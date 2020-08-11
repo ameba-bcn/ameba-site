@@ -1,13 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import Home from './pages/Home';
+import Activitats from './pages/Activitats';
+import Botiga from './pages/Botiga';
+import Article from './components/forms/Article';
+import NotFound from './pages/NotFound';
+import { Switch, Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-        <Home />
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+          <Switch>
+            <Route path='/' exact component={Home} />
+            <Route path='/Activitats' component={Activitats} />
+            <Route path='/Botiga' component={Botiga} />
+            <Route path='/Article' component={Article} />
+            <Route component={NotFound} />
+          </Switch>
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -1,0 +1,55 @@
+[{
+        "id": 1,
+        "title": "AMEBA PARKFEST 2019",
+        "article": "El 29 de juny torna l’Ameba Parkfest en la seva cinquena edició al Parc de l’Espanya Industrial. Tota una jornada de música electrònica ",
+        "img": "https://ameba.cat/wp-content/uploads/2019/04/ameba-parkfest-2019-lineup-mur-1024x1024.png",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "address": ""
+    },
+    {
+        "id": 2,
+        "title": "El Rouge presens Ameba Dj's",
+        "article": "Doors open 21h. Per a aquesta ocasió comptarem amb Bill Baggins (Dublab/Rhythm Control) i Noir Renoir (L'Electra). www.mixcloud.com/noir-renoir www.mixcloud.com/Bill_Baggins",
+        "img": "https://ameba.cat/wp-content/uploads/2019/08/65851320_1042781555915081_1846433318455738368_n.jpg",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "address": ""
+    },
+    {
+        "id": 3,
+        "title": "Ameba Prismática 2019",
+        "article": "Seguim!! El proper dissabte que ve 13 de Juliol i un any més tenim el plaer de formar part de la programació de les festes del Raval! En aquesta ocasió ens mudem a la Plaça Joan Coromines amb activitats per a tota la família: taller de grafiti amb Montana Colors, exhibicions de breakdance i les ja èpiques subhastes de Discos Edison’s.",
+        "img": "https://ameba.cat/wp-content/uploads/2019/08/67213754_2229994557108707_7569289137988042752_n.jpg",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "address": ""
+    },
+    {
+        "id": 4,
+        "title": "Ameba als Clubs (Razzmatazz): Vise – Not on Earth – Ameba DJS",
+        "article": "El proper dissabte dia 10 tornem a la sala Lolita de Razzmatazz amb un nova nit d’Ameba als Clubs. En aquesta ocasió comptarem amb els directes dels socis barcelonins VISE i Not On Earth. Propostes que tenen els sons electrònics com a punt de partida però sense deixar de buscar l’equilibri entre l’orgànic i el sintètic. Completen la nit el set de Bill Baggins i el B2B de Noir Renoir i Bob Ventura.",
+        "img": "https://ameba.cat/wp-content/uploads/2019/08/67616229_2274077669367062_2054933820100050944_n.jpg",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "address": ""
+    },
+    {
+        "id": 5,
+        "title": "Autoedició i distribució musical by Alicia Carrera",
+        "article": "Tornem de vacances amb un nou taller de la mà d’Alicia Carrera, ex-label manager d’Hivern Discs, dj i moltes coses més, on ens explicarà com funciona la distribució d’una producció musical, com generar una identitat artística, de quines plataformes disposem i com operen.",
+        "img": "https://ameba.cat/wp-content/uploads/2019/10/ameba-alicia-carrera-workshop-01-1024x1024.png",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "address": ""
+    },
+    {
+        "id": 6,
+        "title": "Music Business amb Fernando Lagreca",
+        "article": "Nova assessoria grupal amb l'expert Fernando Lagreca, músic, productor i general manager de Miracle MGMT. A més d’artista d'electrònica reconegut internacionalment, Fernando Lagreca és professor titular a SAE on imparteix seminaris sobre producció musical i hardware, entre altres. També desenvolupa tasques com a consultor freelance de temes d’ editorial i drets d’ autor.És especialista en: producció d’ esdeveniments, producció musical de bandes sonores, disseny sonor, gestió cultural, empreses culturals, administració d’ empreses, booking i management musical.",
+        "img": "https://ameba.cat/wp-content/uploads/2019/10/ameba-fernando-lagreca-asesoria-01-1024x1024.png",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "address": ""
+    }
+]

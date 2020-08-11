@@ -1,33 +1,122 @@
 import React from 'react';
-import { Nav, Navbar, Form, NavDropdown } from 'react-bootstrap';
+import { Nav, Navbar, NavItem, NavDropdown } from 'react-bootstrap';
 import LoginForm from '../components/form'
+import { Link } from "react-scroll";
+import MenuSpacer from './layout/menuTopSpacer'
+// import { useLocation } from 'react-router-dom'
+
+// function HeaderView() {
+//     let location = useLocation();
+//     console.log(location.pathname);
+//     // return <span>Path : {location.pathname}</span>
+// }
 
 function Menu() {
     return (
-        <Navbar bg="light" expand="lg">
-            <Navbar.Brand href="#home">AMEBA</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <Nav.Link href="#home">ASSOCIACIÓ</Nav.Link>
-                    <Nav.Link href="#colabo">COLABORADORS</Nav.Link>
-                    <Nav.Link href="#shop">BOTIGA</Nav.Link>
-                    <Nav.Link href="#activitats">ACTIVITATS</Nav.Link>
-                    <Nav.Link href="#festi">PARKFEST</Nav.Link>
-                    <Nav.Link href="#contacte">CONTACTE</Nav.Link>
-                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                    </NavDropdown>
-                </Nav>
-                <Form inline>
+        <div>
+            <Navbar bg="light" expand="lg" id="navbar">
+                <Navbar.Brand href="\">AMEBA</Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="mr-auto">
+
+                        <NavItem>
+                            <Link activeClass="active"
+                                to="asso"
+                                spy={true}
+                                smooth={true}
+                                offset={0}
+                                duration={500}>
+                                ASSOCIACIÓ
+                        </Link>
+                        </NavItem>
+
+                        <NavItem>
+                            <Link activeClass=""
+                                to="noti"
+                                spy={true}
+                                smooth={true}
+                                offset={0}
+                                duration={500}>
+                                NOTÍCIES
+                        </Link></NavItem>
+
+                        <NavItem>
+                            <Link activeClass=""
+                                to="activitats"
+                                spy={true}
+                                smooth={true}
+                                offset={0}
+                                duration={500}>
+                                ACTIVITATS
+                        </Link>
+                        </NavItem>
+
+                        <NavItem >
+                            <Link activeClass=""
+                                to="colabo"
+                                spy={true}
+                                smooth={true}
+                                offset={0}
+                                duration={500}>
+                                COLABORADORS
+                        </Link>
+                        </NavItem>
+                        
+                        <NavItem>
+                            <Link activeClass="active"
+                                to="shop"
+                                spy={true}
+                                smooth={true}
+                                offset={0}
+                                duration={500}>
+                                BOTIGA
+                        </Link>
+                        </NavItem>
+
+                        <NavItem>
+                            <Link activeClass=""
+                                to="festi"
+                                spy={true}
+                                smooth={true}
+                                offset={0}
+                                duration={500}>
+                                PARKFEST
+                        </Link>
+                        </NavItem>
+                        <NavItem>
+                            <Link activeClass=""
+                                to="contacte"
+                                spy={true}
+                                smooth={true}
+                                offset={0}
+                                duration={500}>
+                                CONTACTE
+                        </Link></NavItem>
+                        {/* <NavItem>
+                            <Link activeClass="active"
+                                onClick={HeaderView}
+                                to=""
+                                spy={true}
+                                smooth={true}
+                                offset={0}
+                                duration={500}>
+                                Headerview
+                        </Link></NavItem> */}
+                        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
+                            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
+                        </NavDropdown>
+
+                    </Nav>
                     <LoginForm />
-                </Form>
-            </Navbar.Collapse>
-        </Navbar>
+                </Navbar.Collapse>
+            </Navbar>
+            <MenuSpacer />
+        </div>
     );
 }
 

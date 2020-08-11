@@ -1,6 +1,7 @@
 // Revisar la seccion 6 del curso REACT y crear componentes controlados
 import React, { Component } from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 
 export default class LoginForm extends Component {
     constructor() {
@@ -31,6 +32,7 @@ export default class LoginForm extends Component {
             <div>
                 {this.state.logged ?
                     <Form inline onSubmit={this.handleClick}>
+                        <Link to="Article">Article</Link>
                         <FormControl
                             id="user"
                             name="userName"
