@@ -2,6 +2,9 @@
 import React, { Component } from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
+import Avatar from '@material-ui/core/Avatar';
+// import { Redirect } from 'react-router-dom';
+// import Sessio from '../sessio/sessioGeneral';
 
 export default class LoginForm extends Component {
     constructor() {
@@ -32,7 +35,11 @@ export default class LoginForm extends Component {
             <div>
                 {this.state.logged ?
                     <Form inline onSubmit={this.handleClick}>
-                        <Link to="Article">Article</Link>
+                        <div>
+                            <Link to="/Article">Article</Link>
+                            {/* <Link to="/Sessio">Algo</Link> */}
+                        </div>
+
                         <FormControl
                             id="user"
                             name="userName"
@@ -54,9 +61,13 @@ export default class LoginForm extends Component {
                             value={this.state.inputElement}
                         />
                         <Button onClick={this.handleChange}>Accedeix</Button>
-                       </Form> :
+                    </Form> :
                     <Form inline>
-                        <Form.Label>Hola {this.state.userName}</Form.Label>
+                        <Form.Label>
+                            Hola 
+                        </Form.Label>
+                       <Avatar><Link to="/Sessio">J</Link></Avatar>
+                        
                         <Button onClick={this.handleChange}>Desconecta't</Button>
                     </Form>
                 }

@@ -13,6 +13,7 @@ function Home() {
   return (
     <div className="Home">
       <Menu />
+      
       <div className="HomeContent">
         <Associacio/>
         <Noticies/>

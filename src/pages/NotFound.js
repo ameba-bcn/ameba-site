@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // import { ButtonBackToHome } from '../components/ButtonBackToHome'
 
-
 export default class NotFound extends Component {
     render() {
         return (

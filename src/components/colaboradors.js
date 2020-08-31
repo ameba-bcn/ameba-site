@@ -1,6 +1,6 @@
 import React from 'react';
 import PowerTitle from './layout/powerTitle';
-import Image from '../ameba-logo.png'
+import Image from '../images/ameba-logo.png';
 
 
 const stylesBack = {

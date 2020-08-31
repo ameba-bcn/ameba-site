@@ -2,9 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import ListSubheader from '@material-ui/core/ListSubheader';
 
 import tileData from './tileData';
 
@@ -37,15 +34,7 @@ export default function GridNoticies() {
                 {tileData.map((tile) => (
                     <GridListTile key={tile.img}>
                         <img src={tile.img} alt={tile.title} className="gridImages"/>
-                        {/* <GridListTileBar
-                            title={tile.title}
-                            subtitle={<span>by: {tile.author}</span>}
-                            actionIcon={
-                                <IconButton aria-label={`info about ${tile.title}`} className={classes.icon}>
-
-                                </IconButton>
-                            }
-                        /> */}
+                        
                     </GridListTile>
                 ))}
             </GridList>

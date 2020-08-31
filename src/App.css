@@ -57,12 +57,6 @@ body {
     width: 40%;
 }
 
-#asso {
-    padding-top: 56px;
-    /*solucion para evitar ser pisado por el menu, OJO*/
-    background-color: skyblue;
-}
-
 .titulo>h1 {
     font-size: 120px;
     font-family: 'Montserrat';
@@ -80,10 +74,7 @@ div>.nav-item {
 
 #noti {
     padding-top: 56px;
-    background-color: pink;
     position: relative;
-    /*solucion para evitar ser pisado por el menu, OJO*/
-    /* background-color: rgb(135, 235, 135); */
 }
 
 .overlay {
@@ -107,14 +98,63 @@ div>.nav-item {
 }
 
 
+/* CenteredImageTopTitle Component */
+
+.titleCoverCanvas {
+    height: 600px;
+    width: 1200px;
+    background-image: url("./images/PARKFEST.jpg");
+    background-position: center;
+    background-size: cover;
+    opacity: 0.8;
+}
+
+.titleCoverImage {
+    position: relative;
+    bottom: 0;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 0.5);
+    background-size: contain;
+    color: #f1f1f1;
+    width: 100%;
+    height: 100%;
+    opacity: 1.2;
+    color: white;
+    text-align: center;
+    font-size: 100px;
+    font-family: 'Montserrat';
+    font-weight: 900;
+    padding: 15% 0;
+}
+
+.subtitleCoverImage {
+    font-size: 40px;
+    font-family: 'Montserrat';
+    font-weight: 600;
+    /* padding: 20% 0; */
+    color: white;
+}
+
+
 /* When you mouse over the container, fade in the overlay title */
 
 #noti:hover .overlay {
     opacity: 1;
 }
 
+#festi {
+    position: relative;
+    /* padding-top: 56px; */
+    align-items: center;
+    justify-content: center;
+}
+
+#festi:hover .overlay {
+    opacity: 1;
+}
+
 #colabo {
-    padding-top: 56px;
+    /* padding-top: 56px; */
     position: flex;
     /* background-color: white; */
     /*solucion para evitar ser pisado por el menu, OJO*/
@@ -124,6 +164,12 @@ div>.nav-item {
 .BGWrapper {
     position: relative;
     margin: auto;
+}
+
+.CenteredImage {
+    position: relative;
+    height: 20%;
+    width: auto;
 }
 
 
@@ -164,29 +210,39 @@ div.PowerTitle:hover {
     animation-iteration-count: infinite;
 }
 
+#asso {
+    background-color: skyblue;
+}
+
+#festi {
+    background-color: Khaki;
+}
+
+#noti {
+    background-color: pink;
+}
+
 #shop {
-    padding-top: 56px;
-    /*solucion para evitar ser pisado por el menu, OJO*/
     background-color: rgb(135, 165, 235);
 }
 
 #activitats {
-    padding-top: 56px;
-    /*solucion para evitar ser pisado por el menu, OJO*/
     background-color: rgb(190, 135, 235);
 }
 
-#festi {
-    padding-top: 56px;
-    /*solucion para evitar ser pisado por el menu, OJO*/
-    background-color: rgb(235, 208, 135);
-}
-
 #contacte {
-    padding-top: 56px;
-    /*solucion para evitar ser pisado por el menu, OJO*/
     background-color: rgb(135, 235, 188);
 }
+
+
+/* 
+#activitats #contacte #shop #festi #asso {
+    background-color: white;
+}
+
+#noti {
+    background-color: pink;
+} */
 
 .HomeContent {
     display: block;
@@ -214,4 +270,14 @@ div.PowerTitle:hover {
 
 .form-control.control-error {
     border: 1px solid red;
+}
+
+
+/* SESSIO */
+
+.sessio {
+    /* width: 100%; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

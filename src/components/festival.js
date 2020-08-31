@@ -1,17 +1,15 @@
 import React from 'react';
-import AlphaBlock from './layout/alphaBlock'
-import AmebaLogo from './amebaLogo'
+import CenteredImage from './layout/centeredImageTopTitle'
+// import fotoParkfest from '../images/PARKFEST.jpg';
 
 
 function Festival() {
     return (
     <div className="Bloque" id="festi"> 
-    <AlphaBlock 
-        titulo='Titulo'
-        subtitulo='Sustitulo'
-        parrafo='BHKGHVHVAkjabjkjjkbasdkjasdkjas'
-        button='Aqui hi ha un botó'
-        imatge= {{AmebaLogo}}
+    <CenteredImage 
+        titulo='PARKFEST'
+        subtitulo='Vine a ballar amb nosaltres!'
+        cssClass= "titleCoverCanvas"
         wrapper="festi"
     />
     </div>

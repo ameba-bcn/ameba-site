@@ -6,8 +6,8 @@ function Noticies() {
     return (
         <div className="Bloque" id="noti">
             <GridNoticies className="gridNoticies"/>
-            <div class="overlay">
-            <Link to="/blog" style={{ textDecoration: 'none', color: 'white' }}>#SUPPORT YOUR LOCALS</Link>
+            <div className="overlay">
+            <Link to="/blog" style={{ textDecoration: 'inherit', color: 'inherit' }}>#SUPPORT YOUR LOCALS</Link>
             </div>
         </div>
     );

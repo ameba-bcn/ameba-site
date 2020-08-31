@@ -1,10 +1,11 @@
 import React from "react";
+import logo from '../images/ameba-logo.png';
 
 export default class AmebaLogo extends React.Component{
     render(){
         return(
             <div>
-                <img src={process.env.PUBLIC_URL + '/ameba-logo.png'} alt="logo" />
+                <img src={logo} alt="logo" />
             </div>
         )
     }
