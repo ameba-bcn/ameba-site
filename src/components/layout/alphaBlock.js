@@ -9,7 +9,6 @@ import Button from '@material-ui/core/Button';
 // Ilustracion y texto
 import AmebaLogo from '../amebaLogo'
 
-
 function AlphaBlock(props) {
     return (
         <div className="ContainerAmeba">

@@ -14,6 +14,7 @@ WebFont.load({
 
 ReactDOM.render(
   <BrowserRouter basename={process.env.PUBLIC_URL}>
+    
     <React.StrictMode>
 
       <App />
