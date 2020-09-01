@@ -272,6 +272,12 @@ div.PowerTitle:hover {
     border: 1px solid red;
 }
 
+.newsletterForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 /* SESSIO */
 
