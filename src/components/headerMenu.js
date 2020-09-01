@@ -9,7 +9,7 @@ function Menu() {
     return (
         <div>
             <Navbar bg="light" expand="lg" id="navbar">
-                <Navbar.Brand href="\">AMEBA</Navbar.Brand>
+                <Navbar.Brand href="\ameba-site\">AMEBA</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">

@@ -17,7 +17,7 @@ class App extends Component {
             <Route path='/Botiga' component={Botiga} />
             <Route path='/Article' component={ Articles } />
             <Route path='/Sessio' component={ Sessio } />
-            <Route exact path='/' component={Home} />
+            <Route path='/' component={Home} />
             <Route component={NotFound} />
           </Switch>
       </div>
