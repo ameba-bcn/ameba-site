@@ -27,33 +27,12 @@ function Menu() {
 
                         <NavItem>
                             <LinkScroll activeClass=""
-                                to="noti"
-                                spy={true}
-                                smooth={true}
-                                offset={0}
-                                duration={500}>
-                                NOTÍCIES
-                        </LinkScroll></NavItem>
-
-                        <NavItem>
-                            <LinkScroll activeClass=""
                                 to="activitats"
                                 spy={true}
                                 smooth={true}
                                 offset={0}
                                 duration={500}>
                                 ACTIVITATS
-                        </LinkScroll>
-                        </NavItem>
-
-                        <NavItem >
-                            <LinkScroll activeClass=""
-                                to="colabo"
-                                spy={true}
-                                smooth={true}
-                                offset={0}
-                                duration={500}>
-                                COLABORADORS
                         </LinkScroll>
                         </NavItem>
                         
@@ -70,6 +49,17 @@ function Menu() {
 
                         <NavItem>
                             <LinkScroll activeClass=""
+                                to="locals"
+                                spy={true}
+                                smooth={true}
+                                offset={0}
+                                duration={500}>
+                                #SUPPORTYOURLOCALS
+                        </LinkScroll>
+                        </NavItem>
+
+                        <NavItem>
+                            <LinkScroll activeClass=""
                                 to="festi"
                                 spy={true}
                                 smooth={true}
@@ -78,6 +68,18 @@ function Menu() {
                                 PARKFEST
                         </LinkScroll>
                         </NavItem>
+                        
+                        <NavItem >
+                            <LinkScroll activeClass=""
+                                to="colabo"
+                                spy={true}
+                                smooth={true}
+                                offset={0}
+                                duration={500}>
+                                COLABORADORS
+                        </LinkScroll>
+                        </NavItem>
+
                         <NavItem>
                             <LinkScroll activeClass=""
                                 to="contacte"
@@ -86,7 +88,8 @@ function Menu() {
                                 offset={0}
                                 duration={500}>
                                 CONTACTE
-                        </LinkScroll></NavItem>
+                        </LinkScroll>
+                        </NavItem>
            
                         {/* <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

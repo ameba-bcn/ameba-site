@@ -13,10 +13,10 @@ function Contacte() {
     return (
         <div className="BloqueContacto" id="contacte">
             <Container maxWidth="sm">
-                <div><NewsletterForm2/></div>
-                <div><FacebookIcon/><InstagramIcon/><TwitterIcon/><YouTubeIcon/></div>
+                <div className=""><NewsletterForm2/></div>
+                <div className=""><FacebookIcon/><InstagramIcon/><TwitterIcon/><YouTubeIcon/></div>
                 <div>©2020 AMEBA<br/>Associació de Música Electrònica de Barcelona - Tots els drets reservats</div>
-                <div>Carrousel de patros</div>
+                <div className="">Carrousel de patros</div>
             </Container>
 
         </div>

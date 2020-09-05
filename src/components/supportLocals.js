@@ -2,9 +2,9 @@ import React from 'react';
 import GridNoticies from './noticies/gridNoticies'
 import { Link } from 'react-router-dom'
 
-function Noticies() {
+export default function SupportLocals() {
     return (
-        <div className="Bloque" id="noti">
+        <div className="Bloque" id="locals">
             <GridNoticies className="gridNoticies"/>
             <div className="overlay">
             <Link to="/blog" style={{ textDecoration: 'inherit', color: 'inherit' }}>#SUPPORT YOUR LOCALS</Link>
@@ -12,5 +12,3 @@ function Noticies() {
         </div>
     );
 }
-
-export default Noticies;
