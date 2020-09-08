@@ -76,9 +76,9 @@ export default function ScrollableTabsButtonAuto() {
           aria-label="scrollable auto tabs example"
           centered
         >
-          <Tab label="EL MEU PERFIL" {...a11yProps(0)} />
+          <Tab label="EL MEU COMPTE" {...a11yProps(0)} />
           <Tab label="LES MEVES COMPRES" {...a11yProps(1)} />
-          <Tab label="5 CÈNTIMS" {...a11yProps(2)} />
+          <Tab label="SUPPORTYOURLOCALS" {...a11yProps(2)} />
           <Tab label="NOTÍCIES" {...a11yProps(3)} />
           <Tab label="LLISTAT SOCIS" {...a11yProps(4)} />
         </Tabs>
