@@ -3,104 +3,46 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
-import {NavLink, withRouter}  from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import LoginForm from './login';
 
-// const useStyles = makeStyles((theme) => ({
-//     // root: {
-//     //     flexGrow: 1,
-//     // },
-//     // menuButton: {
-//     //     marginRight: theme.spacing(2),
-//     // },
-//     title: {
-//         flexGrow: 1,
-//     },
-// }));
 
-export default function MenuAppBar() {
-    // const classes = useStyles();
-    const [auth, setAuth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginRight: theme.spacing(2),
+    },
+    title: {
+        flexGrow: 1,
+    },
+}));
 
-    const handleChange = (event) => {
-        setAuth(event.target.checked);
-    };
-
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const getNavLinkClass = (path) => { //creado para estilar la pestaña activa
-        // return this.props.location.pathname === path ? 'active' : '';
-    }
+export default function ButtonAppBar() {
+    const classes = useStyles();
 
     return (
-        <div className="">
-            {/* <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup> */}
+        <div className={classes.root}>
             <AppBar position="static">
-                <Toolbar>
-                    <IconButton edge="start" className="" color="inherit" aria-label="menu">
-                        {/* <MenuIcon /> */}
-                        <NavLink to="/" >AMEBA</NavLink>
+                <Toolbar className="menuSuperior">
+                    <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                        AMEBA
           </IconButton>
-                    <Typography variant="h6" className="">
-                        <ul className="nav navbar-nav navbar-expand-lg">
-                            <li className={getNavLinkClass("/")}><NavLink to="/Activitats" >ACTIVITATS</NavLink></li>
-                            <li className={getNavLinkClass("/agregar")}><NavLink to="/Botiga">BOTIGA</NavLink></li>
-                            <li className={getNavLinkClass("/agregar")}><NavLink to="/Article">#SUPPORTYOURLOCALS</NavLink></li>
-                        </ul>
+                    <Typography variant="h6" className={classes.title}>
+                        <NavLink className="menuOptions" to="/Activitats" style={{ textDecoration: 'none' }} >ACTIVITATS</NavLink>
+                        <NavLink className="menuOptions" to="/Botiga" style={{ textDecoration: 'none' }}>BOTIGA</NavLink>
+                        <NavLink className="menuOptions" to="/Article" style={{ textDecoration: 'none' }}>#SUPPORTYOURLOCALS</NavLink>                       
                     </Typography>
-                    {auth && (
-                        <div>
-                            <IconButton
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={open}
-                                onClose={handleClose}
-                            >
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
-                            </Menu>
-                        </div>
-                    )}
+                    {/* <Button color="inherit">Login</Button> */}
+                    <LoginForm />
                 </Toolbar>
             </AppBar>
         </div>
     );
 }
+// <NavLink className="menuOptions" to="/Activitats" style={{ textDecoration: 'none' }} >ACTIVITATS</NavLink>
+// <NavLink className="menuOptions" to="/Botiga" style={{ textDecoration: 'none' }}>BOTIGA</NavLink>
+// <NavLink className="menuOptions" to="/Article" style={{ textDecoration: 'none' }}>#SUPPORTYOURLOCALS</NavLink>                       

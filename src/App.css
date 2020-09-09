@@ -340,3 +340,16 @@ div.PowerTitle:hover {
     line-height: 1em;
     text-align: left;
 }
+
+
+/* MENU SUPERIOR */
+
+.menuSuperior {
+    background-color: pink !important;
+    text-align: left;
+}
+
+.menuOptions {
+    padding-right: 10px;
+    color: white;
+}
