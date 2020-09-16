@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
 
 const stylesTit = {
     title: {
@@ -18,7 +18,7 @@ function PowerTitle(props) {
     return (
         <div className="BGWrapper">
             <div style={stylesTit.title} className="PowerTitle" >{props.title} </div>
-            <Button variant="contained" color="secondary">Leer Mas</Button>
+            {/* <Button variant="contained" color="secondary">Leer Mas</Button> */}
         </div>
 
     );

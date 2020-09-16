@@ -3,7 +3,9 @@ import './App.css';
 import Home from './pages/Home';
 import Activitats from './pages/Activitats';
 import Botiga from './pages/Botiga';
-import Articles from './components/forms/Article';
+import Entrevista from './components/supportyourlocals/entrevista';
+// import Articles from './components/forms/Article';
+import SupportYourLocals from './pages/SupportYourLocals';
 import Sessio from './sessio/sessioGeneral';
 import NotFound from './pages/NotFound';
 import { Switch, Route } from 'react-router-dom';
@@ -13,11 +15,12 @@ class App extends Component {
     return (
       <div className="App">
           <Switch> 
-            <Route path='/Activitats' component={Activitats} />
-            <Route path='/Botiga' component={Botiga} />
-            <Route path='/Article' component={ Articles } />
-            <Route path='/Sessio' component={ Sessio } />
-            <Route path='/' component={Home} />
+            <Route path='/ameba-site/Activitats' component={Activitats} />
+            <Route path='/ameba-site/Botiga' component={Botiga} />
+            <Route exact path='/ameba-site/Support/Entrevista?=:id' component={ Entrevista } />
+            <Route path='/ameba-site/Support' component={ SupportYourLocals } />
+            <Route path='/ameba-site/Sessio' component={ Sessio } />
+            <Route exact path='/ameba-site/' component={Home} />
             <Route component={NotFound} />
           </Switch>
       </div>

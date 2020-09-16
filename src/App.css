@@ -17,20 +17,30 @@ body {
 }
 
 
+/* Main Flyer */
+
+.mainFlyer {
+    height: 100vh;
+    width: 100%;
+    background-image: url("./images/MainAMEBA.png");
+    background-position: center;
+    background-size: cover;
+}
+
+
 /* Menu  */
 
-#navbar {
+
+/* #navbar {
     position: fixed !important;
     top: 0;
     width: 100%;
     display: flex;
-    /* padding: 0 100px; desplaza horizontalmente los elementos*/
     justify-content: space-between;
     align-items: center;
     transition: 0.5s;
     z-index: 1;
-    /*mantiene el navBar siempre encima del resto*/
-}
+} */
 
 .Bloque {
     display: flex;
@@ -202,6 +212,11 @@ div>.nav-item {
     }
 }
 
+div.PowerTitle {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 div.PowerTitle:hover {
     color: tomato;
     background-color: yellowgreen;
@@ -237,11 +252,11 @@ div.PowerTitle:hover {
 } */
 
 #festi,
-#asso {
+#asso,
+#activitats {
     background-color: white;
 }
 
-#activitats,
 #contacte,
 #locals {
     background-color: pink;
@@ -254,14 +269,6 @@ div.PowerTitle:hover {
 .HomeContent {
     display: block;
     overflow: auto;
-}
-
-
-/* CARDS */
-
-.card-text {
-    text-overflow: ellipsis;
-    overflow: hidden;
 }
 
 
@@ -352,4 +359,171 @@ div.PowerTitle:hover {
 .menuOptions {
     margin-right: 10px;
     color: white;
+}
+
+
+/* ARTICLES */
+
+.card {
+    opacity: 0.9;
+    overflow: hidden;
+}
+
+.card-deck {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    /* padding-right: 20px; */
+    text-align: left;
+    /* align-items: center; */
+}
+
+.fullcard {
+    margin-bottom: 20px;
+    margin: 0 auto;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.card-title {
+    overflow: hidden;
+    /* delimitar lineas verticales */
+    display: -webkit-box;
+    /* delimitar lineas verticales */
+    -webkit-line-clamp: 2;
+    /* delimitar lineas verticales */
+    -webkit-box-orient: vertical;
+    /* delimitar lineas verticales */
+    font-size: 30px;
+    font-family: 'Montserrat';
+    font-weight: 800;
+    line-height: 1em;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.card-text {
+    overflow: hidden;
+    /* delimitar lineas verticales */
+    display: -webkit-box;
+    /* delimitar lineas verticales */
+    -webkit-line-clamp: 3;
+    /* delimitar lineas verticales */
+    -webkit-box-orient: vertical;
+    /* delimitar lineas verticales */
+}
+
+.card-body {
+    overflow: hidden;
+    z-index: 0;
+    background-color: white;
+}
+
+.card-img-top {
+    width: auto;
+    height: 400px;
+    object-fit: cover;
+    z-index: 0;
+    transition: all .4s ease;
+    vertical-align: middle;
+}
+
+.card:hover {
+    opacity: 1;
+}
+
+.card-img-top:hover {
+    transform: scale(1.05);
+}
+
+
+/* WORDS CAROUSEL */
+
+.wordsMoveFrame {
+    width: 100%;
+    height: 24px;
+    background-color: black;
+}
+
+.wordsMove {
+    color: white;
+    font-weight: bold;
+    position: relative;
+    width: 300px;
+    animation-name: wordsInMove;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes wordsInMove {
+    0% {
+        background: red;
+        left: 0px
+    }
+    50% {
+        background: green;
+        left: 100px;
+    }
+    100% {
+        background: blue;
+        left: 80%;
+    }
+}
+
+
+/* ENTREVISTA */
+
+.imgEntrevista {
+    height: 600px;
+    width: auto;
+    position: relative;
+}
+
+.rowEntrevista {
+    display: flex;
+    margin-top: 2em;
+}
+
+.columnEntrevista {
+    flex: 50%;
+    position: relative;
+    bottom: 0;
+    left: 0;
+}
+
+.textContentEntrevista {
+    text-align: left;
+    margin-top: 2em;
+}
+
+.fullEntrevista {
+    width: 1700px;
+    margin: auto;
+}
+
+.titleBoxEntrevista {
+    text-align: left;
+    position: absolute;
+    margin-left: 2em;
+    top: 80%;
+}
+
+.titleEntrevista {
+    font-size: 90px;
+    font-family: 'Montserrat';
+    font-weight: 800;
+    line-height: 1em;
+}
+
+.questionsEntrevista {
+    font-weight: bold;
+}
+
+.reproductorEntrevista {}
+
+hr {
+    width: 100%;
+    height: 1px;
+    background: #fff
 }

@@ -36,7 +36,7 @@ export default class LoginForm extends Component {
                 {this.state.logged ?
                     <Form inline onSubmit={this.handleClick}>
                         <div>
-                            <Link to="/Article">Article</Link>
+                            {/* <Link to="/Article">Article</Link> */}
                             {/* <Link to="/Sessio">Algo</Link> */}
                         </div>
 

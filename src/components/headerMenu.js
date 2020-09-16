@@ -31,9 +31,9 @@ export default function ButtonAppBar() {
                         <NavLink to="/ameba-site/" style={{ textDecoration: 'none' }}>AMEBA</NavLink>
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        <NavLink className="menuOptions" to="/Activitats" style={{ textDecoration: 'none' }} >ACTIVITATS</NavLink>
-                        <NavLink className="menuOptions" to="/Botiga" style={{ textDecoration: 'none' }}>BOTIGA</NavLink>
-                        <NavLink className="menuOptions" to="/Article" style={{ textDecoration: 'none' }}>#SUPPORTYOURLOCALS</NavLink>
+                        <NavLink className="menuOptions" to="/ameba-site/Activitats" style={{ textDecoration: 'none' }} >ACTIVITATS</NavLink>
+                        <NavLink className="menuOptions" to="/ameba-site/Botiga" style={{ textDecoration: 'none' }}>BOTIGA</NavLink>
+                        <NavLink className="menuOptions" to="/ameba-site/Support" style={{ textDecoration: 'none' }}>#SUPPORTYOURLOCALS</NavLink>
                     </Typography>
                     <LoginForm />
                 </Toolbar>
