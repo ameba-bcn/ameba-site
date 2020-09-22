@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/ameba-site/static/css/main.abac01b9.chunk.css",
-    "main.js": "/ameba-site/static/js/main.2d952e1a.chunk.js",
-    "main.js.map": "/ameba-site/static/js/main.2d952e1a.chunk.js.map",
+    "main.css": "/ameba-site/static/css/main.23437cdd.chunk.css",
+    "main.js": "/ameba-site/static/js/main.9684cd1a.chunk.js",
+    "main.js.map": "/ameba-site/static/js/main.9684cd1a.chunk.js.map",
     "runtime-main.js": "/ameba-site/static/js/runtime-main.71e93b33.js",
     "runtime-main.js.map": "/ameba-site/static/js/runtime-main.71e93b33.js.map",
     "static/css/2.af3c1da9.chunk.css": "/ameba-site/static/css/2.af3c1da9.chunk.css",
-    "static/js/2.28efb1bc.chunk.js": "/ameba-site/static/js/2.28efb1bc.chunk.js",
-    "static/js/2.28efb1bc.chunk.js.map": "/ameba-site/static/js/2.28efb1bc.chunk.js.map",
+    "static/js/2.091b1b5b.chunk.js": "/ameba-site/static/js/2.091b1b5b.chunk.js",
+    "static/js/2.091b1b5b.chunk.js.map": "/ameba-site/static/js/2.091b1b5b.chunk.js.map",
     "index.html": "/ameba-site/index.html",
-    "precache-manifest.3d2cb872d97525a998d33a202a1e9da2.js": "/ameba-site/precache-manifest.3d2cb872d97525a998d33a202a1e9da2.js",
+    "precache-manifest.6ae8c1d21e916eca7e2b80a46278558c.js": "/ameba-site/precache-manifest.6ae8c1d21e916eca7e2b80a46278558c.js",
     "service-worker.js": "/ameba-site/service-worker.js",
     "static/css/2.af3c1da9.chunk.css.map": "/ameba-site/static/css/2.af3c1da9.chunk.css.map",
-    "static/css/main.abac01b9.chunk.css.map": "/ameba-site/static/css/main.abac01b9.chunk.css.map",
-    "static/js/2.28efb1bc.chunk.js.LICENSE.txt": "/ameba-site/static/js/2.28efb1bc.chunk.js.LICENSE.txt",
+    "static/css/main.23437cdd.chunk.css.map": "/ameba-site/static/css/main.23437cdd.chunk.css.map",
+    "static/js/2.091b1b5b.chunk.js.LICENSE.txt": "/ameba-site/static/js/2.091b1b5b.chunk.js.LICENSE.txt",
     "static/media/App.css": "/ameba-site/static/media/PARKFEST.48c918d2.jpg",
     "static/media/ameba-joseanto.png": "/ameba-site/static/media/ameba-joseanto.6b65aa06.png",
     "static/media/ameba-pablo.png": "/ameba-site/static/media/ameba-pablo.e0c5ec33.png",
@@ -22,8 +22,8 @@
   "entrypoints": [
     "static/js/runtime-main.71e93b33.js",
     "static/css/2.af3c1da9.chunk.css",
-    "static/js/2.28efb1bc.chunk.js",
-    "static/css/main.abac01b9.chunk.css",
-    "static/js/main.2d952e1a.chunk.js"
+    "static/js/2.091b1b5b.chunk.js",
+    "static/css/main.23437cdd.chunk.css",
+    "static/js/main.9684cd1a.chunk.js"
   ]
 }
