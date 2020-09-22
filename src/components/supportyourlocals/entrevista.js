@@ -1,6 +1,5 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
-import HeaderMenu from '../headerMenu';
 
 
 export default function Entrevista(props) {
@@ -11,7 +10,7 @@ export default function Entrevista(props) {
 
     return (
         <>
-            <HeaderMenu />
+    
             <div className="fullEntrevista" >
 
                 <div className="rowEntrevista">
