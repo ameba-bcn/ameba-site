@@ -527,3 +527,12 @@ hr {
     height: 1px;
     background: #fff
 }
+
+
+/* ACTIVITATS */
+
+.fullTableActiv {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 2em;
+}

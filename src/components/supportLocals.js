@@ -7,7 +7,7 @@ export default function SupportLocals() {
         <div className="Bloque" id="locals">
             <GridNoticies className="gridNoticies"/>
             <div className="overlay">
-            <Link to="/blog" style={{ textDecoration: 'inherit', color: 'inherit' }}>#SUPPORT YOUR LOCALS</Link>
+            <Link to="/support" style={{ textDecoration: 'inherit', color: 'inherit' }}>#SUPPORT YOUR LOCALS</Link>
             </div>
         </div>
     );

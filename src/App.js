@@ -8,21 +8,27 @@ import Entrevista from './components/supportyourlocals/entrevista';
 import SupportYourLocals from './pages/SupportYourLocals';
 import Sessio from './sessio/sessioGeneral';
 import NotFound from './pages/NotFound';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Router } from 'react-router-dom';
+import Contacte from './components/contacte';
+import Menu from './components/headerMenu'
+
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-          <Switch> 
-            <Route path='/ameba-site/Activitats' component={Activitats} />
-            <Route path='/ameba-site/Botiga' component={Botiga} />
-            <Route exact path='/ameba-site/Support/Entrevista?=:id' component={ Entrevista } />
-            <Route path='/ameba-site/Support' component={ SupportYourLocals } />
-            <Route path='/ameba-site/Sessio' component={ Sessio } />
-            <Route exact path='/ameba-site/' component={Home} />
+        <Menu/>
+        {/* Switch evita que mas de un componente se renderice a la vez */}
+          <Switch>  
+            <Route path='/activitats' component={Activitats} />
+            <Route path='/botiga' component={Botiga} />
+            <Route exact path='/support/:id' component={ Entrevista } />
+            <Route path='/support' component={ SupportYourLocals } />
+            <Route path='/sessio' component={ Sessio } />
+            <Route exact path='/' component={Home} />
             <Route component={NotFound} />
           </Switch>
+          <Contacte/>
       </div>
     );
   }

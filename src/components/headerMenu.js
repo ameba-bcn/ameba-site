@@ -28,12 +28,12 @@ export default function ButtonAppBar() {
             <AppBar position="static">
                 <Toolbar className="menuSuperior">
                     <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                        <NavLink to="/ameba-site/" style={{ textDecoration: 'none' }}>AMEBA</NavLink>
+                        <NavLink to="/" style={{ textDecoration: 'none' }}>AMEBA</NavLink>
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        <NavLink className="menuOptions" to="/ameba-site/Activitats" style={{ textDecoration: 'none' }} >ACTIVITATS</NavLink>
-                        <NavLink className="menuOptions" to="/ameba-site/Botiga" style={{ textDecoration: 'none' }}>BOTIGA</NavLink>
-                        <NavLink className="menuOptions" to="/ameba-site/Support" style={{ textDecoration: 'none' }}>#SUPPORTYOURLOCALS</NavLink>
+                        <NavLink className="menuOptions" to="/activitats" style={{ textDecoration: 'none' }} >ACTIVITATS</NavLink>
+                        <NavLink className="menuOptions" to="/botiga" style={{ textDecoration: 'none' }}>BOTIGA</NavLink>
+                        <NavLink className="menuOptions" to="/support" style={{ textDecoration: 'none' }}>#SUPPORTYOURLOCALS</NavLink>
                     </Typography>
                     <LoginForm />
                 </Toolbar>

@@ -9,7 +9,7 @@ export default function llistatEntrevistes() {
 
     const cardClicked = (data) =>  {
         // console.log(data.id)
-        return  <Redirect  to={`/ameba-site/Support/Entrevista?='${data.id}`} />
+        return  <Redirect  to={`/Support/Entrevista?='${data.id}`} />
     }
 
     const cardGenerator = data.map((data) => {
@@ -17,7 +17,7 @@ export default function llistatEntrevistes() {
             <div className="fullcard" key={data.id} 
             onClick={() => cardClicked(data)}>
                 <NavLink style={{ textDecoration: 'none' }} 
-                to={{pathname:'/ameba-site/Support/Entrevista?='+data.id,
+                to={{pathname:'/support/'+data.id,
                 aboutProps: data}}>
                 <div className="card" style={{ width: "26rem" }}>
                     <img className="card-img-top" src={data.img} alt={data.title} />
