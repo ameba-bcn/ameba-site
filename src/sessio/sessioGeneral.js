@@ -62,8 +62,7 @@ export default function ScrollableTabsButtonAuto() {
   };
 
   return (
-    <>
-    <HeaderMenu/>
+    <div className="tablesView">
     <div className={classes.root}>
       <AppBar position="static" color="default">
         <Tabs
@@ -90,7 +89,7 @@ export default function ScrollableTabsButtonAuto() {
         <Compres/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Power title='PERAS'/> 
+        Item Three
       </TabPanel>
       <TabPanel value={value} index={3}>
         Item Four
@@ -100,7 +99,7 @@ export default function ScrollableTabsButtonAuto() {
       </TabPanel>
 
     </div>
-    </>
+    </div>
   );
 }
 

@@ -9,7 +9,7 @@ export default class clientEntrevistes extends Component {
         return (
             <>
                 <PoweTitle
-                    title="#SUPPORTYOUR" />
+                    title="#SUPPORTYOURLOCALS" />
                 <LlistatEntrevistes />
             </>
         )

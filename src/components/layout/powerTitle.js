@@ -3,10 +3,10 @@ import React from 'react';
 
 const stylesTit = {
     title: {
-        fontSize: 200,
-        fontFamily: 'Montserrat',
+        fontSize: 220,
+        fontFamily: 'Bebas Neue',
         position: 'center',
-        fontWeight: 900,
+        fontWeight: 600,
         textAlign: 'center',
         textShadowColor:'#000',
         textShadowOffset:{width: 5, height: 5},

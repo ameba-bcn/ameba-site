@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
         overflow: 'hidden',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'pink',
+        backgroundColor: '#F2C571',
         margin: 'auto'
     },
     gridList: {
@@ -30,7 +30,7 @@ export default function GridNoticies() {
 
     return (
         <div className={classes.root}>
-            <GridList cols={3} spacing={10} cellHeight={180} className={classes.gridList}>
+            <GridList cols={3} spacing={20} cellHeight={240} className={classes.gridList}>
                 {tileData.map((tile) => (
                     <GridListTile key={tile.img}>
                         <img src={tile.img} alt={tile.title} className="gridImages"/>

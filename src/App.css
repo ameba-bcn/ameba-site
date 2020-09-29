@@ -1,3 +1,13 @@
+/* COLOURS */
+
+
+/*
+#FAE6C5 Crema
+#F2C571 Naranja
+#EB5E3E Rojo
+#1D1D1B Negro
+*/
+
 .App {
     text-align: center;
 }
@@ -27,21 +37,6 @@ body {
     background-size: cover;
 }
 
-
-/* Menu  */
-
-
-/* #navbar {
-    position: fixed !important;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: 0.5s;
-    z-index: 1;
-} */
-
 .Bloque {
     display: flex;
     border-color: white;
@@ -69,12 +64,19 @@ body {
 
 .titulo>h1 {
     font-size: 120px;
-    font-family: 'Montserrat';
-    font-weight: 900;
+    font-family: 'Bebas Neue';
+    /* font-weight: 300; */
+}
+
+a {
+    text-decoration: none;
+    color: white;
 }
 
 a.active {
-    border-bottom: 1px solid #333;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
 }
 
 div>.nav-item {
@@ -90,8 +92,8 @@ div>.nav-item {
 .overlay {
     position: absolute;
     bottom: 0;
-    background: rgb(0, 0, 0);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgb(29, 29, 27);
+    background: rgba(29, 29, 27, 0.5);
     /* Black see-through */
     color: #f1f1f1;
     width: 100%;
@@ -101,9 +103,9 @@ div>.nav-item {
     color: white;
     /* padding: 20px; */
     text-align: center;
-    font-size: 120px;
-    font-family: 'Montserrat';
-    font-weight: 900;
+    font-size: 180px;
+    font-family: 'Bebas Neue';
+    /* font-weight: 900; */
     padding: 20% 0;
 }
 
@@ -122,8 +124,8 @@ div>.nav-item {
 .titleCoverImage {
     position: relative;
     bottom: 0;
-    background: rgb(0, 0, 0);
-    background: rgba(0, 0, 0, 0.5);
+    background: rgb(29, 29, 27);
+    background: rgba(29, 29, 27, 0.5);
     background-size: contain;
     color: #f1f1f1;
     width: 100%;
@@ -132,16 +134,15 @@ div>.nav-item {
     color: white;
     text-align: center;
     font-size: 100px;
-    font-family: 'Montserrat';
+    font-family: 'Bebas Neue';
     font-weight: 900;
     padding: 15% 0;
 }
 
 .subtitleCoverImage {
     font-size: 40px;
-    font-family: 'Montserrat';
+    font-family: 'Bebas Neue';
     font-weight: 600;
-    /* padding: 20% 0; */
     color: white;
 }
 
@@ -154,7 +155,6 @@ div>.nav-item {
 
 #festi {
     position: relative;
-    /* padding-top: 56px; */
     align-items: center;
     justify-content: center;
 }
@@ -225,45 +225,20 @@ div.PowerTitle:hover {
     animation-iteration-count: infinite;
 }
 
-
-/* 
-/* #asso {
-    background-color: skyblue;
-}
-
-#festi {
-    background-color: Khaki;
-}
-
-#locals {
-    background-color: pink;
-}
-
-#shop {
-    background-color: rgb(135, 165, 235);
-}
-
-#activitats {
-    background-color: rgb(190, 135, 235);
-}
-
-#contacte {
-    background-color: rgb(135, 235, 188);
-} */
-
 #festi,
 #asso,
-#activitats {
-    background-color: white;
+#activitats,
+#shop {
+    background-color: #FAE6C5;
 }
 
 #contacte,
 #locals {
-    background-color: pink;
+    background-color: #F2C571;
 }
 
-#shop {
-    background-color: whitesmoke;
+.ArticlesContent {
+    background-color: #FAE6C5;
 }
 
 .HomeContent {
@@ -311,11 +286,6 @@ div.PowerTitle:hover {
     margin: auto;
 }
 
-
-/* .cardFrame {
-    background-color: black;
-} */
-
 .Card3GridContainer {
     width: 80%;
     justify-content: center;
@@ -335,7 +305,7 @@ div.PowerTitle:hover {
 
 .cardMediaTitle {
     font-size: 50px;
-    font-family: 'Montserrat';
+    font-family: 'Bebas Neue';
     font-weight: 900;
     line-height: 1em;
     text-align: left;
@@ -352,7 +322,7 @@ div.PowerTitle:hover {
 /* MENU SUPERIOR */
 
 .menuSuperior {
-    background-color: pink !important;
+    background-color: #F2C571 !important;
     text-align: left;
 }
 
@@ -396,7 +366,7 @@ div.PowerTitle:hover {
     -webkit-box-orient: vertical;
     /* delimitar lineas verticales */
     font-size: 30px;
-    font-family: 'Montserrat';
+    font-family: 'Bebas Neue';
     font-weight: 800;
     line-height: 1em;
     text-align: left;
@@ -443,7 +413,7 @@ div.PowerTitle:hover {
 .wordsMoveFrame {
     width: 100%;
     height: 24px;
-    background-color: black;
+    background-color: #1D1D1B;
 }
 
 .wordsMove {
@@ -511,7 +481,7 @@ div.PowerTitle:hover {
 
 .titleEntrevista {
     font-size: 90px;
-    font-family: 'Montserrat';
+    font-family: 'Bebas Neue';
     font-weight: 800;
     line-height: 1em;
 }
@@ -536,3 +506,9 @@ hr {
     margin: auto;
     margin-bottom: 2em;
 }
+
+
+/* .MainBody {
+    position: relative;
+    min-height: 100vh;
+} */

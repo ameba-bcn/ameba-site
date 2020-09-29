@@ -8,7 +8,7 @@ import Entrevista from './components/supportyourlocals/entrevista';
 import SupportYourLocals from './pages/SupportYourLocals';
 import Sessio from './sessio/sessioGeneral';
 import NotFound from './pages/NotFound';
-import { Switch, Route, Router } from 'react-router-dom';
+import { Switch, Route} from 'react-router-dom';
 import Contacte from './components/contacte';
 import Menu from './components/headerMenu'
 
