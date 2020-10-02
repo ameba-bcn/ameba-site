@@ -1,0 +1,81 @@
+[{
+        "id": 1,
+        "title": "Samarreta 5è Aniversari",
+        "article": "",
+        "img": "https://ameba.cat/wp-content/uploads/2019/09/ameba-5-anys-woo-commerce-500x469.jpg",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "price": "30€",
+        "size": ""
+    },
+    {
+        "id": 2,
+        "title": "Samarreta Ameba 2016",
+        "article": "",
+        "img": "https://ameba.cat/wp-content/uploads/2019/09/ameba-old-woo-commerce-500x469.jpg",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "price": "30€",
+        "size": ""
+    },
+    {
+        "id": 3,
+        "title": "Samarreta Ameba 2019",
+        "article": "",
+        "img": "https://ameba.cat/wp-content/uploads/2019/09/ameba-new-woo-commerce-500x469.jpg",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "price": "30€",
+        "size": ""
+    },
+    {
+        "id": 4,
+        "title": "Samarreta Modular",
+        "article": "",
+        "img": "https://ameba.cat/wp-content/uploads/2019/09/ameba-modular-0-woo-commerce-500x469.jpg",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "price": "30€",
+        "size": ""
+    },
+    {
+        "id": 5,
+        "title": "Samarreta Vinil",
+        "article": "",
+        "img": "https://ameba.cat/wp-content/uploads/2019/09/ameba-vinil-woo-commerce-500x469.jpg",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "price": "30€",
+        "size": ""
+    },
+    {
+        "id": 6,
+        "title": "Tote Bag Modular",
+        "article": "",
+        "img": "https://ameba.cat/wp-content/uploads/2019/09/notonearth-002-tote-modular-ok-500x500.jpg",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "price": "30€",
+        "size": ""
+    },
+    {
+        "id": 7,
+        "title": "Tote Bag Vinil",
+        "article": "",
+        "img": "https://ameba.cat/wp-content/uploads/2019/09/notonearth-002-tote-vinil-500x500.jpg",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "price": "30€",
+        "size": ""
+    },
+    {
+        "id": 8,
+        "title": "FES-TE SOCI",
+        "article": "",
+        "img": "https://ameba.cat/wp-content/uploads/2017/12/carnet-500x501.png",
+        "date": "00/00/00",
+        "hour": "00:00",
+        "price": "30€",
+        "size": ""
+    }
+]

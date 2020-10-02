@@ -9,8 +9,8 @@ import Box from '@material-ui/core/Box';
 import SociEstat from './taules/estatusSoci';
 import Compres from './taules/compres';
 import Socis from './taules/socis';
-import Power from '../components/layout/powerTitle';
-import HeaderMenu from '../components/headerMenu';
+// import Power from '../components/layout/powerTitle';
+// import Navbar from '../components/Navbar';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

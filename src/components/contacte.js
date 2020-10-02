@@ -17,11 +17,11 @@ function Contacte() {
                 <div className=""><FacebookIcon /><InstagramIcon /><TwitterIcon /><YouTubeIcon /></div>
                 <div>©2020 AMEBA<br />Associació de Música Electrònica de Barcelona - Tots els drets reservats</div>
             </Container>
-            <div className="wordsMoveFrame">
+            {/* <div className="wordsMoveFrame">
                 <div className="wordsMove">
                     FES-TE SOCI 
                     </div>
-            </div>
+            </div> */}
         </div>
     );
 }

@@ -1,0 +1,100 @@
+.materialTableGeneral {
+    margin: 0 auto;
+    background-color: #FAE6C5;
+}
+
+.fullTableActiv {
+    width: 80%;
+}
+
+
+/* .MuiTable-root,
+.MuiTableCell-root,
+.MuiToolbar-root {
+    background-color: #FAE6C5;
+} */
+
+.column {
+    float: left;
+    width: 50%;
+}
+
+.row {
+    max-width: 950px;
+}
+
+
+/* Clear floats after the columns */
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+h1 {
+    font-family: 'Bebas Neue';
+    font-weight: 900;
+    line-height: 0.8em;
+}
+
+h5 {
+    font-family: 'Libre Baskerville';
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+p {
+    font-family: 'Libre Baskerville';
+    font-size: 0.9rem;
+    /* delimitar lineas verticales */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.activitatImg {
+    max-width: 200px;
+    text-align: right;
+}
+
+.activitatDescripcio {
+    margin-left: 1em;
+}
+
+.imgMiniActivitat {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    vertical-align: middle;
+}
+
+.horaDataActivitat {
+    text-align: center;
+    justify-content: center;
+}
+
+.cardActivitat {
+    font-size: 3rem;
+    text-align: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 970px) {
+    .row {
+        display: flex;
+        width: 150px;
+    }
+    .activitatImg {
+        display: none;
+        /* width: 50px;
+        height: 50px; */
+    }
+    .activitatDescripcio h1 {
+        font-size: 2rem;
+    }
+    .horaDataActivitat h1 {
+        font-size: 1rem;
+    }
+}

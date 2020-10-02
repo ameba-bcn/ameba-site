@@ -27,8 +27,8 @@ export default function NewsletterForm2() {
                 placeholder="e-mail"
                 required
               />
-              
-              <Button className="buttonNews" type="submit">Inscriu-te!</Button>
+              <button type="submit">Inscriu-te!</button>
+              {/* <Button className="buttonNews" type="submit">Inscriu-te!</Button> */}
               <Form.Control.Feedback type="invalid">
                 e-mail incorrecte
               </Form.Control.Feedback>

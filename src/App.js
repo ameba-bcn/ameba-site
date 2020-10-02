@@ -10,7 +10,7 @@ import Sessio from './sessio/sessioGeneral';
 import NotFound from './pages/NotFound';
 import { Switch, Route} from 'react-router-dom';
 import Contacte from './components/contacte';
-import Menu from './components/headerMenu'
+import Menu from './components/Navbar'
 
 
 class App extends Component {

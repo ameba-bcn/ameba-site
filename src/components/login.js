@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 import { Form, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import Avatar from '@material-ui/core/Avatar';
-// import { Redirect } from 'react-router-dom';
-// import Sessio from '../sessio/sessioGeneral';
 
 export default class LoginForm extends Component {
     constructor() {
@@ -34,17 +32,12 @@ export default class LoginForm extends Component {
         return (
             <div>
                 {this.state.logged ?
-                    <Form inline onSubmit={this.handleClick}>
-                        <div>
-                            {/* <Link to="/Article">Article</Link> */}
-                            {/* <Link to="/Sessio">Algo</Link> */}
-                        </div>
-
+                    <Form inline className="formLog" onSubmit={this.handleClick}>
                         <FormControl
                             id="user"
                             name="userName"
                             type="text"
-                            className=" mr-sm-2"
+                            className="mr-sm-2"
                             onChange={e => this.setState({ userName: e.target.value })}
                             placeholder="Usuari"
                             ref={inputElement => this.userName = inputElement} // con ref evitamos que no se conozca el contexto¿?
@@ -54,7 +47,7 @@ export default class LoginForm extends Component {
                             id="psswd"
                             name="password"
                             type="text"
-                            className=" mr-sm-2"
+                            className="mr-sm-2"
                             onChange={e => this.setState({ userPass: e.target.value })}
                             placeholder="Contrasenya"
                             ref={inputElement => this.userPass = inputElement} // con ref evitamos que no se conozca el contexto¿?
@@ -64,10 +57,10 @@ export default class LoginForm extends Component {
                     </Form> :
                     <Form inline>
                         <Form.Label>
-                            Hola 
+                            Hola
                         </Form.Label>
-                       <Avatar><Link to="/Sessio">J</Link></Avatar>
-                        
+                        <Avatar><Link to="/Sessio">J</Link></Avatar>
+
                         <Button onClick={this.handleChange}>Desconecta't</Button>
                     </Form>
                 }

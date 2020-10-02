@@ -6,10 +6,17 @@
 #F2C571 Naranja
 #EB5E3E Rojo
 #1D1D1B Negro
+
+font-family: 'Bebas Neue';
+font-family: 'Libre Baskerville';
 */
 
 .App {
     text-align: center;
+    background-color: #FAE6C5;
+    width: 100%;
+    max-width: 2000px;
+    box-sizing: border-box;
 }
 
 @keyframes App-logo-spin {
@@ -30,12 +37,22 @@ body {
 /* Main Flyer */
 
 .mainFlyer {
-    height: 100vh;
     width: 100%;
+    height: 100vh;
     background-image: url("./images/MainAMEBA.png");
     background-position: center;
     background-size: cover;
 }
+
+@media screen and (max-width: 800px) {
+    .mainFlyer {
+        width: 100%;
+        height: auto;
+    }
+}
+
+
+/*  */
 
 .Bloque {
     display: flex;
@@ -66,17 +83,6 @@ body {
     font-size: 120px;
     font-family: 'Bebas Neue';
     /* font-weight: 300; */
-}
-
-a {
-    text-decoration: none;
-    color: white;
-}
-
-a.active {
-    font-weight: bold;
-    text-decoration: none;
-    color: white;
 }
 
 div>.nav-item {
@@ -319,19 +325,6 @@ div.PowerTitle:hover {
 }
 
 
-/* MENU SUPERIOR */
-
-.menuSuperior {
-    background-color: #F2C571 !important;
-    text-align: left;
-}
-
-.menuOptions {
-    margin-right: 10px;
-    color: white;
-}
-
-
 /* ARTICLES */
 
 .card {
@@ -490,8 +483,6 @@ div.PowerTitle:hover {
     font-weight: bold;
 }
 
-.reproductorEntrevista {}
-
 hr {
     width: 100%;
     height: 1px;
@@ -506,9 +497,3 @@ hr {
     margin: auto;
     margin-bottom: 2em;
 }
-
-
-/* .MainBody {
-    position: relative;
-    min-height: 100vh;
-} */

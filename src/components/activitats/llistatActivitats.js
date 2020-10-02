@@ -1,23 +1,67 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Data from './response.json';
 import MaterialTable from "material-table";
+// import { FiShoppingCart } from 'react-icons/fi';
+import { TiTicket } from 'react-icons/ti';
+import './LlistatActivitats.css';
+import SimpleDialog from './Activitat';
 
 export default function LlistatActivitats() {
+  const [selectedRow, setSelectedRow] = useState(null);
+  const [open, setOpen] = React.useState(false);
+  const datos ={
+    title: ""
+  }
+
+  const handleClickOpen = (rowData) => {
+    setOpen(true);
+
+  };
+
+  const handleClose = (value) => {
+    setOpen(false);
+  }
+  
 
   const [state, setState] = React.useState({
     columns: [
       {
-        title: '',
-        field: 'url',
-        render: rowData => <img src={rowData.img} style={{ width: 150, objectFit: "contain"
-        }} alt="" />,
-        cellStyle:{ maxWidth: 100 }
+        title: 'Descripció',
+        field: 'details',
+        render: rowData =>
+          <div className="row">
+            <div className="column activitatImg">
+              <img src={rowData.img} className="imgMiniActivitat" alt="" />
+            </div>
+            <div className="column activitatDescripcio">
+              <h5>{rowData.address}</h5>
+              <h1>{rowData.title}</h1>
+              <p>{rowData.article}</p>
+            </div>
+          </div>,
+        cellStyle: { maxWidth: 500 },
+        headerStyle: {
+          textAlign: 'center'
+        }
       },
-      { title: 'Activitat', field: 'title',cellStyle:  { textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', maxWidth: 100}} ,
-      { title: 'Descripció', field: 'article', cellStyle:  { textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', maxWidth: 100}},
-      { title: 'Data', field: 'date', cellStyle:{ maxWidth: 100 } },
-      { title: 'Hora', field: 'hour', cellStyle:{ maxWidth: 100 } },
-      { title: 'Adreça', field: 'address', cellStyle:{ maxWidth: 100 } }
+      // { title: 'Activitat', field: 'title', cellStyle: { textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', maxWidth: 100 } },
+      // { title: 'Descripció', field: 'article', cellStyle: { textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', maxWidth: 100 } },
+      {
+        title: 'Data', field: 'date',
+        render: rowData => <div className="horaDataActivitat"><h1>{rowData.date}</h1></div>
+        , cellStyle: { maxWidth: 400 },
+        headerStyle: {
+          textAlign: 'center'
+        }
+      },
+      {
+        title: 'Hora', field: 'hour',
+        render: rowData => <div className="horaDataActivitat"><h1>{rowData.hour}</h1></div>,
+        cellStyle: { maxWidth: 400 },
+        headerStyle: {
+          textAlign: 'center'
+        }
+      }
     ],
     data: Data,
 
@@ -27,49 +71,28 @@ export default function LlistatActivitats() {
     <div className="fullTableActiv">
       <MaterialTable
         title=""
+        className="materialTableGeneral"
         columns={state.columns}
         data={state.data}
         options={{
           actionsColumnIndex: -1
         }}
-        // editable={{
-        //   onRowAdd: (newData) =>
-        //     new Promise((resolve) => {
-        //       setTimeout(() => {
-        //         resolve();
-        //         setState((prevState) => {
-        //           const data = [...prevState.data];
-        //           data.push(newData);
-        //           return { ...prevState, data };
-        //         });
-        //       }, 600);
-        //     }),
-        //   onRowUpdate: (newData, oldData) =>
-        //     new Promise((resolve) => {
-        //       setTimeout(() => {
-        //         resolve();
-        //         if (oldData) {
-        //           setState((prevState) => {
-        //             const data = [...prevState.data];
-        //             data[data.indexOf(oldData)] = newData;
-        //             return { ...prevState, data };
-        //           });
-        //         }
-        //       }, 600);
-        //     }),
-        //   onRowDelete: (oldData) =>
-        //     new Promise((resolve) => {
-        //       setTimeout(() => {
-        //         resolve();
-        //         setState((prevState) => {
-        //           const data = [...prevState.data];
-        //           data.splice(data.indexOf(oldData), 1);
-        //           return { ...prevState, data };
-        //         });
-        //       }, 600);
-        //     }),
-        // }}
+        onRowClick={((evt, selectedRow) => {
+          setSelectedRow(selectedRow.tableData.id)
+          handleClickOpen(selectedRow);
+        })}
+        actions={[
+          {
+            icon: () => <TiTicket className="cardActivitat" />,
+            tooltip: 'Reserva',
+            onClick: (event, rowData) => {
+              // Do save operation
+
+            }
+          }
+        ]}
       />
+      <SimpleDialog open={open} onClose={handleClose} />
     </div>
   );
 
