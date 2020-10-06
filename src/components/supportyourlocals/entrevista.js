@@ -1,5 +1,7 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
+import ReactPlayer from "react-player";
+import './Entrevista.css'
 
 
 export default function Entrevista(props) {
@@ -10,31 +12,34 @@ export default function Entrevista(props) {
 
     return (
         <>
-    
             <div className="fullEntrevista" >
-
                 <div className="rowEntrevista">
                     <img className="imgEntrevista" src={EntrevistaResponse.img} alt={EntrevistaResponse.title} />
                     <div className="columnEntrevista">
                         <div className="titleBoxEntrevista">
                             <h1 className="titleEntrevista" >{EntrevistaResponse.title}</h1>
                             <p className="dateEntrevista"><small className="text-muted">{EntrevistaResponse.date}</small></p>
+                            <p className="introEntrevista">{EntrevistaResponse.interview.intro}</p>
                         </div>
                     </div>
                 </div>
-                <hr />
+                <hr className="separadorTop" />
                 <div className="textContentEntrevista">
-                    <p className="introEntrevista">{EntrevistaResponse.interview.intro}</p>
-                    {
-                        questions.map((f, index) =>
-                            <div key={f}>
-                                <p className="questionsEntrevista">+{f}</p>
-                                <p>{answers[index]}</p>
-                            </div>
-                        )
+                    {questions.map((f, index) =>
+                        <div className="questionBox" key={f}>
+                            <p className="questionsEntrevista">+{f}</p>
+                            <p className="answersEntrevista">{answers[index]}</p>
+                            <hr className="separadorTop" />
+                        </div>
+                    )
                     }
 
-                    {EntrevistaResponse.links.map((n) => <a href={n} target="_blank" rel="noopener noreferrer" className="reproductorEntrevista">{n}<br/></a>)}
+                    {EntrevistaResponse.links.map((n) => 
+                    <div className="mediaPlayer">
+                        {/* <a href={n} target="_blank" rel="noopener noreferrer" className="reproductorEntrevista">{n}<br />
+                    </a> */}
+                        <ReactPlayer url={n} />
+                    </div>)}
 
                 </div>
             </div>

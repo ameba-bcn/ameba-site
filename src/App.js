@@ -3,7 +3,7 @@ import './App.css';
 import Home from './pages/Home';
 import Activitats from './pages/Activitats';
 import Botiga from './pages/Botiga';
-import Entrevista from './components/supportyourlocals/entrevista';
+import Entrevista from './components/supportyourlocals/Entrevista';
 // import Articles from './components/forms/Article';
 import SupportYourLocals from './pages/SupportYourLocals';
 import Sessio from './sessio/sessioGeneral';

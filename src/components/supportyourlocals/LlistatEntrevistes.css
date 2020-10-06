@@ -6,3 +6,10 @@
 .card-text {
     color: #1D1D1B;
 }
+
+.card-text {
+    /* Ojo que esta font no esta en el diseño */
+    font-family: 'Arial';
+    font-weight: 300;
+    font-size: 1rem;
+}
