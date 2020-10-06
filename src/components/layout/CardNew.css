@@ -1,0 +1,23 @@
+.cardMedia {
+    height: 100%;
+    width: 100% !important;
+    object-fit: contain !important;
+}
+
+.cardMediaTitle {
+    font-size: 4em;
+    font-family: 'Bebas Neue';
+    font-weight: 900;
+    line-height: 1em;
+    text-align: left;
+}
+
+.cardMediaText {
+    font-size: 1.3em;
+    line-height: 1em;
+    text-align: left;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}

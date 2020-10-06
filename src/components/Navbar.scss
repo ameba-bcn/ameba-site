@@ -1,0 +1,130 @@
+/* MENU SUPERIOR */
+
+
+/* https://codepen.io/grohit/pen/jObGzdG */
+
+.menuSuperior {
+    background-color: #F2C571 !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.nav-ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    vertical-align: middle;
+    margin: 0;
+}
+
+.nav-ul li {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nav-ul {
+    li {
+        a.active {
+            color: #EB5E3E;
+        }
+    }
+}
+
+.nav-ul {
+    list-style: none;
+    display: flex;
+    li {
+        // margin: 50px;
+        a {
+            display: inline-block;
+            font-family: Arial;
+            font-weight: lighter;
+            font-size: 1.5rem;
+            margin-right: 10px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            transition: all 0.5s ease-in-out;
+            position: relative;
+            text-transform: uppercase;
+            &::before {
+                content: attr(data-item);
+                transition: 0.5s;
+                color: #FAE6C5;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 10;
+                width: 0;
+                overflow: hidden;
+            }
+            &:hover {
+                &::before {
+                    width: 100%;
+                    transition: all 0.5s ease-in-out;
+                }
+            }
+        }
+    }
+}
+
+// }
+
+/**/
+
+.menuButton a {
+    font-family: Arial;
+    text-decoration: none;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-left: 10px;
+    display: inline-block;
+    color: white;
+    position: relative;
+    transition: all 0.5s ease-in-out;
+    &::before {
+        content: attr(data-item);
+        transition: 0.5s;
+        color: #FAE6C5;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 10;
+        width: 0;
+        overflow: hidden;
+    }
+    &:hover {
+        &::before {
+            width: 100%;
+            transition: all 0.5s ease-in-out;
+        }
+    }
+}
+
+.logBox {
+    vertical-align: middle;
+}
+
+.menuIcon {
+    display: none;
+    font-size: 2rem;
+}
+
+@media screen and (max-width: 1000px) {
+    .nav-ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+    }
+    .nav-ul.show {
+        display: flex;
+    }
+    .menuIcon {
+        display: block;
+    }
+}

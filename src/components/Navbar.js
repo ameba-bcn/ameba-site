@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 // import LoginForm from './login';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import './Navbar.css';
+import './Navbar.scss';
 
 export default function Navbar() {
     const [click, setClick] = useState(false)
@@ -28,15 +28,15 @@ export default function Navbar() {
             {/* <AppBar position="static"> */}
                 <div className="menuSuperior">
                     <div className="menuButton">
-                        <NavLink to="/" >AMEBA</NavLink>
+                        <NavLink to="/" data-item='AMEBA'>AMEBA</NavLink>
                     </div>
                     <div className="menuIcon" onClick={handleClick} >
                         {click ? <FaTimes /> : <FaBars />}
                     </div>
                     <ul className={click ? "nav-ul.show" : "nav-ul"}>
-                        <li><NavLink className="menuOptions" to="/activitats" >ACTIVITATS</NavLink></li>
-                        <li><NavLink className="menuOptions" to="/botiga" >BOTIGA</NavLink></li>
-                        <li><NavLink className="menuOptions" to="/support" >#SUPPORTYOURLOCALS</NavLink></li>
+                        <li><NavLink className="menuOptions" to="/activitats" data-item='ACTIVITATS'>ACTIVITATS</NavLink></li>
+                        <li><NavLink className="menuOptions" to="/botiga" data-item='BOTIGA'>BOTIGA</NavLink></li>
+                        <li><NavLink className="menuOptions" to="/support" data-item='#SUPPORTYOURLOCALS'>#SUPPORTYOURLOCALS</NavLink></li>
                         <button type="button">CONECTA'T</button>
                     </ul>
                 </div>

@@ -9,7 +9,7 @@ import SupportYourLocals from './pages/SupportYourLocals';
 import Sessio from './sessio/sessioGeneral';
 import NotFound from './pages/NotFound';
 import { Switch, Route} from 'react-router-dom';
-import Contacte from './components/contacte';
+import Contacte from './contacte/Contacte';
 import Menu from './components/Navbar'
 
 

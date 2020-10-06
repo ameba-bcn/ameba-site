@@ -19,15 +19,15 @@ export default function NewsletterForm2() {
     <div >
       <Form className="contactNews" noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Row className="rowNews">
-          <Form.Group  as={Col} md="8" controlId="validationCustomUsername">
-            <Form.Label className="formLabelNews">Newsletter</Form.Label>
+          <Form.Group  as={Col} md="8" className="rowNewsLine" controlId="validationCustomUsername">
+            <Form.Label className="formLabelNews">Subscriu-te  a la nostra newsletter!</Form.Label>
             <InputGroup>
               <Form.Control className="formControlNews"
                 type="text"
                 placeholder="e-mail"
                 required
               />
-              <button type="submit">Inscriu-te!</button>
+              <button type="submit">Subscriu-te</button>
               {/* <Button className="buttonNews" type="submit">Inscriu-te!</Button> */}
               <Form.Control.Feedback type="invalid">
                 e-mail incorrecte
