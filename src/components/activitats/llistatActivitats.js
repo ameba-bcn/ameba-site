@@ -9,21 +9,18 @@ import SimpleDialog from './Activitat';
 export default function LlistatActivitats() {
   const [selectedRow, setSelectedRow] = useState(null);
   const [open, setOpen] = React.useState(false);
-  const datos ={
-    title: ""
-  }
+  const [rowClickedData, setState] = React.useState([]);
 
-  const handleClickOpen = (rowData) => {
+  const handleClickOpen = () => {
     setOpen(true);
-
+    // console.log(selectedRow)
   };
 
-  const handleClose = (value) => {
+  const handleClose = () => {
     setOpen(false);
   }
-  
 
-  const [state, setState] = React.useState({
+  const [state] = React.useState({
     columns: [
       {
         title: 'Descripció',
@@ -44,8 +41,6 @@ export default function LlistatActivitats() {
           textAlign: 'center'
         }
       },
-      // { title: 'Activitat', field: 'title', cellStyle: { textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', maxWidth: 100 } },
-      // { title: 'Descripció', field: 'article', cellStyle: { textOverflow: 'ellipsis', whiteSpace: 'nowrap', overflow: 'hidden', maxWidth: 100 } },
       {
         title: 'Data', field: 'date',
         render: rowData => <div className="horaDataActivitat"><h1>{rowData.date}</h1></div>
@@ -63,8 +58,8 @@ export default function LlistatActivitats() {
         }
       }
     ],
-    data: Data,
-
+    data: Data, // Respuesta API aqui
+    results: []
   });
 
   return (
@@ -79,7 +74,10 @@ export default function LlistatActivitats() {
         }}
         onRowClick={((evt, selectedRow) => {
           setSelectedRow(selectedRow.tableData.id)
-          handleClickOpen(selectedRow);
+          // console.log(selectedRow);
+          setState({ selectedRow });
+          handleClickOpen();
+
         })}
         actions={[
           {
@@ -87,12 +85,16 @@ export default function LlistatActivitats() {
             tooltip: 'Reserva',
             onClick: (event, rowData) => {
               // Do save operation
-
             }
           }
         ]}
+        localization={{
+          header: {
+            actions: 'Reserva'
+          }
+        }}
       />
-      <SimpleDialog open={open} onClose={handleClose} />
+      <SimpleDialog open={open} dataRow={rowClickedData} onClose={handleClose} />
     </div>
   );
 
