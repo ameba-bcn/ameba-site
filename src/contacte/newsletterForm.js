@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, InputGroup, Col } from 'react-bootstrap';
+import { Form, InputGroup, Col } from 'react-bootstrap';
 
 
 export default function NewsletterForm2() {
@@ -22,7 +22,8 @@ export default function NewsletterForm2() {
           <Form.Group  as={Col} md="8" className="rowNewsLine" controlId="validationCustomUsername">
             <Form.Label className="formLabelNews">Subscriu-te  a la nostra newsletter!</Form.Label>
             <InputGroup>
-              <Form.Control className="formControlNews"
+              <Form.Control 
+                className="formControlNews"
                 type="text"
                 placeholder="e-mail"
                 required

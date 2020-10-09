@@ -32,7 +32,7 @@ export default function SimpleDialog(props) {
                         title={dataRow.selectedRow ? dataRow.selectedRow.title : ''}
                     />
                     <CardContent className="modalTextBox">
-                        <div gutterBottom className="textModal addressModal" variant="h5" component="h2">
+                        <div  className="textModal addressModal" variant="h5" component="h2">
                             {dataRow.selectedRow ? dataRow.selectedRow.address : ''}
                             <br/> 
                             {dataRow.selectedRow ? dataRow.selectedRow.hour : ''}

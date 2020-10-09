@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Data from './response.json';
 import './BotigaGeneral.css';
 import { NavLink, Redirect } from 'react-router-dom';
@@ -6,7 +6,7 @@ import { NavLink, Redirect } from 'react-router-dom';
 export default function BotigaGeneral() {
 
     const cardClicked = (data) =>  {
-        return  <Redirect  to={`/Support/Entrevista?='${data.id}`} />
+        return  <Redirect  to={`/Botiga/Producte?='${data.id}`} />
     }
 
     const cardGenerator = Data.map((data) => {
@@ -14,9 +14,9 @@ export default function BotigaGeneral() {
             <div className="fullcard" key={data.id} 
             onClick={() => cardClicked(data)}>
                 <NavLink style={{ textDecoration: 'none' }} 
-                to={{pathname:'/support/'+data.id,
+                to={{pathname:'/botiga/'+data.id,
                 aboutProps: data}}>
-                <div className="card" style={{ width: "26rem" }}>
+                <div className="card">
                     <img className="card-img-top" src={data.img} alt={data.title} />
                     <div className="card-body">
                         <h5 className="card-title" >{data.title}</h5>

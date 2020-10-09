@@ -7,7 +7,7 @@ import './LlistatActivitats.css';
 import SimpleDialog from './Activitat';
 
 export default function LlistatActivitats() {
-  const [selectedRow, setSelectedRow] = useState(null);
+  const [selectedRow , setSelectedRow] = useState(null);
   const [open, setOpen] = React.useState(false);
   const [rowClickedData, setState] = React.useState([]);
 

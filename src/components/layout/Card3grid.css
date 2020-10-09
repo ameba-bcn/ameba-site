@@ -4,34 +4,74 @@
 
 .Card3GridContainer {
     width: 100% !important;
-    /* justify-content: center; */
     margin: auto;
-    /* display: inline-block */
     margin-top: 20px;
     margin-bottom: 20px;
 }
 
-.Card3GridPaper {
-    /* overflow: hidden; */
-    color: red;
-    width: 580px;
+.Card3GridItem {
+    width: 30.53%;
     height: auto;
     margin: 26px;
-    display: block;
-    /* justify-content: center; */
 }
 
 .MuiGrid-item {
     margin: auto !important;
 }
 
+.cardMediaTitle {
+    overflow: hidden;
+    /* delimitar lineas verticales */
+    display: -webkit-box;
+    /* delimitar lineas verticales */
+    -webkit-line-clamp: 1;
+    /* delimitar lineas verticales */
+    -webkit-box-orient: vertical;
+    /* delimitar lineas verticales */
+}
 
-/* .MuiGrid-root {
-    margin-top: 10px !important; 
-} */
-
-@media screen and (max-width: 775px) {
-    .Card3GridPaper {
-        width: 270px;
+@media screen and (max-width: 1250px) {
+    .cardMediaTitle {
+        font-size: 2.5rem;
+    }
+    .cardMediaText {
+        font-size: 1rem;
     }
 }
+
+@media screen and (max-width: 1008px) {
+    .cardMediaTitle {
+        font-size: 2rem;
+    }
+    .cardMediaText {
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 641px) {
+    .Card3GridItem {
+        width: 80%;
+        height: auto;
+        margin: 26px;
+        padding-top: 10px;
+    }
+    .cardMediaTitle {
+        font-size: 3rem;
+    }
+}
+
+
+/*
+@media screen and (max-width: 322px) {
+    .fullcard {
+        width: 94.7%;
+        height: auto;
+        display: inline-block;
+    }
+    .card-title {
+        font-size: 1.4rem;
+    }
+}
+
+
+*/

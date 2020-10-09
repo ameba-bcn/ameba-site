@@ -8,30 +8,33 @@ import Card3 from './../../images/ameba-pablo.png';
 import './Card3grid.css'
 
 export default function Card3Grid() {
-
     return (
         <Grid container justify="center" className="Card3GridContainer">
-
-            <Grid key={0} item>
+            <Grid key={0} item className="Card3GridItem">
                 <Paper className="Card3GridPaper">
-                    <CardNew 
+                    <CardNew
+                    className="CardIndividual"
                     imatge= {Card1} 
                     titol="Taller amb BeGun"
                     text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut."
                     />
                 </Paper>
             </Grid>
-            <Grid key={1} item>
+            <Grid key={1} item className="Card3GridItem">
                 <Paper className="Card3GridPaper" >
-                    <CardNew imatge= {Card2}
+                    <CardNew 
+                    className="CardIndividual"
+                    imatge= {Card2}
                     titol="Taller teoria musical"
                     text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut."
                     />
                 </Paper>
             </Grid>
-            <Grid key={2} item>
+            <Grid key={2} item className="Card3GridItem">
                 <Paper className="Card3GridPaper" >
-                    <CardNew imatge= {Card3}
+                    <CardNew 
+                    className="CardIndividual"
+                    imatge= {Card3}
                     titol="Taller live en grup"
                     text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut."
                     />
