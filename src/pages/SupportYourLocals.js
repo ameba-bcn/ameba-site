@@ -1,9 +1,9 @@
 import React from 'react';
-import ClientEntrevistes from '../components/supportyourlocals/clientEntrevistes';
+import ClientEntrevistes from '../components/supportyourlocals/ClientEntrevistes';
 
 export default function SupportYourLocals() { 
     return (
-      <div className="ArticlesContent">
+      <div className="SupportContent">
         <ClientEntrevistes />
       </div>
     );

@@ -36,7 +36,7 @@ export default function LlistatActivitats() {
               <p>{rowData.article}</p>
             </div>
           </div>,
-        cellStyle: { maxWidth: 500 },
+        
         headerStyle: {
           textAlign: 'center'
         }
@@ -44,15 +44,15 @@ export default function LlistatActivitats() {
       {
         title: 'Data', field: 'date',
         render: rowData => <div className="horaDataActivitat"><h1>{rowData.date}</h1></div>
-        , cellStyle: { maxWidth: 400 },
-        headerStyle: {
+        // , cellStyle: { maxWidth: 400 },
+        ,headerStyle: {
           textAlign: 'center'
         }
       },
       {
         title: 'Hora', field: 'hour',
         render: rowData => <div className="horaDataActivitat"><h1>{rowData.hour}</h1></div>,
-        cellStyle: { maxWidth: 400 },
+        // cellStyle: { maxWidth: 400 },
         headerStyle: {
           textAlign: 'center'
         }

@@ -1,0 +1,8 @@
+.PowerTitle {
+    font-size: 220px;
+    font-family: 'Bebas Neue';
+    position: center;
+    font-weight: 600;
+    text-align: 'center';
+    text-shadow: 5 5 10 #000;
+}
