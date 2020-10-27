@@ -2,7 +2,7 @@
     "name": "ameba-site",
     "version": "0.1.0",
     "private": true,
-    "homepage": "http://PascualHache.github.io/ameba-site/",
+    "homepage": "https://ameba-bcn.github.io/ameba-site/",
     "dependencies": {
         "-": "0.0.1",
         "@material-ui/core": "^4.11.0",
