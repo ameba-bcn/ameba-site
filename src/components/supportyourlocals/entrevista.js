@@ -29,7 +29,7 @@ export default function Entrevista(props) {
                         <div className="questionBox" key={f}>
                             <p className="questionsEntrevista">+{f}</p>
                             <p className="answersEntrevista">{answers[index]}</p>
-                            <hr className="separadorTop" />
+                            {/* <hr className="separadorTop" /> */}
                         </div>
                     )
                     }
@@ -43,7 +43,7 @@ export default function Entrevista(props) {
 
                 </div>
             </div>
-            <button onClick={() => history.goBack()}>Back</button>
+            <button className="backButton" onClick={() => history.goBack()}>Back</button>
         </>
     )
 }

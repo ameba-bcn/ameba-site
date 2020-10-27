@@ -1,19 +1,76 @@
-.card-body {
-    background-color: #FAE6C5;
+/* ARTICLES */
+
+.card-support {
+    opacity: 0.9;
+    overflow: hidden;
+    width: 26rem;
 }
 
-.card-title,
-.card-text {
+.card-support:hover {
+    opacity: 1;
+}
+
+.card-support-deck {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    text-align: left;
+    /* align-items: center; */
+}
+
+.fullcard {
+    margin-bottom: 20px;
+    margin: 0 auto;
+    overflow: hidden;
+    /* z-index: 0; */
+    padding: 10px;
+}
+
+.card-support-title {
+    /* delimitar lineas verticales */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 30px;
+    font-family: 'Bebas Neue';
+    font-weight: 800;
+    line-height: 1em;
+    text-align: left;
+    text-transform: uppercase;
     color: #1D1D1B;
 }
 
-.card-text {
-    /* Ojo que esta font no esta en el diseño */
+.card-support-text {
+    /* delimitar lineas verticales */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    color: #1D1D1B;
     font-family: 'Arial';
     font-weight: 300;
     font-size: 1rem;
 }
 
-.fullcard {
-    padding: 10px;
+.card-support-body {
+    overflow: hidden;
+    z-index: 2;
+    background-color: #FAE6C5;
+    padding: 1rem;
+}
+
+.card-support-img-top {
+    width: 100%;
+    height: 270px;
+    max-height: 270px;
+    object-fit: cover;
+    z-index: 1;
+    transition: all .4s ease;
+    vertical-align: middle;
+}
+
+.card-support-img-top:hover {
+    transform: scale(1.05);
 }

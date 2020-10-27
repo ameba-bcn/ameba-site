@@ -128,7 +128,7 @@ div>.nav-item {
 
 .overlaySubtitle {
     color: #FAE6C5;
-    font-family: 'Arial';
+    font-family: 'Libre Baskerville';
     font-size: 30px;
     margin-top: -75px;
     /* text-transform: uppercase; */
@@ -271,15 +271,6 @@ div.PowerTitle:hover {
     }
 }
 
-
-/* .ArticlesContent:hover {
-    color: tomato;
-    background-color: yellowgreen;
-    animation-name: TitleHovered;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-} */
-
 #festi,
 #asso,
 #activitats,
@@ -330,82 +321,6 @@ div.PowerTitle:hover {
     width: 60%;
     justify-content: center;
     margin: auto;
-}
-
-
-/* ARTICLES */
-
-.card {
-    opacity: 0.9;
-    overflow: hidden;
-}
-
-.card-deck {
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding-left: 20px;
-    /* padding-right: 20px; */
-    text-align: left;
-    /* align-items: center; */
-}
-
-.fullcard {
-    margin-bottom: 20px;
-    margin: 0 auto;
-    overflow: hidden;
-    z-index: 0;
-}
-
-.card-title {
-    overflow: hidden;
-    /* delimitar lineas verticales */
-    display: -webkit-box;
-    /* delimitar lineas verticales */
-    -webkit-line-clamp: 2;
-    /* delimitar lineas verticales */
-    -webkit-box-orient: vertical;
-    /* delimitar lineas verticales */
-    font-size: 30px;
-    font-family: 'Bebas Neue';
-    font-weight: 800;
-    line-height: 1em;
-    text-align: left;
-    text-transform: uppercase;
-}
-
-.card-text {
-    overflow: hidden;
-    /* delimitar lineas verticales */
-    display: -webkit-box;
-    /* delimitar lineas verticales */
-    -webkit-line-clamp: 3;
-    /* delimitar lineas verticales */
-    -webkit-box-orient: vertical;
-    /* delimitar lineas verticales */
-}
-
-.card-body {
-    overflow: hidden;
-    z-index: 0;
-    background-color: white;
-}
-
-.card-img-top {
-    width: auto;
-    height: 400px;
-    object-fit: cover;
-    z-index: 0;
-    transition: all .4s ease;
-    vertical-align: middle;
-}
-
-.card:hover {
-    opacity: 1;
-}
-
-.card-img-top:hover {
-    transform: scale(1.05);
 }
 
 

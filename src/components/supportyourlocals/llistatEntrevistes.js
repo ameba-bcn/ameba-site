@@ -18,12 +18,12 @@ export default function llistatEntrevistes() {
                 <NavLink style={{ textDecoration: 'none' }} 
                 to={{pathname:'/support/'+data.id,
                 aboutProps: data}}>
-                <div className="card" style={{ width: "26rem" }}>
-                    <img className="card-img-top" src={data.img} alt={data.title} />
-                    <div className="card-body">
-                        <h5 className="card-title" >{data.title}</h5>
-                        <p className="card-text">{data.interview.intro}</p>
-                        <p className="card-text"><small className="text-muted">{data.date}</small></p>
+                <div className="card-support">
+                    <img className="card-support-img-top" src={data.img} alt={data.title} />
+                    <div className="card-support-body">
+                        <h5 className="card-support-title" >{data.title}</h5>
+                        <p className="card-support-text">{data.interview.intro}</p>
+                        <p className="card-support-text"><small className="text-muted">{data.date}</small></p>
                     </div>
                 </div>
                 </NavLink>
@@ -32,7 +32,7 @@ export default function llistatEntrevistes() {
     })
 
     return (
-        <div className="card-deck">
+        <div className="card-support-deck">
             {cardGenerator}
         </div>
     )

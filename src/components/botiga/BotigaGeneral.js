@@ -21,7 +21,7 @@ export default function BotigaGeneral() {
                     <div className="card-body">
                         <h5 className="card-title" >{data.title}</h5>
                         {/* <p className="card-text">{data.interview.intro}</p> */}
-                        <p className="card-text"><small className="text-muted">{data.price}</small></p>
+                        <p className="card-text-price ">{data.price}</p>
                     </div>
                 </div>
                 </NavLink>

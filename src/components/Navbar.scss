@@ -6,6 +6,7 @@
 .menuSuperior {
     background-color: #F2C571 !important;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
     padding: 15px;
@@ -33,17 +34,22 @@
     }
 }
 
+.nav-ul.show {
+    display: none;
+    list-style-type: none;
+    list-style: none;
+}
+
 .nav-ul {
     list-style: none;
     display: flex;
     li {
-        // margin: 50px;
         a {
             display: inline-block;
             font-family: Arial;
             font-weight: lighter;
             font-size: 1.5rem;
-            margin-right: 10px;
+            margin-right: 20px;
             font-weight: bold;
             text-decoration: none;
             color: white;
@@ -71,10 +77,6 @@
         }
     }
 }
-
-// }
-
-/**/
 
 .menuButton a {
     font-family: Arial;
@@ -119,12 +121,35 @@
     .nav-ul {
         display: none;
         flex-direction: column;
-        width: 100%;
+        flex: 100%;
     }
-    .nav-ul.show {
-        display: flex;
+    .menuOptionsCollapsed {
+        flex-direction: column;
+        flex: 0 0 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    a.menuOptions {
+        flex: 0 0 100%;
+        color: white;
+        font-family: Arial;
+        font-weight: bolder;
+        font-size: 1.5rem;
+        margin-right: 20px;
+        font-weight: bold;
+        text-decoration: none;
+    }
+    .liMenuOptions {
+        margin: 2rem;
+    }
+    .menuOptionsCollapsed ul {
+        list-style: none;
+        list-style-type: none;
     }
     .menuIcon {
         display: block;
+    }
+    .buttonMenu {
+        width: 60%;
     }
 }

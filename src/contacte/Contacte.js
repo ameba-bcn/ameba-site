@@ -13,7 +13,7 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 function Contacte() {
     return (
         <div className="BloqueContacto" id="contacte">
-            <Container maxWidth="sm">
+            <div className="contenedorContacto">
                 <div className="newletterForm"><NewsletterForm /></div>
                 <div className="iconsFooter">
                     <a href="https://www.facebook.com/amebabarcelona" rel="noopener noreferrer" target="_blank">
@@ -29,13 +29,8 @@ function Contacte() {
                         <YouTubeIcon />
                     </a>
                 </div>
-                <div>©2020 AMEBA<br />Associació de Música Electrònica de Barcelona - Tots els drets reservats</div>
-            </Container>
-            {/* <div className="wordsMoveFrame">
-                <div className="wordsMove">
-                    FES-TE SOCI 
-                    </div>
-            </div> */}
+                <div className="endingText">©2020 AMEBA<br />Associació de Música Electrònica de Barcelona - Tots els drets reservats</div>
+            </div>
         </div>
     );
 }
