@@ -24,6 +24,10 @@ export default function Navbar() {
         // console.log(size)
     }
 
+    const closeMenu = () => {
+        setClick(false)
+    }
+
     return (
         <div className="menuContainer">
             <div className="menuSuperior">
@@ -35,9 +39,9 @@ export default function Navbar() {
                 </div>
                 <div className="menuOptionsCollapsed">
                     <ul className={click ? "nav-ul.show" : "nav-ul"}>
-                        <li className="liMenuOptions"><NavLink className="menuOptions" to="/activitats" data-item='ACTIVITATS'>ACTIVITATS</NavLink></li>
-                        <li className="liMenuOptions"><NavLink className="menuOptions" to="/botiga" data-item='BOTIGA'>BOTIGA</NavLink></li>
-                        <li className="liMenuOptions"><NavLink className="menuOptions" to="/support" data-item='#SUPPORTYOURLOCALS'>#SUPPORTYOURLOCALS</NavLink></li>
+                        <li className="liMenuOptions" onClick={closeMenu}><NavLink className="menuOptions" to="/activitats" data-item='ACTIVITATS'>ACTIVITATS</NavLink></li>
+                        <li className="liMenuOptions"onClick={closeMenu}><NavLink className="menuOptions" to="/botiga" data-item='BOTIGA'>BOTIGA</NavLink></li>
+                        <li className="liMenuOptions"onClick={closeMenu}><NavLink className="menuOptions" to="/support" data-item='#SUPPORTYOURLOCALS'>#SUPPORTYOURLOCALS</NavLink></li>
                         <button className="buttonMenu" type="button">CONECTA'T</button>
                     </ul>
                 </div>
