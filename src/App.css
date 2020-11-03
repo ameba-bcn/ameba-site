@@ -16,6 +16,7 @@ font-family: 'Libre Baskerville';
     background-color: #FAE6C5;
     width: 100%;
     max-width: 2000px;
+    min-height: 100vh;
     box-sizing: border-box;
 }
 
@@ -371,4 +372,10 @@ div.PowerTitle:hover {
     width: 90%;
     margin: auto;
     margin-bottom: 2em;
+}
+
+@media screen and (max-width: 630px) {
+    div.PowerTitle {
+        display: none;
+    }
 }

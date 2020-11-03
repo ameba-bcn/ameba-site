@@ -11,7 +11,7 @@ import NotFound from './pages/NotFound';
 import { Switch, Route} from 'react-router-dom';
 import Contacte from './contacte/Contacte';
 import Menu from './components/Navbar'
-
+import Login from './pages/Login';
 
 class App extends Component {
   render() {
@@ -25,6 +25,7 @@ class App extends Component {
             <Route exact path='/support/:id' component={ Entrevista } />
             <Route path='/support' component={ SupportYourLocals } />
             <Route path='/sessio' component={ Sessio } />
+            <Route path='/login' component={ Login } />
             <Route exact path='/' component={Home} />
             <Route component={NotFound} />
           </Switch>

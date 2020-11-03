@@ -12,13 +12,6 @@
     font-size: 1.5rem;
 }
 
-
-/* .MuiTable-root,
-.MuiTableCell-root,
-.MuiToolbar-root {
-    background-color: #FAE6C5;
-} */
-
 .column {
     float: left;
     width: 50%;
@@ -62,10 +55,12 @@ p {
 .activitatImg {
     max-width: 200px;
     text-align: right;
+    width: 20%;
 }
 
 .activitatDescripcio {
     margin-left: 1em;
+    width: 70%;
 }
 
 .imgMiniActivitat {
@@ -78,7 +73,7 @@ p {
 .horaDataActivitat {
     text-align: center;
     justify-content: center;
-    width: 17%;
+    width: 200px;
 }
 
 .cardActivitat {
@@ -86,10 +81,14 @@ p {
     text-align: center;
     justify-content: center;
     margin-right: 1rem;
-    /* width: 100%; */
 }
 
-@media screen and (max-width: 1075px) {
+.horaDataPetit {
+    margin: 0 auto;
+    display: none;
+}
+
+@media screen and (max-width: 1210px) {
     .row {
         display: flex;
         width: 100%;
@@ -102,7 +101,39 @@ p {
     .activitatDescripcio h1 {
         font-size: 2rem;
     }
+    .activitatDescripcio {
+        width: 100%;
+    }
     .horaDataActivitat h1 {
         font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    table tbody tr td:nth-child(4),
+    .MuiTableCell-paddingCheckbox:last-child {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    table tbody tr td:nth-child(3),
+    .MuiTableCell-head:nth-child(3) {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 630px) {
+    table tbody tr td:nth-child(2),
+    .MuiTableCell-head:nth-child(2),
+    .MuiToolbar-regular,
+    .MuiTableRow-head {
+        display: none !important;
+    }
+    .horaDataPetit {
+        display: block;
+    }
+    .MuiTablePagination-toolbar {
+        display: flex !important;
     }
 }

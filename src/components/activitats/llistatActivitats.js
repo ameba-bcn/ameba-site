@@ -35,6 +35,9 @@ export default function LlistatActivitats() {
               <h1>{rowData.title}</h1>
               <p>{rowData.article}</p>
             </div>
+            <div className="horaDataPetit">
+            <h5>{rowData.date} - {rowData.hour}</h5>
+            </div>
           </div>,
         
         headerStyle: {
@@ -44,7 +47,7 @@ export default function LlistatActivitats() {
       {
         title: 'Data', field: 'date',
         render: rowData => <div className="horaDataActivitat"><h1>{rowData.date}</h1></div>
-        // , cellStyle: { maxWidth: 400 },
+        // , cellStyle: { width: 200 }
         ,headerStyle: {
           textAlign: 'center'
         }
@@ -52,7 +55,7 @@ export default function LlistatActivitats() {
       {
         title: 'Hora', field: 'hour',
         render: rowData => <div className="horaDataActivitat"><h1>{rowData.hour}</h1></div>,
-        // cellStyle: { maxWidth: 400 },
+        // cellStyle: { width: 200 },
         headerStyle: {
           textAlign: 'center'
         }

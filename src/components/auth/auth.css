@@ -1,0 +1,32 @@
+.loginBox {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 3rem;
+    width: 100%;
+}
+
+.loginBox form {
+    width: 20%;
+    min-width: 235px;
+}
+
+.inputLoginEmail,
+.inputLoginPassword,
+.inputLoginPasswordConf {
+    flex: 1 0 100%;
+    width: 100%;
+    padding: 10px;
+}
+
+.inputLoginEmail input,
+.inputLoginPassword input,
+.inputLoginPasswordConf input {
+    width: 100%;
+    min-width: 235px;
+}
+
+.buttonLoginForm {
+    margin: 1.5rem;
+    width: 80%;
+}
