@@ -1,8 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Associacio from '../components/associacio'
-import SupportLocals from '../components/supportLocals'
-import Activitats from '../components/activitats'
+import Associacio from '../components/main/Associacio';
+import SupportLocals from '../components/main/SupportLocals';
+import Activitats from '../components/main/Activitats';
 
 
 export default function Home() {

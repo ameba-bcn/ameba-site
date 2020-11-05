@@ -4,7 +4,7 @@
 /* https://codepen.io/grohit/pen/jObGzdG */
 
 .menuSuperior {
-    background-color: #F2C571 !important;
+    background-color: #1D1D1B !important;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -52,14 +52,14 @@
             margin-right: 20px;
             font-weight: bold;
             text-decoration: none;
-            color: white;
+            color: #FAE6C5;
             transition: all 0.5s ease-in-out;
             position: relative;
             text-transform: uppercase;
             &::before {
                 content: attr(data-item);
                 transition: 0.5s;
-                color: #FAE6C5;
+                color: #F2C571;
                 position: absolute;
                 top: 0;
                 bottom: 0;
@@ -85,13 +85,13 @@
     font-weight: bold;
     margin-left: 10px;
     display: inline-block;
-    color: white;
+    color: #FAE6C5;
     position: relative;
     transition: all 0.5s ease-in-out;
     &::before {
         content: attr(data-item);
         transition: 0.5s;
-        color: #FAE6C5;
+        color: #F2C571;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -120,6 +120,7 @@
 .menuIcon {
     display: none;
     font-size: 2rem;
+    color: #FAE6C5;
 }
 
 @media screen and (max-width: 1000px) {
@@ -136,7 +137,7 @@
     }
     a.menuOptions {
         flex: 0 0 100%;
-        color: white;
+        color: #FAE6C5;
         font-family: Arial;
         font-weight: bolder;
         font-size: 1.5rem;

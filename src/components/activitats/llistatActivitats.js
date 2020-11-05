@@ -13,7 +13,6 @@ export default function LlistatActivitats() {
 
   const handleClickOpen = () => {
     setOpen(true);
-    // console.log(selectedRow)
   };
 
   const handleClose = () => {

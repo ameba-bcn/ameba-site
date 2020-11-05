@@ -1,19 +1,27 @@
 .SectionTitleBox {
     display: flex;
-    min-width: 100%;
+    width: auto;
+    height: 100%;
     flex-direction: column;
-    /* position: absolute; */
+    overflow: hidden;
+    margin: 1.5rem;
 }
 
 .SectionTitle {
     font-size: 60px;
     font-family: 'Bebas Neue';
-    position: center;
     font-weight: 600;
-    text-align: 'center';
+    text-align: center;
     text-transform: uppercase;
     line-height: 1em;
     color: #1D1D1B;
+    width: auto;
+}
+
+@media screen and (max-width: 416px) {
+    .SectionTitle {
+        font-size: 40px;
+    }
 }
 
 

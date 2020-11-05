@@ -1,0 +1,20 @@
+.backgroundGrid {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    background-color: #F2C571;
+    margin: auto;
+}
+
+.gridList {
+    width: 1800px;
+    height: 800px;
+}
+
+@media screen and (max-width: 950px) {
+    .gridImg {
+        width: auto;
+    }
+}

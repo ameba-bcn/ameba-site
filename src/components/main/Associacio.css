@@ -1,0 +1,21 @@
+#asso {
+    background-color: #EB5E3E;
+}
+
+
+/* Main Flyer */
+
+.mainFlyer {
+    width: 100%;
+    height: 100vh;
+    background-image: url("../../images/MainAMEBA.png");
+    background-position: center;
+    background-size: cover;
+}
+
+@media screen and (max-width: 800px) {
+    .mainFlyer {
+        width: 100%;
+        height: auto;
+    }
+}

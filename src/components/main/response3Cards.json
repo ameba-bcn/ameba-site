@@ -1,0 +1,34 @@
+[{
+        "id": 1,
+        "title": "Taller amb BeGun",
+        "article": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut.",
+        "img": "amebabegun.png",
+        "date": "20/02/20",
+        "hour": "00:00",
+        "address": "Parc de l'Espanya Industrial",
+        "price": "6€",
+        "type": "Taller"
+    },
+    {
+        "id": 2,
+        "title": "Taller teoria musical",
+        "article": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut.",
+        "img": "ameba-joseanto.png",
+        "date": "05/06/20",
+        "hour": "00:00",
+        "address": "Parc de l'Espanya Industrial",
+        "price": "GRATIS",
+        "type": "Taller"
+    },
+    {
+        "id": 3,
+        "title": "Taller live en grup",
+        "article": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin porttitor eros lacus, sit amet consequat massa mollis ut.",
+        "img": "ameba-pablo.png",
+        "date": "16/10/20",
+        "hour": "00:00",
+        "address": "Parc de l'Espanya Industrial",
+        "price": "6€",
+        "type": "Taller"
+    }
+]

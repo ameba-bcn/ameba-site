@@ -1,0 +1,39 @@
+/* ACTIVITATS */
+
+#activitats {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #EB5E3E;
+}
+
+.fullTableActiv {
+    width: 90%;
+    margin: auto;
+    margin-bottom: 2em;
+}
+
+
+/* .navLinkActivitat {
+    width: 20%;
+} */
+
+.agendaLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    font-family: 'Bebas Neue';
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #1D1D1B;
+}
+
+@media screen and (max-width: 630px) {
+    div.PowerTitle {
+        display: none;
+    }
+}

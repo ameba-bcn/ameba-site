@@ -1,12 +1,9 @@
-.MuiGrid-container {
-    width: 90% !important;
-}
-
 .Card3GridContainer {
     width: 100% !important;
     margin: auto;
     margin-top: 20px;
     margin-bottom: 20px;
+    justify-content: space-around;
 }
 
 .Card3GridItem {
@@ -50,13 +47,31 @@
 
 @media screen and (max-width: 641px) {
     .Card3GridItem {
-        width: 80%;
+        width: 90%;
         height: auto;
-        margin: 26px;
+        /* margin: 26px; */
         padding-top: 10px;
     }
     .cardMediaTitle {
         font-size: 3rem;
+    }
+    .Card3GridContainer {
+        margin-top: 0px;
+    }
+}
+
+@media screen and (max-width: 416px) {
+    .Card3GridItem {
+        padding-bottom: 5px;
+    }
+    .cardMediaTitle {
+        font-size: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 322px) {
+    .cardMediaTitle {
+        font-size: 2rem;
     }
 }
 
