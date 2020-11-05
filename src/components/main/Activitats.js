@@ -9,8 +9,9 @@ function Activitats() {
         <div className="Bloque" id="activitats">
             <SectionTitle title="properes activitats"/>
             <Card3Grid className="Card3Block"/>
+            <div className="agendaLink">
             <NavLink className="navLinkActivitat"style={{ textDecoration: 'none' }} 
-                to={{pathname:'/activitats'}}><div className="agendaLink">- - - &#62; AGENDA &#60; - - -</div></NavLink>
+                to={{pathname:'/activitats'}}>- - - &#62; AGENDA &#60; - - -</NavLink></div>
         </div>
     );
 }

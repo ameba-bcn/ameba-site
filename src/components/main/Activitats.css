@@ -28,6 +28,10 @@
     font-weight: 600;
     text-align: center;
     text-transform: uppercase;
+    margin: 1rem 0 2rem 0;
+}
+
+.agendaLink a {
     text-decoration: none;
     color: #1D1D1B;
 }

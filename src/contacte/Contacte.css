@@ -5,8 +5,11 @@
 }
 
 .inputGroupNews {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+    border: 2px solid #1D1D1B;
+    border-radius: 15px;
 }
 
 .formControlNews {

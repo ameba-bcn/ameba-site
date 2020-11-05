@@ -17,17 +17,23 @@ export default function CardNew(props) {
           title={props.titol}
           className="cardMedia"
         /> */}
-        <img 
-        className="cardMedia" 
-        src={process.env.PUBLIC_URL +"/"+ props.imatge} 
-        alt={props.titol} 
-        title={props.titol}/>
+        <img
+          className="cardMedia"
+          src={process.env.PUBLIC_URL + "/" + props.imatge}
+          alt={props.titol}
+          title={props.titol} />
         <div className="cardMediaTitle">
-            {props.titol}
-          </div>
-        <CardContent>
-          <div className="cardMediaDate">
+          {props.titol}
+        </div>
+        <div className="cardMediaSort">
+          {props.tipo}
+        </div>
+        <CardContent className="row">
+          <div className="cardMediaDate column">
             {props.data}
+          </div>
+          <div className="cardMediaPlus column">
+            +
           </div>
         </CardContent>
       </CardActionArea>

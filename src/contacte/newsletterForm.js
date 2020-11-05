@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, InputGroup, Col } from 'react-bootstrap';
-
+import './Contacte.css'
 
 export default function NewsletterForm2() {
   const [validated, setValidated] = React.useState(false);
@@ -29,7 +29,7 @@ export default function NewsletterForm2() {
       <Form className="contactNews" noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Row className="rowNews">
           <Form.Group  as={Col} md="8" className="rowNewsLine" controlId="validationCustomUsername">
-            <Form.Label className="formLabelNews">Subscriu-te  a la nostra newsletter!</Form.Label>
+            <Form.Label className="formLabelNews">newsletter</Form.Label>
             <InputGroup className="inputGroupNews">
               <Form.Control 
                 className="formControlNews"
