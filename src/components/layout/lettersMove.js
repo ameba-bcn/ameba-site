@@ -1,0 +1,23 @@
+import React from 'react'
+import './lettersMove.css'
+// https://stackoverflow.com/questions/10679367/css-moving-text-from-left-to-right
+
+export default function LettersMove(props) {
+    return (
+        <div class="wrapper">
+            <marquee behavior="alternate">
+                <span class="marquee">
+                &#60; {props.sentence} &#62;
+                &#60; {props.sentence} &#62;
+                &#60; {props.sentence} &#62;
+                &#60; {props.sentence} &#62;
+                &#60; {props.sentence} &#62;
+                &#60; {props.sentence} &#62;
+                &#60; {props.sentence} &#62;
+                &#60; {props.sentence} &#62;
+                &#60; {props.sentence} &#62;
+                </span>
+            </marquee>
+        </div>
+    )
+}

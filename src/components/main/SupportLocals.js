@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import MainSupportLocals from '../supportyourlocals/MainSupportLocals'
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
+// import LettersMove from './../layout/lettersMove';
 import './SupportLocals.css';
 
 const useViewportOut = () => {
@@ -33,7 +34,7 @@ export default function SupportLocals() {
 
         <div className="Bloque" id="locals" ref={ref}>
             <MainSupportLocals className="gridNoticies" />
-             {inView && width < breakpoint ? <div className="overlayMobile">
+            {inView && width < breakpoint ? <div className="overlayMobile">
                 <Link to="/support" style={{ textDecoration: 'inherit' }}>
                     <div className="overlayTitleMobile">
                         #SUPPORT<br />YOUR<br />LOCALS
@@ -51,8 +52,6 @@ export default function SupportLocals() {
                     </Link>
                 </div>
             }
-
-
         </div>
     );
 }

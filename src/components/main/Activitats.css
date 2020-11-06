@@ -3,6 +3,7 @@
 #activitats {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     width: 100%;
     margin: 0 auto;
     background-color: #EB5E3E;
@@ -11,13 +12,8 @@
 .fullTableActiv {
     width: 90%;
     margin: auto;
-    margin-bottom: 2em;
+    /* margin-bottom: 2em; */
 }
-
-
-/* .navLinkActivitat {
-    width: 20%;
-} */
 
 .agendaLink {
     display: flex;
@@ -35,6 +31,12 @@
     text-decoration: none;
     color: #1D1D1B;
 }
+
+
+/* .lettersMoveDiv {
+    overflow: hidden;
+    height: 10px;
+} */
 
 @media screen and (max-width: 630px) {
     div.PowerTitle {

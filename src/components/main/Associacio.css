@@ -1,5 +1,7 @@
 #asso {
     background-color: #EB5E3E;
+    display: flex;
+    align-items: flex-end;
 }
 
 
@@ -11,6 +13,10 @@
     background-image: url("../../images/MainAMEBA.png");
     background-position: center;
     background-size: cover;
+}
+
+.lettersMoveAsso {
+    margin-top: 100vh;
 }
 
 @media screen and (max-width: 800px) {
