@@ -1,7 +1,9 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
+// import Container from '@material-ui/core/Container';
 import NewsletterForm from './newsletterForm';
 import './Contacte.css';
+import LettersMove from '../components/layout/lettersMove';
+
 
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
@@ -13,6 +15,11 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 function Contacte() {
     return (
         <div className="BloqueContacto" id="contacte">
+             <LettersMove
+                className="lettersMoveDiv"
+                sentence="FES-TE SOCI/A " 
+                color="#EB5E3E"
+                />
             <div className="contenedorContacto">
                 <div className="newletterForm"><NewsletterForm /></div>
                 <div className="iconsFooter">

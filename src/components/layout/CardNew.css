@@ -17,20 +17,22 @@
     text-align: center;
     padding: 30% 0;
     padding-left: 20px;
-    /* text-decoration: none; */
     font-size: 7em;
     font-family: 'Bebas Neue';
-    font-weight: 900;
-    line-height: 1em;
+    font-weight: 400;
+    line-height: 0.8em;
     text-align: left;
+    word-break: keep-all;
     display: -webkit-box;
-    -webkit-line-clamp: 5;
+    -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .cardMediaSort {
     position: absolute;
     color: #FAE6C5;
+    background-color: #1D1D1B;
     top: 0;
     width: 128px;
     height: 53px;
@@ -41,16 +43,24 @@
     padding-left: 10px;
     font-size: 3em;
     font-family: 'Bebas Neue';
-    font-weight: 600;
+    font-weight: 400;
     line-height: 1em;
     text-align: left;
     text-transform: uppercase;
-    border: 2px solid #FAE6C5;
-    border-radius: 20px;
+    /* border: 2px solid #FAE6C5; */
+    /* border-radius: 20px; */
+}
+
+.column1 {
+    width: 80%
+}
+
+.column2 {
+    width: 20%
 }
 
 .cardMediaDate {
-    font-size: 4em;
+    font-size: 4.5em;
     font-family: 'Bebas Neue';
     font-weight: 900;
     line-height: 1em;
@@ -66,4 +76,8 @@
     line-height: 0.8em;
     text-align: right;
     overflow: hidden;
+}
+
+.cardFrame {
+    background-color: #FAE6C5 !important
 }

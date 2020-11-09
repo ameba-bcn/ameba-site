@@ -10,17 +10,14 @@ function Activitats() {
         <div className="Bloque" id="activitats">
             <LettersMove
                 className="lettersMoveDiv"
-                sentence="ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA" 
+                sentence="FES-TE SOCI/A " 
+                color="#EB5E3E"
                 />
             <SectionTitle title="properes activitats" />
             <Card3Grid className="Card3Block" />
             <div className="agendaLink">
                 <NavLink className="navLinkActivitat" style={{ textDecoration: 'none' }}
-                    to={{ pathname: '/activitats' }}>- - - &#62; AGENDA &#60; - - -</NavLink></div>
-            <LettersMove
-                className="lettersMoveDiv"
-                sentence="ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA" 
-                />
+                    to={{ pathname: '/activitats' }}>- - - &#62; VEURE AGENDA &#60; - - -</NavLink></div>
         </div>
     );
 }

@@ -12,8 +12,8 @@
 
 .card-support-deck {
     width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
     padding-left: 20px;
     text-align: left;
     /* align-items: center; */

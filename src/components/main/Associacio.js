@@ -8,7 +8,8 @@ function Associacio() {
             {/* <div className="mainFlyer" /> */}
             <LettersMove
                 className="lettersMoveAsso"
-                sentence="ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA" 
+                sentence="L'ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA " 
+                color="#FAE6C5"
                 />
         </div>
     );

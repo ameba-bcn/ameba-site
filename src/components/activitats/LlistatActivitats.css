@@ -5,11 +5,17 @@
 
 .fullTableActiv {
     width: 80%;
+    background-color: #EB5E3E;
 }
 
 .MuiTableSortLabel-root {
     font-family: 'Bebas Neue';
     font-size: 1.5rem;
+}
+
+.MuiPaper-root,
+.MuiTableCell-head {
+    background-color: #FAE6C5!important;
 }
 
 .column {

@@ -6,16 +6,26 @@ export default function LettersMove(props) {
     return (
         <div class="wrapper">
             <marquee behavior="alternate">
-                <span class="marquee">
-                &#60; {props.sentence} &#62;
-                &#60; {props.sentence} &#62;
-                &#60; {props.sentence} &#62;
-                &#60; {props.sentence} &#62;
-                &#60; {props.sentence} &#62;
-                &#60; {props.sentence} &#62;
-                &#60; {props.sentence} &#62;
-                &#60; {props.sentence} &#62;
-                &#60; {props.sentence} &#62;
+                <span class="marquee" style={{ color: props.color }}>
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
                 </span>
             </marquee>
         </div>

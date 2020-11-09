@@ -44,10 +44,10 @@ export default function SupportLocals() {
                 <div className="overlay">
                     <Link to="/support" style={{ textDecoration: 'inherit' }}>
                         <div className="overlayTitle">
-                            #SUPPORT YOUR LOCALS
+                            #SUPPORTYOURLOCALS
                     </div>
                         <div className="overlaySubtitle">
-                            conèix als artistes que donen vida a l'escena de la ciutat
+                            * conèix als artistes que donen vida a l'escena de la ciutat *
                     </div>
                     </Link>
                 </div>

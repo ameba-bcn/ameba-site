@@ -8,9 +8,9 @@
 }
 
 .SectionTitle {
-    font-size: 60px;
+    font-size: 160px;
     font-family: 'Bebas Neue';
-    font-weight: 600;
+    font-weight: 400;
     text-align: center;
     text-transform: uppercase;
     line-height: 1em;
@@ -18,9 +18,21 @@
     width: auto;
 }
 
-@media screen and (max-width: 416px) {
+@media screen and (max-width: 1300px) {
     .SectionTitle {
-        font-size: 40px;
+        font-size: 120px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .SectionTitle {
+        font-size: 100px;
+    }
+}
+
+@media screen and (max-width: 635px) {
+    .SectionTitle {
+        font-size: 60px;
     }
 }
 

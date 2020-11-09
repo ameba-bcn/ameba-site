@@ -34,7 +34,7 @@ export default function NewsletterForm2() {
               <Form.Control 
                 className="formControlNews"
                 type="text"
-                placeholder= "Escriu el teu email"
+                placeholder= "ESCRIU EL TEU EMAIL"
                 required
               />
               <animatedInput placeholder="type a name"/>

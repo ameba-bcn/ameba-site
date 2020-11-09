@@ -178,6 +178,12 @@ div.PowerTitle:hover {
     }
 }
 
+.Articles,
+.Botiga,
+.SupportContent {
+    background-color: #EB5E3E;
+}
+
 #festi,
 #shop {
     background-color: #FAE6C5;
@@ -186,10 +192,6 @@ div.PowerTitle:hover {
 #contacte,
 #locals {
     background-color: #F2C571;
-}
-
-.SupportContent {
-    background-color: #FAE6C5;
 }
 
 .HomeContent {

@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import WebFont from 'webfontloader';
 import { BrowserRouter } from 'react-router-dom'
+import ScrollToTop from './scrollToTop';
 
 WebFont.load({
   google: {
@@ -14,12 +15,13 @@ WebFont.load({
 
 ReactDOM.render(
   <BrowserRouter basename={process.env.PUBLIC_URL}>
-    
+    <ScrollToTop>
     <React.StrictMode>
 
       <App />
 
     </React.StrictMode>
+    </ScrollToTop>
   </BrowserRouter>,
   document.getElementById('root')
 );

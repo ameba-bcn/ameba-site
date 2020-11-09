@@ -29,10 +29,10 @@ export default function CardNew(props) {
           {props.tipo}
         </div>
         <CardContent className="row">
-          <div className="cardMediaDate column">
+          <div className="cardMediaDate column1">
             {props.data}
           </div>
-          <div className="cardMediaPlus column">
+          <div className="cardMediaPlus column2">
             +
           </div>
         </CardContent>

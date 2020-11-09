@@ -29,17 +29,18 @@
 
 .agendaLink a {
     text-decoration: none;
-    color: #1D1D1B;
+    color: #FAE6C5;
 }
 
-
-/* .lettersMoveDiv {
-    overflow: hidden;
-    height: 10px;
-} */
+.navLinkActivitat:hover {
+    color: #F2C571;
+}
 
 @media screen and (max-width: 630px) {
     div.PowerTitle {
         display: none;
+    }
+    .agendaLink {
+        font-size: 2em;
     }
 }

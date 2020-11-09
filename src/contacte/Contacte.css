@@ -5,21 +5,23 @@
 }
 
 .inputGroupNews {
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     margin-bottom: 2rem;
     padding: 0.5rem;
-    border: 2px solid #1D1D1B;
-    border-radius: 15px;
+    /* border: 2px solid #1D1D1B;
+    border-radius: 15px; */
 }
 
 .formControlNews {
     font-family: 'Libre Baskerville';
     font-size: 2rem;
     margin-right: 10px;
+    padding-top: 15px;
     background-color: #F2C571;
     border: none;
     border-color: transparent;
     width: 90%;
+    height: auto;
 }
 
 .formControlNews:focus,
@@ -31,13 +33,21 @@
 
 .formControlNews::placeholder {
     color: #1D1D1B;
+    font-family: 'Bebas Neue';
+    font-size: 1.5em;
+    font-weight: 400;
+    border: 2px solid #1D1D1B;
+    padding-left: 10px;
+    /* border-radius: 15px; */
 }
 
 .formButton {
-    font-family: 'Libre Baskerville';
-    font-size: 1.5rem;
+    font-family: 'Bebas Neue';
+    font-size: 2.5em;
+    font-weight: 400;
     width: 15rem;
-    background-color: #F2C571;
+    color: #F2C571;
+    background-color: #1D1D1B;
 }
 
 .iconsFooter {
@@ -58,16 +68,10 @@
     margin: 0 auto;
 }
 
-.rowNews {
-    margin-top: 10px;
-    padding-top: 20px;
-    margin-bottom: 20px;
-}
-
 .formLabelNews {
     font-family: 'Bebas Neue';
-    font-size: 3em;
-    font-weight: 900;
+    font-size: 5em;
+    font-weight: 400;
 }
 
 .endingText {
