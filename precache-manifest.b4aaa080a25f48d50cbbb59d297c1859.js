@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c5c29106be2eb26cf5e49919b2c7e717",
+    "revision": "85921c1914bd60c92b20db68187b9587",
     "url": "/ameba-site/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ameba-site/static/css/2.af3c1da9.chunk.css"
   },
   {
-    "revision": "c99fb6087ad4017611a0",
-    "url": "/ameba-site/static/css/main.0fb1b20f.chunk.css"
+    "revision": "cf6c62d01373a31619ce",
+    "url": "/ameba-site/static/css/main.8003aaaa.chunk.css"
   },
   {
     "revision": "6c45dc1c93981092178f",
@@ -40,7 +40,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ameba-site/static/js/5.8c788ac6.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c99fb6087ad4017611a0",
+    "revision": "cf6c62d01373a31619ce",
     "url": "/ameba-site/static/js/main.a145b1db.chunk.js"
   },
   {

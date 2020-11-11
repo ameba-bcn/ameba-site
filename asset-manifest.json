@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/ameba-site/static/css/main.0fb1b20f.chunk.css",
+    "main.css": "/ameba-site/static/css/main.8003aaaa.chunk.css",
     "main.js": "/ameba-site/static/js/main.a145b1db.chunk.js",
     "main.js.map": "/ameba-site/static/js/main.a145b1db.chunk.js.map",
     "runtime-main.js": "/ameba-site/static/js/runtime-main.dda27006.js",
@@ -15,10 +15,10 @@
     "static/js/5.8c788ac6.chunk.js": "/ameba-site/static/js/5.8c788ac6.chunk.js",
     "static/js/5.8c788ac6.chunk.js.map": "/ameba-site/static/js/5.8c788ac6.chunk.js.map",
     "index.html": "/ameba-site/index.html",
-    "precache-manifest.248a502257f61bf728278db0395ebab1.js": "/ameba-site/precache-manifest.248a502257f61bf728278db0395ebab1.js",
+    "precache-manifest.b4aaa080a25f48d50cbbb59d297c1859.js": "/ameba-site/precache-manifest.b4aaa080a25f48d50cbbb59d297c1859.js",
     "service-worker.js": "/ameba-site/service-worker.js",
     "static/css/2.af3c1da9.chunk.css.map": "/ameba-site/static/css/2.af3c1da9.chunk.css.map",
-    "static/css/main.0fb1b20f.chunk.css.map": "/ameba-site/static/css/main.0fb1b20f.chunk.css.map",
+    "static/css/main.8003aaaa.chunk.css.map": "/ameba-site/static/css/main.8003aaaa.chunk.css.map",
     "static/js/2.65e811d1.chunk.js.LICENSE.txt": "/ameba-site/static/js/2.65e811d1.chunk.js.LICENSE.txt",
     "static/js/4.1c4c6d5f.chunk.js.LICENSE.txt": "/ameba-site/static/js/4.1c4c6d5f.chunk.js.LICENSE.txt",
     "static/js/5.8c788ac6.chunk.js.LICENSE.txt": "/ameba-site/static/js/5.8c788ac6.chunk.js.LICENSE.txt",
@@ -29,7 +29,7 @@
     "static/js/runtime-main.dda27006.js",
     "static/css/2.af3c1da9.chunk.css",
     "static/js/2.65e811d1.chunk.js",
-    "static/css/main.0fb1b20f.chunk.css",
+    "static/css/main.8003aaaa.chunk.css",
     "static/js/main.a145b1db.chunk.js"
   ]
 }
