@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ameba-site/precache-manifest.b4aaa080a25f48d50cbbb59d297c1859.js"
+  "/ameba-site/precache-manifest.aa44ad30c924a272fb3945744253c7e8.js"
 );
 
 self.addEventListener('message', (event) => {
