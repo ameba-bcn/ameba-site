@@ -78,6 +78,11 @@
     font-family: 'Libre Baskerville';
 }
 
+.breakLine {
+    height: 0px;
+    width: 0%;
+}
+
 @media screen and (max-width: 990px) {
     .formLabelNews {
         font-size: 2em;
@@ -89,5 +94,23 @@
     .formButton {
         font-size: 1rem;
         width: 10rem;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .breakLine {
+        height: 1em;
+        width: 100%;
+    }
+    .formControlNews {
+        margin: auto;
+    }
+    .formButton {
+        font-size: 1.5rem;
+        margin: auto;
+        margin-bottom: 1.5em;
+    }
+    .inputGroupNews {
+        margin: auto;
     }
 }

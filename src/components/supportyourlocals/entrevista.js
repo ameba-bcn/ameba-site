@@ -14,7 +14,9 @@ export default function Entrevista(props) {
         <>
             <div className="fullEntrevista" >
                 <div className="rowEntrevista">
-                    <img className="imgEntrevista" src={EntrevistaResponse.img} alt={EntrevistaResponse.title} />
+                    <div className="columnImatge">
+                        <img className="imgEntrevista" src={EntrevistaResponse.img} alt={EntrevistaResponse.title} />
+                    </div>
                     <div className="columnEntrevista">
                         <div className="titleBoxEntrevista">
                             <h1 className="titleEntrevista" >{EntrevistaResponse.title}</h1>
@@ -34,12 +36,12 @@ export default function Entrevista(props) {
                     )
                     }
 
-                    {EntrevistaResponse.links.map((n) => 
-                    <div className="mediaPlayer">
-                        {/* <a href={n} target="_blank" rel="noopener noreferrer" className="reproductorEntrevista">{n}<br />
+                    {EntrevistaResponse.links.map((n) =>
+                        <div className="mediaPlayer">
+                            {/* <a href={n} target="_blank" rel="noopener noreferrer" className="reproductorEntrevista">{n}<br />
                     </a> */}
-                        <ReactPlayer url={n} />
-                    </div>)}
+                            <ReactPlayer url={n} />
+                        </div>)}
 
                 </div>
             </div>

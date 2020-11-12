@@ -17,7 +17,7 @@ function Activitats() {
             <Card3Grid className="Card3Block" />
             <div className="agendaLink">
                 <NavLink className="navLinkActivitat" style={{ textDecoration: 'none' }}
-                    to={{ pathname: '/activitats' }}>- - - &#62; VEURE AGENDA &#60; - - -</NavLink></div>
+                    to={{ pathname: '/activitats' }}><span>- - - &#62;</span> VEURE AGENDA <span>&#60; - - -</span></NavLink></div>
         </div>
     );
 }

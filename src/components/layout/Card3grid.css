@@ -36,7 +36,7 @@
 
 @media screen and (max-width: 1250px) {
     .cardMediaTitle {
-        font-size: 4rem;
+        font-size: 3.8rem;
     }
     /* .cardMediaText {
         font-size: 0.5rem;
@@ -45,7 +45,7 @@
 
 @media screen and (max-width: 1090px) {
     .cardMediaTitle {
-        font-size: 9rem;
+        font-size: 7rem;
     }
     /* .cardMediaText {
         font-size: 3rem;
@@ -57,7 +57,7 @@
         font-size: 10em;
     }
     .Card3GridItem {
-        width: 90%;
+        width: 70%;
         height: auto;
         /* margin: 26px; */
         padding-top: 10px;
@@ -74,40 +74,19 @@
 
 @media screen and (max-width: 815px) {
     .cardMediaTitle {
-        font-size: 6rem;
+        font-size: 4.7rem;
     }
     .cardMediaDate {
-        font-size: 6.5em;
+        font-size: 5em;
     }
     .cardMediaPlus {
-        font-size: 8em;
+        font-size: 7em;
     }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 555px) {
     .cardMediaTitle {
-        font-size: 4.5rem;
-    }
-    .cardMediaSort {
-        top: 0;
-        width: 109px;
-        height: 46px;
-        font-size: 2.5em;
-    }
-    .cardMediaDate {
-        font-size: 4.5em;
-    }
-    .cardMediaPlus {
-        font-size: 6em;
-    }
-}
-
-@media screen and (max-width: 416px) {
-    .Card3GridItem {
-        padding-bottom: 5px;
-    }
-    .cardMediaTitle {
-        font-size: 4rem;
+        font-size: 3.5rem;
     }
     .cardMediaSort {
         top: 0;
@@ -119,13 +98,34 @@
         font-size: 3.5em;
     }
     .cardMediaPlus {
-        font-size: 5em;
+        font-size: 4em;
+    }
+}
+
+@media screen and (max-width: 422px) {
+    .Card3GridItem {
+        padding-bottom: 5px;
+    }
+    .cardMediaTitle {
+        font-size: 2.5em;
+    }
+    .cardMediaSort {
+        top: 0;
+        width: 109px;
+        height: 46px;
+        font-size: 2.5em;
+    }
+    .cardMediaDate {
+        font-size: 2.5em;
+    }
+    .cardMediaPlus {
+        font-size: 3em;
     }
 }
 
 @media screen and (max-width: 322px) {
     .cardMediaTitle {
-        font-size: 3rem;
+        font-size: 1.5rem;
     }
 }
 

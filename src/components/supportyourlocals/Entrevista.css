@@ -12,11 +12,17 @@
     margin-top: 2em;
 }
 
+.columnImatge,
 .columnEntrevista {
-    flex: 50%;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+
+.columnEntrevista {
     position: relative;
     bottom: 0;
-    left: 0;
 }
 
 .textContentEntrevista {

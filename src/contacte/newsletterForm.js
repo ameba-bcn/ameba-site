@@ -38,6 +38,7 @@ export default function NewsletterForm2() {
                 required
               />
               <animatedInput placeholder="type a name"/>
+              <div className="breakLine"></div>
               <button 
               type="submit"
               className="formButton">Subscriu-te</button>
