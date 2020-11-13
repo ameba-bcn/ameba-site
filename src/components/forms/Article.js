@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import TextInput from './textInput';
-import validate from './validate';
-import TextArea from './textArea';
+import TextInput from './TextInput';
+import Validate from './Validate';
+import TextArea from './TextArea';
 
 class Article extends Component {
 
@@ -99,7 +99,7 @@ class Article extends Component {
     };
     updatedFormElement.value = value;
     updatedFormElement.touched = true;
-    updatedFormElement.valid = validate(value, updatedFormElement.validationRules);
+    updatedFormElement.valid = Validate(value, updatedFormElement.validationRules);
 
     updatedControls[name] = updatedFormElement;
 

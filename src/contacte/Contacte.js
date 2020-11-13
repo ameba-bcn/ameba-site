@@ -1,8 +1,8 @@
 import React from 'react';
 // import Container from '@material-ui/core/Container';
-import NewsletterForm from './newsletterForm';
+import NewsletterForm from './NewsletterForm';
 import './Contacte.css';
-import LettersMove from '../components/layout/lettersMove';
+import LettersMove from '../components/layout/LettersMove';
 
 
 import FacebookIcon from '@material-ui/icons/Facebook';

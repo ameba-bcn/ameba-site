@@ -7,7 +7,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 
 // Ilustracion y texto
-import AmebaLogo from '../amebaLogo'
+import AmebaLogo from '../_amebaLogo'
 
 function AlphaBlock(props) {
     return (

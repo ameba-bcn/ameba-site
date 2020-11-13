@@ -1,6 +1,6 @@
 import React from 'react';
 import './Associacio.css';
-import LettersMove from './../layout/lettersMove';
+import LettersMove from './../layout/LettersMove';
 
 function Associacio() {
     return (

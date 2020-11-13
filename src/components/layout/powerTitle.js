@@ -1,5 +1,5 @@
 import React from 'react';
-import './powerTitle.css'
+import './PowerTitle.css'
 // const stylesTit = {
 //     title: {
 //         fontSize: 220,

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react';
-import LlistatEntrevistes from './llistatEntrevistes';
-import PowerTitle from '../layout/powerTitle';
+import LlistatEntrevistes from './LlistatEntrevistes';
+import PowerTitle from '../layout/PowerTitle';
 import './ClientEntrevistes.css'
 
 export default class clientEntrevistes extends Component {

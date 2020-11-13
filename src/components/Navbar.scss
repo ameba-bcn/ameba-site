@@ -46,11 +46,11 @@
     li {
         a {
             display: inline-block;
-            font-family: Arial;
+            font-family: 'Bebas Neue';
             font-weight: lighter;
-            font-size: 1.5rem;
+            font-size: 2.5rem;
             margin-right: 20px;
-            font-weight: bold;
+            font-weight: 400;
             text-decoration: none;
             color: #FAE6C5;
             transition: all 0.5s ease-in-out;
@@ -79,10 +79,10 @@
 }
 
 .menuButton a {
-    font-family: Arial;
+    font-family: 'Bebas Neue';
     text-decoration: none;
-    font-size: 2rem;
-    font-weight: bold;
+    font-size: 2.5rem;
+    font-weight: 400;
     margin-left: 10px;
     display: inline-block;
     color: #FAE6C5;
@@ -138,9 +138,9 @@
     a.menuOptions {
         flex: 0 0 100%;
         color: #FAE6C5;
-        font-family: Arial;
-        font-weight: bolder;
-        font-size: 1.5rem;
+        font-family: 'Bebas Neue';
+        font-weight: 400;
+        font-size: 2.5rem;
         margin-right: 20px;
         font-weight: bold;
         text-decoration: none;

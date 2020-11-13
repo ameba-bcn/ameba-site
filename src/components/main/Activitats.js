@@ -2,7 +2,7 @@ import React from 'react';
 import Card3Grid from '../layout/Card3grid';
 import SectionTitle from '../layout/SectionTitle';
 import { NavLink } from 'react-router-dom';
-import LettersMove from './../layout/lettersMove';
+import LettersMove from './../layout/LettersMove';
 import './Activitats.css'
 
 function Activitats() {

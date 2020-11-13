@@ -6,9 +6,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import SociEstat from './taules/estatusSoci';
-import Compres from './taules/compres';
-import Socis from './taules/socis';
+import SociEstat from './taules/EstatusSoci';
+import Compres from './taules/Compres';
+import Socis from './taules/Socis';
 // import Power from '../components/layout/powerTitle';
 // import Navbar from '../components/Navbar';
 

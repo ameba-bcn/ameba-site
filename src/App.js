@@ -6,7 +6,7 @@ import Botiga from './pages/Botiga';
 import Entrevista from './components/supportyourlocals/Entrevista';
 // import Articles from './components/forms/Article';
 import SupportYourLocals from './pages/SupportYourLocals';
-import Sessio from './sessio/sessioGeneral';
+import Sessio from './sessio/SessioGeneral';
 import NotFound from './pages/NotFound';
 import { Switch, Route} from 'react-router-dom';
 import Contacte from './contacte/Contacte';

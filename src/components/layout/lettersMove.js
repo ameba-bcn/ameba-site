@@ -1,5 +1,5 @@
 import React from 'react'
-import './lettersMove.css'
+import './LettersMove.css'
 // https://stackoverflow.com/questions/10679367/css-moving-text-from-left-to-right
 
 export default function LettersMove(props) {
