@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
-import './auth.css';
+import './Auth.css';
 
 export default class Registration extends Component {
     constructor(props) {
