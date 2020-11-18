@@ -1,5 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Start with Docker
+- Instalar Docker
+- En el directorio raíz del proyecto, build del proyecto:
+```
+docker build . -t ameba-site
+```
+- Deploy
+```
+docker run ameba-site
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
