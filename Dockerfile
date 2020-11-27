@@ -1,8 +1,8 @@
-FROM node:10 AS ui-build
-WORKDIR /usr/src/app
-COPY ./ ./
-RUN npm install && npm run build
+FROM node:10
+WORKDIR /src
+COPY package*.json ./
 
+RUN npm install
 EXPOSE 3000
 
 CMD ["npm", "start"]
