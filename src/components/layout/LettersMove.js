@@ -4,9 +4,9 @@ import './LettersMove.css'
 
 export default function LettersMove(props) {
     return (
-        <div class="wrapper">
+        <div className="wrapper">
             <marquee behavior="alternate">
-                <span class="marquee" style={{ color: props.color }}>
+                <span className="marquee" style={{ color: props.color }}>
                 - {props.sentence}
                 - {props.sentence}
                 - {props.sentence}
