@@ -13,6 +13,7 @@ import LocationOnIcon from '@material-ui/icons/LocationOn';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
+import ClearIcon from '@material-ui/icons/Clear';
 export default function SimpleDialog(props) {
     const { onClose, selectedValue, open, dataRow } = props;
     const handleClose = () => {
@@ -24,6 +25,7 @@ export default function SimpleDialog(props) {
 
             <Card className="cardGeneral" >
                 <div className="insideFrameModal">
+                <ClearIcon className="crossCloseModal" onClick={handleClose}/>
                     <div className="titleModal" id="simple-dialog-title">
                         {dataRow.selectedRow ? dataRow.selectedRow.title : ''}
                     </div>
@@ -62,13 +64,13 @@ export default function SimpleDialog(props) {
                             </span>
                             <br />
                             <span className="mainWordBoxCard"><LocalAtmIcon /> PREU / </span>
-                            {dataRow.selectedRow ? dataRow.selectedRow.price : ''}
+                            <span className="priceBoxCard">{dataRow.selectedRow ? dataRow.selectedRow.price : ''}</span>
                         </div>
                         <div className="column">
                             <CardActions>
-                                <button size="small" color="inherit">
-                                    <ReceiptIcon />RESERVA ENTRADA
-                    </button>
+                                <button size="small" className="buttonTicketBoxCard" color="inherit">
+                                    <ReceiptIcon className="buttonIconBoxCard"/><span className="buttonTextBoxCard">RESERVA ENTRADA</span>
+                                </button>
                             </CardActions>
                         </div>
                     </div>
@@ -90,11 +92,11 @@ export default function SimpleDialog(props) {
                     {/* </CardActionArea> */}
                     <hr className="dashed" />
                     <div className="artistBox">
-                    <span className="mainWordBoxCard">
-                    ARTIST / LINE-UP &nbsp;
+                        <span className="mainWordBoxCard">
+                            ARTIST / LINE-UP &nbsp;
                             </span>
-                        
-                </div>
+
+                    </div>
                     <hr className="solid" />
                 </div>
             </Card>

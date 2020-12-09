@@ -32,7 +32,7 @@ export default function LlistatActivitats() {
             <div className="column activitatDescripcio">
               <h5>{rowData.address}</h5>
               <h1>{rowData.title}</h1>
-              <p>{rowData.article}</p>
+              <p className="activitatText">{rowData.article}</p>
             </div>
             <div className="horaDataPetit">
             <h5>{rowData.date} - {rowData.hour}</h5>
