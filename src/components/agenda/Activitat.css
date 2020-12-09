@@ -1,11 +1,38 @@
 .cardGeneral {
     width: 550px;
+    /* height: 100%; */
     padding: 20px;
     background-color: #FAE6C5 !important;
+    /* background-color: blueviolet !important; */
+}
+
+.insideFrameModal {
+    /* background-color: burlywood; */
+    /* position: absolute; */
+    height: 100%;
+}
+
+.cardLocalization {
+    /* background-color: blueviolet; */
+    padding-bottom: 1em;
+}
+
+.mainWordBoxCard {
+    font-weight: bold;
+}
+
+.addressLinkCard a {
+    color: inherit;
+    /* text-decoration: inherit; */
+    /* cursor: inherit; */
 }
 
 .imageModal {
     height: 280px;
+}
+
+.dateDetailed {
+    margin: 0 auto;
 }
 
 .titleModal {
@@ -35,4 +62,12 @@
     font-size: 20px;
     line-height: 1em;
     text-align: left;
+}
+
+hr.dashed {
+    border-top: 3px dashed #bbb;
+}
+
+hr.solid {
+    border-top: 3px solid #bbb;
 }

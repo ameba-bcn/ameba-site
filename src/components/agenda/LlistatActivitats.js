@@ -3,7 +3,7 @@ import Data from './response.json';
 import MaterialTable from "material-table";
 // import { FiShoppingCart } from 'react-icons/fi';
 import { TiTicket } from 'react-icons/ti';
-import './LlistatActivitats.css';
+import './Agenda.css';
 import SimpleDialog from './Activitat';
 
 export default function LlistatActivitats() {

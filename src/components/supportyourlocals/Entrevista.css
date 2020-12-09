@@ -72,7 +72,7 @@
     font-family: 'Arial';
 }
 
-hr {
+hr.separadorTop {
     width: 100%;
     height: 1px;
     background: #F2C571;
