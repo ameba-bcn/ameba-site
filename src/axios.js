@@ -70,11 +70,15 @@ axiosInstance.interceptors.response.use(
                         })
                 } else {
                     console.log('Refresh page token is expired', tokenParts.exp, now)
-                    windows.location.href = '/login/';
+                    if (typeof window !== "undefined") {
+                        window.location.href = '/login/';
+                    }
                 }
             } else {
                 console.log('Refresh token not available');
-                window.location.href = '/login/';
+                if (typeof window !== "undefined") {
+                    window.location.href = '/login/';
+                }
             }
         }
         return Promise.reject(error);
