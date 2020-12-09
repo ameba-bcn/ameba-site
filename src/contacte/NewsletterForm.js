@@ -37,7 +37,7 @@ export default function NewsletterForm2() {
                 placeholder= "ESCRIU EL TEU EMAIL"
                 required
               />
-              <animatedInput placeholder="type a name"/>
+              {/* <AnimatedInput placeholder="type a name"/> */}
               <div className="breakLine"></div>
               <button 
               type="submit"

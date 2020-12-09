@@ -1,0 +1,136 @@
+.cardGeneral {
+    width: 550px;
+    /* height: 100%; */
+    padding: 20px;
+    background-color: #FAE6C5 !important;
+    overflow: auto;
+    /* background-color: blueviolet !important; */
+}
+
+.insideFrameModal {
+    /* background-color: burlywood; */
+    /* position: absolute; */
+    /* height: 700px; */
+    overflow: auto;
+}
+
+.crossCloseModal {
+    float: right;
+    color: #1D1D1B;
+    cursor: pointer;
+}
+
+.cardLocalization {
+    /* background-color: blueviolet; */
+    padding-bottom: 1em;
+}
+
+.mainWordBoxCard {
+    font-weight: bold;
+    font-family: 'Bebas Neue';
+    font-size: 26px;
+}
+
+.addressLinkCard a {
+    color: inherit;
+    font-family: 'Libre Baskerville';
+    font-size: 1rem;
+    /* text-decoration: inherit; */
+    /* cursor: inherit; */
+}
+
+.imageModal {
+    height: 280px;
+    margin-bottom: 1rem;
+}
+
+.dateDetailed {
+    margin: 0 auto;
+    margin-bottom: 0rem;
+}
+
+.titleModal {
+    font-size: 60px;
+    font-family: 'Bebas Neue';
+    font-weight: 800;
+    line-height: 1em;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.modalTextBox {
+    background-color: #F2C571;
+}
+
+.textModal {
+    font-family: 'Libre Baskerville';
+    /* text-transform: uppercase; */
+    font-size: 0.8rem;
+    margin-top: -0.3rem;
+    margin-bottom: 0.5rem;
+    text-align: justify;
+    height: auto;
+}
+
+.addressModal {
+    text-transform: uppercase;
+    font-family: 'Bebas Neue';
+    font-size: 20px;
+    line-height: 1rem;
+    text-align: left;
+}
+
+.dateLinkCard {
+    font-family: 'Libre Baskerville';
+    font-size: 1.1rem;
+    color: inherit;
+}
+
+.dateLinkCard a {
+    color: inherit;
+}
+
+.priceBoxCard {
+    font-family: 'Libre Baskerville';
+    font-size: 1.2rem;
+}
+
+.descriptionCardBox {
+    margin-top: .5rem;
+}
+
+.buttonTextBoxCard {
+    font-family: 'Bebas Neue';
+    font-size: 1.5rem;
+    /* height: 44px; */
+    color: #FAE6C5;
+}
+
+.buttonTicketBoxCard {
+    position: relative;
+    height: auto;
+    color: #FAE6C5;
+    background-color: #1D1D1B;
+}
+
+.buttonIconBoxCard {
+    /* margin: 0 auto; */
+    margin: 0.4rem;
+    /* color: #FAE6C5; */
+}
+
+.MuiCardActions-spacing,
+.MuiCardActions-root {
+    float: right;
+}
+
+hr.dashed {
+    border-top: 3px dashed #bbb;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+hr.solid {
+    border-top: 3px solid #bbb;
+    margin-top: 0rem;
+}

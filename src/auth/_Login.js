@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
+import './Auth.css';
 
 export default class Login extends Component {
     constructor(props) {

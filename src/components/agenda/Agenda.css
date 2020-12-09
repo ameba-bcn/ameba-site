@@ -48,7 +48,7 @@ h5 {
     font-size: 0.8rem;
 }
 
-p {
+.activitatText {
     font-family: 'Libre Baskerville';
     font-size: 0.9rem;
     /* delimitar lineas verticales */
