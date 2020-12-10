@@ -182,9 +182,13 @@ div.PowerTitle:hover {
 } */
 
 .Articles,
-.Botiga,
-.SupportContent {
+.Botiga {
     background-color: #EB5E3E;
+    padding-bottom: 6em;
+}
+
+.SupportContent {
+    background-color: #FAE6C5;
     padding-bottom: 6em;
 }
 
