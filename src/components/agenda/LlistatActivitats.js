@@ -30,12 +30,12 @@ export default function LlistatActivitats() {
               <img src={rowData.img} className="imgMiniActivitat" alt="" />
             </div>
             <div className="column activitatDescripcio">
-              <h5>{rowData.address}</h5>
-              <h1>{rowData.title}</h1>
-              <p className="activitatText">{rowData.article}</p>
+              <h5 className="mainActivitatSubtitle">{rowData.address}</h5>
+              <h1 className="mainActivitatTitle">{rowData.title}</h1>
+              {/* <p className="activitatText">{rowData.article}</p> */}
             </div>
             <div className="horaDataPetit">
-            <h5>{rowData.date} - {rowData.hour}</h5>
+            <h5 className="mainActivitatSubtitle">{rowData.date} - {rowData.hour}</h5>
             </div>
           </div>,
         
@@ -45,7 +45,7 @@ export default function LlistatActivitats() {
       },
       {
         title: 'Data', field: 'date',
-        render: rowData => <div className="horaDataActivitat"><h1>{rowData.date}</h1></div>
+        render: rowData => <div className="horaDataActivitat"><h1 className="mainActivitatTitle">{rowData.date}</h1></div>
         // , cellStyle: { width: 200 }
         ,headerStyle: {
           textAlign: 'center'
@@ -53,7 +53,7 @@ export default function LlistatActivitats() {
       },
       {
         title: 'Hora', field: 'hour',
-        render: rowData => <div className="horaDataActivitat"><h1>{rowData.hour}</h1></div>,
+        render: rowData => <div className="horaDataActivitat"><h1 className="mainActivitatTitle">{rowData.hour}</h1></div>,
         // cellStyle: { width: 200 },
         headerStyle: {
           textAlign: 'center'

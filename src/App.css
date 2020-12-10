@@ -15,7 +15,7 @@ font-family: 'Libre Baskerville';
     text-align: center;
     background-color: #FAE6C5;
     width: 100%;
-    max-width: 2000px;
+    max-width: 2800px;
     min-height: 100vh;
     box-sizing: border-box;
 }
@@ -125,7 +125,6 @@ div>.nav-item {
     width: auto;
 }
 
-
 /* Animacion de hover title */
 
 @keyframes TitleHovered {
@@ -178,10 +177,15 @@ div.PowerTitle:hover {
     }
 }
 
+/* .Articles{
+    padding-bottom: 6em;
+} */
+
 .Articles,
 .Botiga,
 .SupportContent {
     background-color: #EB5E3E;
+    padding-bottom: 6em;
 }
 
 #festi,
@@ -279,7 +283,7 @@ label {
 
 .card {
     background-color: #f7f7f7;
-    padding: 20px 25px 30px;
+    /* padding: 20px 25px 30px; */
     margin: 0 auto 25px;
     margin-top: 50px;
     -moz-border-radius: 2px;
