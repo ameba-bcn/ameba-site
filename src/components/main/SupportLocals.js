@@ -20,16 +20,9 @@ export default function SupportLocals() {
     const breakpoint = 950;
 
     const [ref, inView] = useInView({
-        // triggerOnce: true,
         threshold: '0.5',
     });
-    // useEffect(() => {
-    //     if (inView) {
-    //         // Fire a tracking event to your tracking service of choice.
-    //         console.log("in view!!!!",inView)
-    //         console.log("in width!!!!",width)
-    //     }
-    // }, [inView, width]);
+    
     return (
 
         <div className="Bloque" id="locals" ref={ref}>
