@@ -1,0 +1,30 @@
+.productBannerPlus{
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    font-size: 4em;
+    line-height: 0.8em;
+    font-weight: 800;
+    font-style: bold;
+    color: #FAE6C5;
+    background-color: #1D1D1B;
+    right: 5%;
+    bottom: 5%;
+}
+
+.productBannerTitle {
+    position: absolute;
+    left: 5%;
+    top: 25%;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    font-size: 8rem;
+    font-family: 'Bebas Neue';
+    font-weight: 800;
+    font-style: italic;
+    line-height: 1em;
+    text-transform: uppercase;
+    color: #FAE6C5;
+    text-align: left;
+}

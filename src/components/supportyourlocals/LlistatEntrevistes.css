@@ -17,6 +17,10 @@
     width: 36rem;
     height: 340px;
     max-width: 36rem;
+    display:inline-block;
+    padding-right: 1rem;
+    justify-content: center;
+    min-width: 570px;
 }
 
 .cardSupport {
@@ -26,11 +30,8 @@
     position: relative;
     display: inline-block;
     background-color: black;
+    
 }
-
-/* .cardSupport:hover {
-    opacity: 1;
-} */
 
 .cardSupportImgTop {
     display: block;
@@ -41,7 +42,7 @@
     z-index: 0;
     transition: all .4s ease;
     opacity: 0.6;
-    /* vertical-align: middle; */
+    vertical-align: middle;
 }
 
 .cardSupportImgTop:hover {
