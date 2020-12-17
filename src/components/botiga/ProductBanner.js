@@ -1,5 +1,5 @@
 import React from 'react';
-import './productBanner.css'
+import './ProductBanner.css'
 
 const ProductBanner = (data) => {
     return (

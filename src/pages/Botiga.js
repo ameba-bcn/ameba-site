@@ -1,7 +1,7 @@
 import React from 'react';
 import BotigaGeneral from '../components/botiga/BotigaGeneral';
 import PowerTitle from '../components/layout/PowerTitle';
-import ProductBanner from '../components/botiga/productBanner';
+import ProductBanner from '../components/botiga/ProductBanner';
 
 function Botiga() {
   return (
