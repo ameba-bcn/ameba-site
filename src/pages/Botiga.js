@@ -10,7 +10,7 @@ function Botiga() {
         title="BOTIGA"
         // To Do adjust in two lines
         className="SupportTitle" />
-        <ProductBanner/>
+        <ProductBanner title="fes-te soci/a d'ameba per 15€/any"/>
       <div className="BotigaContent">
         <BotigaGeneral/>
       </div>
