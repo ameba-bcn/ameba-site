@@ -20,7 +20,7 @@
     text-align: left;
 }
 
-.fullcard {
+.fullcardBotiga {
     margin-bottom: 20px;
     margin: 0 auto;
     overflow: hidden;
@@ -90,7 +90,7 @@
 }
 
 @media screen and (max-width: 1008px) {
-    .fullcard {
+    .fullcardBotiga {
         width: 31.58%;
         height: auto;
         display: inline-block;
@@ -104,7 +104,7 @@
 }
 
 @media screen and (max-width: 641px) {
-    .fullcard {
+    .fullcardBotiga {
         width: 47.37%;
         height: auto;
         display: inline-block;
@@ -115,7 +115,7 @@
 }
 
 @media screen and (max-width: 322px) {
-    .fullcard {
+    .fullcardBotiga {
         width: 94.7%;
         height: auto;
         display: inline-block;

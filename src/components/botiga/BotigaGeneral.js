@@ -11,7 +11,7 @@ export default function BotigaGeneral() {
 
     const cardGenerator = Data.map((data) => {
         return (
-            <div className="fullcard" key={data.id} 
+            <div className="fullcardBotiga" key={data.id} 
             onClick={() => cardClicked(data)}>
                 <NavLink style={{ textDecoration: 'none' }} 
                 to={{pathname:'/botiga/'+data.id,
