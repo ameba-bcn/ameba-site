@@ -12,7 +12,7 @@ export default function SupportYourLocals() {
         title="#SUPPORTYOURLOCALS"
         // To Do adjust in two lines
         className="SupportTitle" />
-      <h3 className="SupportSubtitle">- Coneix als professionals que donden vida a la ciutat -</h3>
+      <h3 className="SupportSubtitle">- Coneix als professionals que donen vida a la ciutat -</h3>
       <LlistatEntrevistes />
     </div>
   );

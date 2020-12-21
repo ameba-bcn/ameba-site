@@ -1,11 +1,11 @@
 import React from 'react';
 import './ProductBanner.css'
 
-const ProductBanner = (data) => {
+const ProductBanner = (props) => {
     return (
         <div className="productBanner">
             <div className="productBannerTitle">
-               Carchofes
+               {props.title}
             </div>
             <div className="productBannerPlus">+</div>
         </div>
