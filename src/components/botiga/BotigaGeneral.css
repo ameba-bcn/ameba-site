@@ -1,126 +1,128 @@
 /* ARTICLES */
 
-.card {
+.productCard {
     opacity: 0.9;
     overflow: hidden;
-    width: auto;
     border: none;
     border-color: transparent;
+    position: relative;
 }
 
-.card:hover {
+.productCard:hover {
     opacity: 1;
 }
 
-.card-deck {
+.productCardDeck {
     width: 100%;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    padding-left: 20px;
-    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 4rem;
 }
 
 .fullcardBotiga {
-    margin-bottom: 20px;
+    flex: 0 0 33.333333%;
     margin: 0 auto;
+    margin-bottom: 3rem;
     overflow: hidden;
-    z-index: 0;
-    width: 23.68%;
+    max-width: 467px;
     height: auto;
     display: inline-block;
+    justify-content: center;
+    min-width: 470px;
+    background-color: white;
 }
 
-.card-title {
-    /* delimitar lineas verticales */
-    overflow: hidden;
+.productTitle {
+    position: absolute;
+    bottom: 2%;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    font-size: 30px;
+    font-size: 2.5rem;
     font-family: 'Bebas Neue';
-    font-weight: 800;
+    font-weight: 300;
+    font-style: italic;
     line-height: 1em;
     text-transform: uppercase;
-    text-align: center;
-    margin-bottom: 0rem;
-    color: #1D1D1B;
+    color: #FAE6C5;
+    text-align: left;
 }
 
-.card-text {
-    /* delimitar lineas verticales */
+.productCardBody {
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-}
-
-.card-body {
-    overflow: hidden;
-    z-index: 0;
-    background-color: #FAE6C5;
+    z-index: 10;
+    background-color: #1D1D1B;
     padding: 1rem;
+    padding-bottom: 0rem;
     text-align: center;
     width: 100%;
 }
 
-.card-img-top {
+.productImgFrame {
     width: 100%;
+    height: 440px;
+    overflow: hidden
+}
+
+.productImgTop {
+    display: block;
     height: auto;
+    width: 100%;
     object-fit: cover;
-    z-index: 0;
+    z-index: -10;
     transition: all .4s ease;
     vertical-align: middle;
 }
 
-.card-img-top:hover {
+.productImgTop:hover {
     transform: scale(1.05);
 }
 
-.card-text-price {
+.productCardPrice {
     font-family: 'Bebas Neue';
-    color: #1D1D1B;
-    font-size: 2rem;
-}
-
-@media screen and (max-width: 1250px) {
-    .card-title {
-        font-size: 1.5rem;
-        margin-bottom: 0rem;
-    }
-}
-
-@media screen and (max-width: 1008px) {
-    .fullcardBotiga {
-        width: 31.58%;
-        height: auto;
-        display: inline-block;
-    }
-    .card-title {
-        font-size: 1.2rem;
-    }
-    .card-body {
-        padding: 0.7rem;
-    }
+    color: #FAE6C5;
+    font-size: 2.5rem;
+    position: relative;
+    text-align: right;
+    line-height: 2.9rem;
 }
 
 @media screen and (max-width: 641px) {
     .fullcardBotiga {
-        width: 47.37%;
-        height: auto;
-        display: inline-block;
+        min-width: 340px;
     }
-    .card-title {
-        font-size: 1rem;
+
+    .productImgFrame {
+        height: 100%;
+        overflow: hidden
+    }
+
+    .productTitle {
+        font-size: 2rem;
+    }
+
+    .productCardPrice {
+        font-size: 2rem;
+        line-height: 2.1rem;
     }
 }
 
-@media screen and (max-width: 322px) {
+@media screen and (max-width: 465px) {
     .fullcardBotiga {
-        width: 94.7%;
-        height: auto;
-        display: inline-block;
+        min-width: 240px;
     }
-    .card-title {
-        font-size: 1.4rem;
+
+    .productTitle {
+        font-size: 1.3rem;
     }
+
+    .productCardPrice {
+        font-size: 1.3rem;
+        line-height: 0.9rem;
+    }
+
+    .productCardDeck {
+        padding: 1rem;
+    }
+
 }
