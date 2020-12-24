@@ -12,6 +12,8 @@ import { Switch, Route} from 'react-router-dom';
 import Contacte from './contacte/Contacte';
 import Menu from './components/Navbar'
 import Login from './pages/Login';
+// import Logout from './pages/Logout';
+import LogMailConfirmation from './pages/LogMailConfirmation';
 
 class App extends Component {
   render() {
@@ -26,6 +28,8 @@ class App extends Component {
             <Route path='/support' component={ SupportYourLocals } />
             <Route path='/sessio' component={ Sessio } />
             <Route path='/login' component={ Login } />
+            {/* <Route path='/logout' component={ Logout } /> */}
+            <Route path='/logconf' component={ LogMailConfirmation } />
             <Route exact path='/' component={Home} />
             <Route component={NotFound} />
           </Switch>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import MainSupportLocals from '../supportyourlocals/MainSupportLocals'
 import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';

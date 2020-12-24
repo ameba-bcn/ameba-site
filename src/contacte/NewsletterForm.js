@@ -1,18 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Form, InputGroup, Col } from 'react-bootstrap';
 import './Contacte.css'
 
 export default function NewsletterForm2() {
   const [validated, setValidated] = React.useState(false);
-
-  //Efecto type cursor on/off
-  // const [bar, setBar] = useState(1);
-  //   useEffect(() => {
-  //     const interval = setInterval(() => {
-  //       setBar(bar => bar*(-1));
-  //     }, 500);
-  //     return () => clearInterval(interval);
-  //   }, []);
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;

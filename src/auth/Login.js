@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-// import axios from "axios";
 import './Auth.css';
 import axiosInstance from "../axios";
 import { useHistory } from 'react-router-dom'
 
 
-export default function Login() {
+export default function Login({login}) {
+
+    const [userName, setUserName] = useState("");
 
     const history = useHistory();
 
@@ -37,7 +38,9 @@ export default function Login() {
                 localStorage.setItem('refresh_token', res.data.access);
                 axiosInstance.defaults.headers['Autorization'] =
                 localStorage.getItem('access_token');
-                history.push('/');
+                setUserName(axiosInstance.defaults.headers['Authorization']);
+                login(userName);
+                history.push('/login');
                 // console.log(res)
                 // console.log(res.data);
             })
