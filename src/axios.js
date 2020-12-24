@@ -10,7 +10,7 @@ const axiosInstance = axios.create({
             ? localStorage.getItem('access_token')
             : null,
         'Content-Type': 'application/json',
-        accept: 'application/json',
+        // accept: 'application/json', //Nos está dando errores al no recibir la respuesta de la API en este formato
     }
 });
 

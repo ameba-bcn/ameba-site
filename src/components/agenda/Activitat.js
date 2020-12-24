@@ -1,13 +1,8 @@
 import React from 'react';
-// import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
-// import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
-// import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-// import Button from '@material-ui/core/Button';
-// import Typography from '@material-ui/core/Typography';
 import './Activitat.css'
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
@@ -22,7 +17,6 @@ export default function SimpleDialog(props) {
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >
-
             <Card className="cardGeneral" >
                 <div className="insideFrameModal">
                 <ClearIcon className="crossCloseModal" onClick={handleClose}/>
@@ -35,13 +29,11 @@ export default function SimpleDialog(props) {
                             <LocationOnIcon /> LOCALITZACIÓ / &nbsp;
                         </span>
                         <span className="addressLinkCard">
-                            <a href="https://google.com/maps" target="_blank">
+                            <a href="https://google.com/maps" target="_blank" rel="noopener noreferrer">
                                 {dataRow.selectedRow ? dataRow.selectedRow.address : ''}
                             </a>
                         </span>
                     </div>
-
-                    {/* <CardActionArea> */}
                     <CardMedia
                         component="img"
                         alt={dataRow.selectedRow ? dataRow.selectedRow.title : ''}
@@ -50,14 +42,13 @@ export default function SimpleDialog(props) {
                         title={dataRow.selectedRow ? dataRow.selectedRow.title : ''}
                     />
                     <hr className="solid" />
-
                     <div className="dateDetailed row">
                         <div className="column">
                             <span className="mainWordBoxCard">
                                 <CalendarTodayIcon /> DATA / &nbsp;
                             </span>
                             <span className="dateLinkCard">
-                                <a href="https://google.com/calendar" target="_blank">
+                                <a href="https://google.com/calendar" target="_blank" rel="noopener noreferrer">
                                     {dataRow.selectedRow ? dataRow.selectedRow.date : ''}-
                                     {dataRow.selectedRow ? dataRow.selectedRow.hour : ''}
                                 </a>
@@ -75,27 +66,19 @@ export default function SimpleDialog(props) {
                         </div>
                     </div>
                     <hr className="dashed" />
-                    <div className="descriptionCardBox">
-                        {/* <CardContent className="modalTextBox"> */}
-                        {/* <div className="textModal addressModal" variant="h5" component="h2"></div> */}
-
+                    <div className="descriptionCardBox">  
                         <span className="mainWordBoxCard">
                             DESCRIPCIÓ / &nbsp;
                             </span>
-                        {/* <div variant="body2" className="textModal" color="textSecondary" component="p"> */}
                         <p className="textModal" >
                             {dataRow.selectedRow ? dataRow.selectedRow.article : ''}
                         </p>
-                        {/* </div> */}
                     </div>
-                    {/* </CardContent> */}
-                    {/* </CardActionArea> */}
                     <hr className="dashed" />
                     <div className="artistBox">
                         <span className="mainWordBoxCard">
                             ARTIST / LINE-UP &nbsp;
                             </span>
-
                     </div>
                     <hr className="solid" />
                 </div>

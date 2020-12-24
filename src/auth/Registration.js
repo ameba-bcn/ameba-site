@@ -23,22 +23,27 @@ export default function Registration() {
         })
     }
 
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(formData)
+        let data = JSON.stringify({
+            password: formData.password,
+            username: formData.username,
+            email: formData.email
+        })
 
-        axiosInstance.post(`user/`, {
-                email: formData.email,
-                username: formData.username,
-                password: formData.password,
-            })
+        axiosInstance.post(`users/`, data)
             .then((res) => {
-                history.push('/login');
+                console.log("in registration")
+                history.push('/logconf');
                 console.log(res)
                 console.log(res.data);
             })
+            .catch(error => {
+                console.log(error.response)
+            });
     }
-
     return (
         <div className="loginBox">
             <form onSubmit={handleSubmit}>

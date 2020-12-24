@@ -42,7 +42,7 @@ export default function Navbar() {
                         <li className="liMenuOptions" onClick={closeMenu}><NavLink className="menuOptions" to="/activitats" data-item='AGENDA'>AGENDA</NavLink></li>
                         <li className="liMenuOptions"onClick={closeMenu}><NavLink className="menuOptions" to="/botiga" data-item='BOTIGA'>BOTIGA</NavLink></li>
                         <li className="liMenuOptions"onClick={closeMenu}><NavLink className="menuOptions" to="/support" data-item='#SUPPORTYOURLOCALS'>#SUPPORTYOURLOCALS</NavLink></li>
-                        {/* <li className="liMenuOptions"onClick={closeMenu}><NavLink className="menuOptions" id="MenuOptionsLogin" to="/login" data-item='LOGIN'>LOGIN</NavLink></li> */}
+                        <li className="liMenuOptions"onClick={closeMenu}><NavLink className="menuOptions" id="MenuOptionsLogin" to="/login" data-item='LOGIN'>LOGIN</NavLink></li>
                         {/* <button className="buttonMenu" type="button">CONECTA'T</button> */}
                     </ul>
                 </div>
