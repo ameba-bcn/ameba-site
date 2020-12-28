@@ -46,32 +46,36 @@ export default function Registration() {
     }
     return (
         <div className="loginBox">
+             <p className="loginTitle">REGISTRA'T</p>
             <form onSubmit={handleSubmit}>
-                <div className="inputLoginEmail">
+                <div >
                     <input
                         type="email"
                         name="email"
                         placeholder="Email"
                         // value={state.email}
                         onChange={handleChange}
+                        className="inputLoginEmail"
                         required />
                 </div>
-                <div className="inputLoginUser">
+                <div>
                     <input
                         type="username"
                         name="username"
                         placeholder="User"
                         // value={state.user}
                         onChange={handleChange}
+                        className="inputLoginUser"
                         required />
                 </div>
-                <div className="inputLoginPassword">
+                <div>
                     <input
                         type="password"
                         name="password"
                         placeholder="Password"
                         // value={state.password}
                         onChange={handleChange}
+                        className="inputLoginPassword"
                         required />
                 </div>
 

@@ -12,7 +12,8 @@ import { Switch, Route} from 'react-router-dom';
 import Contacte from './contacte/Contacte';
 import Menu from './components/Navbar'
 import Login from './pages/Login';
-// import Logout from './pages/Logout';
+import Register from './pages/Register';
+import PasswordRecovery from './pages/PasswordRecovery';
 import LogMailConfirmation from './pages/LogMailConfirmation';
 
 class App extends Component {
@@ -22,15 +23,17 @@ class App extends Component {
         <Menu/>
         {/* Switch evita que mas de un componente se renderice a la vez */}
           <Switch>  
-            <Route path='/activitats' component={Activitats} />
-            <Route path='/botiga' component={Botiga} />
+            <Route path='/activitats' component={ Activitats } />
+            <Route path='/botiga' component={ Botiga } />
             <Route exact path='/support/:id' component={ Entrevista } />
             <Route path='/support' component={ SupportYourLocals } />
             <Route path='/sessio' component={ Sessio } />
             <Route path='/login' component={ Login } />
-            {/* <Route path='/logout' component={ Logout } /> */}
+            <Route path='/registration' component={ Register } />
+            <Route path='/recovery-account' component={ PasswordRecovery } />
             <Route path='/logconf' component={ LogMailConfirmation } />
-            <Route exact path='/' component={Home} />
+            <Route exact path='/' component={ Home } />
+            
             <Route component={NotFound} />
           </Switch>
           <Contacte/>

@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
 import LoginComp from '../auth/Login'
-import Registration from '../auth/Registration'
+// import Registration from '../auth/Registration'
 import Logo from './../images/amebaLogo.png'
 import axiosInstance from "../axios";
 import LogoutComp from '../auth/Logout'
-
+// https://dev.to/pnkfluffy/passing-data-from-child-to-parent-with-react-hooks-1ji3
 
 export default function Login() {
 
@@ -17,16 +17,15 @@ export default function Login() {
 
     return (
         <div className="loginWall">
-            <img src={Logo} alt="AMEBA logo" width="229" height="252"></img>
-            <button className="print" onClick={() => getAuthValue()}>XXXXXXXX</button>
+            {/* <img src={Logo} alt="AMEBA logo" width="229" height="252"></img>
+            <button className="print" onClick={() => getAuthValue()}>XXXXXXX</button>
             <br />
-            <p>{user}</p>
+            <p>{user}</p> */}
 
             {user === null ?
                 <>
-                    <p>REGISTRATION</p>
-                    <Registration />
-                    <p>LOGIN</p>
+                    {/* <p>REGISTRATION</p>
+                    <Registration /> */}
                     <LoginComp login={username => setUser(username)}/>
                 </> : <><p>LOGOUT</p>
                     <LogoutComp logout={() => setUser(null)} user={user}/>
