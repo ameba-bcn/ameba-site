@@ -35,13 +35,13 @@ export default function Registration() {
 
         axiosInstance.post(`users/`, data)
             .then((res) => {
-                console.log("in registration")
                 history.push('/logconf');
+                console.log("in registration")
                 console.log(res)
                 console.log(res.data);
             })
             .catch(error => {
-                console.log(error.response)
+                console.log("ERROL",error.response)
             });
     }
     return (
@@ -62,7 +62,7 @@ export default function Registration() {
                     <input
                         type="username"
                         name="username"
-                        placeholder="User"
+                        placeholder="USUARI"
                         // value={state.user}
                         onChange={handleChange}
                         className="inputLoginUser"
@@ -72,14 +72,14 @@ export default function Registration() {
                     <input
                         type="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="CONTRASENYA"
                         // value={state.password}
                         onChange={handleChange}
                         className="inputLoginPassword"
                         required />
                 </div>
 
-                <button className="buttonLoginForm" type="submit">Register</button>
+                <button className="buttonLoginForm" type="submit">Crea</button>
             </form>
         </div>
     )

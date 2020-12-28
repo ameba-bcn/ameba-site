@@ -18,6 +18,8 @@ font-family: 'Libre Baskerville';
     max-width: 2800px;
     min-height: 100vh;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 @keyframes App-logo-spin {

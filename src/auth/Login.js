@@ -52,6 +52,9 @@ export default function Login({ login }) {
                 // console.log(res)
                 // console.log(res.data);
             })
+            .catch(error => {
+                console.log("ERROL", error.response)
+            });
     }
 
     return (
@@ -72,13 +75,13 @@ export default function Login({ login }) {
                     <input
                         type="password"
                         name="password"
-                        placeholder="PASSWORD"
+                        placeholder="CONTRASENYA"
                         // value={this.state.password_confirmation}
                         onChange={handleChange}
                         className="inputLoginPassword"
                         required />
                 </div>
-                <button className="buttonLoginForm" type="submit">Login</button>
+                <button className="buttonLoginForm" type="submit">CONECTA'T</button>
             </form>
             <div className="logTextosLinkBox" >
                 <span className="logTextosLink" onClick={onCreateAccount}>Crea un compte</span>

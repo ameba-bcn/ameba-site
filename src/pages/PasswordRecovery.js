@@ -15,7 +15,9 @@ export default function PasswordRecovery() {
             <img src={Logo} alt="AMEBA logo" width="229" height="252"></img>
             <br />
             <p>RECUPERACIÓ CONTRASSENYA PENDENT DE IMPLEMENTAR</p>
-            <span className="logTextosLink" onClick={onGoToLog}>Torna</span>
+            <div className="logTextosLinkBoz">
+                <span className="logTextosLink" onClick={onGoToLog}>Torna</span>
+            </div>
         </div>
     )
 }
