@@ -1,3 +1,8 @@
+.loginWall {
+    flex-grow: 1;
+}
+
+
 .loginBox {
     display: flex;
     justify-content: space-around;
@@ -9,24 +14,101 @@
 .loginBox form {
     width: 20%;
     min-width: 235px;
+    /* flex-basis: 100%; */
+}
+
+.loginTitle {
+    font-size: 5rem;
+    font-family: 'Bebas Neue';
+    flex: 1 0 100%;
+    font-weight: 400;
+    margin-bottom: 3rem;
 }
 
 .inputLoginEmail,
+.inputLoginUser,
 .inputLoginPassword,
 .inputLoginPasswordConf {
     flex: 1 0 100%;
     width: 100%;
     padding: 10px;
-}
-
-.inputLoginEmail input,
-.inputLoginPassword input,
-.inputLoginPasswordConf input {
-    width: 100%;
     min-width: 235px;
 }
 
+.inputLoginEmail,
+.inputLoginUser,
+.inputLoginPassword,
+.inputLoginPasswordConf {
+    font-family: 'Libre Baskerville';
+    font-size: 2rem;
+    /* margin-right: 10px; */
+    padding-top: 15px;
+    background-color: transparent;
+    /* border: none; */
+    /* border-color: transparent; */
+    border: 2px solid #1D1D1B;
+    margin-bottom: 2rem;
+    width: 100%;
+    height: auto;
+}
+
+.inputLoginEmail:focus,
+.inputLoginUser:focus,
+.inputLoginPassword:focus,
+.inputLoginPasswordConf:focus,
+.inputLoginEmail:active,
+.inputLoginUser:active,
+.inputLoginPassword:active,
+.inputLoginPasswordConf:active {
+    background-color: #F2C571;
+    /* border: none; */
+    /* border-color: transparent; */
+}
+
+.inputLoginEmail::placeholder,
+.inputLoginUser::placeholder,
+.inputLoginPassword::placeholder,
+.inputLoginPasswordConf::placeholder {
+    color: #1D1D1B;
+    font-family: 'Bebas Neue';
+    font-size: 1.5em;
+    font-weight: 400;
+    /* border: 2px solid #1D1D1B; */
+    padding-left: 10px;
+    /* border-radius: 15px; */
+}
+
+.errorLoginBox {
+    border-style: solid;
+    border-color: red;
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    max-width: 15rem;
+}
+
 .buttonLoginForm {
-    margin: 1.5rem;
-    width: 80%;
+    font-family: 'Bebas Neue';
+    font-size: 2em;
+    font-weight: 400;
+    width: 15rem;
+    color: #F2C571;
+    background-color: #1D1D1B;
+    margin-bottom: 2rem;
+}
+
+.logTextosLinkBox {
+    flex-basis: 100%;
+    /* margin-top: 2rem; */
+    margin-bottom: 2rem;
+}
+
+.logTextosLink {
+    cursor: pointer;
+    color: inherit;
+    text-decoration: underline;
+}
+
+.logTextosLink:hover {
+    text-decoration: none;
 }

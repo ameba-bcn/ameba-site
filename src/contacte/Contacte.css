@@ -1,3 +1,7 @@
+.bloqueContacto{
+    flex-shrink: 0;
+}
+
 .contenedorContacto {
     width: 90%;
     margin: 0 auto;

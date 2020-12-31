@@ -14,7 +14,7 @@ import YouTubeIcon from '@material-ui/icons/YouTube';
 
 function Contacte() {
     return (
-        <div className="BloqueContacto" id="contacte">
+        <div className="bloqueContacto" id="contacte">
              <LettersMove
                 className="lettersMoveDiv"
                 sentence="FES-TE SOCI/A " 

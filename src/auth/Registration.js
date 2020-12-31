@@ -7,6 +7,8 @@ export default function Registration() {
 
     const history = useHistory();
 
+    const [displayError, setDisplayError] = useState(null);
+
     const initialFormData = Object.freeze({
         email: '',
         username: '',
@@ -35,47 +37,54 @@ export default function Registration() {
 
         axiosInstance.post(`users/`, data)
             .then((res) => {
-                console.log("in registration")
                 history.push('/logconf');
+                console.log("in registration")
+                setDisplayError(null);
                 console.log(res)
                 console.log(res.data);
             })
             .catch(error => {
-                console.log(error.response)
+                console.log("ERROL", error.response)
+                setDisplayError(`Error: ${error.response.data.detail}`);
+
             });
     }
     return (
         <div className="loginBox">
+            <p className="loginTitle">REGISTRA'T</p>
             <form onSubmit={handleSubmit}>
-                <div className="inputLoginEmail">
+                <div >
                     <input
                         type="email"
                         name="email"
                         placeholder="Email"
                         // value={state.email}
                         onChange={handleChange}
+                        className="inputLoginEmail"
                         required />
                 </div>
-                <div className="inputLoginUser">
+                <div>
                     <input
                         type="username"
                         name="username"
-                        placeholder="User"
+                        placeholder="USUARI"
                         // value={state.user}
                         onChange={handleChange}
+                        className="inputLoginUser"
                         required />
                 </div>
-                <div className="inputLoginPassword">
+                <div>
                     <input
                         type="password"
                         name="password"
-                        placeholder="Password"
+                        placeholder="CONTRASENYA"
                         // value={state.password}
                         onChange={handleChange}
+                        className="inputLoginPassword"
                         required />
                 </div>
-
-                <button className="buttonLoginForm" type="submit">Register</button>
+                {displayError === null ? null : <div className="errorLoginBox">{displayError}</div>}
+                <button className="buttonLoginForm" type="submit">Crea</button>
             </form>
         </div>
     )
