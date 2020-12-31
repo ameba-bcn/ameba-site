@@ -1,43 +1,31 @@
-import React, { useState } from 'react'
-import './Auth.css';
+import React, { useContext, useState } from 'react'
 import axiosInstance from "../axios";
 import { useHistory } from 'react-router-dom'
+import { UserContext } from '../UserContext';
+import './Auth.css';
 
-export default function Logout({ logout, user }) {
+export default function Logout() {
+
+    const { user, setUser } = useContext(UserContext);
+    
+    const [displayError, setDisplayError] = useState(null);
 
     const history = useHistory();
 
-    const initialTokenData = Object.freeze({
-        refresh: ''
-    })
-
-    const [tokenData, updateTokenData] = useState(initialTokenData);
-
-    const initiateLogout = () => {
-        updateTokenData({
-            ...tokenData,
-            //Trimming any whitespace
-            refresh: localStorage.getItem('access_token'),
-        })
-        // logoutUser();
-    }
-
     const logoutUser = () => {
-        // initiateLogout();
+
         if (axiosInstance.defaults.headers['Authorization'] === null) {
             console.log("Already deleted")
         } else {
-            // localStorage.setItem('refresh_token', res.data.access);
-            console.log("Token data", tokenData.refresh)
-            axiosInstance.delete(`token/`, {
-                refresh: localStorage.getItem('access_token')
-            })
+
+            axiosInstance.delete('http://localhost/api/', { data: { refresh: localStorage.getItem('access_token') } }
+            )
                 .then((res) => {
                     localStorage.removeItem('access_token');
                     localStorage.removeItem('refresh_token');
                     axiosInstance.defaults.headers['Authorization'] = null;
-                    logout();
-                    updateTokenData("")
+                    setUser(null)
+                    setDisplayError(null);
                     // console.log(res)
                     // console.log(res.data);
                     history.push('/login');
@@ -46,6 +34,7 @@ export default function Logout({ logout, user }) {
                 })
                 .catch(error => {
                     console.log("ERROL", error.response)
+                    setDisplayError(`Error: ${error.response.data.detail}`);
                 });
         }
     }
@@ -53,6 +42,7 @@ export default function Logout({ logout, user }) {
     return (
         <div>
             <p className="loginTitle">JA MARXES?</p>
+            {displayError === null ? null : <div className="errorLoginBox">{displayError}</div>}
             <button className="buttonLoginForm" onClick={logoutUser}>Desconecta't</button>
         </div>
     )

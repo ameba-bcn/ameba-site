@@ -7,6 +7,8 @@ export default function Registration() {
 
     const history = useHistory();
 
+    const [displayError, setDisplayError] = useState(null);
+
     const initialFormData = Object.freeze({
         email: '',
         username: '',
@@ -37,16 +39,19 @@ export default function Registration() {
             .then((res) => {
                 history.push('/logconf');
                 console.log("in registration")
+                setDisplayError(null);
                 console.log(res)
                 console.log(res.data);
             })
             .catch(error => {
-                console.log("ERROL",error.response)
+                console.log("ERROL", error.response)
+                setDisplayError(`Error: ${error.response.data.detail}`);
+
             });
     }
     return (
         <div className="loginBox">
-             <p className="loginTitle">REGISTRA'T</p>
+            <p className="loginTitle">REGISTRA'T</p>
             <form onSubmit={handleSubmit}>
                 <div >
                     <input
@@ -78,7 +83,7 @@ export default function Registration() {
                         className="inputLoginPassword"
                         required />
                 </div>
-
+                {displayError === null ? null : <div className="errorLoginBox">{displayError}</div>}
                 <button className="buttonLoginForm" type="submit">Crea</button>
             </form>
         </div>

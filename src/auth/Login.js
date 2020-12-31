@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './Auth.css';
 import axiosInstance from "../axios";
 import { useHistory } from 'react-router-dom'
+import { UserContext } from '../UserContext';
 
+export default function Login() {
 
-export default function Login({ login }) {
+    const { setUser } = useContext(UserContext);
 
-    const [userName, setUserName] = useState("");
+    const [ displayError, setDisplayError ] = useState(null);
 
     const history = useHistory();
 
@@ -46,14 +48,15 @@ export default function Login({ login }) {
                 localStorage.setItem('refresh_token', res.data.access);
                 axiosInstance.defaults.headers['Autorization'] =
                     localStorage.getItem('access_token');
-                setUserName(axiosInstance.defaults.headers['Authorization']);
-                login(userName);
+                setUser(localStorage.getItem('access_token'));
+                setDisplayError(null);
                 history.push('/login');
                 // console.log(res)
                 // console.log(res.data);
             })
             .catch(error => {
                 console.log("ERROL", error.response)
+                setDisplayError(`Error: ${error.response.data.detail}`);
             });
     }
 
@@ -81,6 +84,7 @@ export default function Login({ login }) {
                         className="inputLoginPassword"
                         required />
                 </div>
+                {displayError === null? null : <div className="errorLoginBox">{displayError}</div>}
                 <button className="buttonLoginForm" type="submit">CONECTA'T</button>
             </form>
             <div className="logTextosLinkBox" >

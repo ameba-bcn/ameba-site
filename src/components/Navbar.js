@@ -32,7 +32,7 @@ export default function Navbar() {
         <div className="menuContainer">
             <div className="menuSuperior">
                 <div className="menuButton">
-                    <NavLink to="/" data-item='AMEBA'><FaTimes />AMEBA</NavLink>
+                    <NavLink to="/" data-item='AMEBA'>AMEBA</NavLink>
                 </div>
                 <div className="menuIcon" onClick={handleClick} >
                     {click ? <FaTimes /> : <FaBars />}

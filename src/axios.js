@@ -7,10 +7,11 @@ const axiosInstance = axios.create({
     timeout: 5000,
     headers: {
         Autorization: localStorage.getItem('access_token')
-            ? localStorage.getItem('access_token')
+            ? `Bearer ${localStorage.getItem('access_token')}`
             : null,
         'Content-Type': 'application/json',
-        // accept: 'application/json', //Nos está dando errores al no recibir la respuesta de la API en este formato
+        Accept: 'application/json, text/plain, */*'
+        //Nos está dando errores al no recibir la respuesta de la API en este formato
     }
 });
 

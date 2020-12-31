@@ -1,4 +1,4 @@
-.loginWall{
+.loginWall {
     flex-grow: 1;
 }
 
@@ -17,7 +17,7 @@
     /* flex-basis: 100%; */
 }
 
-.loginTitle{
+.loginTitle {
     font-size: 5rem;
     font-family: 'Bebas Neue';
     flex: 1 0 100%;
@@ -38,7 +38,7 @@
 .inputLoginEmail,
 .inputLoginUser,
 .inputLoginPassword,
-.inputLoginPasswordConf  {
+.inputLoginPasswordConf {
     font-family: 'Libre Baskerville';
     font-size: 2rem;
     /* margin-right: 10px; */
@@ -59,7 +59,7 @@
 .inputLoginEmail:active,
 .inputLoginUser:active,
 .inputLoginPassword:active,
-.inputLoginPasswordConf:active{
+.inputLoginPasswordConf:active {
     background-color: #F2C571;
     /* border: none; */
     /* border-color: transparent; */
@@ -78,11 +78,14 @@
     /* border-radius: 15px; */
 }
 
-
-/* .buttonLoginForm {
-    margin: 1.5rem;
-    width: 80%;
-} */
+.errorLoginBox {
+    border-style: solid;
+    border-color: red;
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    max-width: 15rem;
+}
 
 .buttonLoginForm {
     font-family: 'Bebas Neue';
@@ -94,18 +97,18 @@
     margin-bottom: 2rem;
 }
 
-.logTextosLinkBox{
+.logTextosLinkBox {
     flex-basis: 100%;
     /* margin-top: 2rem; */
     margin-bottom: 2rem;
 }
 
 .logTextosLink {
-    cursor:pointer;
-    color:inherit;
-    text-decoration:underline;
+    cursor: pointer;
+    color: inherit;
+    text-decoration: underline;
 }
 
 .logTextosLink:hover {
-    text-decoration:none;
+    text-decoration: none;
 }
