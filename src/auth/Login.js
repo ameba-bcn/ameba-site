@@ -45,9 +45,9 @@ export default function Login() {
         })
             .then((res) => {
                 localStorage.setItem('access_token', res.data.access);
-                localStorage.setItem('refresh_token', res.data.access);
-                axiosInstance.defaults.headers['Autorization'] =
-                    localStorage.getItem('access_token');
+                localStorage.setItem('refresh_token', res.data.refresh);
+                axiosInstance.defaults.headers["Authorization"] =
+                    `Bearer ${localStorage.getItem('access_token')}`
                 setUser(localStorage.getItem('access_token'));
                 setDisplayError(null);
                 history.push('/login');
@@ -56,7 +56,7 @@ export default function Login() {
             })
             .catch(error => {
                 console.log("ERROL", error.response)
-                setDisplayError(`Error: ${error.response.data.detail}`);
+                setDisplayError(`Error: ${error.response === undefined? error.response : error.response.data.detail}`);
             });
     }
 

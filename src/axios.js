@@ -6,12 +6,11 @@ const axiosInstance = axios.create({
     baseURL: baseURL,
     timeout: 5000,
     headers: {
-        Autorization: localStorage.getItem('access_token')
+        Authorization: localStorage.getItem('access_token')
             ? `Bearer ${localStorage.getItem('access_token')}`
             : null,
         'Content-Type': 'application/json',
         Accept: 'application/json, text/plain, */*'
-        //Nos está dando errores al no recibir la respuesta de la API en este formato
     }
 });
 
@@ -48,7 +47,7 @@ axiosInstance.interceptors.response.use(
 
             if (refreshToken) {
                 const tokenParts = JSON.parso(atob(refreshToken.split('.')[1]));
-                //Expiring date is expressed in seconds, let's change it
+                //La fecha esta en segundos, la reformateamos
                 const now = Math.ceil(Date.now() / 1000);
                 console.log(tokenParts.exp);
 
