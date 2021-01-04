@@ -13,7 +13,7 @@ export default function LogSession() {
 
     function getAuthValue() {
         console.log('user', user)
-        console.log('axios', axiosInstance.defaults.headers['Autorization'])
+        console.log('axios', axiosInstance.defaults.headers['Authorization'])
     }
 
     return (

@@ -17,25 +17,27 @@ export default function Logout() {
         if (axiosInstance.defaults.headers['Authorization'] === null) {
             console.log("Already deleted")
         } else {
-
-            axiosInstance.delete('http://localhost/api/', { data: { refresh: localStorage.getItem('access_token') } }
-            )
+            axiosInstance.delete('http://localhost/api/token/',
+            {
+                data: {
+                    refresh: localStorage.getItem('refresh_token')
+                }})
                 .then((res) => {
                     localStorage.removeItem('access_token');
                     localStorage.removeItem('refresh_token');
-                    axiosInstance.defaults.headers['Authorization'] = null;
+                    axiosInstance.defaults.headers["Authorization"] = null;
                     setUser(null)
                     setDisplayError(null);
                     // console.log(res)
                     // console.log(res.data);
                     history.push('/login');
                     console.log("user", user)
-                    console.log("axios", axiosInstance.defaults.headers['Authorization'])
+                    console.log("axios", axiosInstance.defaults.headers["Authorization"])
                 })
                 .catch(error => {
                     console.log("ERROL", error.response)
-                    setDisplayError(`Error: ${error.response.data.detail}`);
-                });
+                    setDisplayError(`Error: ${error.response === undefined? error.response : error.response.data.detail}`);
+                })
         }
     }
 
