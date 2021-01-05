@@ -1,29 +1,53 @@
-import React from 'react';
-import data from './response.json';
+import React, {useState, useEffect} from 'react';
+// import data from './response.json';
 import { NavLink, Redirect } from 'react-router-dom';
 // import Entrevista from './entrevista';
 import './LlistatEntrevistes.css';
+import axiosInstance from "../../axios";
 
+export default function LlistatEntrevistes() {
 
-export default function llistatEntrevistes() {
+    const cardClicked = (id) => {
+        return <Redirect to={`/Support/Entrevista?='${id}`} />
+    };
 
-    const cardClicked = (data) => {
-        return <Redirect to={`/Support/Entrevista?='${data.id}`} />
-    }
+    const [state, setState] = useState([
+        {
+            id: 0,
+            name: "",
+            image: "",
+            bio_preview: "",
+            created: ""
+        }
+    ]);
 
-    const cardGenerator = data.map((data) => {
+    useEffect(() => {
+        axiosInstance.get(`artists/`, {})
+            .then((res) => {
+                console.log(res)
+                console.log(res.data);
+                return res.data
+            }).then((response) =>{
+                setState(response)
+            })
+            .catch(error => {
+                console.log("ERROL", error.response)
+            });
+      }, []);
+
+    const cardGenerator = state.map((data) => {
         return (
             <div className="fullcard" key={data.id}
-                onClick={() => cardClicked(data)}>
+                onClick={() => cardClicked(data.id)}>
                 <NavLink style={{ textDecoration: 'none' }}
                     to={{
                         pathname: '/support/' + data.id,
                         aboutProps: data
                     }}>
                     <div className="cardSupport">
-                        <img className="cardSupportImgTop" src={data.img} alt={data.title} />
+                        <img className="cardSupportImgTop" src={data.image} alt={data.name} />
                         <div className="cardSupportTitle">
-                            {data.title}
+                            {data.name}
                         </div>
                         <div className="cardSupportPlusBox">+</div>
                         <div className="cardTagBox">DJ</div>
