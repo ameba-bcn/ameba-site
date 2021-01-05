@@ -1,47 +1,68 @@
-import React from 'react';
-import { useHistory } from "react-router-dom";
-import ReactPlayer from "react-player";
+import React, { useState, useEffect } from 'react';
+import { useHistory, useLocation } from "react-router-dom";
+// import ReactPlayer from "react-player";
 import './Entrevista.css'
-
+import axiosInstance from "../../axios";
 
 export default function Entrevista(props) {
     let history = useHistory();
-    const EntrevistaResponse = props.location.aboutProps;
-    let answers = EntrevistaResponse.interview.answers;
-    let questions = EntrevistaResponse.interview.questions;
+    let location = useLocation();
+    let urlID = location.pathname.substr(location.pathname.lastIndexOf('/') + 1);
+
+    const [state, setState] = useState([
+        {
+            id: 0,
+            name: "",
+            image: "",
+            biography: "",
+            created: "",
+            current_answers: [{ 'answer': "", "question": "" }]
+        }
+    ]);
+    useEffect(() => {
+        axiosInstance.get(`artists/${urlID}/`, {})
+            .then((res) => {
+                console.log(res)
+                console.log(res.data);
+                return res.data
+            }).then((response) => {
+                setState(response)
+            })
+            .catch(error => {
+                console.log("ERROL", error.response)
+            });
+    }, []);
 
     return (
         <>
             <div className="fullEntrevista" >
                 <div className="rowEntrevista">
                     <div className="columnImatge">
-                        <img className="imgEntrevista" src={EntrevistaResponse.img} alt={EntrevistaResponse.title} />
+                        <img className="imgEntrevista" src={state.image} alt={state.name} />
                     </div>
                     <div className="columnEntrevista">
                         <div className="titleBoxEntrevista">
-                            <h1 className="titleEntrevista" >{EntrevistaResponse.title}</h1>
-                            <p className="dateEntrevista"><small className="text-muted">{EntrevistaResponse.date}</small></p>
-                            <p className="introEntrevista">{EntrevistaResponse.interview.intro}</p>
+                            <h1 className="titleEntrevista" >{state.name}</h1>
+                            <p className="dateEntrevista"><small className="text-muted">{state.created}</small></p>
+                            <p className="introEntrevista">{state.biography}</p>
                         </div>
                     </div>
                 </div>
                 <hr className="separadorTop" />
                 <div className="textContentEntrevista">
-                    {questions.map((f, index) =>
-                        <div className="questionBox" key={f}>
-                            <p className="questionsEntrevista">+{f}</p>
-                            <p className="answersEntrevista">{answers[index]}</p>
-                            {/* <hr className="separadorTop" /> */}
+                    {console.log("AAAAAAAAA", state.current_answers)}
+                    {state.current_answers === undefined ? null : (state.current_answers.map((f) => (
+                        <div className="questionBox" key={f.question}>
+                            <p className="questionsEntrevista">+{f.question}</p>
+                            <p className="answersEntrevista">{f.answer}</p>
                         </div>
-                    )
-                    }
+                    )))}
 
-                    {EntrevistaResponse.links.map((n) =>
+                    {/* falta la urls en la db */}
+                    {/* {EntrevistaResponse.links.map((n) =>
                         <div className="mediaPlayer">
-                            {/* <a href={n} target="_blank" rel="noopener noreferrer" className="reproductorEntrevista">{n}<br />
-                    </a> */}
                             <ReactPlayer url={n} />
-                        </div>)}
+                        </div>)} */}
 
                 </div>
             </div>
