@@ -2,22 +2,38 @@ import React from 'react';
 import Data from './response.json';
 import './BotigaGeneral.css';
 import { NavLink, Redirect } from 'react-router-dom';
+import ProducteDialog from './Producte';
 
 export default function BotigaGeneral() {
 
+    const [open, setOpen] = React.useState(false);
+    const [rowClickedData, setState] = React.useState([]);
+
+
+    const handleClickOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+      }
+
     const cardClicked = (data) => {
-        return <Redirect to={`/Botiga/Producte?='${data.id}`} />
+        handleClickOpen();
+        console.log("VAMOS A ADIVINAR COMO SACAR LA DATA", data)
+        setState(data);
+        // return <Redirect to={`/Botiga/Producte?='${data.id}`} />
     }
 
     const cardGenerator = Data.map((data) => {
         return (
             <div className="fullcardBotiga" key={data.id}
                 onClick={() => cardClicked(data)}>
-                <NavLink style={{ textDecoration: 'none' }}
+                {/* <NavLink style={{ textDecoration: 'none' }}
                     to={{
                         pathname: '/botiga/' + data.id,
                         aboutProps: data
-                    }}>
+                    }}> */}
                     <div className="productCard">
                         <div className="productImgFrame">
                             <img className="productImgTop" src={data.img} alt={data.title} />
@@ -28,7 +44,7 @@ export default function BotigaGeneral() {
                             <p className="productCardPrice">{data.price}</p>
                         </div>
                     </div>
-                </NavLink>
+                {/* </NavLink> */}
             </div>
         )
     })
@@ -36,6 +52,9 @@ export default function BotigaGeneral() {
     return (
         <div className="productCardDeck">
             {cardGenerator}
+            <ProducteDialog open={open} 
+            dataRow={rowClickedData} 
+            onClose={handleClose} />
         </div>
     )
 

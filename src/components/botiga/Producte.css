@@ -1,0 +1,162 @@
+.cardGeneral {
+    width: 550px;
+    padding: 20px;
+    background-color: #FAE6C5 !important;
+    overflow: auto;
+}
+
+.insideFrameModal {
+    overflow: auto;
+}
+
+.crossCloseModal {
+    float: right;
+    color: #1D1D1B;
+    cursor: pointer;
+}
+
+.cardPriceBigBox {
+    background-color: #1D1D1B;
+    width: 70%;
+    height: auto;
+    float: right;
+    text-align: center;
+    color: #FAE6C5;
+    font-size: 2rem;
+    font-family: 'Bebas Neue';
+}
+
+.column_productTitle1 {
+    width: 80%;
+}
+
+.column_productTitle2 {
+    width: 20%;
+}
+
+.productImageBox {
+    display: flex;
+    justify-content: center;
+}
+
+.columnProductImage1 {
+    flex: 75%;
+    margin-right: 1rem;
+}
+
+.columnProductImage2 {
+    flex: 25%;
+}
+
+.imageProductModal {
+    height: 23.438rem;
+    margin-bottom: 0.313rem;
+}
+
+.row1ProductImage,
+.row2ProductImage,
+.row3ProductImage {
+    height: 7.75rem;
+    margin-bottom: 0.313rem;
+    width: 7.75rem;
+    
+}
+
+.sizeProductBox {
+    display: inline-flex;
+    background-color: #1D1D1B;
+    width: 35px;
+    height: 35px;
+    color: #FAE6C5;
+    font-size: 1.8rem;
+    font-family: 'Bebas Neue';
+    margin-right: 4px;
+    justify-content: center;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+
+.sizeDetailed {
+    margin: 0 auto;
+    margin-bottom: 0rem;
+}
+
+.productTitleModal {
+    font-size: 60px;
+    font-family: 'Bebas Neue';
+    font-weight: 300;
+    line-height: 1em;
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.modalTextBox {
+    background-color: #F2C571;
+}
+
+.textModal {
+    font-family: 'Libre Baskerville';
+    /* text-transform: uppercase; */
+    font-size: 0.8rem;
+    margin-top: -0.3rem;
+    margin-bottom: 0.5rem;
+    text-align: justify;
+    height: auto;
+}
+
+.addressModal {
+    text-transform: uppercase;
+    font-family: 'Bebas Neue';
+    font-size: 20px;
+    line-height: 1rem;
+    text-align: left;
+}
+
+.dateLinkCard {
+    font-family: 'Libre Baskerville';
+    font-size: 1.1rem;
+    color: inherit;
+}
+
+.dateLinkCard a {
+    color: inherit;
+}
+
+.descriptionCardBox {
+    margin-top: .5rem;
+}
+
+.buttonTextProductBoxCard {
+    font-family: 'Bebas Neue';
+    font-size: 1.5rem;
+    color: #FAE6C5;
+}
+
+.buttonCartBoxCard {
+    position: relative;
+    height: auto;
+    color: #FAE6C5;
+    background-color: #1D1D1B;
+}
+
+.buttonIconBoxCard {
+    margin: 0.4rem;
+}
+
+.MuiCardActions-spacing,
+.MuiCardActions-root {
+    float: right;
+}
+
+hr.dashed {
+    border-top: 3px dashed #bbb;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+hr.solid {
+    border-top: 3px solid #bbb;
+    margin-top: 0rem;
+}

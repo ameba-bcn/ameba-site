@@ -4,7 +4,7 @@ import MaterialTable from "material-table";
 // import { FiShoppingCart } from 'react-icons/fi';
 import { TiTicket } from 'react-icons/ti';
 import './Agenda.css';
-import SimpleDialog from './Activitat';
+import ActivitatDialog from './Activitat';
 
 export default function LlistatActivitats() {
   const [selectedRow , setSelectedRow] = useState(null);
@@ -96,7 +96,7 @@ export default function LlistatActivitats() {
           }
         }}
       />
-      <SimpleDialog open={open} dataRow={rowClickedData} onClose={handleClose} />
+      <ActivitatDialog open={open} dataRow={rowClickedData} onClose={handleClose} />
     </div>
   );
 

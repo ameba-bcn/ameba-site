@@ -9,7 +9,8 @@ import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import ReceiptIcon from '@material-ui/icons/Receipt';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import ClearIcon from '@material-ui/icons/Clear';
-export default function SimpleDialog(props) {
+
+export default function ActivitatDialog(props) {
     const { onClose, selectedValue, open, dataRow } = props;
     const handleClose = () => {
         onClose(selectedValue);
