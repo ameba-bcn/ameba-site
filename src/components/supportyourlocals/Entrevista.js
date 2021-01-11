@@ -50,7 +50,6 @@ export default function Entrevista(props) {
                 </div>
                 <hr className="separadorTop" />
                 <div className="textContentEntrevista">
-                    {console.log("AAAAAAAAA", state.current_answers)}
                     {state.current_answers === undefined ? null : (state.current_answers.map((f) => (
                         <div className="questionBox" key={f.question}>
                             <p className="questionsEntrevista">+{f.question}</p>
