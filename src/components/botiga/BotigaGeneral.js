@@ -1,7 +1,7 @@
 import React from 'react';
 import Data from './response.json';
 import './BotigaGeneral.css';
-import { NavLink, Redirect } from 'react-router-dom';
+// import { NavLink, Redirect } from 'react-router-dom';
 import ProducteDialog from './Producte';
 
 export default function BotigaGeneral() {
@@ -20,7 +20,6 @@ export default function BotigaGeneral() {
 
     const cardClicked = (data) => {
         handleClickOpen();
-        console.log("VAMOS A ADIVINAR COMO SACAR LA DATA", data)
         setState(data);
         // return <Redirect to={`/Botiga/Producte?='${data.id}`} />
     }

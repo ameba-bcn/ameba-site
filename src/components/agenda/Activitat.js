@@ -61,7 +61,7 @@ export default function ActivitatDialog(props) {
                         <div className="column">
                             <CardActions>
                                 <button size="small" className="buttonTicketBoxCard" color="inherit">
-                                    <ReceiptIcon className="buttonIconBoxCard"/><span className="buttonTextBoxCard">RESERVA ENTRADA</span>
+                                    <ReceiptIcon className="buttonTicketIconBoxCard"/><span className="buttonTicketTextBoxCard">RESERVA ENTRADA</span>
                                 </button>
                             </CardActions>
                         </div>

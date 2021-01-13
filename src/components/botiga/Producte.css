@@ -1,12 +1,7 @@
 .cardGeneral {
-    width: 550px;
+    max-width: 39.375rem;
     padding: 20px;
     background-color: #FAE6C5 !important;
-    overflow: auto;
-}
-
-.insideFrameModal {
-    overflow: auto;
 }
 
 .crossCloseModal {
@@ -17,13 +12,12 @@
 
 .cardPriceBigBox {
     background-color: #1D1D1B;
-    width: 70%;
-    height: auto;
     float: right;
     text-align: center;
     color: #FAE6C5;
     font-size: 2rem;
     font-family: 'Bebas Neue';
+    padding: 0.188rem 0.8rem 0rem 0.8rem;
 }
 
 .column_productTitle1 {
@@ -59,7 +53,7 @@
     height: 7.75rem;
     margin-bottom: 0.313rem;
     width: 7.75rem;
-    
+
 }
 
 .sizeProductBox {
@@ -128,21 +122,26 @@
     margin-top: .5rem;
 }
 
-.buttonTextProductBoxCard {
-    font-family: 'Bebas Neue';
-    font-size: 1.5rem;
-    color: #FAE6C5;
-}
-
+/* Boton de compra  */
 .buttonCartBoxCard {
+    display: flex;
     position: relative;
     height: auto;
     color: #FAE6C5;
     background-color: #1D1D1B;
+    align-items: center;
+    padding: 0rem 0.625rem 0rem 0.625rem;
 }
 
-.buttonIconBoxCard {
+.buttonCartIconBoxCard {
     margin: 0.4rem;
+}
+
+.buttonTextProductBoxCard {
+    font-family: 'Bebas Neue';
+    font-size: 1.6rem;
+    color: #FAE6C5;
+    padding-top: 0.125rem;
 }
 
 .MuiCardActions-spacing,

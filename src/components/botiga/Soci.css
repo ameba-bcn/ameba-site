@@ -1,0 +1,108 @@
+.cardSociGeneral {
+    max-width: 39.375rem;
+    padding: 20px;
+    background-color: #1D1D1B !important;
+    color: #FAE6C5;
+}
+
+.topSociBlock{
+    margin: 0 auto;
+    margin-top: 0.8rem;
+}
+
+.clickBanner {
+    cursor: pointer;
+}
+
+.crossSociCloseModal {
+    float: right;
+    color: #FAE6C5;
+    cursor: pointer;
+}
+
+.cardSociPriceBigBox {
+    background-color: #EB5E3E;
+    float: right;
+    text-align: center;
+    color: #FAE6C5;
+    font-size: 2rem;
+    font-family: 'Bebas Neue';
+    text-transform: uppercase;
+    padding: 0.188rem 0.8rem 0rem 0.8rem;
+}
+
+.column_productTitle1 {
+    width: 80%;
+}
+
+.column_productTitle2 {
+    width: 20%;
+}
+
+.mainSociWordBoxCard {
+    font-family: 'Bebas Neue';
+    font-size: 26px;
+    color: #FAE6C5;
+    text-transform: uppercase;
+}
+
+/* Boton de cesta */
+.buttonSociBoxCard {
+    display: flex;
+    position: relative;
+    height: auto;
+    color: #FAE6C5;
+    background-color: #EB5E3E;
+    align-items: center;
+    padding: 0rem 0.625rem 0rem 0.625rem;
+}
+
+.buttonSociIconBoxCard {
+    margin-right: 0.4rem;
+}
+
+.buttonSociTextBoxCard {
+    font-family: 'Bebas Neue';
+    font-size: 1.6rem;
+    color: #FAE6C5;
+    padding-top: 0.125rem;
+    text-transform: uppercase;
+}
+
+.titleSociModal {
+    color: #FAE6C5;
+    font-size: 60px;
+    font-family: 'Bebas Neue';
+    font-weight: 300;
+    line-height: 1em;
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+}
+
+.textSociModal {
+    font-family: 'Libre Baskerville';
+    color: #FAE6C5;
+    font-size: 0.8rem;
+    margin-top: -0.3rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+    height: auto;
+}
+
+.buttonIconBoxCard {
+    margin: 0.4rem;
+}
+
+hr.dashed {
+    border-top: 3px dashed #bbb;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+hr.solid {
+    border-top: 3px solid #bbb;
+    margin-top: 0rem;
+}
