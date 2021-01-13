@@ -1,17 +1,7 @@
 .cardGeneral {
-    width: 550px;
-    /* height: 100%; */
+    max-width: 39.375rem;
     padding: 20px;
     background-color: #FAE6C5 !important;
-    overflow: auto;
-    /* background-color: blueviolet !important; */
-}
-
-.insideFrameModal {
-    /* background-color: burlywood; */
-    /* position: absolute; */
-    /* height: 700px; */
-    overflow: auto;
 }
 
 .crossCloseModal {
@@ -99,24 +89,26 @@
     margin-top: .5rem;
 }
 
-.buttonTextBoxCard {
-    font-family: 'Bebas Neue';
-    font-size: 1.5rem;
-    /* height: 44px; */
-    color: #FAE6C5;
-}
-
+/* Boton de compra  */
 .buttonTicketBoxCard {
+    display: flex;
     position: relative;
     height: auto;
     color: #FAE6C5;
     background-color: #1D1D1B;
+    align-items: center;
+    padding: 0rem 0.625rem 0rem 0.625rem;
 }
 
-.buttonIconBoxCard {
-    /* margin: 0 auto; */
-    margin: 0.4rem;
-    /* color: #FAE6C5; */
+.buttonTicketIconBoxCard{
+    margin-right: 0.4rem;
+}
+
+.buttonTicketTextBoxCard {
+    font-family: 'Bebas Neue';
+    font-size: 1.6rem;
+    color: #FAE6C5;
+    padding-top: 0.125rem;
 }
 
 .MuiCardActions-spacing,

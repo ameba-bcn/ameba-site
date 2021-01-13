@@ -127,6 +127,16 @@ div>.nav-item {
     width: auto;
 }
 
+
+/* DIALOGS/MODALS */
+.MuiDialog-paperWidthSm{
+    max-width: 39.375rem !important;
+}
+
+.MuiCard-root{
+    overflow-y:auto !important;
+}
+
 /* Animacion de hover title */
 /* 
 @keyframes TitleHovered {

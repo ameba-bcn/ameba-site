@@ -21,7 +21,6 @@ export default function ProducteDialog(props) {
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >
-            {console.log("SSS", dataRow)}
             <Card className="cardGeneral" >
                 <div className="insideFrameModal">
                     <ClearIcon className="crossCloseModal" onClick={handleClose} />
@@ -96,7 +95,7 @@ export default function ProducteDialog(props) {
                         <div className="column">
                             <CardActions>
                                 <button size="small" className="buttonCartBoxCard" color="inherit">
-                                    <ShoppingCartIcon className="buttonIconBoxCard" /><span className="buttonTextProductBoxCard">AFEGIR A CISTELLA</span>
+                                    <ShoppingCartIcon className="buttonCartIconBoxCard" /><span className="buttonTextProductBoxCard">AFEGIR A CISTELLA</span>
                                 </button>
                             </CardActions>
                         </div>
