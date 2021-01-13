@@ -13,6 +13,7 @@ export default function SociDialog(props) {
     const handleClose = () => {
         onClose(selectedValue);
     };
+    const [isSubscriber, setIsSubscriber] = React.useState(true);
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" className="cardSociDialogGeneral" open={open} >
@@ -28,7 +29,7 @@ export default function SociDialog(props) {
                         </div>
                         <div className="column_productTitle2">
                             <div className="cardSociPriceBigBox">
-                                XXXX €
+                                5-15 €
                             </div>
                         </div>
                     </div>
@@ -42,10 +43,14 @@ export default function SociDialog(props) {
                     />
                     <hr className="solid" />
                     <div className="dateDetailed row">
-                        <div className="column">
+                        <div className="column ">
                             <span className="mainSociWordBoxCard">
                                 <PeopleAltIcon /> TIPUS DE SOCI/A / &nbsp;
                             </span>
+                            <div className="sociTypeBox">
+                                <div className="subscriberSociBox" onClick={()=> setIsSubscriber(true)}>Subscriptor</div>
+                                <div className="professionalSociBox" onClick={()=> setIsSubscriber(false)}>Professional</div>
+                            </div>
                             <br />
                         </div>
                         <div className="column">
@@ -71,7 +76,7 @@ export default function SociDialog(props) {
                             BENEFICIS &nbsp;
                             </span>
                         <p className="textSociModal" >
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ornare nulla eros, eu tempor lorem imperdiet eget. Etiam a metus nulla. Vivamus tempor interdum felis viverra dapibus. Ut cursus magna ut pharetra lobortis. 
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ornare nulla eros, eu tempor lorem imperdiet eget. Etiam a metus nulla. Vivamus tempor interdum felis viverra dapibus. Ut cursus magna ut pharetra lobortis.
                         </p>
                     </div>
                     <hr className="solid" />
