@@ -1,16 +1,21 @@
-.cardGeneral {
+.cardProducteGeneral {
     max-width: 39.375rem;
-    padding: 20px;
+    padding: 1.25rem;
     background-color: #FAE6C5 !important;
 }
 
-.crossCloseModal {
+.crossCloseProducteModal {
     float: right;
     color: #1D1D1B;
     cursor: pointer;
 }
 
-.cardPriceBigBox {
+.topProductBlock{
+    margin: 0 auto;
+    margin-top: 0.8rem;
+}
+
+.cardPriceProducteBigBox {
     background-color: #1D1D1B;
     float: right;
     text-align: center;
@@ -26,6 +31,13 @@
 
 .column_productTitle2 {
     width: 20%;
+}
+
+.mainProducteWordBoxCard {
+    font-family: 'Bebas Neue';
+    font-size: 1.625rem;
+    color: #1D1D1B;
+    text-transform: uppercase;
 }
 
 .productImageBox {
@@ -53,30 +65,29 @@
     height: 7.75rem;
     margin-bottom: 0.313rem;
     width: 7.75rem;
-
 }
 
 .sizeProductBox {
     display: inline-flex;
     background-color: #1D1D1B;
-    width: 35px;
-    height: 35px;
+    width: 2.188rem;
+    height: 2.188rem;
     color: #FAE6C5;
     font-size: 1.8rem;
     font-family: 'Bebas Neue';
-    margin-right: 4px;
+    margin-right: 0.25rem;
     justify-content: center;
     margin-bottom: 1rem;
     align-items: center;
 }
 
-.sizeDetailed {
+.sizeProductDetailed {
     margin: 0 auto;
     margin-bottom: 0rem;
 }
 
 .productTitleModal {
-    font-size: 60px;
+    font-size: 3.75rem;
     font-family: 'Bebas Neue';
     font-weight: 300;
     line-height: 1em;
@@ -86,13 +97,8 @@
     text-overflow: ellipsis;
 }
 
-.modalTextBox {
-    background-color: #F2C571;
-}
-
-.textModal {
+.textProductModal {
     font-family: 'Libre Baskerville';
-    /* text-transform: uppercase; */
     font-size: 0.8rem;
     margin-top: -0.3rem;
     margin-bottom: 0.5rem;
@@ -100,30 +106,12 @@
     height: auto;
 }
 
-.addressModal {
-    text-transform: uppercase;
-    font-family: 'Bebas Neue';
-    font-size: 20px;
-    line-height: 1rem;
-    text-align: left;
-}
-
-.dateLinkCard {
-    font-family: 'Libre Baskerville';
-    font-size: 1.1rem;
-    color: inherit;
-}
-
-.dateLinkCard a {
-    color: inherit;
-}
-
-.descriptionCardBox {
+.descriptionProductCardBox {
     margin-top: .5rem;
 }
 
 /* Boton de compra  */
-.buttonCartBoxCard {
+.buttonCartProductBoxCard {
     display: flex;
     position: relative;
     height: auto;
@@ -133,7 +121,7 @@
     padding: 0rem 0.625rem 0rem 0.625rem;
 }
 
-.buttonCartIconBoxCard {
+.buttonCartProductIconBoxCard {
     margin: 0.4rem;
 }
 
@@ -144,18 +132,13 @@
     padding-top: 0.125rem;
 }
 
-.MuiCardActions-spacing,
-.MuiCardActions-root {
-    float: right;
-}
-
 hr.dashed {
-    border-top: 3px dashed #bbb;
+    border-top: 0.188rem dashed #bbb;
     margin-top: 0rem;
     margin-bottom: 0rem;
 }
 
 hr.solid {
-    border-top: 3px solid #bbb;
+    border-top: 0.188rem solid #bbb;
     margin-top: 0rem;
 }

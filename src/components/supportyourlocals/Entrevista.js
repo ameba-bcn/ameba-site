@@ -12,15 +12,15 @@ export default function Entrevista(props) {
     const [state, setState] = useState([
         {
             id: 0,
-            name: "",
+            title: "",
             image: "",
-            biography: "",
+            introduction: "",
             created: "",
             current_answers: [{ 'answer': "", "question": "" }]
         }
     ]);
     useEffect(() => {
-        axiosInstance.get(`artists/${urlID}/`, {})
+        axiosInstance.get(`interviews/${urlID}/`, {})
             .then((res) => {
                 console.log(res)
                 console.log(res.data);
@@ -38,13 +38,13 @@ export default function Entrevista(props) {
             <div className="fullEntrevista" >
                 <div className="rowEntrevista">
                     <div className="columnImatge">
-                        <img className="imgEntrevista" src={state.image} alt={state.name} />
+                        <img className="imgEntrevista" src={state.image} alt={state.title} />
                     </div>
                     <div className="columnEntrevista">
                         <div className="titleBoxEntrevista">
-                            <h1 className="titleEntrevista" >{state.name}</h1>
+                            <h1 className="titleEntrevista" >{state.title}</h1>
                             <p className="dateEntrevista"><small className="text-muted">{state.created}</small></p>
-                            <p className="introEntrevista">{state.biography}</p>
+                            <p className="introEntrevista">{state.introduction}</p>
                         </div>
                     </div>
                 </div>
