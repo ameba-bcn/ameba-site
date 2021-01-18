@@ -30,7 +30,18 @@
     text-transform: uppercase;
     padding: 0.188rem 0.8rem 0rem 0.8rem;
 }
+.imageSociModal{
+    height: 17.5rem;
+    margin-bottom: 1rem;
+}
 
+.dateSociDetailed {
+    margin: 0 auto;
+    margin-bottom: 0rem;
+}
+.descriptionSociCardBox{
+    margin-top: .5rem;
+}
 .column_productTitle1 {
     width: 80%;
 }
@@ -125,12 +136,12 @@
 }
 
 hr.dashed {
-    border-top: 3px dashed #bbb;
+    border-top: 0.188rem dashed #bbb;
     margin-top: 0rem;
     margin-bottom: 0rem;
 }
 
 hr.solid {
-    border-top: 3px solid #bbb;
+    border-top: 0.188rem solid #bbb;
     margin-top: 0rem;
 }

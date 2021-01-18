@@ -14,7 +14,7 @@ export default function LlistatEntrevistes() {
     const [state, setState] = useState([
         {
             id: 0,
-            name: "",
+            title: "",
             image: "",
             bio_preview: "",
             created: ""
@@ -22,7 +22,7 @@ export default function LlistatEntrevistes() {
     ]);
 
     useEffect(() => {
-        axiosInstance.get(`artists/`, {})
+        axiosInstance.get(`interviews/`, {})
             .then((res) => {
                 console.log(res)
                 console.log(res.data);
@@ -45,9 +45,9 @@ export default function LlistatEntrevistes() {
                         aboutProps: data
                     }}>
                     <div className="cardSupport">
-                        <img className="cardSupportImgTop" src={data.image} alt={data.name} />
+                        <img className="cardSupportImgTop" src={data.image} alt={data.title} />
                         <div className="cardSupportTitle">
-                            {data.name}
+                            {data.title}
                         </div>
                         <div className="cardSupportPlusBox">+</div>
                         <div className="cardTagBox">DJ</div>

@@ -16,7 +16,7 @@ export default function SociDialog(props) {
     const [isSubscriber, setIsSubscriber] = React.useState(true);
 
     return (
-        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" className="cardSociDialogGeneral" open={open} >
+        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >
             <Card className="cardSociGeneral" >
                 <div className="insideFrameModal">
                     <ClearIcon className="crossSociCloseModal" onClick={handleClose} />
@@ -37,12 +37,12 @@ export default function SociDialog(props) {
                     <CardMedia
                         component="img"
                         alt=""
-                        className="imageModal"
+                        className="imageSociModal"
                         image=""
                         title=""
                     />
                     <hr className="solid" />
-                    <div className="dateDetailed row">
+                    <div className="dateSociDetailed row">
                         <div className="column ">
                             <span className="mainSociWordBoxCard">
                                 <PeopleAltIcon /> TIPUS DE SOCI/A / &nbsp;
@@ -62,7 +62,7 @@ export default function SociDialog(props) {
                         </div>
                     </div>
                     <hr className="dashed" />
-                    <div className="descriptionCardBox">
+                    <div className="descriptionSociCardBox">
                         <span className="mainSociWordBoxCard">
                             DESCRIPCIÓ / &nbsp;
                             </span>

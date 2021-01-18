@@ -3,15 +3,10 @@ import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
-import './Producte.css'
-// import LocationOnIcon from '@material-ui/icons/LocationOn';
-// import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-// import ReceiptIcon from '@material-ui/icons/Receipt';
-// import LocalAtmIcon from '@material-ui/icons/LocalAtm';
-// import HowToRegIcon from '@material-ui/icons/HowToReg';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ClearIcon from '@material-ui/icons/Clear';
+import './Producte.css';
 
 export default function ProducteDialog(props) {
     const { onClose, selectedValue, open, dataRow } = props;
@@ -21,18 +16,18 @@ export default function ProducteDialog(props) {
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >
-            <Card className="cardGeneral" >
+            <Card className="cardProducteGeneral" >
                 <div className="insideFrameModal">
-                    <ClearIcon className="crossCloseModal" onClick={handleClose} />
+                    <ClearIcon className="crossCloseProducteModal" onClick={handleClose} />
                     <br />
-                    <div className="row">
+                    <div className="row topProductBlock">
                         <div className="column_productTitle1">
                             <div className="productTitleModal" id="simple-dialog-title">
                                 {dataRow ? dataRow.title : ''}
                             </div>
                         </div>
                         <div className="column_productTitle2">
-                            <div className="cardPriceBigBox">
+                            <div className="cardPriceProducteBigBox">
                                 XX €
                             </div>
                         </div>
@@ -79,9 +74,9 @@ export default function ProducteDialog(props) {
                         </div>
                     </div>
                     <hr className="solid" />
-                    <div className="sizeDetailed row">
+                    <div className="sizeProductDetailed row">
                         <div className="column">
-                            <span className="mainWordBoxCard">
+                            <span className="mainProducteWordBoxCard">
                                 <PeopleAltIcon /> TALLES DISPONIBLES / &nbsp;
                             </span>
                             <div className="sizesBox">
@@ -94,18 +89,18 @@ export default function ProducteDialog(props) {
                         </div>
                         <div className="column">
                             <CardActions>
-                                <button size="small" className="buttonCartBoxCard" color="inherit">
-                                    <ShoppingCartIcon className="buttonCartIconBoxCard" /><span className="buttonTextProductBoxCard">AFEGIR A CISTELLA</span>
+                                <button size="small" className="buttonCartProductBoxCard" color="inherit">
+                                    <ShoppingCartIcon className="buttonCartProductIconBoxCard" /><span className="buttonTextProductBoxCard">AFEGIR A CISTELLA</span>
                                 </button>
                             </CardActions>
                         </div>
                     </div>
                     <hr className="dashed" />
-                    <div className="descriptionCardBox">
-                        <span className="mainWordBoxCard">
+                    <div className="descriptionProductCardBox">
+                        <span className="mainProducteWordBoxCard">
                             DESCRIPCIÓ &nbsp;
                             </span>
-                        <p className="textModal" >
+                        <p className="textProductModal">
                             {dataRow ? dataRow.article : ''}
                         </p>
                     </div>

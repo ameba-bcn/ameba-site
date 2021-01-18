@@ -137,6 +137,28 @@ div>.nav-item {
     overflow-y:auto !important;
 }
 
+.MuiCardActions-spacing,
+.MuiCardActions-root {
+    float: right;
+}
+
+.MuiCard-root::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.MuiCard-root::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+.MuiCard-root::-webkit-scrollbar-thumb
+{
+	background-color: #1D1D1B;
+}
+
 /* Animacion de hover title */
 /* 
 @keyframes TitleHovered {
