@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 // import data from './response.json';
 import { NavLink, Redirect } from 'react-router-dom';
-// import Entrevista from './entrevista';
 import './LlistatEntrevistes.css';
 import axiosInstance from "../../axios";
 
@@ -24,7 +23,6 @@ export default function LlistatEntrevistes() {
     useEffect(() => {
         axiosInstance.get(`interviews/`, {})
             .then((res) => {
-                console.log(res)
                 console.log(res.data);
                 return res.data
             }).then((response) =>{

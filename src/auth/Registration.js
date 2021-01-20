@@ -40,7 +40,6 @@ export default function Registration() {
                 history.push('/logconf');
                 console.log("in registration")
                 setDisplayError(null);
-                console.log(res)
                 console.log(res.data);
             })
             .catch(error => {

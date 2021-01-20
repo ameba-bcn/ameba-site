@@ -16,19 +16,19 @@ export default function ProducteDialog(props) {
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >
-            <Card className="cardProducteGeneral" >
+            <Card className="cardProducteGeneral">
                 <div className="insideFrameModal">
                     <ClearIcon className="crossCloseProducteModal" onClick={handleClose} />
                     <br />
                     <div className="row topProductBlock">
                         <div className="column_productTitle1">
                             <div className="productTitleModal" id="simple-dialog-title">
-                                {dataRow ? dataRow.title : ''}
+                                {dataRow.name}
                             </div>
                         </div>
                         <div className="column_productTitle2">
                             <div className="cardPriceProducteBigBox">
-                                XX €
+                                {dataRow.price}€
                             </div>
                         </div>
                     </div>
@@ -37,38 +37,38 @@ export default function ProducteDialog(props) {
                         <div className="columnProductImage1">
                             <CardMedia
                                 component="img"
-                                alt={dataRow ? dataRow.title : ''}
+                                alt={dataRow.name}
                                 className="imageProductModal"
-                                image={dataRow ? dataRow.img : ''}
-                                title={dataRow ? dataRow.title : ''}
+                                image={dataRow.images}
+                                title={dataRow.name}
                             />
                         </div>
                         <div className="columnProductImage2">
                             <div className="row1ProductImage">
                                 <CardMedia
                                     component="img"
-                                    alt={dataRow ? dataRow.title : ''}
+                                    alt={dataRow.name}
                                     className="imageRow1ProductModal"
-                                    image={dataRow ? dataRow.img : ''}
-                                    title={dataRow ? dataRow.title : ''}
+                                    image={dataRow.images}
+                                    title={dataRow.name}
                                 />
                             </div>
                             <div className="row2ProductImage">
                                 <CardMedia
                                     component="img"
-                                    alt={dataRow ? dataRow.title : ''}
+                                    alt={dataRow.name}
                                     className="imageRow2ProductModal"
-                                    image={dataRow ? dataRow.img : ''}
-                                    title={dataRow ? dataRow.title : ''}
+                                    image={dataRow.images}
+                                    title={dataRow.name}
                                 />
                             </div>
                             <div className="row3ProductImage">
                                 <CardMedia
                                     component="img"
-                                    alt={dataRow ? dataRow.title : ''}
+                                    alt={dataRow.name}
                                     className="imageRow3ProductModal"
-                                    image={dataRow ? dataRow.img : ''}
-                                    title={dataRow ? dataRow.title : ''}
+                                    image={dataRow.images}
+                                    title={dataRow.name}
                                 />
                             </div>
                         </div>
@@ -101,7 +101,7 @@ export default function ProducteDialog(props) {
                             DESCRIPCIÓ &nbsp;
                             </span>
                         <p className="textProductModal">
-                            {dataRow ? dataRow.article : ''}
+                            {dataRow.description}
                         </p>
                     </div>
                     <hr className="solid" />

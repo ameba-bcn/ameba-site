@@ -1,49 +1,79 @@
-import React from 'react';
-import Data from './response.json';
+import React, {useState, useEffect} from 'react';
+// import Data from './response.json';
 import './BotigaGeneral.css';
-// import { NavLink, Redirect } from 'react-router-dom';
 import ProducteDialog from './Producte';
+import axiosInstance from "../../axios";
 
 export default function BotigaGeneral() {
 
     const [open, setOpen] = React.useState(false);
-    const [rowClickedData, setState] = React.useState([]);
+    const [data, setData] = useState([
+        {
+            id: 0,
+            name: "",
+            price:"",
+            images: [""],
+            discount: ""
+        }
+    ]);
 
+    const [productData, setProductData] = useState([
+        {
+            id: 0,
+            name: "",
+            description: "",
+            price: "",
+            stock: 0,
+            variants: [""],
+            images: [""],
+            is_active: false,
+            discount: ""
+        }
+    ]);
 
     const handleClickOpen = () => {
         setOpen(true);
-      };
-    
-      const handleClose = () => {
-        setOpen(false);
-      }
+    };
 
-    const cardClicked = (data) => {
-        handleClickOpen();
-        setState(data);
-        // return <Redirect to={`/Botiga/Producte?='${data.id}`} />
+    const handleClose = () => {
+        setOpen(false);
     }
 
-    const cardGenerator = Data.map((data) => {
+    const fetchProduct = (data) => {
+        axiosInstance.get(`articles/${data.id}`, {})
+        .then((res) => {
+            console.log(res.data);
+            setProductData(res.data)
+        }).then(handleClickOpen())
+        .catch(error => {
+            console.log("ERROL", error.response)
+        });
+    }
+
+    useEffect(() => {
+        axiosInstance.get(`articles/`, {})
+            .then((res) => {
+                console.log(res.data);
+                setData(res.data)
+            })
+            .catch(error => {
+                console.log("ERROL", error.response)
+            });
+    }, []);
+
+    const cardGenerator = data.map((data) => {
         return (
             <div className="fullcardBotiga" key={data.id}
-                onClick={() => cardClicked(data)}>
-                {/* <NavLink style={{ textDecoration: 'none' }}
-                    to={{
-                        pathname: '/botiga/' + data.id,
-                        aboutProps: data
-                    }}> */}
-                    <div className="productCard">
-                        <div className="productImgFrame">
-                            <img className="productImgTop" src={data.img} alt={data.title} />
-                        </div>
-                        <div className="productCardBody">
-                            <h5 className="productTitle" >{data.title}</h5>
-                            {/* <p className="card-text">{data.interview.intro}</p> */}
-                            <p className="productCardPrice">{data.price}</p>
-                        </div>
+                onClick={() => fetchProduct(data)}>
+                <div className="productCard">
+                    <div className="productImgFrame">
+                        <img className="productImgTop" src={data.images[0]} alt={data.name} />
                     </div>
-                {/* </NavLink> */}
+                    <div className="productCardBody">
+                        <h5 className="productTitle" >{data.name}</h5>
+                        <p className="productCardPrice">{data.price}{data.discount!==0?"-{data.discount}":""}€</p>
+                    </div>
+                </div>
             </div>
         )
     })
@@ -51,9 +81,9 @@ export default function BotigaGeneral() {
     return (
         <div className="productCardDeck">
             {cardGenerator}
-            <ProducteDialog open={open} 
-            dataRow={rowClickedData} 
-            onClose={handleClose} />
+            <ProducteDialog open={open}
+                dataRow={productData}
+                onClose={handleClose} />
         </div>
     )
 
