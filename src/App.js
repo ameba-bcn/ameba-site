@@ -4,7 +4,6 @@ import Home from './pages/Home';
 import Activitats from './pages/Activitats';
 import Botiga from './pages/Botiga';
 import Entrevista from './components/supportyourlocals/Entrevista';
-// import Articles from './components/forms/Article';
 import SupportYourLocals from './pages/SupportYourLocals';
 import Sessio from './sessio/SessioGeneral';
 import NotFound from './pages/NotFound';
@@ -16,9 +15,6 @@ import Register from './pages/Register';
 import PasswordRecovery from './pages/PasswordRecovery';
 import LogMailConfirmation from './pages/LogMailConfirmation';
 import { UserContext } from './UserContext';
-
-// class App extends Component {
-//   render() {
 
 function App() {
   const [user, setUser] = useState(null);
@@ -40,7 +36,6 @@ function App() {
           <Route path='/recovery-account' component={PasswordRecovery} />
           <Route path='/logconf' component={LogMailConfirmation} />
           <Route exact path='/' component={Home} />
-
           <Route component={NotFound} />
         </Switch>
       </UserContext.Provider>
@@ -48,6 +43,5 @@ function App() {
     </div>
   );
 }
-// }
 
 export default App;

@@ -22,11 +22,9 @@ export default function Entrevista(props) {
     useEffect(() => {
         axiosInstance.get(`interviews/${urlID}/`, {})
             .then((res) => {
-                console.log(res)
+                // console.log(res)
                 console.log(res.data);
-                return res.data
-            }).then((response) => {
-                setState(response)
+                setState(res.data)
             })
             .catch(error => {
                 console.log("ERROL", error.response)

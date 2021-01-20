@@ -30,6 +30,8 @@
     justify-content: center;
     min-width: 470px;
     background-color: white;
+    cursor: pointer;
+
 }
 
 .productTitle {
