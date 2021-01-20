@@ -129,7 +129,8 @@ export default function LlistatActivitats() {
           actionsColumnIndex: -1
         }}
         onRowClick={((evt, selectedRow) => {
-          setSelectedRow(selectedRow.tableData.id)
+          console.log("JJJJJJJJJJ", selectedRow)
+          setSelectedRow(selectedRow.id)
           // setState({ selectedRow });
           fetchEvent(selectedRow)
           // setSelectedRow(selectedRow.tableData.id)
@@ -153,7 +154,7 @@ export default function LlistatActivitats() {
           }
         }}
       />
-      <ActivitatDialog open={open} dataRow={rowClickedData} onClose={handleClose} />
+      <ActivitatDialog open={open} dataRow={eventData} onClose={handleClose} />
     </div>
   );
 

@@ -20,9 +20,9 @@ export default function ActivitatDialog(props) {
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >
             <Card className="cardActivitatGeneral" >
                 <div className="insideFrameModal">
-                <ClearIcon className="crossCloseActivitatModal" onClick={handleClose}/>
+                    <ClearIcon className="crossCloseActivitatModal" onClick={handleClose} />
                     <div className="titleActivitatModal" id="simple-dialog-title">
-                        {dataRow.selectedRow ? dataRow.selectedRow.title : ''}
+                        {dataRow.name}
                     </div>
                     <hr className="solid" />
                     <div className="cardLocation">
@@ -31,16 +31,16 @@ export default function ActivitatDialog(props) {
                         </span>
                         <span className="addressLinkActivitatCard">
                             <a href="https://google.com/maps" target="_blank" rel="noopener noreferrer">
-                                {dataRow.selectedRow ? dataRow.selectedRow.address : ''}
+                                {dataRow.address}
                             </a>
                         </span>
                     </div>
                     <CardMedia
                         component="img"
-                        alt={dataRow.selectedRow ? dataRow.selectedRow.title : ''}
+                        alt={dataRow.name}
                         className="imageActivitatModal"
-                        image={dataRow.selectedRow ? dataRow.selectedRow.img : ''}
-                        title={dataRow.selectedRow ? dataRow.selectedRow.title : ''}
+                        image={dataRow.images}
+                        title={dataRow.name}
                     />
                     <hr className="solid" />
                     <div className="dateActivitatDetailed row">
@@ -50,36 +50,39 @@ export default function ActivitatDialog(props) {
                             </span>
                             <span className="dateLinkActivitatCard">
                                 <a href="https://google.com/calendar" target="_blank" rel="noopener noreferrer">
-                                    {dataRow.selectedRow ? dataRow.selectedRow.date : ''}-
-                                    {dataRow.selectedRow ? dataRow.selectedRow.hour : ''}
+                                    {dataRow.datetime}-
+                                    {dataRow.datetime}
                                 </a>
                             </span>
                             <br />
                             <span className="mainActivitatWordBoxCard"><LocalAtmIcon /> PREU / </span>
-                            <span className="priceBoxActivitatCard">{dataRow.selectedRow ? dataRow.selectedRow.price : ''}</span>
+                            <span className="priceBoxActivitatCard">{dataRow.price}</span>
                         </div>
                         <div className="column">
                             <CardActions>
                                 <button size="small" className="buttonTicketActivitatBoxCard" color="inherit">
-                                    <ReceiptIcon className="buttonTicketIconActivitatBoxCard"/><span className="buttonTicketTextActivitatBoxCard">RESERVA ENTRADA</span>
+                                    <ReceiptIcon className="buttonTicketIconActivitatBoxCard" /><span className="buttonTicketTextActivitatBoxCard">RESERVA ENTRADA</span>
                                 </button>
                             </CardActions>
                         </div>
                     </div>
                     <hr className="dashed" />
-                    <div className="descriptionActivitatCardBox">  
+                    <div className="descriptionActivitatCardBox">
                         <span className="mainActivitatWordBoxCard">
                             DESCRIPCIÓ / &nbsp;
-                            </span>
+                        </span>
                         <p className="textActivitatModal" >
-                            {dataRow.selectedRow ? dataRow.selectedRow.article : ''}
+                            {dataRow.description}
                         </p>
                     </div>
                     <hr className="dashed" />
                     <div className="artistBox">
                         <span className="mainActivitatWordBoxCard">
                             ARTIST / LINE-UP &nbsp;
-                            </span>
+                        </span>
+                        <p className="textActivitatModal" >
+                            {dataRow.artists}
+                        </p>
                     </div>
                     <hr className="solid" />
                 </div>
