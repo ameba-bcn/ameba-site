@@ -5,7 +5,7 @@ const ProductBanner = (props) => {
     return (
         <div className="productBanner">
             <div className="productBannerTitle">
-               {props.title}
+                {props.title}
             </div>
             <div className="productBannerPlus">+</div>
         </div>

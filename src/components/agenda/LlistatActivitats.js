@@ -99,7 +99,7 @@ export default function LlistatActivitats() {
       },
       {
         title: 'Data', field: 'date',
-        render: rowData => <div className="horaDataActivitat"><h1 className="mainActivitatTitle">{rowData.datetime}</h1></div>
+        render: rowData => <div className="horaDataActivitat"><h1 className="mainActivitatTitle">{rowData.datetime.split("T")[0]}</h1></div>
         // , cellStyle: { width: 200 }
         , headerStyle: {
           textAlign: 'center'
@@ -107,7 +107,7 @@ export default function LlistatActivitats() {
       },
       {
         title: 'Hora', field: 'hour',
-        render: rowData => <div className="horaDataActivitat"><h1 className="mainActivitatTitle">{rowData.datetime}</h1></div>,
+        render: rowData => <div className="horaDataActivitat"><h1 className="mainActivitatTitle">{rowData.datetime.substring(rowData.datetime.lastIndexOf("T") + 1,rowData.datetime.lastIndexOf("Z")).slice(0, -3)}</h1></div>,
         // cellStyle: { width: 200 },
         headerStyle: {
           textAlign: 'center'
@@ -129,7 +129,6 @@ export default function LlistatActivitats() {
           actionsColumnIndex: -1
         }}
         onRowClick={((evt, selectedRow) => {
-          console.log("JJJJJJJJJJ", selectedRow)
           setSelectedRow(selectedRow.id)
           // setState({ selectedRow });
           fetchEvent(selectedRow)

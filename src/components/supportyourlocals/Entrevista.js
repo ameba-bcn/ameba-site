@@ -22,7 +22,6 @@ export default function Entrevista(props) {
     useEffect(() => {
         axiosInstance.get(`interviews/${urlID}/`, {})
             .then((res) => {
-                // console.log(res)
                 console.log(res.data);
                 setState(res.data)
             })
