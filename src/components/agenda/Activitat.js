@@ -50,8 +50,8 @@ export default function ActivitatDialog(props) {
                             </span>
                             <span className="dateLinkActivitatCard">
                                 <a href="https://google.com/calendar" target="_blank" rel="noopener noreferrer">
-                                    {dataRow.datetime}-
-                                    {dataRow.datetime}
+                                    {dataRow.datetime!==undefined?dataRow.datetime.split("T")[0]:""}-
+                                    {dataRow.datetime!==undefined?dataRow.datetime.substring(dataRow.datetime.lastIndexOf("T") + 1,dataRow.datetime.lastIndexOf("Z")).slice(0, -3):""}
                                 </a>
                             </span>
                             <br />
