@@ -5,20 +5,21 @@ import axios from "axios";
 const API_URL = "http://localhost/api/";
 
 const register = (username, email, password) => {
-    return axios.post(API_URL + "users", {
+    return axios.post(API_URL + "users/", {
         username,
         email,
         password,
     });
 };
 
-const login = (username, password) => {
-    return axios.post(API_URL + "token", {
-        username,
+const login = (email, password) => {
+    return axios.post(API_URL + "token/", {
+        email,
         password,
     })
         .then((response) => {
-            if (response.data.accessToken) {
+            console.log("reponse", response)
+            if (response.data.access) {
                 localStorage.setItem("user", JSON.stringify(response.data));
             }
             return response.data;
@@ -26,9 +27,11 @@ const login = (username, password) => {
 };
 
 const logout = () => {
-    let refresh_token = localStorage.getItem("refresh_token");
-    return axios.delete(API_URL + `token/${refresh_token}`, {})
+    let userData = JSON.parse(localStorage.getItem("user"));
+    console.log("ARRIQUI", userData.refresh)
+    return axios.delete(API_URL + `token/${userData.refresh}/`, {})
         .then((response) => {
+            console.log("Vamos a eliminar el user")
             localStorage.removeItem("user");
         });
 };

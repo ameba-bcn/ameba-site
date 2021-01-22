@@ -10,7 +10,7 @@ import NotFound from './pages/NotFound';
 import { Switch, Route } from 'react-router-dom';
 import Contacte from './contacte/Contacte';
 import Menu from './components/Navbar'
-// import LogSession from './pages/LogSession';
+import LogSession from './pages/LogSession';
 // import Register from './pages/Register';
 import PasswordRecovery from './pages/PasswordRecovery';
 import LogMailConfirmation from './pages/LogMailConfirmation';
@@ -33,8 +33,8 @@ function App() {
           <Route exact path='/support/:id' component={Entrevista} />
           <Route path='/support' component={SupportYourLocals} />
           <Route path='/sessio' component={Sessio} />
-          {/* <Route path='/login' component={LogSession} /> */}
-          <Route path='/login' component={Login} />
+          <Route path='/login' component={LogSession} />
+          {/* <Route path='/login' component={Login} /> */}
           {/* <Route path='/registration' component={Register} /> */}
           <Route path='/registration' component={Register} />
           <Route path='/recovery-account' component={PasswordRecovery} />
