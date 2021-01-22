@@ -10,10 +10,12 @@ import NotFound from './pages/NotFound';
 import { Switch, Route } from 'react-router-dom';
 import Contacte from './contacte/Contacte';
 import Menu from './components/Navbar'
-import LogSession from './pages/LogSession';
-import Register from './pages/Register';
+// import LogSession from './pages/LogSession';
+// import Register from './pages/Register';
 import PasswordRecovery from './pages/PasswordRecovery';
 import LogMailConfirmation from './pages/LogMailConfirmation';
+import Login from './redux/components/Login';
+import Register from './redux/components/Register';
 import { UserContext } from './UserContext';
 
 function App() {
@@ -31,7 +33,9 @@ function App() {
           <Route exact path='/support/:id' component={Entrevista} />
           <Route path='/support' component={SupportYourLocals} />
           <Route path='/sessio' component={Sessio} />
-          <Route path='/login' component={LogSession} />
+          {/* <Route path='/login' component={LogSession} /> */}
+          <Route path='/login' component={Login} />
+          {/* <Route path='/registration' component={Register} /> */}
           <Route path='/registration' component={Register} />
           <Route path='/recovery-account' component={PasswordRecovery} />
           <Route path='/logconf' component={LogMailConfirmation} />

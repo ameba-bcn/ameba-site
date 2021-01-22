@@ -12,7 +12,7 @@
         "@testing-library/user-event": "^7.2.1",
         "animate.css": "^4.1.0",
         "antd": "^4.5.4",
-        "axios": "^0.21.0",
+        "axios": "^0.21.1",
         "bootstrap": "^4.5.0",
         "gh-pages": "^3.1.0",
         "jquery": "^3.5.1",
@@ -31,10 +31,14 @@
         "react-rellax": "^1.0.3",
         "react-responsive-carousel": "^3.2.9",
         "react-router-dom": "^5.2.0",
-        "react-scripts": "3.4.0",
+        "react-scripts": "^4.0.1",
         "react-scroll": "^1.7.16",
         "react-update": "^0.4.4",
+        "react-validation": "^3.0.7",
+        "redux": "^4.0.5",
+        "redux-thunk": "^2.3.0",
         "save-dev": "0.0.1-security",
+        "validator": "^13.5.2",
         "webfontloader": "^1.6.28"
     },
     "scripts": {
@@ -59,5 +63,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "redux-devtools-extension": "^2.13.8"
     }
 }

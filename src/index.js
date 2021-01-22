@@ -6,6 +6,8 @@ import * as serviceWorker from './serviceWorker';
 import WebFont from 'webfontloader';
 import { BrowserRouter } from 'react-router-dom'
 import ScrollToTop from './scrollToTop';
+import { Provider } from 'react-redux';
+import store from './store';
 
 WebFont.load({
   google: {
@@ -15,13 +17,15 @@ WebFont.load({
 
 ReactDOM.render(
   <BrowserRouter basename={process.env.PUBLIC_URL}>
-    <ScrollToTop>
-    <React.StrictMode>
+    <Provider store={store}>
+      <ScrollToTop>
+        <React.StrictMode>
 
-      <App />
+          <App />
 
-    </React.StrictMode>
-    </ScrollToTop>
+        </React.StrictMode>
+      </ScrollToTop>
+    </Provider>
   </BrowserRouter>,
   document.getElementById('root')
 );
