@@ -202,9 +202,9 @@ div>.nav-item {
     margin-top: 100px;
 }
 
-.form-control.control-error {
+/* .form-control.control-error {
     border: 1px solid red;
-}
+} */
 
 
 /* SESSIO */
@@ -258,6 +258,41 @@ div>.nav-item {
 
 
 /* LOGIN NUEVO */
+.loginWall {
+    background-color: #EB5E3E;
+}
+
+.logTitle{
+    text-transform: uppercase;
+    /* font-weight: bold; */
+    font-family: 'Bebas Neue';
+    color: #1D1D1B;
+    font-size: 4.5rem;
+}
+
+input.logForm{
+    background-color: transparent;
+    border: 4px solid #1D1D1B;
+    border-radius: 0rem;   
+}
+
+input.logForm::placeholder{
+    text-transform: uppercase;
+    /* font-weight: bold; */
+    font-family: 'Bebas Neue';
+    color: #1D1D1B;
+    font-size: 1.625rem;
+}
+
+.logFormButton{
+    background-color: #1D1D1B;
+    color: #FAE6C5;
+    text-transform: uppercase;
+    font-family: 'Bebas Neue';
+    font-size: 1.8rem;
+    width: 30% !important;
+    margin: 0 auto;
+}
 
 label {
     display: block;
@@ -265,7 +300,8 @@ label {
 }
 
 .card-container.card {
-    max-width: 350px !important;
+    max-width: 450px !important;
+    background-color: transparent;
     padding: 40px 40px;
 }
 
@@ -273,15 +309,15 @@ label {
     background-color: #f7f7f7;
     margin: 0 auto 25px;
     margin-top: 50px;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
+    /* -moz-border-radius: 2px;
+    -webkit-border-radius: 2px; */
+    /* border-radius: 2px;
     -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); */
 }
 
-.profile-img-card {
+/* .profile-img-card {
     width: 96px;
     height: 96px;
     margin: 0 auto 10px;
@@ -289,4 +325,4 @@ label {
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
-}
+} */

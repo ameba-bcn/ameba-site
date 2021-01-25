@@ -101,19 +101,21 @@ const Login = (props) => {
     return (
         <div className="col-md-12">
             <div className="card card-container">
-                <img
+                {/* <img
                     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
                     alt="profile-img"
                     className="profile-img-card"
-                />
+                /> */}
+                <div className="logTitle">login</div>
 
                 <Form onSubmit={handleLogin} ref={form}>
                     <div className="form-group">
-                        <label htmlFor="email">Email</label>
+                        {/* <label htmlFor="email">Email</label> */}
                         <Input
                             type="text"
-                            className="form-control"
+                            className="form-control logForm"
                             name="email"
+                            placeholder="email"
                             value={email}
                             onChange={onChangeUsername}
                             validations={[required]}
@@ -121,11 +123,12 @@ const Login = (props) => {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="password">Password</label>
+                        {/* <label htmlFor="password">Password</label> */}
                         <Input
                             type="password"
-                            className="form-control"
+                            className="form-control logForm"
                             name="password"
+                            placeholder="contrasenya"
                             value={password}
                             onChange={onChangePassword}
                             validations={[required]}
@@ -133,7 +136,7 @@ const Login = (props) => {
                     </div>
 
                     <div className="form-group">
-                        <button className="btn btn-primary btn-block" disabled={loading}>
+                        <button className=" btn-block logFormButton" disabled={loading}>
                             {loading && (
                                 <span className="spinner-border spinner-border-sm"></span>
                             )}
