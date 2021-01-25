@@ -1,5 +1,3 @@
-// https://bezkoder.com/react-hooks-redux-login-registration-example/
-
 import axios from "axios";
 
 const API_URL = "http://localhost/api/";
@@ -28,7 +26,6 @@ const login = (email, password) => {
 
 const logout = () => {
     let userData = JSON.parse(localStorage.getItem("user"));
-    console.log("ARRIQUI", userData.refresh)
     return axios.delete(API_URL + `token/${userData.refresh}/`, {})
         .then((response) => {
             console.log("Vamos a eliminar el user")
