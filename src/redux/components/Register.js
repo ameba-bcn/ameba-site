@@ -5,14 +5,18 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
+import AddIcon from '@material-ui/icons/Add';
 
 import { register } from "../actions/auth";
+
+import SociDialog from '../../components/botiga/Soci';
+
 
 const required = (value) => {
   if (!value) {
     return (
       <div className="alert alert-danger" role="alert">
-        This field is required!
+        Iep fera! Aquest camp es obligatori!
       </div>
     );
   }
@@ -22,7 +26,7 @@ const validEmail = (value) => {
   if (!isEmail(value)) {
     return (
       <div className="alert alert-danger" role="alert">
-        This is not a valid email.
+        Ay ay ay... això no es vàlid!
       </div>
     );
   }
@@ -32,7 +36,7 @@ const vusername = (value) => {
   if (value.length < 3 || value.length > 20) {
     return (
       <div className="alert alert-danger" role="alert">
-        The username must be between 3 and 20 characters.
+        Ni et flipis ni et quedis curt, has de tenir de 3-20 lletres!
       </div>
     );
   }
@@ -42,7 +46,7 @@ const vpassword = (value) => {
   if (value.length < 6 || value.length > 40) {
     return (
       <div className="alert alert-danger" role="alert">
-        The password must be between 6 and 40 characters.
+        Ni et flipis ni et quedis curt, has de tenir de 6-40 lletres
       </div>
     );
   }
@@ -56,9 +60,14 @@ const Register = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const { message } = useSelector(state => state.message);
   const dispatch = useDispatch();
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
   const onChangeUsername = (e) => {
     const username = e.target.value;
@@ -100,8 +109,9 @@ const Register = (props) => {
 
   return (
     <div className="col-md-12">
-      <div className="card card-container">
+      <div className="card card-container card-login">
       <div className="logTitle">registra't</div>
+      <div className="sociLogBanner" onClick={handleClick}>encara no ets soci/a? Informa't aquí!<AddIcon className="sociLogBannerPlus"/></div>
 
         {/* <img
           src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
@@ -113,11 +123,11 @@ const Register = (props) => {
           {!successful && (
             <div>
               <div className="form-group">
-                <label htmlFor="username">Username</label>
                 <Input
                   type="text"
-                  className="form-control"
+                  className="form-control logForm"
                   name="username"
+                  placeholder="usuari"
                   value={username}
                   onChange={onChangeUsername}
                   validations={[required, vusername]}
@@ -125,11 +135,11 @@ const Register = (props) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email</label>
                 <Input
                   type="text"
-                  className="form-control"
+                  className="form-control logForm"
                   name="email"
+                  placeholder="email"
                   value={email}
                   onChange={onChangeEmail}
                   validations={[required, validEmail]}
@@ -137,11 +147,11 @@ const Register = (props) => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="password">Password</label>
                 <Input
                   type="password"
-                  className="form-control"
+                  className="form-control logForm"
                   name="password"
+                  placeholder="contrasenya"
                   value={password}
                   onChange={onChangePassword}
                   validations={[required, vpassword]}
@@ -149,7 +159,7 @@ const Register = (props) => {
               </div>
 
               <div className="form-group">
-                <button className="btn btn-primary btn-block">Sign Up</button>
+                <button className="btn-block logFormButton">Sign Up</button>
               </div>
             </div>
           )}
@@ -163,7 +173,9 @@ const Register = (props) => {
           )}
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
-        <span className="logTextosLink" onClick={showLogin}>Inicia sessió</span>
+        <span className="logTextosLink" onClick={showLogin}>- Ja estàs registrat? Inicia sessió -</span>
+        <SociDialog open={open}
+        onClose={handleClick} />
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ const required = (value) => {
     if (!value) {
         return (
             <div className="alert alert-danger" role="alert">
-                This field is required!
+                Iep fera! Camp obligatori!
             </div>
         );
     }
@@ -100,7 +100,7 @@ const Login = (props) => {
 
     return (
         <div className="col-md-12">
-            <div className="card card-container">
+            <div className="card card-container card-login">
                 {/* <img
                     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
                     alt="profile-img"
@@ -153,8 +153,8 @@ const Login = (props) => {
                     )}
                     <CheckButton style={{ display: "none" }} ref={checkBtn} />
                 </Form>
-                <span className="logTextosLink" onClick={showRegistration}>Registra't</span>
-                <span className="logTextosLink" onClick={showPasswordRecover}>Recupera la teva contrassenya</span>
+                <span className="logTextosLink logTextosLinkRegistrat" onClick={showRegistration}>- Registra't -</span>
+                <span className="logTextosLink" onClick={showPasswordRecover}>- Recupera la teva contrassenya -</span>
             </div>
         </div>
     );
