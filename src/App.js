@@ -12,7 +12,7 @@ import Contacte from './contacte/Contacte';
 import Menu from './components/Navbar'
 import LogSession from './pages/LogSession';
 // import Register from './pages/Register';
-import PasswordRecovery from './pages/PasswordRecovery';
+// import PasswordRecovery from './pages/PasswordRecovery';
 import LogMailConfirmation from './pages/LogMailConfirmation';
 import Login from './redux/components/Login';
 import Register from './redux/components/Register';
@@ -37,7 +37,7 @@ function App() {
           {/* <Route path='/login' component={Login} /> */}
           {/* <Route path='/registration' component={Register} /> */}
           <Route path='/registration' component={Register} />
-          <Route path='/recovery-account' component={PasswordRecovery} />
+          {/* <Route path='/recovery-account' component={PasswordRecovery} /> */}
           <Route path='/logconf' component={LogMailConfirmation} />
           <Route exact path='/' component={Home} />
           <Route component={NotFound} />

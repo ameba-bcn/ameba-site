@@ -7,24 +7,20 @@ import SociDialog from '../components/botiga/Soci';
 function Botiga() {
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleClick = () => {
+    setOpen(!open);
   };
-
-  const handleClose = () => {
-    setOpen(false);
-  }
 
   return (
     <div className="Botiga">
       <PowerTitle
         title="BOTIGA"
         className="SupportTitle" />
-      <div className="clickBanner" onClick={() => handleClickOpen()}>
+      <div className="clickBanner" onClick={() => handleClick()}>
         <ProductBanner title="fes-te soci/a d'ameba per 15€/any" />
       </div>
       <SociDialog open={open}
-        onClose={handleClose} />
+        onClose={handleClick} />
       <div className="BotigaContent">
         <BotigaGeneral />
       </div>
