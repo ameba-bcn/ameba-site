@@ -12,7 +12,7 @@ const required = (value) => {
     if (!value) {
         return (
             <div className="alert alert-danger" role="alert">
-                This field is required!
+                Iep fera! Camp obligatori!
             </div>
         );
     }
@@ -41,6 +41,16 @@ const Login = (props) => {
         const password = e.target.value;
         setPassword(password);
     };
+
+    const showRegistration = () => {
+        props.setViewState("registration")
+        // console.log(props.viewState)
+    }
+
+    const showPasswordRecover = () => {
+        props.setViewState("recover")
+        // console.log(props.viewState)
+    }
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -90,20 +100,22 @@ const Login = (props) => {
 
     return (
         <div className="col-md-12">
-            <div className="card card-container">
-                <img
+            <div className="card card-container card-login">
+                {/* <img
                     src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
                     alt="profile-img"
                     className="profile-img-card"
-                />
+                /> */}
+                <div className="logTitle">login</div>
 
                 <Form onSubmit={handleLogin} ref={form}>
                     <div className="form-group">
-                        <label htmlFor="email">Email</label>
+                        {/* <label htmlFor="email">Email</label> */}
                         <Input
                             type="text"
-                            className="form-control"
+                            className="form-control logForm"
                             name="email"
+                            placeholder="email"
                             value={email}
                             onChange={onChangeUsername}
                             validations={[required]}
@@ -111,11 +123,12 @@ const Login = (props) => {
                     </div>
 
                     <div className="form-group">
-                        <label htmlFor="password">Password</label>
+                        {/* <label htmlFor="password">Password</label> */}
                         <Input
                             type="password"
-                            className="form-control"
+                            className="form-control logForm"
                             name="password"
+                            placeholder="contrasenya"
                             value={password}
                             onChange={onChangePassword}
                             validations={[required]}
@@ -123,7 +136,7 @@ const Login = (props) => {
                     </div>
 
                     <div className="form-group">
-                        <button className="btn btn-primary btn-block" disabled={loading}>
+                        <button className=" btn-block logFormButton" disabled={loading}>
                             {loading && (
                                 <span className="spinner-border spinner-border-sm"></span>
                             )}
@@ -140,6 +153,8 @@ const Login = (props) => {
                     )}
                     <CheckButton style={{ display: "none" }} ref={checkBtn} />
                 </Form>
+                <span className="logTextosLink logTextosLinkRegistrat" onClick={showRegistration}>- Registra't -</span>
+                <span className="logTextosLink" onClick={showPasswordRecover}>- Recupera la teva contrassenya -</span>
             </div>
         </div>
     );
