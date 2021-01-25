@@ -42,6 +42,16 @@ const Login = (props) => {
         setPassword(password);
     };
 
+    const showRegistration = () => {
+        props.setViewState("registration")
+        // console.log(props.viewState)
+    }
+
+    const showPasswordRecover = () => {
+        props.setViewState("recover")
+        // console.log(props.viewState)
+    }
+
     const handleLogin = (e) => {
         e.preventDefault();
 
@@ -140,6 +150,8 @@ const Login = (props) => {
                     )}
                     <CheckButton style={{ display: "none" }} ref={checkBtn} />
                 </Form>
+                <span className="logTextosLink" onClick={showRegistration}>Registra't</span>
+                <span className="logTextosLink" onClick={showPasswordRecover}>Recupera la teva contrassenya</span>
             </div>
         </div>
     );

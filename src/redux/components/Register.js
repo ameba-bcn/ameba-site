@@ -48,7 +48,7 @@ const vpassword = (value) => {
   }
 };
 
-const Register = () => {
+const Register = (props) => {
   const form = useRef();
   const checkBtn = useRef();
 
@@ -92,6 +92,11 @@ const Register = () => {
         });
     }
   };
+
+  const showLogin = () => {
+    props.setViewState("login")
+    // console.log(props.viewState)
+}
 
   return (
     <div className="col-md-12">
@@ -156,6 +161,7 @@ const Register = () => {
           )}
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
+        <span className="logTextosLink" onClick={showLogin}>Inicia sessió</span>
       </div>
     </div>
   );
