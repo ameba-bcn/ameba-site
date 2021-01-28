@@ -78,7 +78,7 @@
     }
 }
 
-.menuButton a {
+.menuButton a, .cartIconMenu {
     font-family: 'Bebas Neue';
     text-decoration: none;
     font-size: 2.5rem;
@@ -106,6 +106,17 @@
             transition: all 0.5s ease-in-out;
         }
     }
+}
+
+.cartIconMenu{
+    width: 2.2rem !important;
+    height: auto !important;
+    margin-left: 0px;
+    margin-right: 5px;
+    margin-bottom: 4px;
+}
+.menuDropdownCart .MuiPaper-root{
+    margin-top: 3rem;
 }
 
 // #MenuOptionsLogin {
