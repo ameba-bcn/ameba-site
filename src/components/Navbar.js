@@ -5,6 +5,9 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logout } from "../redux/actions/auth";
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import './Navbar.scss';
 
 export default function Navbar() {
@@ -12,6 +15,16 @@ export default function Navbar() {
     const [size, setSize] = useState(0);
     const dispatch = useDispatch();
     const { isLoggedIn, user } = useSelector(state => state.auth);
+
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClickCart = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleCloseCart = () => {
+        setAnchorEl(null);
+    };
 
     useLayoutEffect(() => {
         function updateSize() {
@@ -34,7 +47,7 @@ export default function Navbar() {
     }
 
     const logoutMenu = () => {
-        console.log("LOGAAAAAAAAAU")
+        console.log("Logout, inicio del proceso")
         dispatch(logout())
     }
 
@@ -57,6 +70,20 @@ export default function Navbar() {
                                 <NavLink className="menuOptions" id="MenuOptionsLogin" to="/login" data-item='LOGIN'>LOGIN</NavLink> :
                                 <NavLink className="menuOptions" id="MenuOptionsLogin" to="/" data-item='LOGOUT' onClick={logoutMenu}>LOGOUT</NavLink>
                             }
+                        </li>
+                        <li className="liMenuOptions" ><ShoppingCartIcon className="cartIconMenu" onClick={handleClickCart} />
+                            <Menu
+                                id="simple-menu"
+                                anchorEl={anchorEl}
+                                keepMounted
+                                className="menuDropdownCart"
+                                open={Boolean(anchorEl)}
+                                onClose={handleCloseCart}
+                            >
+                                <MenuItem onClick={handleCloseCart}>Producte 1</MenuItem>
+                                <MenuItem onClick={handleCloseCart}>Producte 2</MenuItem>
+                                <MenuItem onClick={handleCloseCart}>Finalitzar compra</MenuItem>
+                            </Menu>
                         </li>
                     </ul>
                 </div>
