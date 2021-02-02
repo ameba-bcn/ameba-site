@@ -21,12 +21,6 @@ export default function ProducteDialog(props) {
 
     const handleAddClick = () => {
         dispatch(addToCart(dataRow.id))
-            .then(() => {
-                console.log("Añadido desde el componente", dataRow.id);
-            })
-            .catch(() => {
-                console.log("Fallado desde el componente", dataRow.id);
-            });
     }
 
 
@@ -55,7 +49,7 @@ export default function ProducteDialog(props) {
                                 component="img"
                                 alt={dataRow.name}
                                 className="imageProductModal"
-                                image={dataRow.images}
+                                image={dataRow.images === undefined ? "" : dataRow.images[0]}
                                 title={dataRow.name}
                             />
                         </div>
@@ -65,7 +59,7 @@ export default function ProducteDialog(props) {
                                     component="img"
                                     alt={dataRow.name}
                                     className="imageRow1ProductModal"
-                                    image={dataRow.images}
+                                    image={dataRow.images === undefined ? "" : dataRow.images[0]}
                                     title={dataRow.name}
                                 />
                             </div>
@@ -74,7 +68,7 @@ export default function ProducteDialog(props) {
                                     component="img"
                                     alt={dataRow.name}
                                     className="imageRow2ProductModal"
-                                    image={dataRow.images}
+                                    image={dataRow.images === undefined ? "" : dataRow.images[0]}
                                     title={dataRow.name}
                                 />
                             </div>
@@ -83,7 +77,7 @@ export default function ProducteDialog(props) {
                                     component="img"
                                     alt={dataRow.name}
                                     className="imageRow3ProductModal"
-                                    image={dataRow.images}
+                                    image={dataRow.images === undefined ? "" : dataRow.images[0]}
                                     title={dataRow.name}
                                 />
                             </div>
