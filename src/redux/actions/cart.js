@@ -11,11 +11,12 @@ export const addToCart = (id) => (dispatch) => {
         (response) => {
             dispatch({
                 type: ADD_TO_CART,
+                payload: { cart: response },
             });
 
             dispatch({
                 type: SET_MESSAGE,
-                payload: response.data.message,
+                payload: response.data,
             });
 
             return Promise.resolve();

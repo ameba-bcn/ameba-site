@@ -78,9 +78,29 @@ export const login = (username, password) => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-    AuthService.logout();
+    AuthService.logout().then(
+        (response) => {
+            dispatch({
+                type: LOGOUT,
+            })
+            dispatch({
+                type: SET_MESSAGE,
+                payload: response,
+            });
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
 
-    dispatch({
-        type: LOGOUT,
-    });
+            return Promise.reject();
+        }
+        )
 };
