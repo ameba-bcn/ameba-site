@@ -23,7 +23,7 @@
 
 .addressLinkActivitatCard a {
     color: inherit;
-    font-family: 'Libre Baskerville';
+    font-family: 'Montserrat';
     font-size: 1rem;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .textActivitatModal {
-    font-family: 'Libre Baskerville';
+    font-family: 'Montserrat';
     font-size: 0.8rem;
     margin-top: -0.3rem;
     margin-bottom: 0.5rem;
@@ -57,7 +57,7 @@
 }
 
 .dateLinkActivitatCard {
-    font-family: 'Libre Baskerville';
+    font-family: 'Montserrat';
     font-size: 1.1rem;
     color: inherit;
 }
@@ -67,7 +67,7 @@
 }
 
 .priceBoxActivitatCard {
-    font-family: 'Libre Baskerville';
+    font-family: 'Montserrat';
     font-size: 1.2rem;
 }
 

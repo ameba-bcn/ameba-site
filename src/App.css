@@ -6,9 +6,11 @@
 #F2C571 Naranja
 #EB5E3E Rojo
 #1D1D1B Negro
+#FFED00 Amarillo
 
 font-family: 'Bebas Neue';
 font-family: 'Libre Baskerville';
+font-family: 'Montserrat';
 */
 
 .App {
@@ -276,7 +278,7 @@ input.logForm {
     border: 4px solid #1D1D1B;
     border-radius: 0rem;
     padding-top: 14px;
-    font-family: 'Libre Baskerville';
+    font-family: 'Montserrat';
     color: #1D1D1B;
     font-size: 1.2rem;
     font-weight: bold;
@@ -320,7 +322,7 @@ label {
 }
 
 .logTextosLink {
-    font-family: 'Libre Baskerville';
+    font-family: 'Montserrat';
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
