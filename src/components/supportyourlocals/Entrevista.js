@@ -5,7 +5,8 @@ import TitleSection from './TitleSection';
 import axiosInstance from "../../axios";
 import state from './response2.js';
 import LettersMove from './../layout/LettersMove';
-
+import AddBoxIcon from '@material-ui/icons/AddBox';
+import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
 export default function Entrevista(props) {
     let history = useHistory();
     let location = useLocation();
@@ -21,6 +22,22 @@ export default function Entrevista(props) {
     //         current_answers: [{ 'answer': "", "question": "" }]
     //     }
     // ]);
+
+    const [expand, setExpand] = useState({p:[
+        false,
+        false,
+        false,
+        false,
+        false
+    ]})
+
+    const updateExpand = (i) =>{
+        const newIds = expand.p.slice() 
+        newIds[i] = !newIds[i];
+        setExpand(
+            {p:newIds}
+        )
+    }
     // useEffect(() => {
     //     axiosInstance.get(`interviews/${urlID}/`, {})
     //         .then((res) => {
@@ -63,13 +80,20 @@ export default function Entrevista(props) {
                 <TitleSection title="Entrevista" />
                 <div className="entrevista-columnes">
                     <div className="col1-preguntes">
-                        {state.current_answers.map((f) => (
-                            <div className="pregunta" id={f.id}>{f.questions}<span className="plus-symbol">+</span></div>
+                        {state.current_answers.map((f, i) => (
+                            <div className="pregunta" id={i}>
+                                {f.questions}
+                                {expand.p[i]?<IndeterminateCheckBoxIcon className="collapse-resp" onClick={()=>updateExpand(i)}/>
+                                :<AddBoxIcon className="expand-resp" onClick={()=>updateExpand(i)}/>}
+                                {expand.p[i]?<div className="resposta">{f.answers}</div>:null}
+                                <hr/>
+                            </div>
+                            
                         ))}
                     </div>
                     <div className="col2-preguntes">
-                        {state.current_answers.map((f) => (
-                            <div className="pregunta" id={`1-${f.id}`}>{f.questions}</div>
+                        {state.current_answers.map((f, i) => (
+                            <div className="pregunta" id={i}>{f.questions}</div>
                         ))}
                     </div>
                 </div>
@@ -83,7 +107,7 @@ export default function Entrevista(props) {
                 <TitleSection title="Activitats" />
             </div>
             <LettersMove sentence={"l'associació de música electrònica de barcelona"} color={"#FAE6C5"} />
-
+                            <div onClick={() =>console.log(expand)}>SSSSS</div>
 
         </>
     )

@@ -1,21 +1,22 @@
-.top-section-gral{
+.top-section-gral {
     height: auto;
     width: 100%;
     background-color: #FAE6C5;
 }
-.entrevista-gral{
+
+.entrevista-gral {
     height: auto;
     width: 100%;
     background-color: #FFED00;
 }
 
-.media-gral{
+.media-gral {
     height: auto;
     width: 100%;
     background-color: #F2C571;
 }
 
-.activitats-gral{
+.activitats-gral {
     height: auto;
     width: 100%;
     background-color: #EB5E3E;
@@ -80,18 +81,18 @@
     padding-top: 30px;
 }
 
-.bio-data{
+.bio-data {
     font-size: 40px;
     font-family: 'Bebas Neue';
-    font-weight:100;
+    font-weight: 100;
     text-align: left;
     padding-left: 40px;
     line-height: 1em;
-   
+
 
 }
 
-.bio-data > span {
+.bio-data>span {
     font-weight: 700;
 }
 
@@ -102,7 +103,7 @@
     margin: 20px 0px 20px 0px;
 }
 
-.entrevista-columnes{
+.entrevista-columnes {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-evenly;
@@ -111,17 +112,51 @@
     width: 90%;
     padding-top: 30px;
     margin: 0 auto;
-
 }
 
-.pregunta{
+.col1-preguntes{
+    max-width: 45%;
+}
+
+.pregunta {
     font-size: 40px;
     font-family: 'Bebas Neue';
-    font-weight:100;
+    font-weight: 100;
     text-align: left;
+    position: relative;
+    max-width: 100%;
+    padding-right: 80px;
+    overflow: hidden;
+    height: auto;
+    
 }
 
-.plus-symbol{
+.resposta{
+    font-size: 20px;
+    font-family: 'Monsterrat';
+    font-weight: 100;
+    /* position: absolute; */
+    height: fit-content;
+   
+}
+
+.pregunta svg {
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    top: 7px;
+    right: 0px;
+    width: 40px;
+    height: auto;
+    ;
+}
+
+.pregunta hr{
+    display: inline-block;
+    width: 110%;
+}
+
+.plus-symbol {
     color: #FFED00;
     background-color: #1D1D1B;
     display: inline-block;
