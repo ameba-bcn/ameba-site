@@ -171,12 +171,12 @@ div>.nav-item {
 .Articles,
 .Botiga {
     background-color: #EB5E3E;
-    padding-bottom: 6em;
+    /* padding-bottom: 6em; */
 }
 
 .SupportContent {
     background-color: #FAE6C5;
-    padding-bottom: 6em;
+    /* padding-bottom: 6em; */
 }
 
 #festi,

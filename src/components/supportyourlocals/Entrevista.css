@@ -1,143 +1,131 @@
-/* ENTREVISTA */
-
-.imgEntrevista {
-    height: 600px;
-    width: auto;
-    margin-bottom: 0;
+.top-section-gral{
+    height: auto;
+    width: 100%;
+    background-color: #FAE6C5;
+}
+.entrevista-gral{
+    height: auto;
+    width: 100%;
+    background-color: #FFED00;
 }
 
-.rowEntrevista {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 2em;
+.media-gral{
+    height: auto;
+    width: 100%;
+    background-color: #F2C571;
 }
 
-.columnImatge,
-.columnEntrevista {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-    flex: 1;
+.activitats-gral{
+    height: auto;
+    width: 100%;
+    background-color: #EB5E3E;
 }
 
-.columnEntrevista {
-    position: relative;
-    bottom: 0;
+.top-section_entr {
+    margin-top: 50px;
 }
 
-.textContentEntrevista {
-    text-align: left;
-    column-count: 3;
-    column-gap: 1.5rem;
-}
-
-.fullEntrevista {
-    width: 90%;
-    margin: auto;
-}
-
-.titleBoxEntrevista {
-    text-align: left;
-    position: absolute;
-    margin-left: 2em;
-    bottom: -3%;
-}
-
-.titleEntrevista {
+.ts-title {
     font-size: 90px;
     font-family: 'Bebas Neue';
     font-weight: 800;
     line-height: 1em;
 }
 
-.introEntrevista {
-    font-family: 'Arial';
-    display: block;
-}
-
-.questionBox {
-    position: relative;
-    break-inside: avoid-column;
-}
-
-.questionsEntrevista {
-    /* font-weight: bold; */
+.ts-breadcrumbs {
     font-family: 'Bebas Neue';
+    font-size: 30px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.ts-breadcrumbs span {
+    cursor: pointer;
+}
+
+.ts-breadcrumbs span:hover {
+    text-decoration: underline;
+}
+
+.bio-section {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    align-content: center;
+    width: 90%;
+    padding-top: 30px;
+    margin: 0 auto;
+}
+
+.bio-highlights,
+.bio-text,
+.bio-img {
+    width: 32%;
+    display: block;
+    /* height: 100px; */
+}
+
+.bio-img {
+    /* height: 100px; */
+}
+
+.bio-text {
+    background-color: thistle;
+    text-align: left;
+}
+
+.bio-highlights {
+    background-color: yellowgreen;
+    padding-top: 30px;
+}
+
+.bio-data{
     font-size: 40px;
+    font-family: 'Bebas Neue';
+    font-weight:100;
+    text-align: left;
+    padding-left: 40px;
     line-height: 1em;
-    margin-bottom: 0rem;
+   
+
 }
 
-.answersEntrevista {
-    font-family: 'Arial';
+.bio-data > span {
+    font-weight: 700;
 }
 
-hr.separadorTop {
+.bio-img-src {
     width: 100%;
-    height: 1px;
-    background: #F2C571;
-    height: 1px;
-    border: none;
-    outline: none;
-    margin: 1em 1em 1em;
-    position: relative;
+    height: auto;
+    max-width: 550px;
+    margin: 20px 0px 20px 0px;
 }
 
-.mediaPlayer {
-    margin-bottom: 10px;
+.entrevista-columnes{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    align-content: center;
+    width: 90%;
+    padding-top: 30px;
+    margin: 0 auto;
+
 }
 
-.mediaPlayer div {
-    width: 100% !important;
-    height: 100% !important;
+.pregunta{
+    font-size: 40px;
+    font-family: 'Bebas Neue';
+    font-weight:100;
+    text-align: left;
 }
 
-.backButton {
-    margin-bottom: 2rem;
-}
-
-@media screen and (max-width: 1788px) {
-    .textContentEntrevista {
-        text-align: left;
-        column-count: 2;
-        column-gap: 1.5rem;
-    }
-    .imgEntrevista {
-        height: 350px;
-        width: auto;
-    }
-}
-
-@media screen and (max-width: 1521px) {
-    .textContentEntrevista {
-        text-align: left;
-        column-count: 2;
-        column-gap: 1.2rem;
-    }
-    .columnEntrevista {
-        width: 100%;
-        position: relative;
-        height: var(--ColumnHeight);
-    }
-    .imgEntrevista {
-        height: 250px;
-        width: auto;
-    }
-    .titleBoxEntrevista {
-        position: relative;
-    }
-}
-
-@media screen and (max-width: 740px) {
-    .textContentEntrevista {
-        text-align: left;
-        column-count: 1;
-    }
-    .titleBoxEntrevista {
-        margin-left: 0em;
-    }
-    .imgEntrevista {
-        height: auto;
-        width: 100%;
-    }
+.plus-symbol{
+    color: #FFED00;
+    background-color: #1D1D1B;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 1px;
 }

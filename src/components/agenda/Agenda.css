@@ -44,13 +44,13 @@
 }
 
 .mainActivitatSubtitle {
-    font-family: 'Libre Baskerville';
+    font-family: 'Montserrat';
     text-transform: uppercase;
     font-size: 0.8rem;
 }
 
 .activitatText {
-    font-family: 'Libre Baskerville';
+    font-family: 'Montserrat';
     font-size: 0.9rem;
     /* delimitar lineas verticales */
     overflow: hidden;
