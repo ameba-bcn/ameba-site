@@ -7,7 +7,7 @@ const addInCart = (id) => {
 
     if (JSON.parse(localStorage.getItem("user"))?.access !== undefined) {
         console.log("Hay un user loggeado, nene")
-        return axios.post(API_URL + 'carts/',
+        return axios.post(API_URL + 'carts/current/',
             {
                 headers: {
                     Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`
@@ -20,23 +20,15 @@ const addInCart = (id) => {
             })
     } else {
         console.log("No lo hay y hay que crear uuid")
-        return axios.put(API_URL + 'carts/current/', {
-            items: [id]
-        }).then((response) => {
-            console.log("cart response", response)
-            localStorage.setItem("cart", JSON.stringify(response.data.id));
-            return response.data;
-        })
+        return axios.post(API_URL + 'carts/',
+            {
+                items: [id]
+            }).then((response) => {
+                console.log("cart response", response)
+                localStorage.setItem("cart", JSON.stringify(response.data.id));
+                return response.data;
+            })
     }
-    // Hay cart uuid en LS?
-
-    // No? -->     User Logged?
-    //             No? --> axios.post(url, {items})
-    //             Si? --> axios.???
-
-    // Si? -->     axios.put(url/uuid, {items})
-    // error --> ???
-
 };
 
 export default {
