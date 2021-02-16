@@ -4,9 +4,12 @@ import './Entrevista.css'
 import TitleSection from './TitleSection';
 import axiosInstance from "../../axios";
 import state from './response2.js';
+// import ReactPlayer from "react-player";
 import LettersMove from './../layout/LettersMove';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
+import MediaLinks from './../layout/MediaLinks';
+
 export default function Entrevista(props) {
     let history = useHistory();
     let location = useLocation();
@@ -23,21 +26,24 @@ export default function Entrevista(props) {
     //     }
     // ]);
 
-    const [expand, setExpand] = useState({p:[
-        false,
-        false,
-        false,
-        false,
-        false
-    ]})
+    const [expand, setExpand] = useState({
+        p: [
+            false,
+            false,
+            false,
+            false,
+            false
+        ]
+    })
 
-    const updateExpand = (i) =>{
-        const newIds = expand.p.slice() 
+    const updateExpand = (i) => {
+        const newIds = expand.p.slice()
         newIds[i] = !newIds[i];
         setExpand(
-            {p:newIds}
+            { p: newIds }
         )
     }
+
     // useEffect(() => {
     //     axiosInstance.get(`interviews/${urlID}/`, {})
     //         .then((res) => {
@@ -57,16 +63,28 @@ export default function Entrevista(props) {
                     <div className="ts-breadcrumbs">
                         <span onClick={() => history.push('/')}>AMEBA</span> / <span onClick={() => history.goBack()}>#SUPPORTYOURLOCALS</span> / {state.title}
                     </div>
-                    <div className="ts-tags"></div>
+                    <div className="ts-tags">
+                        <div className="tags-e">dj</div>
+                        <div className="tags-e">productor</div>
+                        <div className="tags-e">manager</div>
+                        <div className="tags-e">mastering</div>
+                        <div className="tags-e">label</div>
+                    </div>
+                    <div className="menu-entrevista">
+                        <div className="menu-e menu-bio">BIO</div>
+                        <div className="menu-e menu-entrev">ENTREVISTA</div>
+                        <div className="menu-e menu-media">MEDIA</div>
+                        <div className="menu-e menu-activit">ACTIVITATS</div>
+                    </div>
                 </div>
-                <TitleSection title="BIO" />
+                <TitleSection title="BIO" id="BIO"/>
                 <div className="bio-section">
                     <div className="bio-highlights">
                         <div className="bio-data">NOM/ <span>{state.title}</span></div>
-                        <div className="bio-data">CIUTAT/ <span></span></div>
-                        <div className="bio-data">SEGELLS/ <span></span></div>
-                        <div className="bio-data">PROJECTES/ <span></span></div>
-                        <div className="bio-data">ARTISTES/ <span></span></div>
+                        <div className="bio-data">CIUTAT/ <span>DUMMY TEXT</span></div>
+                        <div className="bio-data">SEGELLS/ <span>DUMMY TEXT</span></div>
+                        <div className="bio-data">PROJECTES/ <span>DUMMY TEXT</span></div>
+                        <div className="bio-data">ARTISTES/ <span>DUMMY TEXT</span></div>
                     </div>
                     <div className="bio-text">
                         {state.introduction}</div>
@@ -81,19 +99,28 @@ export default function Entrevista(props) {
                 <div className="entrevista-columnes">
                     <div className="col1-preguntes">
                         {state.current_answers.map((f, i) => (
-                            <div className="pregunta" id={i}>
-                                {f.questions}
-                                {expand.p[i]?<IndeterminateCheckBoxIcon className="collapse-resp" onClick={()=>updateExpand(i)}/>
-                                :<AddBoxIcon className="expand-resp" onClick={()=>updateExpand(i)}/>}
-                                {expand.p[i]?<div className="resposta">{f.answers}</div>:null}
-                                <hr/>
-                            </div>
-                            
+                            (i < 3 ?
+                                <div className="pregunta" id={i}>
+                                    {f.questions}
+                                    {expand.p[i] ? <IndeterminateCheckBoxIcon className="collapse-resp" onClick={() => updateExpand(i)} />
+                                        : <AddBoxIcon className="expand-resp" onClick={() => updateExpand(i)} />}
+                                    {expand.p[i] ? <div className={"resposta"}>{f.answers}</div> : null}
+                                    <hr />
+                                </div>
+                                : null)
                         ))}
                     </div>
                     <div className="col2-preguntes">
                         {state.current_answers.map((f, i) => (
-                            <div className="pregunta" id={i}>{f.questions}</div>
+                            (i > 2 ?
+                                <div className="pregunta" id={i}>
+                                    {f.questions}
+                                    {expand.p[i] ? <IndeterminateCheckBoxIcon className="collapse-resp" onClick={() => updateExpand(i)} />
+                                        : <AddBoxIcon className="expand-resp" onClick={() => updateExpand(i)} />}
+                                    {expand.p[i] ? <div className={"resposta"}>{f.answers}</div> : null}
+                                    <hr />
+                                </div>
+                                : null)
                         ))}
                     </div>
                 </div>
@@ -101,14 +128,26 @@ export default function Entrevista(props) {
             <LettersMove sentence={"l'associació de música electrònica de barcelona"} color={"#F2C571"} />
             <div className="media-gral">
                 <TitleSection title="Media" />
+                <div className="media-artista">
+                    {/* {state.links.map((n) =>
+                        <div className="mediaPlayer">
+                            <ReactPlayer url={n} />
+                        </div>)} */}
+                </div>
+                <TitleSection title="Xarxes socials" />
+                <div className="xarxes-artista">
+                    <MediaLinks
+                        fcbk="#"
+                        insta="#"
+                        twit="#"
+                        yout="#" />
+                </div>
             </div>
             <LettersMove sentence={"l'associació de música electrònica de barcelona"} color={"#EB5E3E"} />
             <div className="activitats-gral">
                 <TitleSection title="Activitats" />
             </div>
             <LettersMove sentence={"l'associació de música electrònica de barcelona"} color={"#FAE6C5"} />
-                            <div onClick={() =>console.log(expand)}>SSSSS</div>
-
         </>
     )
 }
