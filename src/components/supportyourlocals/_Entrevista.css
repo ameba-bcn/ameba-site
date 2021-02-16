@@ -1,0 +1,143 @@
+/* ENTREVISTA */
+
+.imgEntrevista {
+    height: 600px;
+    width: auto;
+    margin-bottom: 0;
+}
+
+.rowEntrevista {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 2em;
+}
+
+.columnImatge,
+.columnEntrevista {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+}
+
+.columnEntrevista {
+    position: relative;
+    bottom: 0;
+}
+
+.textContentEntrevista {
+    text-align: left;
+    column-count: 3;
+    column-gap: 1.5rem;
+}
+
+.fullEntrevista {
+    width: 90%;
+    margin: auto;
+}
+
+.titleBoxEntrevista {
+    text-align: left;
+    position: absolute;
+    margin-left: 2em;
+    bottom: -3%;
+}
+
+.titleEntrevista {
+    font-size: 90px;
+    font-family: 'Bebas Neue';
+    font-weight: 800;
+    line-height: 1em;
+}
+
+.introEntrevista {
+    font-family: 'Arial';
+    display: block;
+}
+
+.questionBox {
+    position: relative;
+    break-inside: avoid-column;
+}
+
+.questionsEntrevista {
+    /* font-weight: bold; */
+    font-family: 'Bebas Neue';
+    font-size: 40px;
+    line-height: 1em;
+    margin-bottom: 0rem;
+}
+
+.answersEntrevista {
+    font-family: 'Arial';
+}
+
+hr.separadorTop {
+    width: 100%;
+    height: 1px;
+    background: #F2C571;
+    height: 1px;
+    border: none;
+    outline: none;
+    margin: 1em 1em 1em;
+    position: relative;
+}
+
+.mediaPlayer {
+    margin-bottom: 10px;
+}
+
+.mediaPlayer div {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.backButton {
+    margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 1788px) {
+    .textContentEntrevista {
+        text-align: left;
+        column-count: 2;
+        column-gap: 1.5rem;
+    }
+    .imgEntrevista {
+        height: 350px;
+        width: auto;
+    }
+}
+
+@media screen and (max-width: 1521px) {
+    .textContentEntrevista {
+        text-align: left;
+        column-count: 2;
+        column-gap: 1.2rem;
+    }
+    .columnEntrevista {
+        width: 100%;
+        position: relative;
+        height: var(--ColumnHeight);
+    }
+    .imgEntrevista {
+        height: 250px;
+        width: auto;
+    }
+    .titleBoxEntrevista {
+        position: relative;
+    }
+}
+
+@media screen and (max-width: 740px) {
+    .textContentEntrevista {
+        text-align: left;
+        column-count: 1;
+    }
+    .titleBoxEntrevista {
+        margin-left: 0em;
+    }
+    .imgEntrevista {
+        height: auto;
+        width: 100%;
+    }
+}

@@ -1,143 +1,243 @@
-/* ENTREVISTA */
-
-.imgEntrevista {
-    height: 600px;
-    width: auto;
-    margin-bottom: 0;
+.top-section-gral {
+    height: auto;
+    width: 100%;
+    background-color: #FAE6C5;
 }
 
-.rowEntrevista {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 2em;
+.entrevista-gral {
+    height: auto;
+    width: 100%;
+    background-color: #FFED00;
+    padding-top: 20px;
 }
 
-.columnImatge,
-.columnEntrevista {
-    display: flex;
-    flex-direction: column;
-    flex-basis: 100%;
-    flex: 1;
+.media-gral {
+    height: auto;
+    width: 100%;
+    background-color: #F2C571;
 }
 
-.columnEntrevista {
-    position: relative;
-    bottom: 0;
+.activitats-gral {
+    height: auto;
+    width: 100%;
+    background-color: #EB5E3E;
 }
 
-.textContentEntrevista {
-    text-align: left;
-    column-count: 3;
-    column-gap: 1.5rem;
+.top-section_entr {
+    margin-top: 50px;
 }
 
-.fullEntrevista {
-    width: 90%;
-    margin: auto;
-}
-
-.titleBoxEntrevista {
-    text-align: left;
-    position: absolute;
-    margin-left: 2em;
-    bottom: -3%;
-}
-
-.titleEntrevista {
-    font-size: 90px;
+.ts-title {
+    font-size: 130px;
     font-family: 'Bebas Neue';
     font-weight: 800;
     line-height: 1em;
 }
 
-.introEntrevista {
-    font-family: 'Arial';
-    display: block;
-}
-
-.questionBox {
-    position: relative;
-    break-inside: avoid-column;
-}
-
-.questionsEntrevista {
-    /* font-weight: bold; */
+.ts-breadcrumbs {
     font-family: 'Bebas Neue';
-    font-size: 40px;
+    font-size: 34px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.ts-breadcrumbs span {
+    cursor: pointer;
+}
+
+.ts-breadcrumbs span:hover {
+    text-decoration: underline;
+}
+
+.ts-tags{
+   
+    font-family: 'Bebas Neue';
+    font-size: 26px;
+    font-weight: 500;
+    text-transform: uppercase;
+
+}
+
+.tags-e{
+    display: inline-block;
+    background-color: #1D1D1B;
+    color: #FAE6C5;
     line-height: 1em;
-    margin-bottom: 0rem;
+    padding: 5px 10px 3px 10px;
+    margin: 2px 4px 20px 4px;
 }
 
-.answersEntrevista {
-    font-family: 'Arial';
+.menu-entrevista {
+    width: 90%;
+    background-color: #1D1D1B;
+    margin: 0 auto;
+    text-align:left;
+    margin-top: 20px;
 }
 
-hr.separadorTop {
+.menu-e {
+    display: inline-block;
+    font-family: 'Bebas Neue';
+    font-size: 36px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin: 10px 2px 10px 12px;
+    padding: 8px 12px 2px 12px;
+    line-height: 1em;
+    cursor: pointer;
+}
+
+.menu-e:hover {
+    background-color: whitesmoke;
+}
+
+.menu-bio {
+    background-color: #FAE6C5;
+}
+
+.menu-entrev {
+    background-color: #FFED00;
+}
+
+.menu-media {
+    background-color: #F2C571;
+}
+
+.menu-activit {
+    background-color: #EB5E3E;
+}
+
+.bio-section {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    align-content: center;
+    width: 90%;
+    padding-top: 20px;
+    margin: 0 auto;
+    padding-bottom: 30px;    
+}
+
+.bio-highlights,
+.bio-text,
+.bio-img {
+    width: 30%;
+    display: block;
+    margin: 0px 20px 0px 20px;
+}
+
+.bio-text {
+    text-align: left;
+    width: 25%;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.bio-highlights {
+    padding-top: 30px;
+}
+
+.bio-data {
+    font-size: 40px;
+    font-family: 'Bebas Neue';
+    font-weight: 100;
+    text-align: left;
+    padding-left: 40px;
+    line-height: 1em;
+    padding-top: 20px;
+
+}
+
+.bio-data>span {
+    font-weight: 700;
+}
+
+.bio-img-src {
     width: 100%;
-    height: 1px;
-    background: #F2C571;
-    height: 1px;
-    border: none;
-    outline: none;
-    margin: 1em 1em 1em;
+    height: auto;
+    max-width: 550px;
+    margin: 20px 0px 20px 0px;
+}
+
+.entrevista-columnes {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: stretch;
+    align-content: center;
+    width: 90%;
+    padding-top: 30px;
+    margin: 0 auto;
+}
+
+.col1-preguntes,
+.col2-preguntes {
+    max-width: 45%;
+}
+
+.pregunta {
+    font-size: 40px;
+    font-family: 'Bebas Neue';
+    font-weight: 100;
+    text-align: left;
     position: relative;
+    max-width: 100%;
+    padding-right: 80px;
+    overflow: hidden;
+    height: auto;
 }
 
-.mediaPlayer {
-    margin-bottom: 10px;
+.resposta {
+    font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+    animation: fade 1s 1;
+    -webkit-animation: fade 1s 1;
+
 }
 
-.mediaPlayer div {
-    width: 100% !important;
-    height: 100% !important;
-}
+@keyframes fade {
+    0% {
+        opacity: 0
+    }
 
-.backButton {
-    margin-bottom: 2rem;
-}
-
-@media screen and (max-width: 1788px) {
-    .textContentEntrevista {
-        text-align: left;
-        column-count: 2;
-        column-gap: 1.5rem;
-    }
-    .imgEntrevista {
-        height: 350px;
-        width: auto;
-    }
-}
-
-@media screen and (max-width: 1521px) {
-    .textContentEntrevista {
-        text-align: left;
-        column-count: 2;
-        column-gap: 1.2rem;
-    }
-    .columnEntrevista {
-        width: 100%;
-        position: relative;
-        height: var(--ColumnHeight);
-    }
-    .imgEntrevista {
-        height: 250px;
-        width: auto;
-    }
-    .titleBoxEntrevista {
-        position: relative;
+    100% {
+        opacity: 1
     }
 }
 
-@media screen and (max-width: 740px) {
-    .textContentEntrevista {
-        text-align: left;
-        column-count: 1;
+@-webkit-keyframes fade {
+    0% {
+        opacity: 0
     }
-    .titleBoxEntrevista {
-        margin-left: 0em;
+
+    100% {
+        opacity: 1
     }
-    .imgEntrevista {
-        height: auto;
-        width: 100%;
-    }
+}
+
+.pregunta svg {
+    cursor: pointer;
+    display: inline-block;
+    position: absolute;
+    top: 7px;
+    right: 0px;
+    width: 40px;
+    height: auto;
+    ;
+}
+
+.pregunta hr {
+    display: inline-block;
+    width: 110%;
+}
+
+.plus-symbol {
+    color: #FFED00;
+    background-color: #1D1D1B;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 1px;
 }
