@@ -3,7 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import './Entrevista.css'
 import TitleSection from './TitleSection';
 import axiosInstance from "../../axios";
-import state from './response2.js';
+// import state from './response2.js';
 // import ReactPlayer from "react-player";
 import LettersMove from './../layout/LettersMove';
 import AddBoxIcon from '@material-ui/icons/AddBox';
@@ -15,16 +15,16 @@ export default function Entrevista(props) {
     let location = useLocation();
     let urlID = location.pathname.substr(location.pathname.lastIndexOf('/') + 1);
 
-    // const [state, setState] = useState([
-    //     {
-    //         id: 0,
-    //         title: "",
-    //         image: "",
-    //         introduction: "",
-    //         created: "",
-    //         current_answers: [{ 'answer': "", "question": "" }]
-    //     }
-    // ]);
+    const [state, setState] = useState([
+        {
+            id: 0,
+            title: "",
+            image: "",
+            introduction: "",
+            created: "",
+            current_answers: [{ 'answer': "", "question": "" }]
+        }
+    ]);
 
     const [expand, setExpand] = useState({
         p: [
@@ -44,16 +44,16 @@ export default function Entrevista(props) {
         )
     }
 
-    // useEffect(() => {
-    //     axiosInstance.get(`interviews/${urlID}/`, {})
-    //         .then((res) => {
-    //             console.log(res.data);
-    //             setState(res.data)
-    //         })
-    //         .catch(error => {
-    //             console.log("ERROL", error.response)
-    //         });
-    // }, []);
+    useEffect(() => {
+        axiosInstance.get(`interviews/${urlID}/`, {})
+            .then((res) => {
+                console.log(res.data);
+                setState(res.data)
+            })
+            .catch(error => {
+                console.log("ERROL", error.response)
+            });
+    }, []);
 
     return (
         <>
@@ -98,26 +98,26 @@ export default function Entrevista(props) {
                 <TitleSection title="Entrevista" />
                 <div className="entrevista-columnes">
                     <div className="col1-preguntes">
-                        {state.current_answers.map((f, i) => (
+                        {state.current_answers?.map((f, i) => (
                             (i < 3 ?
-                                <div className="pregunta" id={i}>
-                                    {f.questions}
+                                <div className="pregunta" key={i}>
+                                    {f.question}
                                     {expand.p[i] ? <IndeterminateCheckBoxIcon className="collapse-resp" onClick={() => updateExpand(i)} />
                                         : <AddBoxIcon className="expand-resp" onClick={() => updateExpand(i)} />}
-                                    {expand.p[i] ? <div className={"resposta"}>{f.answers}</div> : null}
+                                    {expand.p[i] ? <div className={"resposta"}>{f.answer}</div> : null}
                                     <hr />
                                 </div>
                                 : null)
                         ))}
                     </div>
                     <div className="col2-preguntes">
-                        {state.current_answers.map((f, i) => (
+                        {state.current_answers?.map((f, i) => (
                             (i > 2 ?
-                                <div className="pregunta" id={i}>
-                                    {f.questions}
+                                <div className="pregunta" key={i}>
+                                    {f.question}
                                     {expand.p[i] ? <IndeterminateCheckBoxIcon className="collapse-resp" onClick={() => updateExpand(i)} />
                                         : <AddBoxIcon className="expand-resp" onClick={() => updateExpand(i)} />}
-                                    {expand.p[i] ? <div className={"resposta"}>{f.answers}</div> : null}
+                                    {expand.p[i] ? <div className={"resposta"}>{f.answer}</div> : null}
                                     <hr />
                                 </div>
                                 : null)
@@ -129,10 +129,7 @@ export default function Entrevista(props) {
             <div className="media-gral">
                 <TitleSection title="Media" />
                 <div className="media-artista">
-                    {/* {state.links.map((n) =>
-                        <div className="mediaPlayer">
-                            <ReactPlayer url={n} />
-                        </div>)} */}
+          
                 </div>
                 <TitleSection title="Xarxes socials" />
                 <div className="xarxes-artista">
