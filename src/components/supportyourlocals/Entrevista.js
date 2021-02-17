@@ -3,6 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import './Entrevista.css'
 import TitleSection from './TitleSection';
 import axiosInstance from "../../axios";
+import { useInView } from 'react-intersection-observer';
 // import state from './response2.js';
 // import ReactPlayer from "react-player";
 import LettersMove from './../layout/LettersMove';
@@ -10,10 +11,26 @@ import AddBoxIcon from '@material-ui/icons/AddBox';
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
 import MediaLinks from './../layout/MediaLinks';
 
+const useViewportOut = () => {
+    const [width, setWidth] = React.useState(window.innerWidth);
+    React.useEffect(() => {
+        const handleWindowResize = () => setWidth(window.innerWidth);
+        window.addEventListener("resize", handleWindowResize);
+        return () => window.removeEventListener("resize", handleWindowResize);
+    }, []);
+    console.log("Ancho", width)
+    return { width };
+}
+
 export default function Entrevista(props) {
     let history = useHistory();
     let location = useLocation();
     let urlID = location.pathname.substr(location.pathname.lastIndexOf('/') + 1);
+    const { width } = useViewportOut();
+    const breakpoint = 820;
+    // const [ref, inView] = useInView({
+    //     threshold: '0.5',
+    // });
 
     const [state, setState] = useState([
         {
@@ -77,7 +94,7 @@ export default function Entrevista(props) {
                         <div className="menu-e menu-activit">ACTIVITATS</div>
                     </div>
                 </div>
-                <TitleSection title="BIO" id="BIO"/>
+                <TitleSection title="BIO" id="BIO" />
                 <div className="bio-section">
                     <div className="bio-highlights">
                         <div className="bio-data">NOM/ <span>{state.title}</span></div>
@@ -97,9 +114,37 @@ export default function Entrevista(props) {
             <div className="entrevista-gral">
                 <TitleSection title="Entrevista" />
                 <div className="entrevista-columnes">
-                    <div className="col1-preguntes">
-                        {state.current_answers?.map((f, i) => (
-                            (i < 3 ?
+                    { width > breakpoint ? <>
+                        <div className="col1-preguntes">
+
+                            {state.current_answers?.map((f, i) => (
+                                (i < 3 ?
+                                    <div className="pregunta" key={i}>
+                                        {f.question}
+                                        {expand.p[i] ? <IndeterminateCheckBoxIcon className="collapse-resp" onClick={() => updateExpand(i)} />
+                                            : <AddBoxIcon className="expand-resp" onClick={() => updateExpand(i)} />}
+                                        {expand.p[i] ? <div className={"resposta"}>{f.answer}</div> : null}
+                                        <hr />
+                                    </div>
+                                    : null)
+                            ))}
+                        </div>
+                        <div className="col2-preguntes">
+                            {state.current_answers?.map((f, i) => (
+                                (i > 2 ?
+                                    <div className="pregunta" >
+                                        {f.question}
+                                        {expand.p[i] ? <IndeterminateCheckBoxIcon className="collapse-resp" onClick={() => updateExpand(i)} />
+                                            : <AddBoxIcon className="expand-resp" onClick={() => updateExpand(i)} />}
+                                        {expand.p[i] ? <div className={"resposta"}>{f.answer}</div> : null}
+                                        <hr />
+                                    </div>
+                                    : null)
+                            ))}
+                        </div>
+                    </> :
+                        <>
+                            {state.current_answers?.map((f, i) => (
                                 <div className="pregunta" key={i}>
                                     {f.question}
                                     {expand.p[i] ? <IndeterminateCheckBoxIcon className="collapse-resp" onClick={() => updateExpand(i)} />
@@ -107,29 +152,18 @@ export default function Entrevista(props) {
                                     {expand.p[i] ? <div className={"resposta"}>{f.answer}</div> : null}
                                     <hr />
                                 </div>
-                                : null)
-                        ))}
-                    </div>
-                    <div className="col2-preguntes">
-                        {state.current_answers?.map((f, i) => (
-                            (i > 2 ?
-                                <div className="pregunta" key={i}>
-                                    {f.question}
-                                    {expand.p[i] ? <IndeterminateCheckBoxIcon className="collapse-resp" onClick={() => updateExpand(i)} />
-                                        : <AddBoxIcon className="expand-resp" onClick={() => updateExpand(i)} />}
-                                    {expand.p[i] ? <div className={"resposta"}>{f.answer}</div> : null}
-                                    <hr />
-                                </div>
-                                : null)
-                        ))}
-                    </div>
+                            ))}
+                        </>}
                 </div>
             </div>
             <LettersMove sentence={"l'associació de música electrònica de barcelona"} color={"#F2C571"} />
             <div className="media-gral">
                 <TitleSection title="Media" />
                 <div className="media-artista">
-          
+                    {/* {state.links.map((n) =>
+                        <div className="mediaPlayer">
+                            <ReactPlayer url={n} />
+                        </div>)} */}
                 </div>
                 <TitleSection title="Xarxes socials" />
                 <div className="xarxes-artista">
