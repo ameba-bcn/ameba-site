@@ -3,7 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import './Entrevista.css'
 import TitleSection from './TitleSection';
 import axiosInstance from "../../axios";
-import { useInView } from 'react-intersection-observer';
+import { Link } from "react-scroll";
 // import state from './response2.js';
 // import ReactPlayer from "react-player";
 import LettersMove from './../layout/LettersMove';
@@ -18,7 +18,6 @@ const useViewportOut = () => {
         window.addEventListener("resize", handleWindowResize);
         return () => window.removeEventListener("resize", handleWindowResize);
     }, []);
-    console.log("Ancho", width)
     return { width };
 }
 
@@ -28,9 +27,7 @@ export default function Entrevista(props) {
     let urlID = location.pathname.substr(location.pathname.lastIndexOf('/') + 1);
     const { width } = useViewportOut();
     const breakpoint = 820;
-    // const [ref, inView] = useInView({
-    //     threshold: '0.5',
-    // });
+
 
     const [state, setState] = useState([
         {
@@ -88,25 +85,36 @@ export default function Entrevista(props) {
                         <div className="tags-e">label</div>
                     </div>
                     <div className="menu-entrevista">
-                        <div className="menu-e menu-bio">BIO</div>
-                        <div className="menu-e menu-entrev">ENTREVISTA</div>
-                        <div className="menu-e menu-media">MEDIA</div>
-                        <div className="menu-e menu-activit">ACTIVITATS</div>
+                        <Link activeClass="active" to="bio-gral" spy={true} smooth={true} duration={500}>
+                            <div className="menu-e menu-bio">BIO</div>
+                        </Link>
+                        <Link activeClass="active" to="entrevista-gral" spy={true} smooth={true} duration={500}>
+                            <div className="menu-e menu-entrev">ENTREVISTA</div>
+                        </Link>
+                        <Link activeClass="active" to="media-gral" spy={true} smooth={true} duration={500}>
+                            <div className="menu-e menu-media">MEDIA</div>
+                        </Link>
+                        <Link activeClass="active" to="activitats-gral" spy={true} smooth={true} duration={500}>
+                            <div className="menu-e menu-activit">ACTIVITATS</div>
+                        </Link>
                     </div>
                 </div>
-                <TitleSection title="BIO" id="BIO" />
-                <div className="bio-section">
-                    <div className="bio-highlights">
-                        <div className="bio-data">NOM/ <span>{state.title}</span></div>
-                        <div className="bio-data">CIUTAT/ <span>DUMMY TEXT</span></div>
-                        <div className="bio-data">SEGELLS/ <span>DUMMY TEXT</span></div>
-                        <div className="bio-data">PROJECTES/ <span>DUMMY TEXT</span></div>
-                        <div className="bio-data">ARTISTES/ <span>DUMMY TEXT</span></div>
-                    </div>
-                    <div className="bio-text">
-                        {state.introduction}</div>
-                    <div className="bio-img">
-                        <img className="bio-img-src" src={state.image} alt={state.title} />
+
+                <div className="bio-gral">
+                    <TitleSection title="BIO" />
+                    <div className="bio-section">
+                        <div className="bio-highlights">
+                            <div className="bio-data">NOM/ <span>{state.title}</span></div>
+                            <div className="bio-data">CIUTAT/ <span>DUMMY TEXT</span></div>
+                            <div className="bio-data">SEGELLS/ <span>DUMMY TEXT</span></div>
+                            <div className="bio-data">PROJECTES/ <span>DUMMY TEXT</span></div>
+                            <div className="bio-data">ARTISTES/ <span>DUMMY TEXT</span></div>
+                        </div>
+                        <div className="bio-text">
+                            {state.introduction}</div>
+                        <div className="bio-img">
+                            <img className="bio-img-src" src={state.image} alt={state.title} />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -114,7 +122,7 @@ export default function Entrevista(props) {
             <div className="entrevista-gral">
                 <TitleSection title="Entrevista" />
                 <div className="entrevista-columnes">
-                    { width > breakpoint ? <>
+                    {width > breakpoint ? <>
                         <div className="col1-preguntes">
 
                             {state.current_answers?.map((f, i) => (
@@ -132,7 +140,7 @@ export default function Entrevista(props) {
                         <div className="col2-preguntes">
                             {state.current_answers?.map((f, i) => (
                                 (i > 2 ?
-                                    <div className="pregunta" >
+                                    <div className="pregunta" key={i}>
                                         {f.question}
                                         {expand.p[i] ? <IndeterminateCheckBoxIcon className="collapse-resp" onClick={() => updateExpand(i)} />
                                             : <AddBoxIcon className="expand-resp" onClick={() => updateExpand(i)} />}
