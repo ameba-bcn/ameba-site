@@ -14,7 +14,7 @@ import LogSession from './pages/LogSession';
 // import Register from './pages/Register';
 // import PasswordRecovery from './pages/PasswordRecovery';
 import LogMailConfirmation from './pages/LogMailConfirmation';
-import Login from './redux/components/Login';
+// import Login from './redux/components/Login';
 import Register from './redux/components/Register';
 import { UserContext } from './UserContext';
 
