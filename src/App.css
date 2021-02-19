@@ -17,6 +17,7 @@ font-family: 'Montserrat', sans-serif;
     text-align: center;
     background-color: #FAE6C5;
     width: 100%;
+    max-width: 100%;
     /* max-width: 2800px; */
     min-height: 100vh;
     box-sizing: border-box;

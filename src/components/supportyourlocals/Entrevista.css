@@ -182,7 +182,7 @@
     font-weight: 100;
     text-align: left;
     position: relative;
-    max-width: 100%;
+    min-width: 100%;
     padding-right: 80px;
     overflow: hidden;
     height: auto;
@@ -194,6 +194,7 @@
     font-weight: 400;
     animation: fade 1s 1;
     -webkit-animation: fade 1s 1;
+    max-width: 100%;
 
 }
 

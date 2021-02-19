@@ -16,7 +16,9 @@ export default function SociDialog(props) {
     const [isSubscriber, setIsSubscriber] = React.useState(true);
 
     return (
-        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >
+        <Dialog onClose={handleClose} 
+        // aria-labelledby="simple-dialog-title" 
+        open={open} >
             <Card className="cardSociGeneral" >
                 <div className="insideFrameModal">
                     <ClearIcon className="crossSociCloseModal" onClick={handleClose} />
