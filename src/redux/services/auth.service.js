@@ -23,6 +23,7 @@ const login = (email, password) => {
             }
             return response.data;
         });
+        // si hay cart en LS hacer un get localhost/api/carts/{cart-id}/ ide de carro del LS
 };
 
 const logout = () => {
