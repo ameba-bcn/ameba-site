@@ -67,7 +67,7 @@ export default function Entrevista(props) {
             .catch(error => {
                 console.log("ERROL", error.response)
             });
-    }, []);
+    }, [urlID]);
 
     return (
         <>

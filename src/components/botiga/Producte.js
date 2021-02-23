@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from "react-redux";
 import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -6,13 +7,22 @@ import CardMedia from '@material-ui/core/CardMedia';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ClearIcon from '@material-ui/icons/Clear';
+import { addToCart } from '../../redux/actions/cart';
+
 import './Producte.css';
 
 export default function ProducteDialog(props) {
     const { onClose, selectedValue, open, dataRow } = props;
+    const dispatch = useDispatch();
+
     const handleClose = () => {
         onClose(selectedValue);
     };
+
+    const handleAddClick = () => {
+        dispatch(addToCart(dataRow.id))
+    }
+
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >
@@ -39,17 +49,17 @@ export default function ProducteDialog(props) {
                                 component="img"
                                 alt={dataRow.name}
                                 className="imageProductModal"
-                                image={dataRow.images}
+                                image={dataRow.images===undefined?null: dataRow.images[0]}
                                 title={dataRow.name}
                             />
                         </div>
-                        <div className="columnProductImage2">
+                        {/* <div className="columnProductImage2">
                             <div className="row1ProductImage">
                                 <CardMedia
                                     component="img"
                                     alt={dataRow.name}
                                     className="imageRow1ProductModal"
-                                    image={dataRow.images}
+                                    image={dataRow.images === undefined ? "" : dataRow.images[0]}
                                     title={dataRow.name}
                                 />
                             </div>
@@ -58,7 +68,7 @@ export default function ProducteDialog(props) {
                                     component="img"
                                     alt={dataRow.name}
                                     className="imageRow2ProductModal"
-                                    image={dataRow.images}
+                                    image={dataRow.images === undefined ? "" : dataRow.images[0]}
                                     title={dataRow.name}
                                 />
                             </div>
@@ -67,11 +77,11 @@ export default function ProducteDialog(props) {
                                     component="img"
                                     alt={dataRow.name}
                                     className="imageRow3ProductModal"
-                                    image={dataRow.images}
+                                    image={dataRow.images === undefined ? "" : dataRow.images[0]}
                                     title={dataRow.name}
                                 />
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <hr className="solid" />
                     <div className="sizeProductDetailed row">
@@ -89,7 +99,7 @@ export default function ProducteDialog(props) {
                         </div>
                         <div className="column">
                             <CardActions>
-                                <button size="small" className="buttonCartProductBoxCard" color="inherit">
+                                <button size="small" className="buttonCartProductBoxCard" color="inherit" onClick={() => { handleAddClick(dataRow.id) }}>
                                     <ShoppingCartIcon className="buttonCartProductIconBoxCard" /><span className="buttonTextProductBoxCard">AFEGIR A CISTELLA</span>
                                 </button>
                             </CardActions>

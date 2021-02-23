@@ -96,8 +96,8 @@
         top: 0;
         bottom: 0;
         left: 0;
-        right: 10;
-        width: 0;
+        right: 0;
+        width: 100%;
         overflow: hidden;
     }
     &:hover {
@@ -116,9 +116,7 @@
     margin-bottom: 4px;
     cursor: pointer; 
 }
-.menuDropdownCart .MuiPaper-root{
-    margin-top: 3rem;
-}
+
 
 // #MenuOptionsLogin {
 //     border: 2px solid #EB5E3E !important;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Data from './response.json';
+// import Data from './response.json';
 import MaterialTable from "material-table";
 // import { FiShoppingCart } from 'react-icons/fi';
 import { TiTicket } from 'react-icons/ti';
@@ -8,9 +8,9 @@ import ActivitatDialog from './Activitat';
 import './Agenda.css';
 
 export default function LlistatActivitats() {
-  const [selectedRow, setSelectedRow] = useState(null);
+  // const [selectedRow, setSelectedRow] = useState(null);
   const [open, setOpen] = React.useState(false);
-  const [rowClickedData, setState] = React.useState([]);
+  // const [rowClickedData, setState] = React.useState([]);
   const [eventsData, setEventsData] = useState([
     {
       id: 0,
@@ -129,7 +129,7 @@ export default function LlistatActivitats() {
           actionsColumnIndex: -1
         }}
         onRowClick={((evt, selectedRow) => {
-          setSelectedRow(selectedRow.id)
+          // setSelectedRow(selectedRow.id)
           // setState({ selectedRow });
           fetchEvent(selectedRow)
           // setSelectedRow(selectedRow.tableData.id)
