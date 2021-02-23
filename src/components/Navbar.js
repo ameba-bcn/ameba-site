@@ -8,7 +8,10 @@ import { logout } from "../redux/actions/auth";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 import './Navbar.scss';
+import './DropdownCart.css';
 
 export default function Navbar() {
     const [click, setClick] = useState(false)
@@ -62,9 +65,12 @@ export default function Navbar() {
                 </div>
                 <div className="menuOptionsCollapsed">
                     <ul className={click ? "nav-ul.show" : "nav-ul"}>
-                        <li className="liMenuOptions" onClick={closeMenu}><NavLink className="menuOptions" to="/activitats" data-item='AGENDA'>AGENDA</NavLink></li>
-                        <li className="liMenuOptions" onClick={closeMenu}><NavLink className="menuOptions" to="/botiga" data-item='BOTIGA'>BOTIGA</NavLink></li>
-                        <li className="liMenuOptions" onClick={closeMenu}><NavLink className="menuOptions" to="/support" data-item='#SUPPORTYOURLOCALS'>#SUPPORTYOURLOCALS</NavLink></li>
+                        <li className="liMenuOptions" onClick={closeMenu}>
+                            <NavLink className="menuOptions" to="/activitats" data-item='AGENDA'>AGENDA</NavLink></li>
+                        <li className="liMenuOptions" onClick={closeMenu}>
+                            <NavLink className="menuOptions" to="/botiga" data-item='BOTIGA'>BOTIGA</NavLink></li>
+                        <li className="liMenuOptions" onClick={closeMenu}>
+                            <NavLink className="menuOptions" to="/support" data-item='#SUPPORTYOURLOCALS'>#SUPPORTYOURLOCALS</NavLink></li>
                         <li className="liMenuOptions" onClick={closeMenu}>
                             {!isLoggedIn ?
                                 <NavLink className="menuOptions" id="MenuOptionsLogin" to="/login" data-item='LOGIN'>LOGIN</NavLink> :
@@ -80,9 +86,27 @@ export default function Navbar() {
                                 open={Boolean(anchorEl)}
                                 onClose={handleCloseCart}
                             >
-                                <MenuItem onClick={handleCloseCart}>Producte 1</MenuItem>
+                                <div className="totalCart">Total: <span>XXX€</span></div>
+                                <hr className="separadorCartDrop"/>
+                                <MenuItem onClick={handleCloseCart}  className="menuItemCart">
+                                    <div className="rowCartProduct">
+                                        <div className="colCartProduct1">
+                                            <div className="addCart" onClick={()=> console.log("Adding to cart")}><AddIcon/></div>
+                                            <div className="subsCart" onClick={()=> console.log("Subtracting from cart")}><RemoveIcon/></div>
+                                        </div>
+                                        <div className="colCartProduct2">
+                                            <div className="titleCartProduct">Producte 1</div>
+                                            <div className="rowDetailedCart">
+                                                <div className="cartPriceProduct">XXX€</div>
+                                                <div className="quantityPriceProduct">Qty: <span>XX</span></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </MenuItem>
+                                <hr className="separadorCartDrop"/>
                                 <MenuItem onClick={handleCloseCart}>Producte 2</MenuItem>
-                                <MenuItem onClick={handleCloseCart}>Finalitzar compra</MenuItem>
+                                <div onClick={handleCloseCart} className="buttonCheckoutCart">Finalitzar compra</div>
                             </Menu>
                         </li>
                     </ul>

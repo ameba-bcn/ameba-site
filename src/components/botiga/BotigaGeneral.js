@@ -71,7 +71,7 @@ export default function BotigaGeneral() {
                     </div>
                     <div className="productCardBody">
                         <h5 className="productTitle" >{data.name}</h5>
-                        <p className="productCardPrice">{data.price}{data.discount!==0?"-{data.discount}":""}€</p>
+                        <p className="productCardPrice">{data.price}{data.discount===""?"":`-${data.discount}`}€</p>
                     </div>
                 </div>
             </div>
