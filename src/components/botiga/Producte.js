@@ -49,11 +49,11 @@ export default function ProducteDialog(props) {
                                 component="img"
                                 alt={dataRow.name}
                                 className="imageProductModal"
-                                image={dataRow.images === undefined ? "" : dataRow.images[0]}
+                                image={dataRow.images===undefined?null: dataRow.images[0]}
                                 title={dataRow.name}
                             />
                         </div>
-                        <div className="columnProductImage2">
+                        {/* <div className="columnProductImage2">
                             <div className="row1ProductImage">
                                 <CardMedia
                                     component="img"
@@ -81,7 +81,7 @@ export default function ProducteDialog(props) {
                                     title={dataRow.name}
                                 />
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <hr className="solid" />
                     <div className="sizeProductDetailed row">

@@ -19,11 +19,11 @@ ReactDOM.render(
   <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Provider store={store}>
       <ScrollToTop>
-        <React.StrictMode>
+        {/* <React.StrictMode> */}
 
           <App />
 
-        </React.StrictMode>
+        {/* </React.StrictMode> */}
       </ScrollToTop>
     </Provider>
   </BrowserRouter>,

@@ -17,7 +17,7 @@ export default function Navbar() {
     const [click, setClick] = useState(false)
     const [size, setSize] = useState(0);
     const dispatch = useDispatch();
-    const { isLoggedIn, user } = useSelector(state => state.auth);
+    const { isLoggedIn } = useSelector(state => state.auth);
 
     const [anchorEl, setAnchorEl] = React.useState(null);
 

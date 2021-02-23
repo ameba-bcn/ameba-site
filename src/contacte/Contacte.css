@@ -17,7 +17,7 @@
 }
 
 .formControlNews {
-    font-family: 'Libre Baskerville';
+    font-family: 'Montserrat', sans-serif;
     font-size: 2rem;
     margin-right: 10px;
     padding-top: 15px;
@@ -79,7 +79,7 @@
 }
 
 .endingText {
-    font-family: 'Libre Baskerville';
+    font-family: 'Montserrat', sans-serif;
 }
 
 .breakLine {
