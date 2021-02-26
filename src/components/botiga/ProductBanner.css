@@ -36,6 +36,7 @@
     position: relative;
     justify-content: center;
     margin: 0 auto;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 990px) {

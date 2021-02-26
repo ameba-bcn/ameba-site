@@ -49,7 +49,6 @@ const addInCart = (id) => {
         } else {
             let cart_uuid = JSON.parse(localStorage.getItem("cart_id"));
             let cart_prev = JSON.parse(localStorage.getItem("cart_items"));
-            console.log("las cosas", cart_uuid)
             cart_prev.push(id)
             return axios.patch(`${API_URL}carts/${cart_uuid}/`,
                 { "items": cart_prev }
@@ -62,6 +61,18 @@ const addInCart = (id) => {
         }
     }
 };
+
+const checkoutCart = () => {
+    let cart_uuid = JSON.parse(localStorage.getItem("cart_id"));
+    // let cart_prev = JSON.parse(localStorage.getItem("cart_items"));
+
+    return axios.get(`${API_URL}carts/${cart_uuid}/checkout`,
+    {headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`}}
+    ).then((response) => {
+        console.log("cart CHECKOUT response", response)
+        return response.data;
+    })
+}
 
 const removeItemCart = (id) => {
     let cart_uuid = JSON.parse(localStorage.getItem("cart_id"));
@@ -93,5 +104,6 @@ const deleteFullCart = () => {
 export default {
     addInCart,
     deleteFullCart,
-    removeItemCart
+    removeItemCart,
+    checkoutCart
 };

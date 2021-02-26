@@ -38,6 +38,7 @@
         "redux": "^4.0.5",
         "redux-thunk": "^2.3.0",
         "save-dev": "0.0.1-security",
+        "stripe": "^8.137.0",
         "validator": "^13.5.2",
         "webfontloader": "^1.6.28"
     },

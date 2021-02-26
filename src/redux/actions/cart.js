@@ -1,7 +1,10 @@
 import {
     ADD_TO_CART,
     ADD_FAIL,
-    SET_MESSAGE,
+    SUBS_TO_CART,
+    SUBS_FAIL,
+    CHECKOUT,
+    CHECKOUT_FAIL
 } from "./types";
 
 import CartService from "../services/cart.services";
@@ -11,12 +14,7 @@ export const addToCart = (id) => (dispatch) => {
         (response) => {
             dispatch({
                 type: ADD_TO_CART,
-                payload: { cart: response },
-            });
-
-            dispatch({
-                type: SET_MESSAGE,
-                payload: response.data,
+                payload: response,
             });
 
             return Promise.resolve();
@@ -31,10 +29,6 @@ export const addToCart = (id) => (dispatch) => {
 
             dispatch({
                 type: ADD_FAIL,
-            });
-
-            dispatch({
-                type: SET_MESSAGE,
                 payload: message,
             });
 
@@ -42,3 +36,63 @@ export const addToCart = (id) => (dispatch) => {
         }
     );
 };
+
+export const substractToCart = (id) => (dispatch) => {
+    return CartService.removeItemCart(id).then(
+        (response) => {
+            dispatch({
+                type: SUBS_TO_CART,
+                payload: response,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: SUBS_FAIL,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const checkoutCart = () => (dispatch) => {
+    return CartService.checkoutCart().then(
+        (response) => {
+            dispatch({
+                type: CHECKOUT,
+                payload: response,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: CHECKOUT_FAIL,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+
+
+

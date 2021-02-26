@@ -6,6 +6,10 @@ export const LOGOUT = "LOGOUT";
 
 export const ADD_TO_CART = "ADD_TO_CART";
 export const ADD_FAIL = "ADD_FAIL";
+export const SUBS_TO_CART = "SUBS_TO_CART";
+export const SUBS_FAIL = "SUBS_FAIL";
+export const CHECKOUT = "CHECKOUT";
+export const CHECKOUT_FAIL = "CHECKOUT_FAIL";
 
 export const SET_MESSAGE = "SET_MESSAGE";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
