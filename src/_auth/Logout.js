@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom'
 import { UserContext } from '../UserContext';
 import './Auth.css';
 
-const API_URL = process.env.API_HOST || "http://localhost/api/";
+const API_URL = process.env.REACT_APP_API_HOST || "http://localhosts/api/";
 
 export default function Logout() {
 
