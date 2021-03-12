@@ -4,7 +4,9 @@ import {
     SUBS_TO_CART,
     SUBS_FAIL,
     CHECKOUT,
-    CHECKOUT_FAIL
+    CHECKOUT_FAIL,
+    GET_CART,
+    GET_CART_FAIL
 } from "../actions/types";
 
 const initialState = {};
@@ -21,7 +23,7 @@ export default function (state = initialState, action) {
         case ADD_FAIL:
             return {
                 ...state,
-                cart_data: [],
+                cart_data: state.cart_data,
             };
         case SUBS_TO_CART:
             return {
@@ -31,7 +33,7 @@ export default function (state = initialState, action) {
         case SUBS_FAIL:
             return {
                 ...state,
-                cart_data: [],
+                cart_data: state.cart_data,
             };
         case CHECKOUT:
             return {
@@ -42,6 +44,16 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 checkout: {},
+            };
+        case GET_CART:
+            return {
+                ...state,
+                cart_data: payload,
+            };
+        case GET_CART_FAIL:
+            return {
+                ...state,
+                cart_data: [],
             };
         default:
             return state;

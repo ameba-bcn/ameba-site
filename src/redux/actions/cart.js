@@ -4,7 +4,9 @@ import {
     SUBS_TO_CART,
     SUBS_FAIL,
     CHECKOUT,
-    CHECKOUT_FAIL
+    CHECKOUT_FAIL,
+    GET_CART,
+    GET_CART_FAIL
 } from "./types";
 
 import CartService from "../services/cart.services";
@@ -85,6 +87,34 @@ export const checkoutCart = () => (dispatch) => {
 
             dispatch({
                 type: CHECKOUT_FAIL,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const getCart = () => (dispatch) => {
+    return CartService.getCartOnLog().then(
+        (response) => {
+            dispatch({
+                type: GET_CART,
+                payload: response,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: GET_CART_FAIL,
                 payload: message,
             });
 

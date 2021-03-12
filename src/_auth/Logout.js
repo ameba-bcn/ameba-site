@@ -17,7 +17,7 @@ export default function Logout() {
         if (axiosInstance.defaults.headers['Authorization'] === null) {
             console.log("Already deleted")
         } else {
-            axiosInstance.delete('http://localhost/api/token/',
+            axiosInstance.delete(`${process.env.REACT_APP_API_HOST}token/`,
             {
                 data: {
                     refresh: localStorage.getItem('refresh_token')

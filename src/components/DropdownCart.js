@@ -3,6 +3,7 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import { addToCart, substractToCart, checkoutCart } from './../redux/actions/cart';
 import { useDispatch } from "react-redux";
+import { NavLink } from 'react-router-dom';
 import './DropdownCart.css';
 
 export default function DropdownCart(props) {
@@ -30,7 +31,7 @@ export default function DropdownCart(props) {
     return (
         <>
             {console.log("cart", cart)}
-            {cart.cart_items !== undefined ? <>
+            {cart?.cart_items !== undefined ? <>
                 <div className="totalCart">Total: <span>{cart.total}</span></div>
                 <hr className="separadorCartDrop" />
                 {cart.cart_items.map((el, index) => (
@@ -52,11 +53,13 @@ export default function DropdownCart(props) {
                         </div>
                 ))}
                 <hr className="separadorCartDrop" />
-                <div
-                    onClick={()=>checkoutToCart()}
-                    className="buttonCheckoutCart">
-                    Finalitzar compra
+                <NavLink className="menuOptions" to="/checkout">
+                    <div
+                        onClick={() => checkoutToCart()}
+                        className="buttonCheckoutCart">
+                        Finalitzar compra
                         </div>
+                </NavLink>
             </> : null}
         </>
     )
