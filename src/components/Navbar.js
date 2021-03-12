@@ -2,23 +2,25 @@ import React, { useLayoutEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 // import LoginForm from './login';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch, connect } from "react-redux";
 import { logout } from "../redux/actions/auth";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
+import DropdownCart from './DropdownCart';
 import './Navbar.scss';
 import './DropdownCart.css';
 
-export default function Navbar() {
+const mapStateToProps = state => {
+    return {
+        cart: state.cart.cart_data
+    };
+};
+
+function Navbar(props) {
     const [click, setClick] = useState(false)
     const [size, setSize] = useState(0);
     const dispatch = useDispatch();
     const { isLoggedIn } = useSelector(state => state.auth);
-
     const [anchorEl, setAnchorEl] = React.useState(null);
 
     const handleClickCart = (event) => {
@@ -42,7 +44,6 @@ export default function Navbar() {
 
     const handleClick = () => {
         setClick(!click)
-        // console.log(size)
     }
 
     const closeMenu = () => {
@@ -77,41 +78,27 @@ export default function Navbar() {
                                 <NavLink className="menuOptions" id="MenuOptionsLogin" to="/" data-item='LOGOUT' onClick={logoutMenu}>LOGOUT</NavLink>
                             }
                         </li>
-                        <li className="liMenuOptions" ><ShoppingCartIcon className="cartIconMenu" onClick={handleClickCart} />
-                            <Menu
-                                id="simple-menu"
-                                anchorEl={anchorEl}
-                                keepMounted
-                                className="menuDropdownCart"
-                                open={Boolean(anchorEl)}
-                                onClose={handleCloseCart}
-                            >
-                                <div className="totalCart">Total: <span>XXX€</span></div>
-                                <hr className="separadorCartDrop"/>
-                                <MenuItem onClick={handleCloseCart}  className="menuItemCart">
-                                    <div className="rowCartProduct">
-                                        <div className="colCartProduct1">
-                                            <div className="addCart" onClick={()=> console.log("Adding to cart")}><AddIcon/></div>
-                                            <div className="subsCart" onClick={()=> console.log("Subtracting from cart")}><RemoveIcon/></div>
-                                        </div>
-                                        <div className="colCartProduct2">
-                                            <div className="titleCartProduct">Producte 1</div>
-                                            <div className="rowDetailedCart">
-                                                <div className="cartPriceProduct">XXX€</div>
-                                                <div className="quantityPriceProduct">Qty: <span>XX</span></div>
-                                            </div>
-                                        </div>
+                        {JSON.parse(localStorage.getItem("cart_items"))?.length > 0 ?
+                            <li className="liMenuOptions" ><ShoppingCartIcon className="cartIconMenu" onClick={handleClickCart} />
+                                {props.cart ? <div className="bubbleCart">{props.cart.count}</div> : null}
+                                <Menu
+                                    id="simple-menu"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    className="menuDropdownCart"
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleCloseCart}>
+                                    <div>
+                                        <DropdownCart cartData={props} />
                                     </div>
-                                    
-                                </MenuItem>
-                                <hr className="separadorCartDrop"/>
-                                <MenuItem onClick={handleCloseCart}>Producte 2</MenuItem>
-                                <div onClick={handleCloseCart} className="buttonCheckoutCart">Finalitzar compra</div>
-                            </Menu>
-                        </li>
+                                </Menu>
+                            </li>
+                            : null}
                     </ul>
                 </div>
             </div>
         </div>
     );
 }
+
+export default connect(mapStateToProps)(Navbar);

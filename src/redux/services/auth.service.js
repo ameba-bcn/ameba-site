@@ -22,7 +22,19 @@ const login = (email, password) => {
                 localStorage.setItem("user", JSON.stringify(response.data));
             }
             return response.data;
-        });
+        // }).then((response) => {
+        //     console.log("responseeeeeee", response)
+        //     return axios.get(`${API_URL}carts/current/`, {
+        //         headers: {
+        //             Authorization: `Bearer ${response.access}`
+        //         }
+        //     })
+        //     .then((response) => {
+        //         console.log("responsEEEEEE", response)
+        //         return response;
+        //     })
+        })
+
         // si hay cart en LS hacer un get localhost/api/carts/{cart-id}/ ide de carro del LS
 };
 
@@ -42,6 +54,7 @@ const logout = () => {
         .then((response) => {
             console.log("Vamos a eliminar el user")
             localStorage.removeItem("user");
+            localStorage.removeItem("cart");
         });
 };
 

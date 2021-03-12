@@ -11,7 +11,7 @@
 }
 
 .clickBanner {
-    cursor: pointer;
+    cursor: default;
 }
 
 .crossSociCloseModal {

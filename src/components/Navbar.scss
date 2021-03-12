@@ -43,6 +43,7 @@
 .nav-ul {
     list-style: none;
     display: flex;
+
     li {
         a {
             display: inline-block;
@@ -56,6 +57,7 @@
             transition: all 0.5s ease-in-out;
             position: relative;
             text-transform: uppercase;
+
             &::before {
                 content: attr(data-item);
                 transition: 0.5s;
@@ -68,6 +70,7 @@
                 width: 0;
                 overflow: hidden;
             }
+
             &:hover {
                 &::before {
                     width: 100%;
@@ -78,7 +81,8 @@
     }
 }
 
-.menuButton a, .cartIconMenu {
+.menuButton a,
+.cartIconMenu {
     font-family: 'Bebas Neue';
     text-decoration: none;
     font-size: 2.5rem;
@@ -88,6 +92,7 @@
     color: #FAE6C5;
     position: relative;
     transition: all 0.5s ease-in-out;
+
     &::before {
         content: attr(data-item);
         transition: 0.5s;
@@ -100,6 +105,7 @@
         width: 100%;
         overflow: hidden;
     }
+
     &:hover {
         &::before {
             width: 100%;
@@ -108,15 +114,29 @@
     }
 }
 
-.cartIconMenu{
+.cartIconMenu {
     width: 2.2rem !important;
     height: auto !important;
     margin-left: 0px;
     margin-right: 5px;
     margin-bottom: 4px;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
+.bubbleCart {
+    color: #1D1D1B;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 2px 5px 2px 6px;
+    background-color: #F2C571;
+    font-family: 'Bebas Neue';
+    font-weight: 400;
+    font-size: .8em;
+    // line-height: 1em;
+    border-radius: 50%;
+    box-shadow: 1px 1px 1px gray;
+}
 
 // #MenuOptionsLogin {
 //     border: 2px solid #EB5E3E !important;
@@ -139,12 +159,14 @@
         flex-direction: column;
         flex: 100%;
     }
+
     .menuOptionsCollapsed {
         flex-direction: column;
         flex: 0 0 100%;
         align-items: center;
         justify-content: center;
     }
+
     a.menuOptions {
         flex: 0 0 100%;
         color: #FAE6C5;
@@ -155,16 +177,20 @@
         font-weight: bold;
         text-decoration: none;
     }
+
     .liMenuOptions {
         margin: 2rem;
     }
+
     .menuOptionsCollapsed ul {
         list-style: none;
         list-style-type: none;
     }
+
     .menuIcon {
         display: block;
     }
+
     .buttonMenu {
         width: 60%;
     }

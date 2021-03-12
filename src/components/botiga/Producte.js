@@ -8,7 +8,6 @@ import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ClearIcon from '@material-ui/icons/Clear';
 import { addToCart } from '../../redux/actions/cart';
-
 import './Producte.css';
 
 export default function ProducteDialog(props) {
@@ -22,7 +21,6 @@ export default function ProducteDialog(props) {
     const handleAddClick = () => {
         dispatch(addToCart(dataRow.id))
     }
-
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >
