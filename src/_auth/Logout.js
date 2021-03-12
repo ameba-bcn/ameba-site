@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom'
 import { UserContext } from '../UserContext';
 import './Auth.css';
 
+const API_URL = process.env.REACT_APP_API_HOST || "http://localhost/api/";
+
 export default function Logout() {
 
     const { user, setUser } = useContext(UserContext);
@@ -17,7 +19,7 @@ export default function Logout() {
         if (axiosInstance.defaults.headers['Authorization'] === null) {
             console.log("Already deleted")
         } else {
-            axiosInstance.delete(`${process.env.REACT_APP_API_HOST}token/`,
+            axiosInstance.delete(API_URL + 'token/',
             {
                 data: {
                     refresh: localStorage.getItem('refresh_token')
