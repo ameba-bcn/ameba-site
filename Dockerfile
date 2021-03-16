@@ -1,10 +1,14 @@
 FROM node:10
 
-COPY . /src
+ARG NODE_PATH=/opt/node_modules
+ENV NODE_PATH=${NODE_PATH}
 
-WORKDIR /src
+COPY . /opt/src
+WORKDIR /opt/src
+
+RUN chmod +x start.sh
 
 RUN npm install
 RUN npm install nodemon -g --save
 
-CMD ["nodemon", "-L", "--exec", "npm", "start"]
+CMD ["./start.sh"]
