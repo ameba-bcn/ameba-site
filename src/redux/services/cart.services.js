@@ -43,7 +43,7 @@ const addInCart = (id) => {
                     console.log("cart patch response", response)
                     cart_prev.push(response.data.cart_items[0].id)
                     localStorage.setItem("cart_items", JSON.stringify(cart_prev));
-                    return response;
+                    return response.data;
                 })
             })
         } else {
