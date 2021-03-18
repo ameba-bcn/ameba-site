@@ -5,8 +5,10 @@ import './LettersMove.css'
 export default function LettersMove(props) {
     return (
         <div className="wrapper">
-            <marquee behavior="alternate">
-                <span className="marquee" style={{ color: props.color }}>
+            {/* <marquee behavior="alternate"> */}
+            <div className="substituto-marquee">
+                <div className="marquee" style={{ color: props.color }}>
+                    - {props.sentence}
                 - {props.sentence}
                 - {props.sentence}
                 - {props.sentence}
@@ -26,8 +28,13 @@ export default function LettersMove(props) {
                 - {props.sentence}
                 - {props.sentence}
                 - {props.sentence}
-                </span>
-            </marquee>
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                - {props.sentence}
+                </div>
+            </div>
+            {/* </marquee> */}
         </div>
     )
 }

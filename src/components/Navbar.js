@@ -1,23 +1,28 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import LoginForm from './login';
 import { FaBars, FaTimes } from 'react-icons/fa';
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch, connect } from "react-redux";
 import { logout } from "../redux/actions/auth";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import DropdownCart from './DropdownCart';
 import './Navbar.scss';
+import './DropdownCart.css';
 
-export default function Navbar() {
+const mapStateToProps = state => {
+    return {
+        cart: state.cart.cart_data
+    };
+};
+
+function Navbar(props) {
     const [click, setClick] = useState(false)
     const [size, setSize] = useState(0);
     const dispatch = useDispatch();
-    const { isLoggedIn, user } = useSelector(state => state.auth);
-
+    const { isLoggedIn } = useSelector(state => state.auth);
     const [anchorEl, setAnchorEl] = React.useState(null);
-
+    const { cart = {} } = props;
+    const { cart_items = [], count = 0} = cart;
     const handleClickCart = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -36,10 +41,8 @@ export default function Navbar() {
         return () => window.removeEventListener('resize', updateSize);
     }, [size, click]);
 
-
     const handleClick = () => {
         setClick(!click)
-        // console.log(size)
     }
 
     const closeMenu = () => {
@@ -62,32 +65,39 @@ export default function Navbar() {
                 </div>
                 <div className="menuOptionsCollapsed">
                     <ul className={click ? "nav-ul.show" : "nav-ul"}>
-                        <li className="liMenuOptions" onClick={closeMenu}><NavLink className="menuOptions" to="/activitats" data-item='AGENDA'>AGENDA</NavLink></li>
-                        <li className="liMenuOptions" onClick={closeMenu}><NavLink className="menuOptions" to="/botiga" data-item='BOTIGA'>BOTIGA</NavLink></li>
-                        <li className="liMenuOptions" onClick={closeMenu}><NavLink className="menuOptions" to="/support" data-item='#SUPPORTYOURLOCALS'>#SUPPORTYOURLOCALS</NavLink></li>
+                        <li className="liMenuOptions" onClick={closeMenu}>
+                            <NavLink className="menuOptions" to="/activitats" data-item='AGENDA'>AGENDA</NavLink></li>
+                        <li className="liMenuOptions" onClick={closeMenu}>
+                            <NavLink className="menuOptions" to="/botiga" data-item='BOTIGA'>BOTIGA</NavLink></li>
+                        <li className="liMenuOptions" onClick={closeMenu}>
+                            <NavLink className="menuOptions" to="/support" data-item='#SUPPORTYOURLOCALS'>#SUPPORTYOURLOCALS</NavLink></li>
                         <li className="liMenuOptions" onClick={closeMenu}>
                             {!isLoggedIn ?
                                 <NavLink className="menuOptions" id="MenuOptionsLogin" to="/login" data-item='LOGIN'>LOGIN</NavLink> :
                                 <NavLink className="menuOptions" id="MenuOptionsLogin" to="/" data-item='LOGOUT' onClick={logoutMenu}>LOGOUT</NavLink>
                             }
                         </li>
-                        <li className="liMenuOptions" ><ShoppingCartIcon className="cartIconMenu" onClick={handleClickCart} />
-                            <Menu
-                                id="simple-menu"
-                                anchorEl={anchorEl}
-                                keepMounted
-                                className="menuDropdownCart"
-                                open={Boolean(anchorEl)}
-                                onClose={handleCloseCart}
-                            >
-                                <MenuItem onClick={handleCloseCart}>Producte 1</MenuItem>
-                                <MenuItem onClick={handleCloseCart}>Producte 2</MenuItem>
-                                <MenuItem onClick={handleCloseCart}>Finalitzar compra</MenuItem>
-                            </Menu>
-                        </li>
+                        {cart_items.length > 0 ?
+                            <li className="liMenuOptions" ><ShoppingCartIcon className="cartIconMenu" onClick={handleClickCart} />
+                                {cart ? <div className="bubbleCart">{count}</div> : null}
+                                <Menu
+                                    id="simple-menu"
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    className="menuDropdownCart"
+                                    open={Boolean(anchorEl)}
+                                    onClose={handleCloseCart}>
+                                    <div>
+                                        <DropdownCart cartData={cart} />
+                                    </div>
+                                </Menu>
+                            </li>
+                            : null}
                     </ul>
                 </div>
             </div>
         </div>
     );
 }
+
+export default connect(mapStateToProps)(Navbar);

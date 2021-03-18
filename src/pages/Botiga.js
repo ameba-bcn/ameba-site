@@ -3,6 +3,7 @@ import BotigaGeneral from '../components/botiga/BotigaGeneral';
 import PowerTitle from '../components/layout/PowerTitle';
 import ProductBanner from '../components/botiga/ProductBanner';
 import SociDialog from '../components/botiga/Soci';
+import LettersMove from './../components/layout/LettersMove';
 
 function Botiga() {
   const [open, setOpen] = React.useState(false);
@@ -24,6 +25,11 @@ function Botiga() {
       <div className="BotigaContent">
         <BotigaGeneral />
       </div>
+      <LettersMove
+                className="lettersMoveDiv"
+                sentence="FES-TE SOCI/A " 
+                color="#EB5E3E"
+                />
     </div>
   );
 }

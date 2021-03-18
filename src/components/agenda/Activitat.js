@@ -39,7 +39,7 @@ export default function ActivitatDialog(props) {
                         component="img"
                         alt={dataRow.name}
                         className="imageActivitatModal"
-                        image={dataRow.images}
+                        image={dataRow.images===undefined?null : dataRow.images[0]}
                         title={dataRow.name}
                     />
                     <hr className="solid" />

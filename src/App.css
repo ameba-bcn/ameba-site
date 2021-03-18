@@ -6,16 +6,19 @@
 #F2C571 Naranja
 #EB5E3E Rojo
 #1D1D1B Negro
+#FFED00 Amarillo
 
 font-family: 'Bebas Neue';
 font-family: 'Libre Baskerville';
+font-family: 'Montserrat', sans-serif;
 */
 
 .App {
     text-align: center;
     background-color: #FAE6C5;
     width: 100%;
-    max-width: 2800px;
+    max-width: 100%;
+    /* max-width: 2800px; */
     min-height: 100vh;
     box-sizing: border-box;
     display: flex;
@@ -169,12 +172,12 @@ div>.nav-item {
 .Articles,
 .Botiga {
     background-color: #EB5E3E;
-    padding-bottom: 6em;
+    /* padding-bottom: 6em; */
 }
 
 .SupportContent {
     background-color: #FAE6C5;
-    padding-bottom: 6em;
+    /* padding-bottom: 6em; */
 }
 
 #festi,
@@ -276,7 +279,7 @@ input.logForm {
     border: 4px solid #1D1D1B;
     border-radius: 0rem;
     padding-top: 14px;
-    font-family: 'Libre Baskerville';
+    font-family: 'Montserrat', sans-serif;
     color: #1D1D1B;
     font-size: 1.2rem;
     font-weight: bold;
@@ -320,7 +323,7 @@ label {
 }
 
 .logTextosLink {
-    font-family: 'Libre Baskerville';
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;

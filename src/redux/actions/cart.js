@@ -1,92 +1,25 @@
 import {
-    REGISTER_SUCCESS,
-    REGISTER_FAIL,
-    LOGIN_SUCCESS,
-    LOGIN_FAIL,
-    LOGOUT,
-    SET_MESSAGE,
+    ADD_TO_CART,
+    ADD_FAIL,
+    SUBS_TO_CART,
+    SUBS_FAIL,
+    CHECKOUT,
+    CHECKOUT_FAIL,
+    GET_CART,
+    GET_CART_FAIL
 } from "./types";
 
-import AuthService from "../services/auth.service";
+import CartService from "../services/cart.services";
 
-export const register = (username, email, password) => (dispatch) => {
-    return AuthService.register(username, email, password).then(
+export const addToCart = (id) => (dispatch) => {
+    return CartService.addInCart(id).then(
         (response) => {
             dispatch({
-                type: REGISTER_SUCCESS,
-            });
-
-            dispatch({
-                type: SET_MESSAGE,
-                payload: response.data.message,
-            });
-
-            return Promise.resolve();
-        },
-        (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-
-            dispatch({
-                type: REGISTER_FAIL,
-            });
-
-            dispatch({
-                type: SET_MESSAGE,
-                payload: message,
-            });
-
-            return Promise.reject();
-        }
-    );
-};
-
-export const login = (username, password) => (dispatch) => {
-    return AuthService.login(username, password).then(
-        (data) => {
-            dispatch({
-                type: LOGIN_SUCCESS,
-                payload: { user: data },
-            });
-
-            return Promise.resolve();
-        },
-        (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
-
-            dispatch({
-                type: LOGIN_FAIL,
-            });
-
-            dispatch({
-                type: SET_MESSAGE,
-                payload: message,
-            });
-
-            return Promise.reject();
-        }
-    );
-};
-
-export const logout = () => (dispatch) => {
-    AuthService.logout().then(
-        (response) => {
-            dispatch({
-                type: LOGOUT,
-            })
-            dispatch({
-                type: SET_MESSAGE,
+                type: ADD_TO_CART,
                 payload: response,
             });
+
+            return Promise.resolve();
         },
         (error) => {
             const message =
@@ -95,12 +28,101 @@ export const logout = () => (dispatch) => {
                     error.response.data.message) ||
                 error.message ||
                 error.toString();
+
             dispatch({
-                type: SET_MESSAGE,
+                type: ADD_FAIL,
                 payload: message,
             });
 
             return Promise.reject();
         }
-        )
+    );
 };
+
+export const substractToCart = (id) => (dispatch) => {
+    return CartService.removeItemCart(id).then(
+        (response) => {
+            dispatch({
+                type: SUBS_TO_CART,
+                payload: response,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: SUBS_FAIL,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const checkoutCart = () => (dispatch) => {
+    return CartService.checkoutCart().then(
+        (response) => {
+            dispatch({
+                type: CHECKOUT,
+                payload: response,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: CHECKOUT_FAIL,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const getCart = () => (dispatch) => {
+    return CartService.getCartOnLog().then(
+        (response) => {
+            dispatch({
+                type: GET_CART,
+                payload: response,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: GET_CART_FAIL,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+
+
+

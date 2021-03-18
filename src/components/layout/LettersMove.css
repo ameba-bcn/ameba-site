@@ -3,29 +3,40 @@
     background: #1D1D1B;
     height: 42px;
     text-align: left;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.substituto-marquee {
+    overflow: hidden;
+    position: relative;
 }
 
 .marquee {
-    background: #1D1D1B;
-    /* color: #FAE6C5; */
+    animation: marqueee 20s linear infinite;
+    display: block;
+    min-width: 100%;
+    left: 0;
+    top: 0;
     white-space: nowrap;
+    z-index: 3;
     font-size: 30px;
     font-family: 'Bebas Neue';
     font-weight: 600;
     text-transform: uppercase;
-    -webkit-animation: rightThenLeft 2s linear;
-    animation: rightThenLeft 2s linear;
 }
 
-@keyframes rightThenLeft {
+@keyframes marqueee {
     0% {
-        margin-right: 70%;
+        transform: translateX(0%);
     }
+
     50% {
-        margin-right: 0;
+        transform: translateX(-50%);
     }
+
     100% {
-        margin-right: 70%;
+        transform: translateX(0%);
     }
 }
 

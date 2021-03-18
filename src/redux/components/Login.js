@@ -1,12 +1,12 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from 'react-router-dom';
-
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 // import UserService from "../services/user.service";
 import { login } from "../actions/auth";
+import { getCart } from "../actions/cart";
 
 const required = (value) => {
     if (!value) {
@@ -58,15 +58,15 @@ const Login = (props) => {
         setLoading(true);
 
         form.current.validateAll();
-
         if (checkBtn.current.context._errors.length === 0) {
             dispatch(login(email, password))
                 .then(() => {
+                    // el push recarga la ruta y para seguir ejecutando necesitamos el catch
                     props.history.push("/");
-                    window.location.reload();
-                })
-                .catch(() => {
+                    // window.location.reload();
+                }).catch(() => {
                     setLoading(false);
+                    dispatch(getCart())
                 });
         } else {
             setLoading(false);

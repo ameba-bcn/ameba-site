@@ -11,10 +11,11 @@ import { Switch, Route } from 'react-router-dom';
 import Contacte from './contacte/Contacte';
 import Menu from './components/Navbar'
 import LogSession from './pages/LogSession';
+import Checkout from './pages/Checkout';
 // import Register from './pages/Register';
 // import PasswordRecovery from './pages/PasswordRecovery';
 import LogMailConfirmation from './pages/LogMailConfirmation';
-import Login from './redux/components/Login';
+// import Login from './redux/components/Login';
 import Register from './redux/components/Register';
 import { UserContext } from './UserContext';
 
@@ -39,6 +40,7 @@ function App() {
           <Route path='/registration' component={Register} />
           {/* <Route path='/recovery-account' component={PasswordRecovery} /> */}
           <Route path='/logconf' component={LogMailConfirmation} />
+          <Route path='/checkout' component={Checkout} />
           <Route exact path='/' component={Home} />
           <Route component={NotFound} />
         </Switch>
