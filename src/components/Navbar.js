@@ -1,6 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-// import LoginForm from './login';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { useSelector, useDispatch, connect } from "react-redux";
 import { logout } from "../redux/actions/auth";
@@ -22,7 +21,8 @@ function Navbar(props) {
     const dispatch = useDispatch();
     const { isLoggedIn } = useSelector(state => state.auth);
     const [anchorEl, setAnchorEl] = React.useState(null);
-
+    const { cart = {} } = props;
+    const { cart_items = [], count = 0} = cart;
     const handleClickCart = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -40,7 +40,6 @@ function Navbar(props) {
         size > 1000 ? setClick(false) : setClick(click)
         return () => window.removeEventListener('resize', updateSize);
     }, [size, click]);
-
 
     const handleClick = () => {
         setClick(!click)
@@ -78,9 +77,9 @@ function Navbar(props) {
                                 <NavLink className="menuOptions" id="MenuOptionsLogin" to="/" data-item='LOGOUT' onClick={logoutMenu}>LOGOUT</NavLink>
                             }
                         </li>
-                        {JSON.parse(localStorage.getItem("cart_items"))?.length > 0 ?
+                        {cart_items.length > 0 ?
                             <li className="liMenuOptions" ><ShoppingCartIcon className="cartIconMenu" onClick={handleClickCart} />
-                                {props.cart ? <div className="bubbleCart">{props.cart.count}</div> : null}
+                                {cart ? <div className="bubbleCart">{count}</div> : null}
                                 <Menu
                                     id="simple-menu"
                                     anchorEl={anchorEl}
@@ -89,7 +88,7 @@ function Navbar(props) {
                                     open={Boolean(anchorEl)}
                                     onClose={handleCloseCart}>
                                     <div>
-                                        <DropdownCart cartData={props} />
+                                        <DropdownCart cartData={cart} />
                                     </div>
                                 </Menu>
                             </li>
