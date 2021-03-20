@@ -6,7 +6,8 @@ import {
     CHECKOUT,
     CHECKOUT_FAIL,
     GET_CART,
-    GET_CART_FAIL
+    GET_CART_FAIL,
+    DELETE_CART
 } from "../actions/types";
 
 const initialState = {};
@@ -51,6 +52,11 @@ export default function (state = initialState, action) {
                 cart_data: payload,
             };
         case GET_CART_FAIL:
+            return {
+                ...state,
+                cart_data: [],
+            };
+        case DELETE_CART:
             return {
                 ...state,
                 cart_data: [],

@@ -55,6 +55,7 @@ const logout = () => {
             console.log("Vamos a eliminar el user")
             localStorage.removeItem("user");
             localStorage.removeItem("cart");
+            localStorage.removeItem("cart_id");
         });
 };
 
