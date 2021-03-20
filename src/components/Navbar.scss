@@ -80,6 +80,17 @@
         }
     }
 }
+.menuButton{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.menuAmebalogo{
+    width: 50px;
+    height: auto;
+    margin-bottom: 3px;
+}
 
 .menuButton a,
 .cartIconMenu {

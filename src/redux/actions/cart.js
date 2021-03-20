@@ -6,7 +6,7 @@ import {
     CHECKOUT,
     CHECKOUT_FAIL,
     GET_CART,
-    GET_CART_FAIL
+    GET_CART_FAIL,
 } from "./types";
 
 import CartService from "../services/cart.services";
@@ -122,7 +122,3 @@ export const getCart = () => (dispatch) => {
         }
     );
 };
-
-
-
-

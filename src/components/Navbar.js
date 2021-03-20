@@ -58,6 +58,7 @@ function Navbar(props) {
         <div className="menuContainer">
             <div className="menuSuperior">
                 <div className="menuButton">
+                    <img src={"./NewLogo.png"} className="menuAmebalogo"/>
                     <NavLink to="/" data-item='AMEBA'>AMEBA</NavLink>
                 </div>
                 <div className="menuIcon" onClick={handleClick} >
