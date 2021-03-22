@@ -60,7 +60,7 @@ const addInCart = (id) => {
 
 const checkoutCart = () => {
     let cart_uuid = JSON.parse(localStorage.getItem("cart_id"));
-    return axios.get(`${API_URL}carts/${cart_uuid}/checkout`,
+    return axios.get(`${API_URL}carts/${cart_uuid}/checkout/`,
         { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}` } }
     ).then((response) => {
         console.log("cart CHECKOUT response", response)

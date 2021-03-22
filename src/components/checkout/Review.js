@@ -6,16 +6,10 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
-
-const products = [
-  { name: 'Product 1', desc: 'A nice thing', price: '$9.99' },
-  { name: 'Product 2', desc: 'Another thing', price: '$3.45' },
-  { name: 'Product 3', desc: 'Something else', price: '$6.51' },
-  { name: 'Product 4', desc: 'Best thing of all', price: '$14.11' },
-  { name: 'Shipping', desc: '', price: 'Free' },
-];
-const addresses = ['1 Material-UI Drive', 'Reactville', 'Anytown', '99999', 'USA'];
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import { substractToCart } from './../../redux/actions/cart';
+import { useDispatch } from "react-redux";
+import './Review.css';
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -30,59 +24,50 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const mapStateToProps = state => {
-    return {
-        cart: state.cart.cart_data
-    };
+  return {
+    cart: state.cart.cart_data
+  };
 };
 
 function Review(props) {
+  console.log("XXXXXXXXXXX",props)
+  const { cart_items, total} = props.cart;
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const substractItem = (id) => {
+    dispatch(substractToCart(id))
+}
 
   return (
     <React.Fragment>
-        {console.log("IN CART props", props)}
       <Typography variant="h6" gutterBottom>
         Resum compra
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem className={classes.listItem} key={product.name}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
+        {cart_items.map((item, i) => (
+          <ListItem className={classes.listItem} key={i}>
+            <ListItemText primary={item.name} secondary={item.discount_value} />
+            <Typography variant="body2">{item.price}</Typography>
+            <div className="deleteItem" onClick={() => substractItem(item.id)}><DeleteIcon /></div>
           </ListItem>
         ))}
         <ListItem className={classes.listItem}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" className={classes.total}>
-            $34.06
+            {total}
           </Typography>
         </ListItem>
       </List>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
-            Shipping
+            Recollida
           </Typography>
-          <Typography gutterBottom>John Smith</Typography>
-          <Typography gutterBottom>{addresses.join(', ')}</Typography>
+          <Typography gutterBottom>No es realitzen enviaments, només recollida a Barcelona</Typography>
+          <Typography gutterBottom>La recollida es pot fer de 10-14 a l'adreça i de 16-20 a Rhythm Control</Typography>
+          <Typography gutterBottom>Qualsevol dubte possat en contacte amb nosaltres: info@ameba.cat</Typography>
         </Grid>
-        {/* <Grid item container direction="column" xs={12} sm={6}>
-          <Typography variant="h6" gutterBottom className={classes.title}>
-            Payment details
-          </Typography>
-          <Grid container>
-            {payments.map((payment) => (
-              <React.Fragment key={payment.name}>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.name}</Typography>
-                </Grid>
-                <Grid item xs={6}>
-                  <Typography gutterBottom>{payment.detail}</Typography>
-                </Grid>
-              </React.Fragment>
-            ))}
-          </Grid>
-        </Grid> */}
       </Grid>
     </React.Fragment>
   );
