@@ -7,6 +7,7 @@ import CheckButton from "react-validation/build/button";
 // import UserService from "../services/user.service";
 import { login } from "../actions/auth";
 import { getCart } from "../actions/cart";
+import { useLocation } from 'react-router-dom';
 
 const required = (value) => {
     if (!value) {
@@ -29,7 +30,8 @@ const Login = (props) => {
 
     const { isLoggedIn } = useSelector(state => state.auth);
     const { message } = useSelector(state => state.message);
-
+    const location = useLocation();
+    console.log("location", location)
     const dispatch = useDispatch();
 
     const onChangeUsername = (e) => {
@@ -74,7 +76,7 @@ const Login = (props) => {
 
     };
 
-    if (isLoggedIn) {
+    if (isLoggedIn && location.pathname === '/login') {
 
         return <Redirect to="/" />;
     }

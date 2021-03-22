@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector, useDispatch, connect } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import LogSession from './../../pages/LogSession';
@@ -15,18 +16,12 @@ import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
+const mapStateToProps = state => {
+  return {
+      cart: state.cart.cart_data,
+      isLoggedIn: state.auth.isLoggedIn
+  };
+};
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -65,39 +60,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = localStorage.getItem("user") !== null ? ['Adreça', 'Revisió', 'Dades de pagament'] : ['Log/Registre','Adreça', 'Revisió', 'Dades de pagament'];
+const steps = ['Log/Registre', 'Revisió', 'Dades de pagament'];
 
 function getStepContent(step) {
-  if (localStorage.getItem("user") === null) {
     switch (step) {
       case 0:
         return <LogSession />;
       case 1:
-        return <AddressForm />;
-      case 2:
-        return <Review />;
-      case 3:
-        return <PaymentForm />;
-      default:
-        throw new Error('Unknown step');
-    }
-  } else {
-    switch (step) {
-      case 0:
-        return <AddressForm />;
-      case 1:
         return <Review />;
       case 2:
         return <PaymentForm />;
       default:
         throw new Error('Unknown step');
     }
-  }
 }
 
-export default function CheckoutMain() {
+function CheckoutMain(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = React.useState(props.isLoggedIn?1:0);
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -106,6 +86,7 @@ export default function CheckoutMain() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+  console.log("Test income props ", props)
 
   return (
     <React.Fragment>
@@ -167,3 +148,5 @@ export default function CheckoutMain() {
     </React.Fragment>
   );
 }
+
+export default connect(mapStateToProps)(CheckoutMain);
