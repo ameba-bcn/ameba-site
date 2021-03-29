@@ -30,7 +30,6 @@ const mapStateToProps = state => {
 };
 
 function Review(props) {
-  console.log("XXXXXXXXXXX",props)
   const { cart_items, total} = props.cart;
   const classes = useStyles();
   const dispatch = useDispatch();

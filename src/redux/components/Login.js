@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -22,7 +22,7 @@ const required = (value) => {
 const Login = (props) => {
     const form = useRef();
     const checkBtn = useRef();
-
+    const { isCheckout } = props;
     const [email, setEmailname] = useState("");
     const [password, setPassword] = useState("");
     // const [userName, setUserName] = useState("");
@@ -108,7 +108,7 @@ const Login = (props) => {
                     alt="profile-img"
                     className="profile-img-card"
                 /> */}
-                <div className="logTitle">login</div>
+                {!isCheckout && (<div className="logTitle">login</div>)}
 
                 <Form onSubmit={handleLogin} ref={form}>
                     <div className="form-group">
@@ -138,7 +138,7 @@ const Login = (props) => {
                     </div>
 
                     <div className="form-group">
-                        <button className=" btn-block logFormButton" disabled={loading}>
+                        <button className="btn-block logFormButton" disabled={loading}>
                             {loading && (
                                 <span className="spinner-border spinner-border-sm"></span>
                             )}
@@ -155,8 +155,11 @@ const Login = (props) => {
                     )}
                     <CheckButton style={{ display: "none" }} ref={checkBtn} />
                 </Form>
-                <span className="logTextosLink logTextosLinkRegistrat" onClick={showRegistration}>- Registra't -</span>
-                <span className="logTextosLink" onClick={showPasswordRecover}>- Recupera la teva contrassenya -</span>
+                {!isCheckout && (
+                <><span className="logTextosLink logTextosLinkRegistrat" onClick={showRegistration}>- Registra't -</span>
+                <span className="logTextosLink" onClick={showPasswordRecover}>- Recupera la teva contrassenya -</span></>)}
+                {isCheckout && (
+                <NavLink to="/login" ><span className="logTextosLink logTextosLinkRegistrat">- No tens compte? Registra't -</span></NavLink>)}
             </div>
         </div>
     );

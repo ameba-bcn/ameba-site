@@ -2,10 +2,22 @@ import React, { useState } from 'react';
 import Login from '../redux/components/Login'
 import Register from '../redux/components/Register'
 import PasswordRecovery from '../redux/components/PasswordRecovery'
+import { connect } from "react-redux";
 
-export default function LogSession() {
+const mapStateToProps = state => {
+    return {
+      cart: state.cart.cart_data,
+      isLoggedIn: state.auth.isLoggedIn
+    };
+  };
 
-    const [viewState, setViewState] = useState("login");
+function LogSession(props) {
+
+    const [viewState, setViewState] = useState(!!props.cart?"registration":"login");
+console.log("XXXXXXXXXXXXXXXXXX", props.cart)
+    // if (props.cart?.id !== ""){
+    //     setViewState("registration")
+    // }
 
     return (
         <div className="loginWall">
@@ -16,3 +28,5 @@ export default function LogSession() {
         </div>
     )
 }
+
+export default connect(mapStateToProps)(LogSession);

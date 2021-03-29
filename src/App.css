@@ -359,3 +359,15 @@ label {
     width: 10px;
     /* line-height: 10px;; */
 }
+
+.succesful-login-modificar {
+    background-color: #1D1D1B;
+    cursor: pointer;
+    color: #FAE6C5;
+    text-transform: uppercase;
+    font-family: 'Bebas Neue';
+    font-size: 1.8rem;
+    max-width: 110px !important;
+    margin: 0 auto;
+}
+

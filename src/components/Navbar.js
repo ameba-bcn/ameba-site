@@ -50,7 +50,6 @@ function Navbar(props) {
     }
 
     const logoutMenu = () => {
-        console.log("Logout, inicio del proceso")
         dispatch(logout())
     }
 

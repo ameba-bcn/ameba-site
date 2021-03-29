@@ -1,25 +1,22 @@
 import React from 'react';
-import { useSelector, useDispatch, connect } from "react-redux";
+import { connect } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import LogSession from './../../pages/LogSession';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
+import Login from './../../redux/components/Login'
+import SuccesfullLogin from './../../redux/components/SuccesfullLogin'
 
 const mapStateToProps = state => {
   return {
-      cart: state.cart.cart_data,
-      isLoggedIn: state.auth.isLoggedIn
+    cart: state.cart.cart_data,
+    isLoggedIn: state.auth.isLoggedIn
   };
 };
 
@@ -60,24 +57,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const steps = ['Log/Registre', 'Revisió', 'Dades de pagament'];
-
-function getStepContent(step) {
-    switch (step) {
-      case 0:
-        return <LogSession />;
-      case 1:
-        return <Review />;
-      case 2:
-        return <PaymentForm />;
-      default:
-        throw new Error('Unknown step');
-    }
-}
-
 function CheckoutMain(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(props.isLoggedIn?1:0);
+  const [activeStep, setActiveStep] = React.useState(props.isLoggedIn ? 1 : 0);
+  const [autoStep, setAutoStep] = React.useState(true);
+  const steps = ['Log/Registre', 'Revisió', 'Dades de pagament'];
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -86,18 +70,28 @@ function CheckoutMain(props) {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-  console.log("Test income props ", props)
+
+  if (props.isLoggedIn && activeStep === 0 && autoStep) {
+    handleNext();
+    setAutoStep(false)
+  }
+
+  const getStepContent = (step) => {
+    switch (step) {
+      case 0:
+        return props.isLoggedIn ? <SuccesfullLogin nom={"nombre"} email={"Email"}/> : <Login isCheckout={true} />;
+      case 1:
+        return <Review />;
+      case 2:
+        return <PaymentForm />;
+      default:
+        throw new Error('Unknown step');
+    }
+  }
 
   return (
     <React.Fragment>
       <CssBaseline />
-      {/* <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
-            Company name
-          </Typography>
-        </Toolbar>
-      </AppBar> */}
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
@@ -122,28 +116,27 @@ function CheckoutMain(props) {
                 </Typography>
               </React.Fragment>
             ) : (
-                <React.Fragment>
-                  {getStepContent(activeStep)}
-                  <div className={classes.buttons}>
-                    {activeStep !== 0 && (
-                      <Button onClick={handleBack} className={classes.button}>
-                        Back
-                      </Button>
-                    )}
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleNext}
-                      className={classes.button}
-                    >
-                      {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+              <React.Fragment>
+                {getStepContent(activeStep)}
+                <div className={classes.buttons}>
+                  {activeStep !== 0 && (
+                    <Button onClick={handleBack} className={classes.button}>
+                      Back
                     </Button>
-                  </div>
-                </React.Fragment>
-              )}
+                  )}
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                  </Button>
+                </div>
+              </React.Fragment>
+            )}
           </React.Fragment>
         </Paper>
-        {/* <Copyright /> */}
       </main>
     </React.Fragment>
   );
