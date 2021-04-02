@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# AMEBA FRONTEND
+
+Version 0.1
+
+## Release changes
+- Implemented checkout procedure
+
+
 ## Start with Docker
 - Instalar Docker
 - En el directorio raíz del proyecto, build del proyecto:
