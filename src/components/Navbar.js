@@ -88,7 +88,7 @@ function Navbar(props) {
                                     open={Boolean(anchorEl)}
                                     onClose={handleCloseCart}>
                                     <div>
-                                        <DropdownCart cartData={cart} />
+                                        <DropdownCart cartData={cart} closeDropDown={handleCloseCart} />
                                     </div>
                                 </Menu>
                             </li>

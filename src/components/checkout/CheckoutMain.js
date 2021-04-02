@@ -1,5 +1,6 @@
-import React from 'react';
-import { connect } from "react-redux";
+import React, { useState } from 'react';
+import { connect, useDispatch } from "react-redux";
+import { checkoutCart } from './../../redux/actions/cart';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
@@ -10,13 +11,14 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
-import Login from './../../redux/components/Login'
-import SuccesfullLogin from './../../redux/components/SuccesfullLogin'
+import Login from './../../redux/components/Login';
+import SuccesfullLogin from './../../redux/components/SuccesfullLogin';
 
 const mapStateToProps = state => {
   return {
     cart: state.cart.cart_data,
-    isLoggedIn: state.auth.isLoggedIn
+    isLoggedIn: state.auth.isLoggedIn,
+    stripe: state.cart.stripe
   };
 };
 
@@ -58,17 +60,30 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function CheckoutMain(props) {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(props.isLoggedIn ? 1 : 0);
   const [autoStep, setAutoStep] = React.useState(true);
   const steps = ['Log/Registre', 'Revisió', 'Dades de pagament'];
+  const [viewState, setViewState] = useState("login");
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    if (activeStep === 0 && !props.isLoggedIn) {
+      console.log("Error, user not logged")
+    }
+    else {
+      if (activeStep === 1) {
+        dispatch(checkoutCart())
+      } else {
+        setActiveStep(activeStep + 1);
+      }
+    }
   };
 
   const handleBack = () => {
+    console.log("Handle Back", activeStep)
     setActiveStep(activeStep - 1);
+    setAutoStep(false)
   };
 
   if (props.isLoggedIn && activeStep === 0 && autoStep) {
@@ -76,10 +91,14 @@ function CheckoutMain(props) {
     setAutoStep(false)
   }
 
+  if (props.stripe && activeStep === 1){
+    setActiveStep(activeStep + 1);
+  }
+
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return props.isLoggedIn ? <SuccesfullLogin nom={"nombre"} email={"Email"}/> : <Login isCheckout={true} />;
+        return props.isLoggedIn ? <SuccesfullLogin nom={"nombre"} email={"Email"} /> : <Login isCheckout={true} viewState={viewState} setViewState={setViewState}/>;
       case 1:
         return <Review />;
       case 2:
@@ -104,8 +123,8 @@ function CheckoutMain(props) {
               </Step>
             ))}
           </Stepper>
-          <React.Fragment>
-            {activeStep === steps.length ? (
+          {/* <React.Fragment> */}
+            {/* {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
                   Thank you for your order.
@@ -115,27 +134,29 @@ function CheckoutMain(props) {
                   send you an update when your order has shipped.
                 </Typography>
               </React.Fragment>
-            ) : (
+            ) : ( */}
               <React.Fragment>
                 {getStepContent(activeStep)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
-                      Back
+                      Enrere
                     </Button>
                   )}
+                  {activeStep <= 1 && (
                   <Button
                     variant="contained"
                     color="primary"
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    Següent
                   </Button>
+                    )}
                 </div>
               </React.Fragment>
-            )}
-          </React.Fragment>
+             {/* )} */}
+          {/* </React.Fragment> */}
         </Paper>
       </main>
     </React.Fragment>

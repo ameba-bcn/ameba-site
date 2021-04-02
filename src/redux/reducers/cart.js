@@ -7,10 +7,16 @@ import {
     CHECKOUT_FAIL,
     GET_CART,
     GET_CART_FAIL,
-    DELETE_CART
+    DELETE_CART,
+    DESTROY_CART,
+    DESTROY_CART_FAIL
 } from "../actions/types";
 
-const initialState = {};
+const initialState = {
+    cart_data: {},
+    checkout: {},
+    stripe: false
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
@@ -40,11 +46,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 checkout: payload,
+                stripe: true
             };
         case CHECKOUT_FAIL:
             return {
                 ...state,
                 checkout: {},
+                stripe: false
             };
         case GET_CART:
             return {
@@ -54,12 +62,24 @@ export default function (state = initialState, action) {
         case GET_CART_FAIL:
             return {
                 ...state,
-                cart_data: [],
+                cart_data: {},
             };
         case DELETE_CART:
             return {
                 ...state,
-                cart_data: [],
+                cart_data: {},
+            };
+        case DESTROY_CART:
+            return {
+                ...state,
+                cart_data: {},
+                checkout: {},
+                stripe: false
+            };
+        case DESTROY_CART_FAIL:
+            return {
+                ...state,
+                cart_data: {},
             };
         default:
             return state;

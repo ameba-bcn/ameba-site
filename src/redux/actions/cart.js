@@ -7,6 +7,8 @@ import {
     CHECKOUT_FAIL,
     GET_CART,
     GET_CART_FAIL,
+    DESTROY_CART,
+    DESTROY_CART_FAIL
 } from "./types";
 
 import CartService from "../services/cart.services";
@@ -67,6 +69,34 @@ export const substractToCart = (id) => (dispatch) => {
     );
 };
 
+export const getCart = () => (dispatch) => {
+    return CartService.getCartOnLog().then(
+        (response) => {
+            dispatch({
+                type: GET_CART,
+                payload: response,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: GET_CART_FAIL,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
 export const checkoutCart = () => (dispatch) => {
     return CartService.checkoutCart().then(
         (response) => {
@@ -95,11 +125,11 @@ export const checkoutCart = () => (dispatch) => {
     );
 };
 
-export const getCart = () => (dispatch) => {
-    return CartService.getCartOnLog().then(
+export const deleteCartAfterCheckout = () => (dispatch) => {
+    return CartService.deleteCartAfterSuccesfullCheckout().then(
         (response) => {
             dispatch({
-                type: GET_CART,
+                type: DESTROY_CART,
                 payload: response,
             });
 
@@ -114,7 +144,7 @@ export const getCart = () => (dispatch) => {
                 error.toString();
 
             dispatch({
-                type: GET_CART_FAIL,
+                type: DESTROY_CART_FAIL,
                 payload: message,
             });
 
