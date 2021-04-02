@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
@@ -8,7 +8,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Grid from '@material-ui/core/Grid';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { substractToCart } from './../../redux/actions/cart';
-import { useDispatch } from "react-redux";
 import './Review.css';
 
 const useStyles = makeStyles((theme) => ({
@@ -44,7 +43,7 @@ function Review(props) {
         Resum compra
       </Typography>
       <List disablePadding>
-        {cart_items.map((item, i) => (
+        {cart_items?.map((item, i) => (
           <ListItem className={classes.listItem} key={i}>
             <ListItemText primary={item.name} secondary={item.discount_value} />
             <Typography variant="body2">{item.price}</Typography>

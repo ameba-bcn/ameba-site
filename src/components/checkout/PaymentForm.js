@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch, connect } from "react-redux";
+import { connect, useDispatch } from "react-redux";
+import { deleteCartAfterCheckout } from './../../redux/actions/cart';
+import { Redirect } from 'react-router-dom';
 import {
   CardElement,
   useStripe,
@@ -14,6 +16,7 @@ const mapStateToProps = state => {
 };
 
 function PaymentForm(props) {
+  const dispatch = useDispatch();
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState('');
@@ -46,6 +49,7 @@ function PaymentForm(props) {
   }, []);
 
   const cardStyle = {
+    hidePostalCode: true,
     style: {
       base: {
         color: "#32325d",
@@ -81,14 +85,19 @@ function PaymentForm(props) {
     });
 
     if (payload.error) {
-      setError(`Payment failed ${payload.error.message}`);
+      setError(`Pagament no realitzat: ${payload.error.message}`);
       setProcessing(false);
     } else {
       setError(null);
       setProcessing(false);
       setSucceeded(true);
+      dispatch(deleteCartAfterCheckout())
     }
   };
+
+  if (succeeded) {
+    return <Redirect to='/summary-checkout' />;
+}
 
   return (
     <div className="payment-root">
@@ -116,13 +125,13 @@ function PaymentForm(props) {
           )}
           {/* Show a success message upon completion */}
           <p className={succeeded ? "result-message" : "result-message hidden"}>
-            Payment succeeded, see the result in your
+            Pagament realitzat amb èxit, comproba la teva compra a :
         <a
               href={`https://dashboard.stripe.com/test/payments`}
             >
               {" "}
           Stripe dashboard.
-        </a> Refresh the page to pay again.
+        </a> Refresca la pàgina per a pagar un altre cop
       </p>
         </form>
       </div>

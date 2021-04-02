@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -104,20 +103,13 @@ const Register = (props) => {
 
   const showLogin = () => {
     props.setViewState("login")
-    // console.log(props.viewState)
-}
+  }
 
   return (
     <div className="col-md-12">
       <div className="card card-container card-login">
-      <div className="logTitle">registra't</div>
-      <div className="sociLogBanner" onClick={handleClick}>encara no ets soci/a? Informa't aquí!<AddIcon className="sociLogBannerPlus"/></div>
-
-        {/* <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-          alt="profile-img"
-          className="profile-img-card"
-        /> */}
+        <div className="logTitle">registra't</div>
+        <div className="sociLogBanner" onClick={handleClick}>encara no ets soci/a? Informa't aquí!<AddIcon className="sociLogBannerPlus" /></div>
 
         <Form onSubmit={handleRegister} ref={form}>
           {!successful && (
@@ -159,14 +151,14 @@ const Register = (props) => {
               </div>
 
               <div className="form-group">
-                <button className="btn-block logFormButton">Sign Up</button>
+                <button className="btn-block logFormButton">Registra't</button>
               </div>
             </div>
           )}
 
           {message && (
             <div className="form-group">
-              <div className={ successful ? "alert alert-success" : "alert alert-danger" } role="alert">
+              <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
                 {message}
               </div>
             </div>
@@ -175,7 +167,7 @@ const Register = (props) => {
         </Form>
         <span className="logTextosLink" onClick={showLogin}>- Ja estàs registrat? Inicia sessió -</span>
         <SociDialog open={open}
-        onClose={handleClick} />
+          onClose={handleClick} />
       </div>
     </div>
   );

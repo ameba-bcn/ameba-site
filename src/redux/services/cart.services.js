@@ -59,8 +59,7 @@ const addInCart = (id) => {
 };
 
 const checkoutCart = () => {
-    let cart_uuid = JSON.parse(localStorage.getItem("cart_id"));
-    return axios.get(`${API_URL}carts/${cart_uuid}/checkout/`,
+    return axios.get(`${API_URL}carts/current/checkout/`,
         { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}` } }
     ).then((response) => {
         console.log("cart CHECKOUT response", response)
@@ -103,44 +102,56 @@ const removeItemCart = (id) => {
             if (index > -1) {
                 cart_prev.splice(index, 1);
             }
-            return axios.patch(`${API_URL}carts/${cart_uuid}/`, 
-            { "items": cart_prev }
-                ).then((response) => {
-                    console.log("cart response", response)
-                    localStorage.setItem("cart_id", JSON.stringify(response.data.id));
-                    // localStorage.setItem("cart_items", JSON.stringify(cart_prev));
-                    return response.data;
-                })
+            return axios.patch(`${API_URL}carts/${cart_uuid}/`,
+                { "items": cart_prev }
+            ).then((response) => {
+                console.log("cart response", response)
+                localStorage.setItem("cart_id", JSON.stringify(response.data.id));
+                // localStorage.setItem("cart_items", JSON.stringify(cart_prev));
+                return response.data;
+            })
         })
     }
 }
 
-    const deleteFullCart = () => {
-        let cart_uuid = JSON.parse(localStorage.getItem("cart_id"))
-        return axios.delete(`${API_URL}carts/${cart_uuid}`, {
-            headers: {
-                Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`
-            }
-        })
-    }
+const deleteFullCart = () => {
+    let cart_uuid = JSON.parse(localStorage.getItem("cart_id"))
+    return axios.delete(`${API_URL}carts/${cart_uuid}`, {
+        headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`
+        }
+    })
+}
 
-    const getCartOnLog = () => {
-        return axios.get(`${API_URL}carts/current/`, {
-            headers: {
-                Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`
-            }
-        }).then((response) => {
-            console.log("cart response", response.data)
-            localStorage.setItem("cart_id", JSON.stringify(response.data.id));
-            return response.data;
-        })
-    }
+const getCartOnLog = () => {
+    return axios.get(`${API_URL}carts/current/`, {
+        headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`
+        }
+    }).then((response) => {
+        console.log("cart response", response.data)
+        localStorage.setItem("cart_id", JSON.stringify(response.data.id));
+        return response.data;
+    })
+}
 
-    // eslint-disable-next-line import/no-anonymous-default-export
-    export default {
-        addInCart,
-        deleteFullCart,
-        removeItemCart,
-        checkoutCart,
-        getCartOnLog
-    };
+const deleteCartAfterSuccesfullCheckout = () => {
+    return axios.delete(`${API_URL}carts/current/`, {
+        headers: {
+            Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`
+        }
+    }).then((response) => {
+        console.log("delete cart response", response.data)
+        return response.data;
+    })
+}
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+    addInCart,
+    deleteFullCart,
+    removeItemCart,
+    checkoutCart,
+    getCartOnLog,
+    deleteCartAfterSuccesfullCheckout
+};

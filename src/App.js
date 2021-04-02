@@ -12,6 +12,7 @@ import Contacte from './contacte/Contacte';
 import Menu from './components/Navbar'
 import LogSession from './pages/LogSession';
 import Checkout from './pages/Checkout';
+import CheckoutFinished from './pages/CheckoutFinished';
 // import Register from './pages/Register';
 // import PasswordRecovery from './pages/PasswordRecovery';
 import LogMailConfirmation from './pages/LogMailConfirmation';
@@ -41,6 +42,7 @@ function App() {
           {/* <Route path='/recovery-account' component={PasswordRecovery} /> */}
           <Route path='/logconf' component={LogMailConfirmation} />
           <Route path='/checkout' component={Checkout} />
+          <Route path='/summary-checkout' component={CheckoutFinished} />
           <Route exact path='/' component={Home} />
           <Route component={NotFound} />
         </Switch>

@@ -20,6 +20,7 @@ export default function ProducteDialog(props) {
 
     const handleAddClick = () => {
         dispatch(addToCart(dataRow.id))
+        handleClose();
     }
 
     return (
