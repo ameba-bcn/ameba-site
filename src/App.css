@@ -25,6 +25,10 @@ font-family: 'Montserrat', sans-serif;
     flex-direction: column;
 }
 
+*:focus {
+    outline: 0;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
@@ -304,7 +308,7 @@ input.logForm::placeholder {
     text-transform: uppercase;
     font-family: 'Bebas Neue';
     font-size: 1.8rem;
-    max-width: 110px !important;
+    max-width: 130px !important;
     margin: 0 auto;
 }
 

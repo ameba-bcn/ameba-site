@@ -25,6 +25,7 @@ const Login = (props) => {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [redirect, setRedirect] = useState(false);
+    const [recover, setRecover] = useState(false);
     const { message } = useSelector(state => state.message);
     const location = useLocation();
     const dispatch = useDispatch();
@@ -42,14 +43,9 @@ const Login = (props) => {
         props.setViewState("registration")
     }
 
-    // const showToRegister = () => {
-    //     props.setViewState("toRegister")
-    // }
-
     const showPasswordRecover = () => {
-        props.setViewState("recover")
+        setRecover(true)
     }
-
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -64,9 +60,9 @@ const Login = (props) => {
                     if (JSON.parse(localStorage.getItem("cart_id")) === null) {
                         dispatch(getCart())
                             .then(() => {
-                                setRedirect(true)
                             })
                     }
+                    setRedirect(true)
                 });
         } else {
             setLoading(false);
@@ -77,6 +73,8 @@ const Login = (props) => {
     if (redirect && location.pathname === '/login') {
         return <Redirect to='/' />;
     }
+
+    if (recover) return <Redirect to='/password-recovery' />
 
     return (
         <div className="col-md-12">
@@ -106,12 +104,12 @@ const Login = (props) => {
                             validations={[required]}
                         />
                     </div>
+                    {loading && (
+                        <span className="spinner-border spinner-border-sm"></span>
+                    )}
 
                     <div className="form-group">
                         <button className="btn-block logFormButton" disabled={loading}>
-                            {loading && (
-                                <span className="spinner-border spinner-border-sm"></span>
-                            )}
                             <span>Login</span>
                         </button>
                     </div>

@@ -70,7 +70,6 @@ const checkoutCart = () => {
 const removeItemCart = (id) => {
     //  Detected user on LS case
     if (JSON.parse(localStorage.getItem("user"))?.access !== undefined) {
-        console.log("SI")
         return axios.get(API_URL + 'carts/current/', {
             headers: {
                 Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`

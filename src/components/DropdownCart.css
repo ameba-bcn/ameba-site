@@ -14,7 +14,7 @@
     padding: 6px;
 }
 
-.totalCart{
+.totalCart {
     font-size: 20px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
@@ -78,7 +78,7 @@
     cursor: pointer;
 }
 
-.addCart{
+.addCart {
     margin-bottom: 10px;
 }
 
@@ -87,7 +87,7 @@
     background-color: #e9e9e9;
 }
 
-.buttonCheckoutCart{
+.buttonCheckoutCart {
     background-color: #1D1D1B;
     font-size: 20px;
     font-family: 'Bebas Neue';
@@ -102,7 +102,7 @@
     margin-right: 2rem; */
 }
 
-.separadorCartDrop{
+.separadorCartDrop {
     width: 100%;
     margin: 0 auto;
 }

@@ -32,7 +32,6 @@ export default function DropdownCart(props) {
 
     return (
         <>
-            {console.log("cart", props)}
             {cart_items !== undefined ? <>
                 <div className="totalCart">Total: <span>{total}</span></div>
                 <hr className="separadorCartDrop" />

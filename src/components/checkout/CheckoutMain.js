@@ -9,7 +9,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import PaymentForm from './PaymentForm';
+import PaymentForm from './../forms/PaymentForm';
 import Review from './Review';
 import Login from './../../redux/components/Login';
 import SuccesfullLogin from './../../redux/components/SuccesfullLogin';

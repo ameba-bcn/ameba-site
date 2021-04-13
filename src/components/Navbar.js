@@ -7,7 +7,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Menu from '@material-ui/core/Menu';
 import DropdownCart from './DropdownCart';
 import './Navbar.scss';
-import './DropdownCart.css';
+import './DropdownCart.css'
 
 const mapStateToProps = state => {
     return {
@@ -22,7 +22,7 @@ function Navbar(props) {
     const { isLoggedIn } = useSelector(state => state.auth);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const { cart = {} } = props;
-    const { cart_items = [], count = 0} = cart;
+    const { cart_items = [], count = 0 } = cart;
     const handleClickCart = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -57,7 +57,7 @@ function Navbar(props) {
         <div className="menuContainer">
             <div className="menuSuperior">
                 <div className="menuButton">
-                    <img src={process.env.PUBLIC_URL +'/NewLogo.png'} className="menuAmebalogo" alt="Ameba Logo"/>
+                    <img src={process.env.PUBLIC_URL + '/NewLogo.png'} className="menuAmebalogo" alt="Ameba Logo" />
                     <NavLink to="/" data-item='AMEBA'>AMEBA</NavLink>
                 </div>
                 <div className="menuIcon" onClick={handleClick} >
@@ -65,6 +65,8 @@ function Navbar(props) {
                 </div>
                 <div className="menuOptionsCollapsed">
                     <ul className={click ? "nav-ul.show" : "nav-ul"}>
+                        <li className="liMenuOptions" onClick={closeMenu}>
+                            <NavLink className="menuOptions" to="/membership-registration" data-item='MEMBER'>MEMBER</NavLink></li>
                         <li className="liMenuOptions" onClick={closeMenu}>
                             <NavLink className="menuOptions" to="/activitats" data-item='AGENDA'>AGENDA</NavLink></li>
                         <li className="liMenuOptions" onClick={closeMenu}>
@@ -85,6 +87,7 @@ function Navbar(props) {
                                     anchorEl={anchorEl}
                                     keepMounted
                                     className="menuDropdownCart"
+                                    disableAutoFocusItem
                                     open={Boolean(anchorEl)}
                                     onClose={handleCloseCart}>
                                     <div>

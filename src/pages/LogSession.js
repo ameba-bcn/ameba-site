@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import Login from '../redux/components/Login'
 import Register from '../redux/components/Register'
-import PasswordRecovery from '../redux/components/PasswordRecovery';
+// import RegisterForm from './../components/forms/RegisterForm'
+// import LoginForm from './../components/forms/LoginForm'
 import LettersMove from './../components/layout/LettersMove'
 import { connect } from "react-redux";
 
@@ -18,10 +19,9 @@ function LogSession(props) {
 
   return (<>
     <div className="loginWall">
-      {viewState === "registration" || (viewState === "registration" && !!props.cart) ? <Register viewState={viewState} setViewState={setViewState} /> :
-        (viewState === "recover" ? <PasswordRecovery viewState={viewState} setViewState={setViewState} /> :
-          <Login isCheckout={false} viewState={viewState} setViewState={setViewState} />
-        )}
+      {viewState === "registration" ? <Register viewState={viewState} setViewState={setViewState} /> :
+        <Login isCheckout={false} viewState={viewState} setViewState={setViewState} />
+      }
     </div>
     <LettersMove
       className="lettersMoveDiv"
