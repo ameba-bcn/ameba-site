@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
@@ -13,6 +13,8 @@ import './Producte.css';
 export default function ProducteDialog(props) {
     const { onClose, selectedValue, open, dataRow } = props;
     const dispatch = useDispatch();
+
+    const [activeSize, setActiveSize] = useState("S")
 
     const handleClose = () => {
         onClose(selectedValue);
@@ -48,39 +50,10 @@ export default function ProducteDialog(props) {
                                 component="img"
                                 alt={dataRow.name}
                                 className="imageProductModal"
-                                image={dataRow.images===undefined?null: dataRow.images[0]}
+                                image={dataRow.images === undefined ? null : dataRow.images[0]}
                                 title={dataRow.name}
                             />
                         </div>
-                        {/* <div className="columnProductImage2">
-                            <div className="row1ProductImage">
-                                <CardMedia
-                                    component="img"
-                                    alt={dataRow.name}
-                                    className="imageRow1ProductModal"
-                                    image={dataRow.images === undefined ? "" : dataRow.images[0]}
-                                    title={dataRow.name}
-                                />
-                            </div>
-                            <div className="row2ProductImage">
-                                <CardMedia
-                                    component="img"
-                                    alt={dataRow.name}
-                                    className="imageRow2ProductModal"
-                                    image={dataRow.images === undefined ? "" : dataRow.images[0]}
-                                    title={dataRow.name}
-                                />
-                            </div>
-                            <div className="row3ProductImage">
-                                <CardMedia
-                                    component="img"
-                                    alt={dataRow.name}
-                                    className="imageRow3ProductModal"
-                                    image={dataRow.images === undefined ? "" : dataRow.images[0]}
-                                    title={dataRow.name}
-                                />
-                            </div>
-                        </div> */}
                     </div>
                     <hr className="solid" />
                     <div className="sizeProductDetailed row">
@@ -90,7 +63,7 @@ export default function ProducteDialog(props) {
                             </span>
                             <div className="sizesBox">
                                 {["S", "M", "L", "XL"].map((el) => (
-                                    <div className="sizeProductBox" key={el}>
+                                    <div className={activeSize===el?"sizeProductBox-active":"sizeProductBox"} key={el} onClick={() => setActiveSize(el)}>
                                         {el}
                                     </div>
                                 ))}
