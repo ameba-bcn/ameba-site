@@ -11,6 +11,16 @@ const register = (username, email, password) => {
     });
 };
 
+const validateEmail = () => {
+    // return axios.post(API_URL + "users/", {
+    // });
+};
+
+const passwordRecovery = () => {
+    // return axios.post(API_URL + "users/", {
+    // });
+};
+
 const login = (email, password) => {
     return axios.post(API_URL + "token/", {
         email,
@@ -46,4 +56,6 @@ export default {
     register,
     login,
     logout,
+    validateEmail,
+    passwordRecovery
 };

@@ -1,8 +1,12 @@
 import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
+    VALIDATE_SUCCESS,
+    VALIDATE_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
+    PASSWORD_RECOVERY_SUCCESS,
+    PASSWORD_RECOVERY_FAIL,
     LOGOUT,
     SET_MESSAGE,
     // DELETE_CART
@@ -46,6 +50,32 @@ export const register = (username, email, password) => (dispatch) => {
     );
 };
 
+export const validateEmail = () => (dispatch) => {
+    return AuthService.validateEmail().then(
+        (response) => {
+            dispatch({
+                type: VALIDATE_SUCCESS,
+            });
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: VALIDATE_FAIL,
+                payload: message
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
 export const login = (username, password) => (dispatch) => {
     return AuthService.login(username, password).then(
         (data) => {
@@ -71,6 +101,32 @@ export const login = (username, password) => (dispatch) => {
             dispatch({
                 type: SET_MESSAGE,
                 payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const passwordRecovery = () => (dispatch) => {
+    return AuthService.passwordRecovery().then(
+        (response) => {
+            dispatch({
+                type: PASSWORD_RECOVERY_SUCCESS,
+            });
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: PASSWORD_RECOVERY_FAIL,
+                payload: message
             });
 
             return Promise.reject();

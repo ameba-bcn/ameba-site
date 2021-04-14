@@ -1,8 +1,12 @@
 import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
+    VALIDATE_SUCCESS,
+    VALIDATE_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
+    PASSWORD_RECOVERY_SUCCESS,
+    PASSWORD_RECOVERY_FAIL,
     LOGOUT,
 } from "../actions/types";
 
@@ -27,6 +31,14 @@ export default function (state = initialState, action) {
                 ...state,
                 isLoggedIn: false,
             };
+        case VALIDATE_SUCCESS:
+            return {
+                ...state,
+            };
+        case VALIDATE_FAIL:
+            return {
+                ...state,
+            };
         case LOGIN_SUCCESS:
             return {
                 ...state,
@@ -38,6 +50,14 @@ export default function (state = initialState, action) {
                 ...state,
                 isLoggedIn: false,
                 user: null,
+            };
+        case PASSWORD_RECOVERY_SUCCESS:
+            return {
+                ...state,
+            };
+        case PASSWORD_RECOVERY_FAIL:
+            return {
+                ...state,
             };
         case LOGOUT:
             return {
