@@ -35,6 +35,7 @@
         "react-router-dom": "^5.2.0",
         "react-scripts": "^4.0.1",
         "react-scroll": "^1.7.16",
+        "react-swipeable-views": "^0.13.9",
         "react-update": "^0.4.4",
         "react-validation": "^3.0.7",
         "redux": "^4.0.5",

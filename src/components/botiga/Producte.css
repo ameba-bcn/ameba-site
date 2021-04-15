@@ -10,7 +10,7 @@
     cursor: pointer;
 }
 
-.topProductBlock{
+.topProductBlock {
     margin: 0 auto;
     margin-top: 0.8rem;
 }
@@ -141,4 +141,103 @@ hr.dashed {
 hr.solid {
     border-top: 0.188rem solid #bbb;
     margin-top: 0rem;
+}
+
+/* /////////////////////////// */
+
+.cardProducteGeneralMbl {
+    height: 100%;
+    width: 600px;
+    max-width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    font-family: 'Bebas Neue';
+    color: #1D1D1B;
+}
+
+.frame-margin-modal {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.close-modal {
+    /* text-align: right; */
+    color: #1D1D1B;
+    cursor: pointer;
+}
+
+.title-modal {
+    font-size: 3.75rem;
+    font-weight: 300;
+    line-height: 1em;
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* .description-modal{
+    display: flex;
+} */
+
+.description-modal-title {
+    font-size: 1.625rem;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.description-modal-content {
+    text-align: left;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    margin-top: -0.3rem;
+    margin-bottom: 0.5rem;
+    text-align: justify;
+}
+
+.sizes-modal {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 0 auto;
+    justify-content: space-around;
+}
+
+.sizes-modal-title {
+    font-size: 1.625rem;
+    text-transform: uppercase;
+}
+
+.sizes-modal-button {
+    display: inline-flex;
+    background-color: #1D1D1B;
+    width: 2.188rem;
+    height: 2.188rem;
+    color: #FAE6C5;
+    font-size: 1.8rem;
+    margin-right: 0.25rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+
+.submit-button-modal-button {
+    display: flex;
+    position: relative;
+    height: auto;
+    width: 100%;
+    color: #FAE6C5;
+    background-color: #1D1D1B;
+    align-items: center;
+    justify-content:center;
+    padding: 0rem 0.625rem 0rem 0.625rem;
+}
+
+.submit-button-modal-button-text{
+    font-size: 2.6rem;
+    color: #FAE6C5;
+    padding-top: 0.125rem;
 }
