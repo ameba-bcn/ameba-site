@@ -70,6 +70,7 @@
     font-family: 'Bebas Neue';
     text-align: center;
     padding: 0rem 0.8rem 0rem 0.8rem;
+    margin-right: 0.5rem;
 }
 
 .subscriberSociBox{
@@ -77,7 +78,6 @@
     border-style: solid;
     border-color: #EB5E3E;
     line-height: 2.695rem;
-    margin-right: 0.5rem;
 }
 
 .professionalSociBox{

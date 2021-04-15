@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
@@ -17,6 +17,8 @@ export default function ProducteDialog(props) {
     const dispatch = useDispatch();
     const isMobile = useMediaQuery('(max-width:640px)');
 
+
+    const [activeSize, setActiveSize] = useState("S")
 
     const handleClose = () => {
         onClose(selectedValue);
@@ -46,48 +48,39 @@ export default function ProducteDialog(props) {
                             </div>
                             </div>
                         </div>
-                        <hr className="solid" />
-                        <div className="productImageBox">
-                            <div className="columnProductImage1">
-                                <CardMedia
-                                    component="img"
-                                    alt={dataRow.name}
-                                    className="imageProductModal"
-                                    image={dataRow.images === undefined ? null : dataRow.images[0]}
-                                    title={dataRow.name}
-                                />
-                            </div>
+                    </div>
+                    <hr className="solid" />
+                    <div className="productImageBox">
+                        <div className="columnProductImage1">
+                            <CardMedia
+                                component="img"
+                                alt={dataRow.name}
+                                className="imageProductModal"
+                                image={dataRow.images === undefined ? null : dataRow.images[0]}
+                                title={dataRow.name}
+                            />
                         </div>
-                        <hr className="solid" />
-                        <div className="sizeProductDetailed row">
-                            <div className="column">
-                                <span className="mainProducteWordBoxCard">
-                                    <PeopleAltIcon /> TALLES DISPONIBLES / &nbsp;
-                            </span>
-                                <div className="sizesBox">
-                                    {["S", "M", "L", "XL"].map((el) => (
-                                        <div className="sizeProductBox" key={el}>
-                                            {el}
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="column">
-                                <CardActions>
-                                    <button size="small" className="buttonCartProductBoxCard" color="inherit" onClick={() => { handleAddClick(dataRow.id) }}>
-                                        <ShoppingCartIcon className="buttonCartProductIconBoxCard" /><span className="buttonTextProductBoxCard">AFEGIR A CISTELLA</span>
-                                    </button>
-                                </CardActions>
-                            </div>
-                        </div>
-                        <hr className="dashed" />
-                        <div className="descriptionProductCardBox">
+                    </div>
+                    <hr className="solid" />
+                    <div className="sizeProductDetailed row">
+                        <div className="column">
                             <span className="mainProducteWordBoxCard">
                                 DESCRIPCIÓ &nbsp;
                             </span>
-                            <p className="textProductModal">
-                                {dataRow.description}
-                            </p>
+                            <div className="sizesBox">
+                                {["S", "M", "L", "XL"].map((el) => (
+                                    <div className={activeSize === el ? "sizeProductBox-active" : "sizeProductBox"} key={el} onClick={() => setActiveSize(el)}>
+                                        {el}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="column">
+                            <CardActions>
+                                <button size="small" className="buttonCartProductBoxCard" color="inherit" onClick={() => { handleAddClick(dataRow.id) }}>
+                                    <ShoppingCartIcon className="buttonCartProductIconBoxCard" /><span className="buttonTextProductBoxCard">AFEGIR A CISTELLA</span>
+                                </button>
+                            </CardActions>
                         </div>
                         <hr className="solid" />
                     </div>
