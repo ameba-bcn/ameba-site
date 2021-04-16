@@ -11,9 +11,10 @@ const register = (username, email, password) => {
     });
 };
 
-const validateEmail = () => {
-    // return axios.post(API_URL + "users/", {
-    // });
+const validateEmail = (token) => {
+    return axios.post(API_URL + "activate/", {
+        'token': token
+    });
 };
 
 const passwordRecovery = () => {
@@ -34,7 +35,7 @@ const login = (email, password) => {
             return response.data;
         })
 
-        // si hay cart en LS hacer un get localhost/api/carts/{cart-id}/ ide de carro del LS
+    // si hay cart en LS hacer un get localhost/api/carts/{cart-id}/ ide de carro del LS
 };
 
 const logout = () => {
@@ -47,7 +48,7 @@ const logout = () => {
         .then(() => {
             console.log("Vamos a eliminar el user")
             localStorage.removeItem("user");
-            if(JSON.parse(localStorage.getItem("cart_id"))) localStorage.removeItem("cart_id");
+            if (JSON.parse(localStorage.getItem("cart_id"))) localStorage.removeItem("cart_id");
         });
 };
 

@@ -40,7 +40,7 @@ function App() {
           <Route path='/password-recovery' component={PasswordRecovery} />
           <Route path='/validate-email' component={ValidateEmail} />
           <Route path='/registration' component={Register} />
-          <Route path='/logconf' component={LogMailConfirmation} />
+          <Route path='/activate' component={LogMailConfirmation} />
           <Route path='/checkout' component={Checkout} />
           <Route path='/summary-checkout' component={CheckoutFinished} />
           <Route exact path='/' component={Home} />

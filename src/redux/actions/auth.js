@@ -50,8 +50,8 @@ export const register = (username, email, password) => (dispatch) => {
     );
 };
 
-export const validateEmail = () => (dispatch) => {
-    return AuthService.validateEmail().then(
+export const validateEmail = (token) => (dispatch) => {
+    return AuthService.validateEmail(token).then(
         (response) => {
             dispatch({
                 type: VALIDATE_SUCCESS,
