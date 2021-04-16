@@ -1,0 +1,14 @@
+.image-carousel-root{
+    max-width: 400px;
+    flex-grow: 1;
+    margin: 0 auto
+}
+
+.image-carousel-img{
+    width: 100%;
+    height: auto;
+    max-width: 60vw;
+    display: block;
+    max-width: 400px;
+    overflow: hidden;
+}

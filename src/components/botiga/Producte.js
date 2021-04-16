@@ -90,15 +90,15 @@ export default function ProducteDialog(props) {
                 <Card className="cardProducteGeneralMbl">
                     <ClearIcon className="close-modal" onClick={handleClose} />
                     <div className="frame-margin-modal">
-                        <hr className="solid" />
+                        <hr className="thin" />
                         <div className="title-modal">
                             {dataRow.name}
                         </div>
-                        <hr className="solid" />
+                        <hr className="thin" />
                         <div className="img-modal">
-                            <ImageCarousel />
+                            <ImageCarousel imgList={dataRow.images}/>
                         </div>
-                        <hr className="solid" />
+                        <hr className="thin" />
                         <div className="description-modal">
                             <span className="description-modal-title">
                                 DESCRIPCIÓ
@@ -107,23 +107,22 @@ export default function ProducteDialog(props) {
                                 {dataRow.description}
                             </p>
                         </div>
-                        <hr className="solid" />
+                        <hr className="thin" />
                         <div className="sizes-modal">
                             <span className="sizes-modal-title">
                                 <PeopleAltIcon /> TALLES DISPONIBLES / &nbsp;
                             </span>
                             {["S", "M", "L", "XL"].map((el) => (
-                                <div className="sizes-modal-button" key={el}>
+                                <div className={activeSize === el?"sizes-modal-button-active":"sizes-modal-button"} key={el} onClick={() => setActiveSize(el)}>
                                     {el}
                                 </div>
                             ))}
                         </div>
                         <div className="submit-button-modal">
                             <button size="small" className="submit-button-modal-button" color="inherit" onClick={() => { handleAddClick(dataRow.id) }}>
-                                <ShoppingCartIcon className="buttonCartProductIconBoxCard" /><span className="submit-button-modal-button-text">AFEGIR A CISTELLA - {dataRow.price}€</span>
+                                <ShoppingCartIcon className="submit-button-modal-icon-cart" /><span className="submit-button-modal-button-text">AFEGIR A CISTELLA - {dataRow.price}€</span>
                             </button>
                         </div>
-                        <div className="teste">HOLI</div>
                     </div>
                 </Card>
             )}
