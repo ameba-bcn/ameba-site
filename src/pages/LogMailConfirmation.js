@@ -10,16 +10,16 @@ export default function LogMailConfirmation(props) {
     const dispatch = useDispatch();
 
     const history = useHistory();
-
-    const confirmed = (tkn) => {
-        dispatch(validateEmail(tkn))
-        history.push('/');
-    }
     const queryString = require('query-string');
     const parsed = queryString.parse(props.location.search);
+    const strToken = parsed.token
+
+    const confirmed = (strToken) => {
+        dispatch(validateEmail(strToken))
+        history.push('/');
+    }
     // new URLSearchParams(this.props.location.search).get("__firebase_request_key")
     console.log("queryparamsss", parsed)
-    const strToken = parsed.token
     return (
         <div className="loginWall">
             <br />
