@@ -50,8 +50,8 @@ export default function SociDialog(props) {
                                 <PeopleAltIcon /> TIPUS DE SOCI/A / &nbsp;
                             </span>
                             <div className="sociTypeBox">
-                                <div className="subscriberSociBox" onClick={()=> setIsSubscriber(true)}>Subscriptor</div>
-                                <div className="professionalSociBox" onClick={()=> setIsSubscriber(false)}>Professional</div>
+                                <div className={isSubscriber?"subscriberSociBox":"professionalSociBox"} onClick={()=> setIsSubscriber(true)}>Subscriptor</div>
+                                <div className={isSubscriber?"professionalSociBox":"subscriberSociBox"} onClick={()=> setIsSubscriber(false)}>Professional</div>
                             </div>
                             <br />
                         </div>
