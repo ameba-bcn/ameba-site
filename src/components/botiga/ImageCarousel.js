@@ -3,10 +3,10 @@ import { useTheme } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Button from '@material-ui/core/Button';
 import SwipeableViews from 'react-swipeable-views';
-import { autoPlay } from 'react-swipeable-views-utils';
+// import { autoPlay } from 'react-swipeable-views-utils';
 import './ImageCarousel.css';
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+// const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 function ImageCarousel(props) {
   const { imgList = [] } = props;

@@ -52,22 +52,16 @@ export default function ProducteDialog(props) {
                     <hr className="solid" />
                     <div className="productImageBox">
                         <div className="columnProductImage1">
-                            <CardMedia
-                                component="img"
-                                alt={dataRow.name}
-                                className="imageProductModal"
-                                image={dataRow.images === undefined ? null : dataRow.images[0]}
-                                title={dataRow.name}
-                            />
+                            <ImageCarousel imgList={dataRow.images} />
                         </div>
                     </div>
                     <hr className="solid" />
                     <div className="sizeProductDetailed row">
                         <div className="column">
-                            <span className="mainProducteWordBoxCard">
-                                DESCRIPCIÓ &nbsp;
-                            </span>
                             <div className="sizesBox">
+                                <span className="mainProducteWordBoxCard">
+                                    <PeopleAltIcon /> TALLES DISPONIBLES / &nbsp;
+                            </span>
                                 {["S", "M", "L", "XL"].map((el) => (
                                     <div className={activeSize === el ? "sizeProductBox-active" : "sizeProductBox"} key={el} onClick={() => setActiveSize(el)}>
                                         {el}
@@ -82,6 +76,13 @@ export default function ProducteDialog(props) {
                                 </button>
                             </CardActions>
                         </div>
+                        <hr className="dashed" />
+                            <span className="mainProducteWordBoxCard">
+                                DESCRIPCIÓ &nbsp;
+                            </span>
+                             <div className="descriptionModalText">
+                                {dataRow.description}
+                            </div>
                         <hr className="solid" />
                     </div>
                 </Card>
@@ -96,7 +97,7 @@ export default function ProducteDialog(props) {
                         </div>
                         <hr className="thin" />
                         <div className="img-modal">
-                            <ImageCarousel imgList={dataRow.images}/>
+                            <ImageCarousel imgList={dataRow.images} />
                         </div>
                         <hr className="thin" />
                         <div className="description-modal">
@@ -113,16 +114,16 @@ export default function ProducteDialog(props) {
                                 <PeopleAltIcon /> TALLES DISPONIBLES / &nbsp;
                             </span>
                             {["S", "M", "L", "XL"].map((el) => (
-                                <div className={activeSize === el?"sizes-modal-button-active":"sizes-modal-button"} key={el} onClick={() => setActiveSize(el)}>
+                                <div className={activeSize === el ? "sizes-modal-button-active" : "sizes-modal-button"} key={el} onClick={() => setActiveSize(el)}>
                                     {el}
                                 </div>
                             ))}
                         </div>
-                        <div className="submit-button-modal">
-                            <button size="small" className="submit-button-modal-button" color="inherit" onClick={() => { handleAddClick(dataRow.id) }}>
-                                <ShoppingCartIcon className="submit-button-modal-icon-cart" /><span className="submit-button-modal-button-text">AFEGIR A CISTELLA - {dataRow.price}€</span>
-                            </button>
-                        </div>
+                        {/* <div className="submit-button-modal"> */}
+                        <button size="small" className="submit-button-modal-button" color="inherit" onClick={() => { handleAddClick(dataRow.id) }}>
+                            <ShoppingCartIcon className="submit-button-modal-icon-cart" /><span className="submit-button-modal-button-text">AFEGIR A CISTELLA - {dataRow.price}€</span>
+                        </button>
+                        {/* </div> */}
                     </div>
                 </Card>
             )}
