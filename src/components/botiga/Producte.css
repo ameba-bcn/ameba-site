@@ -203,6 +203,7 @@ hr.thin {
 }
 
 .title-modal {
+    text-align: center;
     font-size: 3.75rem;
     font-weight: 600;
     line-height: 1em;
