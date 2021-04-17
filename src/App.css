@@ -269,6 +269,7 @@ div>.nav-item {
 /* LOGIN NUEVO */
 .loginWall {
     background-color: #EB5E3E;
+    height: 50vh;
 }
 
 .logTitle {
