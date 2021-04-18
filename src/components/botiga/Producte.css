@@ -1,21 +1,21 @@
-.cardProducteGeneral {
-    max-width: 39.375rem;
-    padding: 1.25rem;
-    background-color: #FAE6C5 !important;
+.frame-margin-modal {
+    margin: 40px 70px 40px 70px;
 }
 
-.crossCloseProducteModal {
-    float: right;
-    color: #1D1D1B;
-    cursor: pointer;
-}
-
-.topProductBlock {
+.top-title-price-modal{
     margin: 0 auto;
     margin-top: 0.8rem;
 }
 
-.cardPriceProducteBigBox {
+.top-title-price-modal-col1 {
+    width: 80%;
+}
+
+.top-title-price-modal-col2 {
+    width: 20%;
+}
+
+.title-modal-price{
     background-color: #1D1D1B;
     float: right;
     text-align: center;
@@ -25,113 +25,42 @@
     padding: 0.188rem 0.8rem 0rem 0.8rem;
 }
 
-.column_productTitle1 {
-    width: 80%;
+hr.modal-solid {
+    border-top: 0.088rem solid #bbb;
+    margin-top: 0rem;
+    margin-bottom: 0.5rem;
 }
 
-.column_productTitle2 {
-    width: 20%;
+hr.modal-dashed {
+    border-top: 0.088rem dashed #bbb;
+    margin-top: 0.2rem;
+    margin-bottom: 0.5rem;
 }
 
-.mainProducteWordBoxCard {
+.sizes-modal-title{
     font-family: 'Bebas Neue';
-    font-size: 1.625rem;
+    font-size: 1.3rem;
     color: #1D1D1B;
     text-transform: uppercase;
+    flex-grow: 1;
+    font-weight: 500;
 }
 
-.productImageBox {
-    display: flex;
-    justify-content: center;
+.description-modal-title {
+    font-size: 1.3rem;
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: 500;
+    flex-grow: 1;
 }
 
-.columnProductImage1 {
-    flex: 75%;
-    margin-right: 1rem;
-}
-
-.columnProductImage2 {
-    flex: 25%;
-}
-
-.imageProductModal {
-    height: 23.438rem;
-    margin-bottom: 0.313rem;
-}
-
-.row1ProductImage,
-.row2ProductImage,
-.row3ProductImage {
-    height: 7.75rem;
-    margin-bottom: 0.313rem;
-    width: 7.75rem;
-}
-
-.sizeProductBox {
-    display: inline-flex;
-    background-color: #1D1D1B;
-    width: 2.188rem;
-    height: 2.188rem;
-    color: #FAE6C5;
-    font-size: 1.8rem;
-    font-family: 'Bebas Neue';
-    margin-right: 0.25rem;
-    justify-content: center;
-    margin-bottom: 1rem;
-    align-items: center;
-}
-
-.sizeProductBox-active {
-    display: inline-flex;
-    background-color: #FAE6C5;
-    width: 2.188rem;
-    height: 2.188rem;
-    color: #1D1D1B;
-    border-width: 3px;
-    border-style: solid;
-    border-color: #1D1D1B;
-    font-size: 1.8rem;
-    font-family: 'Bebas Neue';
-    margin-right: 0.25rem;
-    justify-content: center;
-    margin-bottom: 1rem;
-    align-items: center;
-}
-
-.sizeProductDetailed {
+.size-description-modal-box {
     margin: 0 auto;
     margin-bottom: 0rem;
+    display: flex;
+    flex-direction: column;
 }
 
-.productTitleModal {
-    font-size: 3.75rem;
-    font-family: 'Bebas Neue';
-    font-weight: 300;
-    line-height: 1em;
-    margin: 0 auto;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
-.textProductModal {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.8rem;
-    margin-top: -0.3rem;
-    margin-bottom: 0.5rem;
-    text-align: justify;
-    height: auto;
-}
-
-.descriptionProductCardBox {
-    margin-top: .5rem;
-}
-
-.descriptionModalText{
-    display: inline-block;
-}
-
-/* Boton de compra  */
 .buttonCartProductBoxCard {
     display: flex;
     position: relative;
@@ -153,39 +82,19 @@
     padding-top: 0.125rem;
 }
 
-hr.dashed {
-    border-top: 0.088rem dashed #bbb;
-    margin-top: 0rem;
-    margin-bottom: 0rem;
-}
-
-hr.solid {
-    border-top: 0.088rem solid #bbb;
-    margin-top: 0rem;
-}
-
 /* /////////////////////////// */
 
-.cardProducteGeneralMbl {
+.card-general-mobile {
     height: 100%;
-    /* min-height: 640px; */
     max-height: 100%;
     width: 100%;
     max-width: 600px;
-    /* display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; */
     font-family: 'Bebas Neue';
     color: #1D1D1B;
 }
 
-.frame-margin-modal {
+.frame-margin-modal-mobile {
     margin: 20px;
-    /* display: flex; */
-
-    /* margin-right: 20px; */
 }
 
 .close-modal {
@@ -213,11 +122,7 @@ hr.thin {
     text-overflow: ellipsis;
 }
 
-/* .description-modal{
-    display: flex;
-} */
-
-.description-modal-title {
+.description-modal-title-mobile {
     font-size: 0.8rem;
     text-align: left;
     text-transform: uppercase;
@@ -230,6 +135,7 @@ hr.thin {
     margin-top: -0.3rem;
     margin-bottom: 0.5rem;
     text-align: justify;
+    flex-grow: 1;
 }
 
 .sizes-modal {
@@ -242,7 +148,7 @@ hr.thin {
     margin-bottom: 1rem;
 }
 
-.sizes-modal-title {
+.sizes-modal-title-mobile {
     font-size: 2.2rem;
     text-transform: uppercase;
     font-weight: 500;
@@ -258,7 +164,6 @@ hr.thin {
     font-size: 1.8rem;
     margin-right: 0.15rem;
     justify-content: center;
-    /* margin-bottom: 1rem; */
     align-items: center;
 }
 
@@ -274,7 +179,6 @@ hr.thin {
     font-size: 1.8rem;
     margin-right: 0.15rem;
     justify-content: center;
-    /* margin-bottom: 1rem; */
     align-items: center;
 }
 
@@ -311,7 +215,7 @@ hr.thin {
 }
 
 @media screen and (max-width: 500px) {
-    .sizes-modal-title {
+    .sizes-modal-title-mobile {
         font-size: 1.5rem;
     }
 
@@ -321,7 +225,7 @@ hr.thin {
 }
 
 @media screen and (max-width: 500px) {
-    .sizes-modal-title {
+    .sizes-modal-title-mobile {
         font-size: 1rem;
     }
 

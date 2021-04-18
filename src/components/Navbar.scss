@@ -80,13 +80,14 @@
         }
     }
 }
-.menuButton{
+
+.menuButton {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.menuAmebalogo{
+.menuAmebalogo {
     width: 50px;
     height: auto;
     margin-bottom: 3px;
@@ -176,6 +177,7 @@
         flex: 0 0 100%;
         align-items: center;
         justify-content: center;
+        // text-align: center;
     }
 
     a.menuOptions {
@@ -185,8 +187,10 @@
         font-weight: 400;
         font-size: 2.5rem;
         margin-right: 20px;
-        font-weight: bold;
         text-decoration: none;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     .liMenuOptions {
@@ -204,5 +208,11 @@
 
     .buttonMenu {
         width: 60%;
+    }
+}
+
+@media screen and (max-width: 420px) {
+    .menuOptionsCollapsed {
+        text-align: left;
     }
 }

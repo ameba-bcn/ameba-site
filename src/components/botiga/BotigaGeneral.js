@@ -3,6 +3,7 @@ import React, {useState, useEffect} from 'react';
 import './BotigaGeneral.css';
 import ProducteDialog from './Producte';
 import axiosInstance from "../../axios";
+import { formatPrice } from './../../utils/utils';
 
 export default function BotigaGeneral() {
 
@@ -71,7 +72,7 @@ export default function BotigaGeneral() {
                     </div>
                     <div className="productCardBody">
                         <h5 className="productTitle" >{data.name}</h5>
-                        <p className="productCardPrice">{data.price}{data.discount===""?"":`-${data.discount}`}€</p>
+                        <p className="productCardPrice">{formatPrice(data.price)}{data.discount===""?"":`-${data.discount}`}€</p>
                     </div>
                 </div>
             </div>

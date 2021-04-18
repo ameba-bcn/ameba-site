@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
-import CardMedia from '@material-ui/core/CardMedia';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import ClearIcon from '@material-ui/icons/Clear';
 import { addToCart } from '../../redux/actions/cart';
 import ImageCarousel from './ImageCarousel';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { formatPrice } from './../../utils/utils';
 import './Producte.css';
 
 export default function ProducteDialog(props) {
@@ -32,65 +32,62 @@ export default function ProducteDialog(props) {
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >
             {!isMobile && (<>
-                <Card className="cardProducteGeneral">
-                    <div className="insideFrameModal">
-                        <ClearIcon className="crossCloseProducteModal" onClick={handleClose} />
-                        <br />
-                        <div className="row topProductBlock">
-                            <div className="column_productTitle1">
-                                <div className="productTitleModal" id="simple-dialog-title">
+                <Card className="card-general-mobile">
+                    <ClearIcon className="close-modal" onClick={handleClose} />
+                    <div className="frame-margin-modal">
+                        <div className="row top-title-price-modal">
+                            <div className="top-title-price-modal-col1">
+                                <div className="title-modal">
                                     {dataRow.name}
                                 </div>
                             </div>
-                            <div className="column_productTitle2">
-                                <div className="cardPriceProducteBigBox">
-                                    {dataRow.price}€
+                            <div className="top-title-price-modal-col2">
+                                <div className="title-modal-price">
+                                    {formatPrice(dataRow.price)}€
                             </div>
                             </div>
                         </div>
-                    </div>
-                    <hr className="solid" />
-                    <div className="productImageBox">
-                        <div className="columnProductImage1">
+                        <hr className="modal-solid" />
+                        <div className="img-modal">
                             <ImageCarousel imgList={dataRow.images} />
                         </div>
-                    </div>
-                    <hr className="solid" />
-                    <div className="sizeProductDetailed row">
-                        <div className="column">
-                            <div className="sizesBox">
-                                <span className="mainProducteWordBoxCard">
-                                    <PeopleAltIcon /> TALLES DISPONIBLES / &nbsp;
-                            </span>
-                                {["S", "M", "L", "XL"].map((el) => (
-                                    <div className={activeSize === el ? "sizeProductBox-active" : "sizeProductBox"} key={el} onClick={() => setActiveSize(el)}>
-                                        {el}
+                        <hr className="modal-solid" />
+                        <div className="size-description-modal-box">
+                            <div>
+                                <div className="column">
+                                    <div className="sizes-modal-title">
+                                        <PeopleAltIcon /> TALLES DISPONIBLES / &nbsp;
                                     </div>
-                                ))}
+                                    {["S", "M", "L", "XL"].map((el) => (
+                                        <div className={activeSize === el ? "sizes-modal-button-active" : "sizes-modal-button"} key={el} onClick={() => setActiveSize(el)}>
+                                            {el}
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="column">
+                                    <CardActions>
+                                        <button size="small" className="buttonCartProductBoxCard" color="inherit" onClick={() => { handleAddClick(dataRow.id) }}>
+                                            <ShoppingCartIcon className="buttonCartProductIconBoxCard" /><span className="buttonTextProductBoxCard">AFEGIR A CISTELLA</span>
+                                        </button>
+                                    </CardActions>
+                                </div>
                             </div>
                         </div>
-                        <div className="column">
-                            <CardActions>
-                                <button size="small" className="buttonCartProductBoxCard" color="inherit" onClick={() => { handleAddClick(dataRow.id) }}>
-                                    <ShoppingCartIcon className="buttonCartProductIconBoxCard" /><span className="buttonTextProductBoxCard">AFEGIR A CISTELLA</span>
-                                </button>
-                            </CardActions>
-                        </div>
-                        <hr className="dashed" />
-                            <span className="mainProducteWordBoxCard">
-                                DESCRIPCIÓ &nbsp;
-                            </span>
-                             <div className="descriptionModalText">
-                                {dataRow.description}
+                        <hr className="modal-dashed" />
+                        <div className="description-modal-title">
+                            DESCRIPCIÓ &nbsp;
                             </div>
-                        <hr className="solid" />
+                        <div className="description-modal-content">
+                            {dataRow.description}
+                        </div>
+                        <hr className="modal-solid" />
                     </div>
                 </Card>
             </>)}
             {isMobile && (
-                <Card className="cardProducteGeneralMbl">
+                <Card className="card-general-mobile">
                     <ClearIcon className="close-modal" onClick={handleClose} />
-                    <div className="frame-margin-modal">
+                    <div className="frame-margin-modal-mobile">
                         <hr className="thin" />
                         <div className="title-modal">
                             {dataRow.name}
@@ -101,7 +98,7 @@ export default function ProducteDialog(props) {
                         </div>
                         <hr className="thin" />
                         <div className="description-modal">
-                            <span className="description-modal-title">
+                            <span className="description-modal-title-mobile">
                                 DESCRIPCIÓ
                             </span>
                             <p className="description-modal-content">
@@ -110,7 +107,7 @@ export default function ProducteDialog(props) {
                         </div>
                         <hr className="thin" />
                         <div className="sizes-modal">
-                            <span className="sizes-modal-title">
+                            <span className="sizes-modal-title-mobile">
                                 <PeopleAltIcon /> TALLES DISPONIBLES / &nbsp;
                             </span>
                             {["S", "M", "L", "XL"].map((el) => (
@@ -119,11 +116,9 @@ export default function ProducteDialog(props) {
                                 </div>
                             ))}
                         </div>
-                        {/* <div className="submit-button-modal"> */}
                         <button size="small" className="submit-button-modal-button" color="inherit" onClick={() => { handleAddClick(dataRow.id) }}>
-                            <ShoppingCartIcon className="submit-button-modal-icon-cart" /><span className="submit-button-modal-button-text">AFEGIR A CISTELLA - {dataRow.price}€</span>
+                            <ShoppingCartIcon className="submit-button-modal-icon-cart" /><span className="submit-button-modal-button-text">AFEGIR A CISTELLA - {formatPrice(dataRow.price)}€</span>
                         </button>
-                        {/* </div> */}
                     </div>
                 </Card>
             )}
