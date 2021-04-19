@@ -6,28 +6,17 @@ import axiosInstance from "../../axios";
 import { Link } from "react-scroll";
 // import state from './response2.js';
 // import ReactPlayer from "react-player";
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import LettersMove from './../layout/LettersMove';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
 import MediaLinks from './../layout/MediaLinks';
 
-const useViewportOut = () => {
-    const [width, setWidth] = React.useState(window.innerWidth);
-    React.useEffect(() => {
-        const handleWindowResize = () => setWidth(window.innerWidth);
-        window.addEventListener("resize", handleWindowResize);
-        return () => window.removeEventListener("resize", handleWindowResize);
-    }, []);
-    return { width };
-}
-
 export default function Entrevista(props) {
+    const breakpoint = useMediaQuery('(min-width:820px)');
     let history = useHistory();
     let location = useLocation();
     let urlID = location.pathname.substr(location.pathname.lastIndexOf('/') + 1);
-    const { width } = useViewportOut();
-    const breakpoint = 820;
-
 
     const [state, setState] = useState([
         {
@@ -122,7 +111,7 @@ export default function Entrevista(props) {
             <div className="entrevista-gral">
                 <TitleSection title="Entrevista" />
                 <div className="entrevista-columnes">
-                    {width > breakpoint ? <>
+                    {breakpoint ? <>
                         <div className="col1-preguntes">
 
                             {state.current_answers?.map((f, i) => (
