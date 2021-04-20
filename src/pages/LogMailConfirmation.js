@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch } from "react-redux";
 import { validateEmail } from './../redux/actions/auth';
 import { useHistory } from 'react-router-dom'
+import LettersMove from './../components/layout/LettersMove';
 
 export default function LogMailConfirmation(props) {
 
@@ -27,6 +28,11 @@ export default function LogMailConfirmation(props) {
             {hasQueryParams ?
                 <p>Compte verificat: Benvingut!</p> :
                 <p>T'hem enviat un mail de confirmació, confirma l'enllaç</p>}
+                            <LettersMove
+                className="lettersMoveDiv"
+                sentence="FES-TE SOCI/A "
+                color="#FAE6C5"
+            />
         </div>
     )
 }

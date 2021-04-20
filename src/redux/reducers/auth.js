@@ -5,6 +5,8 @@ import {
     VALIDATE_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
+    SEND_EMAIL_PASSWORD_RECOVERY_SUCCESS,
+    SEND_EMAIL_PASSWORD_RECOVERY_FAIL,
     PASSWORD_RECOVERY_SUCCESS,
     PASSWORD_RECOVERY_FAIL,
     LOGOUT,
@@ -50,6 +52,14 @@ export default function (state = initialState, action) {
                 ...state,
                 isLoggedIn: false,
                 user: null,
+            };
+        case SEND_EMAIL_PASSWORD_RECOVERY_SUCCESS:
+            return {
+                ...state,
+            };
+        case SEND_EMAIL_PASSWORD_RECOVERY_FAIL:
+            return {
+                ...state,
             };
         case PASSWORD_RECOVERY_SUCCESS:
             return {

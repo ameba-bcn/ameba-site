@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from "react-redux";
 import { passwordRecovery } from './../redux/actions/auth';
-import { useHistory } from 'react-router-dom'
-import PasswordRecoverForm from './../components/forms/PasswordRecoverForm'
+import { useHistory } from 'react-router-dom';
+import PasswordRecoverForm from './../components/forms/PasswordRecoverForm';
+import LettersMove from './../components/layout/LettersMove';
 
 export default function PasswordRecovery(props) {
     const dispatch = useDispatch();
@@ -27,6 +28,11 @@ export default function PasswordRecovery(props) {
             {hasQueryParams ?
                 <p>Contrasenya recuperada</p> :
                 <PasswordRecoverForm />}
-        </div>
+            <LettersMove
+                className="lettersMoveDiv"
+                sentence="FES-TE SOCI/A "
+                color="#FAE6C5"
+            />
+        </div >
     )
 }

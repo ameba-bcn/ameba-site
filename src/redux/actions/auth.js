@@ -5,6 +5,8 @@ import {
     VALIDATE_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
+    SEND_EMAIL_PASSWORD_RECOVERY_SUCCESS,
+    SEND_EMAIL_PASSWORD_RECOVERY_FAIL,
     PASSWORD_RECOVERY_SUCCESS,
     PASSWORD_RECOVERY_FAIL,
     LOGOUT,
@@ -126,6 +128,32 @@ export const passwordRecovery = () => (dispatch) => {
 
             dispatch({
                 type: PASSWORD_RECOVERY_FAIL,
+                payload: message
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const sendEmailPasswordRecovery = (email) => (dispatch) => {
+    return AuthService.sendEmailPasswordRecovery(email).then(
+        (response) => {
+            dispatch({
+                type: SEND_EMAIL_PASSWORD_RECOVERY_SUCCESS,
+            });
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: SEND_EMAIL_PASSWORD_RECOVERY_FAIL,
                 payload: message
             });
 

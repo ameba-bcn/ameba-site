@@ -22,6 +22,11 @@ const passwordRecovery = () => {
     // });
 };
 
+const sendEmailPasswordRecovery = () => {
+    // return axios.post(API_URL + "users/", {
+    // });
+};
+
 const login = (email, password) => {
     return axios.post(API_URL + "token/", {
         email,
@@ -58,5 +63,6 @@ export default {
     login,
     logout,
     validateEmail,
-    passwordRecovery
+    passwordRecovery,
+    sendEmailPasswordRecovery
 };
