@@ -5,6 +5,8 @@ import {
     VALIDATE_FAIL,
     LOGIN_SUCCESS,
     LOGIN_FAIL,
+    GET_USER_SUCCESS,
+    GET_USER_FAIL,
     SEND_EMAIL_PASSWORD_RECOVERY_SUCCESS,
     SEND_EMAIL_PASSWORD_RECOVERY_FAIL,
     PASSWORD_RECOVERY_SUCCESS,
@@ -110,8 +112,42 @@ export const login = (username, password) => (dispatch) => {
     );
 };
 
-export const passwordRecovery = () => (dispatch) => {
-    return AuthService.passwordRecovery().then(
+
+
+export const getUserData = () => (dispatch) => {
+    return AuthService.getUserData().then(
+        (data) => {
+            dispatch({
+                type: GET_USER_SUCCESS,
+                payload: { user: data },
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: GET_USER_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const passwordRecovery = (token, password) => (dispatch) => {
+    return AuthService.passwordRecovery(token, password).then(
         (response) => {
             dispatch({
                 type: PASSWORD_RECOVERY_SUCCESS,
@@ -187,5 +223,5 @@ export const logout = () => (dispatch) => {
 
             return Promise.reject();
         }
-        )
+    )
 };

@@ -4,7 +4,7 @@ import { Redirect, NavLink, useLocation } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { login } from "../actions/auth";
+import { login, getUserData } from "../actions/auth";
 import { getCart } from "../actions/cart";
 
 const required = (value) => {
@@ -56,6 +56,7 @@ const Login = (props) => {
         if (checkBtn.current.context._errors.length === 0) {
             dispatch(login(email, password))
                 .then(() => {
+                    dispatch(getUserData())
                     setLoading(false);
                     if (JSON.parse(localStorage.getItem("cart_id")) === null) {
                         dispatch(getCart())
@@ -63,7 +64,10 @@ const Login = (props) => {
                             })
                     }
                     setRedirect(true)
-                });
+                }).catch( 
+                    error => {console.log("Login error", error)
+                    setLoading(false);
+                })
         } else {
             setLoading(false);
         }
@@ -74,7 +78,7 @@ const Login = (props) => {
         return <Redirect to='/' />;
     }
 
-    if (recover) return <Redirect to='/password-recovery' />
+    if (recover) return <Redirect to='/send-recovery' />
 
     return (
         <div className="col-md-12">

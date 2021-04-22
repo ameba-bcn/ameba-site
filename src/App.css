@@ -269,7 +269,6 @@ div>.nav-item {
 /* LOGIN NUEVO */
 .loginWall {
     background-color: #EB5E3E;
-    height: 50vh;
 }
 
 .logTitle {
@@ -332,11 +331,11 @@ label {
     font-size: 1.2rem;
     font-weight: bold;
     cursor: pointer;
-    color: #1D1D1B;
+    color: #1D1D1B !important;
 }
 
 .logTextosLink:hover {
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 
 .logTextosLinkRegistrat{

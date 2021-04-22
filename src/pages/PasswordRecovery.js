@@ -1,38 +1,101 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch } from "react-redux";
 import { passwordRecovery } from './../redux/actions/auth';
-import { useHistory } from 'react-router-dom';
-import PasswordRecoverForm from './../components/forms/PasswordRecoverForm';
+// import { useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import Form from "react-validation/build/form";
+import Input from "react-validation/build/input";
+import CheckButton from "react-validation/build/button";
 import LettersMove from './../components/layout/LettersMove';
 
 export default function PasswordRecovery(props) {
     const dispatch = useDispatch();
-    const history = useHistory();
-    const [hasQueryParams, setHasQueryParams] = React.useState(false);
+    // const history = useHistory();
+    const form1 = useRef();
+    const checkBtn1 = useRef();
+    const [loading, setLoading] = useState(false);
+    const [password, setPassword] = useState("");
+
+    const [isSubmitted, setIsSubmitted] = React.useState(false);
     const queryString = require('query-string');
     const parsed = queryString.parse(props.location.search);
     const strToken = parsed.token
 
-    useEffect(() => {
-        if (strToken) {
-            dispatch(passwordRecovery(strToken))
-            setHasQueryParams(true)
-            setTimeout(() => {
-                history.push('/');
-            }, 3000);
+    const onChangePasword = (e) => {
+        const password = e.target.value;
+        setPassword(password);
+    };
+
+    const required = (value) => {
+        if (!value) {
+            return (
+                <div className="alert alert-danger" role="alert">
+                    Iep fera! Aquest camp es obligatori!
+                </div>
+            );
         }
-    }, [strToken]);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setLoading(true);
+        // form1.current.validateAll();
+        if (checkBtn1.current.context._errors.length === 0) {
+            dispatch(passwordRecovery(strToken, password)).then(
+                (response) => {
+                    console.log(response.data)
+                }).catch(error => console.log("passwordRecovery: ", error))
+            setLoading(false)
+            setIsSubmitted(true)
+            // Pendiente handlear la respuesta si es ok o si falla
+
+        } else {
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="loginWall">
-            {hasQueryParams ?
-                <p>Contrasenya recuperada</p> :
-                <PasswordRecoverForm />}
+            <div className="col-md-12">
+                <div className="card card-container card-login">
+                    <div className="logTitle">Recupera contrasenya</div>
+                    {isSubmitted ?
+                        <>Recuperació de contrasenya finalitzada</> :
+                        <>
+                            <Form
+                                onSubmit={handleSubmit}
+                                ref={form1}>
+                                <div className="form-group">
+                                    <Input
+                                        type="password"
+                                        className="form-control logForm"
+                                        name="password"
+                                        placeholder="contrasenya"
+                                        value={password}
+                                        onChange={onChangePasword}
+                                        validations={[required]}
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <button className="btn-block logFormButton" disabled={loading}>
+                                        {loading && (
+                                            <span className="spinner-border spinner-border-sm"></span>
+                                        )}
+                                        <span>Envia</span>
+                                    </button>
+                                </div>
+                                <CheckButton style={{ display: "none" }} ref={checkBtn1} />
+                            </Form>
+                            <span className="logTextosLink"><NavLink to="/send-recovery" >- No has rebut cap correu? Torna-ho a intentar -</NavLink></span>
+                        </>
+                    }
+                </div >
+            </div>
             <LettersMove
                 className="lettersMoveDiv"
                 sentence="FES-TE SOCI/A "
                 color="#FAE6C5"
             />
-        </div >
+        </div>
     )
 }

@@ -16,6 +16,7 @@ import MemberRegistration from './pages/MemberRegistration';
 import CheckoutFinished from './pages/CheckoutFinished';
 import LogMailConfirmation from './pages/LogMailConfirmation';
 import PasswordRecovery from './pages/PasswordRecovery';
+import SendEmailPasswordRecovery from './pages/SendEmailPasswordRecovery';
 import ValidateEmail from './pages/ValidateEmail';
 import Register from './redux/components/Register';
 import { UserContext } from './UserContext';
@@ -37,7 +38,8 @@ function App() {
           <Route path='/sessio' component={Sessio} />
           <Route path='/login' component={LogSession} />
           <Route path='/membership-registration' component={MemberRegistration} />
-          <Route path='/password-recovery' component={PasswordRecovery} />
+          <Route path='/recovery' component={PasswordRecovery} />
+          <Route path='/send-recovery' component={SendEmailPasswordRecovery} />
           <Route path='/validate-email' component={ValidateEmail} />
           <Route path='/registration' component={Register} />
           <Route path='/activate' component={LogMailConfirmation} />

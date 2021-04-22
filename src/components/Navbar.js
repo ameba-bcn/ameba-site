@@ -19,7 +19,7 @@ function Navbar(props) {
     const [click, setClick] = useState(false)
     const [size, setSize] = useState(0);
     const dispatch = useDispatch();
-    const { isLoggedIn } = useSelector(state => state.auth);
+    const { isLoggedIn, user_data } = useSelector(state => state.auth);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const { cart = {} } = props;
     const { cart_items = [], count = 0 } = cart;
@@ -76,7 +76,7 @@ function Navbar(props) {
                         <li className="liMenuOptions" onClick={closeMenu}>
                             {!isLoggedIn ?
                                 <NavLink className="menuOptions" id="MenuOptionsLogin" to="/login" data-item='LOGIN'>LOGIN</NavLink> :
-                                <NavLink className="menuOptions" id="MenuOptionsLogin" to="/" data-item='LOGOUT' onClick={logoutMenu}>LOGOUT</NavLink>
+                                <NavLink className="menuOptions" id="MenuOptionsLogin" to="/" data-item={user_data.username===""?"LOGOUT":user_data.username} onClick={logoutMenu}>{user_data.username===""?"LOGOUT":user_data.username}</NavLink>
                             }
                         </li>
                         {cart_items.length > 0 ?
