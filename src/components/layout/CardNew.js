@@ -8,18 +8,11 @@ import './CardNew.css';
 
 export default function CardNew(props) {
   return (
-    <Card >
+    <Card className="cardMainFrame">
       <CardActionArea className="cardFrame">
-        {/* <CardMedia
-          component="img"
-          alt={props.titol}
-          image={props.imatge}
-          title={props.titol}
-          className="cardMedia"
-        /> */}
         <img
           className="cardMedia"
-          src={process.env.PUBLIC_URL + "/" + props.imatge}
+          src={props.imatge}
           alt={props.titol}
           title={props.titol} />
         <div className="cardMediaTitle">

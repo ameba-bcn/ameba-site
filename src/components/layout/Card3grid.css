@@ -12,6 +12,10 @@
     margin: 26px;
 }
 
+.Card3GridPaper{
+    max-width: 500px !important;
+}
+
 .MuiGrid-item {
     margin: auto !important;
 }
