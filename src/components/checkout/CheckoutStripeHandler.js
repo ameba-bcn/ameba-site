@@ -10,6 +10,6 @@ export default function CheckoutStripeHandler(props) {
 
     const { isNewMember } = props;
     return (
-        <Elements stripe={promise} >{isNewMember ? <CheckoutMember /> : <CheckoutMain />}</Elements>
+        <Elements stripe={promise} >{isNewMember ? <CheckoutMember {...props}/> : <CheckoutMain />}</Elements>
     )
 }

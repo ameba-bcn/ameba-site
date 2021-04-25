@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 // import { required, vusername, vpassword, validEmail, vdninie, vphone } from './FormValidator';
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -8,7 +9,7 @@ import { isEmail } from "validator";
 import { register } from '../../redux/actions/auth';
 import { checkoutCart, addToCart } from '../../redux/actions/cart';
 
-const MembershipForm = ({isSubmitted}) => {
+const MembershipForm = ({ isSubmitted }) => {
     const form = useRef();
     const checkBtn = useRef();
 
@@ -29,23 +30,19 @@ const MembershipForm = ({isSubmitted}) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        setSuccessful(false);
-
-        form.current.validateAll();
+        // form.current.validateAll();
 
         if (checkBtn.current.context._errors.length === 0) {
             dispatch(register(username, email, password))
-                // .then(() => {
-                //     dispatch(addToCart([1])).then(() => {
-                //         dispatch(checkoutCart())
-                //         setSuccessful(true);
-                //     })
-                // })
-                // .catch(() => {
-                //     setSuccessful(false);
-                // });
+                .then(() => {
+                    setSuccessful(true);
+                    localStorage.setItem("view", "new_member");
+                })
+                .catch(() => {
+                    setSuccessful(false);
+                });
         }
-        isSubmitted(successful)
+
     };
 
     const required = (value) => {
@@ -113,10 +110,15 @@ const MembershipForm = ({isSubmitted}) => {
         }
     };
 
+    if (successful) {
+        isSubmitted(true)
+        if (successful) return <Redirect to='/validate-email' />
+    }
+
     return (
         <div className="col-md-12">
             <div className="card card-container card-login">
-                <div className="logTitle">Fes-te soci</div>
+                {/* <div className="logTitle">Fes-te soci</div> */}
 
                 <Form onSubmit={handleSubmit} ref={form}>
                     {!successful && (

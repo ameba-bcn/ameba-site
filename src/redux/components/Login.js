@@ -20,7 +20,7 @@ const required = (value) => {
 const Login = (props) => {
     const form = useRef();
     const checkBtn = useRef();
-    const { isCheckout } = props;
+    const { isCheckout, isNewMember } = props;
     const [email, setEmailname] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
@@ -57,17 +57,16 @@ const Login = (props) => {
             dispatch(login(email, password))
                 .then(() => {
                     dispatch(getUserData())
-                    setLoading(false);
                     if (JSON.parse(localStorage.getItem("cart_id")) === null) {
                         dispatch(getCart())
-                            .then(() => {
-                            })
                     }
-                    setRedirect(true)
-                }).catch( 
-                    error => {console.log("Login error", error)
                     setLoading(false);
-                })
+                    setRedirect(true)
+                }).catch(
+                    error => {
+                        console.log("Login error", error)
+                        setLoading(false);
+                    })
         } else {
             setLoading(false);
         }
@@ -78,12 +77,21 @@ const Login = (props) => {
         return <Redirect to='/' />;
     }
 
+    if (redirect && location.pathname === '/membership-registration') {
+        props.setViewState("membershipPayment")
+        console.log("Redireccion membership form ok")
+    }
+    // if (redirect && location.pathname === '/membership-registration') {
+    //     // return <Redirect to='/membership-registration' />;
+    //     console.log("Redireccion membership form ok")
+    // }
+
     if (recover) return <Redirect to='/send-recovery' />
 
     return (
         <div className="col-md-12">
             <div className="card card-container card-login">
-                {!isCheckout && (<div className="logTitle">login</div>)}
+                {!isCheckout && (<div className={isNewMember?"logTitleSmall":"logTitle"}>login</div>)}
                 <Form onSubmit={handleLogin} ref={form}>
                     <div className="form-group">
                         <Input
@@ -127,11 +135,13 @@ const Login = (props) => {
                     )}
                     <CheckButton style={{ display: "none" }} ref={checkBtn} />
                 </Form>
-                {!isCheckout && (
-                    <><span className="logTextosLink logTextosLinkRegistrat" onClick={showRegistration}>- Registra't -</span>
-                        <span className="logTextosLink" onClick={showPasswordRecover}>- Recupera la teva contrassenya -</span></>)}
-                {isCheckout && (
-                    <span className="logTextosLink logTextosLinkRegistrat" onClick={showRegistration}><NavLink to="/login" >- No tens compte? Registra't -</NavLink></span>)}
+                {!isNewMember && (isCheckout ?
+                    <span className="logTextosLink logTextosLinkRegistrat" onClick={showRegistration}><NavLink to="/login" >- No tens compte? Registra't -</NavLink></span> :
+                    <>
+                        <span className="logTextosLink logTextosLinkRegistrat" onClick={showRegistration}>- Registra't -</span>
+                        <span className="logTextosLink" onClick={showPasswordRecover}>- Recupera la teva contrassenya -</span>
+                    </>
+                )}
             </div>
         </div>
     );

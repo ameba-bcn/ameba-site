@@ -54,6 +54,7 @@ const RegisterForm = (props) => {
             dispatch(register(username, email, password))
                 .then(() => {
                     setSuccessful(true);
+                    localStorage.setItem("view", "new_register");
                 })
                 .catch(() => {
                     setSuccessful(false);
