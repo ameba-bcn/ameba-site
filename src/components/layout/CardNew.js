@@ -1,14 +1,13 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-// import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-// import CardMedia from '@material-ui/core/CardMedia';
 import './CardNew.css';
+import {formatISODateToDate} from './../../utils/utils';
 
 export default function CardNew(props) {
   return (
-    <Card className="cardMainFrame">
+    <Card>
       <CardActionArea className="cardFrame">
         <img
           className="cardMedia"
@@ -23,7 +22,7 @@ export default function CardNew(props) {
         </div>
         <CardContent className="row">
           <div className="cardMediaDate column1">
-            {props.data}
+          {formatISODateToDate(props.data)}
           </div>
           <div className="cardMediaPlus column2">
             +

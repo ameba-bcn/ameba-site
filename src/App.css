@@ -163,16 +163,6 @@ div>.nav-item {
     background-color: #1D1D1B;
 }
 
-@media screen and (max-width: 835px) {
-    .PowerTitle {
-        display: none;
-    }
-
-    .fullTableActiv {
-        padding-top: 1rem;
-    }
-}
-
 .Articles,
 .Botiga {
     background-color: #EB5E3E;

@@ -6,11 +6,13 @@
 .fullTableActiv {
     width: 80%;
     background-color: #EB5E3E;
+    margin: auto;
+    margin-bottom: 2em;
 }
 
-.MuiTableSortLabel-root {
-    font-family: 'Bebas Neue';
-    font-size: 1.5rem;
+.MuiTableCell-root {
+    font-family: 'Bebas Neue'!important;
+    font-size: 1.5rem!important;
 }
 
 .MuiPaper-root,
@@ -131,6 +133,16 @@
     }
 }
 
+@media screen and (max-width: 835px) {
+    .PowerTitle {
+        display: none;
+    }
+
+    .fullTableActiv {
+        padding-top: 1rem;
+    }
+}
+
 @media screen and (max-width: 630px) {
     table tbody tr td:nth-child(2),
     .MuiTableCell-head:nth-child(2),
@@ -143,5 +155,9 @@
     }
     .MuiTablePagination-toolbar {
         display: flex !important;
+    }
+    .horaDataPetit{
+        text-align: left;
+        margin-left: 1rem;
     }
 }

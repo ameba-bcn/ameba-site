@@ -8,7 +8,7 @@ export default class clientActivitats extends Component {
     render() {
         return (
             <>
-                <PowerTitle title="AGENDA" />
+                <PowerTitle title="AGENDA"/>
                 <LlistatActivitats />
             </>
         )

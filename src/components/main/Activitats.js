@@ -30,11 +30,14 @@ function Activitats() {
                 sentence="FES-TE SOCI/A "
                 color="#EB5E3E"
             />
-            <SectionTitle title="properes activitats" />
+            <SectionTitle title="activitats" />
             <Card3Grid className="Card3Block" activitats={activitats} />
             <div className="agendaLink">
                 <NavLink className="navLinkActivitat" style={{ textDecoration: 'none' }}
-                    to={{ pathname: '/activitats' }}><span>- - - &#62;</span> VEURE AGENDA <span>&#60; - - -</span></NavLink></div>
+                    to={{ pathname: '/activitats' }}>
+                        <div className="moreAgendaPlus">+</div>
+                        {/* <span>- - - &#62;</span> VEURE AGENDA <span>&#60; - - -</span> */}
+                        </NavLink></div>
         </div>
     );
 }

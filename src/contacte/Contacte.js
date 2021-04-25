@@ -3,17 +3,13 @@ import React from 'react';
 import NewsletterForm from './NewsletterForm';
 import './Contacte.css';
 import MediaLinks from '../components/layout/MediaLinks';
+import LettersMove from './../components/layout/LettersMove';
 //Falta Mixcloud & Twitch
 
 
 function Contacte() {
     return (
         <div className="bloqueContacto" id="contacte">
-            {/* <LettersMove
-                className="lettersMoveDiv"
-                sentence="FES-TE SOCI/A " 
-                color="#EB5E3E"
-                /> */}
             <div className="contenedorContacto">
                 <div className="newletterForm"><NewsletterForm /></div>
                 <MediaLinks
@@ -21,9 +17,14 @@ function Contacte() {
                     insta="ameba_bcn"
                     twit="ameba_bcn"
                     yout="channel/UCH5ssfBCmgJ1IDM-pSn2cEg"
-                />
+                    />
                 <div className="endingText">©2020 AMEBA<br />Associació de Música Electrònica de Barcelona - Tots els drets reservats</div>
             </div>
+                    <LettersMove
+                        className="lettersMoveDiv"
+                        sentence="L'ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA " 
+                        color="#F2C571"
+                        />
         </div>
     );
 }

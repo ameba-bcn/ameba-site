@@ -5,6 +5,7 @@ import MaterialTable from "material-table";
 import { TiTicket } from 'react-icons/ti';
 import axiosInstance from "../../axios";
 import ActivitatDialog from './Activitat';
+import { formatISODateToDate, formatISODateToHour } from './../../utils/utils'
 import './Agenda.css';
 
 export default function LlistatActivitats() {
@@ -45,14 +46,14 @@ export default function LlistatActivitats() {
 
   const fetchEvent = (data) => {
     axiosInstance.get(`events/${data.id}`, {})
-    .then((res) => {
+      .then((res) => {
         console.log(res.data);
         setEventData(res.data)
-    }).then(handleClickOpen())
-    .catch(error => {
+      }).then(handleClickOpen())
+      .catch(error => {
         console.log("ERROL", error.response)
-    });
-}
+      });
+  }
 
   useEffect(() => {
     axiosInstance.get(`events/`, {})
@@ -89,7 +90,7 @@ export default function LlistatActivitats() {
               <h1 className="mainActivitatTitle">{rowData.name}</h1>
             </div>
             <div className="horaDataPetit">
-              <h5 className="mainActivitatSubtitle">{rowData.datetime}</h5>
+              <h5 className="mainActivitatSubtitle">{formatISODateToDate(rowData.datetime)} {formatISODateToHour(rowData.datetime)}</h5>
             </div>
           </div>,
 
@@ -99,7 +100,7 @@ export default function LlistatActivitats() {
       },
       {
         title: 'Data', field: 'date',
-        render: rowData => <div className="horaDataActivitat"><h1 className="mainActivitatTitle">{rowData.datetime.split("T")[0]}</h1></div>
+        render: rowData => <div className="horaDataActivitat"><h1 className="mainActivitatTitle">{formatISODateToDate(rowData.datetime)}</h1></div>
         // , cellStyle: { width: 200 }
         , headerStyle: {
           textAlign: 'center'
@@ -107,8 +108,9 @@ export default function LlistatActivitats() {
       },
       {
         title: 'Hora', field: 'hour',
-        render: rowData => <div className="horaDataActivitat"><h1 className="mainActivitatTitle">{rowData.datetime.substring(rowData.datetime.lastIndexOf("T") + 1,rowData.datetime.lastIndexOf("Z")).slice(0, -3)}</h1></div>,
+        render: rowData => <div className="horaDataActivitat"><h1 className="mainActivitatTitle">{formatISODateToHour(rowData.datetime)}</h1></div>,
         // cellStyle: { width: 200 },
+        sorting: false,
         headerStyle: {
           textAlign: 'center'
         }
@@ -126,7 +128,7 @@ export default function LlistatActivitats() {
         columns={state.columns}
         data={eventsData}
         options={{
-          actionsColumnIndex: -1
+          actionsColumnIndex: -1,
         }}
         onRowClick={((evt, selectedRow) => {
           // setSelectedRow(selectedRow.id)
