@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 // import data from './response.json';
 import { NavLink, Redirect } from 'react-router-dom';
 import './LlistatEntrevistes.css';
 import axiosInstance from "../../axios";
+import ScrollTop from './../../components/layout/ScrollTop';
 
 export default function LlistatEntrevistes() {
 
@@ -25,13 +26,13 @@ export default function LlistatEntrevistes() {
             .then((res) => {
                 console.log(res.data);
                 return res.data
-            }).then((response) =>{
+            }).then((response) => {
                 setState(response)
             })
             .catch(error => {
                 console.log("ERROL", error.response)
             });
-      }, []);
+    }, []);
 
     const cardGenerator = state.map((data) => {
         return (
@@ -57,6 +58,7 @@ export default function LlistatEntrevistes() {
 
     return (
         <div className="cardSupportDeck">
+            <ScrollTop showBelow={250} />
             {cardGenerator}
         </div>
     )
