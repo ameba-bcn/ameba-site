@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-// import Data from './response.json';
+import { useDispatch } from "react-redux";
+import { addToCart } from '../../redux/actions/cart';
+import { Redirect } from 'react-router-dom';
 import MaterialTable from "material-table";
 // import { FiShoppingCart } from 'react-icons/fi';
 import { TiTicket } from 'react-icons/ti';
@@ -9,8 +11,18 @@ import { formatISODateToDate, formatISODateToHour } from './../../utils/utils'
 import './Agenda.css';
 
 export default function LlistatActivitats() {
+  const [redirect, setRedirect] = useState(false)
+  const dispatch = useDispatch();
+  const [open, setOpen] = useState(false);
+
+  const handleAddClick = (rowData) => {
+    dispatch(addToCart(rowData.id))
+    handleClose();
+    setRedirect(true)
+  }
+
+
   // const [selectedRow, setSelectedRow] = useState(null);
-  const [open, setOpen] = React.useState(false);
   // const [rowClickedData, setState] = React.useState([]);
   const [eventsData, setEventsData] = useState([
     {
@@ -120,6 +132,8 @@ export default function LlistatActivitats() {
     results: []
   });
 
+  if (redirect) { return <Redirect to='/checkout' /> }
+
   return (
     <div className="fullTableActiv">
       <MaterialTable
@@ -145,7 +159,7 @@ export default function LlistatActivitats() {
             icon: () => <TiTicket className="cardActivitat" />,
             tooltip: 'Reserva',
             onClick: (event, rowData) => {
-              // Do save operation
+              handleAddClick(rowData)
             }
           }
         ]}

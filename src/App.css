@@ -364,4 +364,10 @@ label {
     max-width: 110px !important;
     margin: 0 auto;
 }
-
+.succesful-login {
+    color: #FAE6C5;
+    text-transform: uppercase;
+    font-family: 'Bebas Neue';
+    font-size: 1.8rem;
+    margin: 0 auto;
+}

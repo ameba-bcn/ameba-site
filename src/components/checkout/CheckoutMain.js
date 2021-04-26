@@ -18,7 +18,8 @@ const mapStateToProps = state => {
   return {
     cart: state.cart.cart_data,
     isLoggedIn: state.auth.isLoggedIn,
-    stripe: state.cart.stripe
+    stripe: state.cart.stripe,
+    user_data: state.auth.user_data
   };
 };
 
@@ -62,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
 function CheckoutMain(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const { username = "", email = "" } = props.user_data
   const [activeStep, setActiveStep] = React.useState(props.isLoggedIn ? 1 : 0);
   const [autoStep, setAutoStep] = React.useState(true);
   const steps = ['Log/Registre', 'Revisió', 'Dades de pagament'];
@@ -98,7 +100,7 @@ function CheckoutMain(props) {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return props.isLoggedIn ? <SuccesfullLogin nom={"nombre"} email={"Email"} /> : <Login isCheckout={true} viewState={viewState} setViewState={setViewState}/>;
+        return props.isLoggedIn ? <SuccesfullLogin nom={username} email={email} /> : <Login isCheckout={true} viewState={viewState} setViewState={setViewState}/>;
       case 1:
         return <Review />;
       case 2:
@@ -123,18 +125,6 @@ function CheckoutMain(props) {
               </Step>
             ))}
           </Stepper>
-          {/* <React.Fragment> */}
-            {/* {activeStep === steps.length ? (
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order confirmation, and will
-                  send you an update when your order has shipped.
-                </Typography>
-              </React.Fragment>
-            ) : ( */}
               <React.Fragment>
                 {getStepContent(activeStep)}
                 <div className={classes.buttons}>
@@ -155,8 +145,6 @@ function CheckoutMain(props) {
                     )}
                 </div>
               </React.Fragment>
-             {/* )} */}
-          {/* </React.Fragment> */}
         </Paper>
       </main>
     </React.Fragment>
