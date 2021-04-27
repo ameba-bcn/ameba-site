@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axiosInstance from "../../axios";
 import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,13 +14,26 @@ export default function SociDialog(props) {
     const handleClose = () => {
         onClose(selectedValue);
     };
-    const [isSubscriber, setIsSubscriber] = React.useState(true);
+    const [socisData, getSocisData] = useState();
 
+    useEffect(() => {
+        axiosInstance.get(`subscriptions/`, {})
+            .then((res) => {
+                console.log(res.data);
+                getSocisData(res.data)
+            })
+            .catch(error => {
+                console.log("ERROL", error.response)
+            });
+    }, []);
+
+    const [isSubscriber, setIsSubscriber] = useState(0);
+    console.log("Data responseeeeee", socisData)
     return (
-        <Dialog onClose={handleClose} 
-        // aria-labelledby="simple-dialog-title" 
-        open={open} >
-            <Card className="cardSociGeneral" >
+         <Dialog onClose={handleClose}
+            // aria-labelledby="simple-dialog-title" 
+            open={open} >
+            {socisData?<Card className="cardSociGeneral" >
                 <div className="insideFrameModal">
                     <ClearIcon className="crossSociCloseModal" onClick={handleClose} />
                     <br />
@@ -31,7 +45,7 @@ export default function SociDialog(props) {
                         </div>
                         <div className="column_productTitle2">
                             <div className="cardSociPriceBigBox">
-                                5-15 €
+                                {socisData[isSubscriber].price} €
                             </div>
                         </div>
                     </div>
@@ -40,7 +54,7 @@ export default function SociDialog(props) {
                         component="img"
                         alt=""
                         className="imageSociModal"
-                        image=""
+                        image={socisData[isSubscriber].images[0]}
                         title=""
                     />
                     <hr className="solid" />
@@ -50,8 +64,8 @@ export default function SociDialog(props) {
                                 <PeopleAltIcon /> TIPUS DE SOCI/A / &nbsp;
                             </span>
                             <div className="sociTypeBox">
-                                <div className={isSubscriber?"subscriberSociBox":"professionalSociBox"} onClick={()=> setIsSubscriber(true)}>Subscriptor</div>
-                                <div className={isSubscriber?"professionalSociBox":"subscriberSociBox"} onClick={()=> setIsSubscriber(false)}>Professional</div>
+                                <div className={isSubscriber===0 ? "subscriberSociBox" : "professionalSociBox"} onClick={() => setIsSubscriber(1)}>Subscriptor</div>
+                                <div className={isSubscriber===1 ? "professionalSociBox" : "subscriberSociBox"} onClick={() => setIsSubscriber(0)}>Professional</div>
                             </div>
                             <br />
                         </div>
@@ -83,7 +97,7 @@ export default function SociDialog(props) {
                     </div>
                     <hr className="solid" />
                 </div>
-            </Card>
+            </Card>: null}
         </Dialog>
     );
 }
