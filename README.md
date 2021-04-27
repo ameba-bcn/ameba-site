@@ -2,6 +2,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # AMEBA FRONTEND
 
+Version 0.2
+
+## Release changes
+- Membership procedure
+- Modals mobile adapted
+- Password recovery implemented
+- Email verification implemented
+
 Version 0.1
 
 ## Release changes
