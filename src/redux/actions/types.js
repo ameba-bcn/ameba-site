@@ -21,6 +21,7 @@ export const CHECKOUT_FAIL = "CHECKOUT_FAIL";
 export const GET_CART = "GET_CART";
 export const GET_CART_FAIL = "GET_CART_FAIL";
 export const DELETE_CART = "DELETE_CART";
+export const DELETE_CART_FAIL = "DELETE_CART_FAIL";
 export const DESTROY_CART = "DESTROY_CART";
 export const DESTROY_CART_FAIL = "DESTROY_CART_FAIL";
 
