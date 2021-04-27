@@ -7,6 +7,8 @@ import {
     CHECKOUT_FAIL,
     GET_CART,
     GET_CART_FAIL,
+    DELETE_CART,
+    DELETE_CART_FAIL,
     DESTROY_CART,
     DESTROY_CART_FAIL
 } from "./types";
@@ -124,6 +126,37 @@ export const checkoutCart = () => (dispatch) => {
         }
     );
 };
+
+
+
+export const deleteFullCart = () => (dispatch) => {
+    return CartService.deleteFullCart().then(
+        (response) => {
+            dispatch({
+                type: DELETE_CART,
+                payload: response,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message =
+                (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                error.message ||
+                error.toString();
+
+            dispatch({
+                type: DELETE_CART_FAIL,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
 
 export const deleteCartAfterCheckout = () => (dispatch) => {
     return CartService.deleteCartAfterSuccesfullCheckout().then(
