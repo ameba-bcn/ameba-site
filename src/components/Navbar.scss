@@ -94,8 +94,10 @@
 }
 
 .menuButton a,
-.cartIconMenu {
+.cartIconMenu,
+.sessio-menu-button {
     font-family: 'Bebas Neue';
+    cursor: pointer;
     text-decoration: none;
     font-size: 2.5rem;
     font-weight: 400;
