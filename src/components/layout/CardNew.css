@@ -1,11 +1,11 @@
-/* .cardFrame {
-    position: relative;
-} */
-
 .cardMedia {
-    height: 100%;
-    width: 100% !important;
-    object-fit: contain !important;
+    -webkit-filter: grayscale(100%);
+    /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+    filter: brightness(50%);
+    width: 500px;
+    height: 500px;
+    object-fit: cover !important;
 }
 
 .cardMediaTitle {
@@ -23,10 +23,12 @@
     line-height: 0.8em;
     text-align: left;
     word-break: keep-all;
+    text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    visibility: visible;
 }
 
 .cardMediaSort {
@@ -79,5 +81,5 @@
 }
 
 .cardFrame {
-    background-color: #FAE6C5 !important
+    background-color: #FAE6C5 !important;
 }

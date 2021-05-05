@@ -18,6 +18,7 @@
     font-family: 'Bebas Neue';
     font-weight: 400;
     line-height: 1.1em;
+    overflow: hidden;
 }
 
 #locals:hover .overlay {
@@ -76,5 +77,29 @@
     .overlayTitle,
     .overlaySubtitle {
         display: none;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .overlayTitle {
+        font-size: 150px;
+    }
+    .overlaySubtitle {
+        font-size: 40px;
+    }
+    .overlay {
+        padding: 30% 0;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .overlayTitle {
+        font-size: 130px;
+    }
+    .overlaySubtitle {
+        font-size: 35px;
+        margin-top: -115px;
+    }
+    .overlay {
+        padding: 35% 0;
     }
 }

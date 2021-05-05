@@ -1,7 +1,7 @@
 import React from 'react';
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { addToCart, substractToCart } from './../redux/actions/cart';
+import { addToCart, substractToCart } from './../../redux/actions/cart';
 import { useDispatch } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import './DropdownCart.css';

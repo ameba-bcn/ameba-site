@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { addToCart } from '../../redux/actions/cart';
+import { Redirect } from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -12,9 +15,20 @@ import './Activitat.css';
 
 export default function ActivitatDialog(props) {
     const { onClose, selectedValue, open, dataRow } = props;
+    const [redirect, setRedirect] = useState(false)
+    const dispatch = useDispatch();
+
     const handleClose = () => {
         onClose(selectedValue);
     };
+
+    const handleAddClick = () => {
+        dispatch(addToCart(dataRow.id))
+        handleClose();
+        setRedirect(true)
+    }
+
+    if (redirect) return <Redirect to='/checkout' />;
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >
@@ -39,7 +53,7 @@ export default function ActivitatDialog(props) {
                         component="img"
                         alt={dataRow.name}
                         className="imageActivitatModal"
-                        image={dataRow.images===undefined?null : dataRow.images[0]}
+                        image={dataRow.images === undefined ? null : dataRow.images[0]}
                         title={dataRow.name}
                     />
                     <hr className="solid" />
@@ -50,8 +64,8 @@ export default function ActivitatDialog(props) {
                             </span>
                             <span className="dateLinkActivitatCard">
                                 <a href="https://google.com/calendar" target="_blank" rel="noopener noreferrer">
-                                    {dataRow.datetime!==undefined?dataRow.datetime.split("T")[0]:""}-
-                                    {dataRow.datetime!==undefined?dataRow.datetime.substring(dataRow.datetime.lastIndexOf("T") + 1,dataRow.datetime.lastIndexOf("Z")).slice(0, -3):""}
+                                    {dataRow.datetime !== undefined ? dataRow.datetime.split("T")[0] : ""}-
+                                    {dataRow.datetime !== undefined ? dataRow.datetime.substring(dataRow.datetime.lastIndexOf("T") + 1, dataRow.datetime.lastIndexOf("Z")).slice(0, -3) : ""}
                                 </a>
                             </span>
                             <br />
@@ -60,7 +74,7 @@ export default function ActivitatDialog(props) {
                         </div>
                         <div className="column">
                             <CardActions>
-                                <button size="small" className="buttonTicketActivitatBoxCard" color="inherit">
+                                <button size="small" className="buttonTicketActivitatBoxCard" color="inherit" onClick={() => { handleAddClick(dataRow.id) }}>
                                     <ReceiptIcon className="buttonTicketIconActivitatBoxCard" /><span className="buttonTicketTextActivitatBoxCard">RESERVA ENTRADA</span>
                                 </button>
                             </CardActions>

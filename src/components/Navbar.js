@@ -1,13 +1,12 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { useSelector, useDispatch, connect } from "react-redux";
 import { logout } from "../redux/actions/auth";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Menu from '@material-ui/core/Menu';
-import DropdownCart from './DropdownCart';
+import DropdownCart from './../components/dropdowns/DropdownCart';
 import './Navbar.scss';
-import './DropdownCart.css'
 
 const mapStateToProps = state => {
     return {
@@ -20,17 +19,12 @@ function Navbar(props) {
     const [size, setSize] = useState(0);
     const dispatch = useDispatch();
     const { isLoggedIn, user_data } = useSelector(state => state.auth);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const [anchorEl1, setAnchorEl1] = useState(null);
+    const [redirect, setRedirect] = useState(false)
     const { cart = {} } = props;
     const { cart_items = [], count = 0 } = cart;
-    const handleClickCart = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleCloseCart = () => {
-        setAnchorEl(null);
-    };
-
+    
     useLayoutEffect(() => {
         function updateSize() {
             setSize(window.innerWidth);
@@ -40,6 +34,30 @@ function Navbar(props) {
         size > 1000 ? setClick(false) : setClick(click)
         return () => window.removeEventListener('resize', updateSize);
     }, [size, click]);
+    
+    const handleClickCart = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleCloseCart = () => {
+        setAnchorEl(null);
+    };
+
+    const handleClickSessio = (event) => {
+        setAnchorEl1(event.currentTarget)
+    }
+
+    const handleCloseSessio = () => {
+        setAnchorEl1(null);
+    };
+
+
+    const handleRedirect = () => {
+        console.log("Entra")
+        setAnchorEl(null);
+        // setRedirect(true)
+    }
+
 
     const handleClick = () => {
         setClick(!click)
@@ -52,6 +70,7 @@ function Navbar(props) {
     const logoutMenu = () => {
         dispatch(logout())
     }
+    // if (redirect) return <Redirect to='/profile' />
 
     return (
         <div className="menuContainer">
@@ -76,7 +95,26 @@ function Navbar(props) {
                         <li className="liMenuOptions" onClick={closeMenu}>
                             {!isLoggedIn ?
                                 <NavLink className="menuOptions" id="MenuOptionsLogin" to="/login" data-item='LOGIN'>LOGIN</NavLink> :
-                                <NavLink className="menuOptions" id="MenuOptionsLogin" to="/" data-item={user_data.username===""?"LOGOUT":user_data.username} onClick={logoutMenu}>{user_data.username===""?"LOGOUT":user_data.username}</NavLink>
+                                <>
+                                    <a className="sessio-menu-button" data-item={user_data.username === "" ? "SESSIÓ" : user_data.username}
+                                        onClick={handleClickSessio} >{user_data.username === "" ? "SESSIÓ" : user_data.username}</a>
+                                    {user_data.username === "" ? "SESSIÓ" : user_data.username}
+                                    <Menu
+                                        id="simple-menu"
+                                        anchorEl={anchorEl1}
+                                        keepMounted
+                                        className="menuDropdownCart"
+                                        disableAutoFocusItem
+                                        open={Boolean(anchorEl1)}
+                                        onClose={handleCloseSessio}>
+                                        <div>
+                                            <NavLink className="menuOptions" to="/profile">
+                                                <div className="dropdown-profile" onClick={handleRedirect}>Perfil</div>
+                                            </NavLink>
+                                            <div className="dropdown-logout" onClick={logoutMenu}>Log out</div>
+                                        </div>
+
+                                    </Menu></>
                             }
                         </li>
                         {cart_items.length > 0 ?

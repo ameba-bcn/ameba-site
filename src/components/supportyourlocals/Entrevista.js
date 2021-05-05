@@ -11,6 +11,7 @@ import LettersMove from './../layout/LettersMove';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import IndeterminateCheckBoxIcon from '@material-ui/icons/IndeterminateCheckBox';
 import MediaLinks from './../layout/MediaLinks';
+import ScrollTop from './../../components/layout/ScrollTop';
 
 export default function Entrevista(props) {
     const breakpoint = useMediaQuery('(min-width:820px)');
@@ -61,6 +62,7 @@ export default function Entrevista(props) {
     return (
         <>
             <div className="top-section-gral">
+                <ScrollTop showBelow={250} />
                 <div className="top-section_entr">
                     <div className="ts-title">{state.title}</div>
                     <div className="ts-breadcrumbs">

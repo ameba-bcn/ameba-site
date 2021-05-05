@@ -11,6 +11,7 @@ import { Switch, Route } from 'react-router-dom';
 import Contacte from './contacte/Contacte';
 import Menu from './components/Navbar'
 import LogSession from './pages/LogSession';
+import Profile from './pages/Profile';
 import Checkout from './pages/Checkout';
 import MemberRegistration from './pages/MemberRegistration';
 import CheckoutFinished from './pages/CheckoutFinished';
@@ -43,6 +44,7 @@ function App() {
           <Route path='/validate-email' component={ValidateEmail} />
           <Route path='/registration' component={Register} />
           <Route path='/activate' component={LogMailConfirmation} />
+          <Route path='/profile' component={Profile} />
           <Route path='/checkout' component={Checkout} />
           <Route path='/summary-checkout' component={CheckoutFinished} />
           <Route exact path='/' component={Home} />

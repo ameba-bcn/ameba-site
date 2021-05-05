@@ -8,6 +8,7 @@ import {
     GET_CART,
     GET_CART_FAIL,
     DELETE_CART,
+    DELETE_CART_FAIL,
     DESTROY_CART,
     DESTROY_CART_FAIL
 } from "../actions/types";
@@ -65,6 +66,11 @@ export default function (state = initialState, action) {
                 cart_data: {},
             };
         case DELETE_CART:
+            return {
+                ...state,
+                cart_data: {},
+            };
+        case DELETE_CART_FAIL:
             return {
                 ...state,
                 cart_data: {},

@@ -1,4 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
+import { addToCart, deleteFullCart } from '../../redux/actions/cart';
+import { Redirect } from 'react-router-dom';
+import axiosInstance from "../../axios";
 import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,16 +14,42 @@ import './Soci.css'
 
 export default function SociDialog(props) {
     const { onClose, selectedValue, open } = props;
+    const dispatch = useDispatch();
+    const [socisData, getSocisData] = useState();
+    const [isSubscriber, setIsSubscriber] = useState(0);
+    const [redirect, setRedirect] = useState(false);
+
+    useEffect(() => {
+        axiosInstance.get(`subscriptions/`, {})
+            .then((res) => {
+                console.log(res.data);
+                getSocisData(res.data)
+            })
+            .catch(error => {
+                console.log("ERROL", error.response)
+            });
+    }, []);
+
     const handleClose = () => {
         onClose(selectedValue);
     };
-    const [isSubscriber, setIsSubscriber] = React.useState(true);
+
+    const handleAddClick = () => {
+        dispatch(deleteFullCart())
+        dispatch(addToCart(socisData[isSubscriber].id))
+        setRedirect(true)
+        // handleClose();
+    }
+
+    if (redirect) {
+        return <Redirect to='/membership-registration' />;
+    }
 
     return (
-        <Dialog onClose={handleClose} 
-        // aria-labelledby="simple-dialog-title" 
-        open={open} >
-            <Card className="cardSociGeneral" >
+        <Dialog onClose={handleClose}
+            // aria-labelledby="simple-dialog-title" 
+            open={open} >
+            {socisData ? <Card className="cardSociGeneral" >
                 <div className="insideFrameModal">
                     <ClearIcon className="crossSociCloseModal" onClick={handleClose} />
                     <br />
@@ -31,7 +61,7 @@ export default function SociDialog(props) {
                         </div>
                         <div className="column_productTitle2">
                             <div className="cardSociPriceBigBox">
-                                5-15 €
+                                {socisData[isSubscriber].price} €
                             </div>
                         </div>
                     </div>
@@ -40,7 +70,7 @@ export default function SociDialog(props) {
                         component="img"
                         alt=""
                         className="imageSociModal"
-                        image=""
+                        image={socisData[isSubscriber].images[0]}
                         title=""
                     />
                     <hr className="solid" />
@@ -50,14 +80,14 @@ export default function SociDialog(props) {
                                 <PeopleAltIcon /> TIPUS DE SOCI/A / &nbsp;
                             </span>
                             <div className="sociTypeBox">
-                                <div className={isSubscriber?"subscriberSociBox":"professionalSociBox"} onClick={()=> setIsSubscriber(true)}>Subscriptor</div>
-                                <div className={isSubscriber?"professionalSociBox":"subscriberSociBox"} onClick={()=> setIsSubscriber(false)}>Professional</div>
+                                <div className={isSubscriber === 1 ? "subscriberSociBox" : "professionalSociBox"} onClick={() => setIsSubscriber(0)}>Subscriptor</div>
+                                <div className={isSubscriber === 1 ? "professionalSociBox" : "subscriberSociBox"} onClick={() => setIsSubscriber(1)}>Professional</div>
                             </div>
                             <br />
                         </div>
                         <div className="column">
                             <CardActions>
-                                <button size="small" className="buttonSociBoxCard" color="inherit">
+                                <button size="small" className="buttonSociBoxCard" color="inherit" onClick={() => { handleAddClick(socisData[isSubscriber].id) }} >
                                     <ShoppingCartIcon className="buttonSociIconBoxCard" /><span className="buttonSociTextBoxCard">AFEGIR CISTELLA</span>
                                 </button>
                             </CardActions>
@@ -83,7 +113,7 @@ export default function SociDialog(props) {
                     </div>
                     <hr className="solid" />
                 </div>
-            </Card>
+            </Card> : null}
         </Dialog>
     );
 }

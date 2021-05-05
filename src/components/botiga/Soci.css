@@ -65,6 +65,7 @@
 .professionalSociBox{
     display: inline-block;
     text-transform: uppercase;
+    cursor:pointer;
     color: #FAE6C5;
     font-size: 1.6rem;
     font-family: 'Bebas Neue';

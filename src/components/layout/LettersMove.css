@@ -56,3 +56,10 @@
     text-decoration: none;
     color: #1D1D1B;
 }
+
+
+@media screen and (max-width: 700px) {
+    .marquee {
+        animation: marqueee 7s linear infinite;
+    }
+}

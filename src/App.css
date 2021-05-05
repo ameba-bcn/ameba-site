@@ -163,16 +163,6 @@ div>.nav-item {
     background-color: #1D1D1B;
 }
 
-@media screen and (max-width: 835px) {
-    .PowerTitle {
-        display: none;
-    }
-
-    .fullTableActiv {
-        padding-top: 1rem;
-    }
-}
-
 .Articles,
 .Botiga {
     background-color: #EB5E3E;
@@ -401,4 +391,10 @@ label {
     max-width: 110px !important;
     margin: 0 auto;
 }
-
+.succesful-login {
+    color: #FAE6C5;
+    text-transform: uppercase;
+    font-family: 'Bebas Neue';
+    font-size: 1.8rem;
+    margin: 0 auto;
+}
