@@ -27,3 +27,6 @@ export const DESTROY_CART_FAIL = "DESTROY_CART_FAIL";
 
 export const SET_MESSAGE = "SET_MESSAGE";
 export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
+
+export const GUEST_USER = "GUEST_USER";
+export const LOGGED_USER = "LOGGED_USER";

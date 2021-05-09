@@ -16,6 +16,7 @@ const MembershipForm = ({ isSubmitted }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [displayError, setDisplayError] = useState(false);
     const [usernameReal, setUsernameReal] = useState("");
     const [surnameReal, setSurnameReal] = useState("");
     const [dni, setDni] = useState("");
@@ -40,6 +41,7 @@ const MembershipForm = ({ isSubmitted }) => {
                 })
                 .catch(() => {
                     setSuccessful(false);
+                    setDisplayError(true);
                 });
         }
 
@@ -225,7 +227,7 @@ const MembershipForm = ({ isSubmitted }) => {
                         </div>
                     )}
 
-                    {message && (
+                    {(displayError && message) && (
                         <div className="form-group">
                             <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
                                 {message}

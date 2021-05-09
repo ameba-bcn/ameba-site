@@ -1,5 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import './App.css';
+import { setGuestUser, setLoggedUser } from './redux/actions/state';
+import { useDispatch } from "react-redux";
+// import { connect } from "react-redux";
+import axiosInstance from "./axios";
 import Home from './pages/Home';
 import Activitats from './pages/Activitats';
 import Botiga from './pages/Botiga';
@@ -22,9 +26,39 @@ import ValidateEmail from './pages/ValidateEmail';
 import Register from './redux/components/Register';
 import { UserContext } from './UserContext';
 
+// const mapStateToProps = state => {
+//   return {
+//     user_state: state.user_state
+//   };
+// };
+
 function App() {
   const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
+
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("user"))) {
+      // Update Refresh token action and if not  delete LS
+      // axiosInstance.post(`token/refresh/`, {
+      //   'refresh': JSON.parse(localStorage.getItem("user"))?.refresh
+      // })
+      //       .then((res) => {
+      //           console.log("rerereresposta",res.data);
+      //           // localStorage.setItem("user", JSON.stringify(response.data));
+      //       })
+      //       .catch(error => {
+      //           console.log("ERROL", error.response)
+      //       });
+      dispatch(setLoggedUser())
+      console.log("Has local user", JSON.parse(localStorage.getItem("user")))
+    }
+    else {
+      dispatch(setGuestUser());
+      console.log("Has local user", JSON.parse(localStorage.getItem("user")))
+
+    }
+  }, [dispatch]);
 
   return (
     <div className="App">

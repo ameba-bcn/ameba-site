@@ -26,6 +26,7 @@ const Login = (props) => {
     const [loading, setLoading] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const [recover, setRecover] = useState(false);
+    const [displayError, setDisplayError] = useState(false);
     const { message } = useSelector(state => state.message);
     const location = useLocation();
     const dispatch = useDispatch();
@@ -62,11 +63,11 @@ const Login = (props) => {
                     }
                     setLoading(false);
                     setRedirect(true)
-                }).catch(
-                    error => {
-                        console.log("Login error", error)
-                        setLoading(false);
-                    })
+                }).catch(() => {
+                    setDisplayError(true)
+                    setLoading(false)
+                }
+                )
         } else {
             setLoading(false);
         }
@@ -91,7 +92,7 @@ const Login = (props) => {
     return (
         <div className="col-md-12">
             <div className="card card-container card-login">
-                {!isCheckout && (<div className={isNewMember?"logTitleSmall":"logTitle"}>login</div>)}
+                {!isCheckout && (<div className={isNewMember ? "logTitleSmall" : "logTitle"}>login</div>)}
                 <Form onSubmit={handleLogin} ref={form}>
                     <div className="form-group">
                         <Input
@@ -126,7 +127,7 @@ const Login = (props) => {
                         </button>
                     </div>
 
-                    {message && (
+                    {(displayError && message) && (
                         <div className="form-group">
                             <div className="alert alert-danger" role="alert">
                                 {message}

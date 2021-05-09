@@ -92,7 +92,7 @@ function Navbar(props) {
                             <NavLink className="menuOptions" to="/botiga" data-item='BOTIGA'>BOTIGA</NavLink></li>
                         <li className="liMenuOptions" onClick={closeMenu}>
                             <NavLink className="menuOptions" to="/support" data-item='#SUPPORTYOURLOCALS'>#SUPPORTYOURLOCALS</NavLink></li>
-                        <li className="liMenuOptions" onClick={closeMenu}>
+                        <div className="liMenuOptions logname-li" onClick={closeMenu}>
                             {!isLoggedIn ?
                                 <NavLink className="menuOptions" id="MenuOptionsLogin" to="/login" data-item='LOGIN'>LOGIN</NavLink> :
                                 <>
@@ -116,7 +116,7 @@ function Navbar(props) {
 
                                     </Menu></>
                             }
-                        </li>
+                        </div>
                         {cart_items.length > 0 ?
                             <li className="liMenuOptions" ><ShoppingCartIcon className="cartIconMenu" onClick={handleClickCart} />
                                 {cart ? <div className="bubbleCart">{count}</div> : null}

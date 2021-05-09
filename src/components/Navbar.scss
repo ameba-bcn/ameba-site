@@ -26,6 +26,14 @@
     vertical-align: middle;
 }
 
+.logname-li {
+    width: min-content;
+    display: flex;
+    vertical-align: middle;
+    padding-right: 0px;
+    margin-right: 0px;
+}
+
 .nav-ul {
     li {
         a.active {
@@ -44,6 +52,7 @@
     list-style: none;
     display: flex;
 
+    div,
     li {
         a {
             display: inline-block;
@@ -197,6 +206,7 @@
 
     .liMenuOptions {
         margin: 2rem;
+        width: fit-content;
     }
 
     .menuOptionsCollapsed ul {

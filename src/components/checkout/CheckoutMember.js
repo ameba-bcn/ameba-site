@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { connect } from "react-redux";
 import MembershipForm from './../forms/MembershipForm';
 import Login from './../../redux/components/Login';
@@ -19,6 +19,8 @@ function CheckoutMember(props) {
     const [accountCreated, setAccountCreated] = useState(false);
     const [paymentReady, setPaymentReady] = useState(false);
     const [viewState, setViewState] = useState("");
+    const [displayError, setDisplayError] = useState(false);
+    const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -26,8 +28,10 @@ function CheckoutMember(props) {
             console.log("Hey yo")
             dispatch(addToCart("1")).then(() => {
                 dispatch(checkoutCart()).then(() => setPaymentReady(true))
-            }).catch(
+            }).catch(() => {
                 console.log("Algo ha ido muy mal tito...")
+                setDisplayError(true)
+            }
             )
             // setViewState("membershipPaymentPending")
         }
@@ -39,13 +43,20 @@ function CheckoutMember(props) {
     return (
         <div><div className="new-member-title">Fes-te Soci</div>
             {
-            paymentReady ?
-                <CheckoutMemberPayment />
-                :
-                (localStorage.getItem("view") === "new_member" ?
-                    <Login isCheckout={false} isNewMember={true} viewState={viewState} setViewState={setViewState} />
-                    : <MembershipForm isSubmitted={setAccountCreated} />)
-        }
+                paymentReady ?
+                    <CheckoutMemberPayment />
+                    :
+                    (localStorage.getItem("view") === "new_member" ?
+                        <Login isCheckout={false} isNewMember={true} viewState={viewState} setViewState={setViewState} />
+                        : <MembershipForm isSubmitted={setAccountCreated} />)
+            }
+            {(displayError && message) && (
+                        <div className="form-group">
+                            <div className="alert alert-danger" role="alert">
+                                {message}
+                            </div>
+                        </div>
+                    )}
         </div>
     )
 }
