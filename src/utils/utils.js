@@ -6,7 +6,7 @@ export function getIDValuesFromArrayObj(ObjectArray = []) {
 
 export function formatPrice(price = "") {
     var fields = price.split('.');
-    if (fields && fields.length > 0 && fields[1] === "00") return fields[0]
+    if (fields && fields.length > 0 && fields[1] === "00€") return fields[0]+"€"
     return price
 }
 

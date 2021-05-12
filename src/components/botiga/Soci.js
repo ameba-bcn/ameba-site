@@ -22,7 +22,7 @@ export default function SociDialog(props) {
     useEffect(() => {
         axiosInstance.get(`subscriptions/`, {})
             .then((res) => {
-                console.log(res.data);
+                console.log("subscriptions",res.data);
                 getSocisData(res.data)
             })
             .catch(error => {
@@ -35,9 +35,11 @@ export default function SociDialog(props) {
     };
 
     const handleAddClick = () => {
-        dispatch(deleteFullCart())
-        dispatch(addToCart(socisData[isSubscriber].id))
-        setRedirect(true)
+        // dispatch(deleteFullCart()).then(()=> {
+            console.log("Socis data", socisData[isSubscriber].id)
+            dispatch(addToCart(socisData[isSubscriber].id))
+            setRedirect(true)
+        // })
         // handleClose();
     }
 
@@ -61,7 +63,7 @@ export default function SociDialog(props) {
                         </div>
                         <div className="column_productTitle2">
                             <div className="cardSociPriceBigBox">
-                                {socisData[isSubscriber].price} €
+                                {socisData[isSubscriber].price_range}
                             </div>
                         </div>
                     </div>

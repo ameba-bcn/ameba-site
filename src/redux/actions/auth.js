@@ -1,6 +1,8 @@
 import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
+    REGISTER_MEMBER_SUCCESS,
+    REGISTER_MEMBER_FAIL,
     VALIDATE_SUCCESS,
     VALIDATE_FAIL,
     LOGIN_SUCCESS,
@@ -42,6 +44,44 @@ export const register = (username, email, password) => (dispatch) => {
 
             dispatch({
                 type: REGISTER_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const registerMember = (address, first_name, last_name, phone_number, username, password, email) => (dispatch) => {
+    return AuthService.registerMember(address, first_name, last_name, phone_number, username, password, email).then(
+        () => {
+            console.log("In action", )
+            dispatch({
+                type: REGISTER_MEMBER_SUCCESS,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: "Register member success",
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            console.log("error.response.data",error.response.data)
+            const message = error.response.data.detail
+                // (error.response &&
+                //     error.response.data &&
+                //     error.response.data.message) ||
+                // error.message ||
+                // error.toString();
+
+            dispatch({
+                type: REGISTER_MEMBER_FAIL,
             });
 
             dispatch({

@@ -1,6 +1,8 @@
 import {
     REGISTER_SUCCESS,
     REGISTER_FAIL,
+    REGISTER_MEMBER_SUCCESS,
+    REGISTER_MEMBER_FAIL,
     VALIDATE_SUCCESS,
     VALIDATE_FAIL,
     LOGIN_SUCCESS,
@@ -24,12 +26,12 @@ const user_data = {
 }
 const initialState = user
     ? { isLoggedIn: true, user, user_data }
-    : { isLoggedIn: false, user: null, user_data};
+    : { isLoggedIn: false, user: null, user_data };
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
     const { type, payload } = action;
-
+    console.log("payload",payload)
     switch (type) {
         case REGISTER_SUCCESS:
             return {
@@ -40,6 +42,14 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 isLoggedIn: false,
+            };
+        case REGISTER_MEMBER_SUCCESS:
+            return {
+                ...state,
+            };
+        case REGISTER_MEMBER_FAIL:
+            return {
+                ...state,
             };
         case VALIDATE_SUCCESS:
             return {

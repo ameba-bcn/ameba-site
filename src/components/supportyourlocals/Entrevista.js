@@ -5,7 +5,7 @@ import TitleSection from './TitleSection';
 import axiosInstance from "../../axios";
 import { Link } from "react-scroll";
 // import state from './response2.js';
-// import ReactPlayer from "react-player";
+import ReactPlayer from "react-player";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import LettersMove from './../layout/LettersMove';
 import AddBoxIcon from '@material-ui/icons/AddBox';
@@ -19,7 +19,7 @@ export default function Entrevista(props) {
     let location = useLocation();
     let urlID = location.pathname.substr(location.pathname.lastIndexOf('/') + 1);
 
-    const [state, setState] = useState([
+    const [interview, setInterview] = useState([
         {
             id: 0,
             title: "",
@@ -27,6 +27,16 @@ export default function Entrevista(props) {
             introduction: "",
             created: "",
             current_answers: [{ 'answer': "", "question": "" }]
+        }
+    ]);
+
+    const [artist, setArtist] = useState([
+        {
+            id: 0,
+            name: "",
+            images: [],
+            biography: "",
+            media_urls: []
         }
     ]);
 
@@ -52,7 +62,11 @@ export default function Entrevista(props) {
         axiosInstance.get(`interviews/${urlID}/`, {})
             .then((res) => {
                 console.log(res.data);
-                setState(res.data)
+                setInterview(res.data)
+                axiosInstance.get(`artists/${urlID}/`, {}).then((res) => {
+                    console.log("artist", res.data);
+                    setArtist(res.data)
+                })
             })
             .catch(error => {
                 console.log("ERROL", error.response)
@@ -64,9 +78,9 @@ export default function Entrevista(props) {
             <div className="top-section-gral">
                 <ScrollTop showBelow={250} />
                 <div className="top-section_entr">
-                    <div className="ts-title">{state.title}</div>
+                    <div className="ts-title">{interview.title}</div>
                     <div className="ts-breadcrumbs">
-                        <span onClick={() => history.push('/')}>AMEBA</span> / <span onClick={() => history.goBack()}>#SUPPORTYOURLOCALS</span> / {state.title}
+                        <span onClick={() => history.push('/')}>AMEBA</span> / <span onClick={() => history.goBack()}>#SUPPORTYOURLOCALS</span> / {interview.title}
                     </div>
                     <div className="ts-tags">
                         <div className="tags-e">dj</div>
@@ -95,17 +109,17 @@ export default function Entrevista(props) {
                     <TitleSection title="BIO" />
                     <div className="bio-section">
                         <div className="bio-highlights">
-                            <div className="bio-data">NOM/ <span>{state.title}</span></div>
+                            <div className="bio-data">NOM/ <span>{interview.title}</span></div>
                             <div className="bio-data">CIUTAT/ <span>DUMMY TEXT</span></div>
                             <div className="bio-data">SEGELLS/ <span>DUMMY TEXT</span></div>
                             <div className="bio-data">PROJECTES/ <span>DUMMY TEXT</span></div>
                             <div className="bio-data">ARTISTES/ <span>DUMMY TEXT</span></div>
                         </div>
                         <div className="bio-text">
-                            {state.introduction}</div>
-                        <div className="bio-img">
-                            <img className="bio-img-src" src={state.image} alt={state.title} />
-                        </div>
+                            {artist.biography}</div>
+                        {artist.images && (<div className="bio-img">
+                            <img className="bio-img-src" src={artist.images[0]} alt={artist.name} />
+                        </div>)}
                     </div>
                 </div>
             </div>
@@ -115,8 +129,7 @@ export default function Entrevista(props) {
                 <div className="entrevista-columnes">
                     {breakpoint ? <>
                         <div className="col1-preguntes">
-
-                            {state.current_answers?.map((f, i) => (
+                            {interview.current_answers?.map((f, i) => (
                                 (i < 3 ?
                                     <div className="pregunta" key={i}>
                                         {f.question}
@@ -129,7 +142,7 @@ export default function Entrevista(props) {
                             ))}
                         </div>
                         <div className="col2-preguntes">
-                            {state.current_answers?.map((f, i) => (
+                            {interview.current_answers?.map((f, i) => (
                                 (i > 2 ?
                                     <div className="pregunta" key={i}>
                                         {f.question}
@@ -143,7 +156,7 @@ export default function Entrevista(props) {
                         </div>
                     </> :
                         <>
-                            {state.current_answers?.map((f, i) => (
+                            {interview.current_answers?.map((f, i) => (
                                 <div className="pregunta" key={i}>
                                     {f.question}
                                     {expand.p[i] ? <IndeterminateCheckBoxIcon className="collapse-resp" onClick={() => updateExpand(i)} />
@@ -157,13 +170,14 @@ export default function Entrevista(props) {
             </div>
             <LettersMove sentence={"l'associació de música electrònica de barcelona"} color={"#F2C571"} />
             <div className="media-gral">
-                <TitleSection title="Media" />
-                <div className="media-artista">
-                    {/* {state.links.map((n) =>
-                        <div className="mediaPlayer">
-                            <ReactPlayer url={n} />
-                        </div>)} */}
-                </div>
+                {artist.media_urls && artist.media_urls.length > 0 ? <>
+                    <TitleSection title="Media" />
+                    <div className="media-artista">
+                        {artist.media_urls.map((n) =>
+                            <div className="mediaPlayer">
+                                <ReactPlayer url={n} />
+                            </div>)}
+                    </div></> : null}
                 <TitleSection title="Xarxes socials" />
                 <div className="xarxes-artista">
                     <MediaLinks

@@ -8,21 +8,21 @@ import ScrollTop from './../../components/layout/ScrollTop';
 export default function LlistatEntrevistes() {
 
     const cardClicked = (id) => {
-        return <Redirect to={`/Support/Entrevista?='${id}`} />
+        return <Redirect to={`/support/entrevista?='${id}`} />
     };
 
     const [state, setState] = useState([
         {
             id: 0,
-            title: "",
-            image: "",
+            name: "",
+            images: [],
             bio_preview: "",
             created: ""
         }
     ]);
 
     useEffect(() => {
-        axiosInstance.get(`interviews/`, {})
+        axiosInstance.get(`artists/`, {})
             .then((res) => {
                 console.log(res.data);
                 return res.data
@@ -44,9 +44,9 @@ export default function LlistatEntrevistes() {
                         aboutProps: data
                     }}>
                     <div className="cardSupport">
-                        <img className="cardSupportImgTop" src={data.image} alt={data.title} />
+                        <img className="cardSupportImgTop" src={data.images[0]} alt={data.name} />
                         <div className="cardSupportTitle">
-                            {data.title}
+                            {data.name}
                         </div>
                         <div className="cardSupportPlusBox">+</div>
                         <div className="cardTagBox">DJ</div>

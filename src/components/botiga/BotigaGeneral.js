@@ -8,17 +8,17 @@ import { formatPrice } from './../../utils/utils';
 export default function BotigaGeneral() {
 
     const [open, setOpen] = React.useState(false);
-    const [data, setData] = useState([
+    const [allProducts, getAllProducts] = useState([
         {
             id: 0,
             name: "",
-            price:"",
+            price_range:"",
             images: [""],
             discount: ""
         }
     ]);
 
-    const [productData, setProductData] = useState([
+    const [productData, getProductData] = useState([
         {
             id: 0,
             name: "",
@@ -44,7 +44,7 @@ export default function BotigaGeneral() {
         axiosInstance.get(`articles/${data.id}`, {})
         .then((res) => {
             console.log(res.data);
-            setProductData(res.data)
+            getProductData(res.data)
         }).then(handleClickOpen())
         .catch(error => {
             console.log("ERROL", error.response)
@@ -55,14 +55,14 @@ export default function BotigaGeneral() {
         axiosInstance.get(`articles/`, {})
             .then((res) => {
                 console.log(res.data);
-                setData(res.data)
+                getAllProducts(res.data)
             })
             .catch(error => {
                 console.log("ERROL", error.response)
             });
     }, []);
 
-    const cardGenerator = data.map((data) => {
+    const cardGenerator = allProducts.map((data) => {
         return (
             <div className="fullcardBotiga" key={data.id}
                 onClick={() => fetchProduct(data)}>
@@ -72,7 +72,7 @@ export default function BotigaGeneral() {
                     </div>
                     <div className="productCardBody">
                         <h5 className="productTitle" >{data.name}</h5>
-                        <p className="productCardPrice">{formatPrice(data.price)}{data.discount===""?"":`-${data.discount}`}€</p>
+                        <p className="productCardPrice">{formatPrice(data.price_range)}</p>
                     </div>
                 </div>
             </div>

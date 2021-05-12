@@ -11,7 +11,7 @@ function MainSupportLocals() {
     const [state, setState] = useState(undefined)
 
     useEffect(() => {
-        axiosInstance.get(`interviews/`, {})
+        axiosInstance.get(`artists/`, {})
             .then((res) => {
                 console.log(res.data);
                 return res.data
@@ -32,8 +32,8 @@ function MainSupportLocals() {
                 cellHeight={240}
                 className="gridList">
                 {state.slice(0, (breakpoint ? 3 : 9)).map((tile) => (
-                    <GridListTile key={tile.image} className="gridImg">
-                        <img src={tile.image} alt={tile.title} className="gridImages" />
+                    <GridListTile key={tile.id} className="gridImg">
+                        <img src={tile.images[0]} alt={tile.name} className="gridImages" />
                     </GridListTile>
                 ))}
             </GridList>}

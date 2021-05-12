@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import Dialog from '@material-ui/core/Dialog';
 import Card from '@material-ui/core/Card';
@@ -16,9 +16,10 @@ export default function ProducteDialog(props) {
     const { onClose, selectedValue, open, dataRow } = props;
     const dispatch = useDispatch();
     const isMobile = useMediaQuery('(max-width:640px)');
+    const [sizes, setSizes] = useState([])
 
 
-    const [activeSize, setActiveSize] = useState("S")
+    const [activeSize, setActiveSize] = useState(sizes ? sizes[0] : [])
 
     const handleClose = () => {
         onClose(selectedValue);
@@ -28,6 +29,33 @@ export default function ProducteDialog(props) {
         dispatch(addToCart(dataRow.id))
         handleClose();
     }
+
+    useEffect(() => {
+        let arr = []
+        if (dataRow.variants) {
+            dataRow.variants.forEach(element => {
+                if (element.stock > 0) {
+                    arr.push(element.attributes[0].value.toUpperCase())
+                    console.log("el", element.attributes[0])
+                }
+            })
+        }
+        setSizes(arr)
+    }, [dataRow]);
+
+    // function getSizesList() {
+    //     let arr = []
+    //     if (dataRow.variants) {
+    //         dataRow.variants.forEach(element => {
+    //             if (element.stock > 0) {
+    //                 arr.push(element.attributes[0].value.toUpperCase())
+    //             console.log("el", element.attributes[0])
+    //             }
+    //         })
+    //         }
+    //     console.log("arr", arr)
+    //     return arr
+    // }
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >
@@ -43,8 +71,8 @@ export default function ProducteDialog(props) {
                             </div>
                             <div className="top-title-price-modal-col2">
                                 <div className="title-modal-price">
-                                    {formatPrice(dataRow.price)}€
-                            </div>
+                                    {formatPrice(dataRow.price_range)}
+                                </div>
                             </div>
                         </div>
                         <hr className="modal-solid" />
@@ -58,11 +86,13 @@ export default function ProducteDialog(props) {
                                     <div className="sizes-modal-title">
                                         <PeopleAltIcon /> TALLES DISPONIBLES / &nbsp;
                                     </div>
-                                    {["S", "M", "L", "XL"].map((el) => (
-                                        <div className={activeSize === el ? "sizes-modal-button-active" : "sizes-modal-button"} key={el} onClick={() => setActiveSize(el)}>
-                                            {el}
-                                        </div>
-                                    ))}
+                                    {sizes && sizes[0] === "UNIQUE" ?
+                                        <div>Talla única</div> : <>
+                                            {sizes.map((el) => (
+                                                <div className={activeSize === el ? "sizes-modal-button-active" : "sizes-modal-button"} key={el} onClick={() => setActiveSize(el)}>
+                                                    {el}
+                                                </div>
+                                            ))}</>}
                                 </div>
                                 <div className="column">
                                     <CardActions>
@@ -117,7 +147,7 @@ export default function ProducteDialog(props) {
                             ))}
                         </div>
                         <button size="small" className="submit-button-modal-button" color="inherit" onClick={() => { handleAddClick(dataRow.id) }}>
-                            <ShoppingCartIcon className="submit-button-modal-icon-cart" /><span className="submit-button-modal-button-text">AFEGIR A CISTELLA - {formatPrice(dataRow.price)}€</span>
+                            <ShoppingCartIcon className="submit-button-modal-icon-cart" /><span className="submit-button-modal-button-text">AFEGIR A CISTELLA - {formatPrice(dataRow.price_range)}</span>
                         </button>
                     </div>
                 </Card>

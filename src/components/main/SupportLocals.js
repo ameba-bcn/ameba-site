@@ -13,7 +13,6 @@ export default function SupportLocals() {
     });
     
     return (
-
         <div className="Bloque" id="locals" ref={ref}>
             <MainSupportLocals className="gridNoticies" />
             {inView && breakpoint ? <div className="overlayMobile">

@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import axiosInstance from './../../axios';
 
 const API_URL = process.env.REACT_APP_API_HOST || "http://localhost/api/";
 
@@ -8,6 +8,20 @@ const register = (username, email, password) => {
         username,
         email,
         password,
+    });
+};
+
+const registerMember = (address, first_name, last_name, phone_number, username, password, email) => {
+    return axiosInstance.post(API_URL + "member_register/", {
+        username,
+        email,
+        password,
+        first_name,
+        last_name,
+        address,
+        phone_number,
+    }).then((response) => {
+        return response.data;
     });
 };
 
@@ -30,9 +44,9 @@ const passwordRecovery = (token, password) => {
 
 const sendEmailPasswordRecovery = (email) => {
     return axios.get(API_URL + `recovery/?email=${email}`)
-    .then((response) => {
-        return response.data;
-    })
+        .then((response) => {
+            return response.data;
+        })
 };
 
 const login = (email, password) => {
@@ -56,9 +70,9 @@ const getUserData = () => {
             Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`
         }
     })
-    .then((response) => {
-        return response.data;
-    })
+        .then((response) => {
+            return response.data;
+        })
 };
 
 const logout = () => {
@@ -78,6 +92,7 @@ const logout = () => {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     register,
+    registerMember,
     login,
     logout,
     getUserData,

@@ -16,9 +16,11 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.response.use(
     (response) => {
+        console.log("On ok", response)
         return response;
     },
     async function (error) {
+        console.log("On nok", error)
         const originalRequest = error.config;
 
         if (typeof error.response === 'undefined') {

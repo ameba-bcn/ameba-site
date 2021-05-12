@@ -14,7 +14,6 @@ export default function SendEmailPasswordRecovery(props) {
     const [email, setEmailname] = useState("");
     const [loading, setLoading] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
-    // const dispatch = useDispatch();
     const onChangeEmail = (e) => {
         const email = e.target.value;
         setEmailname(email);

@@ -14,7 +14,8 @@ import LogSession from './pages/LogSession';
 import Profile from './pages/Profile';
 import Checkout from './pages/Checkout';
 import MemberRegistration from './pages/MemberRegistration';
-import CheckoutFinished from './pages/CheckoutFinished';
+import CheckoutFinished from './pages/landing/CheckoutFinished';
+import SubscriptionFinished from './pages/landing/SubscriptionFinished';
 import LogMailConfirmation from './pages/LogMailConfirmation';
 import PasswordRecovery from './pages/PasswordRecovery';
 import SendEmailPasswordRecovery from './pages/SendEmailPasswordRecovery';
@@ -47,6 +48,7 @@ function App() {
           <Route path='/profile' component={Profile} />
           <Route path='/checkout' component={Checkout} />
           <Route path='/summary-checkout' component={CheckoutFinished} />
+          <Route path='/????' component={SubscriptionFinished} />
           <Route exact path='/' component={Home} />
           <Route component={NotFound} />
         </Switch>

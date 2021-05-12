@@ -5,10 +5,10 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-import { register } from '../../redux/actions/auth';
+import { registerMember } from '../../redux/actions/auth';
 import { checkoutCart, addToCart } from '../../redux/actions/cart';
 
-const MembershipForm = ({isSubmitted}) => {
+const MembershipForm = ({ isSubmitted }) => {
     const form = useRef();
     const checkBtn = useRef();
 
@@ -18,7 +18,7 @@ const MembershipForm = ({isSubmitted}) => {
     const [usernameReal, setUsernameReal] = useState("");
     const [surnameReal, setSurnameReal] = useState("");
     const [dni, setDni] = useState("");
-    const [birth, setBirth] = useState("");
+    // const [birth, setBirth] = useState("");
     const [phone, setPhone] = useState("");
     const [successful, setSuccessful] = useState(false);
 
@@ -34,17 +34,20 @@ const MembershipForm = ({isSubmitted}) => {
         form.current.validateAll();
 
         if (checkBtn.current.context._errors.length === 0) {
-            dispatch(register(username, email, password))
-                // .then(() => {
-                //     dispatch(addToCart([1])).then(() => {
-                //         dispatch(checkoutCart())
-                //         setSuccessful(true);
-                //     })
-                // })
-                // .catch(() => {
-                //     setSuccessful(false);
-                // });
+            dispatch(registerMember(dni, usernameReal, surnameReal, phone, username, password, email))
+                .then(() => {
+                    // pending get id membership 4 add to cart 
+                    dispatch(addToCart([1])).then(() => {
+                        dispatch(checkoutCart())
+                        setSuccessful(true);
+                    })
+                })
+                .catch(() => {
+                    console.log("Algo falla", successful)
+                    setSuccessful(false);
+                });
         }
+        console.log("Llegamos al final", successful)
         isSubmitted(successful)
     };
 
@@ -133,7 +136,7 @@ const MembershipForm = ({isSubmitted}) => {
                                 />
                             </div>
 
-                            {/* <div className="form-group">
+                            <div className="form-group">
                                 <Input
                                     type="text"
                                     className="form-control logForm"
@@ -169,7 +172,7 @@ const MembershipForm = ({isSubmitted}) => {
                                 />
                             </div>
 
-                            <div className="form-group">
+                            {/* <div className="form-group">
                                 <Input
                                     type="text"
                                     className="form-control logForm"
@@ -179,7 +182,7 @@ const MembershipForm = ({isSubmitted}) => {
                                     onChange={(e) => setBirth(e.target.value)}
                                     validations={[required]}
                                 />
-                            </div>
+                            </div> */}
 
                             <div className="form-group">
                                 <Input
@@ -191,7 +194,7 @@ const MembershipForm = ({isSubmitted}) => {
                                     onChange={(e) => setPhone(e.target.value)}
                                     validations={[required, vphone]}
                                 />
-                            </div> */}
+                            </div>
 
                             <div className="form-group">
                                 <Input

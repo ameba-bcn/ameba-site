@@ -27,14 +27,11 @@ const ScrollTop = ({
     const [show, setShow] = useState(showBelow ? false : true)
 
     const handleScroll = () => {
-        console.log("window.pageYOffset", window.pageYOffset)
-        console.log("showBelow", showBelow)
         if (window.pageYOffset > showBelow) {
             if (!show) setShow(true)
         } else {
             if (show) setShow(false)
         }
-        console.log("show", show)
     }
 
     const handleClick = () => {
