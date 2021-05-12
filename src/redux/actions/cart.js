@@ -26,12 +26,12 @@ export const addToCart = (id) => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            const message = error.response.data?.detail
+                // (error.response &&
+                //     error.response.data &&
+                //     error.response.data.message) ||
+                // error.message ||
+                // error.toString();
 
             dispatch({
                 type: ADD_FAIL,
@@ -54,12 +54,12 @@ export const substractToCart = (id) => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            const message = error.response.data?.detail
+                // (error.response &&
+                //     error.response.data &&
+                //     error.response.data.message) ||
+                // error.message ||
+                // error.toString();
 
             dispatch({
                 type: SUBS_FAIL,
@@ -82,12 +82,12 @@ export const getCart = () => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            const message = error.response.data?.detail
+                // (error.response &&
+                //     error.response.data &&
+                //     error.response.data.message) ||
+                // error.message ||
+                // error.toString();
 
             dispatch({
                 type: GET_CART_FAIL,
@@ -110,12 +110,12 @@ export const checkoutCart = () => (dispatch) => {
             return Promise.resolve();
         },
         (error) => {
-            const message =
-                (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                error.message ||
-                error.toString();
+            const message = error.response.data?.detail
+                // (error.response &&
+                //     error.response.data &&
+                //     error.response.data.message) ||
+                // error.message ||
+                // error.toString();
 
             dispatch({
                 type: CHECKOUT_FAIL,

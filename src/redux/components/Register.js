@@ -60,6 +60,7 @@ const Register = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
+  const [displayError, setDisplayError] = useState(false);
   const [open, setOpen] = React.useState(false);
 
   const { message } = useSelector(state => state.message);
@@ -98,6 +99,7 @@ const Register = (props) => {
         })
         .catch(() => {
           setSuccessful(false);
+          setDisplayError(true)
         });
     }
   };
@@ -159,7 +161,7 @@ const Register = (props) => {
             </div>
           )}
 
-          {message && (
+          {(displayError && message) && (
             <div className="form-group">
               <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
                 {message}

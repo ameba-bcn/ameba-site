@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 // import { required, vusername, vpassword, validEmail, vdninie, vphone } from './FormValidator';
 import { useDispatch, useSelector } from "react-redux";
+import { Redirect } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
@@ -15,6 +16,7 @@ const MembershipForm = ({ isSubmitted }) => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [displayError, setDisplayError] = useState(false);
     const [usernameReal, setUsernameReal] = useState("");
     const [surnameReal, setSurnameReal] = useState("");
     const [dni, setDni] = useState("");
@@ -29,9 +31,7 @@ const MembershipForm = ({ isSubmitted }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        setSuccessful(false);
-
-        form.current.validateAll();
+        // form.current.validateAll();
 
         if (checkBtn.current.context._errors.length === 0) {
             dispatch(registerMember(dni, usernameReal, surnameReal, phone, username, password, email))
@@ -40,15 +40,16 @@ const MembershipForm = ({ isSubmitted }) => {
                     dispatch(addToCart([1])).then(() => {
                         dispatch(checkoutCart())
                         setSuccessful(true);
+                        localStorage.setItem("view", "new_member");
                     })
                 })
                 .catch(() => {
                     console.log("Algo falla", successful)
                     setSuccessful(false);
+                    setDisplayError(true);
                 });
         }
-        console.log("Llegamos al final", successful)
-        isSubmitted(successful)
+
     };
 
     const required = (value) => {
@@ -116,10 +117,15 @@ const MembershipForm = ({ isSubmitted }) => {
         }
     };
 
+    if (successful) {
+        isSubmitted(true)
+        if (successful) return <Redirect to='/validate-email' />
+    }
+
     return (
         <div className="col-md-12">
             <div className="card card-container card-login">
-                <div className="logTitle">Fes-te soci</div>
+                {/* <div className="logTitle">Fes-te soci</div> */}
 
                 <Form onSubmit={handleSubmit} ref={form}>
                     {!successful && (
@@ -226,7 +232,7 @@ const MembershipForm = ({ isSubmitted }) => {
                         </div>
                     )}
 
-                    {message && (
+                    {(displayError && message) && (
                         <div className="form-group">
                             <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
                                 {message}

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from "react-redux";
+import { Redirect } from 'react-router-dom';
 import { validateEmail } from './../redux/actions/auth';
 import LettersMove from './../components/layout/LettersMove';
 
@@ -13,10 +14,15 @@ export default function LogMailConfirmation(props) {
 
     useEffect(() => {
         if (strToken) {
-            dispatch(validateEmail(strToken))
-            setHasQueryParams(true)
+            dispatch(validateEmail(strToken)).then(
+                setHasQueryParams(true)
+            )
         }
     }, [strToken]);
+
+    if (localStorage.getItem("view") === "new_member" && setHasQueryParams) {
+        return <Redirect to='/membership-registration' />;
+    }
 
     return (
         <div className="loginWall">

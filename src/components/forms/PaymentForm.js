@@ -25,6 +25,8 @@ function PaymentForm(props) {
   const stripe = useStripe();
   const elements = useElements();
 
+  console.log("client secret", props)
+
   useEffect(() => {
     console.log("client secret", props.checkout.checkout.client_secret)
     setClientSecret(props.checkout.checkout.client_secret);

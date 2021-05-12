@@ -4,11 +4,11 @@ import axiosInstance from './../../axios';
 const API_URL = process.env.REACT_APP_API_HOST || "http://localhost/api/";
 
 const register = (username, email, password) => {
-    return axios.post(API_URL + "users/", {
+    return axiosInstance.post(API_URL + "users/", {
         username,
         email,
         password,
-    });
+    })
 };
 
 const registerMember = (address, first_name, last_name, phone_number, username, password, email) => {
@@ -55,7 +55,6 @@ const login = (email, password) => {
         password,
     })
         .then((response) => {
-            console.log("reponse", response)
             if (response.data.access) {
                 localStorage.setItem("user", JSON.stringify(response.data));
             }
@@ -83,7 +82,6 @@ const logout = () => {
             }
         })
         .then(() => {
-            console.log("Vamos a eliminar el user")
             localStorage.removeItem("user");
             if (JSON.parse(localStorage.getItem("cart_id"))) localStorage.removeItem("cart_id");
         });
