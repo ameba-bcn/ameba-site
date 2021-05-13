@@ -5,6 +5,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { login, getUserData } from "../actions/auth";
+import { setLoggedUser } from '../actions/state';
 import { getCart } from "../actions/cart";
 
 const required = (value) => {
@@ -57,6 +58,7 @@ const Login = (props) => {
         if (checkBtn.current.context._errors.length === 0) {
             dispatch(login(email, password))
                 .then(() => {
+                    dispatch(setLoggedUser())
                     dispatch(getUserData())
                     if (JSON.parse(localStorage.getItem("cart_id")) === null) {
                         dispatch(getCart())
@@ -71,7 +73,6 @@ const Login = (props) => {
         } else {
             setLoading(false);
         }
-
     };
 
     if (redirect && location.pathname === '/login') {

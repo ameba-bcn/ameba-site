@@ -24,16 +24,18 @@ export default function LogMailConfirmation(props) {
         return <Redirect to='/membership-registration' />;
     }
 
-    return (
-        <div className="loginWall">
+    return (<>
+        <div className="full-heigh-msg">
             {hasQueryParams ?
-                <p>Compte verificat: Benvingut!</p> :
-                <p>T'hem enviat un mail de confirmació, confirma l'enllaç</p>}
-            <LettersMove
-                className="lettersMoveDiv"
-                sentence="FES-TE SOCI/A "
-                color="#FAE6C5"
-            />
+                <div className="single-msg">Compte verificat: Benvingut!</div> :
+                <div className="single-msg">T'hem enviat un mail de confirmació, confirma l'enllaç</div>}
         </div>
+        <LettersMove
+            className="lettersMoveDiv"
+            sentence="FES-TE SOCI/A "
+            color="#FAE6C5"
+        />
+    </>
     )
+
 }

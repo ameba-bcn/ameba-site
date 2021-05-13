@@ -266,6 +266,7 @@ div>.nav-item {
     font-family: 'Bebas Neue';
     color: #1D1D1B;
     font-size: 4.5rem;
+    line-height: 4rem;
 }
 
 .logTitleSmall {
@@ -276,7 +277,7 @@ div>.nav-item {
     margin-top: 0px;
 }
 
-.new-member-title{
+.new-member-title {
     text-transform: uppercase;
     font-family: 'Bebas Neue';
     color: #1D1D1B;
@@ -285,7 +286,7 @@ div>.nav-item {
     margin-top: 20px;
 }
 
-.checkout-payment-summary{
+.checkout-payment-summary {
     font-family: 'Montserrat', sans-serif;
     justify-content: center;
     color: #1D1D1B;
@@ -334,7 +335,7 @@ label {
     margin-top: 10px;
 }
 
-.card-login{
+.card-login {
     border-width: 0px !important;
     margin: 0 auto 25px;
     /* margin-top: 50px; */
@@ -355,11 +356,11 @@ label {
     text-decoration: underline !important;
 }
 
-.logTextosLinkRegistrat{
+.logTextosLinkRegistrat {
     margin: 0.8rem 0rem 0.5rem 0rem;
 }
 
-.sociLogBanner{
+.sociLogBanner {
     background-color: #F2C571;
     color: #1D1D1B;
     text-transform: uppercase;
@@ -391,10 +392,37 @@ label {
     max-width: 110px !important;
     margin: 0 auto;
 }
+
 .succesful-login {
     color: #FAE6C5;
     text-transform: uppercase;
     font-family: 'Bebas Neue';
     font-size: 1.8rem;
     margin: 0 auto;
+}
+
+
+/* Main page messages */
+.full-heigh-msg {
+    background-color: #EB5E3E;
+    flex: 1 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.single-msg {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    width: 100%;
+    flex: 1 0 auto;
+}
+
+.lettersMoveDiv {
+    flex: 1 0 auto;
+}
+
+.logFormEmailPasswordRecovery{
+    margin-top: 1.8rem!important;
 }

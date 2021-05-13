@@ -36,12 +36,11 @@ const MembershipForm = ({ isSubmitted }) => {
         if (checkBtn.current.context._errors.length === 0) {
             dispatch(registerMember(dni, usernameReal, surnameReal, phone, username, password, email))
                 .then(() => {
-                    // pending get id membership 4 add to cart 
-                    dispatch(addToCart([1])).then(() => {
-                        dispatch(checkoutCart())
-                        setSuccessful(true);
-                        localStorage.setItem("view", "new_member");
-                    })
+                    //     dispatch(addToCart([1])).then(() => {
+                    //         dispatch(checkoutCart())
+                    setSuccessful(true);
+                    //         localStorage.setItem("view", "new_member");
+                    //     })
                 })
                 .catch(() => {
                     console.log("Algo falla", successful)

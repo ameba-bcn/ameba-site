@@ -10,7 +10,7 @@ export default function DropdownCart(props) {
     const dispatch = useDispatch();
     // const { cart } = props.cartData;
     const {
-        cart_items = [],
+        item_variants = [],
         total = 0 } = props.cartData;
     const arrMono = []
     const getQty = (arr, id) => {
@@ -32,10 +32,10 @@ export default function DropdownCart(props) {
 
     return (
         <>
-            {cart_items !== undefined ? <>
+            {item_variants !== undefined ? <>
                 <div className="totalCart">Total: <span>{total}</span></div>
                 <hr className="separadorCartDrop" />
-                {cart_items.map((el, index) => (
+                {item_variants.map((el, index) => (
                     arrMono.includes(el.id) ? null :
                         <div className="menuItemCart" key={index}>
                             <div className="rowCartProduct">
@@ -47,7 +47,7 @@ export default function DropdownCart(props) {
                                     <div className="titleCartProduct">{el.name}</div>
                                     <div className="rowDetailedCart">
                                         <div className="cartPriceProduct">{el.price}</div>
-                                        <div className="quantityPriceProduct">Qty: <span>{getQty(cart_items, el.id)}</span></div>
+                                        <div className="quantityPriceProduct">Qty: <span>{getQty(item_variants, el.id)}</span></div>
                                     </div>
                                 </div>
                             </div>

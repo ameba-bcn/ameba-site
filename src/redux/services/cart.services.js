@@ -16,7 +16,7 @@ const addInCart = (id) => {
             let cart_prev = getIDValuesFromArrayObj(response.data.cart_items)
             cart_prev.push(id)
             return axios.patch(`${API_URL}carts/${response.data.id}/`,
-                { "items": cart_prev },
+                { "item_variant_ids": cart_prev },
                 { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}` } }
             ).then((response) => {
                 console.log("cart response", response)
@@ -34,7 +34,7 @@ const addInCart = (id) => {
                 console.log("cart response", response)
                 localStorage.setItem("cart_id", JSON.stringify(response.data.id));
                 return axios.patch(`${API_URL}carts/${response.data.id}/`,
-                    { "items": [id] }
+                    { "item_variant_ids": [id] }
                 ).then((response) => {
                     return response.data;
                 })
@@ -47,7 +47,7 @@ const addInCart = (id) => {
                 let cart_prev = getIDValuesFromArrayObj(response.data.cart_items)
                 cart_prev.push(id)
                 return axios.patch(`${API_URL}carts/${cart_uuid}/`,
-                    { "items": cart_prev }
+                    { "item_variant_ids": cart_prev }
                 ).then((response) => {
                     console.log("cart response", response)
                     localStorage.setItem("cart_id", JSON.stringify(response.data.id));
@@ -57,6 +57,21 @@ const addInCart = (id) => {
         }
     }
 };
+
+
+const addMemberToCart = (id) => {
+    return axios.post(`${API_URL}carts/`
+    ).then((response) => {
+        console.log("cart response", response)
+        localStorage.setItem("cart_id", JSON.stringify(response.data.id));
+        return axios.patch(`${API_URL}carts/${response.data.id}/`,
+            { "item_variant_ids": [id] }
+        ).then((response) => {
+            return response.data;
+        })
+    })
+}
+
 
 const checkoutCart = () => {
     return axios.get(`${API_URL}carts/current/checkout/`,
@@ -102,7 +117,7 @@ const removeItemCart = (id) => {
                 cart_prev.splice(index, 1);
             }
             return axios.patch(`${API_URL}carts/${cart_uuid}/`,
-                { "items": cart_prev }
+                { "item_variant_ids": cart_prev }
             ).then((response) => {
                 console.log("cart response", response)
                 localStorage.setItem("cart_id", JSON.stringify(response.data.id));
@@ -150,6 +165,7 @@ export default {
     addInCart,
     deleteFullCart,
     removeItemCart,
+    addMemberToCart,
     checkoutCart,
     getCartOnLog,
     deleteCartAfterSuccesfullCheckout

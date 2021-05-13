@@ -1,6 +1,6 @@
-import { GUEST_USER, LOGGED_USER } from "../actions/types";
+import { GUEST_USER, LOGGED_USER, MEMBER_CANDIDATE } from "../actions/types";
 
-const initialState = {user_state:""};
+const initialState = { user_state: "" };
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
     const { type } = action;
@@ -11,6 +11,9 @@ export default function (state = initialState, action) {
 
         case LOGGED_USER:
             return { user_state: "LOGGED" };
+
+        case MEMBER_CANDIDATE:
+            return { user_state: "MEMBER_CANDIDATE" };
 
         default:
             return state;

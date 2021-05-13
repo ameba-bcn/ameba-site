@@ -29,7 +29,7 @@ const mapStateToProps = state => {
 };
 
 function Review(props) {
-  const { cart_items, total} = props.cart;
+  const { item_variants, total} = props.cart;
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -43,7 +43,7 @@ function Review(props) {
         Resum compra
       </Typography>
       <List disablePadding>
-        {cart_items?.map((item, i) => (
+        {item_variants?.map((item, i) => (
           <ListItem className={classes.listItem} key={i}>
             <ListItemText primary={item.name} secondary={item.discount_value} />
             <Typography variant="body2">{item.price}</Typography>

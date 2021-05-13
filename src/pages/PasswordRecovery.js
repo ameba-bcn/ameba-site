@@ -60,7 +60,8 @@ export default function PasswordRecovery(props) {
                 <div className="card card-container card-login">
                     <div className="logTitle">Recupera contrasenya</div>
                     {isSubmitted ?
-                        <>Recuperació de contrasenya finalitzada</> :
+                        <>
+                            <div className="full-heigh-msg"><div className="single-msg">Recuperació de contrasenya finalitzada</div></div></> :
                         <>
                             <Form
                                 onSubmit={handleSubmit}

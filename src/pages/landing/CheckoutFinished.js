@@ -3,13 +3,15 @@ import LettersMove from '../../components/layout/LettersMove';
 
 export default function CheckoutFinished() {
     return (
-        <div>
-            GRÀCIES!<br/>Hem rebut la teva comanda
+        <>
+            <div className="full-heigh-msg">
+                <div className="single-msg">GRÀCIES!<br />Hem rebut la teva comanda</div>
+            </div>
             <LettersMove
                 className="lettersMoveDiv"
-                sentence="FES-TE SOCI/A " 
+                sentence="FES-TE SOCI/A "
                 color="#EB5E3E"
-                />
-        </div>
+            />
+        </>
     )
 }

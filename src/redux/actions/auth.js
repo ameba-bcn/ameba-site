@@ -15,6 +15,7 @@ import {
     PASSWORD_RECOVERY_FAIL,
     LOGOUT,
     SET_MESSAGE,
+    CLEAR_MESSAGE
     // DELETE_CART
 } from "./types";
 
@@ -36,11 +37,11 @@ export const register = (username, email, password) => (dispatch) => {
         },
         (error) => {
             const message = error.response.data.email
-                // (error.response &&
-                //     error.response.data &&
-                //     error.response.data.message) ||
-                // error.message ||
-                // error.toString();
+            // (error.response &&
+            //     error.response.data &&
+            //     error.response.data.message) ||
+            // error.message ||
+            // error.toString();
             dispatch({
                 type: REGISTER_FAIL,
             });
@@ -58,7 +59,7 @@ export const register = (username, email, password) => (dispatch) => {
 export const registerMember = (address, first_name, last_name, phone_number, username, password, email) => (dispatch) => {
     return AuthService.registerMember(address, first_name, last_name, phone_number, username, password, email).then(
         () => {
-            console.log("In action", )
+            console.log("In action",)
             dispatch({
                 type: REGISTER_MEMBER_SUCCESS,
             });
@@ -71,13 +72,13 @@ export const registerMember = (address, first_name, last_name, phone_number, use
             return Promise.resolve();
         },
         (error) => {
-            console.log("error.response.data",error.response.data)
+            console.log("error.response.data", error.response.data)
             const message = error.response.data.detail
-                // (error.response &&
-                //     error.response.data &&
-                //     error.response.data.message) ||
-                // error.message ||
-                // error.toString();
+            // (error.response &&
+            //     error.response.data &&
+            //     error.response.data.message) ||
+            // error.message ||
+            // error.toString();
 
             dispatch({
                 type: REGISTER_MEMBER_FAIL,
@@ -99,15 +100,20 @@ export const validateEmail = (token) => (dispatch) => {
             dispatch({
                 type: VALIDATE_SUCCESS,
             });
+
+            dispatch({
+                type: CLEAR_MESSAGE
+            });
+
             return Promise.resolve();
         },
         (error) => {
             const message = error.response.data?.detail
-                // (error.response &&
-                //     error.response.data &&
-                //     error.response.data.message) ||
-                // error.message ||
-                // error.toString();
+            // (error.response &&
+            //     error.response.data &&
+            //     error.response.data.message) ||
+            // error.message ||
+            // error.toString();
 
             dispatch({
                 type: VALIDATE_FAIL,
@@ -127,15 +133,19 @@ export const login = (username, password) => (dispatch) => {
                 payload: { user: data },
             });
 
+            dispatch({
+                type: CLEAR_MESSAGE
+            });
+
             return Promise.resolve();
         },
         (error) => {
             const message = error.response.data?.detail
-                // (error.response &&
-                //     error.response.data &&
-                //     error.response.data.message) ||
-                // error.message ||
-                // error.toString();
+            // (error.response &&
+            //     error.response.data &&
+            //     error.response.data.message) ||
+            // error.message ||
+            // error.toString();
             dispatch({
                 type: LOGIN_FAIL,
             });
@@ -160,15 +170,19 @@ export const getUserData = () => (dispatch) => {
                 payload: { user: data },
             });
 
+            dispatch({
+                type: CLEAR_MESSAGE
+            });
+
             return Promise.resolve();
         },
         (error) => {
             const message = error.response.data?.detail
-                // (error.response &&
-                //     error.response.data &&
-                //     error.response.data.message) ||
-                // error.message ||
-                // error.toString();
+            // (error.response &&
+            //     error.response.data &&
+            //     error.response.data.message) ||
+            // error.message ||
+            // error.toString();
 
             dispatch({
                 type: GET_USER_FAIL,
@@ -190,15 +204,20 @@ export const passwordRecovery = (token, password) => (dispatch) => {
             dispatch({
                 type: PASSWORD_RECOVERY_SUCCESS,
             });
+
+            dispatch({
+                type: CLEAR_MESSAGE
+            });
+
             return Promise.resolve();
         },
         (error) => {
             const message = error.response.data?.detail
-                // (error.response &&
-                //     error.response.data &&
-                //     error.response.data.message) ||
-                // error.message ||
-                // error.toString();
+            // (error.response &&
+            //     error.response.data &&
+            //     error.response.data.message) ||
+            // error.message ||
+            // error.toString();
 
             dispatch({
                 type: PASSWORD_RECOVERY_FAIL,
@@ -216,15 +235,18 @@ export const sendEmailPasswordRecovery = (email) => (dispatch) => {
             dispatch({
                 type: SEND_EMAIL_PASSWORD_RECOVERY_SUCCESS,
             });
+            dispatch({
+                type: CLEAR_MESSAGE,
+            });
             return Promise.resolve();
         },
         (error) => {
             const message = error.response.data?.detail
-                // (error.response &&
-                //     error.response.data &&
-                //     error.response.data.message) ||
-                // error.message ||
-                // error.toString();
+            // (error.response &&
+            //     error.response.data &&
+            //     error.response.data.message) ||
+            // error.message ||
+            // error.toString();
 
             dispatch({
                 type: SEND_EMAIL_PASSWORD_RECOVERY_FAIL,
@@ -249,11 +271,11 @@ export const logout = () => (dispatch) => {
         },
         (error) => {
             const message = error.response.data?.detail
-                // (error.response &&
-                //     error.response.data &&
-                //     error.response.data.message) ||
-                // error.message ||
-                // error.toString();
+            // (error.response &&
+            //     error.response.data &&
+            //     error.response.data.message) ||
+            // error.message ||
+            // error.toString();
             dispatch({
                 type: SET_MESSAGE,
                 payload: message,

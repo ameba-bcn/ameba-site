@@ -23,7 +23,7 @@ function Navbar(props) {
     const [anchorEl1, setAnchorEl1] = useState(null);
     const [redirect, setRedirect] = useState(false)
     const { cart = {} } = props;
-    const { cart_items = [], count = 0 } = cart;
+    const { item_variants = [], count = 0 } = cart;
     
     useLayoutEffect(() => {
         function updateSize() {
@@ -117,7 +117,7 @@ function Navbar(props) {
                                     </Menu></>
                             }
                         </div>
-                        {cart_items.length > 0 ?
+                        {item_variants.length > 0 ?
                             <li className="liMenuOptions" ><ShoppingCartIcon className="cartIconMenu" onClick={handleClickCart} />
                                 {cart ? <div className="bubbleCart">{count}</div> : null}
                                 <Menu

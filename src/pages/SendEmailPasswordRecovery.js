@@ -55,7 +55,7 @@ export default function SendEmailPasswordRecovery(props) {
                             <div className="form-group">
                                 <Input
                                     type="text"
-                                    className="form-control logForm"
+                                    className="form-control logForm logFormEmailPasswordRecovery"
                                     name="email"
                                     placeholder="email"
                                     value={email}

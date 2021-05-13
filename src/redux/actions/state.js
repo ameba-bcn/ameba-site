@@ -1,4 +1,4 @@
-import { GUEST_USER, LOGGED_USER } from "./types";
+import { GUEST_USER, LOGGED_USER, MEMBER_CANDIDATE } from "./types";
 
 export const setGuestUser = () => ({
     type: GUEST_USER
@@ -6,4 +6,8 @@ export const setGuestUser = () => ({
 
 export const setLoggedUser = () => ({
     type: LOGGED_USER
+});
+
+export const setMemberCandidate = () => ({
+    type: MEMBER_CANDIDATE
 });

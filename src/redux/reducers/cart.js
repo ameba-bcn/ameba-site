@@ -1,6 +1,8 @@
 import {
     ADD_TO_CART,
     ADD_FAIL,
+    ADD_MEMBER_TO_CART,
+    ADD_MEMBER_FAIL,
     SUBS_TO_CART,
     SUBS_FAIL,
     CHECKOUT,
@@ -29,6 +31,16 @@ export default function (state = initialState, action) {
                 cart_data: payload,
             };
         case ADD_FAIL:
+            return {
+                ...state,
+                cart_data: state.cart_data,
+            };
+        case ADD_MEMBER_TO_CART:
+            return {
+                ...state,
+                cart_data: payload,
+            };
+        case ADD_MEMBER_FAIL:
             return {
                 ...state,
                 cart_data: state.cart_data,

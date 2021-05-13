@@ -3,13 +3,15 @@ import LettersMove from '../../components/layout/LettersMove';
 
 export default function SubscriptionFinished() {
     return (
-        <div>
-            GRÀCIES!<br />Subscripció confirmada
+        <>
+            <div className="full-heigh-msg">
+                <div className="single-msg">GRÀCIES!<br />Subscripció confirmada</div>
+            </div>
             <LettersMove
                 className="lettersMoveDiv"
                 sentence="FES-TE SOCI/A "
                 color="#EB5E3E"
             />
-        </div>
+        </>
     )
 }

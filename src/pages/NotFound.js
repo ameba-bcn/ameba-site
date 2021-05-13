@@ -5,16 +5,16 @@ import LettersMove from './../components/layout/LettersMove';
 export default class NotFound extends Component {
     render() {
         return (
-        <>
-            <div>
-                <h1 className="title">404!</h1>
-                <h2 className="subtitle">Pagina no encontrada</h2>
-            </div>
+            <>
+                <div className="full-heigh-msg">
+                    <div className="single-msg">404!</div>
+                    <div className="single-msg">Pagina no encontrada</div>
+                </div>
                 <LettersMove
-                className="lettersMoveDiv"
-                sentence="FES-TE SOCI/A "
-                color="#EB5E3E"
-              />
+                    className="lettersMoveDiv"
+                    sentence="FES-TE SOCI/A "
+                    color="#EB5E3E"
+                />
             </>
         )
     }

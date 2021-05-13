@@ -16,6 +16,9 @@ export const LOGOUT = "LOGOUT";
 
 export const ADD_TO_CART = "ADD_TO_CART";
 export const ADD_FAIL = "ADD_FAIL";
+export const ADD_MEMBER_TO_CART = "ADD_MEMBER_TO_CART";
+export const ADD_MEMBER_FAIL = "ADD_MEMBER_FAIL";
+
 export const SUBS_TO_CART = "SUBS_TO_CART";
 export const SUBS_FAIL = "SUBS_FAIL";
 export const CHECKOUT = "CHECKOUT";
@@ -32,3 +35,4 @@ export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 
 export const GUEST_USER = "GUEST_USER";
 export const LOGGED_USER = "LOGGED_USER";
+export const MEMBER_CANDIDATE = "MEMBER_CANDIDATE";

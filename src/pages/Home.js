@@ -8,17 +8,16 @@ import LettersMove from './../components/layout/LettersMove';
 export default function Home() {
   return (
     <div className="Home">
-      
       <div className="HomeContent">
-        <Associacio/>
-        <SupportLocals/>
-        <Activitats/>
+        <Associacio />
+        <SupportLocals />
+        <Activitats />
       </div>
       <LettersMove
-                className="lettersMoveDiv"
-                sentence="FES-TE SOCI/A " 
-                color="#EB5E3E"
-                />
+        className="lettersMoveDiv"
+        sentence="FES-TE SOCI/A "
+        color="#EB5E3E"
+      />
     </div>
   );
 }

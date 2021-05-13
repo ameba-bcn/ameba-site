@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
-import { addToCart, deleteFullCart } from '../../redux/actions/cart';
+import { addMemberToCart, deleteFullCart } from '../../redux/actions/cart';
+import {setMemberCandidate} from '../../redux/actions/state';
 import { Redirect } from 'react-router-dom';
 import axiosInstance from "../../axios";
 import Dialog from '@material-ui/core/Dialog';
@@ -36,8 +37,9 @@ export default function SociDialog(props) {
 
     const handleAddClick = () => {
         // dispatch(deleteFullCart()).then(()=> {
-            console.log("Socis data", socisData[isSubscriber].id)
-            dispatch(addToCart(socisData[isSubscriber].id))
+            console.log("Socis data", socisData[isSubscriber].variants[0])
+            dispatch(addMemberToCart(socisData[isSubscriber].variants[0]))
+            dispatch(setMemberCandidate())
             setRedirect(true)
         // })
         // handleClose();
