@@ -1,4 +1,4 @@
-import { GUEST_USER, LOGGED_USER, MEMBER_CANDIDATE } from "../actions/types";
+import { GUEST_USER, LOGGED_USER, MEMBER_CANDIDATE, SUBSCRIBE_SUCCESS, SUBSCRIBE_FAIL } from "../actions/types";
 
 const initialState = { user_state: "" };
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -14,6 +14,16 @@ export default function (state = initialState, action) {
 
         case MEMBER_CANDIDATE:
             return { user_state: "MEMBER_CANDIDATE" };
+
+        case SUBSCRIBE_SUCCESS:
+            return {
+                ...state,
+            };
+
+        case SUBSCRIBE_FAIL:
+            return {
+                ...state,
+            };
 
         default:
             return state;

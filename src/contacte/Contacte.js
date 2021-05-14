@@ -1,6 +1,7 @@
 import React from 'react';
 // import Container from '@material-ui/core/Container';
-import NewsletterForm from './NewsletterForm';
+// import NewsletterForm from './NewsletterForm';
+import NewsletterForm from './../components/forms/NewsletterForm'
 import './Contacte.css';
 import MediaLinks from '../components/layout/MediaLinks';
 import LettersMove from './../components/layout/LettersMove';
