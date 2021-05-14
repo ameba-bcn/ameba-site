@@ -76,7 +76,7 @@ function Navbar(props) {
         <div className="menuContainer">
             <div className="menuSuperior">
                 <div className="menuButton">
-                    <img src={process.env.PUBLIC_URL + '/NewLogo.png'} className="menuAmebalogo" alt="Ameba Logo" />
+                    <img src={process.env.PUBLIC_URL + '/AmebaLogo.png'} className="menuAmebalogo" alt="Ameba Logo" />
                     <NavLink to="/" data-item='AMEBA'>AMEBA</NavLink>
                 </div>
                 <div className="menuIcon" onClick={handleClick} >

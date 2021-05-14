@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { addToCart } from '../../redux/actions/cart';
 import { Redirect } from 'react-router-dom';
 import MaterialTable from "material-table";
-// import { FiShoppingCart } from 'react-icons/fi';
 import { TiTicket } from 'react-icons/ti';
 import axiosInstance from "../../axios";
 import ActivitatDialog from './Activitat';
@@ -21,9 +20,6 @@ export default function LlistatActivitats() {
     setRedirect(true)
   }
 
-
-  // const [selectedRow, setSelectedRow] = useState(null);
-  // const [rowClickedData, setState] = React.useState([]);
   const [eventsData, setEventsData] = useState([
     {
       id: 0,
