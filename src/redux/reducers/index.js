@@ -3,10 +3,12 @@ import auth from "./auth";
 import cart from "./cart";
 import message from "./message";
 import state from './state';
+import data from './data';
 
 export default combineReducers({
   auth,
   cart,
   message,
-  state
+  state,
+  data
 });

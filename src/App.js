@@ -3,7 +3,6 @@ import './App.css';
 import { setGuestUser, setLoggedUser } from './redux/actions/state';
 import { useDispatch } from "react-redux";
 // import { connect } from "react-redux";
-import axiosInstance from "./axios";
 import Home from './pages/Home';
 import Activitats from './pages/Activitats';
 import Botiga from './pages/Botiga';
@@ -26,12 +25,11 @@ import SendEmailPasswordRecovery from './pages/SendEmailPasswordRecovery';
 import ValidateEmail from './pages/ValidateEmail';
 import Register from './redux/components/Register';
 import { UserContext } from './UserContext';
-
-// const mapStateToProps = state => {
-//   return {
-//     user_state: state.user_state
-//   };
-// };
+import {
+  supportYourLocalsAll,
+  agendaAll,
+  botigaAll,
+} from './redux/actions/data';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -40,17 +38,6 @@ function App() {
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("user"))) {
-      // Update Refresh token action and if not  delete LS
-      // axiosInstance.post(`token/refresh/`, {
-      //   'refresh': JSON.parse(localStorage.getItem("user"))?.refresh
-      // })
-      //       .then((res) => {
-      //           console.log("rerereresposta",res.data);
-      //           // localStorage.setItem("user", JSON.stringify(response.data));
-      //       })
-      //       .catch(error => {
-      //           console.log("ERROL", error.response)
-      //       });
       dispatch(setLoggedUser())
       console.log("Has local user", JSON.parse(localStorage.getItem("user")))
     }
@@ -59,6 +46,10 @@ function App() {
       console.log("Has local user", JSON.parse(localStorage.getItem("user")))
 
     }
+    console.log("Collect data on main resources")
+    dispatch(supportYourLocalsAll());
+    dispatch(agendaAll());
+    dispatch(botigaAll());
   }, [dispatch]);
 
   return (

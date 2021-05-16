@@ -1,37 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-// import tileData from './tileData';
+import { useSelector } from "react-redux";
 import './MainSupportLocals.css';
-import axiosInstance from "../../axios";
 
 function MainSupportLocals() {
     const breakpoint = useMediaQuery('(max-width:950px)');
-    const [state, setState] = useState(undefined)
-
-    useEffect(() => {
-        axiosInstance.get(`artists/`, {})
-            .then((res) => {
-                console.log(res.data);
-                return res.data
-            }).then((response) => {
-                setState(response)
-            })
-            .catch(error => {
-                console.log("ERROL", error.response)
-            });
-    }, []);
+    const data = useSelector(state => state.data)
+    const { support = [] } = data
 
     return (
         <div className="backgroundGrid">
-            {state && <GridList
+            {support.length > 0 && <GridList
                 cols={breakpoint ? 1 : 3}
                 rows={1}
                 spacing={20}
                 cellHeight={240}
                 className="gridList">
-                {state.slice(0, (breakpoint ? 3 : 9)).map((tile) => (
+                {support.slice(0, (breakpoint ? 3 : 9)).map((tile) => (
                     <GridListTile key={tile.id} className="gridImg">
                         <img src={tile.images[0]} alt={tile.name} className="gridImages" />
                     </GridListTile>

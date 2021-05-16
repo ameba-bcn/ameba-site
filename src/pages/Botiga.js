@@ -6,7 +6,6 @@ import SociDialog from '../components/botiga/Soci';
 import LettersMove from './../components/layout/LettersMove';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 
-
 function Botiga() {
   const [open, setOpen] = React.useState(false);
 
@@ -15,7 +14,6 @@ function Botiga() {
   };
 
   const isMobile = useMediaQuery('(max-width:750px)');
-
 
   return (
     <div className="Botiga">

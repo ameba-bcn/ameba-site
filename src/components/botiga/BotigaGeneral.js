@@ -1,22 +1,15 @@
-import React, {useState, useEffect} from 'react';
-// import Data from './response.json';
+import React, { useState } from 'react';
 import './BotigaGeneral.css';
 import ProducteDialog from './Producte';
 import axiosInstance from "../../axios";
 import { formatPrice } from './../../utils/utils';
+import { useSelector } from "react-redux";
 
 export default function BotigaGeneral() {
 
     const [open, setOpen] = React.useState(false);
-    const [allProducts, getAllProducts] = useState([
-        {
-            id: 0,
-            name: "",
-            price_range:"",
-            images: [""],
-            discount: ""
-        }
-    ]);
+    const data = useSelector(state => state.data)
+    const { botiga = [] } = data
 
     const [productData, getProductData] = useState([
         {
@@ -42,27 +35,16 @@ export default function BotigaGeneral() {
 
     const fetchProduct = (data) => {
         axiosInstance.get(`articles/${data.id}`, {})
-        .then((res) => {
-            console.log(res.data);
-            getProductData(res.data)
-        }).then(handleClickOpen())
-        .catch(error => {
-            console.log("ERROL", error.response)
-        });
-    }
-
-    useEffect(() => {
-        axiosInstance.get(`articles/`, {})
             .then((res) => {
                 console.log(res.data);
-                getAllProducts(res.data)
-            })
+                getProductData(res.data)
+            }).then(handleClickOpen())
             .catch(error => {
                 console.log("ERROL", error.response)
             });
-    }, []);
+    }
 
-    const cardGenerator = allProducts.map((data) => {
+    const cardGenerator = botiga.length > 0 ? botiga.map((data) => {
         return (
             <div className="fullcardBotiga" key={data.id}
                 onClick={() => fetchProduct(data)}>
@@ -77,7 +59,7 @@ export default function BotigaGeneral() {
                 </div>
             </div>
         )
-    })
+    }) : null
 
     return (
         <div className="productCardDeck">

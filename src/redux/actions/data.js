@@ -1,0 +1,82 @@
+import {
+    SET_MESSAGE, GET_ALL_SUPPORT_SUCCESS, GET_ALL_SUPPORT_FAIL, GET_ALL_AGENDA_SUCCESS, GET_ALL_AGENDA_FAIL, GET_ALL_BOTIGA_SUCCESS, GET_ALL_BOTIGA_FAIL, CLEAR_MESSAGE
+} from "./types";
+import DataService from '../services/data.service'
+
+export const supportYourLocalsAll = () => (dispatch) => {
+    return DataService.supportYourLocalsAll().then(
+        (response) => {
+            dispatch({
+                type: GET_ALL_SUPPORT_SUCCESS,
+                payload: response.data,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message = error.response.data.email
+            dispatch({
+                type: GET_ALL_SUPPORT_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const agendaAll = () => (dispatch) => {
+    return DataService.agendaAll().then(
+        (response) => {
+            dispatch({
+                type: GET_ALL_AGENDA_SUCCESS,
+                payload: response.data,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message = error.response.data.email
+            dispatch({
+                type: GET_ALL_AGENDA_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};
+
+export const botigaAll = () => (dispatch) => {
+    return DataService.botigaAll().then(
+        (response) => {
+            dispatch({
+                type: GET_ALL_BOTIGA_SUCCESS,
+                payload: response.data,
+            });
+
+            return Promise.resolve();
+        },
+        (error) => {
+            const message = error.response.data.email
+            dispatch({
+                type: GET_ALL_BOTIGA_FAIL,
+            });
+
+            dispatch({
+                type: SET_MESSAGE,
+                payload: message,
+            });
+
+            return Promise.reject();
+        }
+    );
+};

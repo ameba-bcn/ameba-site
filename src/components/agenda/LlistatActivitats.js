@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch } from "react-redux";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from '../../redux/actions/cart';
 import { Redirect } from 'react-router-dom';
 import MaterialTable from "material-table";
@@ -13,26 +13,13 @@ export default function LlistatActivitats() {
   const [redirect, setRedirect] = useState(false)
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-
+  const data = useSelector(state => state.data)
+  const { agenda = [] } = data
   const handleAddClick = (rowData) => {
     dispatch(addToCart(rowData.id))
     handleClose();
     setRedirect(true)
   }
-
-  const [eventsData, setEventsData] = useState([
-    {
-      id: 0,
-      name: "",
-      price: "",
-      images: [""],
-      discount: "",
-      datetime: "",
-      address: "",
-      saved: "",
-      purchased: ""
-    }
-  ]);
 
   const [eventData, setEventData] = useState([
     {
@@ -62,18 +49,6 @@ export default function LlistatActivitats() {
         console.log("ERROL", error.response)
       });
   }
-
-  useEffect(() => {
-    axiosInstance.get(`events/`, {})
-      .then((res) => {
-        console.log(res.data);
-        setEventsData(res.data)
-      })
-      .catch(error => {
-        console.log("ERROL", error.response)
-      });
-  }, []);
-
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -124,7 +99,7 @@ export default function LlistatActivitats() {
         }
       }
     ],
-    data: eventsData, // Respuesta API aqui
+    data: agenda, // Respuesta API aqui
     results: []
   });
 
@@ -132,11 +107,11 @@ export default function LlistatActivitats() {
 
   return (
     <div className="fullTableActiv">
-      <MaterialTable
+      {agenda.length > 0 && <MaterialTable
         title=""
         className="materialTableGeneral"
         columns={state.columns}
-        data={eventsData}
+        data={agenda}
         options={{
           actionsColumnIndex: -1,
         }}
@@ -164,7 +139,7 @@ export default function LlistatActivitats() {
             actions: 'Reserva'
           }
         }}
-      />
+      />}
       <ActivitatDialog open={open} dataRow={eventData} onClose={handleClose} />
     </div>
   );

@@ -3,9 +3,9 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import './CardNew.css';
-import {formatISODateToDate} from './../../utils/utils';
+import { formatISODateToDate } from './../../utils/utils';
 
-export default function CardNew(props) {
+const CardNew = React.memo(props => {
   return (
     <Card>
       <CardActionArea className="cardFrame">
@@ -22,7 +22,7 @@ export default function CardNew(props) {
         </div>
         <CardContent className="row">
           <div className="cardMediaDate column1">
-          {formatISODateToDate(props.data)}
+            {formatISODateToDate(props.data)}
           </div>
           <div className="cardMediaPlus column2">
             +
@@ -31,4 +31,6 @@ export default function CardNew(props) {
       </CardActionArea>
     </Card>
   );
-}
+})
+
+export default CardNew

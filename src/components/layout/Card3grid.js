@@ -3,14 +3,12 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import CardNew from './CardNew';
 import './Card3grid.css'
-// import Data from '../main/response3Cards.json'
 
-function Card3Grid(props) {
-    console.log("props.activitats", props.activitats)
-    const activitatsToDisplay = props.activitats || undefined;
+const Card3Grid = React.memo(props => {
+    const { activitats } = props;
     return (
         <Grid container justify="center" className="Card3GridContainer">
-            {activitatsToDisplay && (activitatsToDisplay.map((data) => (
+            {activitats && (activitats.map((data) => (
                 <Grid key={data.name} item className="Card3GridItem">
                     <Paper className="Card3GridPaper">
                         <CardNew
@@ -25,6 +23,6 @@ function Card3Grid(props) {
             )))}
         </Grid>
     );
-}
+})
 
-export default React.memo(Card3Grid);
+export default Card3Grid;
