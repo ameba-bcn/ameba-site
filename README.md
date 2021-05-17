@@ -2,6 +2,16 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # AMEBA FRONTEND
 
+Version 0.3
+
+## Release changes
+- New newsletter form on footer
+- Performace and rerenders optimized
+- Store tracks user status
+- Requests on load and refactor
+- NewMemberForm consumes EP
+- Profile view user first approach
+
 Version 0.2
 
 ## Release changes
