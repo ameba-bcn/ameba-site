@@ -13,7 +13,7 @@ const addInCart = (id) => {
             }
         }).then((response) => {
             localStorage.setItem("cart_id", JSON.stringify(response.data.id));
-            let cart_prev = getIDValuesFromArrayObj(response.data.cart_items)
+            let cart_prev = getIDValuesFromArrayObj(response.data.item_variants)
             cart_prev.push(id)
             return axios.patch(`${API_URL}carts/${response.data.id}/`,
                 { "item_variant_ids": cart_prev },
@@ -44,7 +44,7 @@ const addInCart = (id) => {
             let cart_uuid = JSON.parse(localStorage.getItem("cart_id"));
             return axios.get(`${API_URL}carts/${cart_uuid}/`
             ).then((response) => {
-                let cart_prev = getIDValuesFromArrayObj(response.data.cart_items)
+                let cart_prev = getIDValuesFromArrayObj(response.data.item_variants)
                 cart_prev.push(id)
                 return axios.patch(`${API_URL}carts/${cart_uuid}/`,
                     { "item_variant_ids": cart_prev }
@@ -90,7 +90,7 @@ const removeItemCart = (id) => {
                 Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`
             }
         }).then((response) => {
-            let cart_prev = getIDValuesFromArrayObj(response.data.cart_items)
+            let cart_prev = getIDValuesFromArrayObj(response.data.item_variants)
             const index = cart_prev.indexOf(id);
             if (index > -1) {
                 cart_prev.splice(index, 1);
@@ -111,7 +111,7 @@ const removeItemCart = (id) => {
         let cart_uuid = JSON.parse(localStorage.getItem("cart_id"));
         return axios.get(`${API_URL}carts/${cart_uuid}/`
         ).then((response) => {
-            let cart_prev = getIDValuesFromArrayObj(response.data.cart_items)
+            let cart_prev = getIDValuesFromArrayObj(response.data.item_variants)
             const index = cart_prev.indexOf(id);
             if (index > -1) {
                 cart_prev.splice(index, 1);

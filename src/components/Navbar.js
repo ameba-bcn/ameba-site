@@ -19,12 +19,13 @@ function Navbar(props) {
     const [size, setSize] = useState(0);
     const dispatch = useDispatch();
     const { isLoggedIn, user_data } = useSelector(state => state.auth);
+    const data = useSelector(state => state.state)
+    const { user_state = "" } = data
     const [anchorEl, setAnchorEl] = useState(null);
     const [anchorEl1, setAnchorEl1] = useState(null);
-    const [redirect, setRedirect] = useState(false)
     const { cart = {} } = props;
     const { item_variants = [], count = 0 } = cart;
-    
+
     useLayoutEffect(() => {
         function updateSize() {
             setSize(window.innerWidth);
@@ -34,9 +35,11 @@ function Navbar(props) {
         size > 1000 ? setClick(false) : setClick(click)
         return () => window.removeEventListener('resize', updateSize);
     }, [size, click]);
-    
+
     const handleClickCart = (event) => {
-        setAnchorEl(event.currentTarget);
+        if (user_state !== "MEMBER_CANDIDATE") {
+            setAnchorEl(event.currentTarget);
+        }
     };
 
     const handleCloseCart = () => {
@@ -70,7 +73,6 @@ function Navbar(props) {
     const logoutMenu = () => {
         dispatch(logout())
     }
-    // if (redirect) return <Redirect to='/profile' />
 
     return (
         <div className="menuContainer">
@@ -84,8 +86,8 @@ function Navbar(props) {
                 </div>
                 <div className="menuOptionsCollapsed">
                     <ul className={click ? "nav-ul.show" : "nav-ul"}>
-                        <li className="liMenuOptions" onClick={closeMenu}>
-                            <NavLink className="menuOptions" to="/membership-registration" data-item='MEMBER'>MEMBER</NavLink></li>
+                        {/* <li className="liMenuOptions" onClick={closeMenu}>
+                            <NavLink className="menuOptions" to="/membership-registration" data-item='MEMBER'>MEMBER</NavLink></li> */}
                         <li className="liMenuOptions" onClick={closeMenu}>
                             <NavLink className="menuOptions" to="/activitats" data-item='AGENDA'>AGENDA</NavLink></li>
                         <li className="liMenuOptions" onClick={closeMenu}>
@@ -98,7 +100,7 @@ function Navbar(props) {
                                 <>
                                     <a className="sessio-menu-button" data-item={user_data.username === "" ? "SESSIÓ" : user_data.username}
                                         onClick={handleClickSessio} >{user_data.username === "" ? "SESSIÓ" : user_data.username}</a>
-                                    {user_data.username === "" ? "SESSIÓ" : user_data.username}
+                                    {/* {user_data.username === "" ? "SESSIÓ" : user_data.username} */}
                                     <Menu
                                         id="simple-menu"
                                         anchorEl={anchorEl1}
@@ -118,20 +120,27 @@ function Navbar(props) {
                             }
                         </div>
                         {item_variants.length > 0 ?
-                            <li className="liMenuOptions" ><ShoppingCartIcon className="cartIconMenu" onClick={handleClickCart} />
-                                {cart ? <div className="bubbleCart">{count}</div> : null}
-                                <Menu
-                                    id="simple-menu"
-                                    anchorEl={anchorEl}
-                                    keepMounted
-                                    className="menuDropdownCart"
-                                    disableAutoFocusItem
-                                    open={Boolean(anchorEl)}
-                                    onClose={handleCloseCart}>
-                                    <div>
-                                        <DropdownCart cartData={cart} closeDropDown={handleCloseCart} />
-                                    </div>
-                                </Menu>
+                            <li className="liMenuOptions" >
+                                {user_state === "MEMBER_CANDIDATE" ?
+                                    <NavLink className="menuOptions" to="/membership-registration">
+                                        <ShoppingCartIcon className="cartIconMenu" />
+                                        {cart ? <div className="bubbleCartMember">{count}</div> : null}
+                                    </NavLink>
+                                    : <>
+                                        <ShoppingCartIcon className="cartIconMenu" onClick={handleClickCart} />
+                                        {cart ? <div className="bubbleCart">{count}</div> : null}
+                                        <Menu
+                                            id="simple-menu"
+                                            anchorEl={anchorEl}
+                                            keepMounted
+                                            className="menuDropdownCart"
+                                            disableAutoFocusItem
+                                            open={Boolean(anchorEl)}
+                                            onClose={handleCloseCart}>
+                                            <div>
+                                                <DropdownCart cartData={cart} closeDropDown={handleCloseCart} />
+                                            </div>
+                                        </Menu></>}
                             </li>
                             : null}
                     </ul>

@@ -9,9 +9,7 @@ import './DropdownCart.css';
 export default function DropdownCart(props) {
     const dispatch = useDispatch();
     // const { cart } = props.cartData;
-    const {
-        item_variants = [],
-        total = 0 } = props.cartData;
+    const { item_variants = [], total = 0 } = props.cartData;
     const arrMono = []
     const getQty = (arr, id) => {
         arrMono.push(id)
@@ -19,6 +17,7 @@ export default function DropdownCart(props) {
     }
 
     const addItem = (id) => {
+        console.log("Add item", id)
         dispatch(addToCart(id))
     }
 
@@ -44,7 +43,7 @@ export default function DropdownCart(props) {
                                     <div className="subsCart" onClick={() => substractItem(el.id)}><RemoveIcon /></div>
                                 </div>
                                 <div className="colCartProduct2">
-                                    <div className="titleCartProduct">{el.name}</div>
+                                    <div className="titleCartProduct">{el.name.split("(")[0]}</div>
                                     <div className="rowDetailedCart">
                                         <div className="cartPriceProduct">{el.price}</div>
                                         <div className="quantityPriceProduct">Qty: <span>{getQty(item_variants, el.id)}</span></div>

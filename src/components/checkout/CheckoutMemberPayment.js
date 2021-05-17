@@ -9,12 +9,12 @@ const mapStateToProps = state => {
   };
 
 function CheckoutMemberPayment(props) {
-    const { cart_items, total} = props.cart;
+    const { item_variants, total} = props.cart;
     return (
         <div>
             <div className="checkout-payment-summary row">
                 <div className="column">
-                    {cart_items[0].name}
+                    {item_variants[0].name}
                 </div>
                 <div className="column">
                     Price: {total}
