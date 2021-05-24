@@ -2,6 +2,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # AMEBA FRONTEND
 
+Version 0.4
+
+## Release changes
+- New login flow including cart_id asigned to user
+- New register flow including cart_id asigned to user
+- New register new member flow including cart_id asigned to user
+- New checkout cart and checkout member flow including cart_id asigned to user
+
 Version 0.3
 
 ## Release changes
