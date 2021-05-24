@@ -1,4 +1,4 @@
-import axiosInstance from './../../axios';
+import axiosInstance from '../../axios';
 
 const API_URL = process.env.REACT_APP_API_HOST || "http://localhost/api/";
 

@@ -1,19 +1,19 @@
 import { GUEST_USER, LOGGED_USER, MEMBER_CANDIDATE, SUBSCRIBE_SUCCESS, SUBSCRIBE_FAIL } from "../actions/types";
 
-const initialState = { user_state: "" };
+const initialState = { user_profile: "" };
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
     const { type } = action;
 
     switch (type) {
         case GUEST_USER:
-            return { user_state: "GUEST" };
+            return { user_profile: "GUEST" };
 
         case LOGGED_USER:
-            return { user_state: "LOGGED" };
+            return { user_profile: "LOGGED" };
 
         case MEMBER_CANDIDATE:
-            return { user_state: "MEMBER_CANDIDATE" };
+            return { user_profile: "MEMBER_CANDIDATE" };
 
         case SUBSCRIBE_SUCCESS:
             return {

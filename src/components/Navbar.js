@@ -19,8 +19,12 @@ function Navbar(props) {
     const [size, setSize] = useState(0);
     const dispatch = useDispatch();
     const { isLoggedIn, user_data } = useSelector(state => state.auth);
-    const data = useSelector(state => state.state)
-    const { user_state = "" } = data
+    const cartSel = useSelector(state => state.cart)
+    const { cart_data = {} } = cartSel
+    const { state = {} } = cart_data;
+    const { has_subscriptions = undefined } = state || {};
+    const data = useSelector(state => state.profile)
+    const { user_profile = "" } = data
     const [anchorEl, setAnchorEl] = useState(null);
     const [anchorEl1, setAnchorEl1] = useState(null);
     const { cart = {} } = props;
@@ -37,7 +41,7 @@ function Navbar(props) {
     }, [size, click]);
 
     const handleClickCart = (event) => {
-        if (user_state !== "MEMBER_CANDIDATE") {
+        if (user_profile !== "MEMBER_CANDIDATE") {
             setAnchorEl(event.currentTarget);
         }
     };
@@ -121,7 +125,7 @@ function Navbar(props) {
                         </div>
                         {item_variants.length > 0 ?
                             <li className="liMenuOptions" >
-                                {user_state === "MEMBER_CANDIDATE" ?
+                                {state && has_subscriptions !== undefined ?
                                     <NavLink className="menuOptions" to="/membership-registration">
                                         <ShoppingCartIcon className="cartIconMenu" />
                                         {cart ? <div className="bubbleCartMember">{count}</div> : null}

@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import './App.css';
-import { setGuestUser, setLoggedUser } from './redux/actions/state';
+import { setGuestUser, setLoggedUser } from './redux/actions/profile';
+import { validateLocalToken, getUserData } from './redux/actions/auth';
 import { useDispatch } from "react-redux";
 // import { connect } from "react-redux";
 import Home from './pages/Home';
@@ -23,7 +24,7 @@ import LogMailConfirmation from './pages/LogMailConfirmation';
 import PasswordRecovery from './pages/PasswordRecovery';
 import SendEmailPasswordRecovery from './pages/SendEmailPasswordRecovery';
 import ValidateEmail from './pages/ValidateEmail';
-import Register from './redux/components/Register';
+// import Register from './redux/components/Register';
 import { UserContext } from './UserContext';
 import {
   supportYourLocalsAll,
@@ -38,13 +39,17 @@ function App() {
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("user"))) {
-      dispatch(setLoggedUser())
-      console.log("Has local user", JSON.parse(localStorage.getItem("user")))
+      const refresh = JSON.parse(localStorage.getItem("user")).refresh
+      console.log("Refresh token is", refresh)
+      dispatch(validateLocalToken(refresh)).then(() => {
+        dispatch(setLoggedUser())
+        dispatch(getUserData())
+        console.log("Has local user", JSON.parse(localStorage.getItem("user")))
+      }).catch(dispatch(setGuestUser()))
     }
     else {
       dispatch(setGuestUser());
       console.log("Has local user", JSON.parse(localStorage.getItem("user")))
-
     }
     console.log("Collect data on main resources")
     dispatch(supportYourLocalsAll());
@@ -68,7 +73,7 @@ function App() {
           <Route path='/recovery' component={PasswordRecovery} />
           <Route path='/send-recovery' component={SendEmailPasswordRecovery} />
           <Route path='/validate-email' component={ValidateEmail} />
-          <Route path='/registration' component={Register} />
+          {/* <Route path='/registration' component={Register} /> */}
           <Route path='/activate' component={LogMailConfirmation} />
           <Route path='/profile' component={Profile} />
           <Route path='/checkout' component={Checkout} />

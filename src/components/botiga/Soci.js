@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from "react-redux";
-import { addMemberToCart, deleteFullCart } from '../../redux/actions/cart';
-import {setMemberCandidate} from '../../redux/actions/state';
+import { useDispatch, useSelector } from "react-redux";
+import { addMemberToCart, deleteFullCart, getCart } from '../../redux/actions/cart';
+import { setMemberCandidate } from '../../redux/actions/profile';
 import { Redirect } from 'react-router-dom';
 import axiosInstance from "../../axios";
 import Dialog from '@material-ui/core/Dialog';
@@ -15,6 +15,8 @@ import './Soci.css'
 
 export default function SociDialog(props) {
     const { onClose, selectedValue, open } = props;
+    const profile = useSelector(state => state.profile)
+    const { user_profile = "" } = profile
     const dispatch = useDispatch();
     const [socisData, getSocisData] = useState();
     const [isSubscriber, setIsSubscriber] = useState(0);
@@ -23,7 +25,7 @@ export default function SociDialog(props) {
     useEffect(() => {
         axiosInstance.get(`subscriptions/`, {})
             .then((res) => {
-                console.log("subscriptions",res.data);
+                console.log("subscriptions", res.data);
                 getSocisData(res.data)
             })
             .catch(error => {
@@ -37,15 +39,23 @@ export default function SociDialog(props) {
 
     const handleAddClick = () => {
         // dispatch(deleteFullCart()).then(()=> {
-            console.log("Socis data", socisData[isSubscriber].variants[0])
-            dispatch(addMemberToCart(socisData[isSubscriber].variants[0]))
+        console.log("Socis data", socisData[isSubscriber].variants[0])
+        dispatch(addMemberToCart(socisData[isSubscriber].variants[0]))
+        if (user_profile === "LOGGED") {
+            dispatch(getCart()).then(() => {
+                setRedirect(true)
+                dispatch(setMemberCandidate())
+            })
+        } else {
             dispatch(setMemberCandidate())
             setRedirect(true)
+        }
         // })
         // handleClose();
     }
 
     if (redirect) {
+        // return <Redirect to='/login' />;
         return <Redirect to='/membership-registration' />;
     }
 

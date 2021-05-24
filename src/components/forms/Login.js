@@ -4,9 +4,9 @@ import { Redirect, NavLink, useLocation } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { login, getUserData } from "../actions/auth";
-import { setLoggedUser } from '../actions/state';
-import { getCart } from "../actions/cart";
+import { login, getUserData } from "../../redux/actions/auth";
+import { setLoggedUser } from '../../redux/actions/profile';
+import { getCart, checkoutCart } from "../../redux/actions/cart";
 
 const required = (value) => {
     if (!value) {
@@ -22,13 +22,18 @@ const Login = (props) => {
     const form = useRef();
     const checkBtn = useRef();
     const { isCheckout, isNewMember } = props;
+    const { message } = useSelector(state => state.message);
+    const profile = useSelector(state => state.profile)
+    const cart = useSelector(state => state.cart)
+    const { cart_data = {} } = cart
+    const { state = {} } = cart_data;
+    const { user_profile = "" } = profile
     const [email, setEmailname] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [redirect, setRedirect] = useState(false);
     const [recover, setRecover] = useState(false);
     const [displayError, setDisplayError] = useState(false);
-    const { message } = useSelector(state => state.message);
     const location = useLocation();
     const dispatch = useDispatch();
     const onChangeUsername = (e) => {
@@ -58,13 +63,15 @@ const Login = (props) => {
         if (checkBtn.current.context._errors.length === 0) {
             dispatch(login(email, password))
                 .then(() => {
-                    dispatch(setLoggedUser())
+                    // dispatch(setLoggedUser())
                     dispatch(getUserData())
-                    if (JSON.parse(localStorage.getItem("cart_id")) === null) {
-                        dispatch(getCart())
-                    }
+                    // if (JSON.parse(localStorage.getItem("cart_id")) === null) {
+                    dispatch(getCart()).then(() => {
+                        setRedirect(true)
+                        // dispatch(checkoutCart()).then(() => {
+                        // })
+                    })
                     setLoading(false);
-                    setRedirect(true)
                 }).catch(() => {
                     setDisplayError(true)
                     setLoading(false)
@@ -75,14 +82,29 @@ const Login = (props) => {
         }
     };
 
-    if (redirect && location.pathname === '/login') {
-        return <Redirect to='/' />;
+
+    if (redirect) {
+        console.log("El estado(STATE) del carrito es", state)
+        const { needs_checkout, has_subscriptions, has_article, has_memberships } = state || {};
+        if (needs_checkout === false && has_subscriptions === 1 && has_memberships === false) {
+            return <Redirect to='/membership-registration' />;
+        }
+        else if (needs_checkout === false && has_article === 1) {
+            return <Redirect to='/checkout' />;
+        }
+        else {
+            return <Redirect to='/' />;
+        }
     }
 
-    if (redirect && location.pathname === '/membership-registration') {
-        props.setViewState("membershipPayment")
-        console.log("Redireccion membership form ok")
-    }
+    // if (redirect && location.pathname === '/login') {
+    //     return <Redirect to='/' />;
+    // }
+
+    // if (redirect && location.pathname === '/membership-registration') {
+    //     props.setViewState("membershipPayment")
+    //     console.log("Redireccion membership form ok")
+    // }
     // if (redirect && location.pathname === '/membership-registration') {
     //     // return <Redirect to='/membership-registration' />;
     //     console.log("Redireccion membership form ok")
@@ -92,7 +114,7 @@ const Login = (props) => {
 
     return (
         <div className="col-md-12">
-            <div className="card card-container card-login">
+            {user_profile !== "LOGGED" ? <div className="card card-container card-login">
                 {!isCheckout && (<div className={isNewMember ? "logTitleSmall" : "logTitle"}>login</div>)}
                 <Form onSubmit={handleLogin} ref={form}>
                     <div className="form-group">
@@ -144,7 +166,7 @@ const Login = (props) => {
                         <span className="logTextosLink" onClick={showPasswordRecover}>- Recupera la teva contrassenya -</span>
                     </>
                 )}
-            </div>
+            </div> : <>Datos del user y botón de Log Out</>}
         </div>
     );
 };

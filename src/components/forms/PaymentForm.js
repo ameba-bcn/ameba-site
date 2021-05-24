@@ -75,11 +75,12 @@ function PaymentForm(props) {
       setError(null);
       setProcessing(false);
       setSucceeded(true);
-      dispatch(deleteCartAfterCheckout())
+      
     }
   };
 
   if (succeeded) {
+    dispatch(deleteCartAfterCheckout())
     return <Redirect to='/summary-checkout' />;
 }
 

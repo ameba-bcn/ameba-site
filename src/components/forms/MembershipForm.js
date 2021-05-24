@@ -9,7 +9,7 @@ import { isEmail } from "validator";
 import { registerMember } from '../../redux/actions/auth';
 import { checkoutCart, addToCart } from '../../redux/actions/cart';
 
-const MembershipForm = ({ isSubmitted }) => {
+const MembershipForm = () => {
     const form = useRef();
     const checkBtn = useRef();
 
@@ -26,7 +26,8 @@ const MembershipForm = ({ isSubmitted }) => {
 
     const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
-
+    const { cart_data = {} } = useSelector(state => state.cart);
+    const { id = "" } = cart_data;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,7 +35,7 @@ const MembershipForm = ({ isSubmitted }) => {
         // form.current.validateAll();
 
         if (checkBtn.current.context._errors.length === 0) {
-            dispatch(registerMember(dni, usernameReal, surnameReal, phone, username, password, email))
+            dispatch(registerMember(dni, usernameReal, surnameReal, phone, username, password, email, id))
                 .then(() => {
                     //     dispatch(addToCart([1])).then(() => {
                     //         dispatch(checkoutCart())
@@ -116,10 +117,9 @@ const MembershipForm = ({ isSubmitted }) => {
         }
     };
 
-    if (successful) {
-        isSubmitted(true)
-        if (successful) return <Redirect to='/validate-email' />
-    }
+
+    if (successful) return <Redirect to='/validate-email' />
+
 
     return (
         <div className="col-md-12">

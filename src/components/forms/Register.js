@@ -6,9 +6,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import AddIcon from '@material-ui/icons/Add';
-
-import { register } from "../actions/auth";
-
+import { register } from "../../redux/actions/auth";
 import SociDialog from '../../components/botiga/Soci';
 
 
@@ -55,7 +53,11 @@ const vpassword = (value) => {
 const Register = (props) => {
   const form = useRef();
   const checkBtn = useRef();
-
+  const { message } = useSelector(state => state.message);
+  const profile = useSelector(state => state.profile)
+  const { user_profile = "" } = profile
+  const { cart_data = {} } = useSelector(state => state.cart);
+  const { id = "" } = cart_data;
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -63,7 +65,6 @@ const Register = (props) => {
   const [displayError, setDisplayError] = useState(false);
   const [open, setOpen] = React.useState(false);
 
-  const { message } = useSelector(state => state.message);
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -93,7 +94,7 @@ const Register = (props) => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(register(username, email, password))
+      dispatch(register(username, email, password, id))
         .then(() => {
           setSuccessful(true);
         })
@@ -114,7 +115,7 @@ const Register = (props) => {
     <div className="col-md-12">
       <div className="card card-container card-login">
         <div className="logTitle">registra't</div>
-        <div className="sociLogBanner" onClick={handleClick}>encara no ets soci/a? Informa't aquí!<AddIcon className="sociLogBannerPlus" /></div>
+        {user_profile!=="MEMBER_CANDIDATE" && <div className="sociLogBanner" onClick={handleClick}>encara no ets soci/a? Informa't aquí!<AddIcon className="sociLogBannerPlus" /></div>}
 
         <Form onSubmit={handleRegister} ref={form}>
           {!successful && (

@@ -60,16 +60,32 @@ const addInCart = (id) => {
 
 
 const addMemberToCart = (id) => {
-    return axios.post(`${API_URL}carts/`
-    ).then((response) => {
-        console.log("cart response", response)
-        localStorage.setItem("cart_id", JSON.stringify(response.data.id));
-        return axios.patch(`${API_URL}carts/${response.data.id}/`,
-            { "item_variant_ids": [id] }
-        ).then((response) => {
-            return response.data;
+    if (JSON.parse(localStorage.getItem("user"))?.access !== undefined) {
+        return axios.get(API_URL + 'carts/current/', {
+            headers: {
+                Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`
+            }
+        }).then((response) => {
+            return axios.patch(`${API_URL}carts/${response.data.id}/`,
+                { "item_variant_ids": [id] },
+                { headers: { Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}` } }
+            ).then((response) => {
+                return response.data;
+            })
         })
-    })
+    }
+    else {
+        return axios.post(`${API_URL}carts/`
+        ).then((response) => {
+            console.log("cart response", response)
+            localStorage.setItem("cart_id", JSON.stringify(response.data.id));
+            return axios.patch(`${API_URL}carts/${response.data.id}/`,
+                { "item_variant_ids": [id] }
+            ).then((response) => {
+                return response.data;
+            })
+        })
+    }
 }
 
 
@@ -155,6 +171,7 @@ const deleteCartAfterSuccesfullCheckout = () => {
             Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`
         }
     }).then((response) => {
+        localStorage.removeItem("cart_id")
         console.log("delete cart response", response.data)
         return response.data;
     })

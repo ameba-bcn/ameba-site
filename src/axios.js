@@ -48,7 +48,7 @@ axiosInstance.interceptors.response.use(
             const refreshToken = JSON.parse(localStorage.getItem("user")).refresh;
 
             if (refreshToken) {
-                const tokenParts = JSON.parso(atob(refreshToken.split('.')[1]));
+                const tokenParts = JSON.parse(atob(refreshToken.split('.')[1]));
                 //La fecha esta en segundos, la reformateamos
                 const now = Math.ceil(Date.now() / 1000);
                 console.log(tokenParts.exp);

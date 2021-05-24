@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { connect, useDispatch } from "react-redux";
-import { checkoutCart } from './../../redux/actions/cart';
+import React from 'react';
+import { connect } from "react-redux";
+import { useDispatch} from "react-redux";
+import { checkoutCart,  } from './../../redux/actions/cart';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
@@ -11,8 +12,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PaymentForm from './../forms/PaymentForm';
 import Review from './Review';
-import Login from './../../redux/components/Login';
-import SuccesfullLogin from './../../redux/components/SuccesfullLogin';
+
 
 const mapStateToProps = state => {
   return {
@@ -63,47 +63,26 @@ const useStyles = makeStyles((theme) => ({
 function CheckoutMain(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const { username = "", email = "" } = props.user_data
-  const [activeStep, setActiveStep] = React.useState(props.isLoggedIn ? 1 : 0);
-  const [autoStep, setAutoStep] = React.useState(true);
-  const steps = ['Log/Registre', 'Revisió', 'Dades de pagament'];
-  const [viewState, setViewState] = useState("login");
+  const [activeStep, setActiveStep] = React.useState(0);
+  const steps = ['Revisió', 'Dades de pagament'];
 
   const handleNext = () => {
-    if (activeStep === 0 && !props.isLoggedIn) {
-      console.log("Error, user not logged")
-    }
-    else {
-      if (activeStep === 1) {
-        dispatch(checkoutCart())
-      } else {
-        setActiveStep(activeStep + 1);
-      }
-    }
+    if (activeStep === 0) {
+      dispatch(checkoutCart()).then(() => setActiveStep(activeStep + 1))
+  } else {
+      setActiveStep(activeStep + 1);
+  }
   };
 
   const handleBack = () => {
-    console.log("Handle Back", activeStep)
     setActiveStep(activeStep - 1);
-    setAutoStep(false)
   };
-
-  if (props.isLoggedIn && activeStep === 0 && autoStep) {
-    handleNext();
-    setAutoStep(false)
-  }
-
-  if (props.stripe && activeStep === 1){
-    setActiveStep(activeStep + 1);
-  }
 
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return props.isLoggedIn ? <SuccesfullLogin nom={username} email={email} /> : <Login isCheckout={true} viewState={viewState} setViewState={setViewState}/>;
-      case 1:
         return <Review />;
-      case 2:
+      case 1:
         return <PaymentForm />;
       default:
         throw new Error('Unknown step');
@@ -125,26 +104,26 @@ function CheckoutMain(props) {
               </Step>
             ))}
           </Stepper>
-              <React.Fragment>
-                {getStepContent(activeStep)}
-                <div className={classes.buttons}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
-                      Enrere
-                    </Button>
-                  )}
-                  {activeStep <= 1 && (
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    Següent
-                  </Button>
-                    )}
-                </div>
-              </React.Fragment>
+          <React.Fragment>
+            {getStepContent(activeStep)}
+            <div className={classes.buttons}>
+              {activeStep !== 0 && (
+                <Button onClick={handleBack} className={classes.button}>
+                  Enrere
+                </Button>
+              )}
+              {activeStep <= 1 && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNext}
+                  className={classes.button}
+                >
+                  Següent
+                </Button>
+              )}
+            </div>
+          </React.Fragment>
         </Paper>
       </main>
     </React.Fragment>

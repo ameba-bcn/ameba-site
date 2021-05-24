@@ -14,6 +14,8 @@ import {
     PASSWORD_RECOVERY_SUCCESS,
     PASSWORD_RECOVERY_FAIL,
     LOGOUT,
+    VALIDATE_LOCAL_TOKEN,
+    VALIDATE_LOCAL_TOKEN_FAIL
 } from "../actions/types";
 
 const user = JSON.parse(localStorage.getItem("user"));
@@ -31,7 +33,7 @@ const initialState = user
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
     const { type, payload } = action;
-    console.log("payload",payload)
+    console.log("payload", payload)
     switch (type) {
         case REGISTER_SUCCESS:
             return {
@@ -58,6 +60,18 @@ export default function (state = initialState, action) {
         case VALIDATE_FAIL:
             return {
                 ...state,
+            };
+        case VALIDATE_LOCAL_TOKEN:
+            return {
+                ...state,
+                isLoggedIn: true,
+                user: payload,
+            };
+        case VALIDATE_LOCAL_TOKEN_FAIL:
+            return {
+                ...state,
+                isLoggedIn: false,
+                user: null,
             };
         case LOGIN_SUCCESS:
             return {

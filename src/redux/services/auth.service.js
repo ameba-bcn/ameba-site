@@ -3,15 +3,16 @@ import axiosInstance from './../../axios';
 
 const API_URL = process.env.REACT_APP_API_HOST || "http://localhost/api/";
 
-const register = (username, email, password) => {
+const register = (username, email, password, cart_id) => {
     return axiosInstance.post(API_URL + "users/", {
         username,
         email,
         password,
+        cart_id
     })
 };
 
-const registerMember = (address, first_name, last_name, phone_number, username, password, email) => {
+const registerMember = (address, first_name, last_name, phone_number, username, password, email, cart_id) => {
     return axiosInstance.post(API_URL + "member_register/", {
         username,
         email,
@@ -20,9 +21,21 @@ const registerMember = (address, first_name, last_name, phone_number, username, 
         last_name,
         address,
         phone_number,
+        cart_id
     }).then((response) => {
         return response.data;
     });
+};
+
+const validateLocalToken = (refreshToken) => {
+    return axios.post(API_URL + "token/refresh/", {
+        'refresh': refreshToken
+    }).then((response) => {
+        if (response.data.access) {
+            localStorage.setItem("user", JSON.stringify(response.data));
+        }
+        return response.data;
+    })
 };
 
 const validateEmail = (token) => {
@@ -75,7 +88,8 @@ const getUserData = () => {
 };
 
 const logout = () => {
-    return axios.delete(API_URL + `token/${JSON.parse(localStorage.getItem("user"))?.refresh}/`
+    const refresh = JSON.parse(localStorage.getItem("user")).refresh
+    return axios.delete(API_URL + `token/${refresh}/`
         , {
             headers: {
                 Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`
@@ -91,6 +105,7 @@ const logout = () => {
 export default {
     register,
     registerMember,
+    validateLocalToken,
     login,
     logout,
     getUserData,

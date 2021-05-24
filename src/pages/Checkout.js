@@ -5,7 +5,7 @@ import LettersMove from './../components/layout/LettersMove';
 export default function Checkout() {
     return (
         <>
-            <CheckoutStripeHandler isNewMember={false}/>
+            <CheckoutStripeHandler isMemberRegistration={false}/>
             <LettersMove
                 className="lettersMoveDiv"
                 sentence="FES-TE SOCI/A "

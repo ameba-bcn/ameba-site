@@ -5,7 +5,7 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import './../../contacte/Contacte.css';
-import { subscribeNewsletter } from './../../redux/actions/state';
+import { subscribeNewsletter } from './../../redux/actions/profile';
 
 
 const mapStateToProps = state => {

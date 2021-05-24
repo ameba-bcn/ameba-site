@@ -2,7 +2,7 @@ import {
     GUEST_USER, LOGGED_USER, MEMBER_CANDIDATE,
     SET_MESSAGE, SUBSCRIBE_SUCCESS, SUBSCRIBE_FAIL, CLEAR_MESSAGE
 } from "./types";
-import StateService from './../services/state.services'
+import StateService from './../services/profile.services'
 
 export const setGuestUser = () => ({
     type: GUEST_USER
