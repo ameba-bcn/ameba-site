@@ -25,7 +25,6 @@ export default function SociDialog(props) {
     useEffect(() => {
         axiosInstance.get(`subscriptions/`, {})
             .then((res) => {
-                console.log("subscriptions", res.data);
                 getSocisData(res.data)
             })
             .catch(error => {
@@ -38,8 +37,6 @@ export default function SociDialog(props) {
     };
 
     const handleAddClick = () => {
-        // dispatch(deleteFullCart()).then(()=> {
-        console.log("Socis data", socisData[isSubscriber].variants[0])
         dispatch(addMemberToCart(socisData[isSubscriber].variants[0]))
         if (user_profile === "LOGGED") {
             dispatch(getCart()).then(() => {
@@ -50,18 +47,14 @@ export default function SociDialog(props) {
             dispatch(setMemberCandidate())
             setRedirect(true)
         }
-        // })
-        // handleClose();
     }
 
     if (redirect) {
-        // return <Redirect to='/login' />;
         return <Redirect to='/membership-registration' />;
     }
 
     return (
         <Dialog onClose={handleClose}
-            // aria-labelledby="simple-dialog-title" 
             open={open} >
             {socisData ? <Card className="cardSociGeneral" >
                 <div className="insideFrameModal">

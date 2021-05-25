@@ -32,7 +32,7 @@ const validateLocalToken = (refreshToken) => {
         'refresh': refreshToken
     }).then((response) => {
         if (response.data.access) {
-            localStorage.setItem("user", JSON.stringify(response.data));
+            localStorage.setItem("access", response.data.access);
         }
         return response.data;
     })
@@ -69,7 +69,8 @@ const login = (email, password) => {
     })
         .then((response) => {
             if (response.data.access) {
-                localStorage.setItem("user", JSON.stringify(response.data));
+                localStorage.setItem("access", response.data.access);
+                localStorage.setItem("refresh", response.data.refresh);
             }
             return response.data;
         })
@@ -79,7 +80,7 @@ const login = (email, password) => {
 const getUserData = () => {
     return axios.get(API_URL + `users/current/`, {
         headers: {
-            Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`
+            Authorization: `Bearer ${localStorage.getItem("access")}`
         }
     })
         .then((response) => {
@@ -88,15 +89,16 @@ const getUserData = () => {
 };
 
 const logout = () => {
-    const refresh = JSON.parse(localStorage.getItem("user")).refresh
+    const refresh = localStorage.getItem("refresh")
     return axios.delete(API_URL + `token/${refresh}/`
         , {
             headers: {
-                Authorization: `Bearer ${JSON.parse(localStorage.getItem("user"))?.access}`
+                Authorization: `Bearer ${localStorage.getItem("access")}`
             }
         })
         .then(() => {
-            localStorage.removeItem("user");
+            localStorage.removeItem("access");
+            localStorage.removeItem("refresh");
             if (JSON.parse(localStorage.getItem("cart_id"))) localStorage.removeItem("cart_id");
         });
 };

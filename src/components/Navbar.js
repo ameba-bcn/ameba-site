@@ -60,7 +60,6 @@ function Navbar(props) {
 
 
     const handleRedirect = () => {
-        console.log("Entra")
         setAnchorEl(null);
         // setRedirect(true)
     }

@@ -38,20 +38,16 @@ function App() {
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("user"))) {
-      const refresh = JSON.parse(localStorage.getItem("user")).refresh
-      console.log("Refresh token is", refresh)
+    if (localStorage.getItem("refresh")) {
+      const refresh = localStorage.getItem("refresh")
       dispatch(validateLocalToken(refresh)).then(() => {
         dispatch(setLoggedUser())
         dispatch(getUserData())
-        console.log("Has local user", JSON.parse(localStorage.getItem("user")))
       }).catch(dispatch(setGuestUser()))
     }
     else {
       dispatch(setGuestUser());
-      console.log("Has local user", JSON.parse(localStorage.getItem("user")))
     }
-    console.log("Collect data on main resources")
     dispatch(supportYourLocalsAll());
     dispatch(agendaAll());
     dispatch(botigaAll());

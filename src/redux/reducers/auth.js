@@ -18,7 +18,10 @@ import {
     VALIDATE_LOCAL_TOKEN_FAIL
 } from "../actions/types";
 
-const user = JSON.parse(localStorage.getItem("user"));
+const access = localStorage.getItem("access");
+const refresh = localStorage.getItem("refresh");
+
+const user = {access, refresh }
 const user_data = {
     username: "",
     password: "",
@@ -26,14 +29,13 @@ const user_data = {
     member: "",
     date_joined: ""
 }
-const initialState = user
+const initialState = access
     ? { isLoggedIn: true, user, user_data }
     : { isLoggedIn: false, user: null, user_data };
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
     const { type, payload } = action;
-    console.log("payload", payload)
     switch (type) {
         case REGISTER_SUCCESS:
             return {
@@ -93,7 +95,7 @@ export default function (state = initialState, action) {
         case GET_USER_FAIL:
             return {
                 ...state,
-                user_data: user_data,
+                user_data: user_data
             };
         case SEND_EMAIL_PASSWORD_RECOVERY_SUCCESS:
             return {
@@ -116,6 +118,7 @@ export default function (state = initialState, action) {
                 ...state,
                 isLoggedIn: false,
                 user: null,
+                user_data: user_data
             };
         default:
             return state;

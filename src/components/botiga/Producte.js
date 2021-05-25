@@ -43,20 +43,6 @@ export default function ProducteDialog(props) {
         setSizes(arr)
     }, [dataRow]);
 
-    // function getSizesList() {
-    //     let arr = []
-    //     if (dataRow.variants) {
-    //         dataRow.variants.forEach(element => {
-    //             if (element.stock > 0) {
-    //                 arr.push(element.attributes[0].value.toUpperCase())
-    //             console.log("el", element.attributes[0])
-    //             }
-    //         })
-    //         }
-    //     console.log("arr", arr)
-    //     return arr
-    // }
-
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >
             {!isMobile && (<>

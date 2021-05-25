@@ -11,7 +11,6 @@ export default function NewsletterForm2() {
     if (validated) {
       axiosInstance.post(`subscribe/?email=${email}/`, {})
       .then((res) => {
-        console.log(res.data);
       })
       .catch(error => {
         console.log("ERROL", error.response)
@@ -21,7 +20,6 @@ export default function NewsletterForm2() {
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
-    console.log("JAJAJAJ",event)
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();

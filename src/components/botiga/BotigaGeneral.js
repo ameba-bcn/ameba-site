@@ -36,7 +36,6 @@ export default function BotigaGeneral() {
     const fetchProduct = (data) => {
         axiosInstance.get(`articles/${data.id}`, {})
             .then((res) => {
-                console.log(res.data);
                 getProductData(res.data)
             }).then(handleClickOpen())
             .catch(error => {

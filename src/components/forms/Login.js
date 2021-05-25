@@ -63,13 +63,9 @@ const Login = (props) => {
         if (checkBtn.current.context._errors.length === 0) {
             dispatch(login(email, password))
                 .then(() => {
-                    // dispatch(setLoggedUser())
                     dispatch(getUserData())
-                    // if (JSON.parse(localStorage.getItem("cart_id")) === null) {
                     dispatch(getCart()).then(() => {
                         setRedirect(true)
-                        // dispatch(checkoutCart()).then(() => {
-                        // })
                     })
                     setLoading(false);
                 }).catch(() => {
@@ -84,7 +80,6 @@ const Login = (props) => {
 
 
     if (redirect) {
-        console.log("El estado(STATE) del carrito es", state)
         const { needs_checkout, has_subscriptions, has_article, has_memberships } = state || {};
         if (needs_checkout === false && has_subscriptions === 1 && has_memberships === false) {
             return <Redirect to='/membership-registration' />;
@@ -96,19 +91,6 @@ const Login = (props) => {
             return <Redirect to='/' />;
         }
     }
-
-    // if (redirect && location.pathname === '/login') {
-    //     return <Redirect to='/' />;
-    // }
-
-    // if (redirect && location.pathname === '/membership-registration') {
-    //     props.setViewState("membershipPayment")
-    //     console.log("Redireccion membership form ok")
-    // }
-    // if (redirect && location.pathname === '/membership-registration') {
-    //     // return <Redirect to='/membership-registration' />;
-    //     console.log("Redireccion membership form ok")
-    // }
 
     if (recover) return <Redirect to='/send-recovery' />
 

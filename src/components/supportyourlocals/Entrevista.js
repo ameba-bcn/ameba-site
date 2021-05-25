@@ -61,10 +61,8 @@ export default function Entrevista(props) {
     useEffect(() => {
         axiosInstance.get(`interviews/${urlID}/`, {})
             .then((res) => {
-                console.log(res.data);
                 setInterview(res.data)
                 axiosInstance.get(`artists/${urlID}/`, {}).then((res) => {
-                    console.log("artist", res.data);
                     setArtist(res.data)
                 })
             })

@@ -19,7 +19,6 @@ export const setMemberCandidate = () => ({
 export const subscribeNewsletter = (email) => (dispatch) => {
     return StateService.subscribeNewsletter(email).then(
         (response) => {
-            // console.log("RERA", response)
             const message = response.data.detail
             dispatch({
                 type: SUBSCRIBE_SUCCESS,

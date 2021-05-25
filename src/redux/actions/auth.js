@@ -64,7 +64,6 @@ export const register = (username, email, password, cart_id) => (dispatch) => {
 export const registerMember = (address, first_name, last_name, phone_number, username, password, email, cart_id) => (dispatch) => {
     return AuthService.registerMember(address, first_name, last_name, phone_number, username, password, email, cart_id).then(
         () => {
-            console.log("In action",)
             dispatch({
                 type: REGISTER_MEMBER_SUCCESS,
             });
@@ -77,14 +76,7 @@ export const registerMember = (address, first_name, last_name, phone_number, use
             return Promise.resolve();
         },
         (error) => {
-            console.log("error.response.data", error.response.data)
             const message = error.response.data.detail
-            // (error.response &&
-            //     error.response.data &&
-            //     error.response.data.message) ||
-            // error.message ||
-            // error.toString();
-
             dispatch({
                 type: REGISTER_MEMBER_FAIL,
             });
@@ -164,7 +156,7 @@ export const login = (username, password) => (dispatch) => {
             dispatch({
                 type: LOGGED_USER,
             })
-            
+
             dispatch({
                 type: CLEAR_MESSAGE
             });
@@ -308,15 +300,10 @@ export const logout = () => (dispatch) => {
                 type: SET_MESSAGE,
                 payload: response,
             });
-            
+
         },
         (error) => {
-            const message = error.response.data?.detail
-            // (error.response &&
-            //     error.response.data &&
-            //     error.response.data.message) ||
-            // error.message ||
-            // error.toString();
+            const message = error.response.data
             dispatch({
                 type: SET_MESSAGE,
                 payload: message,

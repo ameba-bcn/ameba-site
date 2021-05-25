@@ -76,20 +76,6 @@ function CheckoutMember(props) {
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = ['Revisió', 'Dades de pagament'];
 
-    // useEffect(() => {
-    //     if (viewState === "membershipPayment") {
-    //         console.log("Hey yo")
-    //         dispatch(addToCart("1")).then(() => {
-    //             dispatch(checkoutCart()).then(() => setPaymentReady(true))
-    //         }).catch(() => {
-    //             console.log("Algo ha ido muy mal tito...")
-    //             setDisplayError(true)
-    //         }
-    //         )
-    //     }
-    // }, [viewState]);
-
-
     const handleNext = () => {
         if (activeStep === 0) {
             dispatch(checkoutCart()).then(() => setActiveStep(activeStep + 1))

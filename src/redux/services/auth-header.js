@@ -1,9 +1,9 @@
 // https://bezkoder.com/react-hooks-redux-login-registration-example/
 export default function authHeader() {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const access = JSON.parse(localStorage.getItem('access'));
 
-    if (user && user.accessToken) {
-        return { Authorization: 'Bearer ' + user.accessToken };
+    if (access) {
+        return { Authorization: 'Bearer ' + access };
     } else {
         return {};
     }
