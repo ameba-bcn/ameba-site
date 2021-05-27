@@ -21,6 +21,7 @@ import {
     DELETE_CART,
     GUEST_USER,
     LOGGED_USER,
+    CLEAR_USER_DATA
     // MEMBER_CANDIDATE
 } from "./types";
 
@@ -308,7 +309,18 @@ export const logout = () => (dispatch) => {
                 type: SET_MESSAGE,
                 payload: message,
             });
-
+            dispatch({
+                type: DELETE_CART
+            });
+            dispatch({
+                type: GUEST_USER,
+            })
+            dispatch({
+                type: CLEAR_USER_DATA,
+            })
+            dispatch({
+                type: CLEAR_MESSAGE,
+            });
             return Promise.reject();
         }
     )

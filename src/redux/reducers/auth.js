@@ -15,13 +15,14 @@ import {
     PASSWORD_RECOVERY_FAIL,
     LOGOUT,
     VALIDATE_LOCAL_TOKEN,
-    VALIDATE_LOCAL_TOKEN_FAIL
+    VALIDATE_LOCAL_TOKEN_FAIL,
+    CLEAR_USER_DATA
 } from "../actions/types";
 
 const access = localStorage.getItem("access");
 const refresh = localStorage.getItem("refresh");
 
-const user = {access, refresh }
+const user = { access, refresh }
 const user_data = {
     username: "",
     password: "",
@@ -114,6 +115,13 @@ export default function (state = initialState, action) {
                 ...state,
             };
         case LOGOUT:
+            return {
+                ...state,
+                isLoggedIn: false,
+                user: null,
+                user_data: user_data
+            };
+        case CLEAR_USER_DATA:
             return {
                 ...state,
                 isLoggedIn: false,
