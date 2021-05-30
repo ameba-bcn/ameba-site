@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import MembershipForm from './../forms/MembershipForm';
 import Review from './Review';
 import PaymentForm from './../forms/PaymentForm';
-import { checkoutCart, addToCart } from './../../redux/actions/cart';
+import { checkoutCart } from './../../redux/actions/cart';
 import ExtendMembership from './ExtendMembership';
 
 const mapStateToProps = state => {
@@ -62,11 +62,6 @@ const useStyles = makeStyles((theme) => ({
 
 function CheckoutMember(props) {
     const classes = useStyles();
-    const [accountCreated, setAccountCreated] = useState(false);
-    const [paymentReady, setPaymentReady] = useState(false);
-    const [viewState, setViewState] = useState("");
-    const [displayError, setDisplayError] = useState(false);
-    const { message } = useSelector(state => state.message);
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cart)
     const { cart_data = {} } = cart

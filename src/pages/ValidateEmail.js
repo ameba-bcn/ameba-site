@@ -4,7 +4,7 @@ import LettersMove from './../components/layout/LettersMove';
 export default function ValidateEmail() {
     return (
         <>
-            <div className="full-heigh-msg">
+            <div className="full-height-msg">
                 <div className="single-msg">Hem enviat un email de verificació. Valida-ho abans de continuar.</div>
             </div>
             <LettersMove

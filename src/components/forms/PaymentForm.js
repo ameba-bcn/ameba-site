@@ -30,7 +30,7 @@ function PaymentForm(props) {
   useEffect(() => {
     console.log("client secret", props.checkout.checkout.client_secret)
     setClientSecret(props.checkout.checkout.client_secret);
-  }, []);
+  }, [props.checkout.checkout.client_secret]);
 
   const cardStyle = {
     hidePostalCode: true,

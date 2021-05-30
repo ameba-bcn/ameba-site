@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { addMemberToCart, deleteFullCart, getCart } from '../../redux/actions/cart';
+import { addMemberToCart, getCart } from '../../redux/actions/cart';
 import { setMemberCandidate } from '../../redux/actions/profile';
 import { Redirect } from 'react-router-dom';
 import axiosInstance from "../../axios";

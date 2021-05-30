@@ -25,7 +25,7 @@ export default function LogMailConfirmation(props) {
     }
 
     return (<>
-        <div className="full-heigh-msg">
+        <div className="full-height-msg">
             {hasQueryParams ?
                 <div className="single-msg">Compte verificat: Benvingut!</div> :
                 <div className="single-msg">T'hem enviat un mail de confirmació, confirma l'enllaç</div>}

@@ -1,12 +1,11 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, NavLink, useLocation } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { login, getUserData } from "../../redux/actions/auth";
-import { setLoggedUser } from '../../redux/actions/profile';
-import { getCart, checkoutCart } from "../../redux/actions/cart";
+import { getCart } from "../../redux/actions/cart";
 
 const required = (value) => {
     if (!value) {
@@ -34,7 +33,6 @@ const Login = (props) => {
     const [redirect, setRedirect] = useState(false);
     const [recover, setRecover] = useState(false);
     const [displayError, setDisplayError] = useState(false);
-    const location = useLocation();
     const dispatch = useDispatch();
     const onChangeUsername = (e) => {
         const email = e.target.value;

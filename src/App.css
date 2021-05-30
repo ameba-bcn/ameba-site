@@ -351,6 +351,10 @@ label {
     cursor: pointer;
     color: #1D1D1B !important;
 }
+.logTextosLink a{
+    text-decoration: none;
+    color: #1D1D1B !important;
+}
 
 .logTextosLink:hover {
     text-decoration: underline !important;
@@ -403,12 +407,14 @@ label {
 
 
 /* Main page messages */
-.full-heigh-msg {
+.full-height-msg {
     background-color: #EB5E3E;
     flex: 1 0 auto;
+    flex-direction: column;
     display: flex;
     justify-content: center;
     align-items: center;
+    word-wrap: break-word;
 }
 
 .single-msg {
@@ -416,7 +422,7 @@ label {
     font-size: 1.4rem;
     font-weight: bold;
     width: 100%;
-    flex: 1 0 auto;
+    /* flex: 1 0 auto; */
 }
 
 .lettersMoveDiv {

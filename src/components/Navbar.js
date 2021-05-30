@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { useSelector, useDispatch, connect } from "react-redux";
 import { logout } from "../redux/actions/auth";

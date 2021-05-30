@@ -6,7 +6,7 @@ export default class NotFound extends Component {
     render() {
         return (
             <>
-                <div className="full-heigh-msg">
+                <div className="full-height-msg">
                     <div className="single-msg">404!</div>
                     <div className="single-msg">Pagina no encontrada</div>
                 </div>

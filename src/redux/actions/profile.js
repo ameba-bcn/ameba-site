@@ -1,6 +1,6 @@
 import {
     GUEST_USER, LOGGED_USER, MEMBER_CANDIDATE,
-    SET_MESSAGE, SUBSCRIBE_SUCCESS, SUBSCRIBE_FAIL, CLEAR_MESSAGE
+    SET_MESSAGE, SUBSCRIBE_SUCCESS, SUBSCRIBE_FAIL
 } from "./types";
 import StateService from './../services/profile.services'
 

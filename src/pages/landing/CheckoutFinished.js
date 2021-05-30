@@ -4,7 +4,7 @@ import LettersMove from '../../components/layout/LettersMove';
 export default function CheckoutFinished() {
     return (
         <>
-            <div className="full-heigh-msg">
+            <div className="full-height-msg">
                 <div className="single-msg">GRÀCIES!<br />Hem rebut la teva comanda</div>
             </div>
             <LettersMove

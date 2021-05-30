@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-// import { required, vusername, vpassword, validEmail, vdninie, vphone } from './FormValidator';
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from 'react-router-dom';
 import Form from "react-validation/build/form";
@@ -7,7 +6,6 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
 import { registerMember } from '../../redux/actions/auth';
-import { checkoutCart, addToCart } from '../../redux/actions/cart';
 
 const MembershipForm = () => {
     const form = useRef();
@@ -20,7 +18,6 @@ const MembershipForm = () => {
     const [usernameReal, setUsernameReal] = useState("");
     const [surnameReal, setSurnameReal] = useState("");
     const [dni, setDni] = useState("");
-    // const [birth, setBirth] = useState("");
     const [phone, setPhone] = useState("");
     const [successful, setSuccessful] = useState(false);
 
@@ -37,11 +34,7 @@ const MembershipForm = () => {
         if (checkBtn.current.context._errors.length === 0) {
             dispatch(registerMember(dni, usernameReal, surnameReal, phone, username, password, email, id))
                 .then(() => {
-                    //     dispatch(addToCart([1])).then(() => {
-                    //         dispatch(checkoutCart())
                     setSuccessful(true);
-                    //         localStorage.setItem("view", "new_member");
-                    //     })
                 })
                 .catch(() => {
                     console.log("Algo falla", successful)

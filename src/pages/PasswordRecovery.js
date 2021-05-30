@@ -1,7 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { useDispatch } from "react-redux";
 import { passwordRecovery } from './../redux/actions/auth';
-// import { useHistory } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
@@ -10,7 +9,6 @@ import LettersMove from './../components/layout/LettersMove';
 
 export default function PasswordRecovery(props) {
     const dispatch = useDispatch();
-    // const history = useHistory();
     const form1 = useRef();
     const checkBtn1 = useRef();
     const [loading, setLoading] = useState(false);
@@ -61,7 +59,7 @@ export default function PasswordRecovery(props) {
                     <div className="logTitle">Recupera contrasenya</div>
                     {isSubmitted ?
                         <>
-                            <div className="full-heigh-msg"><div className="single-msg">Recuperació de contrasenya finalitzada</div></div></> :
+                            <div className="full-height-msg"><div className="single-msg">Recuperació de contrasenya finalitzada</div></div></> :
                         <>
                             <Form
                                 onSubmit={handleSubmit}
