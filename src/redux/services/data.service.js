@@ -14,9 +14,14 @@ const botigaAll = () => {
     return axiosInstance.get(`${API_URL}articles/`, {})
 };
 
+const getAbout = () => {
+    return axiosInstance.get(`${API_URL}/about//`, {})
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     supportYourLocalsAll,
     agendaAll,
     botigaAll,
+    getAbout
 }

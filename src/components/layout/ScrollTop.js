@@ -45,7 +45,6 @@ const ScrollTop = ({
         }
     })
 
-
     return (
         <div>
             {show && (

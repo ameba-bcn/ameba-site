@@ -24,12 +24,13 @@ import LogMailConfirmation from './pages/LogMailConfirmation';
 import PasswordRecovery from './pages/PasswordRecovery';
 import SendEmailPasswordRecovery from './pages/SendEmailPasswordRecovery';
 import ValidateEmail from './pages/ValidateEmail';
-// import Register from './redux/components/Register';
+import ScrollTop from './components/layout/ScrollTop';
 import { UserContext } from './UserContext';
 import {
   supportYourLocalsAll,
   agendaAll,
   botigaAll,
+  getAbout
 } from './redux/actions/data';
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
     dispatch(supportYourLocalsAll());
     dispatch(agendaAll());
     dispatch(botigaAll());
+    dispatch(getAbout());
   }, [dispatch]);
 
   return (
@@ -58,6 +60,7 @@ function App() {
       <Menu />
       {/* Switch evita que mas de un componente se renderice a la vez */}
       <UserContext.Provider value={value}>
+        <ScrollTop showBelow={250} />
         <Switch>
           <Route path='/activitats' component={Activitats} />
           <Route path='/botiga' component={Botiga} />

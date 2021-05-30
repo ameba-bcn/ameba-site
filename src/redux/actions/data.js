@@ -1,5 +1,5 @@
 import {
-    SET_MESSAGE, GET_ALL_SUPPORT_SUCCESS, GET_ALL_SUPPORT_FAIL, GET_ALL_AGENDA_SUCCESS, GET_ALL_AGENDA_FAIL, GET_ALL_BOTIGA_SUCCESS, GET_ALL_BOTIGA_FAIL, CLEAR_MESSAGE
+    SET_MESSAGE, GET_ALL_SUPPORT_SUCCESS, GET_ALL_SUPPORT_FAIL, GET_ALL_AGENDA_SUCCESS, GET_ALL_AGENDA_FAIL, GET_ALL_BOTIGA_SUCCESS, GET_ALL_BOTIGA_FAIL, CLEAR_MESSAGE, GET_ABOUT
 } from "./types";
 import DataService from '../services/data.service'
 
@@ -80,3 +80,17 @@ export const botigaAll = () => (dispatch) => {
         }
     );
 };
+
+export const getAbout = () => (dispatch) => {
+    return DataService.getAbout().then(
+        (response) => {
+            dispatch({
+                type: GET_ABOUT,
+                payload: response.data,
+            });
+
+            return Promise.resolve();
+        }
+    );
+};
+

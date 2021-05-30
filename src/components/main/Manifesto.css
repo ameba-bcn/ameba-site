@@ -1,0 +1,89 @@
+#manifesto {
+    background-color: #EB5E3E;
+    display: flex;
+    /* align-items: flex-end; */
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.manifesto-title {
+    text-transform: uppercase;
+    font-family: 'Bebas Neue';
+    color: #1D1D1B;
+    width: 100%;
+    font-size: 10rem;
+    /* line-height: 4rem; */
+    font-weight: 400;
+}
+
+.manifesto-box {
+    width: 100%;
+    /* margin-top: 2rem; */
+    align-items: center;
+}
+
+.manifesto-text {
+    text-transform: uppercase;
+    font-family: 'Bebas Neue';
+    color: #1D1D1B;
+    font-size: 2rem;
+    margin: 0px 40px 0px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.manifesto-text-fx {
+    animation: blinkingText 0.4s 1;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: transparent;
+}
+
+@keyframes blinkingText {
+    0% {
+        -webkit-text-stroke-color: transparent;
+    }
+
+    60% {
+        -webkit-text-stroke-color: #F2C571;
+    }
+
+    65% {
+        -webkit-text-stroke-color: transparent;
+    }
+
+    95% {
+        -webkit-text-stroke-color: #F2C571;
+    }
+
+    100% {
+        -webkit-text-stroke-color: transparent;
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .manifesto-title {
+        font-size: 120px;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .manifesto-title {
+        font-size: 100px;
+    }
+
+    .manifesto-text {
+        font-size: 1.5rem;
+    }
+}
+
+@media screen and (max-width: 635px) {
+    .manifesto-title {
+        font-size: 60px;
+    }
+
+    .manifesto-text {
+        font-size: 1.2rem;
+    }
+}

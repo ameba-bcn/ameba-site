@@ -1,4 +1,4 @@
-import { GET_ALL_SUPPORT_SUCCESS, GET_ALL_SUPPORT_FAIL, GET_ALL_AGENDA_SUCCESS, GET_ALL_AGENDA_FAIL, GET_ALL_BOTIGA_SUCCESS, GET_ALL_BOTIGA_FAIL } from "../actions/types";
+import { GET_ALL_SUPPORT_SUCCESS, GET_ALL_SUPPORT_FAIL, GET_ALL_AGENDA_SUCCESS, GET_ALL_AGENDA_FAIL, GET_ALL_BOTIGA_SUCCESS, GET_ALL_BOTIGA_FAIL, GET_ABOUT } from "../actions/types";
 
 const initialState = { support: {}, agenda: {}, botiga: {} }
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -36,8 +36,14 @@ export default function (state = initialState, action) {
             return {
                 ...state
             };
-
+        case GET_ABOUT:
+            return {
+                ...state,
+                about: payload
+            };
         default:
             return state;
     }
+
+
 }
