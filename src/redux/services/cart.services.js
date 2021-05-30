@@ -5,7 +5,7 @@ const API_URL = process.env.REACT_APP_API_HOST;
 
 const addInCart = (id) => {
     //  Detected user on LS case
-    if (localStorage.getItem("access") !== undefined) {
+    if (localStorage.getItem("access")) {
         return axios.get(API_URL + 'carts/current/', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("access")}`
@@ -55,7 +55,7 @@ const addInCart = (id) => {
 
 
 const addMemberToCart = (id) => {
-    if (localStorage.getItem("access") !== undefined) {
+    if (localStorage.getItem("access")) {
         return axios.get(API_URL + 'carts/current/', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("access")}`
@@ -93,7 +93,7 @@ const checkoutCart = () => {
 
 const removeItemCart = (id) => {
     //  Detected user on LS case
-    if (localStorage.getItem("access") !== undefined) {
+    if (localStorage.getItem("access")) {
         return axios.get(API_URL + 'carts/current/', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("access")}`
