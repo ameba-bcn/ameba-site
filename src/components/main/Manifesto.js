@@ -12,7 +12,6 @@ export default function Manifesto() {
         const handleScroll = () => {
             const value = (window.pageYOffset / 100) % 2
             if (value === 0) {
-                console.log(window.pageYOffset)
                 setScroll(true);
             }
             else { setScroll(false) }
