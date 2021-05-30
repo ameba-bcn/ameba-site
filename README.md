@@ -4,6 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 0.5
+- About implemented
+- BugFix: Logout crashes app on two tabs
+- BugFix: Logout freeze
+- BugFix: Activities clickable on main
+
 Version 0.4
 - New login flow including cart_id asigned to user
 - New register flow including cart_id asigned to user
