@@ -15,11 +15,6 @@ export default function LlistatActivitats() {
   const [open, setOpen] = useState(false);
   const data = useSelector(state => state.data)
   const { agenda = [] } = data
-  const handleAddClick = (rowData) => {
-    dispatch(addToCart(rowData.id))
-    handleClose();
-    setRedirect(true)
-  }
 
   const [eventData, setEventData] = useState([
     {
@@ -39,10 +34,19 @@ export default function LlistatActivitats() {
     }
   ]);
 
+  const fetchAndAdd = (rowData) => {
+    axiosInstance.get(`events/${rowData.id}`, {})
+      .then((res) => {
+        dispatch(addToCart(res.data.variants[0].id))
+      }).then(setRedirect(true))
+      .catch(error => {
+        console.log("ERROL", error.response)
+      });
+  }
+
   const fetchEvent = (data) => {
     axiosInstance.get(`events/${data.id}`, {})
       .then((res) => {
-        console.log(res.data);
         setEventData(res.data)
       }).then(handleClickOpen())
       .catch(error => {
@@ -116,21 +120,14 @@ export default function LlistatActivitats() {
           actionsColumnIndex: -1,
         }}
         onRowClick={((evt, selectedRow) => {
-          // setSelectedRow(selectedRow.id)
-          // setState({ selectedRow });
           fetchEvent(selectedRow)
-          // setSelectedRow(selectedRow.tableData.id)
-          // console.log(selectedRow);
-          // setState({ selectedRow });
-          // handleClickOpen();
-
         })}
         actions={[
           {
             icon: () => <TiTicket className="cardActivitat" />,
             tooltip: 'Reserva',
             onClick: (event, rowData) => {
-              handleAddClick(rowData)
+              fetchAndAdd(rowData)
             }
           }
         ]}

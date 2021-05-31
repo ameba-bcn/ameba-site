@@ -23,7 +23,8 @@ export default function ActivitatDialog(props) {
     };
 
     const handleAddClick = () => {
-        dispatch(addToCart(dataRow.id))
+        const {variants = []} = dataRow
+        dispatch(addToCart(variants[0].id))
         handleClose();
         setRedirect(true)
     }
