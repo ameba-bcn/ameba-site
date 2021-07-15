@@ -1,0 +1,53 @@
+.subscription-box {
+  margin: 0 auto 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subscription-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.subscription-box-in-row {
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.subscription-status-active {
+  display: block;
+  width: fit-content;
+  background-color: green;
+  color: #fae6c5;
+  text-transform: uppercase;
+  font-family: "Bebas Neue";
+  font-size: 2rem;
+  padding: 0.4rem 0.6rem 0rem 0.6rem;
+  margin-left: 0.5rem;
+}
+
+.subscription-status-close {
+  display: block;
+  width: fit-content;
+  background-color: yellow;
+  color: #fae6c5;
+  text-transform: uppercase;
+  font-family: "Bebas Neue";
+  font-size: 2rem;
+  margin-left: 0.5rem;
+}
+
+.subscription-status-inactive {
+  display: block;
+  width: fit-content;
+  background-color: red;
+  color: #fae6c5;
+  text-transform: uppercase;
+  font-family: "Bebas Neue";
+  font-size: 2rem;
+  margin-left: 0.5rem;
+}

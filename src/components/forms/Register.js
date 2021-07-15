@@ -1,14 +1,13 @@
 import React, { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from "@material-ui/icons/Add";
 import { register } from "../../redux/actions/auth";
-import SociDialog from '../../components/botiga/Soci';
-
+import SociDialog from "../../components/botiga/Soci";
 
 const required = (value) => {
   if (!value) {
@@ -53,11 +52,11 @@ const vpassword = (value) => {
 const Register = (props) => {
   const form = useRef();
   const checkBtn = useRef();
-  const { message } = useSelector(state => state.message);
-  const profile = useSelector(state => state.profile)
-  const { user_profile = "" } = profile
-  const { cart_data = {} } = useSelector(state => state.cart);
-  const { id = "" } = cart_data;
+  const { message } = useSelector((state) => state.message);
+  const profile = useSelector((state) => state.profile);
+  const { user_profile = "" } = profile;
+  const { cart_data = {} } = useSelector((state) => state.cart);
+  const { id = null } = cart_data;
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -94,28 +93,36 @@ const Register = (props) => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(register(username, email, password, id))
+      const registerData = cart_data
+        ? { username, email, password, id }
+        : { username, email, password };
+      dispatch(register(registerData))
         .then(() => {
           setSuccessful(true);
         })
         .catch(() => {
           setSuccessful(false);
-          setDisplayError(true)
+          setDisplayError(true);
         });
     }
   };
 
   const showLogin = () => {
-    props.setViewState("login")
-  }
+    props.setViewState("login");
+  };
 
-  if (successful) return <Redirect to='/validate-email' />
+  if (successful) return <Redirect to="/validate-email" />;
 
   return (
     <div className="col-md-12">
       <div className="card card-container card-login">
         <div className="logTitle">registra't</div>
-        {user_profile!=="MEMBER_CANDIDATE" && <div className="sociLogBanner" onClick={handleClick}>encara no ets soci/a? Informa't aquí!<AddIcon className="sociLogBannerPlus" /></div>}
+        {user_profile !== "MEMBER_CANDIDATE" && (
+          <div className="sociLogBanner" onClick={handleClick}>
+            encara no ets soci/a? Informa't aquí!
+            <AddIcon className="sociLogBannerPlus" />
+          </div>
+        )}
 
         <Form onSubmit={handleRegister} ref={form}>
           {!successful && (
@@ -162,18 +169,24 @@ const Register = (props) => {
             </div>
           )}
 
-          {(displayError && message) && (
+          {displayError && message && (
             <div className="form-group">
-              <div className={successful ? "alert alert-success" : "alert alert-danger"} role="alert">
+              <div
+                className={
+                  successful ? "alert alert-success" : "alert alert-danger"
+                }
+                role="alert"
+              >
                 {message}
               </div>
             </div>
           )}
           <CheckButton style={{ display: "none" }} ref={checkBtn} />
         </Form>
-        <span className="logTextosLink" onClick={showLogin}>- Ja estàs registrat? Inicia sessió -</span>
-        <SociDialog open={open}
-          onClose={handleClick} />
+        <span className="logTextosLink" onClick={showLogin}>
+          - Ja estàs registrat? Inicia sessió -
+        </span>
+        <SociDialog open={open} onClose={handleClick} />
       </div>
     </div>
   );

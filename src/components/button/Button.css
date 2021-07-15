@@ -1,0 +1,62 @@
+/* #FAE6C5 Crema
+#F2C571 Naranja
+#EB5E3E Rojo
+#1D1D1B Negro
+#FFED00 Amarillo */
+
+:root {
+  --primary: #f2c571;
+  --warning: #ffed00;
+  --danger: #eb5e3e;
+  --success: #75fa83;
+  --white: #fdfdfd;
+  --naranja: #f2c571;
+  --rojo: #eb5e3e;
+  --negro: #1d1d1b;
+  --amarillo: #ffed00;
+  --crema: #fae6c5;
+}
+
+.boton {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  cursor: pointer;
+  color: var(--crema);
+  transition: transform 0.3s ease;
+}
+
+.boton:hover {
+  transform: translateY(-2px);
+}
+
+/* Colores y estilos del botón */
+
+.boton--primary--solid {
+  background-color: var(--negro);
+  color: var(--crema);
+  border: none;
+}
+
+.boton--primary--outline {
+  background-color: transparent;
+  border: 2px solid var(--negro);
+  color: var(--negro);
+}
+
+.boton--primary--disabled {
+  background-color: var(--negro);
+  color: var(--crema);
+  border: none;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.boton--medium {
+  padding: 10px 20px;
+  font-size: 26px;
+}
+
+.boton--small {
+  padding: 5px 10px;
+  font-size: 20px;
+}

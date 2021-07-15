@@ -1,9 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import './App.css';
 import { setGuestUser, setLoggedUser } from './redux/actions/profile';
-import { validateLocalToken, getUserData } from './redux/actions/auth';
+import { validateLocalToken, getUserData, getMemberProfile } from './redux/actions/auth';
 import { useDispatch } from "react-redux";
-// import { connect } from "react-redux";
 import Home from './pages/Home';
 import Activitats from './pages/Activitats';
 import Botiga from './pages/Botiga';
@@ -44,6 +43,7 @@ function App() {
       dispatch(validateLocalToken(refresh)).then(() => {
         dispatch(setLoggedUser())
         dispatch(getUserData())
+        dispatch(getMemberProfile())
       }).catch(dispatch(setGuestUser()))
     }
     else {
@@ -72,7 +72,6 @@ function App() {
           <Route path='/recovery' component={PasswordRecovery} />
           <Route path='/send-recovery' component={SendEmailPasswordRecovery} />
           <Route path='/validate-email' component={ValidateEmail} />
-          {/* <Route path='/registration' component={Register} /> */}
           <Route path='/activate' component={LogMailConfirmation} />
           <Route path='/profile' component={Profile} />
           <Route path='/checkout' component={Checkout} />

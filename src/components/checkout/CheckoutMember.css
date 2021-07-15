@@ -1,0 +1,27 @@
+.member-form-stepper {
+    padding: 24px 0px 40px;
+    margin-left: 4rem;
+    margin-right: 4rem;
+}
+
+.checkout-member-form {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.checkout-member-form-paper {
+    padding: 24px;
+    margin-top: 48px;
+    margin-bottom: 48px;
+}
+
+.checkout-member-form-buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.checkout-member-form-button {
+    margin-top: 24px;
+    margin-left: 8px;
+}

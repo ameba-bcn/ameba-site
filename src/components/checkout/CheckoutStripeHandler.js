@@ -1,14 +1,18 @@
-import React from 'react';
+import React from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import CheckoutMain from './CheckoutMain';
-import CheckoutMember from './CheckoutMember';
+import CheckoutMain from "./CheckoutMain";
+import CheckoutMember from "./CheckoutMember";
 
-const promise = loadStripe("pk_test_51IGkXjHRg08Ncmk7fPlbb9DfTF5f7ckXBKiR4g01euLgXs04CqmgBPOQuqQfOhc6aj9mzsYE1oiQ3TFjHH9Hv3Mj00GNyG9sep");
+const promise = loadStripe(
+  "pk_test_51IGkXjHRg08Ncmk7fPlbb9DfTF5f7ckXBKiR4g01euLgXs04CqmgBPOQuqQfOhc6aj9mzsYE1oiQ3TFjHH9Hv3Mj00GNyG9sep"
+);
 
 export default function CheckoutStripeHandler(props) {
-    const {isMemberRegistration} = props;
-    return (
-        <Elements stripe={promise} >{isMemberRegistration ? <CheckoutMember /> : <CheckoutMain />}</Elements>
-    )
+  const { isMemberRegistration } = props;
+  return (
+    <Elements stripe={promise}>
+      {isMemberRegistration ? <CheckoutMember /> : <CheckoutMain />}
+    </Elements>
+  );
 }

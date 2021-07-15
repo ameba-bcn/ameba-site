@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useState } from "react";
+import MemberProfile from "../profile/MemberProfile";
+import "./ExtendMembership.css";
 
-export default function ExtendMembership() {
-    return (
-        <div>
-            Aqui iría un componente para ampliar la memberesía. Esta en proceso, tranquilo que aunque aprietes al botón no va a funcionar nada
-        </div>
-    )
+export default function ExtendMembership({
+  buttonDisabled = false,
+  setButtonDisabled,
+}) {
+  return (
+    <div>
+      <div className="logTitleSmall">Dades personals</div>
+      <MemberProfile
+        buttonDisabled={buttonDisabled}
+        setButtonDisabled={setButtonDisabled}
+      />
+    </div>
+  );
 }

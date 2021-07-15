@@ -1,19 +1,20 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from "react-redux";
 import { connect } from "react-redux";
 import MembershipForm from './../forms/MembershipForm';
 import Review from './Review';
 import PaymentForm from './../forms/PaymentForm';
-import { checkoutCart } from './../../redux/actions/cart';
+import { checkoutCart, getCart } from './../../redux/actions/cart';
 import ExtendMembership from './ExtendMembership';
+import { isEmptyObject } from '../../utils/utils';
+import SubscriptionBox from '../profile/SubscriptionBox';
+import './CheckoutMember.css';
 
 const mapStateToProps = state => {
     return {
@@ -23,53 +24,21 @@ const mapStateToProps = state => {
     };
 };
 
-const useStyles = makeStyles((theme) => ({
-    appBar: {
-        position: 'relative',
-    },
-    layout: {
-        width: 'auto',
-        marginLeft: theme.spacing(2),
-        marginRight: theme.spacing(2),
-        [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-            width: 600,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        },
-    },
-    paper: {
-        marginTop: theme.spacing(3),
-        marginBottom: theme.spacing(3),
-        padding: theme.spacing(2),
-        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-            marginTop: theme.spacing(6),
-            marginBottom: theme.spacing(6),
-            padding: theme.spacing(3),
-        },
-    },
-    stepper: {
-        padding: theme.spacing(3, 0, 5),
-    },
-    buttons: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-    },
-    button: {
-        marginTop: theme.spacing(3),
-        marginLeft: theme.spacing(1),
-    },
-}));
-
 function CheckoutMember(props) {
-    const classes = useStyles();
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cart)
-    const { cart_data = {} } = cart
+    const auth = useSelector(state => state.auth)
+    const { isLoggedIn = false } = auth;
+    const { cart_data = {} } = cart;
     const { state = {} } = cart_data;
     const { has_member_profile = false, has_memberships = false } = state;
+    const mockedInputData = { dataRenovacio: "2021-07-16T12:30:00.000Z" }
 
     const [activeStep, setActiveStep] = React.useState(0);
-    const steps = ['Revisió', 'Dades de pagament'];
+    const [buttonDisabled, setButtonDisabled] = React.useState(false);
+    const steps = ['Dades personals', 'Estat de la subscripció', 'Dades de pagament'];
+
+    if (isEmptyObject(cart_data) && isLoggedIn) { dispatch(getCart()) }
 
     const handleNext = () => {
         if (activeStep === 0) {
@@ -87,30 +56,30 @@ function CheckoutMember(props) {
         switch (step) {
             case 0:
                 return (
-                    has_member_profile ?
+                    has_member_profile && isLoggedIn ?
                         // <CheckoutMemberPayment />
-                        has_memberships ? <ExtendMembership />:<Review />
+                        has_memberships ? <ExtendMembership buttonDisabled={buttonDisabled} setButtonDisabled={setButtonDisabled} /> : <Review />
                         : <MembershipForm />
                 );
             case 1:
+                return <SubscriptionBox date={mockedInputData}/>;
+            case 2:
                 return <PaymentForm />;
             default:
                 throw new Error('Unknown step');
         }
     }
 
-    // if (viewState === "membershipPaymentPending") setPaymentReady(true)
-
     return (
         <div>
             <React.Fragment>
                 <CssBaseline />
-                <main className={classes.layout}>
-                    <Paper className={classes.paper}>
-                        <Typography component="h1" variant="h4" align="center">
+                <main className={"checkout-member-form"}>
+                    <Paper className={"checkout-member-form-paper"}>
+                        <div className="logTitle">
                             Fes-te Soci
-                        </Typography>
-                        {has_member_profile && <Stepper activeStep={activeStep} className={classes.stepper}>
+                        </div>
+                        {has_member_profile && <Stepper activeStep={activeStep} className={"member-form-stepper"}>
                             {steps.map((label) => (
                                 <Step key={label}>
                                     <StepLabel>{label}</StepLabel>
@@ -119,18 +88,19 @@ function CheckoutMember(props) {
                         </Stepper>}
                         <React.Fragment>
                             {getStepContent(activeStep)}
-                            <div className={classes.buttons}>
+                            <div className={"checkout-member-form-buttons"}>
                                 {activeStep !== 0 && (
-                                    <Button onClick={handleBack} className={classes.button}>
+                                    <Button onClick={handleBack} className={"checkout-member-form-button"}>
                                         Enrere
                                     </Button>
                                 )}
-                                {activeStep <= 1 && has_member_profile && (
+                                {activeStep < 2 && has_member_profile && (
                                     <Button
                                         variant="contained"
                                         color="primary"
                                         onClick={handleNext}
-                                        className={classes.button}
+                                        disabled={buttonDisabled}
+                                        className={"checkout-member-form-button"}
                                     >
                                         Següent
                                     </Button>

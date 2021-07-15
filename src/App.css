@@ -199,11 +199,6 @@ div>.nav-item {
     margin-top: 100px;
 }
 
-/* .form-control.control-error {
-    border: 1px solid red;
-} */
-
-
 /* SESSIO */
 
 .sessio {
@@ -328,6 +323,8 @@ input.logForm::placeholder {
     font-size: 1.8rem;
     max-width: 130px !important;
     margin: 0 auto;
+    opacity: 1;
+    pointer-events: initial;
 }
 
 label {
