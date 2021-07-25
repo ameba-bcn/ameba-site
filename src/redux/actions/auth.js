@@ -199,7 +199,9 @@ export const validateLocalToken = (token) => (dispatch) => {
     },
     (error) => {
       const message = error.response.data?.detail;
-      localStorage.removeItem("user");
+      localStorage.removeItem("access");
+      localStorage.removeItem("refresh");
+      localStorage.removeItem("cart_id");
       dispatch({
         type: VALIDATE_LOCAL_TOKEN_FAIL,
         payload: message,

@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import './CardNew.css';
-import { formatISODateToDate } from './../../utils/utils';
+import { formatISODateToDate, isCORSInactive } from './../../utils/utils';
 
 const CardNew = React.memo(props => {
   return (
@@ -11,7 +11,7 @@ const CardNew = React.memo(props => {
       <CardActionArea className="cardFrame">
         <img
           className="cardMedia"
-          src={props.imatge}
+          src={isCORSInactive()+props.imatge}
           alt={props.titol}
           title={props.titol} />
         <div className="cardMediaTitle">

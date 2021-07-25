@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './BotigaGeneral.css';
 import ProducteDialog from './Producte';
 import axiosInstance from "../../axios";
-import { formatPrice } from './../../utils/utils';
+import { formatPrice, isCORSInactive } from './../../utils/utils';
 import { useSelector } from "react-redux";
 
 export default function BotigaGeneral() {
@@ -49,7 +49,7 @@ export default function BotigaGeneral() {
                 onClick={() => fetchProduct(data)}>
                 <div className="productCard">
                     <div className="productImgFrame">
-                        <img className="productImgTop" src={data.images[0]} alt={data.name} />
+                        <img className="productImgTop" src={isCORSInactive()+data.images[0]} alt={data.name} />
                     </div>
                     <div className="productCardBody">
                         <h5 className="productTitle" >{data.name}</h5>

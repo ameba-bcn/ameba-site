@@ -15,7 +15,7 @@ export const supportYourLocalsAll = () => (dispatch) => {
     (response) => {
       dispatch({
         type: GET_ALL_SUPPORT_SUCCESS,
-        payload: response.data,
+        payload: response?.data,
       });
 
       return Promise.resolve();

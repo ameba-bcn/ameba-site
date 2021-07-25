@@ -41,3 +41,8 @@ export function deepComparision(obj1, obj2) {
 export function isEmptyObject(obj) {
   return JSON.stringify(obj) === "{}";
 }
+
+export function isCORSInactive() {
+  if (true) return "http://localhost:8000";
+  return "";
+}

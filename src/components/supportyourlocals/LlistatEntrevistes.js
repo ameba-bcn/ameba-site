@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { NavLink, Redirect } from 'react-router-dom';
 import './LlistatEntrevistes.css';
 import ScrollTop from './../../components/layout/ScrollTop';
+import { isCORSInactive } from '../../utils/utils';
 
 export default function LlistatEntrevistes() {
 
@@ -23,7 +24,7 @@ export default function LlistatEntrevistes() {
                         aboutProps: data
                     }}>
                     <div className="cardSupport">
-                        <img src={data.images[0]} alt={data.name} className="cardSupportImgTop" />
+                        <img src={isCORSInactive()+data.images[0]} alt={data.name} className="cardSupportImgTop" />
                         <div className="cardSupportTitle">
                             {data.name}
                         </div>

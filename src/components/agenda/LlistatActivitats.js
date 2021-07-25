@@ -6,7 +6,7 @@ import MaterialTable from "material-table";
 import { TiTicket } from 'react-icons/ti';
 import axiosInstance from "../../axios";
 import ActivitatDialog from './Activitat';
-import { formatISODateToDate, formatISODateToHour } from './../../utils/utils'
+import { formatISODateToDate, formatISODateToHour, isCORSInactive } from './../../utils/utils'
 import './Agenda.css';
 
 export default function LlistatActivitats() {
@@ -70,7 +70,7 @@ export default function LlistatActivitats() {
         render: rowData =>
           <div className="row">
             <div className="column activitatImg">
-              <img src={rowData.images} className="imgMiniActivitat" alt="" />
+              <img src={isCORSInactive()+rowData.images} className="imgMiniActivitat" alt="" />
             </div>
             <div className="column activitatDescripcio">
               <h5 className="mainActivitatSubtitle">{rowData.address}</h5>

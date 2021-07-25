@@ -12,6 +12,7 @@ import ReceiptIcon from '@material-ui/icons/Receipt';
 import LocalAtmIcon from '@material-ui/icons/LocalAtm';
 import ClearIcon from '@material-ui/icons/Clear';
 import './Activitat.css';
+import { isCORSInactive } from '../../utils/utils';
 
 export default function ActivitatDialog(props) {
     const { onClose, selectedValue, open, dataRow } = props;
@@ -54,7 +55,7 @@ export default function ActivitatDialog(props) {
                         component="img"
                         alt={dataRow.name}
                         className="imageActivitatModal"
-                        image={dataRow.images === undefined ? null : dataRow.images[0]}
+                        image={dataRow.images === undefined ? null : isCORSInactive()+dataRow.images[0]}
                         title={dataRow.name}
                     />
                     <hr className="solid" />

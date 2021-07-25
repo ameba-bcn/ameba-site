@@ -15,7 +15,7 @@ const botigaAll = () => {
 };
 
 const getAbout = () => {
-    return axiosInstance.get(`${API_URL}/about//`, {})
+    return axiosInstance.get(`${API_URL}about/`, {})
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export

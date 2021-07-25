@@ -1,0 +1,17 @@
+.scroll-to-top {
+  z-index: 2;
+  position: fixed !important;
+  bottom: 2vh;
+  background-color: #dcdcdc;
+  stroke: black;
+  fill: transparent;
+  color: black;
+  right: 5%;
+}
+
+.scroll-to-top:hover,
+.Mui-focusVisible {
+  transition: 0.3s;
+  color: #397ba6;
+  background-color: #dcdcdc;
+}
