@@ -1,0 +1,31 @@
+.plusBox {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.plus--ligth {
+  background-color: #fae6c5;
+  color: #1d1d1b;
+}
+
+.plus--obscure {
+  background-color: #1d1d1b;
+  color: #fae6c5;
+}
+
+.plus--big {
+  font-size: 120px;
+  line-height: 76.8px;
+  font-weight: 800;
+  width: 64px;
+  height: 64px;
+}
+.plus--medium {
+  font-size: 60px;
+  line-height: 38.4px;
+  font-weight: 800;
+  width: 32px;
+  height: 32px;
+}

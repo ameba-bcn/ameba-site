@@ -1,193 +1,197 @@
 .Card3GridContainer {
-    width: 100% !important;
-    margin: auto;
-    /* margin-top: 20px; */
-    margin-bottom: 20px;
-    justify-content: space-around;
-}
-
-.cardMediaTitle {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
+  width: 100% !important;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  justify-content: space-around;
 }
 
 .Card3GridItem {
-    width: 30.53%;
-    height: auto;
-    margin: 26px;
-}
-
-.Card3GridPaper {
-    max-width: 500px !important;
+  width: 30.53%;
+  height: auto;
+  margin: 26px;
 }
 
 .MuiGrid-item {
-    margin: auto !important;
+  margin: auto !important;
 }
 
 @media screen and (max-width: 1872px) {
-    .cardMediaTitle {
-        font-size: 5.5rem;
-    }
+  .cardMediaTitle {
+    font-size: 5.5rem;
+  }
 }
 
 @media screen and (max-width: 1490px) {
-    .cardMediaTitle {
-        font-size: 4.5rem;
-    }
+  .cardMediaTitle {
+    font-size: 4.5rem;
+  }
 
-    .cardMediaSort {
-        top: 0;
-        width: 109px;
-        height: 46px;
-        font-size: 2.5em;
-    }
+  .cardMediaSort {
+    top: 0;
+    width: 109px;
+    height: 46px;
+    font-size: 2.5em;
+  }
 }
 
 @media screen and (max-width: 1250px) {
-    .cardMedia {
-        min-height: 370px;
-    }
+  .cardMedia {
+    min-height: 370px;
+  }
 
-    .cardMediaTitle {
-        font-size: 3.8rem;
-    }
+  .cardMediaTitle {
+    font-size: 3.8rem;
+  }
 
-    .cardMediaDate {
-        font-size: 3.2em;
-    }
+  .cardMediaDate {
+    font-size: 3.2em;
+  }
 
-    .cardMediaPlus {
-        font-size: 4.4em;
-    }
+  .cardMediaPlus {
+    font-size: 4.4em;
+  }
 }
 
-@media screen and (max-width: 950px) {
-    .Card3GridPaper {
-        max-width: 900px !important;
-    }
+@media screen and (max-width: 999px) {
+  .Card3GridPaper {
+    max-width: 900px !important;
+  }
 
-    .cardMedia {
-        min-width: 100%;
-        min-height: 640px;
-    }
+  .cardMedia {
+    min-width: 100%;
+    min-height: 640px;
+  }
 
-    .cardMediaTitle {
-        font-size: 7rem;
-    }
+  .cardMediaTitle {
+    font-size: 7rem;
+  }
 
-    .cardMediaDate {
-        font-size: 7em;
-    }
+  .cardMediaDate {
+    font-size: 7em;
+  }
 
-    .cardMediaPlus {
-        font-size: 9em;
-    }
+  .cardMediaPlus {
+    font-size: 9em;
+  }
 
-    .Card3GridItem {
-        width: 70%;
-        height: auto;
-        /* margin: 26px; */
-        padding-top: 25px;
-    }
+  .Card3GridItem {
+    width: 70%;
+    height: auto;
+    /* margin: 26px; */
+    padding-top: 25px;
+  }
 
-    .Card3GridContainer {
-        margin-top: 0px;
-    }
+  .Card3GridContainer {
+    margin-top: 0px;
+  }
 
-    .cardMediaSort {
-        width: 128px;
-        height: 53px;
-        font-size: 3em;
-    }
+  .cardMediaSort {
+    width: 128px;
+    height: 53px;
+    font-size: 3em;
+  }
+}
+
+@media screen and (max-width: 905px) {
+  .cardMediaTitle {
+    font-size: 6.5rem;
+  }
 }
 
 @media screen and (max-width: 815px) {
-    .cardMedia {
-        min-height: 440px;
-    }
+  .cardMedia {
+    min-height: 440px;
+  }
 
-    .cardMediaTitle {
-        font-size: 4.7rem;
-    }
+  .cardMediaTitle {
+    font-size: 5.5rem;
+  }
 
-    .cardMediaDate {
-        font-size: 5em;
-    }
+  .cardMediaDate {
+    font-size: 5em;
+  }
 
-    .cardMediaPlus {
-        font-size: 7em;
-    }
+  .cardMediaPlus {
+    font-size: 7em;
+  }
+}
+
+@media screen and (max-width: 705px) {
+  .cardMediaTitle {
+    font-size: 4.7rem;
+  }
 }
 
 @media screen and (max-width: 605px) {
-    .cardMediaTitle {
-        font-size: 4.4rem;
-    }
+  .cardMediaTitle {
+    font-size: 4.4rem;
+  }
+  .cardMediaDate {
+    font-size: 4.5em;
+  }
 }
 
 @media screen and (max-width: 555px) {
-    .cardMedia {
-        min-height: 370px;
-    }
+  .cardMedia {
+    min-height: 370px;
+  }
 
-    .cardMediaTitle {
-        font-size: 3.5rem;
-    }
+  .cardMediaTitle {
+    font-size: 3.5rem;
+  }
 
-    .cardMediaSort {
-        top: 0;
-        width: 109px;
-        height: 46px;
-        font-size: 2.5em;
-    }
+  .cardMediaSort {
+    top: 0;
+    width: 109px;
+    height: 46px;
+    font-size: 2.5em;
+  }
 
-    .cardMediaDate {
-        font-size: 3.5em;
-    }
+  .cardMediaDate {
+    font-size: 3.5em;
+  }
 
-    .cardMediaPlus {
-        font-size: 4em;
-    }
+  .cardMediaPlus {
+    font-size: 4em;
+  }
 }
 
 @media screen and (max-width: 422px) {
-    .cardMedia {
-        min-height: 290px;
-    }
+  .cardMedia {
+    min-height: 290px;
+  }
 
-    .Card3GridItem {
-        padding-bottom: 5px;
-    }
+  .Card3GridItem {
+    padding-bottom: 5px;
+  }
 
-    .cardMediaTitle {
-        font-size: 2.5em;
-    }
+  .cardMediaTitle {
+    font-size: 2.5em;
+  }
 
-    .cardMediaSort {
-        top: 0;
-        width: 109px;
-        height: 46px;
-        font-size: 2.5em;
-    }
+  .cardMediaSort {
+    top: 0;
+    width: 109px;
+    height: 46px;
+    font-size: 2.5em;
+  }
 
-    .cardMediaDate {
-        font-size: 2.5em;
-    }
+  .cardMediaDate {
+    font-size: 2.4em;
+  }
 
-    .cardMediaPlus {
-        font-size: 3em;
-    }
+  .cardMediaPlus {
+    font-size: 3em;
+  }
 }
 
 @media screen and (max-width: 322px) {
-    .cardMedia {
-        min-height: 210px;
-    }
+  .cardMedia {
+    min-height: 210px;
+  }
 
-    .cardMediaTitle {
-        font-size: 1.5rem;
-    }
+  .cardMediaTitle {
+    font-size: 2rem;
+  }
 }

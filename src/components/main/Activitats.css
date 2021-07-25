@@ -30,18 +30,6 @@
     color: #F2C571;
 }
 
-.moreAgendaPlus {
-    width: 4rem;
-    height: 4rem;
-    font-size: 2em;
-    line-height: 0.64em;
-    font-weight: 800;
-    color: #FAE6C5;
-    background-color: #1D1D1B;
-    right: 2%;
-    top: 20%;
-}
-
 @media screen and (max-width: 630px) {
     div.PowerTitle {
         display: none;
