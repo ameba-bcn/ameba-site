@@ -4,6 +4,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 0.6
+- Profile user data load logic created
+- Profile user data edit logic created
+- BugFix: Main activities cards restyled, title unbound error
+- BugFix: Redirect to Login after addToCart if not logged
+- Prettier included
+
 Version 0.5
 - About implemented
 - BugFix: Logout crashes app on two tabs
