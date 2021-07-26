@@ -1,27 +1,9 @@
 import React, { useState, useEffect } from "react";
 import IconButton from "@material-ui/core/IconButton";
-import { makeStyles } from "@material-ui/core/styles";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
-import './ScrollTop.css';
-
-const useStyles = makeStyles((theme) => ({
-  toTop: {
-    zIndex: 2,
-    position: "fixed",
-    bottom: "2vh",
-    backgroundColor: "#DCDCDC",
-    color: "black",
-    "&:hover, &.Mui-focusVisible": {
-      transition: "0.3s",
-      color: "#397BA6",
-      backgroundColor: "#DCDCDC",
-    },
-    right: "5%",
-  },
-}));
+import "./ScrollTop.css";
 
 const ScrollTop = ({ showBelow }) => {
-  const classes = useStyles();
   const [show, setShow] = useState(showBelow ? false : true);
 
   const handleScroll = () => {

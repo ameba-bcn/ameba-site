@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from '../../redux/actions/cart';
 import { Redirect } from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
@@ -18,6 +18,8 @@ export default function ActivitatDialog(props) {
     const { onClose, selectedValue, open, dataRow } = props;
     const [redirect, setRedirect] = useState(false)
     const dispatch = useDispatch();
+    const profile = useSelector(state => state.profile)
+    const { user_profile = "" } = profile
 
     const handleClose = () => {
         onClose(selectedValue);
@@ -29,8 +31,9 @@ export default function ActivitatDialog(props) {
         handleClose();
         setRedirect(true)
     }
+    const checkoutRedirect = user_profile === "LOGGED" ? "/checkout" : "/login";
 
-    if (redirect) return <Redirect to='/checkout' />;
+    if (redirect) return <Redirect to={checkoutRedirect} />;
 
     return (
         <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} >

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import MemberProfile from "../profile/MemberProfile";
 import "./ExtendMembership.css";
 

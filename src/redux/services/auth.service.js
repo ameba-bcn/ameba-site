@@ -151,8 +151,8 @@ const logout = () => {
     .then(() => {
       localStorage.removeItem("access");
       localStorage.removeItem("refresh");
-      if (JSON.parse(localStorage.getItem("cart_id")))
-        localStorage.removeItem("cart_id");
+      localStorage.removeItem("cart_id");
+      document.location.href="/";
     });
 };
 

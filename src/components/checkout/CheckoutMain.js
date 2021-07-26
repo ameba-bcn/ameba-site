@@ -1,40 +1,40 @@
-import React from 'react';
+import React from "react";
 import { connect } from "react-redux";
-import { useDispatch} from "react-redux";
-import { checkoutCart,  } from './../../redux/actions/cart';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Paper from '@material-ui/core/Paper';
-import Stepper from '@material-ui/core/Stepper';
-import Step from '@material-ui/core/Step';
-import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-import PaymentForm from './../forms/PaymentForm';
-import Review from './Review';
+import { useDispatch } from "react-redux";
+import { checkoutCart } from "./../../redux/actions/cart";
+import { makeStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Paper from "@material-ui/core/Paper";
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import PaymentForm from "./../forms/PaymentForm";
+import Review from "./Review";
+import FreeCheckout from "./FreeCheckout";
 
-
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     cart: state.cart.cart_data,
     isLoggedIn: state.auth.isLoggedIn,
     stripe: state.cart.stripe,
-    user_data: state.auth.user_data
+    user_data: state.auth.user_data,
   };
 };
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    position: 'relative',
+    position: "relative",
   },
   layout: {
-    width: 'auto',
+    width: "auto",
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
       width: 600,
-      marginLeft: 'auto',
-      marginRight: 'auto',
+      marginLeft: "auto",
+      marginRight: "auto",
     },
   },
   paper: {
@@ -51,8 +51,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3, 0, 5),
   },
   buttons: {
-    display: 'flex',
-    justifyContent: 'flex-end',
+    display: "flex",
+    justifyContent: "flex-end",
   },
   button: {
     marginTop: theme.spacing(3),
@@ -64,14 +64,17 @@ function CheckoutMain(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  const steps = ['Revisió', 'Dades de pagament'];
+  const steps = ["Revisió", "Dades de pagament"];
+  const { cart = {} } = props;
+  const { total = "" } = cart;
+  const isPaymentFree = total === "0.00 €";
 
   const handleNext = () => {
     if (activeStep === 0) {
-      dispatch(checkoutCart()).then(() => setActiveStep(activeStep + 1))
-  } else {
+      dispatch(checkoutCart()).then(() => setActiveStep(activeStep + 1));
+    } else {
       setActiveStep(activeStep + 1);
-  }
+    }
   };
 
   const handleBack = () => {
@@ -83,11 +86,11 @@ function CheckoutMain(props) {
       case 0:
         return <Review />;
       case 1:
-        return <PaymentForm />;
+        return isPaymentFree ? <FreeCheckout /> : <PaymentForm />;
       default:
-        throw new Error('Unknown step');
+        throw new Error("Unknown step");
     }
-  }
+  };
 
   return (
     <React.Fragment>
@@ -112,7 +115,7 @@ function CheckoutMain(props) {
                   Enrere
                 </Button>
               )}
-              {activeStep <= 1 && (
+              {activeStep < 1 && (
                 <Button
                   variant="contained"
                   color="primary"

@@ -1,156 +1,215 @@
-import React, { useLayoutEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import React, { useLayoutEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { FaBars, FaTimes } from "react-icons/fa";
 import { useSelector, useDispatch, connect } from "react-redux";
 import { logout } from "../redux/actions/auth";
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import Menu from '@material-ui/core/Menu';
-import DropdownCart from './../components/dropdowns/DropdownCart';
-import './Navbar.scss';
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import Menu from "@material-ui/core/Menu";
+import DropdownCart from "./../components/dropdowns/DropdownCart";
+import "./Navbar.scss";
 
-const mapStateToProps = state => {
-    return {
-        cart: state.cart.cart_data
-    };
+const mapStateToProps = (state) => {
+  return {
+    cart: state.cart.cart_data,
+  };
 };
 
 function Navbar(props) {
-    const [click, setClick] = useState(false)
-    const [size, setSize] = useState(0);
-    const dispatch = useDispatch();
-    const { isLoggedIn, user_data } = useSelector(state => state.auth);
-    const cartSel = useSelector(state => state.cart)
-    const { cart_data = {} } = cartSel
-    const { state = {} } = cart_data;
-    const { has_subscriptions = undefined } = state || {};
-    const data = useSelector(state => state.profile)
-    const { user_profile = "" } = data
-    const [anchorEl, setAnchorEl] = useState(null);
-    const [anchorEl1, setAnchorEl1] = useState(null);
-    const { cart = {} } = props;
-    const { item_variants = [], count = 0 } = cart;
+  const [click, setClick] = useState(false);
+  const [size, setSize] = useState(0);
+  const dispatch = useDispatch();
+  const { isLoggedIn, user_data } = useSelector((state) => state.auth);
+  const cartSel = useSelector((state) => state.cart);
+  const { cart_data = {} } = cartSel;
+  const { state = {} } = cart_data;
+  const { has_subscriptions = undefined } = state || {};
+  const data = useSelector((state) => state.profile);
+  const { user_profile = "" } = data;
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl1, setAnchorEl1] = useState(null);
+  const { cart = {} } = props;
+  const { item_variants = [], count = 0 } = cart;
 
-    useLayoutEffect(() => {
-        function updateSize() {
-            setSize(window.innerWidth);
-        }
-        window.addEventListener('resize', updateSize);
-        updateSize();
-        size > 1000 ? setClick(false) : setClick(click)
-        return () => window.removeEventListener('resize', updateSize);
-    }, [size, click]);
-
-    const handleClickCart = (event) => {
-        if (user_profile !== "MEMBER_CANDIDATE") {
-            setAnchorEl(event.currentTarget);
-        }
-    };
-
-    const handleCloseCart = () => {
-        setAnchorEl(null);
-    };
-
-    const handleClickSessio = (event) => {
-        setAnchorEl1(event.currentTarget)
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize(window.innerWidth);
     }
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    size > 1000 ? setClick(false) : setClick(click);
+    return () => window.removeEventListener("resize", updateSize);
+  }, [size, click]);
 
-    const handleCloseSessio = () => {
-        setAnchorEl1(null);
-    };
-
-
-    const handleRedirect = () => {
-        setAnchorEl(null);
-        // setRedirect(true)
+  const handleClickCart = (event) => {
+    if (user_profile !== "MEMBER_CANDIDATE") {
+      setAnchorEl(event.currentTarget);
     }
+  };
 
+  const handleCloseCart = () => {
+    setAnchorEl(null);
+  };
 
-    const handleClick = () => {
-        setClick(!click)
-    }
+  const handleClickSessio = (event) => {
+    setAnchorEl1(event.currentTarget);
+  };
 
-    const closeMenu = () => {
-        setClick(false)
-    }
+  const handleCloseSessio = () => {
+    setAnchorEl1(null);
+  };
 
-    const logoutMenu = () => {
-        dispatch(logout())
-    }
+  const handleRedirect = () => {
+    setAnchorEl(null);
+    // setRedirect(true)
+  };
 
-    return (
-        <div className="menuContainer">
-            <div className="menuSuperior">
-                <div className="menuButton">
-                    <img src={process.env.PUBLIC_URL + '/AmebaLogo.png'} className="menuAmebalogo" alt="Ameba Logo" />
-                    <NavLink to="/" data-item='AMEBA'>AMEBA</NavLink>
-                </div>
-                <div className="menuIcon" onClick={handleClick} >
-                    {click ? <FaTimes /> : <FaBars />}
-                </div>
-                <div className="menuOptionsCollapsed">
-                    <ul className={click ? "nav-ul.show" : "nav-ul"}>
-                        {/* <li className="liMenuOptions" onClick={closeMenu}>
-                            <NavLink className="menuOptions" to="/membership-registration" data-item='MEMBER'>MEMBER</NavLink></li> */}
-                        <li className="liMenuOptions" onClick={closeMenu}>
-                            <NavLink className="menuOptions" to="/activitats" data-item='AGENDA'>AGENDA</NavLink></li>
-                        <li className="liMenuOptions" onClick={closeMenu}>
-                            <NavLink className="menuOptions" to="/botiga" data-item='BOTIGA'>BOTIGA</NavLink></li>
-                        <li className="liMenuOptions" onClick={closeMenu}>
-                            <NavLink className="menuOptions" to="/support" data-item='#SUPPORTYOURLOCALS'>#SUPPORTYOURLOCALS</NavLink></li>
-                        <div className="liMenuOptions logname-li" onClick={closeMenu}>
-                            {!isLoggedIn ?
-                                <NavLink className="menuOptions" id="MenuOptionsLogin" to="/login" data-item='LOGIN'>LOGIN</NavLink> :
-                                <>
-                                    <a className="sessio-menu-button" data-item={user_data.username === "" ? "SESSIÓ" : user_data.username}
-                                        onClick={handleClickSessio} >{user_data.username === "" ? "SESSIÓ" : user_data.username}</a>
-                                    {/* {user_data.username === "" ? "SESSIÓ" : user_data.username} */}
-                                    <Menu
-                                        id="simple-menu"
-                                        anchorEl={anchorEl1}
-                                        keepMounted
-                                        className="menuDropdownCart"
-                                        disableAutoFocusItem
-                                        open={Boolean(anchorEl1)}
-                                        onClose={handleCloseSessio}>
-                                        <div>
-                                            <NavLink className="menuOptions" to="/profile">
-                                                <div className="dropdown-profile" onClick={handleRedirect}>Perfil</div>
-                                            </NavLink>
-                                            <div className="dropdown-logout" onClick={logoutMenu}>Log out</div>
-                                        </div>
+  const handleClick = () => {
+    setClick(!click);
+  };
 
-                                    </Menu></>
-                            }
-                        </div>
-                        {item_variants.length > 0 ?
-                            <li className="liMenuOptions" >
-                                {state && has_subscriptions !== undefined ?
-                                    <NavLink className="menuOptions" to="/membership-registration">
-                                        <ShoppingCartIcon className="cartIconMenu" />
-                                        {cart ? <div className="bubbleCartMember">{count}</div> : null}
-                                    </NavLink>
-                                    : <>
-                                        <ShoppingCartIcon className="cartIconMenu" onClick={handleClickCart} />
-                                        {cart ? <div className="bubbleCart">{count}</div> : null}
-                                        <Menu
-                                            id="simple-menu"
-                                            anchorEl={anchorEl}
-                                            keepMounted
-                                            className="menuDropdownCart"
-                                            disableAutoFocusItem
-                                            open={Boolean(anchorEl)}
-                                            onClose={handleCloseCart}>
-                                            <div>
-                                                <DropdownCart cartData={cart} closeDropDown={handleCloseCart} />
-                                            </div>
-                                        </Menu></>}
-                            </li>
-                            : null}
-                    </ul>
-                </div>
-            </div>
+  const closeMenu = () => {
+    setClick(false);
+  };
+
+  const logoutMenu = () => {
+    dispatch(logout());
+  };
+
+  return (
+    <div className="menuContainer">
+      <div className="menuSuperior">
+        <div className="menuButton">
+          <img
+            src={process.env.PUBLIC_URL + "/AmebaLogo.png"}
+            className="menuAmebalogo"
+            alt="Ameba Logo"
+          />
+          <NavLink to="/" data-item="AMEBA">
+            AMEBA
+          </NavLink>
         </div>
-    );
+        <div className="menuIcon" onClick={handleClick}>
+          {click ? <FaTimes /> : <FaBars />}
+        </div>
+        <div className="menuOptionsCollapsed">
+          <ul className={click ? "nav-ul.show" : "nav-ul"}>
+            {/* <li className="liMenuOptions" onClick={closeMenu}>
+                            <NavLink className="menuOptions" to="/membership-registration" data-item='MEMBER'>MEMBER</NavLink></li> */}
+            <li className="liMenuOptions" onClick={closeMenu}>
+              <NavLink
+                className="menuOptions"
+                to="/activitats"
+                data-item="AGENDA"
+              >
+                AGENDA
+              </NavLink>
+            </li>
+            <li className="liMenuOptions" onClick={closeMenu}>
+              <NavLink className="menuOptions" to="/botiga" data-item="BOTIGA">
+                BOTIGA
+              </NavLink>
+            </li>
+            <li className="liMenuOptions" onClick={closeMenu}>
+              <NavLink
+                className="menuOptions"
+                to="/support"
+                data-item="#SUPPORTYOURLOCALS"
+              >
+                #SUPPORTYOURLOCALS
+              </NavLink>
+            </li>
+            <div className="liMenuOptions logname-li" onClick={closeMenu}>
+              {!isLoggedIn ? (
+                <NavLink
+                  className="menuOptions"
+                  id="MenuOptionsLogin"
+                  to="/login"
+                  data-item="LOGIN"
+                >
+                  LOGIN
+                </NavLink>
+              ) : (
+                <>
+                  <a
+                    className="sessio-menu-button"
+                    data-item={
+                      user_data.username === "" ? "SESSIÓ" : user_data.username
+                    }
+                    onClick={handleClickSessio}
+                  >
+                    {user_data.username === "" ? "SESSIÓ" : user_data.username}
+                  </a>
+                  {/* {user_data.username === "" ? "SESSIÓ" : user_data.username} */}
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl1}
+                    keepMounted
+                    className="menuDropdownCart"
+                    disableAutoFocusItem
+                    open={Boolean(anchorEl1)}
+                    onClose={handleCloseSessio}
+                  >
+                    <div>
+                      <NavLink className="menuOptions" to="/profile">
+                        <div
+                          className="dropdown-profile"
+                          onClick={handleRedirect}
+                        >
+                          Perfil
+                        </div>
+                      </NavLink>
+                      <div className="dropdown-logout" onClick={logoutMenu}>
+                        Log out
+                      </div>
+                    </div>
+                  </Menu>
+                </>
+              )}
+            </div>
+            {item_variants.length > 0 ? (
+              <li className="liMenuOptions">
+                {state && has_subscriptions !== undefined ? (
+                  <NavLink
+                    className="menuOptions"
+                    to="/membership-registration"
+                  >
+                    <ShoppingCartIcon className="cartIconMenu" />
+                    {cart ? (
+                      <div className="bubbleCartMember">{count}</div>
+                    ) : null}
+                  </NavLink>
+                ) : (
+                  <>
+                    <ShoppingCartIcon
+                      className="cartIconMenu"
+                      onClick={handleClickCart}
+                    />
+                    {cart ? <div className="bubbleCart">{count}</div> : null}
+                    <Menu
+                      id="simple-menu"
+                      anchorEl={anchorEl}
+                      keepMounted
+                      className="menuDropdownCart"
+                      disableAutoFocusItem
+                      open={Boolean(anchorEl)}
+                      onClose={handleCloseCart}
+                    >
+                      <div>
+                        <DropdownCart
+                          cartData={cart}
+                          closeDropDown={handleCloseCart}
+                        />
+                      </div>
+                    </Menu>
+                  </>
+                )}
+              </li>
+            ) : null}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default connect(mapStateToProps)(Navbar);

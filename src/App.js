@@ -1,36 +1,41 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import './App.css';
-import { setGuestUser, setLoggedUser } from './redux/actions/profile';
-import { validateLocalToken, getUserData, getMemberProfile } from './redux/actions/auth';
+import React, { useState, useMemo, useEffect } from "react";
+import "./App.css";
+import { setGuestUser, setLoggedUser } from "./redux/actions/profile";
+import {
+  validateLocalToken,
+  getUserData,
+  getMemberProfile,
+} from "./redux/actions/auth";
 import { useDispatch } from "react-redux";
-import Home from './pages/Home';
-import Activitats from './pages/Activitats';
-import Botiga from './pages/Botiga';
-import Entrevista from './components/supportyourlocals/Entrevista';
-import SupportYourLocals from './pages/SupportYourLocals';
-import Sessio from './sessio/SessioGeneral';
-import NotFound from './pages/NotFound';
-import { Switch, Route } from 'react-router-dom';
-import Contacte from './contacte/Contacte';
-import Menu from './components/Navbar'
-import LogSession from './pages/LogSession';
-import Profile from './pages/Profile';
-import Checkout from './pages/Checkout';
-import MemberRegistration from './pages/MemberRegistration';
-import CheckoutFinished from './pages/landing/CheckoutFinished';
-import SubscriptionFinished from './pages/landing/SubscriptionFinished';
-import LogMailConfirmation from './pages/LogMailConfirmation';
-import PasswordRecovery from './pages/PasswordRecovery';
-import SendEmailPasswordRecovery from './pages/SendEmailPasswordRecovery';
-import ValidateEmail from './pages/ValidateEmail';
-import ScrollTop from './components/layout/ScrollTop';
-import { UserContext } from './UserContext';
+import Home from "./pages/Home";
+import Activitats from "./pages/Activitats";
+import Botiga from "./pages/Botiga";
+import Entrevista from "./components/supportyourlocals/Entrevista";
+import SupportYourLocals from "./pages/SupportYourLocals";
+import Sessio from "./sessio/SessioGeneral";
+import NotFound from "./pages/NotFound";
+import { Switch, Route } from "react-router-dom";
+import Contacte from "./contacte/Contacte";
+import Menu from "./components/Navbar";
+import LogSession from "./pages/LogSession";
+import Profile from "./pages/Profile";
+import Checkout from "./pages/Checkout";
+import MemberRegistration from "./pages/MemberRegistration";
+import CheckoutFinished from "./pages/landing/CheckoutFinished";
+import SubscriptionFinished from "./pages/landing/SubscriptionFinished";
+import LogMailConfirmation from "./pages/LogMailConfirmation";
+import PasswordRecovery from "./pages/PasswordRecovery";
+import SendEmailPasswordRecovery from "./pages/SendEmailPasswordRecovery";
+import ValidateEmail from "./pages/ValidateEmail";
+import ScrollTop from "./components/layout/ScrollTop";
+import { UserContext } from "./UserContext";
 import {
   supportYourLocalsAll,
   agendaAll,
   botigaAll,
-  getAbout
-} from './redux/actions/data';
+  getAbout,
+} from "./redux/actions/data";
+import { getCart } from "./redux/actions/cart";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -39,20 +44,22 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem("refresh")) {
-      const refresh = localStorage.getItem("refresh")
-      dispatch(validateLocalToken(refresh)).then(() => {
-        dispatch(setLoggedUser())
-        dispatch(getUserData())
-        dispatch(getMemberProfile())
-      }).catch(dispatch(setGuestUser()))
-    }
-    else {
+      const refresh = localStorage.getItem("refresh");
+      dispatch(validateLocalToken(refresh))
+        .then(() => {
+          dispatch(setLoggedUser());
+          dispatch(getUserData());
+          dispatch(getMemberProfile());
+        })
+        .catch(dispatch(setGuestUser()));
+    } else {
       dispatch(setGuestUser());
     }
     dispatch(supportYourLocalsAll());
     dispatch(agendaAll());
     dispatch(botigaAll());
     dispatch(getAbout());
+    dispatch(getCart());
   }, [dispatch]);
 
   return (
@@ -62,22 +69,25 @@ function App() {
       <UserContext.Provider value={value}>
         <ScrollTop showBelow={250} />
         <Switch>
-          <Route path='/activitats' component={Activitats} />
-          <Route path='/botiga' component={Botiga} />
-          <Route exact path='/support/:id' component={Entrevista} />
-          <Route path='/support' component={SupportYourLocals} />
-          <Route path='/sessio' component={Sessio} />
-          <Route path='/login' component={LogSession} />
-          <Route path='/membership-registration' component={MemberRegistration} />
-          <Route path='/recovery' component={PasswordRecovery} />
-          <Route path='/send-recovery' component={SendEmailPasswordRecovery} />
-          <Route path='/validate-email' component={ValidateEmail} />
-          <Route path='/activate' component={LogMailConfirmation} />
-          <Route path='/profile' component={Profile} />
-          <Route path='/checkout' component={Checkout} />
-          <Route path='/summary-checkout' component={CheckoutFinished} />
-          <Route path='/????' component={SubscriptionFinished} />
-          <Route exact path='/' component={Home} />
+          <Route path="/activitats" component={Activitats} />
+          <Route path="/botiga" component={Botiga} />
+          <Route exact path="/support/:id" component={Entrevista} />
+          <Route path="/support" component={SupportYourLocals} />
+          <Route path="/sessio" component={Sessio} />
+          <Route path="/login" component={LogSession} />
+          <Route
+            path="/membership-registration"
+            component={MemberRegistration}
+          />
+          <Route path="/recovery" component={PasswordRecovery} />
+          <Route path="/send-recovery" component={SendEmailPasswordRecovery} />
+          <Route path="/validate-email" component={ValidateEmail} />
+          <Route path="/activate" component={LogMailConfirmation} />
+          <Route path="/profile" component={Profile} />
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/summary-checkout" component={CheckoutFinished} />
+          <Route path="/????" component={SubscriptionFinished} />
+          <Route exact path="/" component={Home} />
           <Route component={NotFound} />
         </Switch>
       </UserContext.Provider>

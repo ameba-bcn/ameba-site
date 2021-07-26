@@ -15,6 +15,8 @@ export default function LlistatActivitats() {
   const [open, setOpen] = useState(false);
   const data = useSelector(state => state.data)
   const { agenda = [] } = data
+  const profile = useSelector(state => state.profile)
+  const { user_profile = "" } = profile
 
   const [eventData, setEventData] = useState([
     {
@@ -107,7 +109,10 @@ export default function LlistatActivitats() {
     results: []
   });
 
-  if (redirect) { return <Redirect to='/checkout' /> }
+  const checkoutRedirect = user_profile === "LOGGED" ? "/checkout" : "/login";
+
+  if (redirect) return <Redirect to={checkoutRedirect} />;
+
 
   return (
     <div className="fullTableActiv">
