@@ -19,10 +19,18 @@
 
 .boton {
   font-family: "Bebas Neue", sans-serif;
+  width: fit-content;
+  white-space: nowrap;
   font-weight: 400;
   cursor: pointer;
   color: var(--crema);
+  outline: none;
+  line-height: 1em;
   transition: transform 0.3s ease;
+}
+
+.boton:focus {
+  outline: none;
 }
 
 .boton:hover {
@@ -51,12 +59,45 @@
   pointer-events: none;
 }
 
+.boton--orange--solid {
+  background-color: var(--negro);
+  color: var(--naranja);
+  border: none;
+}
+
+.boton--back-orange--solid {
+  background-color: var(--rojo);
+  color: var(--crema);
+  border: none;
+}
+
 .boton--medium {
-  padding: 10px 20px;
-  font-size: 26px;
+  padding: 10px 20px 5px 20px;
+  font-size: 28px;
 }
 
 .boton--small {
   padding: 5px 10px;
   font-size: 20px;
+}
+
+.boton--big {
+  padding: 10px 40px 5px 40px;
+  font-size: 36px;
+}
+
+.boton--xxl {
+  padding: 10px 40px 5px 40px;
+  font-size: 40px;
+}
+
+.boton--megaxxl {
+  padding: 10px 40px 5px 40px;
+  font-size: 40px;
+  width: 100%;
+}
+
+.boton--megaxxl > svg {
+  width: 40px;
+  height: 40px;
 }

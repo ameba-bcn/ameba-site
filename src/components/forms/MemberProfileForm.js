@@ -6,6 +6,7 @@ import CheckButton from "react-validation/build/button";
 import { updateMemberProfile } from "./../../redux/actions/auth";
 import { deepComparision } from "./../../utils/utils";
 import "./Forms.css";
+import Button from "../button/Button";
 
 const MemberProfileForm = ({ setButtonDisabled, initialValues = {} }) => {
   const form = useRef();
@@ -195,13 +196,27 @@ const MemberProfileForm = ({ setButtonDisabled, initialValues = {} }) => {
             <div className="form-group">
               {touched && (
                 <div className="row">
-                  <button
-                    className="btn-block logFormButton"
-                    onClick={() => handleCancel()}
-                  >
-                    Cancel·la
-                  </button>
-                  <button className="btn-block logFormButton">Guarda</button>
+                  <div className="column">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      buttonSize="boton--medium"
+                      buttonStyle="boton--primary--solid"
+                      onClick={() => handleCancel()}
+                    >
+                      Cancel·la
+                    </Button>
+                  </div>
+                  <div className="column">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      buttonSize="boton--medium"
+                      buttonStyle="boton--primary--solid"
+                    >
+                      Guarda
+                    </Button>
+                  </div>
                 </div>
               )}
             </div>

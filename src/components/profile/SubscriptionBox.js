@@ -65,7 +65,6 @@ export default function SubscriptionBox(props) {
           <span>Renovació anual automàtica</span>
         </label>
         <div className="subscription-row">
-          {/* <div className={`btn-block logFormButton ${disabled ? "button-disabled" : ""}`}>Renova</div> */}
           <Button
             buttonStyle={`${
               disabled ? "boton--primary--disabled" : "boton--primary--solid"

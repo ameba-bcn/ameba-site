@@ -1,159 +1,155 @@
-.bloqueContacto{
-    flex-shrink: 0;
+.bloqueContacto {
+  flex-shrink: 0;
 }
 
 .contenedorContacto {
-    width: 90%;
-    margin: 0 auto;
-    padding-top: 30px;
+  width: 90%;
+  margin: 0 auto;
+  padding-top: 30px;
 }
 
 .inputGroupNews {
-    /* margin-top: 2rem; */
-    margin-bottom: 2rem;
-    padding: 0.5rem;
-    /* border: 2px solid #1D1D1B;
-    border-radius: 15px; */
+  margin-bottom: 2rem;
+  padding: 0.5rem;
 }
 
-.contactNews{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-    max-width: 900px;
-    flex: 100%; 
+.contactNews {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  flex: 100%;
 }
 
-.msg-new-password-sent{
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-top: 1.2rem;
-    margin-bottom: 1.2rem;
+.msg-new-password-sent {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
 }
 
-.form-group-input{
-    flex: 70%; 
+.form-group-input {
+  flex: 70%;
 }
 
-.form-group-button{
-    flex: 30%; 
+.form-group-button {
+  flex: 30%;
 }
 
-.formNewsGlobal{
-    display: flex;
-    flex-grow: column;
-    justify-content: center;
-    flex-wrap: wrap;
+.formNewsGlobal {
+  display: flex;
+  flex-grow: column;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .formControlNews {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-right: 10px;
-    padding-top: 15px;
-    background-color: transparent;
-    color: #1D1D1B;
-    border: 2px solid #1D1D1B;    
-    /* border-color: transparent; */
-    width: 90%;
-    height: auto;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-top: 15px;
+  background-color: transparent;
+  color: #1d1d1b;
+  border: 2px solid #1d1d1b;
+  width: 95%;
+  height: auto;
 }
 
 .formControlNews:focus,
 .formControlNews:active {
-    background-color: #FAE6C5;
-    border: none;
-    border-color: transparent;
+  background-color: #fae6c5;
+  border: none;
+  border-color: transparent;
 }
 
 .formControlNews::placeholder {
-    color: #1D1D1B;
-    font-family: 'Bebas Neue';
-    font-size: 2em;
-    font-weight: 400;
-    /* border: 2px solid #1D1D1B; */
-    padding-left: 10px;
-    text-transform: uppercase;
+  color: #1d1d1b;
+  font-family: "Bebas Neue";
+  font-size: 2em;
+  font-weight: 400;
+  /* border: 2px solid #1D1D1B; */
+  padding-left: 10px;
+  text-transform: uppercase;
 }
 
 .formButton {
-    font-family: 'Bebas Neue';
-    font-size: 2.5em;
-    font-weight: 400;
-    width: 15rem;
-    color: #F2C571;
-    background-color: #1D1D1B;
+  font-family: "Bebas Neue";
+  font-size: 2.5em;
+  font-weight: 400;
+  width: 15rem;
+  color: #f2c571;
+  background-color: #1d1d1b;
 }
 
 .iconsFooter {
-    padding-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 
 .iconsFooter a {
-    text-decoration: none;
-    color: inherit;
-    margin-right: 10px;
+  text-decoration: none;
+  color: inherit;
+  margin-right: 10px;
 }
 
 .iconsFooter svg {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 
 .rowNewsLine {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 .formLabelNews {
-    font-family: 'Bebas Neue';
-    font-size: 5em;
-    font-weight: 400;
-    flex: 100%; 
+  font-family: "Bebas Neue";
+  font-size: 5em;
+  font-weight: 400;
+  flex: 100%;
 }
 
 .endingText {
-    font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .breakLine {
-    height: 0px;
-    width: 0%;
+  height: 0px;
+  width: 0%;
 }
 
 @media screen and (max-width: 990px) {
-    .formLabelNews {
-        font-size: 2em;
-    }
-    .formControlNews {
-        font-size: 1rem;
-        margin-right: 5px;
-    }
-    .formButton {
-        font-size: 1rem;
-        width: 10rem;
-    }
-    .contactNews{
-        flex-wrap: wrap;
-    }
+  .formLabelNews {
+    font-size: 3em;
+  }
+  .formControlNews {
+    font-size: 1rem;
+    margin-right: 5px;
+  }
+  .contactNews {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 758px) {
+  .form-group-button {
+    margin: 1rem 0rem;
+  }
+  .formControlNews {
+    margin-right: 0px;
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 500px) {
-    .breakLine {
-        height: 1em;
-        width: 100%;
-    }
-    .formControlNews {
-        margin: auto;
-    }
-    .formButton {
-        font-size: 1.5rem;
-        margin: auto;
-        margin-bottom: 1.5em;
-    }
-    .inputGroupNews {
-        margin: auto;
-    }
+  .breakLine {
+    height: 1em;
+    width: 100%;
+  }
+  .formControlNews {
+    margin: auto;
+  }
+  .inputGroupNews {
+    margin: auto;
+  }
 }

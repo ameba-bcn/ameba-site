@@ -8,11 +8,11 @@ import Paper from "@material-ui/core/Paper";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import PaymentForm from "./../forms/PaymentForm";
 import Review from "./Review";
 import FreeCheckout from "./FreeCheckout";
+import Button from "./../button/Button";
 
 const mapStateToProps = (state) => {
   return {
@@ -111,7 +111,13 @@ function CheckoutMain(props) {
             {getStepContent(activeStep)}
             <div className={classes.buttons}>
               {activeStep !== 0 && (
-                <Button onClick={handleBack} className={classes.button}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  buttonSize="boton--medium"
+                  buttonStyle="boton--primary--solid"
+                  onClick={handleBack}
+                >
                   Enrere
                 </Button>
               )}
@@ -119,8 +125,9 @@ function CheckoutMain(props) {
                 <Button
                   variant="contained"
                   color="primary"
+                  buttonSize="boton--medium"
+                  buttonStyle="boton--primary--solid"
                   onClick={handleNext}
-                  className={classes.button}
                 >
                   Següent
                 </Button>

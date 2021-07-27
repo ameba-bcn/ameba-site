@@ -8,6 +8,7 @@ import { isEmail } from "validator";
 import AddIcon from "@material-ui/icons/Add";
 import { register } from "../../redux/actions/auth";
 import SociDialog from "../../components/botiga/Soci";
+import Button from "../button/Button";
 
 const required = (value) => {
   if (!value) {
@@ -164,7 +165,14 @@ const Register = (props) => {
               </div>
 
               <div className="form-group">
-                <button className="btn-block logFormButton">Registra't</button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  buttonSize="boton--medium"
+                  buttonStyle="boton--primary--solid"
+                >
+                  Registra't
+                </Button>
               </div>
             </div>
           )}

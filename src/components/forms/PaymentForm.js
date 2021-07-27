@@ -6,6 +6,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import "./PaymentForm.css";
+import Button from "../button/Button";
 
 const mapStateToProps = (state) => {
   return {
@@ -95,10 +96,14 @@ function PaymentForm(props) {
               options={cardStyle}
               onChange={handleChange}
             />
-            <button
-              disabled={processing || disabled || succeeded}
+
+            <Button
+              variant="contained"
+              color="primary"
+              buttonSize="boton--medium"
+              buttonStyle="boton--primary--solid"
               id="submit"
-              className="payment-button"
+              disabled={processing || disabled || succeeded}
             >
               <span id="button-text">
                 {processing ? (
@@ -106,8 +111,9 @@ function PaymentForm(props) {
                 ) : (
                   "Pay now"
                 )}
-              </span>
-            </button>
+              </span>{" "}
+            </Button>
+
             {/* Show any error that happens when processing the payment */}
             {error && (
               <div className="card-error" role="alert">

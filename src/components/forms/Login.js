@@ -6,6 +6,7 @@ import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { login, getUserData, getMemberProfile } from "../../redux/actions/auth";
 import { getCart } from "../../redux/actions/cart";
+import Button from "../button/Button";
 
 const required = (value) => {
   if (!value) {
@@ -133,9 +134,14 @@ const Login = (props) => {
             )}
 
             <div className="form-group">
-              <button className="btn-block logFormButton" disabled={loading}>
-                <span>Login</span>
-              </button>
+              <Button
+                variant="contained"
+                color="primary"
+                buttonSize="boton--medium"
+                buttonStyle="boton--primary--solid"
+              >
+                Login
+              </Button>
             </div>
 
             {displayError && message && (

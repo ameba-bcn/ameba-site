@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { connect } from "react-redux";
 import MembershipForm from "./../forms/MembershipForm";
@@ -15,6 +15,7 @@ import ExtendMembership from "./ExtendMembership";
 import { isEmptyObject } from "../../utils/utils";
 import SubscriptionBox from "../profile/SubscriptionBox";
 import "./CheckoutMember.css";
+import Button from "../button/Button";
 
 const mapStateToProps = (state) => {
   return {
@@ -107,8 +108,11 @@ function CheckoutMember(props) {
               <div className={"checkout-member-form-buttons"}>
                 {activeStep !== 0 && (
                   <Button
+                    variant="contained"
+                    color="primary"
+                    buttonSize="boton--medium"
+                    buttonStyle="boton--primary--solid"
                     onClick={handleBack}
-                    className={"checkout-member-form-button"}
                   >
                     Enrere
                   </Button>
@@ -117,9 +121,9 @@ function CheckoutMember(props) {
                   <Button
                     variant="contained"
                     color="primary"
+                    buttonSize="boton--medium"
+                    buttonStyle="boton--primary--solid"
                     onClick={handleNext}
-                    disabled={buttonDisabled}
-                    className={"checkout-member-form-button"}
                   >
                     Següent
                   </Button>

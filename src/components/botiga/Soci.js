@@ -13,6 +13,7 @@ import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
 import ClearIcon from "@material-ui/icons/Clear";
 import "./Soci.css";
 import { isCORSInactive } from "../../utils/utils";
+import Button from "../button/Button";
 
 export default function SociDialog(props) {
   const { onClose, selectedValue, open } = props;
@@ -114,19 +115,18 @@ export default function SociDialog(props) {
               </div>
               <div className="column">
                 <CardActions>
-                  <button
-                    size="small"
-                    className="buttonSociBoxCard"
-                    color="inherit"
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    buttonSize="boton--medium"
+                    buttonStyle="boton--back-orange--solid"
+                    icon={<ShoppingCartIcon />}
                     onClick={() => {
                       handleAddClick(socisData[isSubscriber].id);
                     }}
                   >
-                    <ShoppingCartIcon className="buttonSociIconBoxCard" />
-                    <span className="buttonSociTextBoxCard">
-                      AFEGIR CISTELLA
-                    </span>
-                  </button>
+                    AFEGIR CISTELLA
+                  </Button>
                 </CardActions>
               </div>
             </div>
