@@ -16,6 +16,12 @@
   margin: auto !important;
 }
 
+.cardMediaPlus > div > div {
+  font-size: 5.8em;
+  width: auto;
+  line-height: 0.4;
+}
+
 @media screen and (max-width: 1872px) {
   .cardMediaTitle {
     font-size: 5.5rem;
@@ -48,8 +54,10 @@
     font-size: 3.2em;
   }
 
-  .cardMediaPlus {
-    font-size: 4.4em;
+  .cardMediaPlus > div > div {
+    font-size: 3.6em;
+    width: auto;
+    line-height: 0.5;
   }
 }
 
@@ -71,8 +79,10 @@
     font-size: 7em;
   }
 
-  .cardMediaPlus {
-    font-size: 9em;
+  .cardMediaPlus > div > div {
+    font-size: 8em;
+    width: auto;
+    line-height: 0.5;
   }
 
   .Card3GridItem {
@@ -112,9 +122,12 @@
     font-size: 5em;
   }
 
-  .cardMediaPlus {
-    font-size: 7em;
+  .cardMediaPlus > div > div {
+    font-size: 6.4rem;
+    width: auto;
+    line-height: 0.4;
   }
+
 }
 
 @media screen and (max-width: 705px) {
@@ -129,6 +142,11 @@
   }
   .cardMediaDate {
     font-size: 4.5em;
+  }
+  .cardMediaPlus > div > div {
+    font-size: 6em;
+    width: auto;
+    line-height: 0.4;
   }
 }
 
@@ -152,8 +170,10 @@
     font-size: 3.5em;
   }
 
-  .cardMediaPlus {
-    font-size: 4em;
+  .cardMediaPlus > div > div {
+    font-size: 5em;
+    width: auto;
+    line-height: 0.3;
   }
 }
 
@@ -181,8 +201,10 @@
     font-size: 2.4em;
   }
 
-  .cardMediaPlus {
-    font-size: 3em;
+  .cardMediaPlus > div > div {
+    font-size: 3.6em;
+    width: auto;
+    line-height: 0.3;
   }
 }
 

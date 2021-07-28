@@ -15,6 +15,11 @@
   color: #fae6c5;
 }
 
+.plus--red{
+  background-color: var(--rojo);
+  color: var(--crema);
+}
+
 .plus--big {
   font-size: 120px;
   line-height: 76.8px;

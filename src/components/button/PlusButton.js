@@ -1,8 +1,8 @@
 import React from "react";
 import "./PlusButton.css";
 
-const STYLES = ["plus--ligth", "plus--obscure"];
-const SIZES = ["plus--big", "plus--medium"];
+const STYLES = ["plus--ligth", "plus--obscure", "plus--red"];
+const SIZES = ["plus--medium", "plus--big"];
 
 export default function PlusButton(props) {
   const { onClick, plusStyle, plusSize } = props;

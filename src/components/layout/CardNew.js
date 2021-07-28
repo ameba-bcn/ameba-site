@@ -3,6 +3,7 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import "./CardNew.css";
 import { formatISODateToDate, isCORSInactive } from "./../../utils/utils";
+import PlusButton from "./../button/PlusButton";
 
 const CardNew = React.memo((props) => {
   return (
@@ -22,7 +23,9 @@ const CardNew = React.memo((props) => {
           <div className="cardMediaDate column1">
             {formatISODateToDate(props.data)}
           </div>
-          <div className="cardMediaPlus column2">+</div>
+          <div className="cardMediaPlus column2">
+            <PlusButton />
+          </div>
         </div>
       </CardActionArea>
     </Card>

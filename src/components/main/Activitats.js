@@ -33,7 +33,7 @@ function Activitats() {
           style={{ textDecoration: "none" }}
           to={{ pathname: "/activitats" }}
         >
-          <PlusButton plusStyle="plus--obscure"/>
+          <PlusButton plusStyle="plus--obscure" plusSize="plus--big" />
         </NavLink>
       </div>
     </div>

@@ -81,14 +81,14 @@
   padding-left: 10px;
 }
 
-.cardMediaPlus {
+/* .cardMediaPlus {
   font-size: 6em;
   font-family: "Bebas Neue";
   font-weight: 900;
   line-height: 0.8em;
   text-align: right;
   overflow: hidden;
-}
+} */
 
 .cardFrame {
   background-color: #fae6c5 !important;
