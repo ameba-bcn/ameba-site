@@ -1,18 +1,24 @@
-import React from 'react';
-import './Associacio.css';
-import LettersMove from './../layout/LettersMove';
+import React from "react";
+import { useSelector } from "react-redux";
+import LettersMove from "./../layout/LettersMove";
+import "./Associacio.css";
 
 function Associacio() {
-    return (
-        <div className="Bloque" id="asso">
-            {/* <div className="mainFlyer" /> */}
-            <LettersMove
-                className="lettersMoveAsso"
-                sentence="L'ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA " 
-                color="#FAE6C5"
-                />
-        </div>
-    );
+  const profile = useSelector((state) => state.profile);
+  return (
+    <div className="Bloque" id="asso">
+      <source
+        className="asso-video"
+        src="/Videos/video1.mp4"
+        type="video/mp4"
+      />
+      <LettersMove
+        className="lettersMoveAsso"
+        sentence="L'ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA "
+        color="#FAE6C5"
+      />
+    </div>
+  );
 }
 
 export default Associacio;
