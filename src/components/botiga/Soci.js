@@ -40,8 +40,12 @@ export default function SociDialog(props) {
     onClose(selectedValue);
   };
 
-  const handleAddClick = () => {
-    dispatch(addMemberToCart(socisData[isSubscriber].variants[0]));
+  const handleAddClick = (id) => {
+    const selectedMembershipId =
+      socisData.filter(function (soci) {
+        return soci.id === id;
+      })[0]?.variants[0] || {};
+    dispatch(addMemberToCart(selectedMembershipId));
     if (user_profile === "LOGGED") {
       dispatch(getCart()).then(() => {
         setRedirect(true);
