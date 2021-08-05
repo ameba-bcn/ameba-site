@@ -34,6 +34,7 @@ import {
   agendaAll,
   botigaAll,
   getAbout,
+  getCover,
 } from "./redux/actions/data";
 import { getCart } from "./redux/actions/cart";
 
@@ -60,6 +61,7 @@ function App() {
     dispatch(botigaAll());
     dispatch(getAbout());
     dispatch(getCart());
+    dispatch(getCover());
   }, [dispatch]);
 
   return (

@@ -1,27 +1,16 @@
-#asso {
-    background-color: #EB5E3E;
-    display: flex;
-    align-items: flex-end;
+#associacio {
+  background-color: #eb5e3e;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
 }
 
-
-/* Main Flyer */
-
-.mainFlyer {
-    width: 100%;
-    height: 100vh;
-    background-image: url("../../images/MainAMEBA.png");
-    background-position: center;
-    background-size: cover;
-}
-
-.lettersMoveAsso {
-    margin-top: 100vh;
-}
-
-@media screen and (max-width: 800px) {
-    .mainFlyer {
-        width: 100%;
-        height: auto;
-    }
+.cover-box {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }

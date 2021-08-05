@@ -1,17 +1,26 @@
 import React from "react";
+import ReactPlayer from "react-player";
 import { useSelector } from "react-redux";
 import LettersMove from "./../layout/LettersMove";
 import "./Associacio.css";
 
 function Associacio() {
-  const profile = useSelector((state) => state.profile);
+  const data = useSelector((state) => state.data);
+  const { cover = [] } = data;
+  const { file = "" } = cover[0] || {};
+
   return (
-    <div className="Bloque" id="asso">
-      <source
-        className="asso-video"
-        src="/Videos/video1.mp4"
-        type="video/mp4"
-      />
+    <div className="Bloque" id="associacio">
+      <div className="cover-box">
+        <ReactPlayer
+          url={file}
+          playing={true}
+          loop
+          muted
+          width="90%"
+          height="auto"
+        />
+      </div>
       <LettersMove
         className="lettersMoveAsso"
         sentence="L'ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA "

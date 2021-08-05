@@ -7,6 +7,7 @@ import {
   GET_ALL_BOTIGA_SUCCESS,
   GET_ALL_BOTIGA_FAIL,
   GET_ABOUT,
+  GET_COVER,
 } from "./types";
 import DataService from "../services/data.service";
 
@@ -92,6 +93,17 @@ export const getAbout = () => (dispatch) => {
   return DataService.getAbout().then((response) => {
     dispatch({
       type: GET_ABOUT,
+      payload: response.data,
+    });
+
+    return Promise.resolve();
+  });
+};
+
+export const getCover = () => (dispatch) => {
+  return DataService.getCover().then((response) => {
+    dispatch({
+      type: GET_COVER,
       payload: response.data,
     });
 
