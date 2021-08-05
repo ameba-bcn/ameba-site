@@ -136,7 +136,7 @@ div>.nav-item {
 
 
 /* DIALOGS/MODALS */
-.MuiDialog-paperWidthSm {
+/* .MuiDialog-paperWidthSm {
     max-width: 39.375rem !important;
 }
 
@@ -147,9 +147,9 @@ div>.nav-item {
 .MuiCardActions-spacing,
 .MuiCardActions-root {
     float: right;
-}
+} */
 
-.MuiCard-root::-webkit-scrollbar-track {
+/* .MuiCard-root::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #F5F5F5;
 }
@@ -161,7 +161,7 @@ div>.nav-item {
 
 .MuiCard-root::-webkit-scrollbar-thumb {
     background-color: #1D1D1B;
-}
+} */
 
 .Articles,
 .Botiga {

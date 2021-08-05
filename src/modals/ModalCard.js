@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import { useMediaQuery } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import ClearIcon from "@material-ui/icons/Clear";
 import { formatPrice } from "../utils/utils";
 import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
@@ -10,7 +8,7 @@ import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import Button from "../components/button/Button";
-import ImageCarousel from "../components/botiga/ImageCarousel";
+import ImageCarousel from "../components/images/ImageCarousel";
 import "./Modals.css";
 
 export default function ModalCard(props) {
@@ -34,6 +32,7 @@ export default function ModalCard(props) {
     box2Text,
     isSubscriber,
     setIsSubscriber,
+    colorMode,
   } = props;
   const isMobile = useMediaQuery("(max-width:640px)");
   const types = ["PRODUCTE", "SOCI", "ACTIVITAT"];
@@ -45,7 +44,7 @@ export default function ModalCard(props) {
     if (modalStyle === "PRODUCTE") {
       let dataBoxDiv = (
         <>
-          <div className="sizes-modal-title">
+          <div className="modal-card___title_small ">
             <PeopleAltIcon /> TALLES DISPONIBLES / &nbsp;
           </div>
           {sizes && sizes[0] === "UNIQUE" ? (
@@ -56,8 +55,8 @@ export default function ModalCard(props) {
                 <div
                   className={
                     activeSize === el
-                      ? "sizes-modal-button-active"
-                      : "sizes-modal-button"
+                      ? "interactiveDataBox-product-sizes__button_active"
+                      : "interactiveDataBox-product-sizes__button"
                   }
                   key={el}
                   onClick={() => setActiveSize(el)}
@@ -73,60 +72,87 @@ export default function ModalCard(props) {
     }
     if (modalStyle === "SOCI") {
       let dataBoxDiv = (
-        <>
-          <span className="mainSociWordBoxCard">
-            <PeopleAltIcon /> TIPUS DE SOCI/A / &nbsp;
-          </span>
-          <div className="sociTypeBox">
+        <div className="interactiveDataBox-soci__row">
+          <div className="modal-card___title_small">
+            <PeopleAltIcon /> QUOTA DE SOCI/A / &nbsp;
+          </div>
+          <div className="interactiveDataBox-soci__buttonBox">
             <div
-              className={
-                isSubscriber ? "professionalSociBox" : "subscriberSociBox"
-              }
+              className={`interactiveDataBox-soci__button interactiveDataBox-soci__button-subscriber 
+                          ${
+                            isSubscriber
+                              ? "interactiveDataBox-soci__button-active"
+                              : "interactiveDataBox-soci__button-inactive"
+                          }`}
               onClick={() => setIsSubscriber(true)}
             >
               Subscriptor
             </div>
             <div
-              className={
-                isSubscriber ? "subscriberSociBox" : "professionalSociBox"
-              }
+              className={`interactiveDataBox-soci__button interactiveDataBox-soci__button-professional 
+                          ${
+                            isSubscriber
+                              ? "interactiveDataBox-soci__button-inactive"
+                              : "interactiveDataBox-soci__button-active"
+                          }`}
               onClick={() => setIsSubscriber(false)}
             >
               Professional
             </div>
           </div>
-        </>
+        </div>
       );
       return dataBoxDiv;
     }
     if (modalStyle === "ACTIVITAT") {
       let dataBoxDiv = (
         <>
-          <span className="mainActivitatWordBoxCard">
-            <CalendarTodayIcon /> DATA / &nbsp;
-          </span>
-          <span className="dateLinkActivitatCard">
-            <a
-              href="https://google.com/calendar"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {datetime !== undefined ? datetime.split("T")[0] : ""}-
-              {datetime !== undefined
-                ? datetime
-                    .substring(
-                      datetime.lastIndexOf("T") + 1,
-                      datetime.lastIndexOf("Z")
-                    )
-                    .slice(0, -3)
-                : ""}
-            </a>
-          </span>
-          <br />
-          <span className="mainActivitatWordBoxCard">
-            <LocalAtmIcon /> PREU /{" "}
-          </span>
-          <span className="priceBoxActivitatCard">{price}</span>
+          {isMobile && (
+            <div className="interactiveDataBox-activitat__row">
+              <div className="modal-card___title_small">
+                <LocationOnIcon /> LOCALITZACIÓ / &nbsp;
+              </div>
+              <div className="modal-card__column_sixtyfive interactiveDataBox-activitat__text-loca">
+                <a
+                  href="https://google.com/maps"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {address}
+                </a>
+              </div>
+            </div>
+          )}
+          <div className="interactiveDataBox-activitat__row">
+            <div className="modal-card___title_small">
+              <CalendarTodayIcon /> DATA / &nbsp;
+            </div>
+            <div className="interactiveDataBox-activitat__text-data">
+              <a
+                href="https://google.com/calendar"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {datetime !== undefined ? datetime.split("T")[0] : ""}-
+                {datetime !== undefined
+                  ? datetime
+                      .substring(
+                        datetime.lastIndexOf("T") + 1,
+                        datetime.lastIndexOf("Z")
+                      )
+                      .slice(0, -3)
+                  : ""}
+              </a>
+            </div>
+          </div>
+          <div className="interactiveDataBox-activitat__row">
+            <span className="modal-card___title_small">
+              <LocalAtmIcon /> PREU / &nbsp;
+            </span>
+            <span className="interactiveDataBox-activitat__text-data">
+              {price}
+            </span>
+          </div>
         </>
       );
       return dataBoxDiv;
@@ -135,107 +161,160 @@ export default function ModalCard(props) {
   };
 
   return (
-    <div>
-      <Dialog onClose={handleClose} open={open}>
-        {!isMobile && (
-          <>
-            <Card className="card-general-mobile">
-              <ClearIcon className="close-modal" onClick={handleClose} />
-              <div className="frame-margin-modal">
-                <div className="row top-title-price-modal">
-                  <div className="top-title-price-modal-col1">
-                    <div className="title-modal">{title}</div>
-                  </div>
-                  <div className="top-title-price-modal-col2">
-                    <div className="title-modal-price">
-                      {formatPrice(price)}
-                    </div>
+    <Dialog onClose={handleClose} open={open}>
+      {!isMobile && (
+        <>
+          <div
+            className={`modal-card__background modal-card__background_${colorMode}`}
+          >
+            <ClearIcon
+              className={`modal-card__close modal-card__close_${colorMode}`}
+              onClick={handleClose}
+            />
+            <div className="modal-card__row">
+              <div className="modal-card__column_eighty">
+                <div className="modal-card__title">{title}</div>
+              </div>
+              <div className="modal-card__column_twenty">
+                <div
+                  className={`modal-card__price modal-card__price_${colorMode}`}
+                >
+                  {formatPrice(price)}
+                </div>
+              </div>
+            </div>
+            <hr
+              className={`modal-card__hr_solid modal-card__hr_solid-${colorMode}`}
+            />
+
+            {modalStyle === "ACTIVITAT" && (
+              <div className="modal-card-location__row">
+                <div className="modal-card__column_thirtyfive">
+                  <div className="modal-card___title_small">
+                    <LocationOnIcon /> LOCALITZACIÓ / &nbsp;
                   </div>
                 </div>
-                <hr className="modal-solid" />
-
-                {modalStyle === "ACTIVITAT" && (
-                  <div className="cardLocation">
-                    <span className="mainActivitatWordBoxCard">
-                      <LocationOnIcon /> LOCALITZACIÓ / &nbsp;
-                    </span>
-                    <span className="addressLinkActivitatCard">
-                      <a
-                        href="https://google.com/maps"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {address}
-                      </a>
-                    </span>
-                  </div>
-                )}
-
-                <div className="img-modal">
-                  <ImageCarousel imgList={imgArr} />
+                <div className="modal-card__column_sixtyfive interactiveDataBox-activitat__text-loca">
+                  <a
+                    href="https://google.com/maps"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {address}
+                  </a>
                 </div>
-                <hr className="modal-solid" />
-                <div className="size-description-modal-box">
-                  <div>
-                    <div className="column">{interactiveDataBox()}</div>
-                    <div className="column">
-                      <CardActions>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          buttonSize="boton--medium"
-                          buttonStyle="boton--primary--solid"
-                          icon={buttonIcon}
-                          onClick={() => {
-                            handleAddClick(id);
-                          }}
-                        >
-                          {buttonText}
-                        </Button>
-                      </CardActions>
-                    </div>
-                  </div>
+              </div>
+            )}
+            <ImageCarousel imgList={imgArr} />
+            <hr
+              className={`modal-card__hr_solid modal-card__hr_solid-${colorMode}`}
+            />
+            <div className="modal-card__row">
+              <div
+                className={
+                  modalStyle === "SOCI"
+                    ? "modal-card__column_hundred"
+                    : "modal-card__column_fiftyfive"
+                }
+              >
+                {interactiveDataBox()}
+              </div>
+              <div
+                className={
+                  modalStyle === "SOCI"
+                    ? "modal-card__column_hundred"
+                    : "modal-card__column_fourtyfive"
+                }
+              >
+                <div
+                  className={
+                    modalStyle === "SOCI" ? "modal-card__button-wrapper" : ""
+                  }
+                >
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    buttonSize="boton--medium"
+                    buttonStyle={
+                      colorMode && colorMode === "dark"
+                        ? "boton--back-orange--solid"
+                        : "boton--primary--solid"
+                    }
+                    icon={buttonIcon}
+                    onClick={() => {
+                      handleAddClick(id);
+                    }}
+                  >
+                    {buttonText}
+                  </Button>
                 </div>
-                <hr className="modal-dashed" />
-                <div className="description-modal-title">{box1Title}</div>
-                <div className="description-modal-content">{box1Text}</div>
-                {box2Title && (
-                  <>
-                    <hr className="modal-dashed" />
-                    <div className="description-modal-title">{box2Title}</div>
-                    <div className="description-modal-content">{box2Text}</div>
-                  </>
-                )}
-                <hr className="modal-solid" />
               </div>
-            </Card>
-          </>
-        )}
+            </div>
+            <hr
+              className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
+            />
+            <div className="modal-card__description-title">{box1Title}</div>
+            <div className="modal-card__description-content">{box1Text}</div>
+            {box2Title && (
+              <>
+                <hr
+                  className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
+                />
+                <div className="modal-card__description-title">{box2Title}</div>
+                <div className="modal-card__description-content">
+                  {box2Text}
+                </div>
+              </>
+            )}
+            <hr
+              className={`modal-card__hr_solid modal-card__hr_solid-${colorMode}`}
+            />
+          </div>
+        </>
+      )}
 
-        {isMobile && (
-          <Card className="card-general-mobile">
-            <ClearIcon className="close-modal" onClick={handleClose} />
-            <div className="frame-margin-modal-mobile">
-              <hr className="thin" />
-              <div className="title-modal">{title}</div>
-              <hr className="thin" />
-              <div className="img-modal">
-                <ImageCarousel imgList={imgArr} />
-              </div>
-              <hr className="thin" />
-              <div className="description-modal">
-                <span className="description-modal-title-mobile">
-                  {box1Title}
-                </span>
-                <p className="description-modal-content">{box1Text}</p>
-              </div>
-              <hr className="thin" />
-              <div className="sizes-modal">{interactiveDataBox()}</div>
+      {isMobile && (
+        <div
+          className={`modal-card-mobile__background modal-card-mobile__background_${colorMode}`}
+        >
+          <ClearIcon
+            className={`modal-card-mobile__close modal-card__close_${colorMode}`}
+            onClick={handleClose}
+          />
+          <div className="modal-card-mobile__row">
+            <hr
+              className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
+            />
+            <div className="modal-card-mobile__title">{title}</div>
+            <hr
+              className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
+            />
+            <ImageCarousel imgList={imgArr} />
+            <hr
+              className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
+            />
+            <div className="modal-card-mobile__description-title">
+              {box1Title}
+            </div>
+            <div className="modal-card-mobile__description-content">
+              {box1Text}
+            </div>
+            <hr
+              className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
+            />
+            <div className="modal-card-mobile__row-interactiveDataBox">
+              {interactiveDataBox()}
+            </div>
+            <div className="modal-card-mobile__button-wrapper">
               <Button
                 variant="contained"
                 color="primary"
                 buttonSize="boton--megaxxl"
-                buttonStyle="boton--primary--solid"
+                buttonStyle={
+                  colorMode && colorMode === "dark"
+                    ? "boton--back-orange--solid"
+                    : "boton--primary--solid"
+                }
                 icon={buttonIcon}
                 onClick={() => {
                   handleAddClick(id);
@@ -244,9 +323,9 @@ export default function ModalCard(props) {
                 {buttonText} - {formatPrice(price)}
               </Button>
             </div>
-          </Card>
-        )}
-      </Dialog>
-    </div>
+          </div>
+        </div>
+      )}
+    </Dialog>
   );
 }
