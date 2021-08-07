@@ -12,11 +12,10 @@ import Activitats from "./pages/Activitats";
 import Botiga from "./pages/Botiga";
 import Entrevista from "./components/supportyourlocals/Entrevista";
 import SupportYourLocals from "./pages/SupportYourLocals";
-import Sessio from "./sessio/SessioGeneral";
 import NotFound from "./pages/NotFound";
 import { Switch, Route } from "react-router-dom";
 import Contacte from "./contacte/Contacte";
-import Menu from "./components/Navbar";
+import Menu from "./components/navbar/Navbar";
 import LogSession from "./pages/LogSession";
 import Profile from "./pages/Profile";
 import Checkout from "./pages/Checkout";
@@ -75,7 +74,6 @@ function App() {
           <Route path="/botiga" component={Botiga} />
           <Route exact path="/support/:id" component={Entrevista} />
           <Route path="/support" component={SupportYourLocals} />
-          <Route path="/sessio" component={Sessio} />
           <Route path="/login" component={LogSession} />
           <Route
             path="/membership-registration"
