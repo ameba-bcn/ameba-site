@@ -4,7 +4,7 @@ import MenuLog from "./MenuLog";
 import Cart from "./Cart";
 
 export default function NavbarButtons(props) {
-  const { isLoggedIn = false } = props;
+  const { isLoggedIn = false, handleClick = {}, click } = props;
 
   return (
     <div className="menuButtons">
@@ -31,10 +31,10 @@ export default function NavbarButtons(props) {
               LOGIN
             </NavLink>
           ) : (
-            <MenuLog />
+            <MenuLog handleClick={handleClick} />
           )}
         </div>
-        <Cart />
+        <Cart onClick={handleClick} click={click} />
       </ul>
     </div>
   );

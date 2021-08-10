@@ -9,7 +9,7 @@ import "./DropdownCart.css";
 
 export default function DropdownCart(props) {
   const dispatch = useDispatch();
-  const { isMobile = false } = props;
+  const { isMobile = false, setCartMenuOpen = {} } = props;
   const { item_variants = [], total = 0 } = props.cartData;
   const arrMono = [];
   const profile = useSelector((state) => state.profile);
@@ -21,7 +21,6 @@ export default function DropdownCart(props) {
   const checkoutRedirect = user_profile === "LOGGED" ? "/checkout" : "/login";
 
   const addItem = (id) => {
-    console.log("Add item", id);
     dispatch(addToCart(id));
   };
 
@@ -30,6 +29,7 @@ export default function DropdownCart(props) {
   };
 
   const checkoutToCart = () => {
+    setCartMenuOpen(false);
     props.handleCloseMenu();
     props.closeDropDown();
   };

@@ -28,9 +28,8 @@ export default function MenuLog(props) {
     <div>
       <a
         className="sessio-menu-button"
-        href
         data-item={user_data.username === "" ? "SESSIÓ" : user_data.username}
-        onClick={handleClickSessio}
+        onClick={(e) => handleClickSessio(e)}
       >
         {user_data.username === "" ? "SESSIÓ" : user_data.username}
       </a>
@@ -45,11 +44,14 @@ export default function MenuLog(props) {
       >
         <div>
           <NavLink className="menuOptions" to="/profile">
-            <div className="dropdown-profile" onClick={handleCloseSessio}>
+            <div
+              className="dropdown-profile"
+              onClick={() => handleCloseSessio()}
+            >
               Perfil
             </div>
           </NavLink>
-          <div className="dropdown-logout" onClick={logoutMenu}>
+          <div className="dropdown-logout" onClick={() => logoutMenu()}>
             Log out
           </div>
         </div>

@@ -7,7 +7,7 @@ import NavbarButtons from "./NavbarButtons";
 import NavbarButtonsMobile from "./NavbarButtonsMobile";
 import "./Navbar.scss";
 
-export default function Navbar(props) {
+export default function Navbar() {
   const isMobile = useMediaQuery("(max-width:940px)");
   const [click, setClick] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
@@ -30,7 +30,7 @@ export default function Navbar(props) {
           </NavLink>
         </div>
         {isMobile ? (
-          <div className="menuIcon" onClick={handleClick}>
+          <div className="menuIcon" onClick={() => handleClick()}>
             {click ? (
               <FaTimes className={"menuIcon__cross"} />
             ) : (
@@ -38,7 +38,11 @@ export default function Navbar(props) {
             )}
           </div>
         ) : (
-          <NavbarButtons isLoggedIn={isLoggedIn} />
+          <NavbarButtons
+            isLoggedIn={isLoggedIn}
+            handleClick={handleClick}
+            click={click}
+          />
         )}
       </div>
       {isMobile && click && (

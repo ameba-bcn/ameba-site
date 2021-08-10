@@ -59,8 +59,8 @@ function App() {
     dispatch(agendaAll());
     dispatch(botigaAll());
     dispatch(getAbout());
-    dispatch(getCart());
     dispatch(getCover());
+    dispatch(getCart());
   }, [dispatch]);
 
   return (

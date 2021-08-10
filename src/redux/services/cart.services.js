@@ -101,16 +101,6 @@ const addMemberToCart = (id) => {
   }
 };
 
-const checkoutCart = () => {
-  return axios
-    .get(`${API_URL}carts/current/checkout/`, {
-      headers: { Authorization: `Bearer ${localStorage.getItem("access")}` },
-    })
-    .then((response) => {
-      return response.data;
-    });
-};
-
 const removeItemCart = (id) => {
   //  Detected user on LS case
   if (localStorage.getItem("access")) {
@@ -129,7 +119,7 @@ const removeItemCart = (id) => {
         return axios
           .patch(
             `${API_URL}carts/current/`,
-            { items: cart_prev },
+            { item_variant_ids: cart_prev },
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -161,6 +151,16 @@ const removeItemCart = (id) => {
   }
 };
 
+const checkoutCart = () => {
+  return axios
+    .get(`${API_URL}carts/current/checkout/`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("access")}` },
+    })
+    .then((response) => {
+      return response.data;
+    });
+};
+
 const deleteFullCart = () => {
   let cart_uuid = JSON.parse(localStorage.getItem("cart_id"));
   return axios.delete(`${API_URL}carts/${cart_uuid}`, {
@@ -171,16 +171,7 @@ const deleteFullCart = () => {
 };
 
 const getCart = () => {
-  if (localStorage.getItem("cart_id")) {
-    const cart_uuid = localStorage
-      .getItem("cart_id")
-      ?.replace('"', "")
-      ?.replace('"', ""); //mejorar esta funcion
-    return axios.get(`${API_URL}carts/${cart_uuid}/`).then((response) => {
-      localStorage.setItem("cart_id", JSON.stringify(response.data.id));
-      return response.data;
-    });
-  } else {
+  if (localStorage.getItem("access")) {
     return axios
       .get(`${API_URL}carts/current/`, {
         headers: {
@@ -191,6 +182,15 @@ const getCart = () => {
         localStorage.setItem("cart_id", JSON.stringify(response.data.id));
         return response.data;
       });
+  } else {
+    const cart_uuid = localStorage
+      .getItem("cart_id")
+      ?.replace('"', "")
+      ?.replace('"', ""); //mejorar esta funcion
+    return axios.get(`${API_URL}carts/${cart_uuid}/`).then((response) => {
+      localStorage.setItem("cart_id", JSON.stringify(response.data.id));
+      return response.data;
+    });
   }
 };
 
