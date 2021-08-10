@@ -10,7 +10,18 @@
     font-family: 'Bebas Neue';
     font-weight: 100;
     margin-bottom: 1rem;
+    width: 100%;
+
 }
+
+@media screen and (max-width: 620px) {
+    .SupportSubtitle {
+        margin-top: -2rem;
+
+       font-size: 10vw;
+
+    }
+  }
 
 /* Animacion de hover title */
 
@@ -61,20 +72,3 @@ div.PowerTitle:hover  {
     animation-duration: 1s;
     animation-iteration-count: infinite;
 }
-
-/* .SupportContent:hover {
-    color: tomato;
-    background-color: yellowgreen;
-    animation-name: TitleHovered;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-} */
-
-/* 
-.SupportContent {
-    pointer-events: none;
-}
-
-div.PowerTitle{
-    pointer-events: auto;
-} */

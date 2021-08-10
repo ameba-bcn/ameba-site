@@ -64,6 +64,8 @@
   text-transform: uppercase;
   color: #fae6c5;
   text-align: left;
+  word-break: keep-all;
+  text-overflow: ellipsis;
 }
 
 .cardSupportPlusBox {
@@ -101,5 +103,16 @@
 @media screen and (max-width: 600px) {
   .fullcard {
     flex: 1 0 100%;
+    min-width: 200px;
+  }
+  .cardSupportTitle {
+    font-size: 25vw;
+    top: 20%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .cardSupportTitle {
+    top: 30%;
   }
 }

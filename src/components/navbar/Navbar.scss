@@ -99,6 +99,8 @@
   flex: 1;
   flex-shrink: 0;
   width: 100%;
+  animation: fade 0.3s 1;
+  -webkit-animation: fade 0.3s 1;
 }
 
 .nav-ul_mobile {
@@ -247,6 +249,8 @@
 .cart-mobile__box {
   background-color: #fae6c5;
   margin-left: -2em;
+  animation: fade 0.5s 1;
+  -webkit-animation: fade 0.5s 1;
 }
 
 .logBox {

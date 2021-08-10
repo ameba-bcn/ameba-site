@@ -1,12 +1,14 @@
-.title-section-support{
-    font-size: 60px;
-    font-family: 'Bebas Neue';
-    font-weight: 800;
-    line-height: 0.6em;
+.title-section-support {
+  font-size: 60px;
+  font-family: "Bebas Neue";
+  font-weight: 800;
+  line-height: 0.6em;
 }
 
-.hr-section{
-    width: 90%;
-    border-top: 1px solid #1D1D1B;
-    opacity: 40%;
+.hr-section {
+  width: 90%;
+  border-top: 1px solid #1d1d1b;
+  opacity: 40%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

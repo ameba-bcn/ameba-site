@@ -145,7 +145,7 @@ export default function Entrevista(props) {
               <div className="bio-img">
                 <img
                   className="bio-img-src"
-                  src={isCORSInactive()+artist.images[0]}
+                  src={isCORSInactive() + artist.images[0]}
                   alt={artist.name}
                 />
               </div>
@@ -181,7 +181,7 @@ export default function Entrevista(props) {
                       {expand.p[i] ? (
                         <div className={"resposta"}>{f.answer}</div>
                       ) : null}
-                      <hr />
+                      <hr className="hr-section" />
                     </div>
                   ) : null
                 )}
@@ -205,7 +205,7 @@ export default function Entrevista(props) {
                       {expand.p[i] ? (
                         <div className={"resposta"}>{f.answer}</div>
                       ) : null}
-                      <hr />
+                      <hr className="hr-section" />
                     </div>
                   ) : null
                 )}
@@ -230,7 +230,7 @@ export default function Entrevista(props) {
                   {expand.p[i] ? (
                     <div className={"resposta"}>{f.answer}</div>
                   ) : null}
-                  <hr />
+                  <hr className="hr-section" />
                 </div>
               ))}
             </>
