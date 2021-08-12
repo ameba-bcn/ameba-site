@@ -4,6 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 0.7
+- Main cart events responsive restyle 
+- SupportYourLocals cards responsive
+- New Button component
+- New Plus button component
+- Modals restyled
+- Mobile menu
+
 Version 0.6
 - Profile user data load logic created
 - Profile user data edit logic created
