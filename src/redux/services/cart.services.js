@@ -171,22 +171,75 @@ const deleteFullCart = () => {
 };
 
 const getCart = () => {
+  let cart_items = [];
+  const isCurrentCart = localStorage.getItem("isCurrentCart");
+  const cart_uuid = localStorage
+    .getItem("cart_id")
+    ?.replace('"', "")
+    ?.replace('"', ""); //mejorar esta funcion
   if (localStorage.getItem("access")) {
-    return axios
-      .get(`${API_URL}carts/current/`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("access")}`,
-        },
-      })
-      .then((response) => {
-        localStorage.setItem("cart_id", JSON.stringify(response.data.id));
-        return response.data;
-      });
+    if (cart_uuid) {
+      return axios
+        .get(`${API_URL}carts/${cart_uuid}/`
+        , isCurrentCart && {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+        }
+        )
+        .then((response) => {
+          cart_items = response.data.item_variant_ids;
+          console.log("newCart, cart_items", cart_items)
+
+          return axios.get(`${API_URL}carts/current/`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            },
+          });
+        })
+        .then((res) => {
+          localStorage.setItem("isCurrentCart", true);
+          const newItems = res.data.item_variant_ids;
+          console.log("oldCart, newItems", newItems)
+          const newCart = cart_items.concat(newItems);
+          localStorage.setItem("cart_id", JSON.stringify(res.data.id));
+          return axios.patch(
+            `${API_URL}carts/current/`,
+            {
+              item_variant_ids: newCart,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem("access")}`,
+              },
+            }
+          );
+        })
+        .then(() => {
+          return axios.get(`${API_URL}carts/current/`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access")}`,
+            },
+          });
+        })
+        .then((response) => {
+          console.log("response final", response)
+          localStorage.setItem("cart_id", JSON.stringify(response.data.id));
+          return response.data;
+        });
+    } else {
+      return axios
+        .get(`${API_URL}carts/current/`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access")}`,
+          },
+        })
+        .then((response) => {
+          localStorage.setItem("cart_id", JSON.stringify(response.data.id));
+          return response.data;
+        });
+    }
   } else {
-    const cart_uuid = localStorage
-      .getItem("cart_id")
-      ?.replace('"', "")
-      ?.replace('"', ""); //mejorar esta funcion
     return axios.get(`${API_URL}carts/${cart_uuid}/`).then((response) => {
       localStorage.setItem("cart_id", JSON.stringify(response.data.id));
       return response.data;
@@ -203,6 +256,7 @@ const deleteCartAfterSuccesfullCheckout = () => {
     })
     .then((response) => {
       localStorage.removeItem("cart_id");
+      localStorage.removeItem("isCurrentCart");
       return response.data;
     });
 };

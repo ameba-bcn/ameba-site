@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import { connect, useDispatch } from "react-redux";
 import { deleteCartAfterCheckout } from "./../../redux/actions/cart";
 import { Redirect } from "react-router-dom";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import "./PaymentForm.css";
 import Button from "../button/Button";
@@ -82,12 +80,7 @@ function PaymentForm(props) {
     return <Redirect to="/summary-checkout" />;
   }
 
-  const promise = loadStripe(
-    "pk_test_51IGkXjHRg08Ncmk7fPlbb9DfTF5f7ckXBKiR4g01euLgXs04CqmgBPOQuqQfOhc6aj9mzsYE1oiQ3TFjHH9Hv3Mj00GNyG9sep"
-  );
-
   return (
-    <Elements stripe={promise}>
       <div className="payment-root">
         <div className="payment-body">
           <form id="payment-form" onSubmit={handleSubmit}>
@@ -134,7 +127,6 @@ function PaymentForm(props) {
           </form>
         </div>
       </div>
-    </Elements>
   );
 }
 

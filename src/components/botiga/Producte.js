@@ -15,7 +15,8 @@ export default function ProducteDialog(props) {
   };
 
   const handleAddClick = () => {
-    dispatch(addToCart(dataRow.id));
+    const variant_id = dataRow.variants[0].id || "";
+    dispatch(addToCart(variant_id));
     handleClose();
   };
 
