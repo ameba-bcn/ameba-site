@@ -2,9 +2,20 @@ import React, { useState, useEffect } from "react";
 import IconButton from "@material-ui/core/IconButton";
 import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import "./ScrollTop.css";
+import { useHistory } from "react-router-dom";
 
 const ScrollTop = ({ showBelow }) => {
   const [show, setShow] = useState(showBelow ? false : true);
+  let history = useHistory();
+
+  useEffect(() => {
+    const unlisten = history.listen(() => {
+      window.scrollTo(0, 0);
+    });
+    return () => {
+      unlisten();
+    };
+  }, []);
 
   const handleScroll = () => {
     if (window.pageYOffset > showBelow) {

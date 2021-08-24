@@ -2,16 +2,16 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink, Redirect } from "react-router-dom";
 import "./LlistatEntrevistes.css";
-import ScrollTop from "./../../components/layout/ScrollTop";
+// import ScrollTop from "./../../components/layout/ScrollTop";
 import { isCORSInactive } from "../../utils/utils";
 import PlusButton from "../button/PlusButton";
 
 export default function LlistatEntrevistes() {
   const data = useSelector((state) => state.data);
   const { support = [] } = data;
-  const cardClicked = (id) => {
-    return <Redirect to={`/support/entrevista?='${id}`} />;
-  };
+  // const cardClicked = (id) => {
+  //   return <Redirect to={`/support/entrevista?='${id}`} />;
+  // };
 
   const cardGenerator =
     support.length > 0
@@ -20,7 +20,7 @@ export default function LlistatEntrevistes() {
             <div
               className="fullcard"
               key={data.id}
-              onClick={() => cardClicked(data.id)}
+              // onClick={() => cardClicked(data.id)}
             >
               <NavLink
                 style={{ textDecoration: "none" }}
@@ -52,7 +52,7 @@ export default function LlistatEntrevistes() {
 
   return (
     <div className="cardSupportDeck">
-      <ScrollTop showBelow={250} />
+      {/* <ScrollTop showBelow={250} /> */}
       {support.length > 0 && cardGenerator}
     </div>
   );

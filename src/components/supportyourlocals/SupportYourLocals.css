@@ -1,74 +1,82 @@
 .BGWrapper {
-    /* display: none; */
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .SupportSubtitle {
-    margin-top: -5rem;
-    text-transform: uppercase;
-    font-size: 2.5rem;
-    font-family: 'Bebas Neue';
-    font-weight: 100;
-    margin-bottom: 1rem;
-    width: 100%;
-
+  margin-top: -5rem;
+  text-transform: uppercase;
+  font-size: 2.5rem;
+  font-family: "Bebas Neue";
+  font-weight: 100;
+  margin-bottom: 1rem;
+  width: 100%;
 }
 
 @media screen and (max-width: 620px) {
-    .SupportSubtitle {
-        margin-top: -2rem;
-
-       font-size: 10vw;
-
-    }
+  .SupportSubtitle {
+    margin-top: -2rem;
+    font-size: 10vw;
   }
+
+  .BGWrapper {
+    animation-name: TitleHovered;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+  }
+}
 
 /* Animacion de hover title */
 
 @keyframes TitleHovered {
-    0% {
-        background-color: rgba(255, 0, 0, 0);
-    }
+  0% {
+    background-color: rgba(255, 0, 0, 0);
+  }
 
-    2% {
-        background-color: rgba(255, 0, 0, 0.8);
-    }
+  2% {
+    background-color: rgba(255, 0, 0, 0.8);
+  }
 
-    23% {
-        background-color: rgba(255, 255, 0, 0);
-    }
+  23% {
+    background-color: rgba(255, 255, 0, 0);
+  }
 
-    25% {
-        background-color: rgba(255, 255, 0, 0.8);
-    }
+  25% {
+    background-color: rgba(255, 255, 0, 0.8);
+  }
 
-    48% {
-        background-color: rgba(0, 0, 255, 0);
-    }
+  48% {
+    background-color: rgba(0, 0, 255, 0);
+  }
 
-    50% {
-        background-color: rgba(0, 0, 255, 0.8);
-    }
+  50% {
+    background-color: rgba(0, 0, 255, 0.8);
+  }
 
-    98% {
-        background-color: rgba(0, 128, 0, 0);
-    }
+  98% {
+    background-color: rgba(0, 128, 0, 0);
+  }
 
-    100% {
-        background-color: rgba(0, 128, 0, 0.8);
-    }
+  100% {
+    background-color: rgba(0, 128, 0, 0.8);
+  }
 }
 
 div.PowerTitle {
-    white-space: nowrap;
-    overflow: hidden;
-    display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
 }
 
-div.PowerTitle:hover  {
-    color: tomato;
-    background-color: yellowgreen;
-    animation-name: TitleHovered;
+/* div.PowerTitle:hover {
+  color: tomato;
+  background-color: yellowgreen; */
+/* animation-name: TitleHovered;
     animation-duration: 1s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: infinite; */
+/* } */
+
+.BGWrapper:hover {
+  animation-name: TitleHovered;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }

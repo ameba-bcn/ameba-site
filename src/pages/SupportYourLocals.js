@@ -13,10 +13,11 @@ export default function SupportYourLocals() {
       <PowerTitle
         title={isMobile ? "#SUPPORT" : "#SUPPORTYOURLOCALS"}
         className="SupportTitle"
+        subtitle="- Conèix als professionals que donen vida a la ciutat -"
       />
-      <h3 className="SupportSubtitle">
+      {/* <h3 className="SupportSubtitle">
         - Conèix als professionals que donen vida a la ciutat -
-      </h3>
+      </h3> */}
       <LlistatEntrevistes />
       <LettersMove
         className="lettersMoveDiv"
