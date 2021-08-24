@@ -19,6 +19,7 @@ function Associacio() {
           muted
           width="90%"
           height="auto"
+          controls="false"
         />
       </div>
       <LettersMove
