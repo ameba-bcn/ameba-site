@@ -4,6 +4,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 0.8
+- Scroll to top on access page
+- Event List images adjustment
+- Cast video options disabled
+- Stripe payment bugfix
+- Duplicate product bugfix
+
 Version 0.7
 - Main cart events responsive restyle 
 - SupportYourLocals cards responsive
