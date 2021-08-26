@@ -2,10 +2,11 @@
   z-index: 2;
   position: fixed !important;
   bottom: 2vh;
-  background-color: #dcdcdc;
-  stroke: black;
-  fill: transparent;
-  color: black;
+  background-color: black !important;
+  stroke: #dcdcdc;
+  opacity: 0.5;
+  /* fill: transparent; */
+  color: #dcdcdc !important;
   right: 5%;
 }
 
@@ -14,4 +15,10 @@
   transition: 0.3s;
   color: #397ba6;
   background-color: #dcdcdc;
+  opacity: 1;
+}
+
+.scroll-to-top:focus {
+  outline: none;
+  box-shadow: none;
 }
