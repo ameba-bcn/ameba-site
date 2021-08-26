@@ -250,9 +250,9 @@ const getCart = () => {
 const deleteCartAfterSuccesfullCheckout = () => {
   return axios
     .delete(`${API_URL}carts/current/`, {
-      //   headers: {
-      //     Authorization: `Bearer ${localStorage.getItem("access")}`,
-      //   },
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
     })
     .then((response) => {
       localStorage.removeItem("cart_id");
