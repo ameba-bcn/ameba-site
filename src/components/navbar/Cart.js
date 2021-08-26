@@ -94,6 +94,7 @@ function Cart(props) {
               isMobile={isMobile}
               handleCloseMenu={onClick}
               click={click}
+              setCartMenuOpen={setCartMenuOpen}
             />
           </div>
         )}
