@@ -14,6 +14,7 @@ import {
   DESTROY_CART,
   DESTROY_CART_FAIL,
   CLEAR_MESSAGE,
+  SET_MESSAGE,
 } from "./types";
 
 import CartService from "../services/cart.services";
@@ -34,11 +35,6 @@ export const addToCart = (id) => (dispatch) => {
     },
     (error) => {
       const message = error.response?.data?.detail;
-      // (error.response &&
-      //     error.response.data &&
-      //     error.response.data.message) ||
-      // error.message ||
-      // error.toString();
 
       dispatch({
         type: ADD_FAIL,
@@ -98,11 +94,6 @@ export const addMemberToCart = (id) => (dispatch) => {
     },
     (error) => {
       const message = error.response?.data?.detail;
-      // (error.response &&
-      //     error.response.data &&
-      //     error.response.data.message) ||
-      // error.message ||
-      // error.toString();
 
       dispatch({
         type: ADD_MEMBER_FAIL,
@@ -130,11 +121,6 @@ export const getCart = () => (dispatch) => {
     },
     (error) => {
       const message = error.response?.data?.detail;
-      // (error.response &&
-      //     error.response.data &&
-      //     error.response.data.message) ||
-      // error.message ||
-      // error.toString();
 
       dispatch({
         type: GET_CART_FAIL,
@@ -162,14 +148,13 @@ export const checkoutCart = () => (dispatch) => {
     },
     (error) => {
       const message = error.response?.data?.detail;
-      // (error.response &&
-      //     error.response.data &&
-      //     error.response.data.message) ||
-      // error.message ||
-      // error.toString();
-
       dispatch({
         type: CHECKOUT_FAIL,
+        payload: message,
+      });
+
+      dispatch({
+        type: SET_MESSAGE,
         payload: message,
       });
 
@@ -226,14 +211,17 @@ export const deleteCartAfterCheckout = () => (dispatch) => {
     },
     (error) => {
       const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
+        (error.response && error.response.data && error.response.data.detail) ||
+        error.detail ||
         error.toString();
 
       dispatch({
         type: DESTROY_CART_FAIL,
+        payload: message,
+      });
+
+      dispatch({
+        type: SET_MESSAGE,
         payload: message,
       });
 

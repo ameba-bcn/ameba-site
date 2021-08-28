@@ -148,6 +148,10 @@ export const updateMemberProfile = (memberData) => (dispatch) => {
         payload: response,
       });
 
+      dispatch({
+        type: CLEAR_MESSAGE,
+      });
+
       return Promise.resolve();
     },
     (error) => {
@@ -193,6 +197,10 @@ export const validateLocalToken = (token) => (dispatch) => {
       dispatch({
         type: VALIDATE_LOCAL_TOKEN,
         payload: response.data,
+      });
+
+      dispatch({
+        type: CLEAR_MESSAGE,
       });
 
       return Promise.resolve();
@@ -338,8 +346,7 @@ export const logout = () => (dispatch) => {
         type: GUEST_USER,
       });
       dispatch({
-        type: SET_MESSAGE,
-        payload: response,
+        type: CLEAR_MESSAGE,
       });
     },
     (error) => {
@@ -358,7 +365,8 @@ export const logout = () => (dispatch) => {
         type: CLEAR_USER_DATA,
       });
       dispatch({
-        type: CLEAR_MESSAGE,
+        type: SET_MESSAGE,
+        payload: message,
       });
       return Promise.reject();
     }

@@ -20,6 +20,7 @@ const mapStateToProps = (state) => {
     isLoggedIn: state.auth.isLoggedIn,
     stripe: state.cart.stripe,
     user_data: state.auth.user_data,
+    errorMessage: state.message.message,
   };
 };
 
@@ -64,14 +65,20 @@ function CheckoutMain(props) {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  const [error, setError] = React.useState(false);
   const steps = ["Revisió", "Dades de pagament"];
-  const { cart = {} } = props;
+  const { cart = {}, errorMessage } = props;
   const { total = "" } = cart;
   const isPaymentFree = total === "0.00 €";
 
   const handleNext = () => {
     if (activeStep === 0) {
-      dispatch(checkoutCart()).then(() => setActiveStep(activeStep + 1));
+      dispatch(checkoutCart())
+        .then(() => setActiveStep(activeStep + 1))
+        .catch((err) => {
+          console.log("se viene error", err);
+          setError(true);
+        });
     } else {
       setActiveStep(activeStep + 1);
     }
@@ -133,6 +140,7 @@ function CheckoutMain(props) {
                 </Button>
               )}
             </div>
+            {error && <div className="error-message">{errorMessage}</div>}
           </React.Fragment>
         </Paper>
       </main>

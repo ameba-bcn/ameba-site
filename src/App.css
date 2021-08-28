@@ -111,6 +111,10 @@ div > .nav-item {
   padding: 15% 0;
 }
 
+.error-message {
+  color: red;
+}
+
 .subtitleCoverImage {
   font-size: 40px;
   font-family: "Bebas Neue";
