@@ -12,8 +12,14 @@ export function formatPrice(price = "") {
 }
 
 export function getNFirstElementsOfArray(inArray = [], numberElements) {
-  if (inArray.length > 2) return inArray.slice(numberElements - 1);
-  return inArray;
+  let newArray = [];
+  if (inArray.length > 2) {
+    newArray = inArray.slice(-numberElements);
+    return newArray;
+  } else {
+    newArray = inArray;
+  }
+  return newArray;
 }
 
 export function formatISODateToDate(sDate) {
