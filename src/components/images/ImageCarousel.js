@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTheme } from "@material-ui/core/styles";
 import MobileStepper from "@material-ui/core/MobileStepper";
 import Button from "@material-ui/core/Button";
@@ -12,8 +12,9 @@ import { isCORSInactive } from "../../utils/utils";
 function ImageCarousel(props) {
   const { imgList = [] } = props;
   const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const [activeStep, setActiveStep] = useState(0);
   const maxSteps = imgList.length;
+  const [loaded, setLoaded] = useState(false);
 
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -26,7 +27,6 @@ function ImageCarousel(props) {
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
-
   return (
     <div className="image-carousel-root">
       <SwipeableViews
@@ -40,9 +40,11 @@ function ImageCarousel(props) {
             <div key={index} className="image-carousel-div">
               {Math.abs(activeStep - index) <= 2 ? (
                 <img
+                  alt={index}
                   className="image-carousel-img"
                   src={isCORSInactive() + step}
-                  alt={index}
+                  style={loaded ? {} : { display: "none" }}
+                  onLoad={() => setLoaded(true)}
                 />
               ) : null}
             </div>

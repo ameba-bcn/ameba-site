@@ -64,7 +64,13 @@ const Card3Grid = React.memo((props) => {
             />
           </Grid>
         ))}
-      <ActivitatDialog open={open} dataRow={eventData} onClose={handleClose} />
+      {open && (
+        <ActivitatDialog
+          open={open}
+          dataRow={eventData}
+          onClose={handleClose}
+        />
+      )}
     </Grid>
   );
 });

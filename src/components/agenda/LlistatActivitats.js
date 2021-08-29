@@ -179,7 +179,7 @@ export default function LlistatActivitats() {
           }}
         />
       )}
-      <ActivitatDialog open={open} dataRow={eventData} onClose={handleClose} />
+      {open && <ActivitatDialog open={open} dataRow={eventData} onClose={handleClose} />}
     </div>
   );
 }

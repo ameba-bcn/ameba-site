@@ -58,7 +58,7 @@ function Cart(props) {
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}
-              keepMounted
+              // keepMounted
               className="menuDropdownCart"
               disableAutoFocusItem
               open={cartMenuOpen}

@@ -194,7 +194,7 @@ const Register = (props) => {
         <span className="logTextosLink" onClick={showLogin}>
           - Ja estàs registrat? Inicia sessió -
         </span>
-        <SociDialog open={open} onClose={handleClick} />
+        {open && <SociDialog open={open} onClose={handleClick} />}
       </div>
     </div>
   );
