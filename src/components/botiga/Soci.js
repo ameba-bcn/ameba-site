@@ -47,7 +47,7 @@ export default function SociDialog(props) {
       })[0]?.variants[0] || {};
     dispatch(addMemberToCart(selectedMembershipId));
     if (user_profile === "LOGGED") {
-      dispatch(getCart()).then(() => {
+      dispatch(getCart()).then(() => { // Aqui hay que tocar
         setRedirect(true);
         dispatch(setMemberCandidate());
       });

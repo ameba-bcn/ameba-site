@@ -6,6 +6,11 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import Button from "../button/Button";
 import "./DropdownCart.css";
+import {
+  setGuestUser,
+  setLoggedUser,
+  setMemberCandidate,
+} from "../../redux/actions/profile";
 
 export default function DropdownCart(props) {
   const dispatch = useDispatch();
@@ -13,22 +18,40 @@ export default function DropdownCart(props) {
   const { item_variants = [], total = 0 } = props.cartData;
   const arrMono = [];
   const profile = useSelector((state) => state.profile);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const { user_profile = "" } = profile;
   const getQty = (arr, id) => {
     arrMono.push(id);
     return arr.filter((x) => x.id === id).length;
   };
-  const checkoutRedirect = user_profile === "LOGGED" ? "/checkout" : "/login";
+
+  const isMemberProduct = (id) => {
+    return id in [26, 27]; // Controlar que el id de cart nunca cambie. IMPORTANTE
+  };
+
+  const isMemberInCart = (item_variants) => {
+    const commonMember = item_variants.find((x) => x.id === 26);
+    const proMember = item_variants.find((x) => x.id === 27);
+    return !!commonMember || !!proMember;
+  };
+
+  const checkoutRedirect = user_profile === "GUEST" ? "/login" : "/checkout";
 
   const addItem = (id) => {
     dispatch(addToCart(id));
+    if (isMemberProduct(id)) dispatch(setMemberCandidate());
   };
 
   const substractItem = (id) => {
+    if (isMemberProduct(id)) {
+      isLoggedIn ? dispatch(setLoggedUser()) : dispatch(setGuestUser());
+    }
     dispatch(substractToCart(id));
   };
 
-  const checkoutToCart = () => {
+  const checkoutToCart = (item_variants) => {
+    if (isMemberInCart(item_variants)) dispatch(setMemberCandidate());
+    else isLoggedIn ? dispatch(setLoggedUser()) : dispatch(setGuestUser());
     setCartMenuOpen(false);
     props.handleCloseMenu();
     props.closeDropDown();
@@ -76,7 +99,7 @@ export default function DropdownCart(props) {
             <hr className="separadorCartDrop" />
             <NavLink className="menuOptions" to={checkoutRedirect}>
               <div
-                onClick={() => checkoutToCart()}
+                onClick={() => checkoutToCart(item_variants)}
                 className="buttonCheckoutCart"
               >
                 Finalitzar compra
@@ -131,7 +154,7 @@ export default function DropdownCart(props) {
                 color="primary"
                 buttonSize="boton--xxl"
                 buttonStyle="boton--primary--solid"
-                onClick={() => checkoutToCart()}
+                onClick={() => checkoutToCart(item_variants)}
               >
                 Finalitzar compra
               </Button>

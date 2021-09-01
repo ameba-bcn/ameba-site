@@ -5,10 +5,15 @@ import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
 import { isEmail } from "validator";
-import { registerMember } from "../../redux/actions/auth";
+import {
+  createMemberProfile,
+  registerMember,
+  updateMemberProfile,
+} from "../../redux/actions/auth";
 import Button from "../button/Button";
 
-const MembershipForm = () => {
+const MembershipForm = (props) => {
+  const {handleNext} = props;
   const form = useRef();
   const checkBtn = useRef();
 
@@ -21,38 +26,63 @@ const MembershipForm = () => {
   const [dni, setDni] = useState("");
   const [phone, setPhone] = useState("");
   const [successful, setSuccessful] = useState(false);
-
   const { message } = useSelector((state) => state.message);
+  const { user_profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { id = "" } = cart_data;
+  const isMember = user_profile === "MEMBER";
+  const isGuest = user_profile === "GUEST";
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // form.current.validateAll();
+    form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(
-        registerMember(
-          dni,
-          usernameReal,
-          surnameReal,
-          phone,
-          username,
-          password,
-          email,
-          id
+      if (isMember) {
+        dispatch(updateMemberProfile(dni, usernameReal, surnameReal, phone))
+          .then(() => {
+            setSuccessful(true);
+            handleNext()
+          })
+          .catch(() => {
+            setSuccessful(false);
+            setDisplayError(true);
+          });
+      } else if (!isGuest) {
+        dispatch(createMemberProfile(dni, usernameReal, surnameReal, phone))
+          .then(() => {
+            setSuccessful(true);
+            handleNext()
+          })
+          .catch(() => {
+            console.log("Algo falla", successful);
+            setSuccessful(false);
+            setDisplayError(true);
+          });
+      } else {
+        dispatch(
+          registerMember(
+            dni,
+            usernameReal,
+            surnameReal,
+            phone,
+            username,
+            password,
+            email,
+            id
+          )
         )
-      )
-        .then(() => {
-          setSuccessful(true);
-        })
-        .catch(() => {
-          console.log("Algo falla", successful);
-          setSuccessful(false);
-          setDisplayError(true);
-        });
+          .then(() => {
+            setSuccessful(true);
+          })
+          .catch(() => {
+            console.log("Algo falla", successful);
+            setSuccessful(false);
+            setDisplayError(true);
+          });
+      }
     }
   };
 
@@ -121,7 +151,12 @@ const MembershipForm = () => {
     }
   };
 
-  if (successful) return <Redirect to="/validate-email" />;
+  if (successful)
+    return isGuest ? (
+      <Redirect to="/validate-email" />
+    ) : (
+      <Redirect to="/checkout" />
+    );
 
   return (
     <div className="col-md-12">
@@ -131,17 +166,19 @@ const MembershipForm = () => {
         <Form onSubmit={handleSubmit} ref={form}>
           {!successful && (
             <div>
-              <div className="form-group">
-                <Input
-                  type="text"
-                  className="form-control logForm"
-                  name="username"
-                  placeholder="usuari"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  validations={[required, vusername]}
-                />
-              </div>
+              {isGuest && (
+                <div className="form-group">
+                  <Input
+                    type="text"
+                    className="form-control logForm"
+                    name="username"
+                    placeholder="usuari"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    validations={[required, vusername]}
+                  />
+                </div>
+              )}
 
               <div className="form-group">
                 <Input
@@ -202,31 +239,33 @@ const MembershipForm = () => {
                   validations={[required, vphone]}
                 />
               </div>
+              {isGuest && (
+                <>
+                  <div className="form-group">
+                    <Input
+                      type="text"
+                      className="form-control logForm"
+                      name="email"
+                      placeholder="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      validations={[required, validEmail]}
+                    />
+                  </div>
 
-              <div className="form-group">
-                <Input
-                  type="text"
-                  className="form-control logForm"
-                  name="email"
-                  placeholder="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  validations={[required, validEmail]}
-                />
-              </div>
-
-              <div className="form-group">
-                <Input
-                  type="password"
-                  className="form-control logForm"
-                  name="password"
-                  placeholder="contrasenya"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  validations={[required, vpassword]}
-                />
-              </div>
-
+                  <div className="form-group">
+                    <Input
+                      type="password"
+                      className="form-control logForm"
+                      name="password"
+                      placeholder="contrasenya"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      validations={[required, vpassword]}
+                    />
+                  </div>
+                </>
+              )}
               <div className="form-group">
                 <Button
                   variant="contained"
@@ -239,7 +278,7 @@ const MembershipForm = () => {
               </div>
             </div>
           )}
-
+{console.log("message", displayError , message)}
           {displayError && message && (
             <div className="form-group">
               <div
