@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 0.9.1
+- Bugfix
+
 Version 0.9
 - Fill back button
 - Error handling request responses
