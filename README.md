@@ -4,6 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 0.9
+- Fill back button
+- Error handling request responses
+- Filter and search in Agenda
+- Unmount modals avoiding last loadings
+- Hide profile view on not members logged users
+- Bugfix: Delete cart error, max 3 activities in Main...
+
 Version 0.8
 - Scroll to top on access page
 - Event List images adjustment
