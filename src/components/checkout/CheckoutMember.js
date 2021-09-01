@@ -26,6 +26,7 @@ const mapStateToProps = (state) => {
 };
 
 function CheckoutMember(props) {
+  const { errorMessage } = props;
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth);
@@ -37,8 +38,10 @@ function CheckoutMember(props) {
 
   const [activeStep, setActiveStep] = React.useState(0);
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
+  const [error, setError] = React.useState(false);
+
   const steps = [
-    "Dades personals",
+    has_member_profile ? "Revisa els productes" : "Dades personals",
     "Estat de la subscripció",
     "Dades de pagament",
   ];
@@ -49,7 +52,12 @@ function CheckoutMember(props) {
 
   const handleNext = () => {
     if (activeStep === 0) {
-      dispatch(checkoutCart()).then(() => setActiveStep(activeStep + 1));
+      dispatch(checkoutCart())
+        .then(() => setActiveStep(activeStep + 1))
+        .catch((err) => {
+          console.log("se viene error", err);
+          setError(true);
+        });
     } else {
       setActiveStep(activeStep + 1);
     }
@@ -63,7 +71,6 @@ function CheckoutMember(props) {
     switch (step) {
       case 0:
         return has_member_profile && isLoggedIn ? (
-          // <CheckoutMemberPayment />
           has_memberships ? (
             <ExtendMembership
               buttonDisabled={buttonDisabled}
@@ -73,7 +80,7 @@ function CheckoutMember(props) {
             <Review />
           )
         ) : (
-          <MembershipForm />
+          <MembershipForm handleNext={handleNext} />
         );
       case 1:
         return <SubscriptionBox date={mockedInputData} />;
@@ -91,18 +98,15 @@ function CheckoutMember(props) {
         <main className={"checkout-member-form"}>
           <Paper className={"checkout-member-form-paper"}>
             <div className="logTitle">Fes-te Soci</div>
-            {has_member_profile && (
-              <Stepper
-                activeStep={activeStep}
-                className={"member-form-stepper"}
-              >
-                {steps.map((label) => (
-                  <Step key={label}>
-                    <StepLabel>{label}</StepLabel>
-                  </Step>
-                ))}
-              </Stepper>
-            )}
+            {/* {has_member_profile && ( */}
+            <Stepper activeStep={activeStep} className={"member-form-stepper"}>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+            {/* )} */}
             <React.Fragment>
               {getStepContent(activeStep)}
               <div className={"checkout-member-form-buttons"}>
@@ -117,7 +121,8 @@ function CheckoutMember(props) {
                     Enrere
                   </Button>
                 )}
-                {activeStep < 1 && has_member_profile && (
+                {activeStep < 1 && (
+                  // && has_member_profile
                   <Button
                     variant="contained"
                     color="primary"
@@ -132,6 +137,7 @@ function CheckoutMember(props) {
             </React.Fragment>
           </Paper>
         </main>
+        {error && <div className="error-message">{errorMessage}</div>}
       </React.Fragment>
     </div>
   );

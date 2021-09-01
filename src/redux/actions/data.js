@@ -47,7 +47,7 @@ export const agendaAll = () => (dispatch) => {
     (response) => {
       dispatch({
         type: GET_ALL_AGENDA_SUCCESS,
-        payload: response.data,
+        payload: response?.data,
       });
 
       dispatch({
@@ -77,7 +77,7 @@ export const botigaAll = () => (dispatch) => {
     (response) => {
       dispatch({
         type: GET_ALL_BOTIGA_SUCCESS,
-        payload: response.data,
+        payload: response?.data,
       });
 
       dispatch({
@@ -106,7 +106,7 @@ export const getAbout = () => (dispatch) => {
   return DataService.getAbout().then((response) => {
     dispatch({
       type: GET_ABOUT,
-      payload: response.data,
+      payload: response?.data,
     });
 
     return Promise.resolve();
@@ -117,7 +117,7 @@ export const getCover = () => (dispatch) => {
   return DataService.getCover().then((response) => {
     dispatch({
       type: GET_COVER,
-      payload: response.data,
+      payload: response?.data,
     });
 
     return Promise.resolve();

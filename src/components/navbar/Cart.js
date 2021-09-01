@@ -13,21 +13,16 @@ const mapStateToProps = (state) => {
 
 function Cart(props) {
   const { cart = {}, isMobile, onClick = {}, click } = props;
-  const data = useSelector((state) => state.profile);
-  const { user_profile = "" } = data;
   const { item_variants = [], count = 0 } = cart;
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState();
   const [cartMenuOpen, setCartMenuOpen] = useState(false);
   const [isCartMobileOpen, setIsCartMobileOpen] = useState(false);
-
   if (cart && cart.item_variants?.length < 1 && cartMenuOpen) {
     setCartMenuOpen(false);
   }
 
   const handleOpenCart = (event) => {
-    if (user_profile !== "MEMBER_CANDIDATE") {
-      setAnchorEl(event.currentTarget);
-    }
+    setAnchorEl(event.currentTarget);
     if (isMobile) {
       setIsCartMobileOpen(!isCartMobileOpen);
     } else {
@@ -58,7 +53,6 @@ function Cart(props) {
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}
-              // keepMounted
               className="menuDropdownCart"
               disableAutoFocusItem
               open={cartMenuOpen}

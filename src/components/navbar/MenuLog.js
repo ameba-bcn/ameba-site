@@ -7,8 +7,10 @@ import { logout } from "../../redux/actions/auth";
 export default function MenuLog(props) {
   const { handleClick = {} } = props;
   const { user_data } = useSelector((state) => state.auth);
+  const { user_profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const [anchorEl1, setAnchorEl1] = useState(null);
+  const isMember = user_profile === "MEMBER";
 
   const handleCloseSessio = () => {
     handleClick();
@@ -44,12 +46,14 @@ export default function MenuLog(props) {
       >
         <div>
           <NavLink className="menuOptions" to="/profile">
-            <div
-              className="dropdown-profile"
-              onClick={() => handleCloseSessio()}
-            >
-              Perfil
-            </div>
+            {isMember && (
+              <div
+                className="dropdown-profile"
+                onClick={() => handleCloseSessio()}
+              >
+                Perfil
+              </div>
+            )}
           </NavLink>
           <div className="dropdown-logout" onClick={() => logoutMenu()}>
             Log out

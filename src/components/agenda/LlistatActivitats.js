@@ -76,7 +76,7 @@ export default function LlistatActivitats() {
     columns: [
       {
         title: "Descripció",
-        field: "details",
+        field: "name",
         render: (rowData) => (
           <div className="row">
             <div className="column activitatImg">
@@ -106,7 +106,7 @@ export default function LlistatActivitats() {
       },
       {
         title: "Data",
-        field: "date",
+        field: "datetime",
         render: (rowData) => (
           <div className="horaDataActivitat">
             <h1 className="mainActivitatTitle">
@@ -159,6 +159,8 @@ export default function LlistatActivitats() {
           options={{
             actionsColumnIndex: -1,
             paging: false,
+            sorting: true,
+            search: true
           }}
           onRowClick={(evt, selectedRow) => {
             fetchEvent(selectedRow);

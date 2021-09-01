@@ -56,13 +56,13 @@ axiosInstance.interceptors.response.use(
                     return axiosInstance
                         .post('/token/refresh/', { refresh: refreshToken })
                         .then((response) => {
-                            localStorage.setItem('access', response.data.access)
-                            localStorage.setItem('refresh', response.data.refresh)
+                            localStorage.setItem('access', response?.data.access)
+                            localStorage.setItem('refresh', response?.data.refresh)
 
                             axiosInstance.defaults.headers['Authorization'] =
-                                response.data.access;
+                                response?.data.access;
                             axiosInstance.headers['Authorization'] =
-                                response.data.access;
+                                response?.data.access;
 
                             return axiosInstance(originalRequest);
                         })

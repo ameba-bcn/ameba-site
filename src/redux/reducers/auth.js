@@ -20,6 +20,7 @@ import {
   GET_MEMBER_PROFILE,
   GET_MEMBER_PROFILE_FAIL,
   UPDATE_MEMBER_PROFILE,
+  CREATE_MEMBER_PROFILE,
 } from "../actions/types";
 
 const access = localStorage.getItem("access");
@@ -66,6 +67,11 @@ export default function (state = initialState, action) {
         user_member_data: payload,
       };
     case UPDATE_MEMBER_PROFILE:
+      return {
+        ...state,
+        user_member_data: payload,
+      };
+    case CREATE_MEMBER_PROFILE:
       return {
         ...state,
         user_member_data: payload,

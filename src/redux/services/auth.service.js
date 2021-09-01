@@ -29,7 +29,7 @@ const registerMember = (
       cart_id,
     })
     .then((response) => {
-      return response.data;
+      return response?.data;
     });
 };
 
@@ -39,10 +39,10 @@ const validateLocalToken = (refreshToken) => {
       refresh: refreshToken,
     })
     .then((response) => {
-      if (response.data.access) {
-        localStorage.setItem("access", response.data.access);
+      if (response?.data.access) {
+        localStorage.setItem("access", response?.data.access);
       }
-      return response.data;
+      return response?.data;
     });
 };
 
@@ -52,7 +52,7 @@ const validateEmail = (token) => {
       token: token,
     })
     .then((response) => {
-      return response.data;
+      return response?.data;
     });
 };
 
@@ -63,13 +63,13 @@ const passwordRecovery = (token, password) => {
       password: password,
     })
     .then((response) => {
-      return response.data;
+      return response?.data;
     });
 };
 
 const sendEmailPasswordRecovery = (email) => {
   return axios.get(API_URL + `recovery/?email=${email}`).then((response) => {
-    return response.data;
+    return response?.data;
   });
 };
 
@@ -80,11 +80,11 @@ const login = (email, password) => {
       password,
     })
     .then((response) => {
-      if (response.data.access) {
-        localStorage.setItem("access", response.data.access);
-        localStorage.setItem("refresh", response.data.refresh);
+      if (response?.data.access) {
+        localStorage.setItem("access", response?.data.access);
+        localStorage.setItem("refresh", response?.data.refresh);
       }
-      return response.data;
+      return response?.data;
     });
   // si hay cart en LS hacer un get localhost/api/carts/{cart-id}/ ide de carro del LS
 };
@@ -97,17 +97,11 @@ const getMemberProfile = () => {
       },
     })
     .then((response) => {
-      return response.data;
+      return response?.data;
     });
 };
 
-const updateMemberProfile = (memberData) => {
-  const {
-    address = "",
-    first_name = "",
-    last_name = "",
-    phone_number = "",
-  } = memberData;
+const updateMemberProfile = (address, first_name, last_name, phone_number) => {
   return axios
     .patch(
       API_URL + `users/current/member_profile/`,
@@ -124,7 +118,28 @@ const updateMemberProfile = (memberData) => {
       }
     )
     .then((response) => {
-      return response.data;
+      return response?.data;
+    });
+};
+
+const createMemberProfile = (address, first_name, last_name, phone_number) => {
+  return axios
+    .post(
+      API_URL + `users/current/member_profile/`,
+      {
+        address,
+        first_name,
+        last_name,
+        phone_number,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      }
+    )
+    .then((response) => {
+      return response?.data;
     });
 };
 
@@ -136,7 +151,7 @@ const getUserData = () => {
       },
     })
     .then((response) => {
-      return response.data;
+      return response?.data;
     });
 };
 
@@ -154,7 +169,7 @@ const logout = () => {
       localStorage.removeItem("cart_id");
       localStorage.removeItem("cart_items");
       localStorage.removeItem("isCurrentCart");
-      document.location.href="/";
+      document.location.href = "/";
     });
 };
 
@@ -171,4 +186,5 @@ export default {
   sendEmailPasswordRecovery,
   getMemberProfile,
   updateMemberProfile,
+  createMemberProfile
 };

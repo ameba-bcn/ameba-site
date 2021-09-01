@@ -118,7 +118,7 @@ const Register = (props) => {
     <div className="col-md-12">
       <div className="card card-container card-login">
         <div className="logTitle">registra't</div>
-        {user_profile !== "MEMBER_CANDIDATE" && (
+        {user_profile !== "LOGGED" && (
           <div className="sociLogBanner" onClick={handleClick}>
             encara no ets soci/a? Informa't aquí!
             <AddIcon className="sociLogBannerPlus" />

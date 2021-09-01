@@ -21,10 +21,12 @@ import {
   DELETE_CART,
   GUEST_USER,
   LOGGED_USER,
+  MEMBER_USER,
   CLEAR_USER_DATA,
   GET_MEMBER_PROFILE,
   GET_MEMBER_PROFILE_FAIL,
   UPDATE_MEMBER_PROFILE,
+  CREATE_MEMBER_PROFILE
 } from "./types";
 
 import AuthService from "../services/auth.service";
@@ -44,7 +46,7 @@ export const register = (registerData) => (dispatch) => {
       return Promise.resolve();
     },
     (error) => {
-      const message = error.response.data.email;
+      const message = error.response?.data.email;
       dispatch({
         type: REGISTER_FAIL,
       });
@@ -122,6 +124,10 @@ export const getMemberProfile = () => (dispatch) => {
         payload: "Register member success",
       });
 
+      dispatch({
+        type: MEMBER_USER,
+      });
+
       return Promise.resolve();
     },
     (error) => {
@@ -136,35 +142,79 @@ export const getMemberProfile = () => (dispatch) => {
   );
 };
 
-export const updateMemberProfile = (memberData) => (dispatch) => {
-  return AuthService.updateMemberProfile(memberData).then(
-    (response) => {
-      dispatch({
-        type: UPDATE_MEMBER_PROFILE,
-      });
+export const updateMemberProfile =
+  (address, first_name, last_name, phone_number) => (dispatch) => {
+    return AuthService.updateMemberProfile(
+      address,
+      first_name,
+      last_name,
+      phone_number
+    ).then(
+      (response) => {
+        dispatch({
+          type: UPDATE_MEMBER_PROFILE,
+        });
 
-      dispatch({
-        type: GET_MEMBER_PROFILE,
-        payload: response,
-      });
+        dispatch({
+          type: GET_MEMBER_PROFILE,
+          payload: response,
+        });
 
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
+        dispatch({
+          type: CLEAR_MESSAGE,
+        });
 
-      return Promise.resolve();
-    },
-    (error) => {
-      const message = error.response.data.detail;
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+        return Promise.resolve();
+      },
+      (error) => {
+        const message = error.response.data.detail;
+        dispatch({
+          type: SET_MESSAGE,
+          payload: message,
+        });
 
-      return Promise.reject();
-    }
-  );
-};
+        return Promise.reject();
+      }
+    );
+  };
+
+  export const createMemberProfile =
+  (address, first_name, last_name, phone_number) => (dispatch) => {
+    return AuthService.createMemberProfile(
+      address,
+      first_name,
+      last_name,
+      phone_number
+    ).then(
+      (response) => {
+        dispatch({
+          type: CREATE_MEMBER_PROFILE,
+        });
+
+        dispatch({
+          type: GET_MEMBER_PROFILE,
+          payload: response,
+        });
+
+        dispatch({
+          type: CLEAR_MESSAGE,
+        });
+
+        return Promise.resolve();
+      },
+      (error) => {
+        const message = error.response.data.detail;
+        dispatch({
+          type: SET_MESSAGE,
+          payload: message,
+        });
+
+        return Promise.reject();
+      }
+    );
+  };
+
+  
 
 export const validateEmail = (token) => (dispatch) => {
   return AuthService.validateEmail(token).then(
@@ -206,7 +256,7 @@ export const validateLocalToken = (token) => (dispatch) => {
       return Promise.resolve();
     },
     (error) => {
-      const message = error.response.data?.detail;
+      const message = error.response?.data?.detail;
       localStorage.removeItem("access");
       localStorage.removeItem("refresh");
       localStorage.removeItem("cart_id");
