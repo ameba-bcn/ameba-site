@@ -29,7 +29,15 @@ export default function NavbarButtonsMobile(props) {
               #SUPPORTYOURLOCALS
             </NavLink>
           </li>
-
+          <li>
+            <NavLink
+              to="/booking"
+              data-item="#SUPPORTYOURLOCALS"
+              onClick={handleClick}
+            >
+              #BOOKING
+            </NavLink>
+          </li>
           <div className="liMenuOptions logname-li">
             {!isLoggedIn ? (
               <NavLink to="/login" data-item="LOGIN" onClick={handleClick}>

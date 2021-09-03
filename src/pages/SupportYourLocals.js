@@ -1,9 +1,10 @@
 import React from "react";
-import LlistatEntrevistes from "../components/supportyourlocals/LlistatEntrevistes";
+// import LlistatEntrevistes from "../components/supportyourlocals/_LlistatEntrevistes";
 import PowerTitle from "../components/layout/PowerTitle";
 import "../components/supportyourlocals/SupportYourLocals.css";
 import LettersMove from "./../components/layout/LettersMove";
 import { useMediaQuery } from "@material-ui/core";
+import CardGrid from "../components/layout/CardGrid";
 
 export default function SupportYourLocals() {
   const isMobile = useMediaQuery("(max-width:690px)");
@@ -18,7 +19,8 @@ export default function SupportYourLocals() {
       {/* <h3 className="SupportSubtitle">
         - Conèix als professionals que donen vida a la ciutat -
       </h3> */}
-      <LlistatEntrevistes />
+      {/* <LlistatEntrevistes /> */}
+      <CardGrid/>
       <LettersMove
         className="lettersMoveDiv"
         sentence="FES-TE SOCI/A "

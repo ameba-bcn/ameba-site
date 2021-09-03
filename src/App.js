@@ -37,6 +37,7 @@ import {
 import { getCart } from "./redux/actions/cart";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import Booking from "./pages/Booking";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -79,6 +80,8 @@ function App() {
             <Route path="/botiga" component={Botiga} />
             <Route exact path="/support/:id" component={Entrevista} />
             <Route path="/support" component={SupportYourLocals} />
+            <Route exact path="/booking/:id" component={Entrevista} />
+            <Route path="/booking" component={Booking} />
             <Route path="/login" component={LogSession} />
             <Route path="/recovery" component={PasswordRecovery} />
             <Route
