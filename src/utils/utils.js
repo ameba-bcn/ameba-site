@@ -55,6 +55,6 @@ export function isMemberCheckout(input) {
 }
 
 export function isCORSInactive() {
-  if (true) return "http://localhost:8000";
+  if (false) return "http://localhost:8000";
   return "";
 }
