@@ -1,6 +1,6 @@
 import React from "react";
 import CheckoutMember from "../components/checkout/CheckoutMember";
-import LettersMove from "./../components/layout/LettersMove";
+import LettersMove from "../components/layout/LettersMove";
 
 export default function MemberRegistration() {
   return (

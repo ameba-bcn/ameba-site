@@ -21,7 +21,7 @@ export default function LogMailConfirmation(props) {
     }, [strToken]);
 
     if (localStorage.getItem("view") === "new_member" && setHasQueryParams) {
-        return <Redirect to='/membership-registration' />;
+        return <Redirect to='/checkout' />;
     }
 
     return (<>

@@ -48,7 +48,13 @@ export function isEmptyObject(obj) {
   return JSON.stringify(obj) === "{}";
 }
 
+export function isMemberCheckout(input) {
+  const commonMember = input.find((x) => x.id === 26);
+  const proMember = input.find((x) => x.id === 27);
+  return !!commonMember || !!proMember;
+}
+
 export function isCORSInactive() {
-  if (false) return "http://localhost:8000";
+  if (true) return "http://localhost:8000";
   return "";
 }

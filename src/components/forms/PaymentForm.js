@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import "./PaymentForm.css";
 import Button from "../button/Button";
+import { getMemberProfile } from "../../redux/actions/auth";
 
 const mapStateToProps = (state) => {
   return {
@@ -76,57 +77,55 @@ function PaymentForm(props) {
   };
 
   if (succeeded) {
-    dispatch(deleteCartAfterCheckout());
+    dispatch(deleteCartAfterCheckout()).then(dispatch(getMemberProfile()));
     return <Redirect to="/summary-checkout" />;
   }
 
   return (
-      <div className="payment-root">
-        <div className="payment-body">
-          <form id="payment-form" onSubmit={handleSubmit}>
-            <CardElement
-              id="card-element"
-              options={cardStyle}
-              onChange={handleChange}
-            />
+    <div className="payment-root">
+      <div className="payment-body">
+        <form id="payment-form" onSubmit={handleSubmit}>
+          <CardElement
+            id="card-element"
+            options={cardStyle}
+            onChange={handleChange}
+          />
 
-            <Button
-              variant="contained"
-              color="primary"
-              buttonSize="boton--medium"
-              buttonStyle="boton--primary--solid"
-              id="submit"
-              disabled={processing || disabled || succeeded}
-            >
-              <span id="button-text">
-                {processing ? (
-                  <div className="spinner" id="spinner"></div>
-                ) : (
-                  "Pay now"
-                )}
-              </span>{" "}
-            </Button>
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--medium"
+            buttonStyle="boton--primary--solid"
+            id="submit"
+            disabled={processing || disabled || succeeded}
+          >
+            <span id="button-text">
+              {processing ? (
+                <div className="spinner" id="spinner"></div>
+              ) : (
+                "Pay now"
+              )}
+            </span>{" "}
+          </Button>
 
-            {/* Show any error that happens when processing the payment */}
-            {error && (
-              <div className="card-error" role="alert">
-                {error}
-              </div>
-            )}
-            {/* Show a success message upon completion */}
-            <p
-              className={succeeded ? "result-message" : "result-message hidden"}
-            >
-              Pagament realitzat amb èxit, comproba la teva compra a :
-              <a href={`https://dashboard.stripe.com/test/payments`}>
-                {" "}
-                Stripe dashboard.
-              </a>{" "}
-              Refresca la pàgina per a pagar un altre cop
-            </p>
-          </form>
-        </div>
+          {/* Show any error that happens when processing the payment */}
+          {error && (
+            <div className="card-error" role="alert">
+              {error}
+            </div>
+          )}
+          {/* Show a success message upon completion */}
+          <p className={succeeded ? "result-message" : "result-message hidden"}>
+            Pagament realitzat amb èxit, comproba la teva compra a :
+            <a href={`https://dashboard.stripe.com/test/payments`}>
+              {" "}
+              Stripe dashboard.
+            </a>{" "}
+            Refresca la pàgina per a pagar un altre cop
+          </p>
+        </form>
       </div>
+    </div>
   );
 }
 

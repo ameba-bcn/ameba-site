@@ -26,7 +26,7 @@ import {
   GET_MEMBER_PROFILE,
   GET_MEMBER_PROFILE_FAIL,
   UPDATE_MEMBER_PROFILE,
-  CREATE_MEMBER_PROFILE
+  CREATE_MEMBER_PROFILE,
 } from "./types";
 
 import AuthService from "../services/auth.service";
@@ -123,10 +123,11 @@ export const getMemberProfile = () => (dispatch) => {
         type: SET_MESSAGE,
         payload: "Register member success",
       });
-
-      dispatch({
-        type: MEMBER_USER,
-      });
+      if (response?.type === "Socio") {
+        dispatch({
+          type: MEMBER_USER,
+        });
+      }
 
       return Promise.resolve();
     },
@@ -178,7 +179,7 @@ export const updateMemberProfile =
     );
   };
 
-  export const createMemberProfile =
+export const createMemberProfile =
   (address, first_name, last_name, phone_number) => (dispatch) => {
     return AuthService.createMemberProfile(
       address,
@@ -213,8 +214,6 @@ export const updateMemberProfile =
       }
     );
   };
-
-  
 
 export const validateEmail = (token) => (dispatch) => {
   return AuthService.validateEmail(token).then(

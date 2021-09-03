@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
-import { checkoutCart } from "./../../redux/actions/cart";
+import { checkoutCart } from "../../redux/actions/cart";
 import { makeStyles } from "@material-ui/core/styles";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
@@ -9,10 +9,10 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Typography from "@material-ui/core/Typography";
-import PaymentForm from "./../forms/PaymentForm";
+import PaymentForm from "../forms/PaymentForm";
 import Review from "./Review";
 import FreeCheckout from "./FreeCheckout";
-import Button from "./../button/Button";
+import Button from "../button/Button";
 
 const mapStateToProps = (state) => {
   return {

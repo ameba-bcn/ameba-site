@@ -12,10 +12,10 @@ import {
 } from "../../redux/actions/auth";
 import Button from "../button/Button";
 
-const MembershipForm = (props) => {
-  const {handleNext} = props;
+const MembershipForm = ({ handleNext }) => {
   const form = useRef();
   const checkBtn = useRef();
+  const dispatch = useDispatch();
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -28,7 +28,6 @@ const MembershipForm = (props) => {
   const [successful, setSuccessful] = useState(false);
   const { message } = useSelector((state) => state.message);
   const { user_profile } = useSelector((state) => state.profile);
-  const dispatch = useDispatch();
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { id = "" } = cart_data;
   const isMember = user_profile === "MEMBER";
@@ -44,7 +43,7 @@ const MembershipForm = (props) => {
         dispatch(updateMemberProfile(dni, usernameReal, surnameReal, phone))
           .then(() => {
             setSuccessful(true);
-            handleNext()
+            handleNext();
           })
           .catch(() => {
             setSuccessful(false);
@@ -54,7 +53,7 @@ const MembershipForm = (props) => {
         dispatch(createMemberProfile(dni, usernameReal, surnameReal, phone))
           .then(() => {
             setSuccessful(true);
-            handleNext()
+            handleNext();
           })
           .catch(() => {
             console.log("Algo falla", successful);
@@ -161,12 +160,10 @@ const MembershipForm = (props) => {
   return (
     <div className="col-md-12">
       <div className="card card-container card-login">
-        {/* <div className="logTitle">Fes-te soci</div> */}
-
-        <Form onSubmit={handleSubmit} ref={form}>
+        <Form onSubmit={handleSubmit} ref={form} id="memberForm">
           {!successful && (
             <div>
-              {isGuest && (
+              {/* {isGuest && (
                 <div className="form-group">
                   <Input
                     type="text"
@@ -178,7 +175,7 @@ const MembershipForm = (props) => {
                     validations={[required, vusername]}
                   />
                 </div>
-              )}
+              )} */}
 
               <div className="form-group">
                 <Input
@@ -239,7 +236,7 @@ const MembershipForm = (props) => {
                   validations={[required, vphone]}
                 />
               </div>
-              {isGuest && (
+              {/* {isGuest && (
                 <>
                   <div className="form-group">
                     <Input
@@ -265,7 +262,7 @@ const MembershipForm = (props) => {
                     />
                   </div>
                 </>
-              )}
+              )} */}
               <div className="form-group">
                 <Button
                   variant="contained"
@@ -273,12 +270,11 @@ const MembershipForm = (props) => {
                   buttonSize="boton--medium"
                   buttonStyle="boton--primary--solid"
                 >
-                  Registra't
+                  Guarda i continua
                 </Button>
               </div>
             </div>
           )}
-{console.log("message", displayError , message)}
           {displayError && message && (
             <div className="form-group">
               <div

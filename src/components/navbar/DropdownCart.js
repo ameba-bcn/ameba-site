@@ -17,9 +17,7 @@ export default function DropdownCart(props) {
   const { isMobile = false, setCartMenuOpen = {} } = props;
   const { item_variants = [], total = 0 } = props.cartData;
   const arrMono = [];
-  const profile = useSelector((state) => state.profile);
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const { user_profile = "" } = profile;
   const getQty = (arr, id) => {
     arrMono.push(id);
     return arr.filter((x) => x.id === id).length;
@@ -35,7 +33,7 @@ export default function DropdownCart(props) {
     return !!commonMember || !!proMember;
   };
 
-  const checkoutRedirect = user_profile === "GUEST" ? "/login" : "/checkout";
+  const checkoutRedirect = isLoggedIn ? "/checkout" : "/login";
 
   const addItem = (id) => {
     dispatch(addToCart(id));
@@ -83,7 +81,9 @@ export default function DropdownCart(props) {
                     </div>
                     <div className="colCartProduct2">
                       <div className="titleCartProduct">
-                        {el.name.split("(")[0]}
+                        {el.name
+                          .replace("ItemVariant(item='", "")
+                          .replace(`')"`, "")}
                       </div>
                       <div className="rowDetailedCart">
                         <div className="cartPriceProduct">{el.price}</div>

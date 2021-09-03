@@ -9,8 +9,8 @@ import ModalCard from "../../modals/ModalCard";
 
 export default function SociDialog(props) {
   const { onClose, selectedValue, open } = props;
-  const profile = useSelector((state) => state.profile);
-  const { user_profile = "" } = profile;
+  const { user_profile = "" } = useSelector((state) => state.profile);
+  const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [socisData, getSocisData] = useState([]);
   const [isSubscriber, setIsSubscriber] = useState(true);
@@ -47,7 +47,8 @@ export default function SociDialog(props) {
       })[0]?.variants[0] || {};
     dispatch(addMemberToCart(selectedMembershipId));
     if (user_profile === "LOGGED") {
-      dispatch(getCart()).then(() => { // Aqui hay que tocar
+      dispatch(getCart()).then(() => {
+        // Aqui hay que tocar
         setRedirect(true);
         dispatch(setMemberCandidate());
       });
@@ -58,7 +59,7 @@ export default function SociDialog(props) {
   };
 
   if (redirect) {
-    return <Redirect to="/membership-registration" />;
+    return isLoggedIn ? null : <Redirect to="/login" />;
   }
 
   return (

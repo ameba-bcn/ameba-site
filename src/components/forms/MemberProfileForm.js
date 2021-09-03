@@ -8,7 +8,11 @@ import { deepComparision } from "./../../utils/utils";
 import "./Forms.css";
 import Button from "../button/Button";
 
-const MemberProfileForm = ({ setButtonDisabled, initialValues = {} }) => {
+const MemberProfileForm = ({
+  setButtonDisabled,
+  initialValues = {},
+  handleNext,
+}) => {
   const form = useRef();
   const checkBtn = useRef();
   const [displayError, setDisplayError] = useState(false);
@@ -40,9 +44,17 @@ const MemberProfileForm = ({ setButtonDisabled, initialValues = {} }) => {
     e.preventDefault();
 
     if (checkBtn.current.context._errors.length === 0) {
-      dispatch(updateMemberProfile(currentUserData))
+      dispatch(
+        updateMemberProfile(
+          currentUserData.address,
+          currentUserData.first_name,
+          currentUserData.last_name,
+          currentUserData.phone_number
+        )
+      )
         .then(() => {
           setSuccessful(true);
+          handleNext();
         })
         .catch(() => {
           setDisplayError(true);

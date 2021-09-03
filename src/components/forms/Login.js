@@ -86,7 +86,7 @@ const Login = (props) => {
       has_subscriptions === 1 &&
       has_memberships === false
     ) {
-      return <Redirect to="/membership-registration" />;
+      return <Redirect to="/checkout" />;
     } else if (needs_checkout === false && has_article === 1) {
       return <Redirect to="/checkout" />;
     } else {

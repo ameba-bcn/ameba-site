@@ -18,8 +18,7 @@ import Contacte from "./contacte/Contacte";
 import Menu from "./components/navbar/Navbar";
 import LogSession from "./pages/LogSession";
 import Profile from "./pages/Profile";
-import Checkout from "./pages/Checkout";
-import MemberRegistration from "./pages/MemberRegistration";
+import CheckoutPage from "./pages/CheckoutPage";
 import CheckoutFinished from "./pages/landing/CheckoutFinished";
 import SubscriptionFinished from "./pages/landing/SubscriptionFinished";
 import LogMailConfirmation from "./pages/LogMailConfirmation";
@@ -81,10 +80,6 @@ function App() {
             <Route exact path="/support/:id" component={Entrevista} />
             <Route path="/support" component={SupportYourLocals} />
             <Route path="/login" component={LogSession} />
-            <Route
-              path="/membership-registration"
-              component={MemberRegistration}
-            />
             <Route path="/recovery" component={PasswordRecovery} />
             <Route
               path="/send-recovery"
@@ -93,7 +88,7 @@ function App() {
             <Route path="/validate-email" component={ValidateEmail} />
             <Route path="/activate" component={LogMailConfirmation} />
             <Route path="/profile" component={Profile} />
-            <Route path="/checkout" component={Checkout} />
+            <Route path="/checkout" component={CheckoutPage} />
             <Route path="/summary-checkout" component={CheckoutFinished} />
             <Route path="/????" component={SubscriptionFinished} />
             <Route exact path="/" component={Home} />
