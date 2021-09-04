@@ -14,13 +14,12 @@ import {
 import "./Agenda.css";
 
 export default function LlistatActivitats() {
-  const [redirect, setRedirect] = useState(false);
   const dispatch = useDispatch();
+  const [redirect, setRedirect] = useState(false);
   const [open, setOpen] = useState(false);
-  const data = useSelector((state) => state.data);
-  const { agenda = [] } = data;
-  const profile = useSelector((state) => state.profile);
-  const { user_profile = "" } = profile;
+  const { agenda = [] } = useSelector((state) => state.data);
+  const { user_profile = "" } = useSelector((state) => state.profile);
+  const noResultsMessage = <span>No s'han trobat resultats</span>;
 
   const [eventData, setEventData] = useState([
     {
@@ -75,7 +74,7 @@ export default function LlistatActivitats() {
   const [state] = React.useState({
     columns: [
       {
-        title: "Descripció",
+        title: "Activitat",
         field: "name",
         render: (rowData) => (
           <div className="row">
@@ -88,7 +87,9 @@ export default function LlistatActivitats() {
             </div>
             <div className="column activitatDescripcio">
               <h5 className="mainActivitatSubtitle">{rowData.address}</h5>
-              <h1 className="mainActivitatTitle">{rowData.name}</h1>
+              <h1 className="mainActivitatTitle">
+                {rowData.name?.toUpperCase()}
+              </h1>
             </div>
             <div className="horaDataPetit">
               <h5 className="mainActivitatSubtitle">
@@ -147,7 +148,6 @@ export default function LlistatActivitats() {
   const checkoutRedirect = user_profile === "LOGGED" ? "/checkout" : "/login";
 
   if (redirect) return <Redirect to={checkoutRedirect} />;
-
   return (
     <div className="fullTableActiv">
       {agenda.length > 0 && (
@@ -160,7 +160,7 @@ export default function LlistatActivitats() {
             actionsColumnIndex: -1,
             paging: false,
             sorting: true,
-            search: true
+            search: true,
           }}
           onRowClick={(evt, selectedRow) => {
             fetchEvent(selectedRow);
@@ -178,10 +178,19 @@ export default function LlistatActivitats() {
             header: {
               actions: "Reserva",
             },
+            body: {
+              emptyDataSourceMessage: noResultsMessage,
+            },
           }}
         />
       )}
-      {open && <ActivitatDialog open={open} dataRow={eventData} onClose={handleClose} />}
+      {open && (
+        <ActivitatDialog
+          open={open}
+          dataRow={eventData}
+          onClose={handleClose}
+        />
+      )}
     </div>
   );
 }
