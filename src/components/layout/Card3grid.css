@@ -35,7 +35,6 @@
 
   .cardMediaSort {
     top: 0;
-    width: 109px;
     height: 46px;
     font-size: 2.5em;
   }
@@ -88,7 +87,6 @@
   .Card3GridItem {
     width: 70%;
     height: auto;
-    /* margin: 26px; */
     padding-top: 25px;
   }
 
@@ -97,7 +95,6 @@
   }
 
   .cardMediaSort {
-    width: 128px;
     height: 53px;
     font-size: 3em;
   }
@@ -127,7 +124,6 @@
     width: auto;
     line-height: 0.4;
   }
-
 }
 
 @media screen and (max-width: 705px) {
@@ -161,7 +157,6 @@
 
   .cardMediaSort {
     top: 0;
-    width: 109px;
     height: 46px;
     font-size: 2.5em;
   }
@@ -192,7 +187,6 @@
 
   .cardMediaSort {
     top: 0;
-    width: 109px;
     height: 46px;
     font-size: 2.5em;
   }

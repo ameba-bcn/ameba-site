@@ -6,6 +6,7 @@ import axiosInstance from "../../axios";
 import "./Card3grid.css";
 
 const Card3Grid = React.memo((props) => {
+  const { activitats } = props;
   const [open, setOpen] = useState(false);
   const [eventData, setEventData] = useState([
     {
@@ -24,7 +25,6 @@ const Card3Grid = React.memo((props) => {
       artists: [false],
     },
   ]);
-  const { activitats } = props;
 
   const fetchEvent = (data) => {
     axiosInstance
@@ -60,7 +60,7 @@ const Card3Grid = React.memo((props) => {
               imatge={data.images[0]}
               titol={data.name}
               data={data.datetime}
-              tipo={"TALLER"}
+              tipo={data.type}
             />
           </Grid>
         ))}
