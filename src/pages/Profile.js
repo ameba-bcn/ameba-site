@@ -8,6 +8,10 @@ import { useSelector } from "react-redux";
 export default function Profile() {
   const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const auth = useSelector((state) => state.auth);
+  const { user_profile } = useSelector((state) => state.profile);
+
+  const isMember = user_profile === "MEMBER";
+
   const { isLoggedIn = false } = auth;
 
   if (!isLoggedIn) {
@@ -22,7 +26,7 @@ export default function Profile() {
           buttonDisabled={false}
           setButtonDisabled={setButtonDisabled}
         />
-        <SubscriptionBox date="" />
+        {isMember && <SubscriptionBox date="" />}
       </div>
       <LettersMove
         className="lettersMoveDiv"

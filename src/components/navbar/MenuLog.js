@@ -10,8 +10,7 @@ export default function MenuLog(props) {
   const { user_profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const [anchorEl1, setAnchorEl1] = useState(null);
-  const isMember = user_profile === "MEMBER";
-
+  const isMember = user_profile === "MEMBER" || "LOGGED";
   const handleCloseSessio = () => {
     handleClick();
     setAnchorEl1(null);

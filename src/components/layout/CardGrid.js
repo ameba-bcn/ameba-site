@@ -10,12 +10,12 @@ export default function CardGrid(props) {
   const { support = [] } = useSelector((state) => state.data);
 
   const filteredArtists =
-    isAmebaDJ && support.length
+    isAmebaDJ && !!support.length
       ? support.filter((artist) => artist.is_ameba_dj === true)
       : support;
 
   const cardGenerator =
-    filteredArtists.length &&
+    !!filteredArtists.length &&
     filteredArtists.map((data) => {
       const { id = 0, images = [], name = "" } = data;
       return (
