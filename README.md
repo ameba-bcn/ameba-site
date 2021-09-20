@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.1
+- Profile data on logged user
+- Bugfix stepper checkout on non member
+
 Version 1.0
 - New view BOOKING
 - Complete new Membership flow
