@@ -18,10 +18,19 @@ font-family: 'Montserrat', sans-serif;
   width: 100%;
   max-width: 100%;
   /* max-width: 2800px; */
+  height: 100vh;
   min-height: 100vh;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+}
+
+.logView {
+  height: 100%;
+  background-color: #eb5e3e;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 *:focus {

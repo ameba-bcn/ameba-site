@@ -11,7 +11,6 @@ import MembershipForm from "../forms/MembershipForm";
 import Review from "./Review";
 import PaymentForm from "../forms/PaymentForm";
 import { checkoutCart, getCart } from "../../redux/actions/cart";
-// import ExtendMembership from "./ExtendMembership";
 import { isEmptyObject, isMemberCheckout } from "../../utils/utils";
 import SubscriptionBox from "../profile/SubscriptionBox";
 import "./Checkout.css";
@@ -111,7 +110,6 @@ function Checkout(props) {
         throw new Error("Unknown step");
     }
   };
-
   return (
     <div>
       <React.Fragment>
@@ -145,7 +143,7 @@ function Checkout(props) {
                   )}
                 </div>
                 <div>
-                  {activeStep < steps.length - 1 && has_member_profile && (
+                  {activeStep < steps.length - 1 && (
                     <Button
                       variant="contained"
                       color="primary"
