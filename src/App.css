@@ -334,8 +334,7 @@ label {
 
 .card-login {
   border-width: 0px !important;
-  margin: 0 auto 25px;
-  /* margin-top: 50px; */
+  margin: 0 auto;
   max-width: 500px !important;
   background-color: transparent !important;
   padding: 40px 40px;
@@ -368,7 +367,8 @@ label {
   font-family: "Bebas Neue";
   font-size: 1.8rem;
   text-align: center;
-  margin-bottom: 1.8rem;
+  /* margin-bottom: 1.8rem; */
+  margin-top: 1.8rem;
   cursor: pointer;
 }
 

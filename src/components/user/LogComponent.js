@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import Login from "../forms/Login";
-import Register from "../forms/Register";
+import LoginLayout from "../forms/Login/LoginLayout";
+import RegisterLayout from "../forms/Register/RegisterLayout";
 
 export default function LogComponent() {
   const { user_profile = "" } = useSelector((state) => state.profile);
@@ -13,9 +13,9 @@ export default function LogComponent() {
   return (
     <div className="loginWall">
       {viewState === "registration" ? (
-        <Register viewState={viewState} setViewState={setViewState} />
+        <RegisterLayout viewState={viewState} setViewState={setViewState} />
       ) : (
-        <Login
+        <LoginLayout
           isCheckout={false}
           viewState={viewState}
           setViewState={setViewState}

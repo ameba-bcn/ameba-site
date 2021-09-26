@@ -7,7 +7,7 @@ import StepLabel from "@material-ui/core/StepLabel";
 import FreeCheckout from "./FreeCheckout";
 import { useDispatch, useSelector } from "react-redux";
 import { connect } from "react-redux";
-import MembershipForm from "../forms/MembershipForm";
+import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
 import Review from "./Review";
 import PaymentForm from "../forms/PaymentForm";
 import { checkoutCart, getCart } from "../../redux/actions/cart";
@@ -84,7 +84,7 @@ function Checkout(props) {
             handleNext={handleNext}
           />
         ) : (
-          <MembershipForm handleNext={handleNext} />
+          <MembershipFormLayout handleNext={handleNext} />
         );
       case 1:
         return (

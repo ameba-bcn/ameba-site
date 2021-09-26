@@ -12,7 +12,7 @@ const STYLES = [
 const SIZES = ["boton--medium", "boton--small", "boton--big", "boton--megaxxl"];
 
 export default function Button(props) {
-  const { children, type, onClick, buttonStyle, buttonSize, icon } = props;
+  const { children, type, onClick, buttonStyle, buttonSize, icon, ...rest } = props;
   const checkButtonStyle = STYLES.includes(buttonStyle)
     ? buttonStyle
     : STYLES[0];
@@ -23,6 +23,7 @@ export default function Button(props) {
       className={`boton ${checkButtonStyle} ${checkButtonSize}`}
       onClick={onClick}
       type={type}
+      {...rest}
     >
       {icon && (
         <>
