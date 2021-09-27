@@ -25,12 +25,25 @@ font-family: 'Montserrat', sans-serif;
   flex-direction: column;
 }
 
-.logView {
+.logViewRed {
   height: 100%;
   background-color: #eb5e3e;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+.logViewYellow {
+  height: 100%;
+  background-color: #fae6c5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 0;
+}
+
+.cardForm {
+  max-width: 100%;
 }
 
 *:focus {

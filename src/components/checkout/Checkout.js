@@ -42,7 +42,8 @@ function Checkout(props) {
   const [error, setError] = React.useState(false);
   const { item_variants = [] } = cart;
   const hasMembershipInCart = isMemberCheckout(item_variants); // sacar del carro cuando esté en back
-
+  const userIsEditingData =
+    buttonDisabled && activeStep === 0 && hasMembershipInCart;
   const steps = hasMembershipInCart
     ? ["Dades personals", "Estat de la subscripció", "Dades de pagament"]
     : ["Revisió", "Dades de pagament"];
@@ -77,14 +78,11 @@ function Checkout(props) {
   const getStepContentMember = (step) => {
     switch (step) {
       case 0:
-        return has_member_profile ? (
-          <MemberProfile
-            buttonDisabled={buttonDisabled}
-            setButtonDisabled={setButtonDisabled}
+        return (
+          <MembershipFormLayout
             handleNext={handleNext}
+            setButtonDisabled={setButtonDisabled}
           />
-        ) : (
-          <MembershipFormLayout handleNext={handleNext} />
         );
       case 1:
         return (
@@ -143,7 +141,7 @@ function Checkout(props) {
                   )}
                 </div>
                 <div>
-                  {activeStep < steps.length - 1 && (
+                  {activeStep < steps.length - 1 && !userIsEditingData && (
                     <Button
                       variant="contained"
                       color="primary"

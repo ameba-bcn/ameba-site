@@ -2,28 +2,28 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import MembershipForm from "./MembershipForm";
 
-const MembershipFormLayout = ({
-  handleNext,
-  buttonDisabled,
-  setButtonDisabled,
-}) => {
+const MembershipFormLayout = ({ setButtonDisabled }) => {
   const [displayError, setDisplayError] = useState(false);
+  const [successful, setSuccessful] = useState(false);
   const { message } = useSelector((state) => state.message);
-  const { user_profile } = useSelector((state) => state.profile);
 
   return (
-    <div className="col-md-12">
+    <div className="cardForm">
       <div className="card card-container card-login">
+        <div className="logTitleSmall">Dades personals</div>
         <MembershipForm
           setDisplayError={setDisplayError}
-          user_profile={user_profile}
-          handleNext={handleNext}
-          buttonDisabled={buttonDisabled}
+          setSuccessful={setSuccessful}
           setButtonDisabled={setButtonDisabled}
         />
         {displayError && message && (
           <div className="form-group">
-            <div className="alert alert-danger" role="alert">
+            <div
+              className={
+                successful ? "alert alert-success" : "alert alert-danger"
+              }
+              role="alert"
+            >
               {message}
             </div>
           </div>

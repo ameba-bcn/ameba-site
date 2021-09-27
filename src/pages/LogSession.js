@@ -4,7 +4,7 @@ import LettersMove from "./../components/layout/LettersMove";
 
 export default function LogSession() {
   return (
-    <div className="logView">
+    <div className="logViewRed">
       <LogComponent />
       <LettersMove
         className="lettersMoveDiv"

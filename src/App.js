@@ -1,12 +1,16 @@
 import React, { useState, useMemo, useEffect } from "react";
 import "./App.css";
-import { setGuestUser, setLoggedUser } from "./redux/actions/profile";
+import {
+  setGuestUser,
+  setLoggedUser,
+  setMember,
+} from "./redux/actions/profile";
 import {
   validateLocalToken,
   getUserData,
   getMemberProfile,
 } from "./redux/actions/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Home from "./pages/Home";
 import Activitats from "./pages/Activitats";
 import Botiga from "./pages/Botiga";
@@ -38,6 +42,7 @@ import { getCart } from "./redux/actions/cart";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Booking from "./pages/Booking";
+import { deepComparision } from "./utils/utils";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -46,13 +51,18 @@ function App() {
   const promise = loadStripe(
     "pk_test_51IGkXjHRg08Ncmk7fPlbb9DfTF5f7ckXBKiR4g01euLgXs04CqmgBPOQuqQfOhc6aj9mzsYE1oiQ3TFjHH9Hv3Mj00GNyG9sep"
   );
+  const auth = useSelector((state) => state.auth);
+
+  const { user_member_data = {} } = auth;
+
+  const isNewMember = deepComparision(user_member_data, {});
 
   useEffect(() => {
     if (localStorage.getItem("refresh")) {
       const refresh = localStorage.getItem("refresh");
       dispatch(validateLocalToken(refresh))
         .then(() => {
-          dispatch(setLoggedUser());
+          isNewMember ? dispatch(setLoggedUser()) : dispatch(setMember());
           dispatch(getUserData());
           dispatch(getMemberProfile());
         })

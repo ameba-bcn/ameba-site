@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   createMemberProfile,
@@ -12,14 +12,15 @@ import InputField from "../InputField/InputField";
 import { LogFormBox, LogFormError } from "../Log.style";
 import { validate } from "../MembershipForm/MembershipValidate";
 
-export default function MembershipForm(
-  { setDisplayError, handleNext, setButtonDisabled },
-  user_profile
-) {
+export default function MembershipForm({
+  setDisplayError,
+  handleNext,
+  setSuccessful,
+  setButtonDisabled,
+}) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [dataHasChanged, setDataHasChanged] = useState(false);
-  const isMember = user_profile === "MEMBER";
   const auth = useSelector((state) => state.auth);
   const { user_member_data = {} } = auth;
   const initialMemberValues = {
@@ -28,32 +29,33 @@ export default function MembershipForm(
     address: user_member_data.address,
     phone_number: user_member_data.phone_number,
   };
+  const isNewMember = deepComparision(user_member_data, {});
 
   const handleCancel = (setValues) => {
     setValues(initialMemberValues);
     setDataHasChanged(false);
+    setButtonDisabled(false);
   };
 
-  const handleBlur = (values, formik) => {
-    setDataHasChanged(!deepComparision(initialMemberValues, values));
-    // console.log(
-    //   "values",
-    //   deepComparision(initialMemberValues, values),
-    //   initialMemberValues,
-    //   formik
-    // );
+  const handleBlur = (values) => {
+    const dataHasChanged = !deepComparision(initialMemberValues, values);
+    setDataHasChanged(dataHasChanged);
+    setButtonDisabled(dataHasChanged);
   };
 
   const handleSubmit = (values) => {
     const { first_name, last_name, address, phone_number } = values;
     setLoading(true);
-    if (isMember) {
+    if (!isNewMember) {
       dispatch(
         updateMemberProfile(address, first_name, last_name, phone_number)
       )
         .then(() => {
-          handleNext();
           setLoading(false);
+          setSuccessful(true);
+          setButtonDisabled(false);
+          setDataHasChanged(false);
+          handleNext && handleNext();
         })
         .catch(() => {
           setDisplayError(true);
@@ -64,8 +66,11 @@ export default function MembershipForm(
         createMemberProfile(address, first_name, last_name, phone_number)
       )
         .then(() => {
-          handleNext();
           setLoading(false);
+          setSuccessful(true);
+          setButtonDisabled(false);
+          setDataHasChanged(false);
+          handleNext();
         })
         .catch(() => {
           setDisplayError(true);
@@ -90,6 +95,19 @@ export default function MembershipForm(
   return (
     <LogFormBox>
       <form onSubmit={formik.handleSubmit}>
+        {!isNewMember && (
+          <div>
+            <InputField
+              id="memberNum"
+              name="memberNum"
+              type="text"
+              label="Nºsoci"
+              value={user_member_data?.number}
+              valid={true}
+              disabled={true}
+            />
+          </div>
+        )}
         <div>
           <InputField
             id="first_name"
@@ -99,7 +117,7 @@ export default function MembershipForm(
             onChange={formik.handleChange}
             onBlur={(e) => {
               formik.handleBlur(e);
-              handleBlur(formik.values, formik);
+              handleBlur(formik.values);
             }}
             value={formik.values.first_name}
             valid={true}
@@ -113,9 +131,12 @@ export default function MembershipForm(
             id="last_name"
             name="last_name"
             type="text"
-            label="cognom"
+            label="cognoms"
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onBlur={(e) => {
+              formik.handleBlur(e);
+              handleBlur(formik.values);
+            }}
             value={formik.values.last_name}
             valid={true}
           />
@@ -130,7 +151,10 @@ export default function MembershipForm(
             type="text"
             label="Adreça"
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onBlur={(e) => {
+              formik.handleBlur(e);
+              handleBlur(formik.values);
+            }}
             value={formik.values.address}
             valid={true}
           />
@@ -145,7 +169,10 @@ export default function MembershipForm(
             type="text"
             label="Telèfon"
             onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            onBlur={(e) => {
+              formik.handleBlur(e);
+              handleBlur(formik.values);
+            }}
             value={formik.values.phone_number}
             valid={true}
           />

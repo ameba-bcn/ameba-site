@@ -16,7 +16,6 @@ export default function LogComponent() {
         <RegisterLayout viewState={viewState} setViewState={setViewState} />
       ) : (
         <LoginLayout
-          isCheckout={false}
           viewState={viewState}
           setViewState={setViewState}
         />

@@ -162,7 +162,8 @@ export const updateMemberProfile =
         });
 
         dispatch({
-          type: CLEAR_MESSAGE,
+          type: SET_MESSAGE,
+          payload: "Update data member success",
         });
 
         return Promise.resolve();
@@ -197,17 +198,13 @@ export const createMemberProfile =
           payload: response,
         });
 
-        dispatch({
-          type: CLEAR_MESSAGE,
-        });
-
         return Promise.resolve();
       },
       (error) => {
-        const message = error.response.data.detail;
+        const message = error.response.data;
         dispatch({
           type: SET_MESSAGE,
-          payload: message,
+          payload: JSON.stringify(message),
         });
 
         return Promise.reject();

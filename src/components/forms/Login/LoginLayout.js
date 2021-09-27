@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Redirect, NavLink } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import LoginForm from "./LoginForm";
 
 const LoginLayout = (props) => {
-  const { isCheckout, isNewMember } = props;
   const { message } = useSelector((state) => state.message);
   const cart = useSelector((state) => state.cart);
   const { cart_data = {} } = cart;
@@ -40,13 +39,10 @@ const LoginLayout = (props) => {
   if (recover) return <Redirect to="/send-recovery" />;
 
   return (
-    <div className="col-md-12">
+    <div className="cardForm">
       <div className="card card-container card-login">
-        {!isCheckout && (
-          <div className={isNewMember ? "logTitleSmall" : "logTitle"}>
-            login
-          </div>
-        )}
+        <div className="logTitle">login</div>
+
         <LoginForm
           setRedirect={setRedirect}
           setDisplayError={setDisplayError}
@@ -60,27 +56,15 @@ const LoginLayout = (props) => {
           </div>
         )}
 
-        {!isNewMember &&
-          (isCheckout ? (
-            <span
-              className="logTextosLink logTextosLinkRegistrat"
-              onClick={showRegistration}
-            >
-              <NavLink to="/login">- No tens compte? Registra't -</NavLink>
-            </span>
-          ) : (
-            <>
-              <span
-                className="logTextosLink logTextosLinkRegistrat"
-                onClick={showRegistration}
-              >
-                - Registra't -
-              </span>
-              <span className="logTextosLink" onClick={showPasswordRecover}>
-                - Recupera la teva contrassenya -
-              </span>
-            </>
-          ))}
+        <span
+          className="logTextosLink logTextosLinkRegistrat"
+          onClick={showRegistration}
+        >
+          - Registra't -
+        </span>
+        <span className="logTextosLink" onClick={showPasswordRecover}>
+          - Recupera la teva contrasenya -
+        </span>
       </div>
     </div>
   );

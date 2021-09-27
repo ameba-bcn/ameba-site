@@ -113,9 +113,9 @@ export const getCart = () => (dispatch) => {
         payload: response,
       });
 
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
+      // dispatch({
+      //   type: CLEAR_MESSAGE,
+      // });
 
       return Promise.resolve();
     },

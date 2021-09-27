@@ -1,5 +1,4 @@
 import React from "react";
-// import LlistatEntrevistes from "../components/supportyourlocals/_LlistatEntrevistes";
 import PowerTitle from "../components/layout/PowerTitle";
 import "../components/supportyourlocals/SupportYourLocals.css";
 import LettersMove from "./../components/layout/LettersMove";
@@ -16,10 +15,6 @@ export default function SupportYourLocals() {
         className="SupportTitle"
         subtitle="- Conèix als professionals que donen vida a la ciutat -"
       />
-      {/* <h3 className="SupportSubtitle">
-        - Conèix als professionals que donen vida a la ciutat -
-      </h3> */}
-      {/* <LlistatEntrevistes /> */}
       <CardGrid/>
       <LettersMove
         className="lettersMoveDiv"

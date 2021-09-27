@@ -24,7 +24,7 @@ const RegisterLayout = (props) => {
   if (redirect) return <Redirect to="/validate-email" />;
 
   return (
-    <div className="col-md-12">
+    <div className="cardForm">
       <div className="card card-container card-login">
         <div className="logTitle">registra't</div>
         {user_profile !== "LOGGED" && (
