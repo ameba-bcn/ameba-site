@@ -37,7 +37,7 @@ export default function NewsletterForm({ setIsSubmitted }) {
     <form className="contactNews" onSubmit={formik.handleSubmit}>
       <div className="form-group-input">
         <InputField
-          id="email"
+          id="emailNewletter"
           name="email"
           type="text"
           placeholder="email"
@@ -45,7 +45,7 @@ export default function NewsletterForm({ setIsSubmitted }) {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
-          valid={true}
+          valid={1}
           unstyled={true}
         />
         {formik.touched.email && formik.errors.email ? (

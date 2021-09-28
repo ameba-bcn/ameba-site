@@ -33,7 +33,7 @@ export default function MembershipFormReadOnly() {
             </div>
             <div>
               <InputField
-                id="email"
+                id="emailMemberReadOnly"
                 name="email"
                 type="email"
                 label="email"

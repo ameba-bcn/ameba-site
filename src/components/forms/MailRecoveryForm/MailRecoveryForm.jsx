@@ -37,15 +37,15 @@ export default function MailRecoveryForm({ setIsSubmitted }) {
     <form onSubmit={formik.handleSubmit}>
       <div className="form-group">
         <InputField
-          id="email"
+          id="emailMailRecover"
           name="email"
-          type="text"
+          type="email"
           placeholder="email"
           className="form-control logForm logFormEmailPasswordRecovery"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
-          valid={true}
+          valid={1}
           unstyled={true}
         />
         {formik.touched.email && formik.errors.email ? (

@@ -45,7 +45,7 @@ export default function PasswordRecoveryForm({ setIsSubmitted }, strToken) {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.password}
-          valid={true}
+          valid={1}
           unstyled={true}
         />
         {formik.touched.password && formik.errors.password ? (

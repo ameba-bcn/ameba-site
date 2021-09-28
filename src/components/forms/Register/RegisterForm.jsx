@@ -63,7 +63,7 @@ export default function RegisterForm({ setRedirect, setDisplayError }) {
         </div>
         <div>
           <InputField
-            id="email"
+            id="emailRegister"
             name="email"
             type="text"
             placeholder="email"

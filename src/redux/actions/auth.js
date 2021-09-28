@@ -231,6 +231,10 @@ export const validateEmail = (token) => (dispatch) => {
         type: VALIDATE_FAIL,
         payload: message,
       });
+      dispatch({
+        type: SET_MESSAGE,
+        payload: JSON.stringify(message),
+      });
 
       return Promise.reject();
     }
@@ -243,10 +247,6 @@ export const validateLocalToken = (token) => (dispatch) => {
       dispatch({
         type: VALIDATE_LOCAL_TOKEN,
         payload: response.data,
-      });
-
-      dispatch({
-        type: CLEAR_MESSAGE,
       });
 
       return Promise.resolve();

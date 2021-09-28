@@ -1,273 +1,273 @@
+.top-section {
+  display: flex;
+  flex-direction: column;
+}
+
 .top-section-gral {
-    height: auto;
-    width: 100%;
-    background-color: #FAE6C5;
+  height: auto;
+  width: 100%;
+  background-color: #fae6c5;
 }
 
 .entrevista-gral {
-    height: auto;
-    width: 100%;
-    background-color: #FFED00;
-    padding-top: 20px;
+  height: auto;
+  width: 100%;
+  background-color: #ffed00;
+  padding-top: 20px;
 }
 
 .media-gral {
-    height: auto;
-    width: 100%;
-    background-color: #F2C571;
+  height: auto;
+  width: 100%;
+  background-color: #f2c571;
 }
 
 .activitats-gral {
-    height: auto;
-    width: 100%;
-    background-color: #EB5E3E;
+  height: auto;
+  width: 100%;
+  background-color: #eb5e3e;
 }
 
 .top-section_entr {
-    margin-top: 50px;
+  margin-top: 50px;
 }
 
 .ts-title {
-    font-size: 130px;
-    font-family: 'Bebas Neue';
-    font-weight: 800;
-    line-height: 1em;
+  font-size: 130px;
+  font-family: "Bebas Neue";
+  font-weight: 800;
+  line-height: 1em;
 }
 
 .ts-breadcrumbs {
-    font-family: 'Bebas Neue';
-    font-size: 34px;
-    font-weight: 500;
-    text-transform: uppercase;
+  font-family: "Bebas Neue";
+  font-size: 34px;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 .ts-breadcrumbs span {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .ts-breadcrumbs span:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .ts-tags {
-
-    font-family: 'Bebas Neue';
-    font-size: 26px;
-    font-weight: 500;
-    text-transform: uppercase;
-
+  font-family: "Bebas Neue";
+  font-size: 26px;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 .tags-e {
-    display: inline-block;
-    background-color: #1D1D1B;
-    color: #FAE6C5;
-    line-height: 1em;
-    padding: 5px 10px 3px 10px;
-    margin: 2px 4px 20px 4px;
+  display: inline-block;
+  background-color: #1d1d1b;
+  color: #fae6c5;
+  line-height: 1em;
+  padding: 5px 10px 3px 10px;
+  margin: 2px 4px 20px 4px;
 }
 
 .menu-entrevista {
-    width: 90%;
-    background-color: #1D1D1B;
-    margin: 0 auto;
-    text-align: left;
-    margin-top: 20px;
+  width: 90%;
+  background-color: #1d1d1b;
+  margin: 0 auto;
+  text-align: left;
+  margin-top: 20px;
 }
 
 .menu-e {
-    display: inline-block;
-    font-family: 'Bebas Neue';
-    font-size: 36px;
-    font-weight: 500;
-    text-transform: uppercase;
-    margin: 10px 2px 10px 12px;
-    padding: 8px 12px 2px 12px;
-    line-height: 1em;
-    cursor: pointer;
+  display: inline-block;
+  font-family: "Bebas Neue";
+  font-size: 36px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin: 10px 2px 10px 12px;
+  padding: 8px 12px 2px 12px;
+  line-height: 1em;
+  cursor: pointer;
 }
 
 .menu-e:hover {
-    background-color: whitesmoke;
+  background-color: whitesmoke;
 }
 
 .menu-bio {
-    background-color: #FAE6C5;
+  background-color: #fae6c5;
 }
 
 .menu-entrev {
-    background-color: #FFED00;
+  background-color: #ffed00;
 }
 
 .menu-media {
-    background-color: #F2C571;
+  background-color: #f2c571;
 }
 
 .menu-activit {
-    background-color: #EB5E3E;
+  background-color: #eb5e3e;
 }
 
 .bio-section {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
-    align-items: stretch;
-    align-content: center;
-    width: 90%;
-    padding-top: 20px;
-    margin: 0 auto;
-    padding-bottom: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: stretch;
+  align-content: center;
+  width: 90%;
+  padding-top: 20px;
+  margin: 0 auto;
+  padding-bottom: 30px;
 }
 
 .bio-highlights,
 .bio-text,
 .bio-img {
-    width: 30%;
-    display: block;
-    margin: 0px 20px 0px 20px;
+  width: 30%;
+  display: block;
+  margin: 0px 20px 0px 20px;
 }
 
 .bio-text {
-    text-align: left;
-    width: 25%;
-    font-size: 16px;
-    font-family: 'Montserrat', sans-serif;
+  text-align: left;
+  width: 25%;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
 }
 
 .bio-highlights {
-    padding-top: 30px;
+  padding-top: 30px;
 }
 
 .bio-data {
-    font-size: 40px;
-    font-family: 'Bebas Neue';
-    font-weight: 100;
-    text-align: left;
-    padding-left: 40px;
-    line-height: 1em;
-    padding-top: 20px;
-
+  font-size: 40px;
+  font-family: "Bebas Neue";
+  font-weight: 100;
+  text-align: left;
+  padding-left: 40px;
+  line-height: 1em;
+  padding-top: 20px;
 }
 
-.bio-data>span {
-    font-weight: 700;
+.bio-data > span {
+  font-weight: 700;
 }
 
 .bio-img-src {
-    width: 100%;
-    height: auto;
-    max-width: 550px;
-    margin: 20px 0px 20px 0px;
+  width: 100%;
+  height: auto;
+  max-width: 550px;
+  margin: 20px 0px 20px 0px;
 }
 
 .entrevista-columnes {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
-    align-items: stretch;
-    align-content: center;
-    width: 90%;
-    padding-top: 30px;
-    margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: stretch;
+  align-content: center;
+  width: 90%;
+  padding-top: 30px;
+  margin: 0 auto;
 }
 
 .col1-preguntes,
 .col2-preguntes {
-    max-width: 45%;
+  max-width: 45%;
 }
 
 .pregunta {
-    font-size: 40px;
-    font-family: 'Bebas Neue';
-    font-weight: 100;
-    text-align: left;
-    position: relative;
-    min-width: 100%;
-    padding-right: 80px;
-    overflow: hidden;
-    height: auto;
+  font-size: 40px;
+  font-family: "Bebas Neue";
+  font-weight: 100;
+  text-align: left;
+  position: relative;
+  min-width: 100%;
+  padding-right: 80px;
+  overflow: hidden;
+  height: auto;
 }
 
 .resposta {
-    font-size: 20px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-    animation: fade 1s 1;
-    -webkit-animation: fade 1s 1;
-    max-width: 100%;
-
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  animation: fade 1s 1;
+  -webkit-animation: fade 1s 1;
+  max-width: 100%;
 }
 
 @keyframes fade {
-    0% {
-        opacity: 0
-    }
+  0% {
+    opacity: 0;
+  }
 
-    100% {
-        opacity: 1
-    }
+  100% {
+    opacity: 1;
+  }
 }
 
 @-webkit-keyframes fade {
-    0% {
-        opacity: 0
-    }
+  0% {
+    opacity: 0;
+  }
 
-    100% {
-        opacity: 1
-    }
+  100% {
+    opacity: 1;
+  }
 }
 
 .pregunta svg {
-    cursor: pointer;
-    display: inline-block;
-    position: absolute;
-    top: 7px;
-    right: 0px;
-    width: 40px;
-    height: auto;
-    ;
+  cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  top: 7px;
+  right: 0px;
+  width: 40px;
+  height: auto;
 }
 
 .pregunta hr {
-    display: inline-block;
-    width: 110%;
+  display: inline-block;
+  width: 110%;
 }
 
 .plus-symbol {
-    color: #FFED00;
-    background-color: #1D1D1B;
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    margin: 1px;
+  color: #ffed00;
+  background-color: #1d1d1b;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin: 1px;
 }
 
 @media screen and (max-width: 820px) {
-    .entrevista-columnes {
-        align-content: flex-start;
-        justify-content: flex-start;
-    }
+  .entrevista-columnes {
+    align-content: flex-start;
+    justify-content: flex-start;
+  }
 }
 
 @media screen and (max-width: 820px) {
-    .ts-title {
-        font-size: 80px;
-    }
+  .ts-title {
+    font-size: 80px;
+  }
 }
 
 @media screen and (max-width: 1345px) {
-    .bio-highlights {
-        display: none;
-    }
+  .bio-highlights {
+    display: none;
+  }
 
-    .bio-img {
-        width: 80%;
-        /* margin: 0px 20px 0px 20px; */
-    }
+  .bio-img {
+    width: 80%;
+    /* margin: 0px 20px 0px 20px; */
+  }
 
-    .bio-text {
-        width: 80%;
-        max-width: 650px;
-    }
+  .bio-text {
+    width: 80%;
+    max-width: 650px;
+  }
 }

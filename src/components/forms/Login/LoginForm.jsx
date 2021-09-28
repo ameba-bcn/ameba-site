@@ -49,7 +49,7 @@ export default function LoginForm({ setRedirect, setDisplayError }) {
       <form onSubmit={formik.handleSubmit}>
         <div>
           <InputField
-            id="email"
+            id="emailLogin"
             name="email"
             type="text"
             placeholder="email"

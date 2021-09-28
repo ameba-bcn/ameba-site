@@ -64,7 +64,7 @@ export default function Entrevista(props) {
   }, [urlID]);
 
   return (
-    <>
+    <div className="top-section">
       <div className="top-section-gral">
         <div className="top-section_entr">
           <div className="ts-title">{interview.title}</div>
@@ -270,6 +270,6 @@ export default function Entrevista(props) {
         sentence={"l'associació de música electrònica de barcelona"}
         color={"#FAE6C5"}
       />
-    </>
+    </div>
   );
 }

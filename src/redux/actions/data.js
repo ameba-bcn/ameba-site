@@ -20,10 +20,6 @@ export const supportYourLocalsAll = () => (dispatch) => {
         payload: response?.data,
       });
 
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
-
       return Promise.resolve();
     },
     (error) => {
@@ -50,10 +46,6 @@ export const agendaAll = () => (dispatch) => {
         payload: response?.data,
       });
 
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
-
       return Promise.resolve();
     },
     (error) => {
@@ -78,10 +70,6 @@ export const botigaAll = () => (dispatch) => {
       dispatch({
         type: GET_ALL_BOTIGA_SUCCESS,
         payload: response?.data,
-      });
-
-      dispatch({
-        type: CLEAR_MESSAGE,
       });
 
       return Promise.resolve();
