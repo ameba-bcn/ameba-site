@@ -17,7 +17,6 @@ import "./Checkout.css";
 import Button from "../button/Button";
 import { getMemberProfile } from "../../redux/actions/auth";
 import { Redirect } from "react-router-dom";
-import MemberProfile from "../profile/MemberProfile";
 
 const mapStateToProps = (state) => {
   return {
@@ -27,12 +26,10 @@ const mapStateToProps = (state) => {
 };
 
 function Checkout(props) {
-  const { errorMessage } = props;
   const dispatch = useDispatch();
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { isLoggedIn = false } = useSelector((state) => state.auth);
-  const { state = {} } = cart_data;
-  const { has_member_profile = false } = state || {};
+  const { message } = useSelector((state) => state.message);
   const mockedInputData = { dataRenovacio: "2021-07-16T12:30:00.000Z" };
   const { cart = {} } = props;
   const { total = "" } = cart;
@@ -59,11 +56,16 @@ function Checkout(props) {
   if (!item_variants.length) return <Redirect to="/" />;
 
   const handleNext = () => {
-    if (activeStep === 0) {
+    setError(false);
+    if (
+      (hasMembershipInCart && activeStep === 1) ||
+      (!hasMembershipInCart && activeStep === 0)
+    ) {
       dispatch(checkoutCart())
-        .then(() => setActiveStep(activeStep + 1))
+        .then(() => {
+          setActiveStep(activeStep + 1);
+        })
         .catch((err) => {
-          console.log("se viene error", err);
           setError(true);
         });
     } else {
@@ -73,6 +75,7 @@ function Checkout(props) {
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
+    setError(false);
   };
 
   const getStepContentMember = (step) => {
@@ -87,7 +90,7 @@ function Checkout(props) {
       case 1:
         return (
           <>
-            <Review />
+            <Review setError={setError}/>
             <SubscriptionBox date={mockedInputData} />
           </>
         );
@@ -101,7 +104,7 @@ function Checkout(props) {
   const getStepContentProduct = (step) => {
     switch (step) {
       case 0:
-        return <Review />;
+        return <Review setError={setError}/>;
       case 1:
         return isPaymentFree ? <FreeCheckout /> : <PaymentForm />;
       default:
@@ -109,57 +112,61 @@ function Checkout(props) {
     }
   };
   return (
-    <div>
-      <React.Fragment>
-        <CssBaseline />
-        <main className={"checkout-member-form"}>
-          <Paper className={"checkout-member-form-paper"}>
-            <div className="logTitle">Fes-te Soci</div>
-            <Stepper activeStep={activeStep} className={"member-form-stepper"}>
-              {steps.map((label) => (
-                <Step key={label}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
-            <React.Fragment>
-              {hasMembershipInCart
-                ? getStepContentMember(activeStep)
-                : getStepContentProduct(activeStep)}
-              <div className={"checkout-member-form-buttons"}>
-                <div>
-                  {activeStep !== 0 && (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      buttonSize="boton--medium"
-                      buttonStyle="boton--primary--solid"
-                      onClick={handleBack}
-                    >
-                      Enrere
-                    </Button>
-                  )}
-                </div>
-                <div>
-                  {activeStep < steps.length - 1 && !userIsEditingData && (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      buttonSize="boton--medium"
-                      buttonStyle="boton--primary--solid"
-                      onClick={handleNext}
-                    >
-                      Següent
-                    </Button>
-                  )}
+    <React.Fragment>
+      <CssBaseline />
+      <main className={"checkout-member-form"}>
+        <Paper className={"checkout-member-form-paper"}>
+          <div className="logTitle">Fes-te Soci</div>
+          <Stepper activeStep={activeStep} className={"member-form-stepper"}>
+            {steps.map((label) => (
+              <Step key={label}>
+                <StepLabel>{label}</StepLabel>
+              </Step>
+            ))}
+          </Stepper>
+          <React.Fragment>
+            {hasMembershipInCart
+              ? getStepContentMember(activeStep)
+              : getStepContentProduct(activeStep)}
+            {error && (
+              <div className="checkout-error">
+                <div className={"alert alert-danger"} role="alert">
+                  {message}
                 </div>
               </div>
-            </React.Fragment>
-          </Paper>
-        </main>
-        {error && <div className="error-message">{errorMessage}</div>}
-      </React.Fragment>
-    </div>
+            )}
+            <div className={"checkout-member-form-buttons"}>
+              <div>
+                {activeStep !== 0 && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    buttonSize="boton--medium"
+                    buttonStyle="boton--primary--solid"
+                    onClick={handleBack}
+                  >
+                    Enrere
+                  </Button>
+                )}
+              </div>
+              <div>
+                {activeStep < steps.length - 1 && !userIsEditingData && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    buttonSize="boton--medium"
+                    buttonStyle="boton--primary--solid"
+                    onClick={handleNext}
+                  >
+                    Següent
+                  </Button>
+                )}
+              </div>
+            </div>
+          </React.Fragment>
+        </Paper>
+      </main>
+    </React.Fragment>
   );
 }
 

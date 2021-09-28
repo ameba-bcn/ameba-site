@@ -42,6 +42,14 @@ font-family: 'Montserrat', sans-serif;
   z-index: 0;
 }
 
+.checkoutViewYellow {
+  background-color: #fae6c5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 0;
+}
+
 .cardForm {
   max-width: 100%;
 }

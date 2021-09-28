@@ -219,9 +219,9 @@ export const validateEmail = (token) => (dispatch) => {
         type: VALIDATE_SUCCESS,
       });
 
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
+      // dispatch({
+      //   type: CLEAR_MESSAGE,
+      // });
 
       return Promise.resolve();
     },
@@ -277,9 +277,9 @@ export const login = (username, password) => (dispatch) => {
         type: LOGGED_USER,
       });
 
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
+      // dispatch({
+      //   type: CLEAR_MESSAGE,
+      // });
       return Promise.resolve();
     },
     (error) => {
@@ -308,9 +308,9 @@ export const getUserData = () => (dispatch) => {
         payload: { user: data },
       });
 
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
+      // dispatch({
+      //   type: CLEAR_MESSAGE,
+      // });
 
       return Promise.resolve();
     },
@@ -337,9 +337,9 @@ export const passwordRecovery = (token, password) => (dispatch) => {
         type: PASSWORD_RECOVERY_SUCCESS,
       });
 
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
+      // dispatch({
+      //   type: CLEAR_MESSAGE,
+      // });
 
       return Promise.resolve();
     },
@@ -361,9 +361,9 @@ export const sendEmailPasswordRecovery = (email) => (dispatch) => {
       dispatch({
         type: SEND_EMAIL_PASSWORD_RECOVERY_SUCCESS,
       });
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
+      // dispatch({
+      //   type: CLEAR_MESSAGE,
+      // });
       return Promise.resolve();
     },
     (error) => {
@@ -391,9 +391,9 @@ export const logout = () => (dispatch) => {
       dispatch({
         type: GUEST_USER,
       });
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
+      // dispatch({
+      //   type: CLEAR_MESSAGE,
+      // });
     },
     (error) => {
       const message = error.response.data;

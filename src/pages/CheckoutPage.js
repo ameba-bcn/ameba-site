@@ -4,7 +4,7 @@ import LettersMove from "../components/layout/LettersMove";
 
 export default function CheckoutPage() {
   return (
-    <div>
+    <div className="checkoutViewYellow">
       <Checkout />
       <LettersMove
         className="lettersMoveDiv"

@@ -27,10 +27,6 @@ export const addToCart = (id) => (dispatch) => {
         payload: response,
       });
 
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
-
       return Promise.resolve();
     },
     (error) => {
@@ -52,10 +48,6 @@ export const substractToCart = (id) => (dispatch) => {
       dispatch({
         type: SUBS_TO_CART,
         payload: response,
-      });
-
-      dispatch({
-        type: CLEAR_MESSAGE,
       });
 
       return Promise.resolve();
@@ -84,10 +76,6 @@ export const addMemberToCart = (id) => (dispatch) => {
       dispatch({
         type: ADD_MEMBER_TO_CART,
         payload: response,
-      });
-
-      dispatch({
-        type: CLEAR_MESSAGE,
       });
 
       return Promise.resolve();
@@ -140,9 +128,6 @@ export const checkoutCart = () => (dispatch) => {
         payload: response,
       });
 
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
 
       return Promise.resolve();
     },
@@ -169,10 +154,6 @@ export const deleteFullCart = () => (dispatch) => {
       dispatch({
         type: DELETE_CART,
         payload: response,
-      });
-
-      dispatch({
-        type: CLEAR_MESSAGE,
       });
 
       return Promise.resolve();

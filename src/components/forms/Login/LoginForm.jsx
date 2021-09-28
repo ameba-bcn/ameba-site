@@ -51,7 +51,7 @@ export default function LoginForm({ setRedirect, setDisplayError }) {
           <InputField
             id="emailLogin"
             name="email"
-            type="text"
+            type="email"
             placeholder="email"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}

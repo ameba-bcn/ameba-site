@@ -22,14 +22,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Review() {
+function Review({ setError }) {
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { item_variants = [], total } = cart_data;
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const substractItem = (id) => {
-    dispatch(substractToCart(id));
+    dispatch(substractToCart(id)).then(setError(false)).catch(setError(true));
   };
 
   return (
