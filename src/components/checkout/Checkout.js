@@ -91,7 +91,7 @@ function Checkout(props) {
         return (
           <>
             <Review setError={setError}/>
-            <SubscriptionBox date={mockedInputData} />
+            <SubscriptionBox date={mockedInputData} isCheckout={true}/>
           </>
         );
       case 2:

@@ -34,13 +34,13 @@ export default function MembershipForm({
   const handleCancel = (setValues) => {
     setValues(initialMemberValues);
     setDataHasChanged(false);
-    setButtonDisabled(false);
+    setButtonDisabled && setButtonDisabled(false);
   };
 
   const handleBlur = (values) => {
     const dataHasChanged = !deepComparision(initialMemberValues, values);
     setDataHasChanged(dataHasChanged);
-    setButtonDisabled(dataHasChanged);
+    setButtonDisabled && setButtonDisabled(dataHasChanged);
   };
 
   const handleSubmit = (values) => {
@@ -53,7 +53,7 @@ export default function MembershipForm({
         .then(() => {
           setLoading(false);
           setSuccessful(true);
-          setButtonDisabled(false);
+          setButtonDisabled && setButtonDisabled(false);
           setDataHasChanged(false);
           handleNext && handleNext();
         })
@@ -68,7 +68,7 @@ export default function MembershipForm({
         .then(() => {
           setLoading(false);
           setSuccessful(true);
-          setButtonDisabled(false);
+          setButtonDisabled && setButtonDisabled(false);
           setDataHasChanged(false);
           handleNext();
         })

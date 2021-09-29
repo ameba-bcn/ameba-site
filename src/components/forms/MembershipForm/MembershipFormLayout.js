@@ -9,7 +9,7 @@ const MembershipFormLayout = ({ setButtonDisabled }) => {
 
   return (
     <div className="cardForm">
-      <div className="card card-container card-login">
+      <div className="card card-container card-member">
         <div className="logTitleSmall">Dades personals</div>
         <MembershipForm
           setDisplayError={setDisplayError}
