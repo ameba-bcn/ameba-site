@@ -81,9 +81,7 @@ export default function DropdownCart(props) {
                     </div>
                     <div className="colCartProduct2">
                       <div className="titleCartProduct">
-                        {el.name
-                          .replace("ItemVariant(item='", "")
-                          .replace(`')"`, "")}
+                        {el.name}
                       </div>
                       <div className="rowDetailedCart">
                         <div className="cartPriceProduct">{el.price}</div>

@@ -41,9 +41,7 @@ function Review({ setError }) {
         {item_variants?.map((item, i) => (
           <ListItem className={classes.listItem} key={i}>
             <ListItemText
-              primary={item.name
-                .replace("ItemVariant(item='", "")
-                .replace(`')"`, "")}
+              primary={item.name}
               secondary={item.discount_value}
             />
             <Typography variant="body2">{item.price}</Typography>
