@@ -1,23 +1,17 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import LettersMove from "../../components/layout/LettersMove";
 
-const mapStateToProps = (state) => {
-  return {
-    errorMessage: state.message.message,
-  };
-};
-
-function CheckoutFinished(props) {
-  const { errorMessage } = props;
+function CheckoutFinished() {
+  const { message } = useSelector((state) => state.message);
   return (
     <>
       <div className="full-height-msg">
-        {errorMessage ? (
+        {message ? (
           <div className="single-msg">
             UPS!
             <br />
-            {errorMessage}
+            {message}
             <br />
             Possat en contacte amb info@ameba.cat indicant l'usuari/email
             empreats.
@@ -39,4 +33,4 @@ function CheckoutFinished(props) {
   );
 }
 
-export default connect(mapStateToProps)(CheckoutFinished);
+export default CheckoutFinished;

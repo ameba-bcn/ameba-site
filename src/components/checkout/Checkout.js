@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
 import Stepper from "@material-ui/core/Stepper";
@@ -6,7 +6,6 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import FreeCheckout from "./FreeCheckout";
 import { useDispatch, useSelector } from "react-redux";
-import { connect } from "react-redux";
 import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
 import Review from "./Review";
 import PaymentForm from "../forms/PaymentForm";
@@ -17,27 +16,20 @@ import "./Checkout.css";
 import Button from "../button/Button";
 import { getMemberProfile } from "../../redux/actions/auth";
 import { Redirect } from "react-router-dom";
+import ErrorBox from "../forms/error/ErrorBox";
+import { clearMessage } from "../../redux/actions/message";
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart.cart_data,
-    isLoggedIn: state.auth.isLoggedIn,
-  };
-};
-
-function Checkout(props) {
+function Checkout() {
   const dispatch = useDispatch();
-  const { cart_data = {} } = useSelector((state) => state.cart);
+  const { cart_data = {}, checkout = {} } = useSelector((state) => state.cart);
   const { isLoggedIn = false } = useSelector((state) => state.auth);
   const { message } = useSelector((state) => state.message);
   const mockedInputData = { dataRenovacio: "2021-07-16T12:30:00.000Z" };
-  const { cart = {} } = props;
-  const { total = "" } = cart;
-  const isPaymentFree = total === "0.00 €";
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [buttonDisabled, setButtonDisabled] = React.useState(false);
-  const [error, setError] = React.useState(false);
-  const { item_variants = [] } = cart;
+  const { total = "", item_variants = [] } = cart_data;
+  const isPaymentFree = checkout ? checkout.amount === 0 : total === "0.00 €";
+  const [activeStep, setActiveStep] = useState(0);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [error, setError] = useState(false);
   const hasMembershipInCart = isMemberCheckout(item_variants); // sacar del carro cuando esté en back
   const userIsEditingData =
     buttonDisabled && activeStep === 0 && hasMembershipInCart;
@@ -64,8 +56,10 @@ function Checkout(props) {
       dispatch(checkoutCart())
         .then(() => {
           setActiveStep(activeStep + 1);
+          setError(false);
+          dispatch(clearMessage());
         })
-        .catch((err) => {
+        .catch(() => {
           setError(true);
         });
     } else {
@@ -90,12 +84,12 @@ function Checkout(props) {
       case 1:
         return (
           <>
-            <Review setError={setError}/>
-            <SubscriptionBox date={mockedInputData} isCheckout={true}/>
+            <Review />
+            <SubscriptionBox date={mockedInputData} isCheckout={true} />
           </>
         );
       case 2:
-        return <PaymentForm />;
+        return isPaymentFree ? <FreeCheckout /> : <PaymentForm />;
       default:
         throw new Error("Unknown step");
     }
@@ -104,7 +98,7 @@ function Checkout(props) {
   const getStepContentProduct = (step) => {
     switch (step) {
       case 0:
-        return <Review setError={setError}/>;
+        return <Review />;
       case 1:
         return isPaymentFree ? <FreeCheckout /> : <PaymentForm />;
       default:
@@ -128,13 +122,7 @@ function Checkout(props) {
             {hasMembershipInCart
               ? getStepContentMember(activeStep)
               : getStepContentProduct(activeStep)}
-            {error && (
-              <div className="checkout-error">
-                <div className={"alert alert-danger"} role="alert">
-                  {message}
-                </div>
-              </div>
-            )}
+            {!!message.length && <ErrorBox isError={error} />}
             <div className={"checkout-member-form-buttons"}>
               <div>
                 {activeStep !== 0 && (
@@ -170,4 +158,4 @@ function Checkout(props) {
   );
 }
 
-export default connect(mapStateToProps)(Checkout);
+export default Checkout;
