@@ -4,9 +4,9 @@ import { Redirect } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import SociDialog from "../../botiga/Soci";
 import RegisterForm from "./RegisterForm";
+import ErrorBox from "../error/ErrorBox";
 
 const RegisterLayout = (props) => {
-  const { message } = useSelector((state) => state.message);
   const profile = useSelector((state) => state.profile);
   const { user_profile = "" } = profile;
   const [displayError, setDisplayError] = useState(false);
@@ -37,13 +37,9 @@ const RegisterLayout = (props) => {
           setDisplayError={setDisplayError}
           setRedirect={setRedirect}
         />
-        {displayError && message && (
-          <div className="form-group">
-            <div className="alert alert-danger" role="alert">
-              {message}
-            </div>
-          </div>
-        )}
+
+        {displayError && <ErrorBox isError={displayError} />}
+
         <span className="logTextosLink" onClick={showLogin}>
           - Ja estàs registrat? Inicia sessió -
         </span>

@@ -6,11 +6,15 @@ import { LogFormError } from "../Log.style";
 import { validate } from "./PasswordRecoveryFormValidate";
 import { passwordRecovery } from "../../../redux/actions/auth";
 import { useFormik } from "formik";
+import ErrorBox from "../error/ErrorBox";
 
-export default function PasswordRecoveryForm({ setIsSubmitted }, strToken) {
+export default function PasswordRecoveryForm(
+  { setIsSubmitted },
+  isSubmitted,
+  strToken
+) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-
   const handleSubmit = (value) => {
     setLoading(true);
     dispatch(passwordRecovery(strToken, value.password))
@@ -61,14 +65,11 @@ export default function PasswordRecoveryForm({ setIsSubmitted }, strToken) {
           buttonStyle="boton--primary--solid"
           disabled={loading}
         >
-          {loading && (
-            <span className="spinner-border spinner-border-sm"></span>
-          )}
           <span>Recupera</span>
         </Button>
       </div>
-
       {loading && <span className="spinner-border spinner-border-sm"></span>}
+      {!isSubmitted && <ErrorBox isError={!isSubmitted} />}
     </form>
   );
 }

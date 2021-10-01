@@ -10,6 +10,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { substractToCart } from "./../../redux/actions/cart";
 import ErrorBox from "../forms/error/ErrorBox";
 import "./Review.css";
+import { clearMessage } from "../../redux/actions/message";
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Review() {
+function Review({ setError: setCheckoutError }) {
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { item_variants = [], total } = cart_data;
   const [error, setError] = useState(false);
@@ -32,7 +33,11 @@ function Review() {
 
   const substractItem = (id) => {
     dispatch(substractToCart(id))
-      .then(setError(false))
+      .then(() => {
+        setError(false);
+        dispatch(clearMessage());
+        setCheckoutError(false);
+      })
       .catch(() => {
         setError(true);
       });

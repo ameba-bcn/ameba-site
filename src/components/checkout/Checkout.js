@@ -48,7 +48,6 @@ function Checkout() {
   if (!item_variants.length) return <Redirect to="/" />;
 
   const handleNext = () => {
-    setError(false);
     if (
       (hasMembershipInCart && activeStep === 1) ||
       (!hasMembershipInCart && activeStep === 0)
@@ -84,7 +83,7 @@ function Checkout() {
       case 1:
         return (
           <>
-            <Review />
+            <Review setError={setError} />
             <SubscriptionBox date={mockedInputData} isCheckout={true} />
           </>
         );
@@ -98,7 +97,7 @@ function Checkout() {
   const getStepContentProduct = (step) => {
     switch (step) {
       case 0:
-        return <Review />;
+        return <Review setError={setError}/>;
       case 1:
         return isPaymentFree ? <FreeCheckout /> : <PaymentForm />;
       default:
@@ -122,7 +121,7 @@ function Checkout() {
             {hasMembershipInCart
               ? getStepContentMember(activeStep)
               : getStepContentProduct(activeStep)}
-            {!!message.length && <ErrorBox isError={error} />}
+            {error && <ErrorBox isError={error} />}
             <div className={"checkout-member-form-buttons"}>
               <div>
                 {activeStep !== 0 && (

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LettersMove from "./../components/layout/LettersMove";
 import MailRecoveryForm from "../components/forms/MailRecoveryForm/MailRecoveryForm";
 
-export default function SendEmailPasswordRecovery(props) {
+export default function SendEmailPasswordRecovery() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   return (
@@ -16,7 +16,10 @@ export default function SendEmailPasswordRecovery(props) {
               Verifícala per poder continuar.
             </div>
           ) : (
-            <MailRecoveryForm setIsSubmitted={setIsSubmitted} />
+            <MailRecoveryForm
+              setIsSubmitted={setIsSubmitted}
+              isSubmitted={isSubmitted}
+            />
           )}
         </div>
       </div>

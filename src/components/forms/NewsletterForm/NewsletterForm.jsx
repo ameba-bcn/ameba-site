@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { subscribeNewsletter } from "../../../redux/actions/profile";
 import Button from "../../button/Button";
+import ErrorBox from "../error/ErrorBox";
 import InputField from "../InputField/InputField";
 import { LogFormError } from "../Log.style";
 import { validate } from "../NewsletterForm/NewletterFormValidate";
 
-export default function NewsletterForm({ setIsSubmitted }) {
+export default function NewsletterForm({ setIsSubmitted }, isSubmitted) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-
   const handleSubmit = (value) => {
     setLoading(true);
     dispatch(subscribeNewsletter(value.email))
@@ -64,8 +64,8 @@ export default function NewsletterForm({ setIsSubmitted }) {
           Subscriu-te
         </Button>
       </div>
-
       {loading && <span className="spinner-border spinner-border-sm"></span>}
+      {!isSubmitted && <ErrorBox isError={!isSubmitted} />}
     </form>
   );
 }

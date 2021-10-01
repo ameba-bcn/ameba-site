@@ -55,6 +55,7 @@ export default function MembershipForm({
           setSuccessful(true);
           setButtonDisabled && setButtonDisabled(false);
           setDataHasChanged(false);
+          setDisplayError(false);
           handleNext && handleNext();
         })
         .catch(() => {
@@ -70,6 +71,7 @@ export default function MembershipForm({
           setSuccessful(true);
           setButtonDisabled && setButtonDisabled(false);
           setDataHasChanged(false);
+          setDisplayError(false);
           handleNext();
         })
         .catch(() => {

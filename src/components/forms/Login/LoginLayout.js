@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import ErrorBox from "../error/ErrorBox";
 import LoginForm from "./LoginForm";
 
 const LoginLayout = (props) => {
-  const { message } = useSelector((state) => state.message);
   const cart = useSelector((state) => state.cart);
   const { cart_data = {} } = cart;
   const { state = {} } = cart_data;
@@ -48,13 +48,7 @@ const LoginLayout = (props) => {
           setDisplayError={setDisplayError}
         />
 
-        {displayError && message && (
-          <div className="form-group">
-            <div className="alert alert-danger" role="alert">
-              {message}
-            </div>
-          </div>
-        )}
+        {displayError && <ErrorBox isError={displayError} />}
 
         <span
           className="logTextosLink logTextosLinkRegistrat"

@@ -6,8 +6,9 @@ import { LogFormError } from "../Log.style";
 import { validate } from "./../NewsletterForm/NewletterFormValidate";
 import { sendEmailPasswordRecovery } from "../../../redux/actions/auth";
 import { useFormik } from "formik";
+import ErrorBox from "../error/ErrorBox";
 
-export default function MailRecoveryForm({ setIsSubmitted }) {
+export default function MailRecoveryForm({ setIsSubmitted }, isSubmitted) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -69,6 +70,7 @@ export default function MailRecoveryForm({ setIsSubmitted }) {
       </div>
 
       {loading && <span className="spinner-border spinner-border-sm"></span>}
+      {!isSubmitted && <ErrorBox isError={!isSubmitted} />}
     </form>
   );
 }

@@ -6,22 +6,23 @@ import { deleteCartAfterCheckout } from "../../redux/actions/cart";
 import { Paragraph1 } from "./../../GlobalStyles.style";
 import Button from "../button/Button";
 import ErrorBox from "../forms/error/ErrorBox";
+import { clearMessage } from "../../redux/actions/message";
 
 export default function FreeCheckout() {
   const dispatch = useDispatch();
   const [redirect, setRedirect] = useState(false);
   const [error, setError] = useState(false);
-  const [message, setMessage] = useState("");
-
   const handleFinishPayment = () => {
     dispatch(deleteCartAfterCheckout())
-      .then(dispatch(getMemberProfile()))
-      .catch((err) => {
+      .then(() => {
+        dispatch(getMemberProfile());
+        setError(false);
+        dispatch(clearMessage());
+      })
+      .catch(() => {
         setError(true);
-        setMessage(err);
       });
     setRedirect(true);
-    setMessage('');
   };
 
   if (redirect) return <Redirect to="/summary-checkout" />;
@@ -32,7 +33,7 @@ export default function FreeCheckout() {
         El procediment de compra no suposa cap càrreg per tant no cal realitzar
         pagament.
       </Paragraph1>
-      {!!message.length && <ErrorBox isError={error} message />}
+      {error && <ErrorBox isError={error} />}
       <Button
         variant="contained"
         color="primary"

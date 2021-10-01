@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import ErrorBox from "../error/ErrorBox";
 import MembershipForm from "./MembershipForm";
 
 const MembershipFormLayout = ({ setButtonDisabled }) => {
   const [displayError, setDisplayError] = useState(false);
   const [successful, setSuccessful] = useState(false);
-  const { message } = useSelector((state) => state.message);
 
   return (
     <div className="cardForm">
@@ -16,18 +15,7 @@ const MembershipFormLayout = ({ setButtonDisabled }) => {
           setSuccessful={setSuccessful}
           setButtonDisabled={setButtonDisabled}
         />
-        {displayError && message && (
-          <div className="form-group">
-            <div
-              className={
-                successful ? "alert alert-success" : "alert alert-danger"
-              }
-              role="alert"
-            >
-              {message}
-            </div>
-          </div>
-        )}
+        {displayError && <ErrorBox isError={!successful} />}
       </div>
     </div>
   );

@@ -13,9 +13,7 @@ export const ErrorMessage = styled.div`
   color: #1d1d1b;
   ${(props) =>
     props.isError &&
-    `  
-    color: #721c24;
+    `color: #721c24;
     background-color: #f8d7da;
-    border-color: #f5c6cb;
-`}
+    border-color: #f5c6cb; `}
 `;
