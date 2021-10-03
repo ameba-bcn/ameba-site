@@ -32,10 +32,10 @@ export default function NavbarButtonsMobile(props) {
           <li>
             <NavLink
               to="/booking"
-              data-item="#SUPPORTYOURLOCALS"
+              data-item="BOOKING"
               onClick={handleClick}
             >
-              #BOOKING
+              BOOKING
             </NavLink>
           </li>
           <div className="liMenuOptions logname-li">

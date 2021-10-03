@@ -64,6 +64,7 @@ export default function PasswordRecoveryForm(
           buttonSize="boton--medium"
           buttonStyle="boton--primary--solid"
           disabled={loading}
+          hoverStyle="bg-cream"
         >
           <span>Recupera</span>
         </Button>

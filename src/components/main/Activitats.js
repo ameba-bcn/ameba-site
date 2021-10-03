@@ -23,18 +23,20 @@ function Activitats() {
         sentence="FES-TE SOCI/A "
         color="#EB5E3E"
       />
-      <SectionTitle title="activitats" />
-      {activitats.length > 0 && (
-        <Card3Grid className="Card3Block" activitats={activitats} />
-      )}
-      <div className="agendaLink">
-        <NavLink
-          className="navLinkActivitat"
-          style={{ textDecoration: "none" }}
-          to={{ pathname: "/activitats" }}
-        >
-          <PlusButton plusStyle="plus--obscure" plusSize="plus--big" />
-        </NavLink>
+      <div className="activitats-box">
+        <SectionTitle title="activitats" />
+        {activitats.length > 0 && (
+          <Card3Grid className="Card3Block" activitats={activitats} />
+        )}
+        <div className="agendaLink">
+          <NavLink
+            className="navLinkActivitat"
+            style={{ textDecoration: "none" }}
+            to={{ pathname: "/activitats" }}
+          >
+            <PlusButton plusStyle="plus--obscure" plusSize="plus--big" />
+          </NavLink>
+        </div>
       </div>
     </div>
   );

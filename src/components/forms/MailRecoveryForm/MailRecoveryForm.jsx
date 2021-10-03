@@ -60,6 +60,7 @@ export default function MailRecoveryForm({ setIsSubmitted }, isSubmitted) {
           color="primary"
           buttonSize="boton--medium"
           buttonStyle="boton--primary--solid"
+          hoverStyle="bg-cream"
           disabled={loading}
         >
           {loading && (

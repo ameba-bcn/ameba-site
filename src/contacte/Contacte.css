@@ -5,7 +5,7 @@
 .contenedorContacto {
   width: 90%;
   margin: 0 auto;
-  padding-top: 30px;
+  padding: 40px;
 }
 
 .inputGroupNews {
@@ -85,7 +85,7 @@
 }
 
 .iconsFooter {
-  padding-bottom: 2rem;
+  padding: 3rem 0rem;
 }
 
 .iconsFooter a {
@@ -96,6 +96,10 @@
 
 .iconsFooter svg {
   font-size: 3rem;
+}
+
+.iconsFooter svg:hover {
+  color: #eb5e3e;
 }
 
 .rowNewsLine {

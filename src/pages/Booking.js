@@ -9,7 +9,7 @@ export default function Booking() {
   return (
     <div className="BookingContent">
       <PowerTitle
-        title={"#BOOKING"}
+        title={"BOOKING"}
         className="SupportTitle"
         subtitle="- AMEBA Rooster -"
       />

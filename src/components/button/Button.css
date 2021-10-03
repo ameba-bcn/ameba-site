@@ -61,8 +61,18 @@
 
 .boton--orange--solid {
   background-color: var(--negro);
-  color: var(--naranja);
+  color: var(--crema);
   border: none;
+}
+
+.bg-red:hover {
+  background-color: var(--rojo);
+  color: var(--negro);
+}
+
+.bg-cream:hover {
+  background-color: var(--crema);
+  color: var(--negro);
 }
 
 .boton--back-orange--solid {

@@ -82,12 +82,16 @@ export default function DropdownCart(props) {
             )}
             <hr className="separadorCartDrop" />
             <NavLink className="menuOptions" to={checkoutRedirect}>
-              <div
+              <Button
+                variant="contained"
+                color="primary"
+                buttonSize="boton--xxl"
+                buttonStyle="boton--primary--solid"
                 onClick={() => checkoutToCart(item_variants)}
-                className="buttonCheckoutCart"
               >
                 Finalitzar compra
-              </div>
+              </Button>
+
             </NavLink>
           </>
         ) : (

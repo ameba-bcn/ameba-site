@@ -6,21 +6,33 @@ const STYLES = [
   "boton--primary--outline",
   "boton--primary--disabled",
   "boton--orange--solid",
-  "boton--back-orange--solid"
+  "boton--back-orange--solid",
 ];
 
 const SIZES = ["boton--medium", "boton--small", "boton--big", "boton--megaxxl"];
 
+const HOVER = ["bg-red", "bg-cream"];
+
 export default function Button(props) {
-  const { children, type, onClick, buttonStyle, buttonSize, icon, ...rest } = props;
+  const {
+    children,
+    type,
+    onClick,
+    buttonStyle,
+    buttonSize,
+    hoverStyle,
+    icon,
+    ...rest
+  } = props;
   const checkButtonStyle = STYLES.includes(buttonStyle)
     ? buttonStyle
     : STYLES[0];
   const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0];
+  const checkHoverStyle = HOVER.includes(hoverStyle) ? hoverStyle : HOVER[0];
 
   return (
     <button
-      className={`boton ${checkButtonStyle} ${checkButtonSize}`}
+      className={`boton ${checkButtonStyle} ${checkButtonSize} ${checkHoverStyle}`}
       onClick={onClick}
       type={type}
       {...rest}

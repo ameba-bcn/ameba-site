@@ -98,6 +98,7 @@ export default function RegisterForm({ setRedirect, setDisplayError }) {
           color="primary"
           buttonSize="boton--medium"
           buttonStyle="boton--primary--solid"
+          hoverStyle="bg-cream"
         >
           registra't
         </Button>

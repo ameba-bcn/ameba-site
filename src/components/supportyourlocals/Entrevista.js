@@ -254,7 +254,7 @@ export default function Entrevista(props) {
             </div>
           </>
         ) : null}
-        <TitleSection title="Xarxes socials" />
+        <TitleSection title="Media" />
         <div className="xarxes-artista">
           <MediaLinks fcbk="#" insta="#" twit="#" yout="#" />
         </div>
