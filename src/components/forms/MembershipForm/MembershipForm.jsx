@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   createMemberProfile,
@@ -31,16 +31,35 @@ export default function MembershipForm({
   };
   const isNewMember = deepComparision(user_member_data, {});
 
+  const InitialValues = {
+    first_name: initialMemberValues.first_name || "",
+    last_name: initialMemberValues.last_name || "",
+    address: initialMemberValues.address || "",
+    phone_number: initialMemberValues.phone_number || "",
+  };
+
+  const formik = useFormik({
+    initialValues: InitialValues,
+    enableReinitialize: true,
+    validate,
+    onSubmit: (values) => {
+      handleSubmit(values);
+    },
+  });
+
+  useEffect(() => {
+    setButtonDisabled &&
+      setButtonDisabled(isNewMember || dataHasChanged || !formik.isValid);
+  }, [dataHasChanged, isNewMember]);
+
   const handleCancel = (setValues) => {
     setValues(initialMemberValues);
     setDataHasChanged(false);
-    setButtonDisabled && setButtonDisabled(false);
   };
 
   const handleBlur = (values) => {
     const dataHasChanged = !deepComparision(initialMemberValues, values);
     setDataHasChanged(dataHasChanged);
-    setButtonDisabled && setButtonDisabled(dataHasChanged);
   };
 
   const handleSubmit = (values) => {
@@ -80,19 +99,6 @@ export default function MembershipForm({
         });
     }
   };
-  const formik = useFormik({
-    initialValues: {
-      first_name: initialMemberValues.first_name || "",
-      last_name: initialMemberValues.last_name || "",
-      address: initialMemberValues.address || "",
-      phone_number: initialMemberValues.phone_number || "",
-    },
-    enableReinitialize: true,
-    validate,
-    onSubmit: (values) => {
-      handleSubmit(values);
-    },
-  });
 
   return (
     <LogFormBox>

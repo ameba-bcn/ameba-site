@@ -4,10 +4,11 @@ import LoginLayout from "../forms/Login/LoginLayout";
 import RegisterLayout from "../forms/Register/RegisterLayout";
 
 export default function LogComponent() {
-  const { user_profile = "" } = useSelector((state) => state.profile);
-
+  const { cart_data = {} } = useSelector((state) => state.cart);
+  const { state = {} } = cart_data;
+  const { has_subscriptions = false } = state || {};
   const [viewState, setViewState] = useState(
-    user_profile === "MEMBER_CANDIDATE" ? "registration" : "login"
+    has_subscriptions ? "registration" : "login"
   );
 
   return (
@@ -15,10 +16,7 @@ export default function LogComponent() {
       {viewState === "registration" ? (
         <RegisterLayout viewState={viewState} setViewState={setViewState} />
       ) : (
-        <LoginLayout
-          viewState={viewState}
-          setViewState={setViewState}
-        />
+        <LoginLayout viewState={viewState} setViewState={setViewState} />
       )}
     </div>
   );

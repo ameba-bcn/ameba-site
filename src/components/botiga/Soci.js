@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addMemberToCart, getCart } from "../../redux/actions/cart";
-import { setMemberCandidate } from "../../redux/actions/profile";
+import { addToCart } from "../../redux/actions/cart";
 import { Redirect } from "react-router-dom";
 import axiosInstance from "../../axios";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ModalCard from "../../modals/ModalCard";
 
 export default function SociDialog(props) {
-  const { onClose, selectedValue, open } = props;
-  const { user_profile = "" } = useSelector((state) => state.profile);
+  const { onClose, open } = props;
   const { isLoggedIn } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const [socisData, getSocisData] = useState([]);
@@ -37,7 +35,7 @@ export default function SociDialog(props) {
   }, []);
 
   const handleClose = () => {
-    onClose(selectedValue);
+    onClose();
   };
 
   const handleAddClick = (id) => {
@@ -45,17 +43,9 @@ export default function SociDialog(props) {
       socisData.filter(function (soci) {
         return soci.id === id;
       })[0]?.variants[0] || {};
-    dispatch(addMemberToCart(selectedMembershipId));
-    if (user_profile === "LOGGED") {
-      dispatch(getCart()).then(() => {
-        // Aqui hay que tocar
-        setRedirect(true);
-        dispatch(setMemberCandidate());
-      });
-    } else {
-      dispatch(setMemberCandidate());
-      setRedirect(true);
-    }
+    dispatch(addToCart(selectedMembershipId));
+    onClose();
+    setRedirect(true);
   };
 
   if (redirect) {

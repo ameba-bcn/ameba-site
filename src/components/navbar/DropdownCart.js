@@ -6,11 +6,7 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import Button from "../button/Button";
 import "./DropdownCart.css";
-import {
-  setGuestUser,
-  setLoggedUser,
-  setMemberCandidate,
-} from "../../redux/actions/profile";
+import { setGuestUser, setLoggedUser } from "../../redux/actions/profile";
 
 export default function DropdownCart(props) {
   const dispatch = useDispatch();
@@ -27,17 +23,10 @@ export default function DropdownCart(props) {
     return id in [26, 27]; // Controlar que el id de cart nunca cambie. IMPORTANTE
   };
 
-  const isMemberInCart = (item_variants) => {
-    const commonMember = item_variants.find((x) => x.id === 26);
-    const proMember = item_variants.find((x) => x.id === 27);
-    return !!commonMember || !!proMember;
-  };
-
   const checkoutRedirect = isLoggedIn ? "/checkout" : "/login";
 
   const addItem = (id) => {
     dispatch(addToCart(id));
-    if (isMemberProduct(id)) dispatch(setMemberCandidate());
   };
 
   const substractItem = (id) => {
@@ -48,8 +37,7 @@ export default function DropdownCart(props) {
   };
 
   const checkoutToCart = (item_variants) => {
-    if (isMemberInCart(item_variants)) dispatch(setMemberCandidate());
-    else isLoggedIn ? dispatch(setLoggedUser()) : dispatch(setGuestUser());
+    isLoggedIn ? dispatch(setLoggedUser()) : dispatch(setGuestUser());
     setCartMenuOpen(false);
     props.handleCloseMenu();
     props.closeDropDown();
@@ -80,9 +68,7 @@ export default function DropdownCart(props) {
                       </div>
                     </div>
                     <div className="colCartProduct2">
-                      <div className="titleCartProduct">
-                        {el.name}
-                      </div>
+                      <div className="titleCartProduct">{el.name}</div>
                       <div className="rowDetailedCart">
                         <div className="cartPriceProduct">{el.price}</div>
                         <div className="quantityPriceProduct">

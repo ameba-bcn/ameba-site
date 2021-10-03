@@ -1,8 +1,6 @@
 import {
   ADD_TO_CART,
   ADD_FAIL,
-  ADD_MEMBER_TO_CART,
-  ADD_MEMBER_FAIL,
   SUBS_TO_CART,
   SUBS_FAIL,
   CHECKOUT,
@@ -13,7 +11,6 @@ import {
   DELETE_CART_FAIL,
   DESTROY_CART,
   DESTROY_CART_FAIL,
-  CLEAR_MESSAGE,
   SET_MESSAGE,
 } from "./types";
 
@@ -54,37 +51,9 @@ export const substractToCart = (id) => (dispatch) => {
     },
     (error) => {
       const message = error.response?.data?.detail;
-      // (error.response &&
-      //     error.response.data &&
-      //     error.response.data.message) ||
-      // error.message ||
-      // error.toString();
 
       dispatch({
         type: SUBS_FAIL,
-        payload: message,
-      });
-
-      return Promise.reject();
-    }
-  );
-};
-
-export const addMemberToCart = (id) => (dispatch) => {
-  return CartService.addMemberToCart(id).then(
-    (response) => {
-      dispatch({
-        type: ADD_MEMBER_TO_CART,
-        payload: response,
-      });
-
-      return Promise.resolve();
-    },
-    (error) => {
-      const message = error.response?.data?.detail;
-
-      dispatch({
-        type: ADD_MEMBER_FAIL,
         payload: message,
       });
 
@@ -100,10 +69,6 @@ export const getCart = () => (dispatch) => {
         type: GET_CART,
         payload: response,
       });
-
-      // dispatch({
-      //   type: CLEAR_MESSAGE,
-      // });
 
       return Promise.resolve();
     },
@@ -184,9 +149,6 @@ export const deleteCartAfterCheckout = () => (dispatch) => {
         payload: response,
       });
 
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
 
       return Promise.resolve();
     },

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { NavLink, Redirect } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./CardGrid.css";
 import { isCORSInactive } from "../../utils/utils";
 import PlusButton from "../button/PlusButton";

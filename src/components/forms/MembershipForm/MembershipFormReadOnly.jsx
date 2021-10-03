@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import { LogFormBox } from "../Log.style";
 import { Redirect } from "react-router";
 
-export default function MembershipFormReadOnly() {
+export default function MembershipFormReadOnly(props) {
+  const { isCheckout = false } = props;
   const auth = useSelector((state) => state.auth);
   const { user_data = {} } = auth;
   const [redirect, setRedirect] = useState(false);
@@ -44,10 +45,12 @@ export default function MembershipFormReadOnly() {
             </div>
           </form>
         </LogFormBox>
+        {!isCheckout && (
           <span className="logTextosLink" onClick={showPasswordRecover}>
             - Modifica la teva contrasenya -
           </span>
+        )}
       </div>
-     </div>
+    </div>
   );
 }

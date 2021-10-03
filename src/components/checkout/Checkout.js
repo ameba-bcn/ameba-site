@@ -9,8 +9,8 @@ import { useDispatch, useSelector } from "react-redux";
 import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
 import Review from "./Review";
 import PaymentForm from "../forms/PaymentForm";
-import { checkoutCart, getCart } from "../../redux/actions/cart";
-import { isEmptyObject, isMemberCheckout } from "../../utils/utils";
+import { checkoutCart } from "../../redux/actions/cart";
+import { isMemberCheckout } from "../../utils/utils";
 import SubscriptionBox from "../profile/SubscriptionBox";
 import "./Checkout.css";
 import Button from "../button/Button";
@@ -18,40 +18,34 @@ import { getMemberProfile } from "../../redux/actions/auth";
 import { Redirect } from "react-router-dom";
 import ErrorBox from "../forms/error/ErrorBox";
 import { clearMessage } from "../../redux/actions/message";
+import MembershipFormReadOnly from "../forms/MembershipForm/MembershipFormReadOnly";
 
 function Checkout() {
   const dispatch = useDispatch();
   const { cart_data = {}, checkout = {} } = useSelector((state) => state.cart);
   const { isLoggedIn = false } = useSelector((state) => state.auth);
-  const { message } = useSelector((state) => state.message);
-  const mockedInputData = { dataRenovacio: "2021-07-16T12:30:00.000Z" };
   const { total = "", item_variants = [] } = cart_data;
   const isPaymentFree = checkout ? checkout.amount === 0 : total === "0.00 €";
-  const [activeStep, setActiveStep] = useState(0);
+  const hasMembershipInCart = isMemberCheckout(item_variants); // sacar del carro cuando esté en back
+  const [activeStep, setActiveStep] = useState(hasMembershipInCart ? 0 : 1);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [error, setError] = useState(false);
-  const hasMembershipInCart = isMemberCheckout(item_variants); // sacar del carro cuando esté en back
   const userIsEditingData =
     buttonDisabled && activeStep === 0 && hasMembershipInCart;
-  const steps = hasMembershipInCart
-    ? ["Dades personals", "Estat de la subscripció", "Dades de pagament"]
-    : ["Revisió", "Dades de pagament"];
+  const steps = [
+    "Dades personals",
+    "Estat de la subscripció",
+    "Dades de pagament",
+  ];
 
   useEffect(() => {
     dispatch(getMemberProfile());
   }, []);
 
-  if (isEmptyObject(cart_data) && isLoggedIn) {
-    dispatch(getCart());
-  }
-
-  if (!item_variants.length) return <Redirect to="/" />;
+  if (!item_variants.length || !isLoggedIn) return <Redirect to="/" />;
 
   const handleNext = () => {
-    if (
-      (hasMembershipInCart && activeStep === 1) ||
-      (!hasMembershipInCart && activeStep === 0)
-    ) {
+    if (activeStep === 1) {
       dispatch(checkoutCart())
         .then(() => {
           setActiveStep(activeStep + 1);
@@ -71,20 +65,22 @@ function Checkout() {
     setError(false);
   };
 
-  const getStepContentMember = (step) => {
+  const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return (
+        return hasMembershipInCart ? (
           <MembershipFormLayout
             handleNext={handleNext}
             setButtonDisabled={setButtonDisabled}
           />
+        ) : (
+          <MembershipFormReadOnly isCheckout={true} />
         );
       case 1:
         return (
           <>
             <Review setError={setError} />
-            <SubscriptionBox date={mockedInputData} isCheckout={true} />
+            <SubscriptionBox isCheckout={true} />
           </>
         );
       case 2:
@@ -94,16 +90,6 @@ function Checkout() {
     }
   };
 
-  const getStepContentProduct = (step) => {
-    switch (step) {
-      case 0:
-        return <Review setError={setError}/>;
-      case 1:
-        return isPaymentFree ? <FreeCheckout /> : <PaymentForm />;
-      default:
-        throw new Error("Unknown step");
-    }
-  };
   return (
     <React.Fragment>
       <CssBaseline />
@@ -118,9 +104,7 @@ function Checkout() {
             ))}
           </Stepper>
           <React.Fragment>
-            {hasMembershipInCart
-              ? getStepContentMember(activeStep)
-              : getStepContentProduct(activeStep)}
+            {getStepContent(activeStep)}
             {error && <ErrorBox isError={error} />}
             <div className={"checkout-member-form-buttons"}>
               <div>

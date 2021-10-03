@@ -8,7 +8,6 @@ import {
   GET_ALL_BOTIGA_FAIL,
   GET_ABOUT,
   GET_COVER,
-  CLEAR_MESSAGE,
 } from "./types";
 import DataService from "../services/data.service";
 
