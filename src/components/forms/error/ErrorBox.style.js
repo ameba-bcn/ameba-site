@@ -11,6 +11,11 @@ export const ErrorMessage = styled.div`
   border: 1px solid transparent;
   border-radius: 0.25rem;
   color: #1d1d1b;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  -webkit-box-orient: vertical;
   ${(props) =>
     props.isError &&
     `color: #721c24;
