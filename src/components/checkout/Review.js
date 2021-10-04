@@ -11,6 +11,7 @@ import { substractToCart } from "./../../redux/actions/cart";
 import ErrorBox from "../forms/error/ErrorBox";
 import "./Review.css";
 import { clearMessage } from "../../redux/actions/message";
+import DiscountCode from "../forms/discountCode/DiscountCode";
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -65,6 +66,7 @@ function Review({ setError: setCheckoutError }) {
           </Typography>
         </ListItem>
       </List>
+      <DiscountCode/>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
