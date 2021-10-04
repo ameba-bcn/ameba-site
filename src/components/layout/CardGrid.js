@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./CardGrid.css";
-import { isCORSInactive } from "../../utils/utils";
+import { createLastRowIterator, isCORSInactive } from "../../utils/utils";
 import PlusButton from "../button/PlusButton";
 
 export default function CardGrid(props) {
@@ -23,7 +23,7 @@ export default function CardGrid(props) {
           <NavLink
             style={{ textDecoration: "none" }}
             to={{
-              pathname: isAmebaDJ?"/booking/" + id:"/support/" + id,
+              pathname: isAmebaDJ ? "/booking/" + id : "/support/" + id,
               aboutProps: data,
             }}
           >
@@ -45,6 +45,12 @@ export default function CardGrid(props) {
     });
 
   return (
-    <div className="cardSupportDeck">{support.length > 0 && cardGenerator}</div>
+    <div className="cardSupportDeck">
+      {support.length > 0 && cardGenerator}
+      {cardGenerator &&
+        createLastRowIterator(support, 550).map((i) => (
+          <i aria-hidden={true} key={i}></i>
+        ))}
+    </div>
   );
 }

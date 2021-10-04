@@ -59,6 +59,14 @@ export function mergeCartIds(arr1, arr2) {
   else return arr1.concat(arr2);
 }
 
+// Funcion que calcula cuantas celdas vacias hay en ultima fila y permite alinear el ultimo elemento
+// Requiere Styling del ancho del elemento i
+export function createLastRowIterator(arr, boxWidth) {
+  const rowLen = ~~(window.innerWidth / boxWidth);
+  const lengthEmptyCells = rowLen - (arr.length % rowLen);
+  return arr.length % rowLen !== 0 ? Array.apply(null, Array(lengthEmptyCells)) : [];
+}
+
 export function isCORSInactive() {
   if (true) return "http://localhost:8000";
   return "";
