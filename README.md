@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
-Version 1.1
+Version 1.2
 - Free shopping process
 - SubscriptionBox
 - Back error handling
