@@ -64,7 +64,9 @@ export function mergeCartIds(arr1, arr2) {
 export function createLastRowIterator(arr, boxWidth) {
   const rowLen = ~~(window.innerWidth / boxWidth);
   const lengthEmptyCells = rowLen - (arr.length % rowLen);
-  return arr.length % rowLen !== 0 ? Array.apply(null, Array(lengthEmptyCells)) : [];
+  return arr.length && rowLen !== 0
+    ? Array.apply(null, Array(lengthEmptyCells))
+    : [];
 }
 
 export function isCORSInactive() {

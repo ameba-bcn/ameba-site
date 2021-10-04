@@ -30,11 +30,7 @@ export default function NavbarButtonsMobile(props) {
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/booking"
-              data-item="BOOKING"
-              onClick={handleClick}
-            >
+            <NavLink to="/booking" data-item="BOOKING" onClick={handleClick}>
               BOOKING
             </NavLink>
           </li>
@@ -46,6 +42,22 @@ export default function NavbarButtonsMobile(props) {
             ) : (
               <MenuLog handleClick={handleClick} />
             )}
+          </div>
+          <div className="menu-lang">
+            <li>
+              <a
+                onClick={() => console.log("Cambia al Catala")}
+                data-item="CAT/"
+              >
+                CAT/
+              </a>
+              <a
+                onClick={() => console.log("Cambia al Castella")}
+                data-item="CAST"
+              >
+                CAST
+              </a>
+            </li>
           </div>
           <Cart isMobile onClick={handleClick} click={click} />
         </ul>

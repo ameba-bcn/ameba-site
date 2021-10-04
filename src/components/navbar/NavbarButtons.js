@@ -39,6 +39,16 @@ export default function NavbarButtons(props) {
             <MenuLog handleClick={handleClick} />
           )}
         </div>
+        <div className="menu-lang">
+          <li>
+            <a onClick={()=>console.log("Cambia al Catala")} data-item="CAT/">
+              CAT/
+            </a>
+            <a onClick={()=>console.log("Cambia al Castella")} data-item="CAST">
+              CAST
+            </a>
+          </li>
+        </div>
         <Cart onClick={handleClick} click={click} />
       </ul>
     </div>
