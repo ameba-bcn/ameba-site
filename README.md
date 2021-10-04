@@ -4,6 +4,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.1
+- Free shopping process
+- SubscriptionBox
+- Back error handling
+- Profile view in no memeber users
+- Forms to Formik
+- Checkout refactored
+- Error message new logic
+- Bugfix: Duplicate products on refresh
+- ItemVariant renamed
+- Restyled from dessign
+
 Version 1.0
 - New view BOOKING
 - Complete new Membership flow
