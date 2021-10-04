@@ -7,25 +7,28 @@
   height: auto;
   width: 100%;
   background-color: #fae6c5;
+  padding: 80px 0px;
 }
 
 .entrevista-gral {
   height: auto;
   width: 100%;
   background-color: #ffed00;
-  padding-top: 20px;
+  padding: 80px 0px;
 }
 
 .media-gral {
   height: auto;
   width: 100%;
   background-color: #f2c571;
+  padding: 80px 0px;
 }
 
 .activitats-gral {
   height: auto;
   width: 100%;
   background-color: #eb5e3e;
+  padding: 80px 0px;
 }
 
 .top-section_entr {
@@ -188,6 +191,7 @@
   padding-right: 80px;
   overflow: hidden;
   height: auto;
+  cursor: pointer;
 }
 
 .resposta {
@@ -197,6 +201,12 @@
   animation: fade 1s 1;
   -webkit-animation: fade 1s 1;
   max-width: 100%;
+}
+
+.media-artista {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 
 @keyframes fade {
@@ -220,7 +230,7 @@
 }
 
 .pregunta svg {
-  cursor: pointer;
+  /* cursor: pointer; */
   display: inline-block;
   position: absolute;
   top: 7px;

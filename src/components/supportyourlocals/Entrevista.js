@@ -165,17 +165,21 @@ export default function Entrevista(props) {
               <div className="col1-preguntes">
                 {interview.current_answers?.map((f, i) =>
                   i < 3 ? (
-                    <div className="pregunta" key={i}>
+                    <div
+                      className="pregunta"
+                      key={i}
+                      onClick={() => updateExpand(i)}
+                    >
                       {f.question}
                       {expand.p[i] ? (
                         <IndeterminateCheckBoxIcon
                           className="collapse-resp"
-                          onClick={() => updateExpand(i)}
+                          // onClick={() => updateExpand(i)}
                         />
                       ) : (
                         <AddBoxIcon
                           className="expand-resp"
-                          onClick={() => updateExpand(i)}
+                          // onClick={() => updateExpand(i)}
                         />
                       )}
                       {expand.p[i] ? (
@@ -189,17 +193,21 @@ export default function Entrevista(props) {
               <div className="col2-preguntes">
                 {interview.current_answers?.map((f, i) =>
                   i > 2 ? (
-                    <div className="pregunta" key={i}>
+                    <div
+                      className="pregunta"
+                      key={i}
+                      onClick={() => updateExpand(i)}
+                    >
                       {f.question}
                       {expand.p[i] ? (
                         <IndeterminateCheckBoxIcon
                           className="collapse-resp"
-                          onClick={() => updateExpand(i)}
+                          // onClick={() => updateExpand(i)}
                         />
                       ) : (
                         <AddBoxIcon
                           className="expand-resp"
-                          onClick={() => updateExpand(i)}
+                          // onClick={() => updateExpand(i)}
                         />
                       )}
                       {expand.p[i] ? (
@@ -214,17 +222,21 @@ export default function Entrevista(props) {
           ) : (
             <>
               {interview.current_answers?.map((f, i) => (
-                <div className="pregunta" key={i}>
+                <div
+                  className="pregunta"
+                  key={i}
+                  onClick={() => updateExpand(i)}
+                >
                   {f.question}
                   {expand.p[i] ? (
                     <IndeterminateCheckBoxIcon
                       className="collapse-resp"
-                      onClick={() => updateExpand(i)}
+                      // onClick={() => updateExpand(i)}
                     />
                   ) : (
                     <AddBoxIcon
                       className="expand-resp"
-                      onClick={() => updateExpand(i)}
+                      // onClick={() => updateExpand(i)}
                     />
                   )}
                   {expand.p[i] ? (
@@ -242,19 +254,16 @@ export default function Entrevista(props) {
         color={"#F2C571"}
       />
       <div className="media-gral">
-        {artist.media_urls && artist.media_urls.length > 0 ? (
-          <>
-            <TitleSection title="Media" />
-            <div className="media-artista">
-              {artist.media_urls.map((n) => (
-                <div className="mediaPlayer">
-                  <ReactPlayer url={n} />
-                </div>
-              ))}
-            </div>
-          </>
-        ) : null}
         <TitleSection title="Media" />
+        {artist.media_urls && artist.media_urls.length > 0 ? (
+          <div className="media-artista">
+            {artist.media_urls.map((n) => (
+              // <div className="mediaPlayer">
+                <ReactPlayer url={n} />
+              // </div>
+            ))}
+          </div>
+        ) : null}
         <div className="xarxes-artista">
           <MediaLinks fcbk="#" insta="#" twit="#" yout="#" />
         </div>
