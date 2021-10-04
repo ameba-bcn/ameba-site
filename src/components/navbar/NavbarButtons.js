@@ -25,8 +25,8 @@ export default function NavbarButtons(props) {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/booking" data-item="#BOOKING">
-            #BOOKING
+          <NavLink to="/booking" data-item="BOOKING">
+            BOOKING
           </NavLink>
         </li>
 

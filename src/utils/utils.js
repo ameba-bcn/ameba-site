@@ -49,12 +49,25 @@ export function isEmptyObject(obj) {
 }
 
 export function isMemberCheckout(input) {
-  const commonMember = input.find((x) => x.id === 26);
-  const proMember = input.find((x) => x.id === 27);
-  return !!commonMember || !!proMember;
+  const membershipInCart = input.find((x) => x.is_subscription === true);
+  return !!membershipInCart;
+}
+
+export function mergeCartIds(arr1, arr2) {
+  if (arr1.length < 1 || arr2.length < 1) return arr1.length ? arr1 : arr2;
+  if (arr1.sort().join(",") === arr2.sort().join(",")) return arr1;
+  else return arr1.concat(arr2);
+}
+
+// Funcion que calcula cuantas celdas vacias hay en ultima fila y permite alinear el ultimo elemento
+// Requiere Styling del ancho del elemento i
+export function createLastRowIterator(arr, boxWidth) {
+  const rowLen = ~~(window.innerWidth / boxWidth);
+  const lengthEmptyCells = rowLen - (arr.length % rowLen);
+  return arr.length % rowLen !== 0 ? Array.apply(null, Array(lengthEmptyCells)) : [];
 }
 
 export function isCORSInactive() {
-  if (false) return "http://localhost:8000";
+  if (true) return "http://localhost:8000";
   return "";
 }

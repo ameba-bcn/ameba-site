@@ -1,46 +1,59 @@
 /* ACTIVITATS */
 
+.activitats-box {
+  padding: 80px;
+}
+
 #activitats {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    margin: 0 auto;
-    background-color: #EB5E3E;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #eb5e3e;
 }
 
 .agendaLink {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 60px;
-    font-family: 'Bebas Neue';
-    font-weight: 600;
-    text-align: center;
-    text-transform: uppercase;
-    margin: 1rem 0 2rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  font-family: "Bebas Neue";
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  margin: 1rem 0 2rem 0;
 }
 
 .agendaLink a {
-    text-decoration: none;
-    color: #FAE6C5;
+  text-decoration: none;
+  color: #fae6c5;
 }
 
 .navLinkActivitat:hover {
-    color: #F2C571;
+  color: #f2c571;
+}
+
+@media screen and (max-width: 830px) {
+  .activitats-box {
+    padding: 40px;
+  }
 }
 
 @media screen and (max-width: 630px) {
-    div.PowerTitle {
-        display: none;
-    }
-    .agendaLink {
-        font-size: 2em;
-    }
+  div.PowerTitle {
+    display: none;
+  }
+  .agendaLink {
+    font-size: 2em;
+  }
+  .activitats-box {
+    padding: 20px;
+  }
 }
 
 @media screen and (max-width: 300px) {
-    .navLinkActivitat span {
-        display: none
-    }
+  .navLinkActivitat span {
+    display: none;
+  }
 }

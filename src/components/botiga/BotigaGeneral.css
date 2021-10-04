@@ -15,8 +15,14 @@
 .productCardDeck {
     width: 100%;
     display: flex;
+    justify-content: space-between;
     flex-wrap: wrap;
     padding: 4rem;
+}
+
+.productCardDeck > i{
+    width: 467px;
+    margin: 0 auto;
 }
 
 .fullcardBotiga {

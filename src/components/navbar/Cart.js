@@ -2,22 +2,17 @@ import React, { useState } from "react";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Menu from "@material-ui/core/Menu";
 import DropdownCart from "./DropdownCart";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-const mapStateToProps = (state) => {
-  return {
-    cart: state.cart.cart_data,
-  };
-};
-
 function Cart(props) {
-  const { cart = {}, isMobile, onClick = {}, click } = props;
-  const { item_variants = [], count = 0 } = cart;
+  const {isMobile, onClick = {}, click } = props;
+  const { cart_data = {} } = useSelector((state) => state.cart);
+  const { item_variants = [], count = 0 } = cart_data;
   const [anchorEl, setAnchorEl] = useState();
   const [cartMenuOpen, setCartMenuOpen] = useState(false);
   const [isCartMobileOpen, setIsCartMobileOpen] = useState(false);
-  if (cart && cart.item_variants?.length < 1 && cartMenuOpen) {
+  if (cart_data && item_variants.length < 1 && cartMenuOpen) {
     setCartMenuOpen(false);
   }
 
@@ -44,7 +39,7 @@ function Cart(props) {
     (!isMobile ? (
       <li>
         <div className="cart-icon-bubble-box">
-          {cart ? <div className="bubbleCart">{count}</div> : null}
+          {cart_data ? <div className="bubbleCart">{count}</div> : null}
           <ShoppingCartIcon
             className="cartIconMenu"
             onClick={(e) => handleOpenCart(e)}
@@ -60,7 +55,7 @@ function Cart(props) {
             >
               <div>
                 <DropdownCart
-                  cartData={cart}
+                  cartData={cart_data}
                   closeDropDown={() => handleCloseCart()}
                   isMobile={false}
                   handleCloseMenu={onClick}
@@ -83,7 +78,7 @@ function Cart(props) {
         {isCartMobileOpen && (
           <div className="cart-mobile__box">
             <DropdownCart
-              cartData={cart}
+              cartData={cart_data}
               closeDropDown={() => handleCloseCart()}
               isMobile={isMobile}
               handleCloseMenu={onClick}
@@ -97,4 +92,4 @@ function Cart(props) {
   );
 }
 
-export default connect(mapStateToProps)(Cart);
+export default Cart;

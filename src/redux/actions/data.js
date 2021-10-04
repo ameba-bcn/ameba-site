@@ -8,7 +8,6 @@ import {
   GET_ALL_BOTIGA_FAIL,
   GET_ABOUT,
   GET_COVER,
-  CLEAR_MESSAGE,
 } from "./types";
 import DataService from "../services/data.service";
 
@@ -18,10 +17,6 @@ export const supportYourLocalsAll = () => (dispatch) => {
       dispatch({
         type: GET_ALL_SUPPORT_SUCCESS,
         payload: response?.data,
-      });
-
-      dispatch({
-        type: CLEAR_MESSAGE,
       });
 
       return Promise.resolve();
@@ -50,10 +45,6 @@ export const agendaAll = () => (dispatch) => {
         payload: response?.data,
       });
 
-      dispatch({
-        type: CLEAR_MESSAGE,
-      });
-
       return Promise.resolve();
     },
     (error) => {
@@ -78,10 +69,6 @@ export const botigaAll = () => (dispatch) => {
       dispatch({
         type: GET_ALL_BOTIGA_SUCCESS,
         payload: response?.data,
-      });
-
-      dispatch({
-        type: CLEAR_MESSAGE,
       });
 
       return Promise.resolve();

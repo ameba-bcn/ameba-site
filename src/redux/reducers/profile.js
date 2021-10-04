@@ -2,7 +2,6 @@ import {
   GUEST_USER,
   LOGGED_USER,
   MEMBER_USER,
-  MEMBER_CANDIDATE_USER,
   SUBSCRIBE_SUCCESS,
   SUBSCRIBE_FAIL,
 } from "../actions/types";
@@ -21,9 +20,6 @@ export default function (state = initialState, action) {
 
     case MEMBER_USER:
       return { user_profile: "MEMBER" };
-
-    case MEMBER_CANDIDATE_USER:
-      return { user_profile: "MEMBER_CANDIDATE" };
 
     case SUBSCRIBE_SUCCESS:
       return {

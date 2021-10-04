@@ -35,7 +35,18 @@
   height: 50px;
 }
 
-.menu-logo-box a,
+.menu-logo-box a{
+  font-family: "Bebas Neue";
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2.5rem;
+  font-weight: 400;
+  display: inline-block;
+  color: #fae6c5;
+  position: relative;
+  transition: all 0.5s ease-in-out;
+}
+
 .cartIconMenu,
 .sessio-menu-button {
   font-family: "Bebas Neue";

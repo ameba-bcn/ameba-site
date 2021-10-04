@@ -1,38 +1,26 @@
 import React from "react";
-import LettersMove from "./../components/layout/LettersMove";
-import MemberProfile from "../components/profile/MemberProfile";
-import SubscriptionBox from "../components/profile/SubscriptionBox";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
+import LettersMove from "./../components/layout/LettersMove";
+import MemberProfile from "../components/profile/MemberProfile";
+import MembershipFormReadOnly from "../components/forms/MembershipForm/MembershipFormReadOnly";
 
 export default function Profile() {
-  const [buttonDisabled, setButtonDisabled] = React.useState(false);
   const auth = useSelector((state) => state.auth);
-  const { user_profile } = useSelector((state) => state.profile);
-
-  const isMember = user_profile === "MEMBER";
-
+  const { user_member_data } = useSelector((state) => state.auth);
   const { isLoggedIn = false } = auth;
 
   if (!isLoggedIn) {
     return <Redirect to="/" />;
   }
-
   return (
-    <>
-      <div>
-        <div className="logTitleSmall">Dades personals</div>
-        <MemberProfile
-          buttonDisabled={false}
-          setButtonDisabled={setButtonDisabled}
-        />
-        {isMember && <SubscriptionBox date="" />}
-      </div>
+    <div className="logViewYellow">
+      {!!user_member_data ? <MemberProfile /> : <MembershipFormReadOnly />}
       <LettersMove
         className="lettersMoveDiv"
         sentence="FES-TE SOCI/A "
         color="#EB5E3E"
       />
-    </>
+    </div>
   );
 }

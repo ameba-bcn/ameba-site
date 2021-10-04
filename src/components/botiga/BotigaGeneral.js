@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import "./BotigaGeneral.css";
 import ProducteDialog from "./Producte";
 import axiosInstance from "../../axios";
-import { formatPrice, isCORSInactive } from "./../../utils/utils";
+import {
+  createLastRowIterator,
+  formatPrice,
+  isCORSInactive,
+} from "./../../utils/utils";
 import { useSelector } from "react-redux";
 
 export default function BotigaGeneral() {
@@ -76,6 +80,10 @@ export default function BotigaGeneral() {
   return (
     <div className="productCardDeck">
       {cardGenerator}
+      {cardGenerator &&
+        createLastRowIterator(botiga, 467).map((i) => (
+          <i aria-hidden={true} key={i}></i>
+        ))}
       {open && (
         <ProducteDialog
           open={open}

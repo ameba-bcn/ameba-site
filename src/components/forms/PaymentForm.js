@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deleteCartAfterCheckout } from "./../../redux/actions/cart";
 import { Redirect } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import "./PaymentForm.css";
 import Button from "../button/Button";
 import { getMemberProfile } from "../../redux/actions/auth";
-
-const mapStateToProps = (state) => {
-  return {
-    checkout: state.cart.checkout,
-  };
-};
+import ErrorBox from "./error/ErrorBox";
 
 function PaymentForm(props) {
   const dispatch = useDispatch();
+  const { checkout = {} } = useSelector((state) => state.cart);
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState("");
@@ -26,9 +22,9 @@ function PaymentForm(props) {
   console.log("client secret", props);
 
   useEffect(() => {
-    console.log("client secret", props.checkout.checkout.client_secret);
-    setClientSecret(props.checkout.checkout.client_secret);
-  }, [props.checkout.checkout.client_secret]);
+    console.log("client secret", checkout.checkout.client_secret);
+    setClientSecret(checkout.checkout.client_secret);
+  }, [checkout.checkout.client_secret]);
 
   const cardStyle = {
     hidePostalCode: true,
@@ -108,13 +104,7 @@ function PaymentForm(props) {
             </span>{" "}
           </Button>
 
-          {/* Show any error that happens when processing the payment */}
-          {error && (
-            <div className="card-error" role="alert">
-              {error}
-            </div>
-          )}
-          {/* Show a success message upon completion */}
+          {error && <ErrorBox isError={true} message={error} />}
           <p className={succeeded ? "result-message" : "result-message hidden"}>
             Pagament realitzat amb èxit, comproba la teva compra a :
             <a href={`https://dashboard.stripe.com/test/payments`}>
@@ -129,4 +119,4 @@ function PaymentForm(props) {
   );
 }
 
-export default connect(mapStateToProps)(PaymentForm);
+export default PaymentForm;

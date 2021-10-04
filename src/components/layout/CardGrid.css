@@ -9,6 +9,13 @@
   padding: 20px;
 }
 
+.cardSupportDeck > i {
+  width: 36rem;
+  min-width: 570px;
+  height: 340px;
+  margin: 0 auto;
+}
+
 .fullcard {
   flex: 1 0 30%;
   margin: 0 auto;

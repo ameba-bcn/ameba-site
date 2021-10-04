@@ -4,13 +4,13 @@ import LettersMove from "../components/layout/LettersMove";
 
 export default function CheckoutPage() {
   return (
-    <>
+    <div className="checkoutViewYellow">
       <Checkout />
       <LettersMove
         className="lettersMoveDiv"
         sentence="FES-TE SOCI/A "
         color="#EB5E3E"
       />
-    </>
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -8,7 +8,9 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Grid from "@material-ui/core/Grid";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { substractToCart } from "./../../redux/actions/cart";
+import ErrorBox from "../forms/error/ErrorBox";
 import "./Review.css";
+import { clearMessage } from "../../redux/actions/message";
 
 const useStyles = makeStyles((theme) => ({
   listItem: {
@@ -22,14 +24,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Review() {
+function Review({ setError: setCheckoutError }) {
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { item_variants = [], total } = cart_data;
+  const [error, setError] = useState(false);
   const classes = useStyles();
   const dispatch = useDispatch();
 
   const substractItem = (id) => {
-    dispatch(substractToCart(id));
+    dispatch(substractToCart(id))
+      .then(() => {
+        setError(false);
+        dispatch(clearMessage());
+        setCheckoutError(false);
+      })
+      .catch(() => {
+        setError(true);
+      });
   };
 
   return (
@@ -40,12 +51,7 @@ function Review() {
       <List disablePadding>
         {item_variants?.map((item, i) => (
           <ListItem className={classes.listItem} key={i}>
-            <ListItemText
-              primary={item.name
-                .replace("ItemVariant(item='", "")
-                .replace(`')"`, "")}
-              secondary={item.discount_value}
-            />
+            <ListItemText primary={item.name} secondary={item.discount_value} />
             <Typography variant="body2">{item.price}</Typography>
             <div className="deleteItem" onClick={() => substractItem(item.id)}>
               <DeleteIcon />
@@ -76,6 +82,7 @@ function Review() {
           </Typography>
         </Grid>
       </Grid>
+      {error && <ErrorBox isError={error} />}
     </React.Fragment>
   );
 }

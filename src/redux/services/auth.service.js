@@ -167,8 +167,6 @@ const logout = () => {
       localStorage.removeItem("access");
       localStorage.removeItem("refresh");
       localStorage.removeItem("cart_id");
-      localStorage.removeItem("cart_items");
-      localStorage.removeItem("isCurrentCart");
       document.location.href = "/";
     });
 };

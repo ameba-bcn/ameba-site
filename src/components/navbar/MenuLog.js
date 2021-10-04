@@ -11,6 +11,7 @@ export default function MenuLog(props) {
   const dispatch = useDispatch();
   const [anchorEl1, setAnchorEl1] = useState(null);
   const isMember = user_profile === "MEMBER" || "LOGGED";
+  const userName = user_data.username.split(' ')
   const handleCloseSessio = () => {
     handleClick();
     setAnchorEl1(null);
@@ -24,15 +25,14 @@ export default function MenuLog(props) {
     handleClick();
     dispatch(logout());
   };
-
   return (
     <div>
       <a
         className="sessio-menu-button"
-        data-item={user_data.username === "" ? "SESSIÓ" : user_data.username}
+        data-item={user_data.username === "" ? "SESSIÓ" : userName[0]}
         onClick={(e) => handleClickSessio(e)}
       >
-        {user_data.username === "" ? "SESSIÓ" : user_data.username}
+        {user_data.username === "" ? "SESSIÓ" : userName[0]}
       </a>
       <Menu
         id="simple-menu"
