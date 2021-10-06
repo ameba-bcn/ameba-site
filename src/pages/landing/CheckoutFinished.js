@@ -7,7 +7,13 @@ function CheckoutFinished() {
   return (
     <>
       <div className="full-height-msg">
-        {message ? (
+        {!message ? (
+          <div className="single-msg">
+            GRÀCIES!
+            <br />
+            Hem rebut la teva comanda
+          </div>
+        ) : (
           <div className="single-msg">
             UPS!
             <br />
@@ -15,12 +21,6 @@ function CheckoutFinished() {
             <br />
             Possat en contacte amb info@ameba.cat indicant l'usuari/email
             empreats.
-          </div>
-        ) : (
-          <div className="single-msg">
-            GRÀCIES!
-            <br />
-            Hem rebut la teva comanda
           </div>
         )}
       </div>

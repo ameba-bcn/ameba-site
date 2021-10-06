@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ErrorBox from "../error/ErrorBox";
+import { CardContainer } from "../Log.style";
 import MembershipForm from "./MembershipForm";
 
 const MembershipFormLayout = ({ setButtonDisabled }) => {
@@ -8,15 +9,14 @@ const MembershipFormLayout = ({ setButtonDisabled }) => {
 
   return (
     <div className="cardForm">
-      <div className="card card-container card-member">
-        <div className="logTitleSmall">Dades personals</div>
+      <CardContainer>
         <MembershipForm
           setDisplayError={setDisplayError}
           setSuccessful={setSuccessful}
           setButtonDisabled={setButtonDisabled}
         />
         {displayError && <ErrorBox isError={!successful} />}
-      </div>
+      </CardContainer>
     </div>
   );
 };

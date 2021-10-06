@@ -11,6 +11,7 @@ import InputField from "../InputField/InputField";
 import { validate } from "../Login/LoginValidate";
 import { LogFormBox, LogFormError } from "../Log.style";
 import Button from "../../button/Button";
+import { isEmptyObject } from "../../../utils/utils";
 
 export default function LoginForm({ setRedirect, setDisplayError }) {
   const dispatch = useDispatch();
@@ -58,9 +59,6 @@ export default function LoginForm({ setRedirect, setDisplayError }) {
             value={formik.values.email}
             valid={true}
           />
-          {formik.touched.email && formik.errors.email ? (
-            <LogFormError>{formik.errors.email}</LogFormError>
-          ) : null}
         </div>
         <div>
           <InputField
@@ -73,10 +71,14 @@ export default function LoginForm({ setRedirect, setDisplayError }) {
             value={formik.values.password}
             valid={true}
           />
-          {formik.touched.password && formik.errors.password ? (
-            <LogFormError>{formik.errors.password}</LogFormError>
-          ) : null}
         </div>
+        {!isEmptyObject(formik.errors) && (
+          <LogFormError>
+            {Object.values(formik.errors).map((x) => {
+              return <div key={x}>{x}</div>;
+            })}
+          </LogFormError>
+        )}
 
         <Button
           type="submit"

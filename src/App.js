@@ -24,7 +24,7 @@ import LogSession from "./pages/LogSession";
 import Profile from "./pages/Profile";
 import CheckoutPage from "./pages/CheckoutPage";
 import CheckoutFinished from "./pages/landing/CheckoutFinished";
-import SubscriptionFinished from "./pages/landing/SubscriptionFinished";
+// import SubscriptionFinished from "./pages/landing/SubscriptionFinished";
 import LogMailConfirmation from "./pages/LogMailConfirmation";
 import PasswordRecovery from "./pages/PasswordRecovery";
 import SendEmailPasswordRecovery from "./pages/SendEmailPasswordRecovery";
@@ -82,7 +82,6 @@ function App() {
     <div className="App">
       <Elements stripe={promise}>
         <Menu />
-        {/* Switch evita que mas de un componente se renderice a la vez */}
         <UserContext.Provider value={value}>
           <ScrollTop showBelow={250} />
           <Switch>
@@ -94,6 +93,7 @@ function App() {
             <Route path="/booking" component={Booking} />
             <Route path="/login" component={LogSession} />
             <Route path="/recovery" component={PasswordRecovery} />
+            <Route path="/checkout" component={CheckoutPage} />
             <Route
               path="/send-recovery"
               component={SendEmailPasswordRecovery}
@@ -101,9 +101,8 @@ function App() {
             <Route path="/validate-email" component={ValidateEmail} />
             <Route path="/activate" component={LogMailConfirmation} />
             <Route path="/profile" component={Profile} />
-            <Route path="/checkout" component={CheckoutPage} />
             <Route path="/summary-checkout" component={CheckoutFinished} />
-            <Route path="/????" component={SubscriptionFinished} />
+            {/* <Route path="/????" component={SubscriptionFinished} /> */}
             <Route exact path="/" component={Home} />
             <Route component={NotFound} />
           </Switch>

@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { subscribeNewsletter } from "../../../redux/actions/profile";
+import { isEmptyObject } from "../../../utils/utils";
 import Button from "../../button/Button";
 import ErrorBox from "../error/ErrorBox";
 import InputField from "../InputField/InputField";
@@ -48,10 +49,14 @@ export default function NewsletterForm({ setIsSubmitted }, isSubmitted) {
           valid={1}
           unstyled={true}
         />
-        {formik.touched.email && formik.errors.email ? (
-          <LogFormError>{formik.errors.email}</LogFormError>
-        ) : null}
       </div>
+      {!isEmptyObject(formik.errors) && (
+        <LogFormError>
+          {Object.values(formik.errors).map((x) => {
+            return <div key={x}>{x}</div>;
+          })}
+        </LogFormError>
+      )}
       <div className="form-group-button">
         <Button
           type="submit"

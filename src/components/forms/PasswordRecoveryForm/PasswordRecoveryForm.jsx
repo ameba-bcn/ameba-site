@@ -7,6 +7,7 @@ import { validate } from "./PasswordRecoveryFormValidate";
 import { passwordRecovery } from "../../../redux/actions/auth";
 import { useFormik } from "formik";
 import ErrorBox from "../error/ErrorBox";
+import { isEmptyObject } from "../../../utils/utils";
 
 export default function PasswordRecoveryForm(
   { setIsSubmitted },
@@ -52,10 +53,14 @@ export default function PasswordRecoveryForm(
           valid={1}
           unstyled={true}
         />
-        {formik.touched.password && formik.errors.password ? (
-          <LogFormError>{formik.errors.password}</LogFormError>
-        ) : null}
       </div>
+      {!isEmptyObject(formik.errors) && (
+        <LogFormError>
+          {Object.values(formik.errors).map((x) => {
+            return <div key={x}>{x}</div>;
+          })}
+        </LogFormError>
+      )}
       <div className="form-group">
         <Button
           type="submit"

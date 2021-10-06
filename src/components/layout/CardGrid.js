@@ -48,8 +48,8 @@ export default function CardGrid(props) {
     <div className="cardSupportDeck">
       {support.length > 0 && cardGenerator}
       {cardGenerator &&
-        createLastRowIterator(support, 550).map((i) => (
-          <i aria-hidden={true} key={i}></i>
+        createLastRowIterator(support, 550).map((n) => (
+          <i aria-hidden={true} key={n}></i>
         ))}
     </div>
   );

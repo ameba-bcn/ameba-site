@@ -21,18 +21,20 @@ export const Input = styled.input`
   ${(props) =>
     !props.valid
       ? `
-  border-bottom: solid rgb(155, 6, 6) 4px;
-  border-top: solid transparent 4px !important;
-  border-right: solid transparent 4px !important;
-  border-left: solid transparent 4px !important;
+  border-color: #EB5E3E;
   transition: border-bottom 0.2s, border-top 0.2s, border-right 0.2s,
     border-left 0.2s ease-in-out;`
-      : `border: 4px solid #1d1d1b;`}
+      : `border-color: #1d1d1b;`}
 
   ${(props) =>
     props.value &&
     `  
     background-color: #fae6c5;
+`}
+${(props) =>
+    props.slimLine && props.slimLine === false &&
+    `  
+    border-width: 3px;
 `}
 
   &::placeholder {
@@ -44,7 +46,7 @@ export const Input = styled.input`
   }
   &:focus {
     background-color: #fae6c5;
-    border: 4px solid #f2c571;
+    border-color: #f2c571;
   }
   &:touch {
     background-color: #fae6c5;

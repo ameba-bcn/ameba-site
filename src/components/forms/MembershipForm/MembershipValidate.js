@@ -1,29 +1,25 @@
+import { ERROR } from "../../../utils/constants";
+import { phoneValidation } from "../../../utils/validations";
+
 export const validate = (values) => {
   const errors = {};
 
   if (!values.first_name) {
-    errors.first_name = "Iep fera! Aquest camp es obligatori!";
+    errors.first_name = ERROR.USERNAME.REQUIRED;
   }
+
   if (!values.last_name) {
-    errors.last_name = "Iep fera! Aquest camp es obligatori!";
+    errors.last_name = ERROR.LASTNAME.REQUIRED;
   }
 
   if (!values.address) {
-    errors.address = "Iep fera! Aquest camp es obligatori!";
-  } 
-  // else if (
-  //   !/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKET]$/i.test(values.address) ||
-  //   !/^[XYZ][0-9]{7}[TRWAGMYFPDXBNJZSQVHLCKET]$/i.test(values.address)
-  // ) {
-  //   errors.address = "Adreça incorrecte";
-  // }
+    errors.address = ERROR.ADDRESS.REQUIRED;
+  }
 
   if (!values.phone_number) {
-    errors.phone_number = "Iep fera! Aquest camp es obligatori!";
-  } else if (
-    !/^(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}/i.test(values.phone_number)
-  ) {
-    errors.phone_number = "Format de telèfon erroni";
+    errors.phone_number = ERROR.PHONE.REQUIRED;
+  } else if (phoneValidation(values.phone_number)) {
+    errors.phone_number = ERROR.PHONE.REQUIRED;
   }
 
   return errors;

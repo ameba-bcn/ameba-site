@@ -6,6 +6,7 @@ import InputField from "../InputField/InputField";
 import { validate } from "../Register/RegisterValidate";
 import { LogFormBox, LogFormError } from "../Log.style";
 import { register } from "../../../redux/actions/auth";
+import { isEmptyObject } from "../../../utils/utils";
 
 export default function RegisterForm({ setRedirect, setDisplayError }) {
   const { cart_data = {} } = useSelector((state) => state.cart);
@@ -57,9 +58,6 @@ export default function RegisterForm({ setRedirect, setDisplayError }) {
             value={formik.values.username}
             valid={true}
           />
-          {formik.touched.username && formik.errors.username ? (
-            <LogFormError>{formik.errors.username}</LogFormError>
-          ) : null}
         </div>
         <div>
           <InputField
@@ -72,9 +70,6 @@ export default function RegisterForm({ setRedirect, setDisplayError }) {
             value={formik.values.email}
             valid={true}
           />
-          {formik.touched.email && formik.errors.email ? (
-            <LogFormError>{formik.errors.email}</LogFormError>
-          ) : null}
         </div>
         <div>
           <InputField
@@ -87,11 +82,14 @@ export default function RegisterForm({ setRedirect, setDisplayError }) {
             value={formik.values.password}
             valid={true}
           />
-          {formik.touched.password && formik.errors.password ? (
-            <LogFormError>{formik.errors.password}</LogFormError>
-          ) : null}
         </div>
-
+        {!isEmptyObject(formik.errors) && (
+          <LogFormError>
+            {Object.values(formik.errors).map((x) => {
+              return <div key={x}>{x}</div>;
+            })}
+          </LogFormError>
+        )}
         <Button
           type="submit"
           variant="contained"

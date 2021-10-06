@@ -17,7 +17,6 @@ font-family: 'Montserrat', sans-serif;
   background-color: #fae6c5;
   width: 100%;
   max-width: 100%;
-  /* max-width: 2800px; */
   height: 100vh;
   min-height: 100vh;
   box-sizing: border-box;
@@ -51,9 +50,9 @@ font-family: 'Montserrat', sans-serif;
   z-index: 0;
 }
 
-.freeCheckout-box{
+.freeCheckout-box {
   min-height: 200px;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
@@ -61,6 +60,7 @@ font-family: 'Montserrat', sans-serif;
 
 .cardForm {
   max-width: 100%;
+  width: 100%;
 }
 
 *:focus {
@@ -368,14 +368,6 @@ label {
   max-width: 500px !important;
   background-color: transparent !important;
   padding: 40px 40px;
-}
-
-.card-member {
-  border-width: 0px !important;
-  margin: 0 auto;
-  max-width: 500px !important;
-  background-color: transparent !important;
-  padding: 40px 40px 0px 40px;
 }
 
 .logTextosLink {

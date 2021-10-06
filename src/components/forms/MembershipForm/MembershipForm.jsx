@@ -6,7 +6,7 @@ import {
   updateMemberProfile,
 } from "../../../redux/actions/auth";
 import { useSelector } from "react-redux";
-import { deepComparision } from "../../../utils/utils";
+import { deepComparision, isEmptyObject } from "../../../utils/utils";
 import Button from "../../button/Button";
 import InputField from "../InputField/InputField";
 import { LogFormBox, LogFormError } from "../Log.style";
@@ -111,6 +111,7 @@ export default function MembershipForm({
               type="text"
               label="Nºsoci"
               value={user_member_data?.number}
+              slimLine={true}
               valid={true}
               disabled={true}
             />
@@ -127,12 +128,10 @@ export default function MembershipForm({
               formik.handleBlur(e);
               handleBlur(formik.values);
             }}
+            slimLine={true}
             value={formik.values.first_name}
-            valid={true}
+            valid={!formik.errors.first_name}
           />
-          {formik.touched.first_name && formik.errors.first_name ? (
-            <LogFormError>{formik.errors.first_name}</LogFormError>
-          ) : null}
         </div>
         <div>
           <InputField
@@ -145,30 +144,26 @@ export default function MembershipForm({
               formik.handleBlur(e);
               handleBlur(formik.values);
             }}
+            slimLine={true}
             value={formik.values.last_name}
-            valid={true}
+            valid={!formik.errors.last_name}
           />
-          {formik.touched.last_name && formik.errors.last_name ? (
-            <LogFormError>{formik.errors.last_name}</LogFormError>
-          ) : null}
         </div>
         <div>
           <InputField
             id="address"
             name="address"
             type="text"
-            label="Adreça"
+            label="DNI/NIE"
             onChange={formik.handleChange}
             onBlur={(e) => {
               formik.handleBlur(e);
               handleBlur(formik.values);
             }}
+            slimLine={true}
             value={formik.values.address}
-            valid={true}
+            valid={!formik.errors.address}
           />
-          {formik.touched.address && formik.errors.address ? (
-            <LogFormError>{formik.errors.address}</LogFormError>
-          ) : null}
         </div>
         <div>
           <InputField
@@ -181,12 +176,19 @@ export default function MembershipForm({
               formik.handleBlur(e);
               handleBlur(formik.values);
             }}
+            slimLine={true}
             value={formik.values.phone_number}
-            valid={true}
+            valid={!formik.errors.phone_number}
           />
-          {formik.touched.phone_number && formik.errors.phone_number ? (
-            <LogFormError>{formik.errors.phone_number}</LogFormError>
-          ) : null}
+        </div>
+        <div>
+        {!isEmptyObject(formik.errors) && (
+          <LogFormError>
+            {Object.values(formik.errors).map((x) => {
+              return <div key={x}>{x}</div>;
+            })}
+          </LogFormError>
+        )}
         </div>
         {dataHasChanged && (
           <div className="row">

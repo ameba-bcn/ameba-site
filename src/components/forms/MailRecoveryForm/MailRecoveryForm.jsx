@@ -7,6 +7,7 @@ import { validate } from "./../NewsletterForm/NewletterFormValidate";
 import { sendEmailPasswordRecovery } from "../../../redux/actions/auth";
 import { useFormik } from "formik";
 import ErrorBox from "../error/ErrorBox";
+import { isEmptyObject } from "../../../utils/utils";
 
 export default function MailRecoveryForm({ setIsSubmitted }, isSubmitted) {
   const [loading, setLoading] = useState(false);
@@ -46,13 +47,17 @@ export default function MailRecoveryForm({ setIsSubmitted }, isSubmitted) {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
-          valid={1}
+          valid={!formik.errors.email}
           unstyled={true}
         />
-        {formik.touched.email && formik.errors.email ? (
-          <LogFormError>{formik.errors.email}</LogFormError>
-        ) : null}
       </div>
+      {!isEmptyObject(formik.errors) && (
+          <LogFormError>
+            {Object.values(formik.errors).map((x) => {
+              return <div key={x}>{x}</div>;
+            })}
+          </LogFormError>
+        )}
       <div className="form-group">
         <Button
           type="submit"

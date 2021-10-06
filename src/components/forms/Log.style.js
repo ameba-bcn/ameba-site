@@ -15,8 +15,18 @@ export const LogFormError = styled.div`
   margin: 0 auto;
   padding-top: 5px;
   padding-bottom: 5px;
-  color: #af3d24;
+  color: #EB5E3E;
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   font-weight: bold;
 `;
+
+
+export const CardContainer = styled.div`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    word-wrap: break-word;
+    margin: 0 auto;
+    max-width: 500px !important;
+`

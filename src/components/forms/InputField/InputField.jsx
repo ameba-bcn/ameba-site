@@ -13,6 +13,7 @@ export default function InputField(props) {
     value,
     label,
     unstyled = false,
+    slimLines = false,
     ...rest
   } = props;
   return (
@@ -44,6 +45,7 @@ export default function InputField(props) {
           onChange={onChange}
           onBlur={onBlur}
           value={value}
+          slimLines={slimLines}
           {...rest}
         ></Input>
       )}
