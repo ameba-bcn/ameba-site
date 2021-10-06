@@ -1,0 +1,9 @@
+{
+  "menu": {
+    "botiga": "tienda"
+  },
+  "checkout": {
+    "finalitzarCompra": "finalizar compra",
+    "cistella": "cesta"
+  }
+}

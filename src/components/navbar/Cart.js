@@ -4,14 +4,16 @@ import Menu from "@material-ui/core/Menu";
 import DropdownCart from "./DropdownCart";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 function Cart(props) {
-  const {isMobile, onClick = {}, click } = props;
+  const { isMobile, onClick = {}, click } = props;
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { item_variants = [], count = 0 } = cart_data;
   const [anchorEl, setAnchorEl] = useState();
   const [cartMenuOpen, setCartMenuOpen] = useState(false);
   const [isCartMobileOpen, setIsCartMobileOpen] = useState(false);
+  const [t] = useTranslation("translation");
   if (cart_data && item_variants.length < 1 && cartMenuOpen) {
     setCartMenuOpen(false);
   }
@@ -68,13 +70,12 @@ function Cart(props) {
       </li>
     ) : (
       <li>
-        <NavLink
-          to="/botiga"
-          data-item="CISTELLA"
+        <a
+          data-item={t("checkout.cistella")}
           onClick={(e) => handleOpenCart(e)}
         >
-          CISTELLA
-        </NavLink>
+          {t("checkout.cistella")}
+        </a>
         {isCartMobileOpen && (
           <div className="cart-mobile__box">
             <DropdownCart

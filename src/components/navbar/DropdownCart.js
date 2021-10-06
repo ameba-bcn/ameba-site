@@ -7,13 +7,16 @@ import RemoveIcon from "@material-ui/icons/Remove";
 import Button from "../button/Button";
 import "./DropdownCart.css";
 import { setGuestUser, setLoggedUser } from "../../redux/actions/profile";
+import { useTranslation } from "react-i18next";
 
 export default function DropdownCart(props) {
   const dispatch = useDispatch();
   const { isMobile = false, setCartMenuOpen = {} } = props;
   const { item_variants = [], total = 0 } = props.cartData;
-  const arrMono = [];
   const { isLoggedIn } = useSelector((state) => state.auth);
+  const arrMono = [];
+  const [t] = useTranslation("translation");
+
   const getQty = (arr, id) => {
     arrMono.push(id);
     return arr.filter((x) => x.id === id).length;
@@ -89,9 +92,8 @@ export default function DropdownCart(props) {
                 buttonStyle="boton--primary--solid"
                 onClick={() => checkoutToCart(item_variants)}
               >
-                Finalitzar compra
+                {t("checkout.finalitzarCompra")}
               </Button>
-
             </NavLink>
           </>
         ) : (
@@ -144,7 +146,7 @@ export default function DropdownCart(props) {
                 buttonStyle="boton--primary--solid"
                 onClick={() => checkoutToCart(item_variants)}
               >
-                Finalitzar compra
+                {t("checkout.finalitzarCompra")}
               </Button>
             </NavLink>
           </div>

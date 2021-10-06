@@ -1,10 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import MenuLog from "./MenuLog";
 import Cart from "./Cart";
 
 export default function NavbarButtons(props) {
   const { isLoggedIn = false, handleClick = {}, click } = props;
+  const [t, i18next] = useTranslation("translation");
+
+  const handleChangeLanguage = (lang) => {
+    i18next.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
+  };
 
   return (
     <div className="menuButtons">
@@ -15,8 +22,8 @@ export default function NavbarButtons(props) {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/botiga" data-item="BOTIGA">
-            BOTIGA
+          <NavLink to="/botiga" data-item={t("menu.botiga")}>
+          {t("menu.botiga")}
           </NavLink>
         </li>
         <li>
@@ -41,10 +48,10 @@ export default function NavbarButtons(props) {
         </div>
         <div className="menu-lang">
           <li>
-            <a onClick={()=>console.log("Cambia al Catala")} data-item="CAT/">
+            <a onClick={() => handleChangeLanguage("cat")} data-item="CAT/">
               CAT/
             </a>
-            <a onClick={()=>console.log("Cambia al Castella")} data-item="CAST">
+            <a onClick={() => handleChangeLanguage("es")} data-item="CAST">
               CAST
             </a>
           </li>

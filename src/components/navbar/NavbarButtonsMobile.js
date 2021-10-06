@@ -2,9 +2,16 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import MenuLog from "./MenuLog";
 import Cart from "./Cart";
+import { useTranslation } from "react-i18next";
 
 export default function NavbarButtonsMobile(props) {
   const { isLoggedIn = false, click, handleClick } = props;
+  const [t, i18next] = useTranslation("translation");
+
+  const handleChangeLanguage = (lang) => {
+    i18next.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
+  };
 
   return (
     <div className="nav-ul_box-mobile">
@@ -16,8 +23,8 @@ export default function NavbarButtonsMobile(props) {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/botiga" data-item="BOTIGA" onClick={handleClick}>
-              BOTIGA
+            <NavLink to="/botiga" data-item={t("menu.botiga")} onClick={handleClick}>
+              {t("menu.botiga")}
             </NavLink>
           </li>
           <li>
@@ -46,13 +53,13 @@ export default function NavbarButtonsMobile(props) {
           <div className="menu-lang">
             <li>
               <a
-                onClick={() => console.log("Cambia al Catala")}
+               onClick={() => handleChangeLanguage("cat")}
                 data-item="CAT/"
               >
                 CAT/
               </a>
               <a
-                onClick={() => console.log("Cambia al Castella")}
+                onClick={() => handleChangeLanguage("es")}
                 data-item="CAST"
               >
                 CAST

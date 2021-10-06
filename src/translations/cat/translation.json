@@ -1,0 +1,9 @@
+{
+  "menu": {
+    "botiga": "botiga"
+  },
+  "checkout": {
+    "finalitzarCompra": "finalitzar compra",
+    "cistella": "cistella"
+  }
+}
