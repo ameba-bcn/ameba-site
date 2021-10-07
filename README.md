@@ -4,6 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.3
+- Multilanguage
+- Form errors restyled
+- New checkout look&feel
+
 Version 1.2
 - Free shopping process
 - SubscriptionBox
