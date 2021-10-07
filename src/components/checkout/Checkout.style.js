@@ -37,7 +37,6 @@ export const CheckoutBox = styled.div`
 
 export const CheckoutContent = styled.div`
   display: flex;
-  border: 4px solid black;
   margin: 40px 0;
 `;
 
@@ -48,4 +47,10 @@ export const CheckoutButtons = styled.div`
     padding-left: 50px;
     padding-right: 50px;
   }
+`;
+export const CheckoutMemberFrame = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border: 4px solid black;
 `;

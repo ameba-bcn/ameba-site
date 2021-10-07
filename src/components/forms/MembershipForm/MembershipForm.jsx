@@ -53,7 +53,8 @@ export default function MembershipForm({
   }, [dataHasChanged, isNewMember]);
 
   const handleCancel = (setValues) => {
-    setValues(initialMemberValues);
+    setValues(InitialValues);
+    if (!isNewMember) formik.setErrors({})
     setDataHasChanged(false);
   };
 
@@ -182,13 +183,13 @@ export default function MembershipForm({
           />
         </div>
         <div>
-        {!isEmptyObject(formik.errors) && (
-          <LogFormError>
-            {Object.values(formik.errors).map((x) => {
-              return <div key={x}>{x}</div>;
-            })}
-          </LogFormError>
-        )}
+          {!isEmptyObject(formik.errors) && (
+            <LogFormError>
+              {Object.values(formik.errors).map((x) => {
+                return <div key={x}>{x}</div>;
+              })}
+            </LogFormError>
+          )}
         </div>
         {dataHasChanged && (
           <div className="row">

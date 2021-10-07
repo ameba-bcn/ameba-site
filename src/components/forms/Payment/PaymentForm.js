@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCartAfterCheckout } from "./../../redux/actions/cart";
+import { deleteCartAfterCheckout } from "./../../../redux/actions/cart";
 import { Redirect } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import "./PaymentForm.css";
-import Button from "../button/Button";
-import { getMemberProfile } from "../../redux/actions/auth";
-import ErrorBox from "./error/ErrorBox";
+import Button from "../../button/Button";
+import { getMemberProfile } from "../../../redux/actions/auth";
+import ErrorBox from "./../error/ErrorBox";
 
 function PaymentForm(props) {
   const dispatch = useDispatch();
@@ -101,7 +101,7 @@ function PaymentForm(props) {
               ) : (
                 "Pay now"
               )}
-            </span>{" "}
+            </span>
           </Button>
 
           {error && <ErrorBox isError={true} message={error} />}

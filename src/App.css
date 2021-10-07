@@ -43,7 +43,7 @@ font-family: 'Montserrat', sans-serif;
 
 .checkoutViewYellow {
   background-color: #fae6c5;
-  height: 100%;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -65,6 +65,10 @@ font-family: 'Montserrat', sans-serif;
 
 *:focus {
   outline: 0;
+}
+
+.deleteItem{
+  cursor:pointer;
 }
 
 @keyframes App-logo-spin {

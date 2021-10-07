@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { Redirect } from "react-router";
 import { getMemberProfile } from "../../redux/actions/auth";
 import { deleteCartAfterCheckout } from "../../redux/actions/cart";
-import { Paragraph1 } from "./../../GlobalStyles.style";
 import Button from "../button/Button";
 import ErrorBox from "../forms/error/ErrorBox";
 import { clearMessage } from "../../redux/actions/message";
@@ -29,10 +28,10 @@ export default function FreeCheckout() {
 
   return (
     <div className="freeCheckout-box">
-      <Paragraph1>
+      <p>
         El procediment de compra no suposa cap càrreg per tant no cal realitzar
         pagament.
-      </Paragraph1>
+      </p>
       {error && <ErrorBox isError={error} />}
       <Button
         variant="contained"

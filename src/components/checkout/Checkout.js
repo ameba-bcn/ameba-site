@@ -17,6 +17,7 @@ import {
   CheckoutButtons,
   CheckoutContent,
   CheckoutFrame,
+  CheckoutMemberFrame,
   CheckoutSubtitle,
   CheckoutTitle,
 } from "./Checkout.style";
@@ -66,18 +67,22 @@ function Checkout() {
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return hasMembershipInCart ? (
-          <MembershipFormLayout
-            handleNext={handleNext}
-            setButtonDisabled={setButtonDisabled}
-          />
-        ) : (
-          <MembershipFormReadOnly isCheckout={true} />
+        return (
+          <CheckoutMemberFrame>
+            {hasMembershipInCart ? (
+            <MembershipFormLayout
+              handleNext={handleNext}
+              setButtonDisabled={setButtonDisabled}
+            />
+            ) : (
+            <MembershipFormReadOnly isCheckout={true} />
+            )}
+          </CheckoutMemberFrame>
         );
       case 1:
         return (
           <>
-            <Review setError={setError} />
+            <Review setError={setError} error={error} />
             {/* <SubscriptionBox isCheckout={true} /> */}
           </>
         );

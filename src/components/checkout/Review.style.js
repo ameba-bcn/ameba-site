@@ -16,6 +16,7 @@ export const ReviewContent = styled.div`
   font-family: "Bebas Neue";
   font-weight: 300;
   color: #1d1d1b;
+  border: 4px solid black;
 `;
 
 export const ReviewTotalRow = styled.div`
@@ -36,7 +37,12 @@ export const ReviewRowSeparator = styled.div`
   width: 100%;
   height: 2px;
   border-bottom: 2px solid black;
-  margin: 20px 0px;
+  ${(props) =>
+    props.isBig
+      ? `margin: 20px 0px
+`
+      : `margin: 5px 0px
+`}
 `;
 
 export const ReviewTable = styled.table`
@@ -57,7 +63,6 @@ export const ReviewTable = styled.table`
         width: 90px;
       }
       & td:nth-child(2) {
-        font-size: 2rem;
         text-align: left;
         max-width: 120px;
         line-height: 1em;
@@ -78,6 +83,33 @@ export const ReviewTable = styled.table`
       }
     }
   }
+  ${(props) =>
+    props.isBig
+      ? `
+    & tbody {
+      & tr {
+        & td:nth-child(2) {
+          font-size: 2rem;
+        }
+        & td:nth-child(3) {
+        font-size: 2.5rem;
+      }
+      }
+    }`
+      : `
+    & tbody {
+      & tr {
+        & td {
+        padding: 5px 0px;
+        }
+        & td:nth-child(2) {
+          font-size: 1.4rem;
+        }
+        & td:nth-child(3) {
+        font-size: 1.5rem;
+      }
+      }
+    }`}
 `;
 
 export const ReviewFooter = styled.div`

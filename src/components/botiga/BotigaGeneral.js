@@ -81,8 +81,8 @@ export default function BotigaGeneral() {
     <div className="productCardDeck">
       {cardGenerator}
       {cardGenerator &&
-        createLastRowIterator(botiga, 467).map((i) => (
-          <i aria-hidden={true} key={i}></i>
+        createLastRowIterator(botiga, 467).map((n, index) => (
+          <i aria-hidden={true} key={index}></i>
         ))}
       {open && (
         <ProducteDialog
