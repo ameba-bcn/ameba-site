@@ -20,7 +20,7 @@ function Review({ setError: setCheckoutError }, error) {
         <div> {total}</div>
       </ReviewTotalRow>
       <ReviewRowSeparator isBig={true}/>
-      <TableProducts isBig={true} setError={setCheckoutError} />
+      <TableProducts setError={setCheckoutError} />
       <ReviewRowSeparator isBig={true}/>
       <ReviewFooter>
         Temporalment no fem enviaments de productes. <br/>La recollida es pot fer de

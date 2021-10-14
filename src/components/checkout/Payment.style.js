@@ -38,5 +38,20 @@ export const PaymentReview = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 40px 40px;
+  padding: 20px 0px;
+`;
+
+export const PayementTotalRow = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  font-size: 2.3rem;
+  padding: 0px 10px;
+  line-height: 1em;
+  & div:nth-child(2) {
+    font-weight: bold;
+  }
 `;

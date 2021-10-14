@@ -2,9 +2,15 @@ import React from "react";
 import { useSelector } from "react-redux";
 import PaymentForm from "../forms/Payment/PaymentForm";
 import FreeCheckout from "./FreeCheckout";
-import { PaymentBox, PaymentContent, PaymentReview, PaymentSummaryBox } from "./Payment.style";
-import { ReviewRowSeparator, ReviewTotalRow } from "./Review.style";
-import TableProducts from "./TableProducts";
+import MiniTableProducts from "./MiniTableProducts";
+import {
+  PayementTotalRow,
+  PaymentBox,
+  PaymentContent,
+  PaymentReview,
+  PaymentSummaryBox,
+} from "./Payment.style";
+import { ReviewRowSeparator } from "./Review.style";
 
 export default function Payment(props) {
   const { isPaymentFree = false } = props;
@@ -15,13 +21,13 @@ export default function Payment(props) {
     <PaymentContent>
       <PaymentSummaryBox>
         <PaymentReview>
-          <ReviewTotalRow>
+          <PayementTotalRow>
             <div> Total</div>
             <div> {total}</div>
-          </ReviewTotalRow>
-          <ReviewRowSeparator isBig={false}/>
-          <TableProducts isBig={false} />
-          <ReviewRowSeparator  isBig={false}/>
+          </PayementTotalRow>
+          <ReviewRowSeparator isBig={false} />
+          <MiniTableProducts />
+          <ReviewRowSeparator isBig={false} />
         </PaymentReview>
       </PaymentSummaryBox>
       <PaymentBox>

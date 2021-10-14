@@ -66,6 +66,7 @@ export const ReviewTable = styled.table`
         text-align: left;
         max-width: 120px;
         line-height: 1em;
+        font-size: 2rem;
       }
       & td:nth-child(3) {
         font-size: 2.5rem;
@@ -83,33 +84,6 @@ export const ReviewTable = styled.table`
       }
     }
   }
-  ${(props) =>
-    props.isBig
-      ? `
-    & tbody {
-      & tr {
-        & td:nth-child(2) {
-          font-size: 2rem;
-        }
-        & td:nth-child(3) {
-        font-size: 2.5rem;
-      }
-      }
-    }`
-      : `
-    & tbody {
-      & tr {
-        & td {
-        padding: 5px 0px;
-        }
-        & td:nth-child(2) {
-          font-size: 1.4rem;
-        }
-        & td:nth-child(3) {
-        font-size: 1.5rem;
-      }
-      }
-    }`}
 `;
 
 export const ReviewFooter = styled.div`
