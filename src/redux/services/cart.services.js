@@ -244,6 +244,25 @@ const deleteCartAfterSuccesfullCheckout = () => {
     });
 };
 
+const applyDiscount = (item_variants, discountCode) => {
+  return axios
+    .post(
+      `${API_URL}carts/`,
+      {
+        item_variant_ids: item_variants,
+        discount_code: discountCode,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      }
+    )
+    .then((response) => {
+      return response?.data;
+    });
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   addInCart,
@@ -252,4 +271,5 @@ export default {
   checkoutCart,
   getCart,
   deleteCartAfterSuccesfullCheckout,
+  applyDiscount
 };

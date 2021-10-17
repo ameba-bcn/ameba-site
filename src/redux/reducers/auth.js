@@ -21,6 +21,8 @@ import {
   GET_MEMBER_PROFILE_FAIL,
   UPDATE_MEMBER_PROFILE,
   CREATE_MEMBER_PROFILE,
+  DELETE_USER,
+  DELETE_USER_FAIL,
 } from "../actions/types";
 
 const access = localStorage.getItem("access");
@@ -161,6 +163,15 @@ export default function (state = initialState, action) {
         user: null,
         user_data: user_data,
       };
+    case DELETE_USER:
+      return {
+        ...state,
+      };
+    case DELETE_USER_FAIL:
+      return {
+        ...state,
+      };
+
     default:
       return state;
   }

@@ -12,6 +12,8 @@ import {
   DESTROY_CART,
   DESTROY_CART_FAIL,
   SET_MESSAGE,
+  DISCOUNT_CODE_APPLIED,
+  DISCOUNT_CODE_FAIL
 } from "./types";
 
 import CartService from "../services/cart.services";
@@ -160,6 +162,38 @@ export const deleteCartAfterCheckout = () => (dispatch) => {
 
       dispatch({
         type: DESTROY_CART_FAIL,
+        payload: message,
+      });
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
+};
+
+export const applyDiscount = (item_variants, discountCode) => (dispatch) => {
+  return CartService.applyDiscount(item_variants, discountCode).then(
+    (response) => {
+      dispatch({
+        type: DISCOUNT_CODE_APPLIED,
+        payload: response,
+      });
+
+      dispatch({
+        type: GET_CART,
+        payload: response,
+      });
+
+      return Promise.resolve();
+    },
+    (error) => {
+      const message = error.response?.data?.discount_code[0];
+      dispatch({
+        type: DISCOUNT_CODE_FAIL,
         payload: message,
       });
 

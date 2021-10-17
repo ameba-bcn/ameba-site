@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import DiscountCode from "../forms/DiscountForm/DiscountCode";
 import ErrorBox from "../forms/error/ErrorBox";
 import {
   ReviewContent,
@@ -19,15 +20,17 @@ function Review({ setError: setCheckoutError }, error) {
         <div> Total</div>
         <div> {total}</div>
       </ReviewTotalRow>
-      <ReviewRowSeparator isBig={true}/>
+      <ReviewRowSeparator isBig={true} />
       <TableProducts setError={setCheckoutError} />
-      <ReviewRowSeparator isBig={true}/>
+      <ReviewRowSeparator isBig={true} />
+      <DiscountCode />
+      <ReviewRowSeparator isBig={true} />
       <ReviewFooter>
-        Temporalment no fem enviaments de productes. <br/>La recollida es pot fer de
-        10-14 i de 16-20 a Rhythm Control. <br/>Si tens qualsevol dubte contacta'ns a
-        info@ameba.cat
+        Temporalment no fem enviaments de productes. <br />
+        La recollida es pot fer de 10-14 i de 16-20 a Rhythm Control. <br />
+        Si tens qualsevol dubte contacta'ns a info@ameba.cat
       </ReviewFooter>
-      {error===true && <ErrorBox isError={error} />}
+      {error === true && <ErrorBox isError={error} />}
     </ReviewContent>
   );
 }

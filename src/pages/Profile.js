@@ -11,10 +11,11 @@ export default function Profile() {
   const { isLoggedIn = false } = auth;
   const { username = "" } = user_data;
   const isMember = !isEmptyObject(user_member_data);
+
   if (!isLoggedIn) {
     return <Redirect to="/" />;
   }
-  console.log("user_member_data", user_member_data);
+
   return (
     <div className="logViewYellow">
       <div className="profileTitle">{`Hola ${username}!`}</div>

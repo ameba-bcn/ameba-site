@@ -24,4 +24,8 @@ export const ERROR = {
   ADDRESS: {
     REQUIRED: "DNI/NIE: aquest camp es obligatori"
   },
+  CODE: {
+    REQUIRED: "Descompte: aquest camp es obligatori",
+    FORMAT: "Descompte: format erroni",
+  },
 };

@@ -17,3 +17,8 @@ export const phoneValidation = (value) => {
   if (!value) return false;
   return !/^(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}/i.test(value);
 };
+
+export const codeValidation = (value) =>{
+  if (!value) return false;
+  return (value.length === 6);
+}

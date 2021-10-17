@@ -171,6 +171,18 @@ const logout = () => {
     });
 };
 
+const deleteUser = () => {
+  return axios
+    .delete(API_URL + "users/current/", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    })
+    .then((response) => {
+      return response?.data;
+    });
+};
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   register,
@@ -184,5 +196,6 @@ export default {
   sendEmailPasswordRecovery,
   getMemberProfile,
   updateMemberProfile,
-  createMemberProfile
+  createMemberProfile,
+  deleteUser,
 };

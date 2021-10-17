@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RowSeparator } from "../../GlobalStyles.style";
+import { deleteUser } from "../../redux/actions/auth";
 import SociDialog from "../botiga/Soci";
 import Button from "../button/Button";
 import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
@@ -15,6 +16,7 @@ import {
 } from "./MemberProfile.style";
 
 export default function MemberProfile({ setButtonDisabled, isMember }) {
+  const dispatch = useDispatch();
   const { user_member_data } = useSelector((state) => state.auth);
   const { type } = user_member_data;
   const antiMember = type === "PROFESSIONAL" ? "SUBSCRIPTOR" : "PROFESSIONAL";
@@ -23,6 +25,11 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
   const handleClick = () => {
     setOpen(!open);
   };
+
+  const unsubscribeUser = () => {
+    dispatch(deleteUser());
+  };
+
   return (
     <MemberProfileFrame>
       <MemberProfileBox>
@@ -44,7 +51,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
             color="primary"
             buttonSize="boton--big"
             buttonStyle="boton--primary--solid"
-            onClick={console.log("pendiente implementar baja")}
+            onClick={() => unsubscribeUser()}
           >
             Donar-se de baixa
           </Button>

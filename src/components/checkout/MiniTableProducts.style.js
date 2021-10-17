@@ -6,7 +6,7 @@ import styled from "styled-components";
 // #1D1D1B Negro
 // #FFED00 Amarillo
 
-export const MiniTableContent = styled.div`
+export const MiniTableContent = styled.table`
   width: 100%;
   display: flex;
   justify-content: center;

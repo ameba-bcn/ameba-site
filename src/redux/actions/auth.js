@@ -17,7 +17,6 @@ import {
   PASSWORD_RECOVERY_FAIL,
   LOGOUT,
   SET_MESSAGE,
-  CLEAR_MESSAGE,
   DELETE_CART,
   GUEST_USER,
   LOGGED_USER,
@@ -27,6 +26,8 @@ import {
   GET_MEMBER_PROFILE_FAIL,
   UPDATE_MEMBER_PROFILE,
   CREATE_MEMBER_PROFILE,
+  DELETE_USER,
+  DELETE_USER_FAIL
 } from "./types";
 
 import AuthService from "../services/auth.service";
@@ -414,6 +415,27 @@ export const logout = () => (dispatch) => {
         type: SET_MESSAGE,
         payload: message,
       });
+      return Promise.reject();
+    }
+  );
+};
+
+export const deleteUser = () => (dispatch) => {
+  return AuthService.deleteUser().then(
+    () => {
+      dispatch({
+        type: DELETE_USER,
+      });
+
+      return Promise.resolve();
+    },
+    (error) => {
+      const message = error.response.data?.detail;
+      dispatch({
+        type: DELETE_USER_FAIL,
+        payload: message,
+      });
+
       return Promise.reject();
     }
   );
