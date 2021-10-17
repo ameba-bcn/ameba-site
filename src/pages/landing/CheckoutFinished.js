@@ -15,12 +15,7 @@ function CheckoutFinished() {
           </div>
         ) : (
           <div className="single-msg">
-            UPS!
-            <br />
             {message}
-            <br />
-            Possat en contacte amb info@ameba.cat indicant l'usuari/email
-            empreats.
           </div>
         )}
       </div>
