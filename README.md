@@ -4,6 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.4
+- DiscountCode
+- NodeModules Lib cleaned
+- MiniTable products on Summary
+- Profile View updated
+
 Version 1.3
 - Multilanguage
 - Form errors restyled
