@@ -15,6 +15,7 @@ export default function Profile() {
   }
   return (
     <div className="logViewYellow">
+      <div className="profileTitle">{!!user_member_data ?`Hola ${user_member_data?.first_name}!`:"Hola!"}</div>
       {!!user_member_data ? <MemberProfile /> : <MembershipFormReadOnly />}
       <LettersMove
         className="lettersMoveDiv"

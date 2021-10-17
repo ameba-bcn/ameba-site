@@ -34,6 +34,7 @@ font-family: 'Montserrat', sans-serif;
 
 .logViewYellow {
   height: 100%;
+  width: 100%;
   background-color: #fae6c5;
   display: flex;
   flex-direction: column;
@@ -58,6 +59,31 @@ font-family: 'Montserrat', sans-serif;
   align-items: center;
 }
 
+.profileTitle {
+  width: 100%;
+  background-color: #eb5e3e;
+  font-size: 120px;
+  font-family: "Bebas Neue";
+  width: 100%;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+@media screen and (max-width: 500px) {
+  .profileTitle {
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profileTitle {
+    font-size: 60px;
+  }
+}
+
 .cardForm {
   max-width: 100%;
   width: 100%;
@@ -67,8 +93,8 @@ font-family: 'Montserrat', sans-serif;
   outline: 0;
 }
 
-.deleteItem{
-  cursor:pointer;
+.deleteItem {
+  cursor: pointer;
 }
 
 @keyframes App-logo-spin {
