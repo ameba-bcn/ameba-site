@@ -8,7 +8,7 @@ import NavbarButtonsMobile from "./NavbarButtonsMobile";
 import "./Navbar.scss";
 
 export default function Navbar() {
-  const isMobile = useMediaQuery("(max-width:940px)");
+  const isMobile = useMediaQuery("(max-width:1130px)");
   const [click, setClick] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
 

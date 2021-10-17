@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const LogFormBox = styled.div`
-margin: 20px 0;
+margin: 20px 10px;
   & > form {
       & > div{
           margin-bottom: 20px;
