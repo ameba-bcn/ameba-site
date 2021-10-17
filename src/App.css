@@ -33,7 +33,6 @@ font-family: 'Montserrat', sans-serif;
 }
 
 .logViewYellow {
-  height: 100%;
   width: 100%;
   background-color: #fae6c5;
   display: flex;
@@ -67,9 +66,7 @@ font-family: 'Montserrat', sans-serif;
   width: 100%;
   font-weight: 400;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
-
 }
 
 @media screen and (max-width: 500px) {
