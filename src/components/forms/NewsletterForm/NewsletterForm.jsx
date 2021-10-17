@@ -35,21 +35,37 @@ export default function NewsletterForm({ setIsSubmitted }, isSubmitted) {
     },
   });
   return (
-    <form className="contactNews" onSubmit={formik.handleSubmit}>
-      <div className="form-group-input">
-        <InputField
-          id="emailNewletter"
-          name="email"
-          type="text"
-          placeholder="email"
-          className="form-control formControlNews"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-          valid={1}
-          unstyled={true}
-        />
-      </div>
+    <>
+      <form className="contactNews" onSubmit={formik.handleSubmit}>
+        <div className="form-group-input">
+          <InputField
+            id="emailNewletter"
+            name="email"
+            type="text"
+            placeholder="email"
+            className="form-control formControlNews"
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            value={formik.values.email}
+            valid={1}
+            unstyled={true}
+          />
+        </div>
+        <div className="form-group-button">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            buttonSize="boton--megaxxl"
+            buttonStyle="boton--orange--solid"
+            disabled={loading}
+          >
+            Subscriu-te
+          </Button>
+        </div>
+        {!isSubmitted && <ErrorBox isError={!isSubmitted} />}
+      </form>
+      {loading && <span className="spinner-border spinner-border-sm"></span>}
       {!isEmptyObject(formik.errors) && (
         <LogFormError>
           {Object.values(formik.errors).map((x) => {
@@ -57,20 +73,6 @@ export default function NewsletterForm({ setIsSubmitted }, isSubmitted) {
           })}
         </LogFormError>
       )}
-      <div className="form-group-button">
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          buttonSize="boton--megaxxl"
-          buttonStyle="boton--orange--solid"
-          disabled={loading}
-        >
-          Subscriu-te
-        </Button>
-      </div>
-      {loading && <span className="spinner-border spinner-border-sm"></span>}
-      {!isSubmitted && <ErrorBox isError={!isSubmitted} />}
-    </form>
+    </>
   );
 }

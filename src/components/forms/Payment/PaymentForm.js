@@ -99,7 +99,7 @@ function PaymentForm(props) {
               {processing ? (
                 <div className="spinner" id="spinner"></div>
               ) : (
-                "Pay now"
+                "Paga ara"
               )}
             </span>
           </Button>
