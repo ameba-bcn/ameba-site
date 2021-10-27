@@ -29,3 +29,7 @@ export const ERROR = {
     FORMAT: "Descompte: format erroni",
   },
 };
+
+export const MOBILE_BIG = "(max-width:1130px)";
+
+export const MOBILE_NORMAL = "(max-width:690px)";

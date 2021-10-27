@@ -6,9 +6,10 @@ import { useSelector } from "react-redux";
 import NavbarButtons from "./NavbarButtons";
 import NavbarButtonsMobile from "./NavbarButtonsMobile";
 import "./Navbar.scss";
+import { MOBILE_BIG } from "../../utils/constants";
 
 export default function Navbar() {
-  const isMobile = useMediaQuery("(max-width:1130px)");
+  const isMobile = useMediaQuery(MOBILE_BIG);
   const [click, setClick] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
 

@@ -10,6 +10,7 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import Button from "../components/button/Button";
 import ImageCarousel from "../components/images/ImageCarousel";
 import "./Modals.css";
+import { MOBILE_NORMAL } from "../utils/constants";
 
 export default function ModalCard(props) {
   const {
@@ -34,7 +35,7 @@ export default function ModalCard(props) {
     setIsSubscriber,
     colorMode,
   } = props;
-  const isMobile = useMediaQuery("(max-width:640px)");
+  const isMobile = useMediaQuery(MOBILE_NORMAL);
   const types = ["PRODUCTE", "SOCI", "ACTIVITAT"];
   const [activeSize, setActiveSize] = useState(sizes ? sizes[0] : []);
   const modalStyle = types.includes(type) ? type : types[0];

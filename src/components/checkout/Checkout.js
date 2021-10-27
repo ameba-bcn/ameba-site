@@ -22,6 +22,8 @@ import {
   CheckoutTitle,
 } from "./Checkout.style";
 import Payment from "./Payment";
+import { useMediaQuery } from "@material-ui/core";
+import { MOBILE_NORMAL } from "../../utils/constants";
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -36,6 +38,8 @@ function Checkout() {
   const userIsEditingData =
     buttonDisabled && activeStep === 0 && hasMembershipInCart;
   const steps = ["Dades personals", "Cistella", "Dades de pagament"];
+  const isMobile = useMediaQuery(MOBILE_NORMAL);
+
 
   useEffect(() => {
     dispatch(getMemberProfile());
@@ -57,11 +61,13 @@ function Checkout() {
     } else {
       setActiveStep(activeStep + 1);
     }
+    isMobile && window.scrollTo(0, 0);
   };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
     setError(false);
+    isMobile && window.scrollTo(0, 0);
   };
 
   const getStepContent = (step) => {

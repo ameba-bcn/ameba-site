@@ -47,7 +47,7 @@ export default function NavbarButtonsMobile(props) {
                 LOGIN
               </NavLink>
             ) : (
-              <MenuLog handleClick={handleClick} />
+              <MenuLog isMobile handleClick={handleClick} />
             )}
           </div>
           <div className="menu-lang">

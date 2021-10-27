@@ -5,6 +5,7 @@ import ProductBanner from "../components/botiga/ProductBanner";
 import SociDialog from "../components/botiga/Soci";
 import LettersMove from "./../components/layout/LettersMove";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { MOBILE_NORMAL } from "../utils/constants";
 
 function Botiga() {
   const [open, setOpen] = React.useState(false);
@@ -13,7 +14,7 @@ function Botiga() {
     setOpen(!open);
   };
 
-  const isMobile = useMediaQuery("(max-width:750px)");
+  const isMobile = useMediaQuery(MOBILE_NORMAL);
 
   return (
     <div className="Botiga">

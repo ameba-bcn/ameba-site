@@ -52,7 +52,7 @@ export default function DiscountCode() {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.code}
-          valid={true}
+          valid={1}
           unstyled={true}
         />
         <Button
