@@ -24,7 +24,7 @@ import LogSession from "./pages/LogSession";
 import Profile from "./pages/Profile";
 import CheckoutPage from "./pages/CheckoutPage";
 import CheckoutFinished from "./pages/landing/CheckoutFinished";
-// import SubscriptionFinished from "./pages/landing/SubscriptionFinished";
+import SubscriptionFinished from "./pages/landing/SubscriptionFinished";
 import LogMailConfirmation from "./pages/LogMailConfirmation";
 import PasswordRecovery from "./pages/PasswordRecovery";
 import SendEmailPasswordRecovery from "./pages/SendEmailPasswordRecovery";
@@ -102,7 +102,7 @@ function App() {
             <Route path="/activate" component={LogMailConfirmation} />
             <Route path="/profile" component={Profile} />
             <Route path="/summary-checkout" component={CheckoutFinished} />
-            {/* <Route path="/????" component={SubscriptionFinished} /> */}
+            <Route path="/subscribe" component={SubscriptionFinished} />
             <Route exact path="/" component={Home} />
             <Route component={NotFound} />
           </Switch>

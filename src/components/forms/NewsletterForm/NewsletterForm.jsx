@@ -16,12 +16,12 @@ export default function NewsletterForm({ setIsSubmitted }, isSubmitted) {
     setLoading(true);
     dispatch(subscribeNewsletter(value.email))
       .then(() => {
-        setIsSubmitted(true);
         setLoading(false);
+        setIsSubmitted(true);
       })
       .catch(() => {
-        setIsSubmitted(false);
         setLoading(false);
+        setIsSubmitted(false);
       });
   };
 
@@ -34,6 +34,7 @@ export default function NewsletterForm({ setIsSubmitted }, isSubmitted) {
       handleSubmit(values);
     },
   });
+
   return (
     <>
       <form className="contactNews" onSubmit={formik.handleSubmit}>

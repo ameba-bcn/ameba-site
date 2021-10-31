@@ -13,7 +13,7 @@ function Activitats() {
   const { agenda = [] } = data;
 
   useEffect(() => {
-    getActivitats(getNFirstElementsOfArray(agenda, 3));
+    if (!!agenda.length) getActivitats(getNFirstElementsOfArray(agenda, 3));
   }, [agenda]);
 
   return (
