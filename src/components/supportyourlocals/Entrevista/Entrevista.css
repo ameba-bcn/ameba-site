@@ -76,6 +76,7 @@
 .menu-entrevista {
   width: 90%;
   background-color: #1d1d1b;
+  text-transform: uppercase;
   margin: 0 auto;
   text-align: left;
   margin-top: 20px;
