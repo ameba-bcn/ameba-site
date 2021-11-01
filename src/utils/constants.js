@@ -33,3 +33,5 @@ export const ERROR = {
 export const MOBILE_BIG = "(max-width:1130px)";
 
 export const MOBILE_NORMAL = "(max-width:690px)";
+
+export const AMEBA_EMAIL = "info@ameba.cat";
