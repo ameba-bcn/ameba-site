@@ -34,7 +34,9 @@ export default function Entrevista() {
       media_urls: [],
     },
   ]);
+
   const hasMediaSection = !!artist.media_urls?.length;
+  const hasActivitiesSection = false;
 
   useEffect(() => {
     axiosInstance
@@ -67,7 +69,10 @@ export default function Entrevista() {
             <div className="tags-e">mastering</div>
             <div className="tags-e">label</div>
           </div>
-          <EntrevistaMenu hasMediaSection={hasMediaSection} />
+          <EntrevistaMenu
+            hasMediaSection={hasMediaSection}
+            hasActivitiesSection={hasActivitiesSection}
+          />
         </div>
         <MainSection interview={interview} artist={artist} />
       </div>
@@ -85,13 +90,17 @@ export default function Entrevista() {
           <MediaSection artist={artist} />
         </>
       )}
-      <LettersMove
-        sentence={"l'associació de música electrònica de barcelona"}
-        color={"#EB5E3E"}
-      />
-      <div className="activitats-gral">
-        <TitleSection title="Activitats" />
-      </div>
+      {hasActivitiesSection && (
+        <>
+          <LettersMove
+            sentence={"l'associació de música electrònica de barcelona"}
+            color={"#EB5E3E"}
+          />
+          <div className="activitats-gral">
+            <TitleSection title="Activitats" />
+          </div>
+        </>
+      )}
       <LettersMove
         sentence={"l'associació de música electrònica de barcelona"}
         color={"#FAE6C5"}

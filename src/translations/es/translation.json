@@ -5,5 +5,13 @@
   "checkout": {
     "finalitzarCompra": "finalizar compra",
     "cistella": "cesta"
+  },
+  "support": {
+    "menu": {
+      "bio": "bio",
+      "entrevista": "entrevista",
+      "media": "media",
+      "activitats": "actividades"
+    }
   }
 }

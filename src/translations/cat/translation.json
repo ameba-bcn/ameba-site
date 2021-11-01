@@ -5,5 +5,20 @@
   "checkout": {
     "finalitzarCompra": "finalitzar compra",
     "cistella": "cistella"
+  },
+  "support": {
+    "menu": {
+      "bio": "bio",
+      "entrevista": "entrevista",
+      "media": "media",
+      "activitats": "activitats"
+    },
+    "top-menu": {
+      "nom": "nom",
+      "ciutat": "ciutat",
+      "segells": "segells",
+      "projectes": "projectes",
+      "artistes": "artistes"
+    }
   }
 }

@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Home from "./pages/Home";
 import Activitats from "./pages/Activitats";
 import Botiga from "./pages/Botiga";
-import Entrevista from "./components/supportyourlocals/Entrevista";
+import Entrevista from "./components/supportyourlocals/Entrevista/Entrevista";
 import SupportYourLocals from "./pages/SupportYourLocals";
 import NotFound from "./pages/NotFound";
 import { Switch, Route } from "react-router-dom";

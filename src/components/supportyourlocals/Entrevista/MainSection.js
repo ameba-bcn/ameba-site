@@ -1,28 +1,31 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { isCORSInactive } from "../../../utils/utils";
 import TitleSection from "../TitleSection";
 
 export default function MainSection(props) {
   const { interview = {}, artist = {} } = props;
+  const [t] = useTranslation("translation");
+
   return (
     <div className="bio-gral">
       <TitleSection title="BIO" />
       <div className="bio-section">
         <div className="bio-highlights">
           <div className="bio-data">
-            NOM/ <span>{interview.title}</span>
+            {t("support.top-menu.nom")}/ <span>{interview.title}</span>
           </div>
           <div className="bio-data">
-            CIUTAT/ <span>DUMMY TEXT</span>
+            {t("support.top-menu.ciutat")}/ <span>DUMMY TEXT</span>
           </div>
           <div className="bio-data">
-            SEGELLS/ <span>DUMMY TEXT</span>
+            {t("support.top-menu.segells")}/ <span>DUMMY TEXT</span>
           </div>
           <div className="bio-data">
-            PROJECTES/ <span>DUMMY TEXT</span>
+            {t("support.top-menu.projectes")}/ <span>DUMMY TEXT</span>
           </div>
           <div className="bio-data">
-            ARTISTES/ <span>DUMMY TEXT</span>
+            {t("support.top-menu.artistes")}/ <span>DUMMY TEXT</span>
           </div>
         </div>
         <div className="bio-text">{artist.biography}</div>

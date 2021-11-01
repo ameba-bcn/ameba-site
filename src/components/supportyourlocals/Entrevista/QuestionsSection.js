@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import TitleSection from "../TitleSection";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import IndeterminateCheckBoxIcon from "@material-ui/icons/IndeterminateCheckBox";
+import { MOBILE_NORMAL } from "../../../utils/constants";
 
 export default function QuestionsSection(props) {
   const { interview = {} } = props;
-  const breakpoint = useMediaQuery("(min-width:820px)");
+  const breakpoint = useMediaQuery(MOBILE_NORMAL);
 
   const [expand, setExpand] = useState({
     p: [false, false, false, false, false],
@@ -34,15 +35,9 @@ export default function QuestionsSection(props) {
                   >
                     {f.question}
                     {expand.p[i] ? (
-                      <IndeterminateCheckBoxIcon
-                        className="collapse-resp"
-                        // onClick={() => updateExpand(i)}
-                      />
+                      <IndeterminateCheckBoxIcon className="collapse-resp" />
                     ) : (
-                      <AddBoxIcon
-                        className="expand-resp"
-                        // onClick={() => updateExpand(i)}
-                      />
+                      <AddBoxIcon className="expand-resp" />
                     )}
                     {expand.p[i] ? (
                       <div className={"resposta"}>{f.answer}</div>
@@ -62,15 +57,9 @@ export default function QuestionsSection(props) {
                   >
                     {f.question}
                     {expand.p[i] ? (
-                      <IndeterminateCheckBoxIcon
-                        className="collapse-resp"
-                        // onClick={() => updateExpand(i)}
-                      />
+                      <IndeterminateCheckBoxIcon className="collapse-resp" />
                     ) : (
-                      <AddBoxIcon
-                        className="expand-resp"
-                        // onClick={() => updateExpand(i)}
-                      />
+                      <AddBoxIcon className="expand-resp" />
                     )}
                     {expand.p[i] ? (
                       <div className={"resposta"}>{f.answer}</div>
@@ -87,15 +76,9 @@ export default function QuestionsSection(props) {
               <div className="pregunta" key={i} onClick={() => updateExpand(i)}>
                 {f.question}
                 {expand.p[i] ? (
-                  <IndeterminateCheckBoxIcon
-                    className="collapse-resp"
-                    // onClick={() => updateExpand(i)}
-                  />
+                  <IndeterminateCheckBoxIcon className="collapse-resp" />
                 ) : (
-                  <AddBoxIcon
-                    className="expand-resp"
-                    // onClick={() => updateExpand(i)}
-                  />
+                  <AddBoxIcon className="expand-resp" />
                 )}
                 {expand.p[i] ? (
                   <div className={"resposta"}>{f.answer}</div>
