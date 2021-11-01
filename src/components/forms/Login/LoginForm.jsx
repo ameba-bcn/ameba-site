@@ -79,7 +79,6 @@ export default function LoginForm({ setRedirect, setDisplayError }) {
             })}
           </LogFormError>
         )}
-
         <Button
           type="submit"
           variant="contained"
@@ -88,9 +87,8 @@ export default function LoginForm({ setRedirect, setDisplayError }) {
           buttonStyle="boton--primary--solid"
           hoverStyle="bg-cream"
         >
-          login
+          {loading ? <span className="spinner-border"></span> : <>login</>}
         </Button>
-        {loading && <span className="spinner-border spinner-border-sm"></span>}
       </form>
     </LogFormBox>
   );

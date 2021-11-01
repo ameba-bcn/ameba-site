@@ -71,10 +71,13 @@ export default function PasswordRecoveryForm(
           disabled={loading}
           hoverStyle="bg-cream"
         >
-          <span>Recupera</span>
+          {loading ? (
+            <span className="spinner-border"></span>
+          ) : (
+            <span>Recupera</span>
+          )}
         </Button>
       </div>
-      {loading && <span className="spinner-border spinner-border-sm"></span>}
       {!isSubmitted && <ErrorBox isError={!isSubmitted} />}
     </form>
   );

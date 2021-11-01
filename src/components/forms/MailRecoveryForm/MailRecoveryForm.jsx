@@ -52,12 +52,12 @@ export default function MailRecoveryForm({ setIsSubmitted }, isSubmitted) {
         />
       </div>
       {!isEmptyObject(formik.errors) && (
-          <LogFormError>
-            {Object.values(formik.errors).map((x) => {
-              return <div key={x}>{x}</div>;
-            })}
-          </LogFormError>
-        )}
+        <LogFormError>
+          {Object.values(formik.errors).map((x) => {
+            return <div key={x}>{x}</div>;
+          })}
+        </LogFormError>
+      )}
       <div className="form-group">
         <Button
           type="submit"
@@ -68,14 +68,13 @@ export default function MailRecoveryForm({ setIsSubmitted }, isSubmitted) {
           hoverStyle="bg-cream"
           disabled={loading}
         >
-          {loading && (
-            <span className="spinner-border spinner-border-sm"></span>
+          {loading ? (
+            <span className="spinner-border"></span>
+          ) : (
+            <span>Recupera</span>
           )}
-          <span>Recupera</span>
         </Button>
       </div>
-
-      {loading && <span className="spinner-border spinner-border-sm"></span>}
       {!isSubmitted && <ErrorBox isError={!isSubmitted} />}
     </form>
   );

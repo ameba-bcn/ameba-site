@@ -64,7 +64,11 @@ export default function DiscountCode() {
           disabled={loading}
           hoverStyle="bg-red"
         >
-          <span>Aplica</span>
+          {loading ? (
+            <span className="spinner-border"></span>
+          ) : (
+            <span>Aplica</span>
+          )}
         </Button>
         {!isEmptyObject(formik.errors) && (
           <LogFormError>
@@ -74,7 +78,6 @@ export default function DiscountCode() {
           </LogFormError>
         )}
       </DiscountRow>
-      {loading && <span className="spinner-border spinner-border-sm"></span>}
       {errorsOnSubmit && <ErrorBox isError={errorsOnSubmit} />}
     </form>
   );

@@ -54,7 +54,7 @@ export default function MembershipForm({
 
   const handleCancel = (setValues) => {
     setValues(InitialValues);
-    if (!isNewMember) formik.setErrors({})
+    if (!isNewMember) formik.setErrors({});
     setDataHasChanged(false);
   };
 
@@ -212,12 +212,15 @@ export default function MembershipForm({
                 buttonSize="boton--medium"
                 buttonStyle="boton--primary--solid"
               >
-                Guarda
+                {loading ? (
+                  <span className="spinner-border"></span>
+                ) : (
+                  <>Guarda</>
+                )}
               </Button>
             </div>
           </div>
         )}
-        {loading && <span className="spinner-border spinner-border-sm"></span>}
       </form>
     </LogFormBox>
   );

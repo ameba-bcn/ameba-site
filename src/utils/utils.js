@@ -70,6 +70,6 @@ export function createLastRowIterator(arr, boxWidth) {
 }
 
 export function isCORSInactive() {
-  if (false) return "http://localhost:8000";
+  if (true) return "http://localhost:8000";
   return "";
 }

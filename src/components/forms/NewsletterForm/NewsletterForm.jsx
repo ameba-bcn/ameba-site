@@ -61,12 +61,15 @@ export default function NewsletterForm({ setIsSubmitted }, isSubmitted) {
             buttonStyle="boton--orange--solid"
             disabled={loading}
           >
-            Subscriu-te
+            {loading ? (
+              <span className="spinner-border"></span>
+            ) : (
+              <>Subscriu-te</>
+            )}
           </Button>
         </div>
         {!isSubmitted && <ErrorBox isError={!isSubmitted} />}
       </form>
-      {loading && <span className="spinner-border spinner-border-sm"></span>}
       {!isEmptyObject(formik.errors) && (
         <LogFormError>
           {Object.values(formik.errors).map((x) => {

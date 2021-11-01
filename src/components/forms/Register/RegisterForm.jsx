@@ -98,9 +98,8 @@ export default function RegisterForm({ setRedirect, setDisplayError }) {
           buttonStyle="boton--primary--solid"
           hoverStyle="bg-cream"
         >
-          registra't
+          {loading ? <span className="spinner-border"></span> : <>registra't</>}
         </Button>
-        {loading && <span className="spinner-border spinner-border-sm"></span>}
       </form>
     </LogFormBox>
   );
