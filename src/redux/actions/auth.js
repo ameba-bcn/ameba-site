@@ -278,9 +278,6 @@ export const login = (username, password) => (dispatch) => {
         type: LOGGED_USER,
       });
 
-      // dispatch({
-      //   type: CLEAR_MESSAGE,
-      // });
       return Promise.resolve();
     },
     (error) => {
@@ -309,10 +306,6 @@ export const getUserData = () => (dispatch) => {
         payload: { user: data },
       });
 
-      // dispatch({
-      //   type: CLEAR_MESSAGE,
-      // });
-
       return Promise.resolve();
     },
     (error) => {
@@ -332,6 +325,7 @@ export const getUserData = () => (dispatch) => {
 };
 
 export const passwordRecovery = (token, password) => (dispatch) => {
+  console.log("token", token)
   return AuthService.passwordRecovery(token, password).then(
     () => {
       dispatch({
@@ -348,6 +342,11 @@ export const passwordRecovery = (token, password) => (dispatch) => {
       const message = error.response.data?.detail;
       dispatch({
         type: PASSWORD_RECOVERY_FAIL,
+        payload: message,
+      });
+
+      dispatch({
+        type: SET_MESSAGE,
         payload: message,
       });
 
@@ -371,6 +370,11 @@ export const sendEmailPasswordRecovery = (email) => (dispatch) => {
       const message = error.response.data?.detail;
       dispatch({
         type: SEND_EMAIL_PASSWORD_RECOVERY_FAIL,
+        payload: message,
+      });
+
+      dispatch({
+        type: SET_MESSAGE,
         payload: message,
       });
 

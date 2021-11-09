@@ -9,22 +9,23 @@ import { useFormik } from "formik";
 import ErrorBox from "../error/ErrorBox";
 import { isEmptyObject } from "../../../utils/utils";
 
-export default function PasswordRecoveryForm(
-  { setIsSubmitted },
-  isSubmitted,
-  strToken
-) {
+export default function PasswordRecoveryForm(props) {
+  const { isSubmitted, strToken } = props;
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
   const handleSubmit = (value) => {
     setLoading(true);
     dispatch(passwordRecovery(strToken, value.password))
-      .then(() => {
-        setIsSubmitted(true);
-        setLoading(false);
-      })
-      .catch(() => {
-        setIsSubmitted(false);
+    .then(() => {
+      props.setIsSubmitted(true);
+      setLoading(false);
+      setIsClicked(false)
+    })
+    .catch(() => {
+        setIsClicked(true)
+        props.setIsSubmitted(false);
         setLoading(false);
       });
   };
@@ -78,7 +79,7 @@ export default function PasswordRecoveryForm(
           )}
         </Button>
       </div>
-      {!isSubmitted && <ErrorBox isError={!isSubmitted} />}
+      {!props.isSubmitted && isClicked &&<ErrorBox isError={!isSubmitted} />}
     </form>
   );
 }
