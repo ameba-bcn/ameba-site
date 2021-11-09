@@ -4,6 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.5
+- Loading Styling
+- SupportYourLocals subdivided by smaller components
+- Password recovery bugfix
+
 Version 1.4
 - DiscountCode
 - NodeModules Lib cleaned
