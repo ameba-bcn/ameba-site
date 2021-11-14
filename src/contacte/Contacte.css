@@ -23,9 +23,9 @@
   flex: 100%;
 }
 
-.formNewsGlobal :last-child {
+/* .formNewsGlobal :last-child {
   width: 94%;
-}
+} */
 
 .msg-new-password-sent {
   font-family: "Montserrat", sans-serif;
@@ -37,6 +37,10 @@
 
 .form-group-input {
   flex: 70%;
+}
+
+.form-group-input > input {
+  border-radius: 0px;
 }
 
 .form-group-button {

@@ -1,7 +1,7 @@
 /* ACTIVITATS */
 
 .activitats-box {
-  padding: 80px;
+  padding: 20px;
 }
 
 #activitats {
@@ -34,11 +34,11 @@
   color: #f2c571;
 }
 
-@media screen and (max-width: 830px) {
+/* @media screen and (max-width: 830px) {
   .activitats-box {
     padding: 40px;
   }
-}
+} */
 
 @media screen and (max-width: 630px) {
   div.PowerTitle {
@@ -48,7 +48,7 @@
     font-size: 2em;
   }
   .activitats-box {
-    padding: 20px;
+    padding: 0px;
   }
 }
 

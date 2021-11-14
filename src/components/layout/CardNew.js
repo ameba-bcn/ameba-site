@@ -9,12 +9,14 @@ const CardNew = React.memo((props) => {
   return (
     <Card>
       <CardActionArea className="cardFrame">
-        <img
-          className="cardMedia"
-          src={isCORSInactive() + props.imatge}
-          alt={props.titol}
-          title={props.titol}
-        />
+        <div className="cardMediaImgBox">
+          <img
+            className="cardMedia"
+            src={isCORSInactive() + props.imatge}
+            alt={props.titol}
+            title={props.titol}
+          />
+        </div>
         <div className="cardMediaTitleBox">
           <div className="cardMediaTitle">{props.titol}</div>
         </div>

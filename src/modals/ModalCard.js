@@ -11,6 +11,8 @@ import Button from "../components/button/Button";
 import ImageCarousel from "../components/images/ImageCarousel";
 import "./Modals.css";
 import { MOBILE_NORMAL } from "../utils/constants";
+import CollapsableTextDiv from "../components/collapsable/CollapsableTextDiv";
+
 
 export default function ModalCard(props) {
   const {
@@ -298,7 +300,7 @@ export default function ModalCard(props) {
               {box1Title}
             </div>
             <div className="modal-card-mobile__description-content">
-              {box1Text}
+              <CollapsableTextDiv text={box1Text} />
             </div>
             <hr
               className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}

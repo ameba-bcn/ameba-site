@@ -207,7 +207,7 @@ hr > .modal-card__hr_dashed {
   font-size: 1.1rem;
   margin-top: -0.3rem;
   margin-bottom: 0.5rem;
-  text-align: justify;
+  text-align: start;
   flex-grow: 1;
   line-height: initial;
 }
@@ -269,7 +269,7 @@ hr > .modal-card__hr_dashed {
 
 .interactiveDataBox-activitat__text-loca a {
   color: inherit;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-size: 1rem;
 }
 

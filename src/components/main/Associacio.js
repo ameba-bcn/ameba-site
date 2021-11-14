@@ -3,21 +3,27 @@ import ReactPlayer from "react-player";
 import { useSelector } from "react-redux";
 import LettersMove from "./../layout/LettersMove";
 import "./Associacio.css";
+import {isCORSInactive} from "./../../utils/utils";
+import { MOBILE_NORMAL } from "../../utils/constants";
+import { useMediaQuery } from "@material-ui/core";
 
 function Associacio() {
+  const isMobile = useMediaQuery(MOBILE_NORMAL);
   const data = useSelector((state) => state.data);
   const { cover = [] } = data;
-  const { file = "" } = cover[0] || {};
+  const mediaIndex = isMobile? 1 : 0;
+  const { file = "" } = cover[mediaIndex] || {};
+  const urlMedia = isCORSInactive()+file;
 
   return (
     <div className="Bloque" id="associacio">
       <div className="cover-box">
         <ReactPlayer
-          url={file}
+          url={urlMedia}
           playing={true}
           loop
           muted
-          width="90%"
+          width="100%"
           height="auto"
           controls={false}
         />

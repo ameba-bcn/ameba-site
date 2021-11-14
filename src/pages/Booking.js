@@ -11,11 +11,8 @@ export default function Booking() {
       <PowerTitle
         title={"BOOKING"}
         className="SupportTitle"
-        subtitle="- AMEBA Rooster -"
+        subtitle="AMEBA Rooster"
       />
-      {/* <h3 className="SupportSubtitle">
-        - Conèix als professionals que donen vida a la ciutat -
-      </h3> */}
       <CardGrid isAmebaDJ={true}/>
       <LettersMove
         className="lettersMoveDiv"

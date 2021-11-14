@@ -12,6 +12,10 @@
   margin: 26px;
 }
 
+.Card3GridItem > div {
+  border-radius: 0px;
+}
+
 .MuiGrid-item {
   margin: auto !important;
 }
@@ -41,9 +45,9 @@
 }
 
 @media screen and (max-width: 1250px) {
-  .cardMedia {
+  /* .cardMedia {
     min-height: 370px;
-  }
+  } */
 
   .cardMediaTitle {
     font-size: 3.8rem;
@@ -65,10 +69,10 @@
     max-width: 900px !important;
   }
 
-  .cardMedia {
+  /* .cardMedia {
     min-width: 100%;
     min-height: 640px;
-  }
+  } */
 
   .cardMediaTitle {
     font-size: 7rem;
@@ -87,7 +91,7 @@
   .Card3GridItem {
     width: 70%;
     height: auto;
-    padding-top: 25px;
+    padding-bottom: 25px;
   }
 
   .Card3GridContainer {
@@ -107,9 +111,9 @@
 }
 
 @media screen and (max-width: 815px) {
-  .cardMedia {
+  /* .cardMedia {
     min-height: 440px;
-  }
+  } */
 
   .cardMediaTitle {
     font-size: 5.5rem;
@@ -147,9 +151,9 @@
 }
 
 @media screen and (max-width: 555px) {
-  .cardMedia {
+  /* .cardMedia {
     min-height: 370px;
-  }
+  } */
 
   .cardMediaTitle {
     font-size: 3.5rem;
@@ -173,13 +177,13 @@
 }
 
 @media screen and (max-width: 422px) {
-  .cardMedia {
+  /* .cardMedia {
     min-height: 290px;
-  }
-
+  } */
+  /* 
   .Card3GridItem {
     padding-bottom: 5px;
-  }
+  } */
 
   .cardMediaTitle {
     font-size: 2.5em;
@@ -203,9 +207,9 @@
 }
 
 @media screen and (max-width: 322px) {
-  .cardMedia {
+  /* .cardMedia {
     min-height: 210px;
-  }
+  } */
 
   .cardMediaTitle {
     font-size: 2rem;

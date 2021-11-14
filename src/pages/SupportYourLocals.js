@@ -13,9 +13,9 @@ export default function SupportYourLocals() {
       <PowerTitle
         title={isMobile ? "#SUPPORT" : "#SUPPORTYOURLOCALS"}
         className="SupportTitle"
-        subtitle="- Conèix als professionals que donen vida a la ciutat -"
+        subtitle="Conèix als professionals que donen vida a la ciutat"
       />
-      <CardGrid/>
+      <CardGrid />
       <LettersMove
         className="lettersMoveDiv"
         sentence="FES-TE SOCI/A "
