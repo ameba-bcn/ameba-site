@@ -56,19 +56,20 @@ export default function Entrevista() {
     <div className="top-section">
       <div className="top-section-gral">
         <div className="top-section_entr">
-          <div className="ts-title">{interview.title}</div>
           <div className="ts-breadcrumbs">
             <span onClick={() => history.push("/")}>AMEBA</span> /{" "}
             <span onClick={() => history.goBack()}>#SUPPORTYOURLOCALS</span> /{" "}
             {interview.title}
           </div>
-          <div className="ts-tags">
+          <div className="ts-title">{interview.title}</div>
+          {/* Tags para el futuro */}
+          {/* <div className="ts-tags">
             <div className="tags-e">dj</div>
             <div className="tags-e">productor</div>
             <div className="tags-e">manager</div>
             <div className="tags-e">mastering</div>
             <div className="tags-e">label</div>
-          </div>
+          </div> */}
           <EntrevistaMenu
             hasMediaSection={hasMediaSection}
             hasActivitiesSection={hasActivitiesSection}

@@ -4,14 +4,6 @@
 #1D1D1B Negro (29,29,27
 #FFED00 Amarillo (255,237,0     */
 
-.PowerTitle {
-  font-size: 220px;
-  font-family: "Bebas Neue";
-  width: 100%;
-  font-weight: 600;
-  overflow: hidden;
-}
-
 .BGWrapper {
   margin-bottom: 0px;
 }
@@ -57,9 +49,7 @@
 }
 
 @media screen and (max-width: 620px) {
-  .PowerTitle {
-    font-size: 30vw;
-  }
+
   .BGWrapper {
     animation-name: TitleHovered;
     animation-duration: 1s;

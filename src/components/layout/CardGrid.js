@@ -4,10 +4,28 @@ import { NavLink } from "react-router-dom";
 import "./CardGrid.css";
 import { createLastRowIterator, isCORSInactive } from "../../utils/utils";
 import PlusButton from "../button/PlusButton";
+import { ReactFitty } from "react-fitty";
+import styled from "styled-components";
 
 export default function CardGrid(props) {
   const { isAmebaDJ = false } = props; //Pendiente recibir si es entrevista por props
   const { support = [] } = useSelector((state) => state.data);
+
+  const TitleStyled = styled.div`
+    position: absolute;
+    font-family: "Bebas Neue";
+    width: 95%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    color: #fae6c5;
+    z-index: 999;
+    padding: 20px;
+    font-weight: 800;
+    font-style: italic;
+  `;
 
   const filteredArtists =
     isAmebaDJ && !!support.length
@@ -28,12 +46,14 @@ export default function CardGrid(props) {
             }}
           >
             <div className="cardSupport">
+              <TitleStyled>
+                <ReactFitty maxSize={200}>{name}</ReactFitty>
+              </TitleStyled>
               <img
                 src={isCORSInactive() + images[0]}
                 alt={name}
                 className="cardSupportImgTop"
               />
-              <div className="cardSupportTitle">{name}</div>
               <div className="cardSupportPlusBox">
                 <PlusButton plusStyle="plus--obscure" plusSize="plus--big" />
               </div>

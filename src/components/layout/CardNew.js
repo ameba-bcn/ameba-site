@@ -6,6 +6,12 @@ import { formatISODateToDate, isCORSInactive } from "./../../utils/utils";
 import PlusButton from "./../button/PlusButton";
 
 const CardNew = React.memo((props) => {
+  const processedText = (text) => {
+    const maxLength = 45;
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + "...";
+  };
+
   return (
     <Card>
       <CardActionArea className="cardFrame">
@@ -18,7 +24,7 @@ const CardNew = React.memo((props) => {
           />
         </div>
         <div className="cardMediaTitleBox">
-          <div className="cardMediaTitle">{props.titol}</div>
+          <div className="cardMediaTitle">{processedText(props.titol)}</div>
         </div>
         <div className="cardMediaSort">{props.tipo}</div>
         <div className="cardDateRow row">

@@ -8,11 +8,22 @@ import {
   isCORSInactive,
 } from "./../../utils/utils";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
+import { ReactFitty } from "react-fitty";
 
 export default function BotigaGeneral() {
   const [open, setOpen] = React.useState(false);
   const data = useSelector((state) => state.data);
   const { botiga = [] } = data;
+  const TitleStyled = styled.div`
+    width: 75%;
+    font-family: "Bebas Neue";
+    font-weight: 300;
+    font-style: italic;
+    text-transform: uppercase;
+    color: #fae6c5;
+    text-align: left;
+  `;
 
   const [productData, getProductData] = useState([
     {
@@ -66,10 +77,12 @@ export default function BotigaGeneral() {
                   />
                 </div>
                 <div className="productCardBody">
-                  <h5 className="productTitle">{data.name}</h5>
-                  <p className="productCardPrice">
+                  <TitleStyled>
+                    <ReactFitty maxSize={50}>{data.name}</ReactFitty>
+                  </TitleStyled>
+                  <div className="productCardPrice">
                     {formatPrice(data.price_range)}
-                  </p>
+                  </div>
                 </div>
               </div>
             </div>

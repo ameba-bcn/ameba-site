@@ -136,9 +136,6 @@
 }
 
 @media screen and (max-width: 835px) {
-  .PowerTitle {
-    display: none;
-  }
 
   .fullTableActiv {
     padding-top: 1rem;

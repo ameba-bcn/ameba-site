@@ -23,7 +23,7 @@ export default function QuestionsSection(props) {
     <div className="entrevista-gral">
       <TitleSection title="Entrevista" />
       <div className="entrevista-columnes">
-        {breakpoint ? (
+        {!breakpoint ? (
           <>
             <div className="col1-preguntes">
               {interview.current_answers?.map((f, i) =>
