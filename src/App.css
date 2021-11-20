@@ -373,6 +373,17 @@ div > .nav-item {
   background-color: #eb5e3e;
 }
 
+.toast-black-background{
+  background-color: #1d1d1b !important;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.Toastify__toast-body{
+  margin: 0 auto;
+}
+
 .logTitle {
   text-transform: uppercase;
   font-family: "Bebas Neue";

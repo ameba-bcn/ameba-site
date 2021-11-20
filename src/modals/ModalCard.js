@@ -12,7 +12,8 @@ import ImageCarousel from "../components/images/ImageCarousel";
 import "./Modals.css";
 import { MOBILE_NORMAL } from "../utils/constants";
 import CollapsableTextDiv from "../components/collapsable/CollapsableTextDiv";
-
+import { toast } from "react-toastify";
+import Toast from "../components/toast/Toast";
 
 export default function ModalCard(props) {
   const {
@@ -321,6 +322,16 @@ export default function ModalCard(props) {
                 icon={buttonIcon}
                 onClick={() => {
                   handleAddClick(id);
+                  toast(<Toast />, {
+                    position: "bottom-center",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: false,
+                    draggable: true,
+                    progress: undefined,
+                    className: "toast-black-background",
+                  });
                 }}
               >
                 {buttonText} - {formatPrice(price)}

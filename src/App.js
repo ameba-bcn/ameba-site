@@ -43,6 +43,8 @@ import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import Booking from "./pages/Booking";
 import { deepComparision } from "./utils/utils";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -107,6 +109,13 @@ function App() {
             <Route component={NotFound} />
           </Switch>
         </UserContext.Provider>
+        <ToastContainer
+          position="bottom-center"
+          closeButton={false}
+          closeOnClick
+          draggable
+          limit={1}
+        />
         <Contacte />
       </Elements>
     </div>

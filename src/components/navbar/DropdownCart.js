@@ -5,6 +5,8 @@ import { NavLink } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import Button from "../button/Button";
+import { toast } from "react-toastify";
+import Toast from "./../toast/Toast";
 import "./DropdownCart.css";
 import { setGuestUser, setLoggedUser } from "../../redux/actions/profile";
 import { useTranslation } from "react-i18next";
@@ -30,6 +32,17 @@ export default function DropdownCart(props) {
 
   const addItem = (id) => {
     dispatch(addToCart(id));
+    isMobile &&
+      toast(<Toast />, {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        className: "toast-black-background",
+      });
   };
 
   const substractItem = (id) => {
@@ -37,6 +50,17 @@ export default function DropdownCart(props) {
       isLoggedIn ? dispatch(setLoggedUser()) : dispatch(setGuestUser());
     }
     dispatch(substractToCart(id));
+    isMobile &&
+      toast(<Toast />, {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        className: "toast-black-background",
+      });
   };
 
   const checkoutToCart = (item_variants) => {
