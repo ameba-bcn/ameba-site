@@ -16,8 +16,12 @@
   align-items: center;
 }
 
-
 #associacio > .wrapper {
   /* margin-top: 100vh; */
   margin-top: -6px;
+}
+
+.portadaFallback {
+  width: 100%;
+  height: auto;
 }
