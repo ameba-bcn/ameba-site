@@ -4,6 +4,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.6
+- Checkout Styling
+- Font auto resize
+- New videos on landing
+- Video fallback on load (img)
+- SupportYourLocals fragmented in small components
+
 Version 1.5
 - Loading Styling
 - SupportYourLocals subdivided by smaller components
