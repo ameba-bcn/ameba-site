@@ -17,6 +17,9 @@ export const ReviewContent = styled.div`
   font-weight: 300;
   color: #1d1d1b;
   border: 4px solid black;
+  @media (max-width: 400px) {
+    padding: 0px 20px;
+  }
 `;
 
 export const ReviewTotalRow = styled.div`
@@ -30,6 +33,10 @@ export const ReviewTotalRow = styled.div`
   line-height: 1em;
   & div:nth-child(2) {
     font-weight: bold;
+  }
+  @media (max-width: 400px) {
+    font-size: 1.8rem;
+    padding: 0px;
   }
 `;
 
@@ -58,28 +65,55 @@ export const ReviewTable = styled.table`
           height: 60px;
         }
       }
-      & td:nth-child(1) {
+      .reviewTable-col1 {
         text-align: left;
         width: 90px;
+        @media (max-width: 420px) {
+          display: none;
+        }
       }
-      & td:nth-child(2) {
+      .reviewTable-col2 {
         text-align: left;
         max-width: 120px;
         line-height: 1em;
         font-size: 2rem;
+        display: table-cell !important;
+        @media (max-width: 500px) {
+          font-size: 1.5rem;
+        }
+        @media (max-width: 340px) {
+          font-size: 1rem;
+        }
       }
-      & td:nth-child(3) {
+      .reviewTable-col3 {
         font-size: 2.5rem;
         border-left: 2px dotted black;
+        display: table-cell !important;
+        @media (max-width: 500px) {
+          font-size: 2rem;
+        }
+        @media (max-width: 340px) {
+          font-size: 1.5rem;
+        }
       }
-      & td:nth-child(4) {
+      .reviewTable-col4 {
         border-left: 2px dotted black;
         width: 100px;
+        display: table-cell !important;
         & div {
           & svg {
             width: 30px;
             height: auto;
           }
+        }
+        @media (max-width: 400px) {
+          width: auto;
+          & div {
+          & svg {
+            width: 20px;
+            height: auto;
+          }
+        }
         }
       }
     }
@@ -91,4 +125,7 @@ export const ReviewFooter = styled.div`
   line-height: 1em;
   font-weight: 300;
   margin-bottom: 20px;
+  @media (max-width: 380px) {
+          font-size: 1.5rem;
+        }
 `;

@@ -26,11 +26,14 @@
 }
 
 #payment-form > button{
+  margin-bottom: 20px;
+}
+
+#payment-form > button {
   margin-top: 20px;
   padding-left: 40px;
   padding-right: 40px;
 }
-
 
 .result-message {
   line-height: 22px;

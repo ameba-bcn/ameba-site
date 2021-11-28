@@ -214,14 +214,14 @@ div > .nav-item {
   position: relative;
 }
 
-.titleCoverCanvas {
+/* .titleCoverCanvas {
   height: 600px;
   width: 1200px;
   background-image: url("./images/PARKFEST.jpg");
   background-position: center;
   background-size: cover;
   opacity: 0.8;
-}
+} */
 
 .titleCoverImage {
   position: relative;
@@ -466,6 +466,11 @@ label {
   max-width: 500px !important;
   background-color: transparent !important;
   padding: 40px 40px;
+}
+@media screen and (max-width: 370px) {
+  .card-login {
+    padding: 40px 10px;
+  }
 }
 
 .logTextosLink {

@@ -27,15 +27,15 @@ export default function TableProducts(props) {
       <tbody>
         {item_variants?.map((item, i) => (
           <tr key={i}>
-            <td>
+            <td className="reviewTable-col1">
               <img
                 src={isCORSInactive() + item.preview}
                 alt={"item-image-" + { item }}
               />
             </td>
-            <td>{item.name}</td>
-            <td>{item.price}</td>
-            <td>
+            <td className="reviewTable-col2">{item.name}</td>
+            <td className="reviewTable-col3">{item.price}</td>
+            <td className="reviewTable-col4">
               <div
                 className="deleteItem"
                 onClick={() => substractItem(item.id)}

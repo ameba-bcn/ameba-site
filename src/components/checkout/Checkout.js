@@ -23,7 +23,7 @@ import {
 } from "./Checkout.style";
 import Payment from "./Payment";
 import { useMediaQuery } from "@material-ui/core";
-import { MOBILE_NORMAL } from "../../utils/constants";
+import { MOBILE_NORMAL, MOBILE_SMALL } from "../../utils/constants";
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ function Checkout() {
     buttonDisabled && activeStep === 0 && hasMembershipInCart;
   const steps = ["Dades personals", "Cistella", "Dades de pagament"];
   const isMobile = useMediaQuery(MOBILE_NORMAL);
-
+  const isMinMobile = useMediaQuery(MOBILE_SMALL);
 
   useEffect(() => {
     dispatch(getMemberProfile());
@@ -76,12 +76,12 @@ function Checkout() {
         return (
           <CheckoutMemberFrame>
             {hasMembershipInCart ? (
-            <MembershipFormLayout
-              handleNext={handleNext}
-              setButtonDisabled={setButtonDisabled}
-            />
+              <MembershipFormLayout
+                handleNext={handleNext}
+                setButtonDisabled={setButtonDisabled}
+              />
             ) : (
-            <MembershipFormReadOnly isCheckout={true} />
+              <MembershipFormReadOnly isCheckout={true} />
             )}
           </CheckoutMemberFrame>
         );
@@ -89,7 +89,6 @@ function Checkout() {
         return (
           <>
             <Review setError={setError} error={error} />
-            {/* <SubscriptionBox isCheckout={true} /> */}
           </>
         );
       case 2:
@@ -112,7 +111,7 @@ function Checkout() {
             <Button
               variant="contained"
               color="primary"
-              buttonSize="boton--medium"
+              buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
               buttonStyle="boton--primary--solid"
               onClick={handleBack}
             >
@@ -123,7 +122,7 @@ function Checkout() {
             <Button
               variant="contained"
               color="primary"
-              buttonSize="boton--large"
+              buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
               buttonStyle="boton--primary--solid"
               onClick={handleNext}
             >

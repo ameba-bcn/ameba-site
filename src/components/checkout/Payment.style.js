@@ -31,6 +31,12 @@ export const PaymentSummaryBox = styled.div`
   border: 4px solid black;
   margin: 20px 0px;
   padding: 0px 80px;
+  @media (max-width: 480px) {
+    padding: 0px 40px;
+  }
+  @media (max-width: 350px) {
+    padding: 0px 10px;
+  }
 `;
 
 export const PaymentReview = styled.div`

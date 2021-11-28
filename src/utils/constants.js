@@ -34,4 +34,6 @@ export const MOBILE_BIG = "(max-width:1130px)";
 
 export const MOBILE_NORMAL = "(max-width:690px)";
 
+export const MOBILE_SMALL = "(max-width:400px)";
+
 export const AMEBA_EMAIL = "info@ameba.cat";

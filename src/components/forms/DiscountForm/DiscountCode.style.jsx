@@ -12,4 +12,17 @@ export const DiscountRow = styled.div`
   & button {
     width: 45%;
   }
+  @media (max-width: 350px) {
+    & input {
+    width: 58%;
+  }
+  & button {
+    width: 40%;
+  }
+  }
+  @media (max-width: 490px) {
+    & input::placeholder {
+      font-size: 1.5rem;
+    }
+  }
 `;

@@ -104,7 +104,7 @@ function PaymentForm(props) {
             </span>
           </Button>
 
-          {error && <ErrorBox isError={true} message={error} />}
+          {error && <ErrorBox isError={true} message={error} className="result-message-box"/>}
           <p className={succeeded ? "result-message" : "result-message hidden"}>
             Pagament realitzat amb èxit, comproba la teva compra a :
             <a href={`https://dashboard.stripe.com/test/payments`}>
