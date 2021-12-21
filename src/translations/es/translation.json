@@ -12,6 +12,13 @@
       "entrevista": "entrevista",
       "media": "media",
       "activitats": "actividades"
+    },
+    "top-menu": {
+      "nom": "nombre",
+      "ciutat": "ciudad",
+      "segells": "sellos",
+      "projectes": "proyectos",
+      "artistes": "artistas"
     }
   }
 }

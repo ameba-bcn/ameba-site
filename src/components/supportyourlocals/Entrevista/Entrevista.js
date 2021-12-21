@@ -32,9 +32,11 @@ export default function Entrevista() {
       images: [],
       biography: "",
       media_urls: [],
+      tags: [],
     },
   ]);
 
+  const tags = artist.tags || [];
   const hasMediaSection = !!artist.media_urls?.length;
   const hasActivitiesSection = false;
 
@@ -63,13 +65,15 @@ export default function Entrevista() {
           </div>
           <div className="ts-title">{interview.title}</div>
           {/* Tags para el futuro */}
-          {/* <div className="ts-tags">
-            <div className="tags-e">dj</div>
-            <div className="tags-e">productor</div>
-            <div className="tags-e">manager</div>
-            <div className="tags-e">mastering</div>
-            <div className="tags-e">label</div>
-          </div> */}
+          {tags.length > 0 && (
+            <div className="ts-tags">
+              {tags.map((n) => (
+                <div className="tags-e" key={n}>
+                  {n}
+                </div>
+              ))}
+            </div>
+          )} 
           <EntrevistaMenu
             hasMediaSection={hasMediaSection}
             hasActivitiesSection={hasActivitiesSection}
