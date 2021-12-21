@@ -20,7 +20,7 @@ export default function LogMailConfirmation(props) {
         .then(setHasQueryParams(true))
         .catch(setDisplayError(true));
     }
-  }, [strToken]);
+  }, [strToken, dispatch]);
 
   if (localStorage.getItem("view") === "new_member" && setHasQueryParams) {
     return <Redirect to="/checkout" />;

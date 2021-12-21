@@ -3,7 +3,6 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Menu from "@material-ui/core/Menu";
 import DropdownCart from "./DropdownCart";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 function Cart(props) {

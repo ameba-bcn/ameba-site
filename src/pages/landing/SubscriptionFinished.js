@@ -19,7 +19,7 @@ export default function SubscriptionFinished(props) {
   useEffect(() => {
     if (email && email.length > 0)
       dispatch(subscribeNewsletter(email)).then(setIsSubmitted(true));
-  }, [email]);
+  }, [email, dispatch]);
 
   return (
     <>

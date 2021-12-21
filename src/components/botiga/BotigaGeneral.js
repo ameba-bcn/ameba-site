@@ -11,20 +11,20 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { ReactFitty } from "react-fitty";
 
+export const TitleStyled = styled.div`
+  width: 75%;
+  font-family: "Bebas Neue";
+  font-weight: 300;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #fae6c5;
+  text-align: left;
+`;
+
 export default function BotigaGeneral() {
   const [open, setOpen] = React.useState(false);
   const data = useSelector((state) => state.data);
   const { botiga = [] } = data;
-  const TitleStyled = styled.div`
-    width: 75%;
-    font-family: "Bebas Neue";
-    font-weight: 300;
-    font-style: italic;
-    text-transform: uppercase;
-    color: #fae6c5;
-    text-align: left;
-  `;
-
   const [productData, getProductData] = useState([
     {
       id: 0,

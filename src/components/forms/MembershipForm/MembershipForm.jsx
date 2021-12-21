@@ -50,7 +50,7 @@ export default function MembershipForm({
   useEffect(() => {
     setButtonDisabled &&
       setButtonDisabled(isNewMember || dataHasChanged || !formik.isValid);
-  }, [dataHasChanged, isNewMember]);
+  }, [dataHasChanged, isNewMember, formik.isValid, setButtonDisabled]);
 
   const handleCancel = (setValues) => {
     setValues(InitialValues);

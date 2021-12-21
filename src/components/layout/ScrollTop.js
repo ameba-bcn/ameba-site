@@ -15,7 +15,7 @@ const ScrollTop = ({ showBelow }) => {
     return () => {
       unlisten();
     };
-  }, []);
+  }, [history]);
 
   const handleScroll = () => {
     if (window.pageYOffset > showBelow) {

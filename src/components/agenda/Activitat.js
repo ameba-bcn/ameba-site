@@ -13,7 +13,7 @@ export default function ActivitatDialog(props) {
     price_range,
     images,
     description,
-    artists,
+    // artists,
     datetime,
     address,
   } = dataRow;
@@ -52,8 +52,8 @@ export default function ActivitatDialog(props) {
       buttonIcon={<ReceiptIcon />}
       box1Title={"DESCRIPCIÓ"}
       box1Text={description}
-      box2Title={"ARTIST / LINE UP"}
-      box2Text={artists}
+      // box2Title={"ARTIST / LINE UP"}
+      // box2Text={artists}
       type="ACTIVITAT"
       colorMode="light"
     />

@@ -12,6 +12,8 @@ import ErrorBox from "../forms/error/ErrorBox";
 import { clearMessage } from "../../redux/actions/message";
 import MembershipFormReadOnly from "../forms/MembershipForm/MembershipFormReadOnly";
 import Stepper from "../stepper/Stepper";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import {
   CheckoutBox,
   CheckoutButtons,
@@ -40,10 +42,13 @@ function Checkout() {
   const steps = ["Dades personals", "Cistella", "Dades de pagament"];
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const isMinMobile = useMediaQuery(MOBILE_SMALL);
+  const promise = loadStripe(
+    "pk_test_51IGkXjHRg08Ncmk7fPlbb9DfTF5f7ckXBKiR4g01euLgXs04CqmgBPOQuqQfOhc6aj9mzsYE1oiQ3TFjHH9Hv3Mj00GNyG9sep"
+  );
 
   useEffect(() => {
     dispatch(getMemberProfile());
-  }, []);
+  }, [dispatch]);
 
   if (!item_variants.length || !isLoggedIn) return <Redirect to="/" />;
 
@@ -99,39 +104,41 @@ function Checkout() {
   };
 
   return (
-    <CheckoutFrame>
-      <CheckoutBox>
-        <CheckoutTitle>Pagament</CheckoutTitle>
-        <CheckoutSubtitle>{steps[activeStep]}</CheckoutSubtitle>
-        <Stepper arraySteps={steps} activeStep={activeStep} />
-        <CheckoutContent>{getStepContent(activeStep)}</CheckoutContent>
-        {error && <ErrorBox isError={error} />}
-        <CheckoutButtons>
-          {activeStep !== 0 && (
-            <Button
-              variant="contained"
-              color="primary"
-              buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
-              buttonStyle="boton--primary--solid"
-              onClick={handleBack}
-            >
-              Enrere
-            </Button>
-          )}
-          {activeStep < steps.length - 1 && !userIsEditingData && (
-            <Button
-              variant="contained"
-              color="primary"
-              buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
-              buttonStyle="boton--primary--solid"
-              onClick={handleNext}
-            >
-              Següent pas
-            </Button>
-          )}
-        </CheckoutButtons>
-      </CheckoutBox>
-    </CheckoutFrame>
+    <Elements stripe={promise}>
+      <CheckoutFrame>
+        <CheckoutBox>
+          <CheckoutTitle>Pagament</CheckoutTitle>
+          <CheckoutSubtitle>{steps[activeStep]}</CheckoutSubtitle>
+          <Stepper arraySteps={steps} activeStep={activeStep} />
+          <CheckoutContent>{getStepContent(activeStep)}</CheckoutContent>
+          {error && <ErrorBox isError={error} />}
+          <CheckoutButtons>
+            {activeStep !== 0 && (
+              <Button
+                variant="contained"
+                color="primary"
+                buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
+                buttonStyle="boton--primary--solid"
+                onClick={handleBack}
+              >
+                Enrere
+              </Button>
+            )}
+            {activeStep < steps.length - 1 && !userIsEditingData && (
+              <Button
+                variant="contained"
+                color="primary"
+                buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
+                buttonStyle="boton--primary--solid"
+                onClick={handleNext}
+              >
+                Següent pas
+              </Button>
+            )}
+          </CheckoutButtons>
+        </CheckoutBox>
+      </CheckoutFrame>
+    </Elements>
   );
 }
 
