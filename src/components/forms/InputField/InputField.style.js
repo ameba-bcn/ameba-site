@@ -32,7 +32,8 @@ export const Input = styled.input`
     background-color: #fae6c5;
 `}
 ${(props) =>
-    props.slimLine && props.slimLine === false &&
+    props.slimLine &&
+    props.slimLine === false &&
     `  
     border-width: 3px;
 `}
@@ -51,14 +52,18 @@ ${(props) =>
   &:touch {
     background-color: #fae6c5;
   }
-  /* &:-internal-autofill-selected,
-  :-webkit-autofill:focus {
-    background-color: #fae6c5 !important;
-  } */
+
   &:disabled {
     border-top: solid transparent 4px !important;
     border-right: solid transparent 4px !important;
     border-left: solid transparent 4px !important;
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #fae6c5 inset !important;
   }
 `;
 

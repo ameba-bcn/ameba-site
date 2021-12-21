@@ -30,6 +30,8 @@ export default function NewsletterForm({ setIsSubmitted }, isSubmitted) {
       email: "",
     },
     validate,
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (values) => {
       handleSubmit(values);
     },

@@ -39,6 +39,8 @@ export default function RegisterForm({ setRedirect, setDisplayError }) {
       password: "",
     },
     validate,
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (values) => {
       handleRegister(values);
     },

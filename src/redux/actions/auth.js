@@ -155,6 +155,7 @@ export const updateMemberProfile =
       (response) => {
         dispatch({
           type: UPDATE_MEMBER_PROFILE,
+          payload: response,
         });
 
         dispatch({

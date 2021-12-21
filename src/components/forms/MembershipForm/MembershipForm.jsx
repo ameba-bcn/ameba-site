@@ -42,6 +42,8 @@ export default function MembershipForm({
     initialValues: InitialValues,
     enableReinitialize: true,
     validate,
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (values) => {
       handleSubmit(values);
     },

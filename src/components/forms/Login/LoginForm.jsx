@@ -40,6 +40,8 @@ export default function LoginForm({ setRedirect, setDisplayError }) {
       password: "",
     },
     validate,
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (values) => {
       handleSubmitLogin(values);
     },

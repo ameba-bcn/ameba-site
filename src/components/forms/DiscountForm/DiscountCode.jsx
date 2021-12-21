@@ -23,6 +23,8 @@ export default function DiscountCode() {
     },
     enableReinitialize: true,
     validate,
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (values) => {
       handleSubmitDiscount(values);
     },

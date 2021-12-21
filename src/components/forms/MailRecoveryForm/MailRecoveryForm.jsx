@@ -31,6 +31,8 @@ export default function MailRecoveryForm({ setIsSubmitted }, isSubmitted) {
       email: "",
     },
     validate,
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (values) => {
       handleSubmit(values);
     },

@@ -35,6 +35,8 @@ export default function PasswordRecoveryForm(props) {
       password: "",
     },
     validate,
+    validateOnChange: false,
+    validateOnBlur: false,
     onSubmit: (values) => {
       handleSubmit(values);
     },
