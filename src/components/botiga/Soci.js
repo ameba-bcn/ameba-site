@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import axiosInstance from "../../axios";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ModalCard from "../../modals/ModalCard";
+import { useTranslation } from "react-i18next";
 
 export default function SociDialog(props) {
   const { onClose, open } = props;
@@ -13,6 +14,7 @@ export default function SociDialog(props) {
   const [socisData, getSocisData] = useState([]);
   const [isSubscriber, setIsSubscriber] = useState(true);
   const [redirect, setRedirect] = useState(false);
+  const [t] = useTranslation("translation");
   const socisSubs =
     socisData.filter(function (soci) {
       return soci.name === "Socio";
@@ -58,16 +60,16 @@ export default function SociDialog(props) {
       open={open}
       handleAddClick={handleAddClick}
       id={id}
-      title="FES-TE SOCI/A!"
+      title={`${t("banners.soci-curt")}!`}
       price={price_range}
       imgArr={images}
-      buttonText="AFEGIR A CISTELLA"
+      buttonText={t("modal.afegir")}
       buttonIcon={<ShoppingCartIcon />}
-      box1Title={"DESCRIPCIÓ"}
+      box1Title={t("modal.descripcio")}
       box1Text={
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donecornare nulla eros, eu tempor lorem imperdiet eget. Etiam a metus nulla. Vivamus tempor interdum felis viverra dapibus. Ut cursus magna ut pharetra lobortis. Mauris hendrerit risus ante, sed consectetur tellus vestibulum ut. Fusce ut aliquet erat. Donec in lacus maximus, ullamcorper enim vitae, euismod arcu."
       }
-      box2Title={"BENEFICIS"}
+      box2Title={t("modal.beneficis")}
       box2Text={
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donecornare nulla eros, eu tempor lorem imperdiet eget. Etiam a metus nulla. Vivamus tempor interdum felis viverra dapibus. Ut cursus magna ut pharetra lobortis. Mauris hendrerit risus ante, sed consectetur tellus vestibulum ut. Fusce ut aliquet erat. Donec in lacus maximus, ullamcorper enim vitae, euismod arcu."
       }

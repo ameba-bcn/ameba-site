@@ -1,8 +1,10 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import LettersMove from "../../components/layout/LettersMove";
 
 function CheckoutFinished() {
+  const [t] = useTranslation("translation");
   const { message } = useSelector((state) => state.message);
   return (
     <>
@@ -21,7 +23,7 @@ function CheckoutFinished() {
       </div>
       <LettersMove
         className="lettersMoveDiv"
-        sentence="FES-TE SOCI/A "
+        sentence={t("banners.soci-curt")}
         color="#EB5E3E"
       />
     </>

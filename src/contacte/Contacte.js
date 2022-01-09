@@ -5,9 +5,11 @@ import NewsletterFormLayout from "../components/forms/NewsletterForm/NewsletterF
 import "./Contacte.css";
 import MediaLinks from "../components/layout/MediaLinks";
 import LettersMove from "./../components/layout/LettersMove";
+import { useTranslation } from "react-i18next";
 //Falta Mixcloud & Twitch
 
 function Contacte() {
+  const [t] = useTranslation("translation");
   return (
     <div className="bloqueContacto" id="contacte">
       <div className="contenedorContacto">
@@ -23,8 +25,7 @@ function Contacte() {
         <div className="endingText">
           ©2020 AMEBA
           <br />
-          Associació de Música Electrònica de Barcelona - Tots els drets
-          reservats
+          Associació de Música Electrònica de Barcelona - {t("footer.drets")}
         </div>
       </div>
       <LettersMove

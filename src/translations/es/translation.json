@@ -4,7 +4,12 @@
   },
   "checkout": {
     "finalitzarCompra": "finalizar compra",
-    "cistella": "cesta"
+    "cistella": "cesta",
+    "pagament":"pago",
+    "pagament-gratis": "El procedimiento de compra no supone ningún cargo, por lo tanto no se realiza flujo de pago.",
+    "review-footer-1": "Temporalmente no hacemos envíos de productos.",
+    "review-footer-2": "La recogida se puede hacer de 10-14 y de 16-20 a Rhythm Control.",
+    "review-footer-3": "Si tienes alguna duda contáctanos en info@ameba.cat"
   },
   "support": {
     "menu": {
@@ -19,6 +24,63 @@
       "segells": "sellos",
       "projectes": "proyectos",
       "artistes": "artistas"
+    },
+    "title":{
+      "subtitle":"* conoce los artistas que dan vida a la escena de la ciudad *"
     }
+  },
+  "banners": {
+    "soci-curt": "hazte socio/a",
+    "soci-llarg": "hazte socio/a de ameba por 15€/año"
+  },
+  "agenda": {
+    "data": "fecha",
+    "activitat": "actividad"
+  },
+  "modal": {
+    "talles": "tallas disponibles",
+    "quota": "cuota de socio/a",
+    "professional": "profesional",
+    "localitzacio": "localización",
+    "preu": "precio",
+    "afegir":"añadir a la cesta",
+    "descripcio": "descripción",
+    "beneficis": "beneficios"
+  },
+  "footer": {
+    "drets": "Todos los derechos reservados"
+  },
+  "newsletter":{
+    "subscriute":"subscríbete"
+  },
+  "login": {
+    "registrat": "Regístrate",
+    "recupera-curt": "Recupera contraseña",
+    "recupera-llarg": "Recupera tu contraseña",
+    "inicia": "Ya estas registrado? Inicia sesión",
+    "encara": "Aún no eres socio/a? Informate aquí!",
+    "modifica": "Modifica tu contraseña"
+  },
+  "form": {
+    "nom": "nombre",
+    "cognom": "apellidos",
+    "telefon": "telefono",
+    "soci": "nºsocio",
+    "descompte": "descuento",
+    "usuari": "usuario",
+    "contrassenya": "contraseña"
+  },
+  "perfil": {
+    "dades": "datos personales",
+    "vols-soci": "¿Quieres ser socio",
+    "mes-info": "mas info aquí",
+    "baixa": "Darse de baja"
+  },
+  "boto": {
+    "cancela": "cancela",
+    "guarda": "guarda",
+    "finalitza": "finaliza",
+    "enrere": "atrás",
+    "seguent": "siguiente"
   }
 }

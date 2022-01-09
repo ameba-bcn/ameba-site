@@ -8,9 +8,13 @@ export default function NavbarButtonsMobile(props) {
   const { isLoggedIn = false, click, handleClick } = props;
   const [t, i18next] = useTranslation("translation");
 
-  const handleChangeLanguage = (lang) => {
-    i18next.changeLanguage(lang);
-    localStorage.setItem("lang", lang);
+  const handleChangeLanguage = (lang) => {   
+    const currentLang = localStorage.getItem("i18nextLng");
+    if (currentLang !== lang) {
+      i18next.changeLanguage(lang);
+      // localStorage.setItem("i18nextLng", lang);
+      window.location.reload(false);
+    }
   };
 
   return (
@@ -53,7 +57,7 @@ export default function NavbarButtonsMobile(props) {
           <div className="menu-lang">
             <li>
               <a
-               onClick={() => handleChangeLanguage("cat")}
+               onClick={() => handleChangeLanguage("ca")}
                 data-item="CAT/"
               >
                 CAT/

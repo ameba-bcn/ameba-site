@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const baseURL = process.env.REACT_APP_API_HOST || "http://localhost/api/";
+const storedLang = localStorage.getItem("i18nextLng") || 'ca';
 
 const axiosInstance = axios.create({
     baseURL: baseURL,
@@ -10,7 +11,8 @@ const axiosInstance = axios.create({
             ? `Bearer ${localStorage.getItem('access')}`
             : null,
         'Content-Type': 'application/json',
-        Accept: 'application/json, text/plain, */*'
+        Accept: 'application/json, text/plain, */*',
+        "Accept-Language": storedLang
     }
 });
 

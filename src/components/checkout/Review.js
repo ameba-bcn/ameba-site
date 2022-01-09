@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import DiscountCode from "../forms/DiscountForm/DiscountCode";
 import ErrorBox from "../forms/error/ErrorBox";
@@ -11,6 +12,7 @@ import {
 import TableProducts from "./TableProducts";
 
 function Review({ setError: setCheckoutError }, error) {
+  const [t] = useTranslation("translation");
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { total } = cart_data;
 
@@ -26,9 +28,9 @@ function Review({ setError: setCheckoutError }, error) {
       <DiscountCode />
       <ReviewRowSeparator isBig={true} />
       <ReviewFooter>
-        Temporalment no fem enviaments de productes. <br />
-        La recollida es pot fer de 10-14 i de 16-20 a Rhythm Control. <br />
-        Si tens qualsevol dubte contacta'ns a info@ameba.cat
+        {t("checkout.review-footer-1")} <br />
+        {t("checkout.review-footer-2")} <br />
+        {t("checkout.review-footer-3")}
       </ReviewFooter>
       {error === true && <ErrorBox isError={error} />}
     </ReviewContent>

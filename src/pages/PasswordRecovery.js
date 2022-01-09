@@ -44,7 +44,7 @@ export default function PasswordRecovery(props) {
       </div>
       <LettersMove
         className="lettersMoveDiv"
-        sentence="FES-TE SOCI/A "
+        sentence={t("banners.soci-curt")}
         color="#FAE6C5"
       />
     </div>

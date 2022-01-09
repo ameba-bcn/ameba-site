@@ -7,10 +7,12 @@ import LettersMove from "./../layout/LettersMove";
 import "./Activitats.css";
 import { getNFirstElementsOfArray } from "../../utils/utils";
 import PlusButton from "../button/PlusButton";
+import { useTranslation } from "react-i18next";
 function Activitats() {
   const [activitats, getActivitats] = useState([]);
   const data = useSelector((state) => state.data);
   const { agenda = [] } = data;
+  const [t] = useTranslation("translation");
 
   useEffect(() => {
     if (!!agenda.length) getActivitats(getNFirstElementsOfArray(agenda, 3));
@@ -20,7 +22,7 @@ function Activitats() {
     <div className="Bloque" id="activitats">
       <LettersMove
         className="lettersMoveDiv"
-        sentence="FES-TE SOCI/A "
+        sentence={t("banners.soci-curt")}
         color="#EB5E3E"
       />
       <div className="activitats-box">

@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { subscribeNewsletter } from "../../../redux/actions/profile";
 import { isEmptyObject } from "../../../utils/utils";
@@ -10,6 +11,7 @@ import { LogFormError } from "../Log.style";
 import { validate } from "../NewsletterForm/NewletterFormValidate";
 
 export default function NewsletterForm({ setIsSubmitted }, isSubmitted) {
+  const [t] = useTranslation("translation");
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const handleSubmit = (value) => {
@@ -66,7 +68,7 @@ export default function NewsletterForm({ setIsSubmitted }, isSubmitted) {
             {loading ? (
               <span className="spinner-border"></span>
             ) : (
-              <>Subscriu-te</>
+              <>{t("newsletter.subscriute")}</>
             )}
           </Button>
         </div>

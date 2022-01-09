@@ -26,9 +26,11 @@ import {
 import Payment from "./Payment";
 import { useMediaQuery } from "@material-ui/core";
 import { MOBILE_NORMAL, MOBILE_SMALL } from "../../utils/constants";
+import { useTranslation } from "react-i18next";
 
 function Checkout() {
   const dispatch = useDispatch();
+  const [t] = useTranslation("translation");
   const { cart_data = {}, checkout = {} } = useSelector((state) => state.cart);
   const { isLoggedIn = false } = useSelector((state) => state.auth);
   const { total = "", item_variants = [] } = cart_data;
@@ -39,7 +41,10 @@ function Checkout() {
   const [error, setError] = useState(false);
   const userIsEditingData =
     buttonDisabled && activeStep === 0 && hasMembershipInCart;
-  const steps = ["Dades personals", "Cistella", "Dades de pagament"];
+  const steps =
+    localStorage.getItem("i18nextLng") === "es"
+      ? ["Datos personales", "Cesta", "Datos de pago"]
+      : ["Dades personals", "Cistella", "Dades de pagament"];
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const isMinMobile = useMediaQuery(MOBILE_SMALL);
   const promise = loadStripe(
@@ -107,7 +112,7 @@ function Checkout() {
     <Elements stripe={promise}>
       <CheckoutFrame>
         <CheckoutBox>
-          <CheckoutTitle>Pagament</CheckoutTitle>
+          <CheckoutTitle>{t("checkout.pagament")}</CheckoutTitle>
           <CheckoutSubtitle>{steps[activeStep]}</CheckoutSubtitle>
           <Stepper arraySteps={steps} activeStep={activeStep} />
           <CheckoutContent>{getStepContent(activeStep)}</CheckoutContent>
@@ -121,7 +126,7 @@ function Checkout() {
                 buttonStyle="boton--primary--solid"
                 onClick={handleBack}
               >
-                Enrere
+                {t("boto.enrere")}
               </Button>
             )}
             {activeStep < steps.length - 1 && !userIsEditingData && (
@@ -132,7 +137,7 @@ function Checkout() {
                 buttonStyle="boton--primary--solid"
                 onClick={handleNext}
               >
-                Següent pas
+                {t("boto.seguent")}
               </Button>
             )}
           </CheckoutButtons>

@@ -6,6 +6,7 @@ import SociDialog from "../components/botiga/Soci";
 import LettersMove from "./../components/layout/LettersMove";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { MOBILE_NORMAL } from "../utils/constants";
+import { useTranslation } from "react-i18next";
 
 function Botiga() {
   const [open, setOpen] = React.useState(false);
@@ -13,16 +14,16 @@ function Botiga() {
   const handleClick = () => {
     setOpen(!open);
   };
-
+  const [t] = useTranslation("translation");
   const isMobile = useMediaQuery(MOBILE_NORMAL);
 
   return (
     <div className="Botiga">
-      <PowerTitle title="BOTIGA" className="SupportTitle" />
+      <PowerTitle title={t("menu.botiga")} className="SupportTitle" />
       <div className="clickBanner" onClick={() => handleClick()}>
         <ProductBanner
           title={
-            isMobile ? "fes-te soci/a" : "fes-te soci/a d'ameba per 15€/any"
+            isMobile ? t("banners.soci-curt") : t("banners.soci-llarg")
           }
         />
       </div>
@@ -32,7 +33,7 @@ function Botiga() {
       </div>
       <LettersMove
         className="lettersMoveDiv"
-        sentence="FES-TE SOCI/A "
+        sentence= {t("banners.soci-curt")}
         color="#EB5E3E"
       />
     </div>

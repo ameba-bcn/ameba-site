@@ -3,8 +3,10 @@ import InputField from "../InputField/InputField";
 import { useSelector } from "react-redux";
 import { LogFormBox } from "../Log.style";
 import { Redirect } from "react-router";
+import { useTranslation } from "react-i18next";
 
 export default function MembershipFormReadOnly(props) {
+  const [t] = useTranslation("translation");
   const { isCheckout = false } = props;
   const auth = useSelector((state) => state.auth);
   const { user_data = {} } = auth;
@@ -25,7 +27,7 @@ export default function MembershipFormReadOnly(props) {
                 id="userName"
                 name="userName"
                 type="text"
-                label="usuari"
+                label={t("form.usuari")}
                 value={user_data?.username}
                 valid={true}
                 disabled={true}
@@ -46,7 +48,7 @@ export default function MembershipFormReadOnly(props) {
         </LogFormBox>
         {!isCheckout && (
           <span className="logTextosLink" onClick={showPasswordRecover}>
-            - Modifica la teva contrasenya -
+             {`- ${t("login.modifica")} -`}
           </span>
         )}
       </div>

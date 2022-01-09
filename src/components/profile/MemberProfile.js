@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { RowSeparator } from "../../GlobalStyles.style";
 import { deleteUser } from "../../redux/actions/auth";
@@ -16,10 +17,12 @@ import {
 } from "./MemberProfile.style";
 
 export default function MemberProfile({ setButtonDisabled, isMember }) {
+  const [t] = useTranslation("translation");
   const dispatch = useDispatch();
   const { user_member_data } = useSelector((state) => state.auth);
   const { type } = user_member_data;
-  const antiMember = type === "PROFESSIONAL" ? "SUBSCRIPTOR" : "PROFESSIONAL";
+  const antiMember =
+    type === "PROFESSIONAL" ? "SUBSCRIPTOR" : t("modal.professional");
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -33,7 +36,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
   return (
     <MemberProfileFrame>
       <MemberProfileBox>
-        <MemberProfileTitle>Dades personals</MemberProfileTitle>
+        <MemberProfileTitle>{t("perfil.dades")}</MemberProfileTitle>
         <MemberProfileBoxBorder>
           {isMember ? (
             <MembershipFormLayout setButtonDisabled={setButtonDisabled} />
@@ -42,8 +45,10 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
           )}
           <RowSeparator />
           <MemberInfoRow>
-            Vols ser soci {isMember ? antiMember : ""}?
-            <span onClick={() => setOpen(true)}>{`< més info aqui >`}</span>
+            {t("perfil.vols-soci")} {isMember ? antiMember : ""}?<br />
+            <span onClick={() => setOpen(true)}>{`< ${t(
+              "perfil.mes-info"
+            )} >`}</span>
           </MemberInfoRow>
           <RowSeparator />
           <Button
@@ -53,7 +58,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
             buttonStyle="boton--primary--solid"
             onClick={() => unsubscribeUser()}
           >
-            Donar-se de baixa
+            {t("perfil.baixa")}
           </Button>
         </MemberProfileBoxBorder>
         {open && <SociDialog open={open} onClose={handleClick} />}

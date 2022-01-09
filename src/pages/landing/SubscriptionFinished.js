@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import LettersMove from "../../components/layout/LettersMove";
 import { subscribeNewsletter } from "../../redux/actions/profile";
@@ -8,6 +9,7 @@ export default function SubscriptionFinished(props) {
   const dispatch = useDispatch();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const { message = "" } = useSelector((state) => state.message);
+  const [t] = useTranslation("translation");
 
   const queryString = require("query-string");
   const parsed = queryString.parse(props.location.search);
@@ -40,7 +42,7 @@ export default function SubscriptionFinished(props) {
       </div>
       <LettersMove
         className="lettersMoveDiv"
-        sentence="FES-TE SOCI/A "
+        sentence={t("banners.soci-curt")}
         color="#EB5E3E"
       />
     </>
