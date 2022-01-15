@@ -9,9 +9,11 @@ import ErrorBox from "../error/ErrorBox";
 import { DiscountRow } from "./DiscountCode.style";
 import { isEmptyObject } from "../../../utils/utils";
 import { applyDiscount } from "../../../redux/actions/cart";
+import { useTranslation } from "react-i18next";
 
 export default function DiscountCode() {
   const dispatch = useDispatch();
+  const [t] = useTranslation("translation");
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { item_variant_ids = [] } = cart_data;
   const [loading, setLoading] = useState(false);
@@ -49,7 +51,7 @@ export default function DiscountCode() {
           id="code"
           name="code"
           type="text"
-          placeholder="Descompte"
+          placeholder={t("form.descompte")}
           className="form-control logForm"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

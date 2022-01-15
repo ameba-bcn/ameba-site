@@ -9,8 +9,12 @@ export default function NavbarButtons(props) {
   const [t, i18next] = useTranslation("translation");
 
   const handleChangeLanguage = (lang) => {
-    i18next.changeLanguage(lang);
-    localStorage.setItem("lang", lang);
+    const currentLang = localStorage.getItem("i18nextLng");
+    if (currentLang !== lang) {
+      i18next.changeLanguage(lang);
+      localStorage.setItem("i18nextLng", lang);
+      window.location.reload(false);
+    }
   };
 
   return (
@@ -23,7 +27,7 @@ export default function NavbarButtons(props) {
         </li>
         <li>
           <NavLink to="/botiga" data-item={t("menu.botiga")}>
-          {t("menu.botiga")}
+            {t("menu.botiga")}
           </NavLink>
         </li>
         <li>
@@ -48,7 +52,7 @@ export default function NavbarButtons(props) {
         </div>
         <div className="menu-lang">
           <li>
-            <a onClick={() => handleChangeLanguage("cat")} data-item="CAT/">
+            <a onClick={() => handleChangeLanguage("ca")} data-item="CAT/">
               CAT/
             </a>
             <a onClick={() => handleChangeLanguage("es")} data-item="CAST">

@@ -11,6 +11,7 @@ import Button from "../../button/Button";
 import InputField from "../InputField/InputField";
 import { LogFormBox, LogFormError } from "../Log.style";
 import { validate } from "../MembershipForm/MembershipValidate";
+import { useTranslation } from "react-i18next";
 
 export default function MembershipForm({
   setDisplayError,
@@ -29,6 +30,7 @@ export default function MembershipForm({
     address: user_member_data.address,
     phone_number: user_member_data.phone_number,
   };
+  const [t] = useTranslation("translation");
   const isNewMember = deepComparision(user_member_data, {});
 
   const InitialValues = {
@@ -112,7 +114,7 @@ export default function MembershipForm({
               id="memberNum"
               name="memberNum"
               type="text"
-              label="Nºsoci"
+              label={t("form.soci")}
               value={user_member_data?.number}
               slimLine={true}
               valid={true}
@@ -125,7 +127,7 @@ export default function MembershipForm({
             id="first_name"
             name="first_name"
             type="text"
-            label="nom"
+            label={t("form.nom")}
             onChange={formik.handleChange}
             onBlur={(e) => {
               formik.handleBlur(e);
@@ -141,7 +143,7 @@ export default function MembershipForm({
             id="last_name"
             name="last_name"
             type="text"
-            label="cognoms"
+            label={t("form.cognom")}
             onChange={formik.handleChange}
             onBlur={(e) => {
               formik.handleBlur(e);
@@ -173,7 +175,7 @@ export default function MembershipForm({
             id="phone_number"
             name="phone_number"
             type="text"
-            label="Telèfon"
+            label={t("form.telefon")}
             onChange={formik.handleChange}
             onBlur={(e) => {
               formik.handleBlur(e);
@@ -203,7 +205,7 @@ export default function MembershipForm({
                 buttonStyle="boton--primary--solid"
                 onClick={() => handleCancel(formik.setValues)}
               >
-                Cancel·la
+                {t("boto.cancela")}
               </Button>
             </div>
             <div className="column">
@@ -217,7 +219,7 @@ export default function MembershipForm({
                 {loading ? (
                   <span className="spinner-border"></span>
                 ) : (
-                  <>Guarda</>
+                  <>{t("boto.guarda")}</>
                 )}
               </Button>
             </div>

@@ -6,9 +6,11 @@ import { deleteCartAfterCheckout } from "../../redux/actions/cart";
 import Button from "../button/Button";
 import ErrorBox from "../forms/error/ErrorBox";
 import { clearMessage } from "../../redux/actions/message";
+import { useTranslation } from "react-i18next";
 
 export default function FreeCheckout() {
   const dispatch = useDispatch();
+  const [t] = useTranslation("translation");
   const [redirect, setRedirect] = useState(false);
   const [error, setError] = useState(false);
   const handleFinishPayment = () => {
@@ -29,8 +31,7 @@ export default function FreeCheckout() {
   return (
     <div className="freeCheckout-box">
       <p>
-        El procediment de compra no suposa cap càrreg per tant no cal realitzar
-        pagament.
+        {t("checkout.pagament-gratis")}
       </p>
       {error && <ErrorBox isError={error} />}
       <Button
@@ -40,7 +41,7 @@ export default function FreeCheckout() {
         buttonStyle="boton--primary--solid"
         onClick={handleFinishPayment}
       >
-        Finalitza
+        {t("boto.finalitza")}
       </Button>
     </div>
   );

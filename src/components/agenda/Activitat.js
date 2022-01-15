@@ -4,6 +4,7 @@ import { addToCart } from "../../redux/actions/cart";
 import { Redirect } from "react-router-dom";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import ModalCard from "../../modals/ModalCard";
+import { useTranslation } from "react-i18next";
 
 export default function ActivitatDialog(props) {
   const { onClose, selectedValue, open, dataRow } = props;
@@ -22,6 +23,7 @@ export default function ActivitatDialog(props) {
   const dispatch = useDispatch();
   const profile = useSelector((state) => state.profile);
   const { user_profile = "" } = profile;
+  const [t] = useTranslation("translation");
 
   const handleClose = () => {
     onClose(selectedValue);
@@ -50,7 +52,7 @@ export default function ActivitatDialog(props) {
       address={address}
       buttonText="RESERVA ENTRADA"
       buttonIcon={<ReceiptIcon />}
-      box1Title={"DESCRIPCIÓ"}
+      box1Title={t("modal.descripcio")}
       box1Text={description}
       // box2Title={"ARTIST / LINE UP"}
       // box2Text={artists}

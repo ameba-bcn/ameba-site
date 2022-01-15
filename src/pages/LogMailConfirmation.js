@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { validateEmail } from "./../redux/actions/auth";
 import LettersMove from "./../components/layout/LettersMove";
+import { useTranslation } from "react-i18next";
 
 export default function LogMailConfirmation(props) {
   const dispatch = useDispatch();
   const { message = "" } = useSelector((state) => state.message);
   const [hasQueryParams, setHasQueryParams] = useState(false);
   const [displayError, setDisplayError] = useState(false);
+  const [t] = useTranslation("translation");
 
   const queryString = require("query-string");
   const parsed = queryString.parse(props.location.search);
@@ -41,7 +43,7 @@ export default function LogMailConfirmation(props) {
       </div>
       <LettersMove
         className="lettersMoveDiv"
-        sentence="FES-TE SOCI/A "
+        sentence={t("banners.soci-curt")}
         color="#FAE6C5"
       />
     </>

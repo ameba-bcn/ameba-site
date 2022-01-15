@@ -7,8 +7,10 @@ import { validate } from "../Register/RegisterValidate";
 import { LogFormBox, LogFormError } from "../Log.style";
 import { register } from "../../../redux/actions/auth";
 import { isEmptyObject } from "../../../utils/utils";
+import { useTranslation } from "react-i18next";
 
 export default function RegisterForm({ setRedirect, setDisplayError }) {
+  const [t] = useTranslation("translation");
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { id = null } = cart_data;
   const dispatch = useDispatch();
@@ -54,7 +56,7 @@ export default function RegisterForm({ setRedirect, setDisplayError }) {
             id="username"
             name="username"
             type="text"
-            placeholder="usuari"
+            placeholder={t("form.usuari")}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.username}
@@ -100,7 +102,7 @@ export default function RegisterForm({ setRedirect, setDisplayError }) {
           buttonStyle="boton--primary--solid"
           hoverStyle="bg-cream"
         >
-          {loading ? <span className="spinner-border"></span> : <>registra't</>}
+          {loading ? <span className="spinner-border"></span> : <>{t("login.registrat")}</>}
         </Button>
       </form>
     </LogFormBox>

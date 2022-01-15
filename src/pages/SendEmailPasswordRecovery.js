@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import LettersMove from "./../components/layout/LettersMove";
 import MailRecoveryForm from "../components/forms/MailRecoveryForm/MailRecoveryForm";
+import { useTranslation } from "react-i18next";
 
 export default function SendEmailPasswordRecovery() {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [t] = useTranslation("translation");
 
   return (
     <div className="logViewRed">
@@ -25,7 +27,7 @@ export default function SendEmailPasswordRecovery() {
       </div>
       <LettersMove
         className="lettersMoveDiv"
-        sentence="FES-TE SOCI/A "
+        sentence={t("banners.soci-curt")}
         color="#FAE6C5"
       />
     </div>

@@ -1,7 +1,9 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import LettersMove from './../components/layout/LettersMove';
 
 export default function ValidateEmail() {
+    const [t] = useTranslation("translation");
     return (
         <>
             <div className="full-height-msg">
@@ -9,7 +11,7 @@ export default function ValidateEmail() {
             </div>
             <LettersMove
                 className="lettersMoveDiv"
-                sentence="FES-TE SOCI/A "
+                sentence={t("banners.soci-curt")}
                 color="#EB5E3E"
             />
         </>

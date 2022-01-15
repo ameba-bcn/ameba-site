@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom'
 import { useInView } from 'react-intersection-observer';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import './SupportLocals.css';
+import { useTranslation } from 'react-i18next';
 
 export default function SupportLocals() {
     const breakpoint = useMediaQuery('(max-width:950px)');
+    const [t] = useTranslation("translation");
 
     const [ref, inView] = useInView({
         threshold: '0.5',
@@ -28,7 +30,7 @@ export default function SupportLocals() {
                             #SUPPORTYOURLOCALS
                     </div>
                         <div className="overlaySubtitle">
-                            * conèix als artistes que donen vida a l'escena de la ciutat *
+                        {t("support.title.subtitle")}
                     </div>
                     </Link>
                 </div>

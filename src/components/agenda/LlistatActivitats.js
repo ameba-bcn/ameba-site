@@ -12,6 +12,7 @@ import {
   isCORSInactive,
 } from "./../../utils/utils";
 import "./Agenda.css";
+import { useTranslation } from "react-i18next";
 
 export default function LlistatActivitats() {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function LlistatActivitats() {
   const { agenda = [] } = useSelector((state) => state.data);
   const { user_profile = "" } = useSelector((state) => state.profile);
   const noResultsMessage = <span>No s'han trobat resultats</span>;
+  const [t] = useTranslation("translation");
 
   const [eventData, setEventData] = useState([
     {
@@ -74,7 +76,7 @@ export default function LlistatActivitats() {
   const [state] = React.useState({
     columns: [
       {
-        title: "Activitat",
+        title: t("agenda.activitat"),
         field: "name",
         render: (rowData) => (
           <div className="row">
@@ -106,7 +108,7 @@ export default function LlistatActivitats() {
         },
       },
       {
-        title: "Data",
+        title: t("agenda.data"),
         field: "datetime",
         render: (rowData) => (
           <div className="horaDataActivitat">

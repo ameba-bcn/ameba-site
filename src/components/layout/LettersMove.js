@@ -5,36 +5,11 @@ import './LettersMove.css'
 export default function LettersMove(props) {
     return (
         <div className="wrapper">
-            {/* <marquee behavior="alternate"> */}
             <div className="substituto-marquee">
                 <div className="marquee" style={{ color: props.color }}>
-                    - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
-                - {props.sentence}
+                    {Array.from(Array(24).keys()).map(x=>  `- ${props.sentence} `)}
                 </div>
             </div>
-            {/* </marquee> */}
         </div>
     )
 }

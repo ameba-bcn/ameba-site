@@ -4,6 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.7
+- FE Translated
+- Validate on submit, not on type
+- Hover in cards bug
+
 Version 1.6
 - Checkout Styling
 - Font auto resize

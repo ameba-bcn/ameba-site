@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import LettersMove from "./../components/layout/LettersMove";
 import MemberProfile from "../components/profile/MemberProfile";
 import { isEmptyObject } from "../utils/utils";
+import { useTranslation } from "react-i18next";
 
 export default function Profile() {
   const auth = useSelector((state) => state.auth);
@@ -11,6 +12,7 @@ export default function Profile() {
   const { isLoggedIn = false } = auth;
   const { username = "" } = user_data;
   const isMember = !isEmptyObject(user_member_data);
+  const [t] = useTranslation("translation");
 
   if (!isLoggedIn) {
     return <Redirect to="/" />;
@@ -22,7 +24,7 @@ export default function Profile() {
       <MemberProfile isMember={isMember} />
       <LettersMove
         className="lettersMoveDiv"
-        sentence="FES-TE SOCI/A "
+        sentence={t("banners.soci-curt")}
         color="#EB5E3E"
       />
     </div>

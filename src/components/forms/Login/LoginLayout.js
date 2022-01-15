@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import ErrorBox from "../error/ErrorBox";
 import LoginForm from "./LoginForm";
 
 const LoginLayout = (props) => {
+  const [t] = useTranslation("translation");
   const cart = useSelector((state) => state.cart);
   const { cart_data = {} } = cart;
   const { state = {} } = cart_data;
@@ -54,10 +56,10 @@ const LoginLayout = (props) => {
           className="logTextosLink logTextosLinkRegistrat"
           onClick={showRegistration}
         >
-          - Registra't -
+          {`- ${t("login.registrat")} -`}
         </span>
         <span className="logTextosLink" onClick={showPasswordRecover}>
-          - Recupera la teva contrasenya -
+          {`- ${t("login.recupera-llarg")} -`}
         </span>
       </div>
     </div>

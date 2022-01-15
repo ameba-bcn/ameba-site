@@ -14,6 +14,7 @@ import { MOBILE_NORMAL } from "../utils/constants";
 import CollapsableTextDiv from "../components/collapsable/CollapsableTextDiv";
 import { toast } from "react-toastify";
 import Toast from "../components/toast/Toast";
+import { useTranslation } from "react-i18next";
 
 export default function ModalCard(props) {
   const {
@@ -42,6 +43,7 @@ export default function ModalCard(props) {
   const types = ["PRODUCTE", "SOCI", "ACTIVITAT"];
   const [activeSize, setActiveSize] = useState(sizes ? sizes[0] : []);
   const modalStyle = types.includes(type) ? type : types[0];
+  const [t] = useTranslation("translation");
 
   const interactiveDataBox = () => {
     let dataBoxDiv = <></>;
@@ -49,7 +51,7 @@ export default function ModalCard(props) {
       let dataBoxDiv = (
         <>
           <div className="modal-card___title_small ">
-            <PeopleAltIcon /> TALLES DISPONIBLES / &nbsp;
+            <PeopleAltIcon /> {t("modal.talles")} / &nbsp;
           </div>
           {sizes && sizes[0] === "UNIQUE" ? (
             <div>Talla única</div>
@@ -78,7 +80,7 @@ export default function ModalCard(props) {
       let dataBoxDiv = (
         <div className="interactiveDataBox-soci__row">
           <div className="modal-card___title_small">
-            <PeopleAltIcon /> QUOTA DE SOCI/A / &nbsp;
+            <PeopleAltIcon /> {t("modal.quota")} / &nbsp;
           </div>
           <div className="interactiveDataBox-soci__buttonBox">
             <div
@@ -101,7 +103,7 @@ export default function ModalCard(props) {
                           }`}
               onClick={() => setIsSubscriber(false)}
             >
-              Professional
+              {t("modal.professional")}
             </div>
           </div>
         </div>
@@ -114,7 +116,7 @@ export default function ModalCard(props) {
           {isMobile && (
             <div className="interactiveDataBox-activitat__row">
               <div className="modal-card___title_small">
-                <LocationOnIcon /> LOCALITZACIÓ / &nbsp;
+                <LocationOnIcon /> {t("modal.localitzacio")} / &nbsp;
               </div>
               <div className="modal-card__column_sixtyfive interactiveDataBox-activitat__text-loca">
                 <a
@@ -129,7 +131,7 @@ export default function ModalCard(props) {
           )}
           <div className="interactiveDataBox-activitat__row">
             <div className="modal-card___title_small">
-              <CalendarTodayIcon /> DATA / &nbsp;
+              <CalendarTodayIcon /> {t("agenda.data")} / &nbsp;
             </div>
             <div className="interactiveDataBox-activitat__text-data">
               <a
@@ -151,7 +153,7 @@ export default function ModalCard(props) {
           </div>
           <div className="interactiveDataBox-activitat__row">
             <span className="modal-card___title_small">
-              <LocalAtmIcon /> PREU / &nbsp;
+              <LocalAtmIcon /> {t("modal.preu")} / &nbsp;
             </span>
             <span className="interactiveDataBox-activitat__text-data">
               {price}
@@ -195,7 +197,7 @@ export default function ModalCard(props) {
               <div className="modal-card-location__row">
                 <div className="modal-card__column_thirtyfive">
                   <div className="modal-card___title_small">
-                    <LocationOnIcon /> LOCALITZACIÓ / &nbsp;
+                    <LocationOnIcon /> {t("modal.localitzacio")} / &nbsp;
                   </div>
                 </div>
                 <div className="modal-card__column_sixtyfive interactiveDataBox-activitat__text-loca">
