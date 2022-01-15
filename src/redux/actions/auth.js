@@ -120,10 +120,6 @@ export const getMemberProfile = () => (dispatch) => {
         payload: response,
       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: "Register member success",
-      });
       if (response?.type === "Socio") {
         dispatch({
           type: MEMBER_USER,

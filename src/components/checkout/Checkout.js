@@ -12,8 +12,6 @@ import ErrorBox from "../forms/error/ErrorBox";
 import { clearMessage } from "../../redux/actions/message";
 import MembershipFormReadOnly from "../forms/MembershipForm/MembershipFormReadOnly";
 import Stepper from "../stepper/Stepper";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import {
   CheckoutBox,
   CheckoutButtons,
@@ -42,9 +40,6 @@ function Checkout() {
   const steps = ["Dades personals", "Cistella", "Dades de pagament"];
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const isMinMobile = useMediaQuery(MOBILE_SMALL);
-  const promise = loadStripe(
-    "pk_test_51IGkXjHRg08Ncmk7fPlbb9DfTF5f7ckXBKiR4g01euLgXs04CqmgBPOQuqQfOhc6aj9mzsYE1oiQ3TFjHH9Hv3Mj00GNyG9sep"
-  );
 
   useEffect(() => {
     dispatch(getMemberProfile());
@@ -82,7 +77,6 @@ function Checkout() {
           <CheckoutMemberFrame>
             {hasMembershipInCart ? (
               <MembershipFormLayout
-                handleNext={handleNext}
                 setButtonDisabled={setButtonDisabled}
               />
             ) : (
@@ -104,7 +98,6 @@ function Checkout() {
   };
 
   return (
-    <Elements stripe={promise}>
       <CheckoutFrame>
         <CheckoutBox>
           <CheckoutTitle>Pagament</CheckoutTitle>
@@ -138,7 +131,6 @@ function Checkout() {
           </CheckoutButtons>
         </CheckoutBox>
       </CheckoutFrame>
-    </Elements>
   );
 }
 

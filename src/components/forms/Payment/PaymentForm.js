@@ -1,30 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteCartAfterCheckout } from "./../../../redux/actions/cart";
+import { deleteCartAfterCheckout } from "../../../redux/actions/cart";
 import { Redirect } from "react-router-dom";
-import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import {
+  PaymentElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
 import "./PaymentForm.css";
 import Button from "../../button/Button";
 import { getMemberProfile } from "../../../redux/actions/auth";
-import ErrorBox from "./../error/ErrorBox";
+import ErrorBox from "../error/ErrorBox";
+import PaymentStatus from "../../checkout/PaymentStatus";
 
 function PaymentForm(props) {
   const dispatch = useDispatch();
-  const { checkout = {} } = useSelector((state) => state.cart);
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
   const [processing, setProcessing] = useState("");
   const [disabled, setDisabled] = useState(true);
-  const [clientSecret, setClientSecret] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-
-  console.log("client secret", props);
-
-  useEffect(() => {
-    console.log("client secret", checkout.checkout.client_secret);
-    setClientSecret(checkout.checkout.client_secret);
-  }, [checkout.checkout.client_secret]);
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const cardStyle = {
     hidePostalCode: true,
@@ -45,42 +42,99 @@ function PaymentForm(props) {
     },
   };
 
-  const handleChange = async (event) => {
-    // Listen for changes in the CardElement
-    // and display any errors as the customer types their card details
-    setDisabled(event.empty);
-    setError(event.error ? event.error.message : "");
-  };
+  // const handleChange = async (event) => {
+  //   // Listen for changes in the CardElement
+  //   // and display any errors as the customer types their card details
+  //   setDisabled(event.empty);
+  //   setError(event.error ? event.error.message : "");
+  // };
+  const handleSubmit = async (event) => {
+    // We don't want to let default form submission happen here,
+    // which would refresh the page.
+    event.preventDefault();
 
-  const handleSubmit = async (ev) => {
-    ev.preventDefault();
-    setProcessing(true);
+    if (!stripe || !elements) {
+      // Stripe.js has not yet loaded.
+      // Make sure to disable form submission until Stripe.js has loaded.
+      return;
+    }
 
-    const payload = await stripe.confirmCardPayment(clientSecret, {
-      payment_method: {
-        card: elements.getElement(CardElement),
+    const { error } = await stripe.confirmPayment({
+      //`Elements` instance that was used to create the Payment Element
+      elements,
+      confirmParams: {
+        return_url: "http://localhost:3000/summary-checkout",
       },
     });
 
-    if (payload.error) {
-      setError(`Pagament no realitzat: ${payload.error.message}`);
+    if (error) {
+      // This point will only be reached if there is an immediate error when
+      // confirming the payment. Show error to your customer (e.g., payment
+      // details incomplete)
+      setError(`Pagament no realitzat: ${error.message}`);
       setProcessing(false);
+      setErrorMessage(error.message);
     } else {
+      // Your customer will be redirected to your `return_url`. For some payment
+      // methods like iDEAL, your customer will be redirected to an intermediate
+      // site first to authorize the payment, then redirected to the `return_url`.
       setError(null);
       setProcessing(false);
       setSucceeded(true);
+      props.handleNext();
     }
   };
 
-  if (succeeded) {
-    dispatch(deleteCartAfterCheckout()).then(dispatch(getMemberProfile()));
-    return <Redirect to="/summary-checkout" />;
-  }
+  // const handleSubmit = async (ev) => {
+  //   ev.preventDefault();
+  //   setProcessing(true);
+
+  //   const payload = await stripe.confirmCardPayment(clientSecret, {
+  //     payment_method: {
+  //       card: elements.getElement(CardElement),
+  //     },
+  //   });
+
+  //   if (payload.error) {
+  //     setError(`Pagament no realitzat: ${payload.error.message}`);
+  //     setProcessing(false);
+  //   } else {
+  //     setError(null);
+  //     setProcessing(false);
+  //     setSucceeded(true);
+  //   }
+  // };
+
+  // if (succeeded) {
+  //   dispatch(deleteCartAfterCheckout()).then(dispatch(getMemberProfile()));
+  //   return <Redirect to="/summary-checkout" />;
+  // }
 
   return (
     <div className="payment-root">
-      <div className="payment-body">
-        <form id="payment-form" onSubmit={handleSubmit}>
+    <div className="payment-body">
+        <form onSubmit={handleSubmit}>
+          <PaymentElement options={cardStyle} />
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--medium"
+            buttonStyle="boton--primary--solid"
+            id="submit"
+            disabled={!stripe}>
+            {" "}
+            <span id="button-text">
+              {processing ? (
+                <div className="spinner" id="spinner"></div>
+              ) : (
+                "Paga"
+              )}
+            </span>
+          </Button>
+          {/* Show error message to your customers */}
+          {errorMessage && <div>{errorMessage}</div>}
+        </form>
+        {/* <form id="payment-form" onSubmit={handleSubmit}>
           <CardElement
             id="card-element"
             options={cardStyle}
@@ -113,7 +167,7 @@ function PaymentForm(props) {
             </a>{" "}
             Refresca la pàgina per a pagar un altre cop
           </p>
-        </form>
+        </form> */}
       </div>
     </div>
   );
