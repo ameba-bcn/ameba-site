@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
 import Review from "./Review";
-import { checkoutCart } from "../../redux/actions/cart";
+import { checkoutCart, checkoutPaymentCart } from "../../redux/actions/cart";
 import { isMemberCheckout } from "../../utils/utils";
 import "./Checkout.css";
 import Button from "../button/Button";
@@ -31,12 +31,13 @@ function Checkout() {
   const [t] = useTranslation("translation");
   const { cart_data = {}, checkout = {} } = useSelector((state) => state.cart);
   const { isLoggedIn = false } = useSelector((state) => state.auth);
-  const { total = "", item_variants = [] } = cart_data;
+  const { total = "", item_variants = [], id=""} = cart_data;
   const isPaymentFree = checkout ? checkout.amount === 0 : total === "0.00 €";
   const hasMembershipInCart = isMemberCheckout(item_variants); // sacar del carro cuando esté en back
   const [activeStep, setActiveStep] = useState(hasMembershipInCart ? 0 : 1);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const userIsEditingData =
     buttonDisabled && activeStep === 0 && hasMembershipInCart;
   const steps =
@@ -54,14 +55,18 @@ function Checkout() {
 
   const handleNext = () => {
     if (activeStep === 1) {
+      setLoading(true)
       dispatch(checkoutCart())
+       .then(()=> !isPaymentFree && dispatch(checkoutPaymentCart(id)))
         .then(() => {
           setActiveStep(activeStep + 1);
           setError(false);
           dispatch(clearMessage());
+          setLoading(false);
         })
         .catch(() => {
           setError(true);
+          setLoading(false);
         });
     } else {
       setActiveStep(activeStep + 1);
@@ -110,6 +115,7 @@ function Checkout() {
           <Stepper arraySteps={steps} activeStep={activeStep} />
           <CheckoutContent>{getStepContent(activeStep)}</CheckoutContent>
           {error && <ErrorBox isError={error} />}
+          {loading && <span className="spinner-border"></span> }
           <CheckoutButtons>
             {activeStep !== 0 && (
               <Button
@@ -117,6 +123,7 @@ function Checkout() {
                 color="primary"
                 buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
                 buttonStyle="boton--primary--solid"
+                disabled={loading}
                 onClick={handleBack}
               >
                 {t("boto.enrere")}
@@ -128,6 +135,7 @@ function Checkout() {
                 color="primary"
                 buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
                 buttonStyle="boton--primary--solid"
+                disabled={loading}
                 onClick={handleNext}
               >
                 {t("boto.seguent")}

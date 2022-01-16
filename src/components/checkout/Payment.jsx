@@ -18,11 +18,14 @@ export default function Payment(props) {
   const { isPaymentFree = false } = props;
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { checkout = {} } = useSelector((state) => state.cart);
-  const { client_secret = "" } = checkout.checkout;
+  const { checkout_stripe = {} } = checkout;
+  const { client_secret = "" } = checkout_stripe;
+  // const client_secret = checkout_stripe?.client_secret
   const { total } = cart_data;
   const stripePromise = loadStripe(
     "pk_test_51IGkXjHRg08Ncmk7fPlbb9DfTF5f7ckXBKiR4g01euLgXs04CqmgBPOQuqQfOhc6aj9mzsYE1oiQ3TFjHH9Hv3Mj00GNyG9sep"
   );
+  console.log({checkout},{checkout_stripe},{client_secret})
   const options = {
     clientSecret: client_secret,
     appearance: {
@@ -43,7 +46,7 @@ export default function Payment(props) {
           <ReviewRowSeparator isBig={false} />
         </PaymentReview>
       </PaymentSummaryBox>
-      <PaymentBox>
+      {checkout_stripe &&<PaymentBox>
         {isPaymentFree ? (
           <FreeCheckout />
         ) : (
@@ -51,7 +54,7 @@ export default function Payment(props) {
             <PaymentForm />
           </Elements>
         )}
-      </PaymentBox>
+      </PaymentBox>}
     </PaymentContent>
   );
 }

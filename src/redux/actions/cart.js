@@ -5,6 +5,8 @@ import {
   SUBS_FAIL,
   CHECKOUT,
   CHECKOUT_FAIL,
+  CHECKOUT_PAYMENT,
+  CHECKOUT_PAYMENT_FAIL,
   GET_CART,
   GET_CART_FAIL,
   DELETE_CART,
@@ -102,6 +104,33 @@ export const checkoutCart = () => (dispatch) => {
       const message = error.response?.data?.detail;
       dispatch({
         type: CHECKOUT_FAIL,
+        payload: message,
+      });
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
+};
+
+export const checkoutPaymentCart = (id) => (dispatch) => {
+  return CartService.checkoutPaymentCart(id).then(
+    (response) => {
+      dispatch({
+        type: CHECKOUT_PAYMENT,
+        payload: response,
+      });
+
+      return Promise.resolve();
+    },
+    (error) => {
+      const message = error.response?.data?.detail;
+      dispatch({
+        type: CHECKOUT_PAYMENT_FAIL,
         payload: message,
       });
 

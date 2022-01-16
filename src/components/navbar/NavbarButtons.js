@@ -5,7 +5,7 @@ import MenuLog from "./MenuLog";
 import Cart from "./Cart";
 
 export default function NavbarButtons(props) {
-  const { isLoggedIn = false, handleClick = {}, click } = props;
+  const { isLoggedIn = false, handleClick = {}, click, isMobile } = props;
   const [t, i18next] = useTranslation("translation");
 
   const handleChangeLanguage = (lang) => {
@@ -60,7 +60,7 @@ export default function NavbarButtons(props) {
             </a>
           </li>
         </div>
-        <Cart onClick={handleClick} click={click} />
+        <Cart onClick={handleClick} click={click} isMobile={isMobile} />
       </ul>
     </div>
   );

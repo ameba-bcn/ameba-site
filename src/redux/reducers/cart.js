@@ -7,6 +7,8 @@ import {
   SUBS_FAIL,
   CHECKOUT,
   CHECKOUT_FAIL,
+  CHECKOUT_PAYMENT,
+  CHECKOUT_PAYMENT_FAIL,
   GET_CART,
   GET_CART_FAIL,
   DELETE_CART,
@@ -14,7 +16,7 @@ import {
   DESTROY_CART,
   DESTROY_CART_FAIL,
   DISCOUNT_CODE_APPLIED,
-  DISCOUNT_CODE_FAIL
+  DISCOUNT_CODE_FAIL,
 } from "../actions/types";
 
 const initialState = {
@@ -64,6 +66,18 @@ export default function (state = initialState, action) {
         stripe: true,
       };
     case CHECKOUT_FAIL:
+      return {
+        ...state,
+        checkout: {},
+        stripe: false,
+      };
+    case CHECKOUT_PAYMENT:
+      return {
+        ...state,
+        checkout: {...state.checkout, checkout_stripe:payload},
+        stripe: true,
+      };
+    case CHECKOUT_PAYMENT_FAIL:
       return {
         ...state,
         checkout: {},

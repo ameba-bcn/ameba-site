@@ -43,6 +43,7 @@ export default function Navbar() {
             isLoggedIn={isLoggedIn}
             handleClick={handleClick}
             click={click}
+            isMobile={isMobile}
           />
         )}
       </div>
@@ -51,7 +52,7 @@ export default function Navbar() {
           isLoggedIn={isLoggedIn}
           handleClick={handleClick}
           click={click}
-          isMobile
+          isMobile={isMobile}
         />
       )}
     </div>

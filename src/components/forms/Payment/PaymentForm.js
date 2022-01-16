@@ -63,7 +63,7 @@ function PaymentForm(props) {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000/summary-checkout",
+        return_url: "http://localhost/summary-checkout",
       },
     });
 

@@ -5,7 +5,7 @@ import Cart from "./Cart";
 import { useTranslation } from "react-i18next";
 
 export default function NavbarButtonsMobile(props) {
-  const { isLoggedIn = false, click, handleClick } = props;
+  const { isLoggedIn = false, click, handleClick, isMobile } = props;
   const [t, i18next] = useTranslation("translation");
 
   const handleChangeLanguage = (lang) => {   
@@ -70,7 +70,7 @@ export default function NavbarButtonsMobile(props) {
               </a>
             </li>
           </div>
-          <Cart isMobile onClick={handleClick} click={click} />
+          <Cart isMobile={isMobile} onClick={handleClick} click={click} />
         </ul>
       )}
     </div>

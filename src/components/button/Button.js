@@ -22,6 +22,7 @@ export default function Button(props) {
     buttonSize,
     hoverStyle,
     icon,
+    disabled,
     ...rest
   } = props;
   const checkButtonStyle = STYLES.includes(buttonStyle)
@@ -32,7 +33,7 @@ export default function Button(props) {
 
   return (
     <button
-      className={`boton ${checkButtonStyle} ${checkButtonSize} ${checkHoverStyle}`}
+      className={`boton ${checkButtonStyle} ${checkButtonSize} ${checkHoverStyle} ${disabled?"button-disabled":""}`}
       onClick={onClick}
       type={type}
       {...rest}

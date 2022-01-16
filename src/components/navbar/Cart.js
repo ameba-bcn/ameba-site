@@ -68,7 +68,7 @@ function Cart(props) {
         </div>
       </li>
     ) : (
-      <li>
+      <li className="cart-cistella">
         <a
           data-item={t("checkout.cistella")}
           onClick={(e) => handleOpenCart(e)}

@@ -170,6 +170,16 @@ const checkoutCart = () => {
     });
 };
 
+const checkoutPaymentCart = (cartId) => {
+  return axios
+    .get(`${API_URL}carts/current/payment/?id=${cartId}`, {
+      headers: { Authorization: `Bearer ${localStorage.getItem("access")}` },
+    })
+    .then((response) => {
+      return response?.data;
+    });
+};
+
 const deleteFullCart = () => {
   let cart_uuid = JSON.parse(localStorage.getItem("cart_id"));
   return axios.delete(`${API_URL}carts/${cart_uuid}`, {
@@ -269,6 +279,7 @@ export default {
   deleteFullCart,
   removeItemCart,
   checkoutCart,
+  checkoutPaymentCart,
   getCart,
   deleteCartAfterSuccesfullCheckout,
   applyDiscount

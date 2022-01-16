@@ -16,7 +16,7 @@ export default function Toast() {
           tens{" "}
           <span>
             {item_variants.length}{" "}
-            {item_variants.length > 1 ? "productes" : "producte"}
+            {item_variants.length === 1 ? "producte" : "productes"}
           </span>{" "}
           a la cistella
         </ToastLeftInBox>

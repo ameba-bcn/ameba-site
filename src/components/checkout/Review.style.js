@@ -78,6 +78,7 @@ export const ReviewTable = styled.table`
         line-height: 1em;
         font-size: 2rem;
         display: table-cell !important;
+        overflow: hidden ;
         @media (max-width: 500px) {
           font-size: 1.5rem;
         }

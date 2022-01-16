@@ -5,116 +5,126 @@
 #FFED00 Amarillo */
 
 :root {
-  --primary: #f2c571;
-  --warning: #ffed00;
-  --danger: #eb5e3e;
-  --success: #75fa83;
-  --white: #fdfdfd;
-  --naranja: #f2c571;
-  --rojo: #eb5e3e;
-  --negro: #1d1d1b;
-  --amarillo: #ffed00;
-  --crema: #fae6c5;
+    --primary: #f2c571;
+    --warning: #ffed00;
+    --danger: #eb5e3e;
+    --success: #75fa83;
+    --white: #fdfdfd;
+    --naranja: #f2c571;
+    --rojo: #eb5e3e;
+    --negro: #1d1d1b;
+    --amarillo: #ffed00;
+    --crema: #fae6c5;
 }
 
 .boton {
-  font-family: "Bebas Neue", sans-serif;
-  width: fit-content;
-  white-space: nowrap;
-  font-weight: 400;
-  cursor: pointer;
-  color: var(--crema);
-  outline: none;
-  line-height: 1em;
-  transition: transform 0.3s ease;
-  text-align: center;
+    font-family: "Bebas Neue", sans-serif;
+    width: fit-content;
+    white-space: nowrap;
+    font-weight: 400;
+    cursor: pointer;
+    color: var(--crema);
+    outline: none;
+    line-height: 1em;
+    transition: transform 0.3s ease;
+    text-align: center;
+}
+
+.button-disabled {
+    opacity: 0.6;
+}
+
+.button-disabled:hover {
+    transform: translateY(0px);
+    cursor: unset;
 }
 
 .boton:focus {
-  outline: none;
+    outline: none;
 }
 
 .boton:hover {
-  transform: translateY(-2px);
+    transform: translateY(-2px);
 }
+
 
 /* Colores y estilos del botón */
 
 .boton--primary--solid {
-  background-color: var(--negro);
-  color: var(--crema);
-  border: none;
+    background-color: var(--negro);
+    color: var(--crema);
+    border: none;
 }
 
 .boton--primary--outline {
-  background-color: transparent;
-  border: 2px solid var(--negro);
-  color: var(--negro);
+    background-color: transparent;
+    border: 2px solid var(--negro);
+    color: var(--negro);
 }
 
 .boton--primary--disabled {
-  background-color: var(--negro);
-  color: var(--crema);
-  border: none;
-  opacity: 0.6;
-  pointer-events: none;
+    background-color: var(--negro);
+    color: var(--crema);
+    border: none;
+    opacity: 0.6;
+    pointer-events: none;
 }
 
 .boton--orange--solid {
-  background-color: var(--negro);
-  color: var(--crema);
-  border: none;
+    background-color: var(--negro);
+    color: var(--crema);
+    border: none;
 }
 
 .bg-red:hover {
-  background-color: var(--rojo);
-  color: var(--negro);
+    background-color: var(--rojo);
+    color: var(--negro);
 }
 
 .bg-cream:hover {
-  background-color: var(--crema);
-  color: var(--negro);
+    background-color: var(--crema);
+    color: var(--negro);
 }
 
 .boton--back-orange--solid {
-  background-color: var(--rojo);
-  color: var(--crema);
-  border: none;
+    background-color: var(--rojo);
+    color: var(--crema);
+    border: none;
 }
 
 .boton--medium {
-  padding: 10px 20px 5px 20px;
-  font-size: 28px;
+    padding: 10px 20px 5px 20px;
+    font-size: 28px;
 }
 
 .boton--small {
-  padding: 5px 10px;
-  font-size: 20px;
+    padding: 5px 10px;
+    font-size: 20px;
 }
 
 .boton--big {
-  padding: 10px 40px 5px 40px;
-  font-size: 36px;
+    padding: 10px 40px 5px 40px;
+    font-size: 36px;
 }
 
 .boton--xxl {
-  padding: 10px 40px 5px 40px;
-  font-size: 40px;
+    padding: 10px 40px 5px 40px;
+    font-size: 40px;
 }
 
 .boton--megaxxl {
-  padding: 10px 40px 5px 40px;
-  font-size: 40px;
-  width: 100%;
+    padding: 10px 40px 5px 40px;
+    font-size: 40px;
+    width: 100%;
 }
 
-.boton--megaxxl > svg {
-  width: 40px;
-  height: 40px;
+.boton--megaxxl>svg {
+    width: 40px;
+    height: 40px;
 }
 
 @media screen and (max-width: 320px) {
-  .boton {
-    font-size: 22px;
-  }
+    .boton {
+        font-size: 22px;
+    }
 }
