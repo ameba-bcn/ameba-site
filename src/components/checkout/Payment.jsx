@@ -23,7 +23,7 @@ export default function Payment(props) {
   // const client_secret = checkout_stripe?.client_secret
   const { total } = cart_data;
   const stripePromise = loadStripe(
-    "pk_test_51IGkXjHRg08Ncmk7fPlbb9DfTF5f7ckXBKiR4g01euLgXs04CqmgBPOQuqQfOhc6aj9mzsYE1oiQ3TFjHH9Hv3Mj00GNyG9sep"
+    "pk_test_51KJ0w2IM50kXLNJHbBXee5ZGs9j0EbbmsBjh0bbbp0CXwEh2gr9smi4E68RUEnKvcAcW5o0SxoaHQUFY3vkX725d00s8R9dCco"
   );
   console.log({checkout},{checkout_stripe},{client_secret})
   const options = {
