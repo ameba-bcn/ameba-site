@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.8
+- Payment component updated
+- Hover cards with effect
+
 Version 1.7
 - FE Translated
 - Validate on submit, not on type
