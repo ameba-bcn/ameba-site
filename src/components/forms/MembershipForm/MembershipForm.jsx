@@ -27,7 +27,7 @@ export default function MembershipForm({
   const initialMemberValues = {
     first_name: user_member_data.first_name,
     last_name: user_member_data.last_name,
-    address: user_member_data.address,
+    identity_card: user_member_data.identity_card,
     phone_number: user_member_data.phone_number,
   };
   const [t] = useTranslation("translation");
@@ -36,7 +36,7 @@ export default function MembershipForm({
   const InitialValues = {
     first_name: initialMemberValues.first_name || "",
     last_name: initialMemberValues.last_name || "",
-    address: initialMemberValues.address || "",
+    identity_card: initialMemberValues.identity_card || "",
     phone_number: initialMemberValues.phone_number || "",
   };
 
@@ -68,11 +68,11 @@ export default function MembershipForm({
   };
 
   const handleSubmit = (values) => {
-    const { first_name, last_name, address, phone_number } = values;
+    const { first_name, last_name, identity_card, phone_number } = values;
     setLoading(true);
     if (!isNewMember) {
       dispatch(
-        updateMemberProfile(address, first_name, last_name, phone_number)
+        updateMemberProfile(identity_card, first_name, last_name, phone_number)
       )
         .then(() => {
           setLoading(false);
@@ -88,7 +88,7 @@ export default function MembershipForm({
         });
     } else {
       dispatch(
-        createMemberProfile(address, first_name, last_name, phone_number)
+        createMemberProfile(identity_card, first_name, last_name, phone_number)
       )
         .then(() => {
           setLoading(false);
@@ -156,8 +156,8 @@ export default function MembershipForm({
         </div>
         <div>
           <InputField
-            id="address"
-            name="address"
+            id="identity_card"
+            name="identity_card"
             type="text"
             label="DNI/NIE"
             onChange={formik.handleChange}
@@ -166,8 +166,8 @@ export default function MembershipForm({
               handleBlur(formik.values);
             }}
             slimLine={true}
-            value={formik.values.address}
-            valid={!formik.errors.address}
+            value={formik.values.identity_card}
+            valid={!formik.errors.identity_card}
           />
         </div>
         <div>

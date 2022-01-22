@@ -12,8 +12,8 @@ export const validate = (values) => {
     errors.last_name = ERROR.LASTNAME.REQUIRED;
   }
 
-  if (!values.address) {
-    errors.address = ERROR.ADDRESS.REQUIRED;
+  if (!values.identity_card) {
+    errors.identity_card = ERROR.ADDRESS.REQUIRED;
   }
 
   if (!values.phone_number) {

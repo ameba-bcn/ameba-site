@@ -29,10 +29,10 @@ import { useTranslation } from "react-i18next";
 function Checkout() {
   const dispatch = useDispatch();
   const [t] = useTranslation("translation");
-  const { cart_data = {}, checkout = {} } = useSelector((state) => state.cart);
+  const { cart_data = {} } = useSelector((state) => state.cart);
   const { isLoggedIn = false } = useSelector((state) => state.auth);
   const { total = "", item_variants = [], id=""} = cart_data;
-  const isPaymentFree = checkout ? checkout.amount === 0 : total === "0.00 €";
+  const isPaymentFree = total === "0.00 €";
   const hasMembershipInCart = isMemberCheckout(item_variants); // sacar del carro cuando esté en back
   const [activeStep, setActiveStep] = useState(hasMembershipInCart ? 0 : 1);
   const [buttonDisabled, setButtonDisabled] = useState(false);

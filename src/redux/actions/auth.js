@@ -62,55 +62,55 @@ export const register = (registerData) => (dispatch) => {
   );
 };
 
-export const registerMember =
-  (
-    address,
-    first_name,
-    last_name,
-    phone_number,
-    username,
-    password,
-    email,
-    cart_id
-  ) =>
-  (dispatch) => {
-    return AuthService.registerMember(
-      address,
-      first_name,
-      last_name,
-      phone_number,
-      username,
-      password,
-      email,
-      cart_id
-    ).then(
-      () => {
-        dispatch({
-          type: REGISTER_MEMBER_SUCCESS,
-        });
+// export const registerMember =
+//   (
+//     address,
+//     first_name,
+//     last_name,
+//     phone_number,
+//     username,
+//     password,
+//     email,
+//     cart_id
+//   ) =>
+//   (dispatch) => {
+//     return AuthService.registerMember(
+//       address,
+//       first_name,
+//       last_name,
+//       phone_number,
+//       username,
+//       password,
+//       email,
+//       cart_id
+//     ).then(
+//       () => {
+//         dispatch({
+//           type: REGISTER_MEMBER_SUCCESS,
+//         });
 
-        dispatch({
-          type: SET_MESSAGE,
-          payload: "Register member success",
-        });
+//         dispatch({
+//           type: SET_MESSAGE,
+//           payload: "Register member success",
+//         });
 
-        return Promise.resolve();
-      },
-      (error) => {
-        const message = error.response.data.detail;
-        dispatch({
-          type: REGISTER_MEMBER_FAIL,
-        });
+//         return Promise.resolve();
+//       },
+//       (error) => {
+//         const message = error.response.data.detail;
+//         dispatch({
+//           type: REGISTER_MEMBER_FAIL,
+//         });
 
-        dispatch({
-          type: SET_MESSAGE,
-          payload: message,
-        });
+//         dispatch({
+//           type: SET_MESSAGE,
+//           payload: message,
+//         });
 
-        return Promise.reject();
-      }
-    );
-  };
+//         return Promise.reject();
+//       }
+//     );
+//   };
 
 export const getMemberProfile = () => (dispatch) => {
   return AuthService.getMemberProfile().then(
@@ -141,9 +141,9 @@ export const getMemberProfile = () => (dispatch) => {
 };
 
 export const updateMemberProfile =
-  (address, first_name, last_name, phone_number) => (dispatch) => {
+  (identity_card, first_name, last_name, phone_number) => (dispatch) => {
     return AuthService.updateMemberProfile(
-      address,
+      identity_card,
       first_name,
       last_name,
       phone_number
@@ -179,9 +179,9 @@ export const updateMemberProfile =
   };
 
 export const createMemberProfile =
-  (address, first_name, last_name, phone_number) => (dispatch) => {
+  (identity_card, first_name, last_name, phone_number) => (dispatch) => {
     return AuthService.createMemberProfile(
-      address,
+      identity_card,
       first_name,
       last_name,
       phone_number
@@ -322,7 +322,6 @@ export const getUserData = () => (dispatch) => {
 };
 
 export const passwordRecovery = (token, password) => (dispatch) => {
-  console.log("token", token)
   return AuthService.passwordRecovery(token, password).then(
     () => {
       dispatch({

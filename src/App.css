@@ -1,5 +1,6 @@
 /* COLOURS */
 
+
 /*
 #FAE6C5 Crema
 #F2C571 Naranja
@@ -13,206 +14,209 @@ font-family: 'Montserrat', sans-serif;
 */
 
 .App {
-  text-align: center;
-  background-color: #fae6c5;
-  width: 100%;
-  max-width: 100%;
-  height: 100vh;
-  min-height: 100vh;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
+    text-align: center;
+    background-color: #fae6c5;
+    width: 100%;
+    max-width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
 }
 
 .logViewRed {
-  height: 100%;
-  background-color: #eb5e3e;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    height: 100%;
+    background-color: #eb5e3e;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .logViewYellow {
-  width: 100%;
-  background-color: #fae6c5;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 0;
+    width: 100%;
+    background-color: #fae6c5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 0;
 }
 
 .checkoutViewYellow {
-  background-color: #fae6c5;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 0;
+    background-color: #fae6c5;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 0;
 }
 
 .freeCheckout-box {
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
 }
 
 .profileTitle {
-  width: 100%;
-  background-color: #eb5e3e;
-  font-size: 120px;
-  font-family: "Bebas Neue";
-  width: 100%;
-  font-weight: 400;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    width: 100%;
+    background-color: #eb5e3e;
+    font-size: 120px;
+    font-family: "Bebas Neue";
+    width: 100%;
+    font-weight: 400;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 500px) {
-  .profileTitle {
-    font-size: 80px;
-  }
+    .profileTitle {
+        font-size: 80px;
+    }
 }
 
 @media screen and (max-width: 400px) {
-  .profileTitle {
-    font-size: 60px;
-  }
+    .profileTitle {
+        font-size: 60px;
+    }
 }
 
 .cardForm {
-  max-width: 100%;
-  width: 100%;
+    max-width: 100%;
+    width: 100%;
 }
 
 *:focus {
-  outline: 0;
+    outline: 0;
 }
 
 .deleteItem {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
+
 /* spinner/processing state, errors */
+
 .spinner,
 .spinner:before,
 .spinner:after {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 
 .spinner {
-  color: #ffffff;
-  font-size: 22px;
-  text-indent: -99999px;
-  margin: 0px auto;
-  position: relative;
-  width: 30px;
-  height: 30px;
-  box-shadow: inset 0 0 0 2px;
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
+    color: #ffffff;
+    font-size: 22px;
+    text-indent: -99999px;
+    margin: 0px auto;
+    position: relative;
+    width: 30px;
+    height: 30px;
+    box-shadow: inset 0 0 0 2px;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
 }
 
 .spinner:before,
 .spinner:after {
-  position: absolute;
-  content: "";
+    position: absolute;
+    content: "";
 }
 
 .spinner:before {
-  width: 10.4px;
-  height: 20.4px;
-  background: #5469d4;
-  border-radius: 20.4px 0 0 20.4px;
-  top: -0.2px;
-  left: -0.2px;
-  -webkit-transform-origin: 10.4px 10.2px;
-  transform-origin: 10.4px 10.2px;
-  -webkit-animation: loading 2s infinite ease 1.5s;
-  animation: loading 2s infinite ease 1.5s;
+    width: 10.4px;
+    height: 20.4px;
+    background: #5469d4;
+    border-radius: 20.4px 0 0 20.4px;
+    top: -0.2px;
+    left: -0.2px;
+    -webkit-transform-origin: 10.4px 10.2px;
+    transform-origin: 10.4px 10.2px;
+    -webkit-animation: loading 2s infinite ease 1.5s;
+    animation: loading 2s infinite ease 1.5s;
 }
 
 .spinner:after {
-  width: 10.4px;
-  height: 10.2px;
-  background: #5469d4;
-  border-radius: 0 10.2px 10.2px 0;
-  top: -0.1px;
-  left: 10.2px;
-  -webkit-transform-origin: 0px 10.2px;
-  transform-origin: 0px 10.2px;
-  -webkit-animation: loading 2s infinite ease;
-  animation: loading 2s infinite ease;
+    width: 10.4px;
+    height: 10.2px;
+    background: #5469d4;
+    border-radius: 0 10.2px 10.2px 0;
+    top: -0.1px;
+    left: 10.2px;
+    -webkit-transform-origin: 0px 10.2px;
+    transform-origin: 0px 10.2px;
+    -webkit-animation: loading 2s infinite ease;
+    animation: loading 2s infinite ease;
 }
 
 @keyframes loading {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
 }
 
 body {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .Bloque {
-  display: flex;
-  border-color: white;
-  border-radius: 2px;
-  /* min-height: 100vh; */
-  overflow-y: hidden;
+    display: flex;
+    border-color: white;
+    border-radius: 2px;
+    /* min-height: 100vh; */
+    overflow-y: hidden;
 }
 
 .ContainerAmeba {
-  display: flex;
-  flex-direction: row;
-  min-height: 100vh;
-  width: 80%;
-  margin: auto;
-  align-items: center;
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+    width: 80%;
+    margin: auto;
+    align-items: center;
 }
 
 .left-side {
-  width: 60%;
+    width: 60%;
 }
 
 .right-side {
-  width: 40%;
+    width: 40%;
 }
 
-.titulo > h1 {
-  font-size: 120px;
-  font-family: "Bebas Neue";
-  /* font-weight: 300; */
+.titulo>h1 {
+    font-size: 120px;
+    font-family: "Bebas Neue";
+    /* font-weight: 300; */
 }
 
-div > .nav-item {
-  margin: auto;
-  padding: 0px 10px 0px 10px;
+div>.nav-item {
+    margin: auto;
+    padding: 0px 10px 0px 10px;
 }
 
 #locals {
-  /* padding-top: 56px; */
-  position: relative;
+    /* padding-top: 56px; */
+    position: relative;
 }
+
 
 /* .titleCoverCanvas {
   height: 600px;
@@ -224,339 +228,347 @@ div > .nav-item {
 } */
 
 .titleCoverImage {
-  position: relative;
-  bottom: 0;
-  background: rgb(29, 29, 27);
-  background: rgba(29, 29, 27, 0.5);
-  background-size: contain;
-  color: #f1f1f1;
-  width: 100%;
-  height: 100%;
-  opacity: 1.2;
-  color: white;
-  text-align: center;
-  font-size: 100px;
-  font-family: "Bebas Neue";
-  font-weight: 900;
-  padding: 15% 0;
+    position: relative;
+    bottom: 0;
+    background: rgb(29, 29, 27);
+    background: rgba(29, 29, 27, 0.5);
+    background-size: contain;
+    color: #f1f1f1;
+    width: 100%;
+    height: 100%;
+    opacity: 1.2;
+    color: white;
+    text-align: center;
+    font-size: 100px;
+    font-family: "Bebas Neue";
+    font-weight: 900;
+    padding: 15% 0;
 }
 
 .error-message {
-  color: red;
+    color: red;
 }
 
 .subtitleCoverImage {
-  font-size: 40px;
-  font-family: "Bebas Neue";
-  font-weight: 600;
-  color: white;
+    font-size: 40px;
+    font-family: "Bebas Neue";
+    font-weight: 600;
+    color: white;
 }
 
 #colabo {
-  position: flex;
+    position: flex;
 }
 
 .BGWrapper {
-  position: relative;
-  margin: auto;
+    position: relative;
+    margin: auto;
 }
 
 .CenteredImage {
-  position: relative;
-  height: 20%;
-  width: auto;
+    position: relative;
+    height: 20%;
+    width: auto;
 }
+
 
 /* Main Flyer */
 
 .mainFlyer {
-  width: 100%;
-  height: 100vh;
-  /* background-image: url("../../images/MainAMEBA.png"); */
-  background-position: center;
-  background-size: cover;
+    width: 100%;
+    height: 100vh;
+    /* background-image: url("../../images/MainAMEBA.png"); */
+    background-position: center;
+    background-size: cover;
 }
 
 @media screen and (max-width: 800px) {
-  .mainFlyer {
-    width: 100%;
-    height: auto;
-  }
+    .mainFlyer {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .Articles,
 .Botiga,
 .BookingContent {
-  background-color: #eb5e3e;
+    background-color: #eb5e3e;
 }
 
 .SupportContent {
-  background-color: #fae6c5;
+    background-color: #fae6c5;
 }
 
 #festi,
 #shop {
-  background-color: #fae6c5;
+    background-color: #fae6c5;
 }
 
 #contacte,
 #locals {
-  background-color: #f2c571;
+    background-color: #f2c571;
 }
 
 .HomeContent {
-  display: block;
-  overflow: auto;
+    display: block;
+    overflow: auto;
 }
+
 
 /* FORM CONTROL */
 
 .Article {
-  width: 50%;
-  border: 1px solid #ccc;
-  padding: 10px;
-  display: inline-block;
-  margin-top: 100px;
+    width: 50%;
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: inline-block;
+    margin-top: 100px;
 }
+
 
 /* SESSIO */
 
 .sessio {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .carouselFrame {
-  width: 60%;
-  justify-content: center;
-  margin: auto;
+    width: 60%;
+    justify-content: center;
+    margin: auto;
 }
+
 
 /* WORDS CAROUSEL */
 
 .wordsMoveFrame {
-  width: 100%;
-  height: 24px;
-  background-color: #1d1d1b;
+    width: 100%;
+    height: 24px;
+    background-color: #1d1d1b;
 }
 
 .wordsMove {
-  color: white;
-  font-weight: bold;
-  position: relative;
-  width: 300px;
-  animation-name: wordsInMove;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    width: 300px;
+    animation-name: wordsInMove;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
 }
 
 @keyframes wordsInMove {
-  0% {
-    background: red;
-    left: 0px;
-  }
-
-  50% {
-    background: green;
-    left: 100px;
-  }
-
-  100% {
-    background: blue;
-    left: 80%;
-  }
+    0% {
+        background: red;
+        left: 0px;
+    }
+    50% {
+        background: green;
+        left: 100px;
+    }
+    100% {
+        background: blue;
+        left: 80%;
+    }
 }
+
 
 /* LOGIN NUEVO */
+
 .loginWall {
-  background-color: #eb5e3e;
+    background-color: #eb5e3e;
 }
 
-.toast-black-background{
-  background-color: #1d1d1b !important;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+.toast-black-background {
+    background-color: #1d1d1b !important;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
-.Toastify__toast-body{
-  margin: 0 auto;
+.Toastify__toast-body {
+    margin: 0 auto;
 }
 
 .logTitle {
-  text-transform: uppercase;
-  font-family: "Bebas Neue";
-  color: #1d1d1b;
-  font-size: 4.5rem;
-  line-height: 4rem;
+    text-transform: uppercase;
+    font-family: "Bebas Neue";
+    color: #1d1d1b;
+    font-size: 4.5rem;
+    line-height: 4rem;
 }
 
 .logTitleSmall {
-  text-transform: uppercase;
-  font-family: "Bebas Neue";
-  color: #1d1d1b;
-  font-size: 2.5rem;
-  margin-top: 0px;
+    text-transform: uppercase;
+    font-family: "Bebas Neue";
+    color: #1d1d1b;
+    font-size: 2.5rem;
+    margin-top: 0px;
 }
 
 .new-member-title {
-  text-transform: uppercase;
-  font-family: "Bebas Neue";
-  color: #1d1d1b;
-  font-size: 4.5rem;
-  margin-bottom: 0px;
-  margin-top: 20px;
+    text-transform: uppercase;
+    font-family: "Bebas Neue";
+    color: #1d1d1b;
+    font-size: 4.5rem;
+    margin-bottom: 0px;
+    margin-top: 20px;
 }
 
 .checkout-payment-summary {
-  font-family: "Montserrat", sans-serif;
-  justify-content: center;
-  color: #1d1d1b;
-  font-size: 1.6rem;
-  margin: 0 auto;
-  padding: 20px 0px 20px 0px;
-  max-width: 500px;
+    font-family: "Montserrat", sans-serif;
+    justify-content: center;
+    color: #1d1d1b;
+    font-size: 1.6rem;
+    margin: 0 auto;
+    padding: 20px 0px 20px 0px;
+    max-width: 500px;
 }
 
 input.logForm {
-  background-color: transparent;
-  border: 4px solid #1d1d1b;
-  border-radius: 0rem;
-  padding-top: 14px;
-  font-family: "Montserrat", sans-serif;
-  color: #1d1d1b;
-  font-size: 1.2rem;
-  font-weight: bold;
+    background-color: transparent;
+    border: 4px solid #1d1d1b;
+    border-radius: 0rem;
+    padding-top: 14px;
+    font-family: "Montserrat", sans-serif;
+    color: #1d1d1b;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 input.logForm:focus {
-  background-color: #fae6c5;
-  border: 4px solid #f2c571;
+    background-color: #fae6c5;
+    border: 4px solid #f2c571;
 }
 
 input.logForm::placeholder {
-  text-transform: uppercase;
-  padding-top: 2px;
-  font-family: "Bebas Neue";
-  color: #1d1d1b;
-  font-size: 2rem;
+    text-transform: uppercase;
+    padding-top: 2px;
+    font-family: "Bebas Neue";
+    color: #1d1d1b;
+    font-size: 2rem;
 }
 
 .logFormButton {
-  background-color: #1d1d1b;
-  color: #fae6c5;
-  text-transform: uppercase;
-  font-family: "Bebas Neue";
-  font-size: 1.8rem;
-  max-width: 130px !important;
-  margin: 0 auto;
-  opacity: 1;
-  pointer-events: initial;
+    background-color: #1d1d1b;
+    color: #fae6c5;
+    text-transform: uppercase;
+    font-family: "Bebas Neue";
+    font-size: 1.8rem;
+    max-width: 130px !important;
+    margin: 0 auto;
+    opacity: 1;
+    pointer-events: initial;
 }
 
 label {
-  display: block;
-  margin-top: 10px;
+    display: block;
+    margin-top: 10px;
 }
 
 .card-login {
-  border-width: 0px !important;
-  margin: 0 auto;
-  max-width: 500px !important;
-  background-color: transparent !important;
-  padding: 40px 40px;
+    border-width: 0px !important;
+    margin: 0 auto;
+    max-width: 500px !important;
+    background-color: transparent !important;
+    padding: 40px 40px;
 }
+
 @media screen and (max-width: 370px) {
-  .card-login {
-    padding: 40px 10px;
-  }
+    .card-login {
+        padding: 40px 10px;
+    }
 }
 
 .logTextosLink {
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.2rem;
-  font-weight: bold;
-  cursor: pointer;
-  color: #1d1d1b !important;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #1d1d1b !important;
 }
+
 .logTextosLink a {
-  text-decoration: none;
-  color: #1d1d1b !important;
+    text-decoration: none;
+    color: #1d1d1b !important;
 }
 
 .logTextosLink:hover {
-  text-decoration: underline !important;
+    text-decoration: underline !important;
 }
 
 .logTextosLinkRegistrat {
-  margin: 0.8rem 0rem 0.5rem 0rem;
+    margin: 0.8rem 0rem 0.5rem 0rem;
 }
 
 .sociLogBanner {
-  background-color: #f2c571;
-  color: #1d1d1b;
-  text-transform: uppercase;
-  font-family: "Bebas Neue";
-  font-size: 1.8rem;
-  text-align: center;
-  /* margin-bottom: 1.8rem; */
-  margin-top: 1.8rem;
-  cursor: pointer;
+    background-color: #f2c571;
+    color: #1d1d1b;
+    text-transform: uppercase;
+    font-family: "Bebas Neue";
+    font-size: 1.8rem;
+    text-align: center;
+    /* margin-bottom: 1.8rem; */
+    margin-top: 1.8rem;
+    cursor: pointer;
 }
 
 .sociLogBannerPlus {
-  background-color: #1d1d1b;
-  color: #f2c571;
-  margin-left: 0.5rem;
-  /* padding: 2px; */
-  height: 10px;
-  width: 10px;
-  /* line-height: 10px;; */
+    background-color: #1d1d1b;
+    color: #f2c571;
+    margin-left: 0.5rem;
+    /* padding: 2px; */
+    height: 10px;
+    width: 10px;
+    /* line-height: 10px;; */
 }
 
 .succesful-login-modificar {
-  background-color: #1d1d1b;
-  cursor: pointer;
-  color: #fae6c5;
-  text-transform: uppercase;
-  font-family: "Bebas Neue";
-  font-size: 1.8rem;
-  max-width: 110px !important;
-  margin: 0 auto;
+    background-color: #1d1d1b;
+    cursor: pointer;
+    color: #fae6c5;
+    text-transform: uppercase;
+    font-family: "Bebas Neue";
+    font-size: 1.8rem;
+    max-width: 110px !important;
+    margin: 0 auto;
 }
 
 .succesful-login {
-  color: #fae6c5;
-  text-transform: uppercase;
-  font-family: "Bebas Neue";
-  font-size: 1.8rem;
-  margin: 0 auto;
+    color: #fae6c5;
+    text-transform: uppercase;
+    font-family: "Bebas Neue";
+    font-size: 1.8rem;
+    margin: 0 auto;
 }
 
+
 /* Main page messages */
+
 .full-height-msg {
-  background-color: #eb5e3e;
-  flex: 1 0 auto;
-  flex-direction: column;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  word-wrap: break-word;
+    background-color: #eb5e3e;
+    flex: 1 0 auto;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-wrap: break-word;
 }
 
 .single-msg {
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.4rem;
-  font-weight: bold;
-  width: 100%;
-  /* flex: 1 0 auto; */
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    width: 100%;
+    /* flex: 1 0 auto; */
 }
 
 .lettersMoveDiv {
-  flex: 1 0 auto;
+    flex: 1 0 auto;
 }
 
 .logFormEmailPasswordRecovery {
-  margin-top: 1.8rem !important;
+    margin-top: 1.8rem !important;
 }

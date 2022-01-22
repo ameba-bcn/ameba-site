@@ -7,31 +7,31 @@ const register = (registerData) => {
   return axiosInstance.post(API_URL + "users/", registerData);
 };
 
-const registerMember = (
-  address,
-  first_name,
-  last_name,
-  phone_number,
-  username,
-  password,
-  email,
-  cart_id
-) => {
-  return axiosInstance
-    .post(API_URL + "member_register/", {
-      username,
-      email,
-      password,
-      first_name,
-      last_name,
-      address,
-      phone_number,
-      cart_id,
-    })
-    .then((response) => {
-      return response?.data;
-    });
-};
+// const registerMember = (
+//   address,
+//   first_name,
+//   last_name,
+//   phone_number,
+//   username,
+//   password,
+//   email,
+//   cart_id
+// ) => {
+//   return axiosInstance
+//     .post(API_URL + "member_register/", {
+//       username,
+//       email,
+//       password,
+//       first_name,
+//       last_name,
+//       address,
+//       phone_number,
+//       cart_id,
+//     })
+//     .then((response) => {
+//       return response?.data;
+//     });
+// };
 
 const validateLocalToken = (refreshToken) => {
   return axios
@@ -101,12 +101,12 @@ const getMemberProfile = () => {
     });
 };
 
-const updateMemberProfile = (address, first_name, last_name, phone_number) => {
+const updateMemberProfile = (identity_card, first_name, last_name, phone_number) => {
   return axios
     .patch(
       API_URL + `users/current/member_profile/`,
       {
-        address,
+        identity_card,
         first_name,
         last_name,
         phone_number,
@@ -122,12 +122,12 @@ const updateMemberProfile = (address, first_name, last_name, phone_number) => {
     });
 };
 
-const createMemberProfile = (address, first_name, last_name, phone_number) => {
+const createMemberProfile = (identity_card, first_name, last_name, phone_number) => {
   return axios
     .post(
       API_URL + `users/current/member_profile/`,
       {
-        address,
+        identity_card,
         first_name,
         last_name,
         phone_number,
@@ -186,7 +186,7 @@ const deleteUser = () => {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   register,
-  registerMember,
+  // registerMember,
   validateLocalToken,
   login,
   logout,

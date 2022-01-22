@@ -22,10 +22,8 @@ export default function Payment(props) {
   const { client_secret = "" } = checkout_stripe;
   // const client_secret = checkout_stripe?.client_secret
   const { total } = cart_data;
-  const stripePromise = loadStripe(
-    "pk_test_51KJ0w2IM50kXLNJHbBXee5ZGs9j0EbbmsBjh0bbbp0CXwEh2gr9smi4E68RUEnKvcAcW5o0SxoaHQUFY3vkX725d00s8R9dCco"
-  );
-  console.log({checkout},{checkout_stripe},{client_secret})
+  const stripe_public_key = process.env.REACT_APP_STRIPE_PUBLIC || "";
+  const stripePromise = loadStripe(stripe_public_key);
   const options = {
     clientSecret: client_secret,
     appearance: {
@@ -46,15 +44,17 @@ export default function Payment(props) {
           <ReviewRowSeparator isBig={false} />
         </PaymentReview>
       </PaymentSummaryBox>
-      {checkout_stripe &&<PaymentBox>
-        {isPaymentFree ? (
-          <FreeCheckout />
-        ) : (
-          <Elements stripe={stripePromise} options={options}>
-            <PaymentForm />
-          </Elements>
-        )}
-      </PaymentBox>}
+      {checkout_stripe && (
+        <PaymentBox>
+          {isPaymentFree ? (
+            <FreeCheckout />
+          ) : (
+            <Elements stripe={stripePromise} options={options}>
+              <PaymentForm />
+            </Elements>
+          )}
+        </PaymentBox>
+      )}
     </PaymentContent>
   );
 }
