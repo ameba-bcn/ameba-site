@@ -1,86 +1,89 @@
 {
-  "menu": {
-    "botiga": "botiga"
-  },
-  "checkout": {
-    "finalitzarCompra": "finalitzar compra",
-    "cistella": "cistella",
-    "pagament":"pagament",
-    "pagament-gratis": "El procediment de compra no suposa cap càrreg per tant no cal realitzar pagament.",
-    "review-footer-1": "Temporalment no fem enviaments de productes.",
-    "review-footer-2": "La recollida es pot fer de 10-14 i de 16-20 a Rhythm Control.",
-    "review-footer-3": "Si tens qualsevol dubte contacta'ns a info@ameba.cat"
-  },
-  "support": {
     "menu": {
-      "bio": "bio",
-      "entrevista": "entrevista",
-      "media": "media",
-      "activitats": "activitats"
+        "botiga": "botiga"
     },
-    "top-menu": {
-      "nom": "nom",
-      "ciutat": "ciutat",
-      "segells": "segells",
-      "projectes": "projectes",
-      "artistes": "artistes"
+    "checkout": {
+        "finalitzarCompra": "finalitzar compra",
+        "cistella": "cistella",
+        "pagament": "pagament",
+        "pagament-gratis": "El procediment de compra no suposa cap càrreg per tant no cal realitzar pagament.",
+        "review-footer-1": "Temporalment no fem enviaments de productes.",
+        "review-footer-2": "La recollida es pot fer de 10-14 i de 16-20 a Rhythm Control.",
+        "review-footer-3": "Si tens qualsevol dubte contacta'ns a info@ameba.cat"
     },
-    "title": {
-      "subtitle": "* conèix als artistes que donen vida a l'escena de la ciutat *"
+    "support": {
+        "menu": {
+            "bio": "bio",
+            "entrevista": "entrevista",
+            "media": "media",
+            "activitats": "activitats"
+        },
+        "top-menu": {
+            "nom": "nom",
+            "ciutat": "ciutat",
+            "segells": "segells",
+            "projectes": "projectes",
+            "artistes": "artistes"
+        },
+        "title": {
+            "subtitle": "* conèix als artistes que donen vida a l'escena de la ciutat *"
+        }
+    },
+    "banners": {
+        "soci-curt": "fes-te soci/a",
+        "soci-llarg": "fes-te soci/a d'ameba per 15€/any"
+    },
+    "agenda": {
+        "data": "data",
+        "activitat": "activitat"
+    },
+    "modal": {
+        "talles": "talles disponibles",
+        "quota": "quota de soci/a",
+        "professional": "professional",
+        "localitzacio": "localització",
+        "preu": "preu",
+        "afegir": "afegir a cistella",
+        "descripcio": "descripció",
+        "beneficis": "beneficis"
+    },
+    "footer": {
+        "drets": "Tots els drets reservats"
+    },
+    "newsletter": {
+        "subscriute": "subscriu-te"
+    },
+    "login": {
+        "registrat": "Registra't",
+        "recupera-curt": "Recupera contrassenya",
+        "recupera-llarg": "Recupera la teva contrassenya",
+        "inicia": "Ja estàs registrat? Inicia sessió",
+        "encara": "Encara no ets soci/a? Informat aquí!",
+        "modifica": "Modifica la teva contrassenya"
+    },
+    "form": {
+        "nom": "nom",
+        "cognom": "cognom",
+        "telefon": "telèfon",
+        "soci": "nºsoci",
+        "descompte": "descompte",
+        "usuari": "usuari",
+        "contrassenya": "contrassenya"
+    },
+    "perfil": {
+        "dades": "dades personals",
+        "vols-soci": "Vols ser soci",
+        "mes-info": "més info aqui",
+        "baixa": "Donar-se de baixa"
+    },
+    "boto": {
+        "cancela": "cancel·la",
+        "guarda": "guarda",
+        "finalitza": "finalitza",
+        "enrere": "enrere",
+        "seguent": "següent pas"
+    },
+    "errors": {
+        "stripe": "Hi ha hagut un error amb el sistema de pagament. Contacta amb info@ameba.cat"
     }
-  },
-  "banners": {
-    "soci-curt": "fes-te soci/a",
-    "soci-llarg": "fes-te soci/a d'ameba per 15€/any"
-  },
-  "agenda": {
-    "data": "data",
-    "activitat": "activitat"
-  },
-  "modal": {
-    "talles": "talles disponibles",
-    "quota": "quota de soci/a",
-    "professional": "professional",
-    "localitzacio": "localització",
-    "preu": "preu",
-    "afegir": "afegir a cistella",
-    "descripcio": "descripció",
-    "beneficis": "beneficis"
-  },
-  "footer": {
-    "drets": "Tots els drets reservats"
-  },
-  "newsletter": {
-    "subscriute": "subscriu-te"
-  },
-  "login": {
-    "registrat": "Registra't",
-    "recupera-curt": "Recupera contrassenya",
-    "recupera-llarg": "Recupera la teva contrassenya",
-    "inicia": "Ja estàs registrat? Inicia sessió",
-    "encara": "Encara no ets soci/a? Informat aquí!",
-    "modifica": "Modifica la teva contrassenya"
-  },
-  "form": {
-    "nom": "nom",
-    "cognom": "cognom",
-    "telefon": "telèfon",
-    "soci": "nºsoci",
-    "descompte": "descompte",
-    "usuari": "usuari",
-    "contrassenya": "contrassenya"
-  },
-  "perfil": {
-    "dades": "dades personals",
-    "vols-soci": "Vols ser soci",
-    "mes-info": "més info aqui",
-    "baixa": "Donar-se de baixa"
-  },
-  "boto": {
-    "cancela": "cancel·la",
-    "guarda": "guarda",
-    "finalitza": "finalitza",
-    "enrere": "enrere",
-    "seguent": "següent pas"
-  }
 }

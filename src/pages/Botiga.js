@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import BotigaGeneral from "../components/botiga/BotigaGeneral";
 import PowerTitle from "../components/layout/PowerTitle";
 import ProductBanner from "../components/botiga/ProductBanner";
@@ -7,15 +7,26 @@ import LettersMove from "./../components/layout/LettersMove";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { MOBILE_NORMAL } from "../utils/constants";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 
 function Botiga() {
   const [open, setOpen] = React.useState(false);
-
+  let location = useLocation();
+  const queryString = require("query-string");
+  const value = queryString.parse(location.search);
+  const externalId = value.id;
+  console.log(externalId)
   const handleClick = () => {
     setOpen(!open);
   };
   const [t] = useTranslation("translation");
   const isMobile = useMediaQuery(MOBILE_NORMAL);
+  
+  useEffect(() => {
+    if (externalId === '14' || externalId === '15') {
+      handleClick();
+    }
+  }, []);
 
   return (
     <div className="Botiga">

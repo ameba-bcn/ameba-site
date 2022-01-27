@@ -16,8 +16,8 @@ export const ERROR = {
         : "Nombre de usuario: campo obligatorio",
     FORMAT:
       localStorage.getItem("i18nextLng") === "ca"
-        ? "Nom d'usuari: ha de tenir entre 6 i 20 lletres"
-        : "Nombre de usuario: debe tener entre 6 y 20 caracteres",
+        ? "Nom d'usuari: ha de tenir entre 1 i 20 lletres"
+        : "Nombre de usuario: debe tener entre 1 y 20 caracteres",
   },
   PASSWORD: {
     REQUIRED:

@@ -1,7 +1,9 @@
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import ErrorBox from "../forms/error/ErrorBox";
 import PaymentForm from "../forms/Payment/PaymentForm";
 import FreeCheckout from "./FreeCheckout";
 import MiniTableProducts from "./MiniTableProducts";
@@ -15,6 +17,7 @@ import {
 import { ReviewRowSeparator } from "./Review.style";
 
 export default function Payment(props) {
+  const [t] = useTranslation("translation");
   const { isPaymentFree = false } = props;
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { checkout = {} } = useSelector((state) => state.cart);
@@ -22,7 +25,7 @@ export default function Payment(props) {
   const { client_secret = "" } = checkout_stripe;
   // const client_secret = checkout_stripe?.client_secret
   const { total } = cart_data;
-  const stripe_public_key = process.env.REACT_APP_STRIPE_PUBLIC || "";
+  const stripe_public_key = process.env["REACT_APP_STRIPE_PUBLIC"];
   const stripePromise = loadStripe(stripe_public_key);
   const options = {
     clientSecret: client_secret,
@@ -44,16 +47,20 @@ export default function Payment(props) {
           <ReviewRowSeparator isBig={false} />
         </PaymentReview>
       </PaymentSummaryBox>
-      {checkout_stripe && (
-        <PaymentBox>
-          {isPaymentFree ? (
-            <FreeCheckout />
-          ) : (
-            <Elements stripe={stripePromise} options={options}>
-              <PaymentForm />
-            </Elements>
-          )}
-        </PaymentBox>
+      {stripe_public_key ? (
+        checkout_stripe && (
+          <PaymentBox>
+            {isPaymentFree ? (
+              <FreeCheckout />
+            ) : (
+              <Elements stripe={stripePromise} options={options}>
+                <PaymentForm />
+              </Elements>
+            )}
+          </PaymentBox>
+        )
+      ) : (
+        <ErrorBox message={t("errors.stripe")} isError={true} />
       )}
     </PaymentContent>
   );

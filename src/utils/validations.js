@@ -10,7 +10,7 @@ export const passwordValidation = (value) => {
 
 export const usernameValidation = (value) => {
   if (!value) return false;
-  return !(value.length > 3 && value.length < 20);
+  return !(value.length > 1 && value.length < 20);
 };
 
 export const phoneValidation = (value) => {

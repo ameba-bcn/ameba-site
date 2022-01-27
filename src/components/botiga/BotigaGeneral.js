@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./BotigaGeneral.css";
 import ProducteDialog from "./Producte";
 import axiosInstance from "../../axios";
@@ -10,6 +10,7 @@ import {
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { ReactFitty } from "react-fitty";
+import { useLocation } from "react-router-dom";
 
 export const TitleStyled = styled.div`
   width: 75%;
@@ -23,6 +24,10 @@ export const TitleStyled = styled.div`
 
 export default function BotigaGeneral() {
   const [open, setOpen] = React.useState(false);
+  let location = useLocation();
+  const queryString = require("query-string");
+  const value = queryString.parse(location.search);
+  const externalId = value.id;
   const data = useSelector((state) => state.data);
   const { botiga = [] } = data;
   const [productData, getProductData] = useState([
@@ -58,6 +63,14 @@ export default function BotigaGeneral() {
         console.log("ERROL", error.response);
       });
   };
+
+  useEffect(() => {
+    if (externalId.length > 0 && botiga.length > 0) {
+      const extIdInt = parseInt(externalId) || 0;
+      const product2Display = botiga.filter(x => x.id === extIdInt);
+      product2Display.length > 0 && fetchProduct(product2Display[0]);
+    }
+  }, [botiga]);
 
   const cardGenerator =
     botiga.length > 0
