@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.91
+- Product landing by url queries
+
 Version 1.9
 - Payment reads stripe env
 - Errors translated
