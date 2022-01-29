@@ -65,7 +65,7 @@ export default function BotigaGeneral() {
   };
 
   useEffect(() => {
-    if (externalId.length > 0 && botiga.length > 0) {
+    if (externalId?.length > 0 && botiga?.length > 0) {
       const extIdInt = parseInt(externalId) || 0;
       const product2Display = botiga.filter(x => x.id === extIdInt);
       product2Display.length > 0 && fetchProduct(product2Display[0]);

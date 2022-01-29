@@ -19,14 +19,11 @@ import { ReviewRowSeparator } from "./Review.style";
 export default function Payment(props) {
   const [t] = useTranslation("translation");
   const { isPaymentFree = false } = props;
-  const { cart_data = {} } = useSelector((state) => state.cart);
-  const { checkout = {} } = useSelector((state) => state.cart);
+  const { cart_data = {}, checkout = {} } = useSelector((state) => state.cart);
   const { checkout_stripe = {} } = checkout;
-  const { client_secret = "" } = checkout_stripe;
-  // const client_secret = checkout_stripe?.client_secret
+  const { client_secret = "", stripe_public = '' } = checkout_stripe;
   const { total } = cart_data;
-  const stripe_public_key = process.env["REACT_APP_STRIPE_PUBLIC"];
-  const stripePromise = loadStripe(stripe_public_key);
+  const stripePromise = loadStripe(stripe_public);
   const options = {
     clientSecret: client_secret,
     appearance: {
@@ -47,7 +44,7 @@ export default function Payment(props) {
           <ReviewRowSeparator isBig={false} />
         </PaymentReview>
       </PaymentSummaryBox>
-      {stripe_public_key ? (
+      {stripe_public ? (
         checkout_stripe && (
           <PaymentBox>
             {isPaymentFree ? (
