@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.93
+- Payment redirects after successfull payment
+
 Version 1.92
 - Payment stripe key consumed from ep
 
