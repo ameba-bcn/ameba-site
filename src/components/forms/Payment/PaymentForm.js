@@ -6,15 +6,9 @@ import {
 } from "@stripe/react-stripe-js";
 import "./PaymentForm.css";
 import Button from "../../button/Button";
-import { getMemberProfile } from "../../../redux/actions/auth";
-import ErrorBox from "../error/ErrorBox";
-import PaymentStatus from "../../checkout/PaymentStatus";
 
-function PaymentForm(props) {
-  const [succeeded, setSucceeded] = useState(false);
-  const [error, setError] = useState(null);
+function PaymentForm() {
   const [processing, setProcessing] = useState(false);
-  const [disabled, setDisabled] = useState(true);
   const stripe = useStripe();
   const elements = useElements();
   const [errorMessage, setErrorMessage] = useState(null);
@@ -38,12 +32,8 @@ function PaymentForm(props) {
     },
   };
 
-  // const handleChange = async (event) => {
-  //   // Listen for changes in the CardElement
-  //   // and display any errors as the customer types their card details
-  //   setDisabled(event.empty);
-  //   setError(event.error ? event.error.message : "");
-  // };
+  const currentURL = window.location.href.replace("checkout", "");
+
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
@@ -59,7 +49,7 @@ function PaymentForm(props) {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: "http://localhost/summary-checkout",
+        return_url: `${currentURL}summary-checkout`,
       },
     });
 
@@ -67,7 +57,6 @@ function PaymentForm(props) {
       // This point will only be reached if there is an immediate error when
       // confirming the payment. Show error to your customer (e.g., payment
       // details incomplete)
-      // setError(`Pagament no realitzat: ${error.message}`);
       setProcessing(false);
       setErrorMessage(error.message);
     } else {
@@ -75,16 +64,13 @@ function PaymentForm(props) {
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.
       setErrorMessage(error.message);
-      // setError(null);
       setProcessing(false);
-      // setSucceeded(true);
-      // props.handleNext();
     }
   };
 
   return (
     <div className="payment-root">
-    <div className="payment-body">
+      <div className="payment-body">
         <form onSubmit={handleSubmit}>
           <PaymentElement options={cardStyle} />
           <Button
@@ -93,7 +79,8 @@ function PaymentForm(props) {
             buttonSize="boton--medium"
             buttonStyle="boton--primary--solid"
             id="submit"
-            disabled={!stripe}>
+            disabled={!stripe}
+          >
             {" "}
             <span id="button-text">
               {processing ? (

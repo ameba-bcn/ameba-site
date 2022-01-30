@@ -5,7 +5,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Release changes
 
 Version 1.92
-- Payement stripe key consumed from ep
+- Payment stripe key consumed from ep
 
 Version 1.91
 - Product landing by url queries
