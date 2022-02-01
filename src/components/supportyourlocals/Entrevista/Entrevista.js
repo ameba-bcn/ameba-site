@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import "./Entrevista.css";
 import TitleSection from "../TitleSection";
 import axiosInstance from "../../../axios";
 import LettersMove from "../../layout/LettersMove";
@@ -8,12 +8,13 @@ import MediaSection from "./MediaSection";
 import QuestionsSection from "./QuestionsSection";
 import MainSection from "./MainSection";
 import EntrevistaMenu from "./EntrevistaMenu";
+import "./Entrevista.css";
 
 export default function Entrevista() {
   let history = useHistory();
   let location = useLocation();
+  const { support } = useSelector((state) => state.data);
   let urlID = location.pathname.substr(location.pathname.lastIndexOf("/") + 1);
-
   const [interview, setInterview] = useState([
     {
       id: 0,
@@ -24,7 +25,7 @@ export default function Entrevista() {
       current_answers: [{ answer: "", question: "" }],
     },
   ]);
-
+  const mediaUrls = !!support.length ? support.find((x) => x.id === parseInt(urlID))?.media_urls : [];
   const [artist, setArtist] = useState([
     {
       id: 0,
@@ -35,9 +36,8 @@ export default function Entrevista() {
       tags: [],
     },
   ]);
-
   const tags = artist.tags || [];
-  const hasMediaSection = !!artist.media_urls?.length;
+  const hasMediaSection = !!mediaUrls.length;
   const hasActivitiesSection = false;
 
   useEffect(() => {
@@ -45,8 +45,8 @@ export default function Entrevista() {
       .get(`interviews/${urlID}/`, {})
       .then((res) => {
         setInterview(res.data);
-        axiosInstance.get(`artists/${urlID}/`, {}).then((res) => {
-          setArtist(res.data);
+        axiosInstance.get(`artists/${urlID}/`, {}).then((resp) => {
+          setArtist(resp.data);
         });
       })
       .catch((error) => {
@@ -73,7 +73,7 @@ export default function Entrevista() {
                 </div>
               ))}
             </div>
-          )} 
+          )}
           <EntrevistaMenu
             hasMediaSection={hasMediaSection}
             hasActivitiesSection={hasActivitiesSection}
@@ -90,9 +90,9 @@ export default function Entrevista() {
         <>
           <LettersMove
             sentence={"l'associació de música electrònica de barcelona"}
-            color={"#F2C571"}
+            color="#F2C571"
           />
-          <MediaSection artist={artist} />
+          <MediaSection mediaUrls={mediaUrls} bgColor={!hasActivitiesSection?"#EB5E3E":"#F2C571"}/>
         </>
       )}
       {hasActivitiesSection && (

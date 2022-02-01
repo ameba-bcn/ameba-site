@@ -10,11 +10,11 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  support: {},
-  agenda: {},
-  botiga: {},
+  support: [],
+  agenda: [],
+  botiga: [],
   about: {},
-  cover: {},
+  cover: [],
 };
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
