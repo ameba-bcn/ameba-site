@@ -84,6 +84,7 @@ export default function Entrevista() {
           <EntrevistaMenu
             hasMediaSection={hasMediaSection}
             hasActivitiesSection={hasActivitiesSection}
+            hasInterviews={hasInterviews}
           />
         </div>
         <MainSection artist={artist} />

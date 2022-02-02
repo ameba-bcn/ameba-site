@@ -3,7 +3,11 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-scroll";
 
 export default function EntrevistaMenu(props) {
-  const { hasMediaSection = false, hasActivitiesSection = false } = props;
+  const {
+    hasMediaSection = false,
+    hasActivitiesSection = false,
+    hasInterviews = false,
+  } = props;
   const [t] = useTranslation("translation");
 
   return (
@@ -17,15 +21,19 @@ export default function EntrevistaMenu(props) {
       >
         <div className="menu-e menu-bio">{t("support.menu.bio")}</div>
       </Link>
-      <Link
-        activeClass="active"
-        to="entrevista-gral"
-        spy={true}
-        smooth={true}
-        duration={500}
-      >
-        <div className="menu-e menu-entrev">{t("support.menu.entrevista")}</div>
-      </Link>
+      {hasInterviews && (
+        <Link
+          activeClass="active"
+          to="entrevista-gral"
+          spy={true}
+          smooth={true}
+          duration={500}
+        >
+          <div className="menu-e menu-entrev">
+            {t("support.menu.entrevista")}
+          </div>
+        </Link>
+      )}
       {hasMediaSection && (
         <Link
           activeClass="active"
