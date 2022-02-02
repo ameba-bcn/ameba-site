@@ -4,6 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.94
+- Bug: Bookings links artists
+- Bug: Artist media links
+- Bug: Wrong breadcrumb title
+- Bug: manifesto text format
+
 Version 1.93
 - Payment redirects after successfull payment
 
