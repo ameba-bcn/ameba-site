@@ -1,6 +1,6 @@
 import React from "react";
-import ReactPlayer from "react-player";
-import MediaLinks from "../../layout/MediaLinks";
+// import ReactPlayer from "react-player";
+// import MediaLinks from "../../layout/MediaLinks";
 import TitleSection from "../TitleSection";
 import styled from "styled-components";
 
@@ -14,16 +14,63 @@ export default function MediaSection(props) {
     padding: 80px 0px;
   `;
 
+  const StyledMediaLinks = styled.div`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    div {
+      position: relative;
+      margin-top: 20px;
+      a {
+        width: 100%;
+        font-size: 34px;
+        font-family: "Bebas Neue";
+        font-weight: 900;
+        line-height: 1em;
+        color: #212529;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        @media (max-width: 500px) {
+          font-size: 24px;
+        }
+      }
+      a:before {
+        position: absolute;
+        margin: 0 auto;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #000;
+        content: "";
+        opacity: 0.3;
+        -webkit-transform: scaleX(0.9);
+        transition-property: opacity, -webkit-transform;
+        transition-duration: 0.3s;
+      }
+      a:hover:before {
+        opacity: 1;
+        -webkit-transform: scaleX(1);
+      }
+    }
+  `;
+
   return (
     <StyledMediaGral bgColor={bgColor}>
       <TitleSection title="Media" />
-      <div className="media-artista">
+      <StyledMediaLinks>
         {mediaUrls.map((n) => (
           // <div className="mediaPlayer">
-          <ReactPlayer url={n} />
+          // <ReactPlayer url={n} />
+          <div>
+            <a href={n} rel="noreferrer" target="_blank">
+              {n.split("www.").length > 0 ? n.split("www.")[1] : n}
+            </a>
+          </div>
           // </div>
         ))}
-      </div>
+      </StyledMediaLinks>
       {/* <div className="xarxes-artista">
         <MediaLinks fcbk="#" insta="#" twit="#" yout="#" />
       </div> */}

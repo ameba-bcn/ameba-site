@@ -30,12 +30,12 @@ export default function CardGrid(props) {
   const filteredArtists =
     isAmebaDJ && !!support.length
       ? support.filter((artist) => artist.is_ameba_dj === true)
-      : support;
+      : support.filter((artist) => artist.is_ameba_dj === false) || support;
 
   const cardGenerator =
     !!filteredArtists.length &&
     filteredArtists.map((data) => {
-      const { id = 0, images = [], name = "" } = data;
+      const { id = 0, images = [], name = "", tags = [] } = data;
       return (
         <div className="fullcard" key={id}>
           <NavLink
@@ -57,7 +57,7 @@ export default function CardGrid(props) {
               <div className="cardSupportPlusBox">
                 <PlusButton plusStyle="plus--obscure" plusSize="plus--big" />
               </div>
-              <div className="cardTagBox">DJ</div>
+              {!!tags.length && <div className="cardTagBox">{tags[0]}</div>}
             </div>
           </NavLink>
         </div>

@@ -4,7 +4,7 @@ import { isCORSInactive } from "../../../utils/utils";
 import TitleSection from "../TitleSection";
 
 export default function MainSection(props) {
-  const { interview = {}, artist = {} } = props;
+  const { artist = {} } = props;
   const [t] = useTranslation("translation");
 
   return (
@@ -13,7 +13,7 @@ export default function MainSection(props) {
       <div className="bio-section">
         <div className="bio-highlights">
           <div className="bio-data">
-            {t("support.top-menu.nom")}/ <span>{interview.title}</span>
+            {t("support.top-menu.nom")}/ <span>{artist.name}</span>
           </div>
           <div className="bio-data">
             {t("support.top-menu.ciutat")}/ <span>DUMMY TEXT</span>
