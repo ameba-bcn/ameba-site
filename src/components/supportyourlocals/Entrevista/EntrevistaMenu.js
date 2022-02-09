@@ -42,7 +42,7 @@ export default function EntrevistaMenu(props) {
           smooth={true}
           duration={500}
         >
-          <div className="menu-e menu-media">{t("support.menu.media")}</div>
+          <div className={`menu-e ${hasActivitiesSection?`menu-media`:`menu-activit`}`}>{t("support.menu.media")}</div>
         </Link>
       )}
       {hasActivitiesSection && (

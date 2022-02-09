@@ -11,7 +11,7 @@ export default function MediaSection(props) {
     height: auto;
     width: 100%;
     background-color: ${(props) => (props.bgColor ? props.bgColor : "#f2c571")};
-    padding: 80px 0px;
+    padding: 20px 0px 40px 0px;
   `;
 
   const StyledMediaLinks = styled.div`
@@ -57,7 +57,7 @@ export default function MediaSection(props) {
   `;
 
   return (
-    <StyledMediaGral bgColor={bgColor}>
+    <StyledMediaGral bgColor={bgColor} className="media-gral">
       <TitleSection title="Media" />
       <StyledMediaLinks>
         {mediaUrls.map((n) => (
@@ -65,7 +65,8 @@ export default function MediaSection(props) {
           // <ReactPlayer url={n} />
           <div>
             <a href={n} rel="noreferrer" target="_blank">
-              {n.split("www.").length > 0 ? n.split("www.")[1] : n}
+              {n.split("www.").length > 1 ? n.split("www.")[1] : n}
+              {console.log(n.split("www."))}
             </a>
           </div>
           // </div>
