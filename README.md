@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.95
+- Bug: Bookings collapsed
+
 Version 1.94
 - Bug: Bookings links artists
 - Bug: Artist media links
