@@ -1,71 +1,68 @@
 .productBannerPlus {
-  position: absolute;
-  width: 4rem;
-  height: 4rem;
-  right: 2%;
-  top: 20%;
+    position: absolute;
+    width: 4rem;
+    height: 4rem;
+    right: 2%;
+    top: 20%;
 }
 
-.productBannerPlus > div > div {
-  font-size: 5.6rem;
-  line-height: 0.45em;
+.productBannerPlus>div>div {
+    font-size: 5.6rem;
+    line-height: 0.5em;
 }
 
 .productBannerTitle {
-  position: absolute;
-  left: 2%;
-  top: 25%;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  font-size: 4rem;
-  font-family: "Bebas Neue";
-  line-height: 1em;
-  text-transform: uppercase;
-  color: #fae6c5;
-  text-align: left;
+    position: absolute;
+    left: 2%;
+    top: 25%;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    font-size: 4rem;
+    font-family: "Bebas Neue";
+    line-height: 1em;
+    text-transform: uppercase;
+    color: #fae6c5;
+    text-align: left;
 }
 
 .productBanner {
-  background-color: #1d1d1b;
-  height: 7rem;
-  overflow: hidden;
-  display: flex;
-  position: relative;
-  justify-content: center;
-  margin: 0 auto;
-  cursor: pointer;
-  margin: 0em 1em;
+    background-color: #1d1d1b;
+    height: 7rem;
+    overflow: hidden;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    margin: 0 auto;
+    cursor: pointer;
+    margin: 0em 1em;
 }
 
 @media screen and (max-width: 990px) {
-  .productBannerTitle {
-    font-size: 3rem;
-    top: 31%;
-  }
-  .productBannerPlus {
-    right: 4%;
-  }
+    .productBannerTitle {
+        font-size: 3rem;
+        top: 31%;
+    }
+    .productBannerPlus {
+        right: 4%;
+    }
 }
 
 @media screen and (max-width: 465px) {
-  .productBannerTitle {
-    font-size: 3rem;
-    line-height: 1.5rem;
-  }
-
-  .productBanner {
-    height: 3.4rem;
-  }
-
-  .productBannerPlus {
-    right: 0%;
-  }
-
-  .productBannerPlus > div > div {
-    font-size: 2.8rem;
-    line-height: 0.5em;
-    width: 2rem;
-    height: 2rem;
-  }
+    .productBannerTitle {
+        font-size: 3rem;
+        line-height: 1.5rem;
+    }
+    .productBanner {
+        height: 3.4rem;
+    }
+    .productBannerPlus {
+        right: 0%;
+    }
+    .productBannerPlus>div>div {
+        font-size: 2.8rem;
+        line-height: 0.5em;
+        width: 2rem;
+        height: 2rem;
+    }
 }

@@ -14,6 +14,10 @@ const botigaAll = () => {
   return axiosInstance.get(`${API_URL}articles/`, {});
 };
 
+const membershipAll = () => {
+  return axiosInstance.get(`${API_URL}subscriptions/`, {});
+};
+
 const getAbout = () => {
   return axiosInstance.get(`${API_URL}about/`, {});
 };
@@ -27,6 +31,7 @@ export default {
   supportYourLocalsAll,
   agendaAll,
   botigaAll,
+  membershipAll,
   getAbout,
   getCover,
 };

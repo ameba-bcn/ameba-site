@@ -31,7 +31,8 @@
     },
     "banners": {
         "soci-curt": "fes-te soci/a",
-        "soci-llarg": "fes-te soci/a d'ameba per 15€/any"
+        "soci-llarg-pt1": "fes-te soci/a d'ameba desde ",
+        "soci-llarg-pt2": "/any"
     },
     "agenda": {
         "data": "data",

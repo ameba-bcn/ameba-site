@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/actions/cart";
 import { Redirect } from "react-router-dom";
-import axiosInstance from "../../axios";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
@@ -10,31 +9,22 @@ import { useTranslation } from "react-i18next";
 export default function SociDialog(props) {
   const { onClose, open } = props;
   const { isLoggedIn } = useSelector((state) => state.auth);
+  const data = useSelector((state) => state.data);
+  const { membership = [] } = data;
   const dispatch = useDispatch();
-  const [socisData, getSocisData] = useState([]);
   const [isSubscriber, setIsSubscriber] = useState(true);
   const [redirect, setRedirect] = useState(false);
   const [t] = useTranslation("translation");
   const socisSubs =
-    socisData.filter(function (soci) {
+    membership.filter(function (soci) {
       return soci.name === "Socio";
     })[0] || {};
   const socisPro =
-    socisData.filter(function (soci) {
+    membership.filter(function (soci) {
       return soci.name === "Pro";
     })[0] || {};
 
   const { id, price_range, images } = isSubscriber ? socisSubs : socisPro;
-  useEffect(() => {
-    axiosInstance
-      .get(`subscriptions/`, {})
-      .then((res) => {
-        getSocisData(res.data);
-      })
-      .catch((error) => {
-        console.log("ERROL", error.response);
-      });
-  }, []);
 
   const handleClose = () => {
     onClose();
@@ -42,7 +32,7 @@ export default function SociDialog(props) {
 
   const handleAddClick = (id) => {
     const selectedMembershipId =
-      socisData.filter(function (soci) {
+      membership.filter(function (soci) {
         return soci.id === id;
       })[0]?.variants[0] || {};
     dispatch(addToCart(selectedMembershipId));

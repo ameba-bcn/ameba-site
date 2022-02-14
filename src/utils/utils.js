@@ -69,6 +69,11 @@ export function createLastRowIterator(arr, boxWidth) {
     : [];
 }
 
+export function deleteStringDecimals(price) {
+  if (price) return `${price.split(".")[0]}€`;
+  return "";
+}
+
 export function isCORSInactive() {
   if (false) return "http://localhost:8000";
   return "";

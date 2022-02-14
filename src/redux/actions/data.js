@@ -6,6 +6,8 @@ import {
   GET_ALL_AGENDA_FAIL,
   GET_ALL_BOTIGA_SUCCESS,
   GET_ALL_BOTIGA_FAIL,
+  GET_ALL_MEMBERSHIPS_SUCCESS,
+  GET_ALL_MEMBERSHIPS_FAIL,
   GET_ABOUT,
   GET_COVER,
 } from "./types";
@@ -77,6 +79,32 @@ export const botigaAll = () => (dispatch) => {
       const message = error.response?.data;
       dispatch({
         type: GET_ALL_BOTIGA_FAIL,
+      });
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
+};
+
+export const membershipAll = () => (dispatch) => {
+  return DataService.membershipAll().then(
+    (response) => {
+      dispatch({
+        type: GET_ALL_MEMBERSHIPS_SUCCESS,
+        payload: response?.data,
+      });
+
+      return Promise.resolve();
+    },
+    (error) => {
+      const message = error.response?.data;
+      dispatch({
+        type: GET_ALL_MEMBERSHIPS_FAIL,
       });
 
       dispatch({

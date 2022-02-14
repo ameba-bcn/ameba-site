@@ -5,6 +5,8 @@ import {
   GET_ALL_AGENDA_FAIL,
   GET_ALL_BOTIGA_SUCCESS,
   GET_ALL_BOTIGA_FAIL,
+  GET_ALL_MEMBERSHIPS_SUCCESS,
+  GET_ALL_MEMBERSHIPS_FAIL,
   GET_ABOUT,
   GET_COVER,
 } from "../actions/types";
@@ -48,6 +50,15 @@ export default function (state = initialState, action) {
       };
 
     case GET_ALL_BOTIGA_FAIL:
+      return {
+        ...state,
+      };
+    case GET_ALL_MEMBERSHIPS_SUCCESS:
+      return {
+        ...state,
+        membership: payload,
+      };
+    case GET_ALL_MEMBERSHIPS_FAIL:
       return {
         ...state,
       };

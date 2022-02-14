@@ -31,7 +31,8 @@
     },
     "banners": {
         "soci-curt": "hazte socio/a",
-        "soci-llarg": "hazte socio/a de ameba por 15€/año"
+        "soci-llarg-pt1": "hazte socio/a de ameba desde ",
+        "soci-llarg-pt2": "/año"
     },
     "agenda": {
         "data": "fecha",

@@ -71,7 +71,7 @@ export const ERROR = {
 
 export const MOBILE_BIG = "(max-width:1130px)";
 
-export const MOBILE_NORMAL = "(max-width:690px)";
+export const MOBILE_NORMAL = "(max-width:760px)";
 
 export const MOBILE_SMALL = "(max-width:400px)";
 

@@ -37,6 +37,7 @@ import {
   botigaAll,
   getAbout,
   getCover,
+  membershipAll
 } from "./redux/actions/data";
 import { getCart } from "./redux/actions/cart";
 import Booking from "./pages/Booking";
@@ -70,6 +71,7 @@ function App() {
     dispatch(supportYourLocalsAll());
     dispatch(agendaAll());
     dispatch(botigaAll());
+    dispatch(membershipAll());
     dispatch(getAbout());
     dispatch(getCover());
     dispatch(getCart());
