@@ -1,8 +1,6 @@
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  REGISTER_MEMBER_SUCCESS,
-  REGISTER_MEMBER_FAIL,
   VALIDATE_SUCCESS,
   VALIDATE_FAIL,
   LOGIN_SUCCESS,
@@ -82,14 +80,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         user_member_data: {},
-      };
-    case REGISTER_MEMBER_SUCCESS:
-      return {
-        ...state,
-      };
-    case REGISTER_MEMBER_FAIL:
-      return {
-        ...state,
       };
     case VALIDATE_SUCCESS:
       return {

@@ -60,7 +60,9 @@
         "recupera-llarg": "Recupera la teva contrassenya",
         "inicia": "Ja estàs registrat? Inicia sessió",
         "encara": "Encara no ets soci/a? Informat aquí!",
-        "modifica": "Modifica la teva contrassenya"
+        "modifica": "Modifica la teva contrassenya",
+        "recupera": "Hem enviat una contrassenya nova al teu correu electrònic. Verifícala per poder continuar.",
+        "link-recupera": "No has rebut cap correu? Torna-ho a intentar"
     },
     "form": {
         "nom": "nom",

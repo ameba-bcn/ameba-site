@@ -1,8 +1,6 @@
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-  REGISTER_MEMBER_SUCCESS,
-  REGISTER_MEMBER_FAIL,
   VALIDATE_SUCCESS,
   VALIDATE_FAIL,
   VALIDATE_LOCAL_TOKEN,
@@ -27,7 +25,7 @@ import {
   UPDATE_MEMBER_PROFILE,
   CREATE_MEMBER_PROFILE,
   DELETE_USER,
-  DELETE_USER_FAIL
+  DELETE_USER_FAIL,
 } from "./types";
 
 import AuthService from "../services/auth.service";
@@ -61,56 +59,6 @@ export const register = (registerData) => (dispatch) => {
     }
   );
 };
-
-// export const registerMember =
-//   (
-//     address,
-//     first_name,
-//     last_name,
-//     phone_number,
-//     username,
-//     password,
-//     email,
-//     cart_id
-//   ) =>
-//   (dispatch) => {
-//     return AuthService.registerMember(
-//       address,
-//       first_name,
-//       last_name,
-//       phone_number,
-//       username,
-//       password,
-//       email,
-//       cart_id
-//     ).then(
-//       () => {
-//         dispatch({
-//           type: REGISTER_MEMBER_SUCCESS,
-//         });
-
-//         dispatch({
-//           type: SET_MESSAGE,
-//           payload: "Register member success",
-//         });
-
-//         return Promise.resolve();
-//       },
-//       (error) => {
-//         const message = error.response.data.detail;
-//         dispatch({
-//           type: REGISTER_MEMBER_FAIL,
-//         });
-
-//         dispatch({
-//           type: SET_MESSAGE,
-//           payload: message,
-//         });
-
-//         return Promise.reject();
-//       }
-//     );
-//   };
 
 export const getMemberProfile = () => (dispatch) => {
   return AuthService.getMemberProfile().then(
@@ -323,14 +271,17 @@ export const getUserData = () => (dispatch) => {
 
 export const passwordRecovery = (token, password) => (dispatch) => {
   return AuthService.passwordRecovery(token, password).then(
-    () => {
+    (response) => {
+      const message = response.detail;
+
       dispatch({
         type: PASSWORD_RECOVERY_SUCCESS,
       });
 
-      // dispatch({
-      //   type: CLEAR_MESSAGE,
-      // });
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
 
       return Promise.resolve();
     },
@@ -353,13 +304,17 @@ export const passwordRecovery = (token, password) => (dispatch) => {
 
 export const sendEmailPasswordRecovery = (email) => (dispatch) => {
   return AuthService.sendEmailPasswordRecovery(email).then(
-    () => {
+    (response) => {
+      const message = response.detail;
       dispatch({
         type: SEND_EMAIL_PASSWORD_RECOVERY_SUCCESS,
       });
-      // dispatch({
-      //   type: CLEAR_MESSAGE,
-      // });
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+
       return Promise.resolve();
     },
     (error) => {
