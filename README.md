@@ -4,6 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.96
+- Bug: display BE response on psswd recovery flow
+- Bug: Avoid hardcoded price on banner
+- Bug: Roster copy
+
 Version 1.95
 - Bug: Bookings collapsed
 
