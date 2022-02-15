@@ -76,3 +76,5 @@ export const MOBILE_NORMAL = "(max-width:760px)";
 export const MOBILE_SMALL = "(max-width:400px)";
 
 export const AMEBA_EMAIL = "info@ameba.cat";
+
+export const MEMBER = "Suporter";

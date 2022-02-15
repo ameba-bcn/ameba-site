@@ -5,6 +5,7 @@ import { Redirect } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
+import { MEMBER } from "../../utils/constants";
 
 export default function SociDialog(props) {
   const { onClose, open } = props;
@@ -17,7 +18,7 @@ export default function SociDialog(props) {
   const [t] = useTranslation("translation");
   const socisSubs =
     membership.filter(function (soci) {
-      return soci.name === "Suporter";
+      return soci.name === MEMBER;
     })[0] || {};
   const socisPro =
     membership.filter(function (soci) {
