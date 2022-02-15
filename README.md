@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.97
+- Bug: Constant fix
+
 Version 1.96
 - Bug: display BE response on psswd recovery flow
 - Bug: Avoid hardcoded price on banner
