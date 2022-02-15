@@ -13,7 +13,7 @@ export default function Booking() {
       <PowerTitle
         title={"BOOKING"}
         className="SupportTitle"
-        subtitle="AMEBA Rooster"
+        subtitle="AMEBA Roster"
       />
       <CardGrid isAmebaDJ={true}/>
       <LettersMove

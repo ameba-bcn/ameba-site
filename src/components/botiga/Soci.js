@@ -17,7 +17,7 @@ export default function SociDialog(props) {
   const [t] = useTranslation("translation");
   const socisSubs =
     membership.filter(function (soci) {
-      return soci.name === "Socio";
+      return soci.name === "Suporter";
     })[0] || {};
   const socisPro =
     membership.filter(function (soci) {
