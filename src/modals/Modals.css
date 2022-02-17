@@ -1,372 +1,381 @@
 .modal-card__background {
-  height: 100%;
-  max-height: 100%;
-  width: 100%;
-  max-width: 800px;
-  font-family: "Bebas Neue";
-  overflow: hidden;
-  overflow-y: auto;
-  border-radius: 4px;
-  padding: 40px 70px 40px 70px;
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+    max-width: 800px;
+    font-family: "Bebas Neue";
+    overflow: hidden;
+    overflow-y: auto;
+    border-radius: 4px;
+    padding: 40px 70px 40px 70px;
 }
 
 .modal-card__background_light {
-  color: #1d1d1b;
-  background-color: #fae6c5;
+    color: #1d1d1b;
+    background-color: #fae6c5;
 }
 
 .modal-card__background_dark {
-  color: #fae6c5;
-  background-color: #1d1d1b;
+    color: #fae6c5;
+    background-color: #1d1d1b;
 }
 
 .modal-card-mobile__background {
-  height: 100%;
-  max-height: 100%;
-  width: 100%;
-  max-width: 600px;
-  font-family: "Bebas Neue";
-  overflow: hidden;
-  overflow-y: auto;
-  border-radius: 4px;
+    height: 100%;
+    max-height: 100%;
+    width: 100%;
+    max-width: 600px;
+    font-family: "Bebas Neue";
+    overflow: hidden;
+    overflow-y: auto;
+    border-radius: 4px;
 }
 
 .modal-card-mobile__background_light {
-  color: #1d1d1b;
-  background-color: #fae6c5;
+    color: #1d1d1b;
+    background-color: #fae6c5;
 }
 
 .modal-card-mobile__background_dark {
-  color: #fae6c5;
-  background-color: #1d1d1b;
+    color: #fae6c5;
+    background-color: #1d1d1b;
 }
 
 .modal-card__close {
-  float: right;
-  cursor: pointer;
-  flex-grow: 1;
-  max-height: 24px;
-  margin-top: -1.5rem;
-  margin-right: -1.5rem;
+    float: right;
+    cursor: pointer;
+    flex-grow: 1;
+    max-height: 24px;
+    margin-top: -1.5rem;
+    margin-right: -1.5rem;
 }
 
 .modal-card-mobile__close {
-  cursor: pointer;
-  flex-grow: 1;
-  max-height: 24px;
-  margin: 0 auto;
-  display: flex !important;
-  margin-bottom: 10px;
-  margin-top: 10px;
+    cursor: pointer;
+    flex-grow: 1;
+    max-height: 24px;
+    margin: 0 auto;
+    display: flex !important;
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .modal-card__close_light {
-  color: #1d1d1b;
+    color: #1d1d1b;
 }
 
 .modal-card__close_dark {
-  color: #fae6c5;
+    color: #fae6c5;
 }
 
 .modal-card__row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .modal-card-mobile__row {
-  margin: 0px 20px;
+    margin: 0px 20px;
 }
 
 .modal-card-mobile__row-interactiveDataBox {
-  margin: 0px;
+    margin: 0px;
 }
 
 .modal-card__column_eighty {
-  width: 80%;
+    width: 80%;
 }
 
 .modal-card__column_twenty {
-  width: 20%;
+    width: 20%;
 }
 
 .modal-card__column_fifty {
-  width: 50%;
+    width: 50%;
 }
 
 .modal-card__column_thirtyfive {
-  width: 35%;
+    width: 35%;
 }
 
 .modal-card__column_sixtyfive {
-  width: 65%;
+    width: 65%;
 }
 
 .modal-card__column_fiftyfive {
-  width: 55%;
+    width: 55%;
 }
 
 .modal-card__column_fourtyfive {
-  width: 45%;
+    width: 45%;
 }
 
 .modal-card__column_hundred {
-  width: 100%;
+    width: 100%;
 }
 
 .modal-card__title {
-  font-size: 3.75rem;
-  font-weight: 600;
-  line-height: 1em;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    font-size: 3.75rem;
+    font-weight: 600;
+    line-height: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 .modal-card-mobile__title {
-  text-align: center;
-  font-size: 3.75rem;
-  font-weight: 600;
-  line-height: 1em;
-  margin: 0 auto;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-bottom: -8px;
+    text-align: center;
+    font-size: 3.75rem;
+    font-weight: 600;
+    line-height: 1em;
+    margin: 0 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-bottom: -8px;
 }
 
 .modal-card__price {
-  color: #fae6c5;
-  float: right;
-  font-size: 2rem;
-  padding: 0.188rem 0.8rem 0rem 0.8rem;
-  margin-bottom: 0.6rem;
+    color: #fae6c5;
+    float: right;
+    font-size: 2rem;
+    padding: 0.188rem 0.8rem 0rem 0.8rem;
+    margin-bottom: 0.6rem;
 }
 
 .modal-card__price_light {
-  background-color: #1d1d1b;
+    background-color: #1d1d1b;
 }
 
 .modal-card__price_dark {
-  background-color: #eb5e3e;
+    background-color: #eb5e3e;
 }
 
 hr {
-  margin-top: 0.3em;
-  margin-bottom: 0.3em;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
 }
 
-hr > .modal-card__hr_solid {
-  margin-top: 0rem;
-  border: 0;
+hr>.modal-card__hr_solid {
+    margin-top: 0rem;
+    border: 0;
 }
 
 .modal-card__hr_solid-light,
 .modal-card__hr_dashed-light {
-  background-color: #bbb;
+    background-color: #bbb;
 }
 
 .modal-card__hr_solid-dark,
 .modal-card__hr_dashed-dark {
-  background-color: #fae6c5;
+    background-color: #fae6c5;
 }
 
-hr > .modal-card__hr_dashed {
-  border-top: 0.088rem dashed #bbb;
-  margin-top: 0rem;
-  border: 0;
+hr>.modal-card__hr_dashed {
+    border-top: 0.088rem dashed #bbb;
+    margin-top: 0rem;
+    border: 0;
 }
 
 .modal-card__description-title {
-  font-size: 1.6rem;
-  text-align: left;
-  text-transform: uppercase;
-  /* font-weight: bold; */
-  flex-grow: 1;
+    font-size: 1.6rem;
+    text-align: left;
+    text-transform: uppercase;
+    /* font-weight: bold; */
+    flex-grow: 1;
 }
 
 .modal-card-mobile__description-title {
-  font-size: 1.6rem;
-  text-align: center;
-  text-transform: uppercase;
+    font-size: 1.6rem;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .modal-card__description-content {
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.1rem;
-  margin-top: -0.3rem;
-  margin-bottom: 0.5rem;
-  text-align: justify;
-  flex-grow: 1;
-  line-height: initial;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1rem;
+    margin-top: -0.3rem;
+    margin-bottom: 0.5rem;
+    text-align: justify;
+    flex-grow: 1;
+    line-height: initial;
 }
 
 .modal-card-mobile__description-content {
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.1rem;
-  margin-top: -0.3rem;
-  margin-bottom: 0.5rem;
-  text-align: start;
-  flex-grow: 1;
-  line-height: initial;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1rem;
+    margin-top: -0.3rem;
+    margin-bottom: 0.5rem;
+    text-align: start;
+    flex-grow: 1;
+    line-height: initial;
 }
 
 .modal-card-location__row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  /* margin-bottom: 0.3em; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-bottom: 0.3em; */
 }
 
 .modal-card___title_small {
-  display: flex;
-  align-items: center;
-  /* font-weight: bold; */
-  font-family: "Bebas Neue";
-  font-size: 1.6rem;
-  text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    /* font-weight: bold; */
+    font-family: "Bebas Neue";
+    font-size: 1.6rem;
+    text-transform: uppercase;
 }
 
 .modal-card__button-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0px 10px 0px;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px 10px 0px;
 }
 
-.modal-card__button-wrapper > button {
-  width: 100%;
+.modal-card__button-wrapper>button {
+    width: 100%;
 }
 
 .modal-card-mobile__button-wrapper {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0px 20px 0px;
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px 20px 0px;
 }
 
+
 /* InteractiveDataBox */
+
 .interactiveDataBox-activitat__row {
-  display: flex;
-  flex-grow: 1;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  padding-right: 1rem;
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding-right: 1rem;
 }
 
 .interactiveDataBox-activitat__text-data {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1.1rem;
-  color: #1d1d1b;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1rem;
+    color: #1d1d1b;
 }
 
-.interactiveDataBox-activitat__text-data > a {
-  color: #1d1d1b;
+.interactiveDataBox-activitat__text-data>a {
+    color: #1d1d1b;
 }
 
 .interactiveDataBox-activitat__text-loca a {
-  color: inherit;
-  font-family: "Montserrat", sans-serif;
-  font-size: 1rem;
+    color: inherit;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem;
 }
 
 .interactiveDataBox-soci__row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 100%;
-  margin: 0.6rem 0rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0.6rem 0rem;
 }
 
 .interactiveDataBox-soci__buttonBox {
-  display: flex;
+    display: flex;
 }
+
 .interactiveDataBox-soci__button {
-  text-transform: uppercase;
-  cursor: pointer;
-  color: #fae6c5;
-  font-size: 1.6rem;
-  font-family: "Bebas Neue";
-  text-align: center;
-  padding: 0rem 0.4rem 0rem 0.4rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #fae6c5;
+    font-size: 1.6rem;
+    font-family: "Bebas Neue";
+    text-align: center;
+    padding: 0rem 0.4rem 0rem 0.4rem;
 }
 
 .interactiveDataBox-soci__button-subscriber {
-  margin-right: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 .interactiveDataBox-soci__button-professional {
-  margin-left: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 .interactiveDataBox-soci__button-active {
-  border-style: solid;
-  border-color: #eb5e3e;
-  background-color: #1d1d1b;
-  line-height: 2.5rem;
-  padding-top: 0.1rem;
+    border-style: solid;
+    border-color: #eb5e3e;
+    background-color: #1d1d1b;
+    line-height: 2.5rem;
+    padding-top: 0.1rem;
 }
 
 .interactiveDataBox-soci__button-inactive {
-  background-color: #eb5e3e;
-  padding-top: 0.4rem;
-  line-height: 2.2rem;
+    background-color: #eb5e3e;
+    padding-top: 0.4rem;
+    line-height: 2.2rem;
 }
 
 .interactiveDataBox-product-sizes__button_active {
-  display: inline-flex;
-  background-color: #fae6c5;
-  width: 2.188rem;
-  height: 2.188rem;
-  color: #1d1d1b;
-  border-width: 3px;
-  border-style: solid;
-  border-color: #1d1d1b;
-  font-size: 1.8rem;
-  margin-right: 0.15rem;
-  justify-content: center;
-  align-items: center;
+    display: inline-flex;
+    background-color: #fae6c5;
+    width: 2.188rem;
+    height: 2.188rem;
+    color: #1d1d1b;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #1d1d1b;
+    font-size: 1.8rem;
+    margin-right: 0.15rem;
+    justify-content: center;
+    align-items: center;
 }
 
 .interactiveDataBox-product-sizes__button {
-  display: inline-flex;
-  background-color: #1d1d1b;
-  width: 2.188rem;
-  height: 2.188rem;
-  color: #fae6c5;
-  font-size: 1.8rem;
-  margin-right: 0.15rem;
-  justify-content: center;
-  align-items: center;
+    display: inline-flex;
+    background-color: #1d1d1b;
+    width: 2.188rem;
+    height: 2.188rem;
+    color: #fae6c5;
+    font-size: 1.8rem;
+    margin-right: 0.15rem;
+    justify-content: center;
+    align-items: center;
 }
 
+.sizes {
+    cursor: pointer;
+}
+
+
 /* Scroll */
+
 .modal-card__background::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  background-color: #f5f5f5;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
 }
 
 .modal-card__background::-webkit-scrollbar {
-  width: 6px;
-  background-color: #f5f5f5;
+    width: 6px;
+    background-color: #f5f5f5;
 }
 
 .modal-card__background::-webkit-scrollbar-thumb {
-  background-color: #1d1d1b;
+    background-color: #1d1d1b;
 }
 
 @media screen and (max-width: 500px) {
-  .modal-card-mobile__button-wrapper > button {
-    font-size: 25px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  .modal-card-mobile__button-wrapper > button > svg {
-    width: 25px;
-    height: 25px;
-  }
+    .modal-card-mobile__button-wrapper>button {
+        font-size: 25px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .modal-card-mobile__button-wrapper>button>svg {
+        width: 25px;
+        height: 25px;
+    }
 }

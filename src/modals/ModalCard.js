@@ -57,19 +57,23 @@ export default function ModalCard(props) {
             <div>Talla única</div>
           ) : (
             <>
-              {sizes?.map((el) => (
-                <div
-                  className={
-                    activeSize === el
-                      ? "interactiveDataBox-product-sizes__button_active"
-                      : "interactiveDataBox-product-sizes__button"
-                  }
-                  key={el}
-                  onClick={() => setActiveSize(el)}
-                >
-                  {el}
-                </div>
-              ))}
+              {sizes?.map((el) => {
+                const talla = el.split(" ")[0];
+                return (
+                  <div
+                    className={
+                      activeSize === el
+                        ? "sizes interactiveDataBox-product-sizes__button_active"
+                        : "sizes interactiveDataBox-product-sizes__button"
+                    }
+                    key={el}
+                    onClick={() => setActiveSize(el)}
+                  >
+                    {console.log(el)}
+                    {talla}
+                  </div>
+                );
+              })}
             </>
           )}
         </>
