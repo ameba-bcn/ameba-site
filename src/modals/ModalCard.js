@@ -15,6 +15,7 @@ import CollapsableTextDiv from "../components/collapsable/CollapsableTextDiv";
 import { toast } from "react-toastify";
 import Toast from "../components/toast/Toast";
 import { useTranslation } from "react-i18next";
+import { ReactFitty } from "react-fitty";
 
 export default function ModalCard(props) {
   const {
@@ -51,7 +52,7 @@ export default function ModalCard(props) {
       let dataBoxDiv = (
         <>
           <div className="modal-card___title_small ">
-            <PeopleAltIcon /> {t("modal.talles")} / &nbsp;
+            <PeopleAltIcon /> {isMobile?t("modal.talles").split(" ")[0]:t("modal.talles")} / &nbsp;
           </div>
           {sizes && sizes[0] === "UNIQUE" ? (
             <div>Talla única</div>
@@ -69,7 +70,6 @@ export default function ModalCard(props) {
                     key={el}
                     onClick={() => setActiveSize(el)}
                   >
-                    {console.log(el)}
                     {talla}
                   </div>
                 );
@@ -183,7 +183,9 @@ export default function ModalCard(props) {
             />
             <div className="modal-card__row">
               <div className="modal-card__column_eighty">
-                <div className="modal-card__title">{title}</div>
+                <div className="modal-card__title">
+                  <ReactFitty maxSize={75}>{title}</ReactFitty>
+                  </div>
               </div>
               <div className="modal-card__column_twenty">
                 <div

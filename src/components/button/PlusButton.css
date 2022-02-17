@@ -1,36 +1,36 @@
 .plusBox {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
 }
 
 .plus--ligth {
-  background-color: #fae6c5;
-  color: #1d1d1b;
+    background-color: #fae6c5;
+    color: #1d1d1b;
 }
 
 .plus--obscure {
-  background-color: #1d1d1b;
-  color: #fae6c5;
+    background-color: #1d1d1b;
+    color: #fae6c5;
 }
 
-.plus--red{
-  background-color: var(--rojo);
-  color: var(--crema);
+.plus--red {
+    background-color: var(--rojo);
+    color: var(--crema);
 }
 
 .plus--big {
-  font-size: 120px;
-  line-height: 76.8px;
-  font-weight: 800;
-  width: 64px;
-  height: 64px;
+    font-size: 120px;
+    line-height: 76.8px;
+    font-weight: 800;
+    width: 64px;
+    height: 64px;
 }
+
 .plus--medium {
-  font-size: 55px;
-  line-height: 32px;
-  font-weight: 800;
-  width: 32px;
-  height: 32px;
+    font-size: 45px;
+    line-height: 26px;
+    font-weight: 800;
+    padding: 8px;
 }

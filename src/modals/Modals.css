@@ -81,6 +81,9 @@
 
 .modal-card-mobile__row-interactiveDataBox {
     margin: 0px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
 }
 
 .modal-card__column_eighty {

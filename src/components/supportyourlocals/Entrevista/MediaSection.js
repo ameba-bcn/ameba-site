@@ -66,7 +66,6 @@ export default function MediaSection(props) {
           <div>
             <a href={n} rel="noreferrer" target="_blank">
               {n.split("www.").length > 1 ? n.split("www.")[1] : n}
-              {console.log(n.split("www."))}
             </a>
           </div>
           // </div>
