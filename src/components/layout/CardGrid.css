@@ -77,8 +77,9 @@
 .cardTagBox {
     position: absolute;
     text-transform: uppercase;
-    width: 4rem;
+    width: auto;
     height: 3rem;
+    padding: 0px 10px;
     font-size: 2em;
     line-height: 1.4em;
     font-weight: 600;
