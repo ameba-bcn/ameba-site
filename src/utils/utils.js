@@ -69,6 +69,15 @@ export function createLastRowIterator(arr, boxWidth) {
     : [];
 }
 
+export const sortByDate = (array) => {
+  array.sort((a, b) => {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(b.datetime) - new Date(a.datetime);
+  });
+  return array;
+};
+
 export function deleteStringDecimals(price) {
   if (price) return `${price.split(".")[0]}€`;
   return "";

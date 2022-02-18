@@ -99,6 +99,14 @@
 }
 
 .logname-li {
+    width: fit-content;
+    display: flex;
+    vertical-align: middle;
+    padding-right: 0px;
+    margin-right: 0px;
+}
+
+.logname-li-mobile {
     width: 100%;
     display: flex;
     vertical-align: middle;

@@ -1,162 +1,162 @@
 .materialTableGeneral {
-  margin: 0 auto;
-  background-color: #fae6c5;
+    margin: 0 auto;
+    background-color: #fae6c5;
 }
 
 .fullTableActiv {
-  width: 80%;
-  background-color: #eb5e3e;
-  margin: auto;
-  margin-bottom: 2em;
+    width: 80%;
+    background-color: #eb5e3e;
+    margin: auto;
+    margin-bottom: 2em;
 }
 
 .MuiTableCell-root {
-  font-family: "Bebas Neue" !important;
-  font-size: 1.5rem !important;
+    font-family: "Bebas Neue" !important;
+    font-size: 1.5rem !important;
 }
 
 .MuiPaper-root,
 .MuiTableCell-head {
-  background-color: #fae6c5 !important;
+    background-color: #fae6c5 !important;
 }
 
 .column {
-  float: left;
-  width: 50%;
+    float: left;
+    width: 50%;
 }
 
 .row {
-  max-width: 100%;
+    max-width: 100%;
 }
+
 
 /* Clear floats after the columns */
 
 .row:after {
-  content: "";
-  display: table;
-  clear: both;
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .mainActivitatTitle {
-  font-family: "Bebas Neue";
-  font-weight: 400;
-  font-size: 2.5rem;
-  line-height: 0.8em;
+    font-family: "Bebas Neue";
+    font-weight: 400;
+    font-size: 2.5rem;
+    line-height: 0.8em;
 }
 
 .mainActivitatSubtitle {
-  font-family: "Montserrat", sans-serif;
-  text-transform: uppercase;
-  font-size: 0.8rem;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    font-size: 0.8rem;
 }
 
 .activitatText {
-  font-family: "Montserrat", sans-serif;
-  font-size: 0.9rem;
-  /* delimitar lineas verticales */
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.9rem;
+    /* delimitar lineas verticales */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 
 .activitatImg {
-  text-align: right;
-  width: 40%;
-  height: auto;
+    text-align: right;
+    width: 40%;
+    height: auto;
 }
 
 .activitatDescripcio {
-  margin-left: 1em;
-  width: 50%;
-  display: flex;
-  align-items: center;
+    margin-left: 1em;
+    width: 50%;
+    display: flex;
+    align-items: center;
 }
 
 .imgMiniActivitat {
-  width: 90%;
-  height: auto;
-  max-height: 120px;
-  object-fit: cover;
-  vertical-align: middle;
+    width: 90%;
+    height: auto;
+    max-height: 120px;
+    object-fit: cover;
+    vertical-align: middle;
 }
 
 .horaDataActivitat {
-  text-align: center;
-  justify-content: center;
-  max-width: 160px;
-  display: inline-block;
+    text-align: center;
+    justify-content: center;
+    max-width: 160px;
+    display: inline-block;
 }
 
 .cardActivitat {
-  font-size: 3rem;
-  text-align: center;
-  justify-content: center;
-  margin-right: 1rem;
+    font-size: 3rem;
+    text-align: center;
+    justify-content: center;
+    margin-right: 1rem;
 }
 
 .horaDataPetit {
-  margin: 0 auto;
-  display: none;
+    margin: 0 auto;
+    display: none;
 }
 
 @media screen and (max-width: 1210px) {
-  .row {
-    display: flex;
-    width: 100%;
-  }
-  .activitatImg {
-    display: none;
-    /* width: 50px;
+    .row {
+        display: flex;
+        width: 100%;
+    }
+    .activitatImg {
+        display: none;
+        /* width: 50px;
         height: 50px; */
-  }
-  .activitatDescripcio h1 {
-    font-size: 2rem;
-  }
-  .activitatDescripcio {
-    width: 100%;
-  }
-  .horaDataActivitat h1 {
-    font-size: 2rem;
-  }
+    }
+    .activitatDescripcio h1 {
+        font-size: 2rem;
+    }
+    .activitatDescripcio {
+        width: 100%;
+    }
+    .horaDataActivitat h1 {
+        font-size: 2rem;
+    }
 }
 
 @media screen and (max-width: 960px) {
-  table tbody tr td:nth-child(4),
-  .MuiTableCell-paddingCheckbox:last-child {
-    display: none;
-  }
+    table tbody tr td:nth-child(4),
+    .MuiTableCell-paddingCheckbox:last-child {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 950px) {
-  table tbody tr td:nth-child(3),
-  .MuiTableCell-head:nth-child(3) {
-    display: none;
-  }
+    table tbody tr td:nth-child(3),
+    .MuiTableCell-head:nth-child(3) {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 835px) {
-
-  .fullTableActiv {
-    padding-top: 1rem;
-  }
+    .fullTableActiv {
+        padding-top: 1rem;
+    }
 }
 
 @media screen and (max-width: 630px) {
-  table tbody tr td:nth-child(2),
-  .MuiTableCell-head:nth-child(2),
-  .MuiToolbar-regular,
-  .MuiTableRow-head {
-    display: none !important;
-  }
-  .horaDataPetit {
-    display: block;
-  }
-  .MuiTablePagination-toolbar {
-    display: flex !important;
-  }
-  .horaDataPetit {
-    text-align: left;
-    margin-left: 1rem;
-  }
+    table tbody tr td:nth-child(2),
+    .MuiTableCell-head:nth-child(2),
+    .MuiToolbar-regular,
+    .MuiTableRow-head {
+        display: none !important;
+    }
+    .horaDataPetit {
+        display: block;
+    }
+    .MuiTablePagination-toolbar {
+        display: flex !important;
+    }
+    .horaDataPetit {
+        text-align: left;
+        margin-left: 1em;
+    }
 }

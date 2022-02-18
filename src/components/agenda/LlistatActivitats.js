@@ -10,6 +10,7 @@ import {
   formatISODateToDate,
   formatISODateToHour,
   isCORSInactive,
+  sortByDate,
 } from "./../../utils/utils";
 import "./Agenda.css";
 import { useTranslation } from "react-i18next";
@@ -118,6 +119,8 @@ export default function LlistatActivitats() {
           </div>
         ),
         cellStyle: { width: 200, maxWidth: 200, textAlign: "center" },
+        sorting: true,
+        sortDirection: "desc",
         headerStyle: {
           width: 200,
           maxWidth: 200,
@@ -135,7 +138,6 @@ export default function LlistatActivitats() {
           </div>
         ),
         cellStyle: { width: 200, maxWidth: 200, textAlign: "center" },
-        sorting: false,
         headerStyle: {
           width: 200,
           maxWidth: 200,
@@ -157,7 +159,7 @@ export default function LlistatActivitats() {
           title=""
           className="materialTableGeneral"
           columns={state.columns}
-          data={agenda}
+          data={sortByDate(agenda)}
           options={{
             actionsColumnIndex: -1,
             paging: false,
