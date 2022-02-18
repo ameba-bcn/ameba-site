@@ -4,6 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.98
+- Unisex sizes prevented
+- Bug: SupportYourLocals tags overflowing
+- Plus modal on mobile restyled
+- Sorting desc on events
+- Flowing title on modal
+- Fallback when loading fonts& and icons
+
 Version 1.97
 - Bug: Constant fix
 
