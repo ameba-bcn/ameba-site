@@ -46,7 +46,9 @@
         "preu": "preu",
         "afegir": "afegir a cistella",
         "descripcio": "descripció",
-        "beneficis": "beneficis"
+        "beneficis": "beneficis",
+        "sizesError": "Per poder avançar selecciona una talla",
+        "esgotat": "Producte esgotat"
     },
     "footer": {
         "drets": "Tots els drets reservats"

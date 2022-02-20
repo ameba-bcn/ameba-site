@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import { useMediaQuery } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
@@ -9,13 +9,13 @@ import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import Button from "../components/button/Button";
 import ImageCarousel from "../components/images/ImageCarousel";
-import "./Modals.css";
 import { MOBILE_NORMAL } from "../utils/constants";
 import CollapsableTextDiv from "../components/collapsable/CollapsableTextDiv";
 import { toast } from "react-toastify";
 import Toast from "../components/toast/Toast";
 import { useTranslation } from "react-i18next";
 import { ReactFitty } from "react-fitty";
+import "./Modals.css";
 
 export default function ModalCard(props) {
   const {
@@ -42,9 +42,44 @@ export default function ModalCard(props) {
   } = props;
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const types = ["PRODUCTE", "SOCI", "ACTIVITAT"];
-  const [activeSize, setActiveSize] = useState(sizes ? sizes[0] : []);
+  const [activeSize, setActiveSize] = useState([]);
+  const [selectSizeError, setSelectSizeError] = useState(false);
   const modalStyle = types.includes(type) ? type : types[0];
   const [t] = useTranslation("translation");
+  const productSoldOut = modalStyle === "PRODUCTE" && sizes.length === 0;
+
+  useEffect(() => {
+    if (!!sizes.length) {
+      setActiveSize(sizes.length === 1 ? sizes[0] : []);
+    }
+  }, [sizes]);
+
+  
+
+  const handleAddToCard = (id) => {
+    if (activeSize.length === 0 && modalStyle === "PRODUCTE")
+      setSelectSizeError(true);
+    else {
+      setSelectSizeError(false);
+      if(modalStyle === "PRODUCTE"){
+        handleAddClick(activeSize);
+      }
+      else{
+        handleAddClick(id);
+
+      }
+      toast(<Toast />, {
+        position: "bottom-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        className: "toast-black-background",
+      });
+    }
+  };
 
   const interactiveDataBox = () => {
     let dataBoxDiv = <></>;
@@ -52,7 +87,13 @@ export default function ModalCard(props) {
       let dataBoxDiv = (
         <>
           <div className="modal-card___title_small ">
-            <PeopleAltIcon /> {isMobile?t("modal.talles").split(" ")[0]:t("modal.talles")} / &nbsp;
+            <PeopleAltIcon />{" "}
+            {productSoldOut
+              ? t("modal.esgotat")
+              : isMobile
+              ? t("modal.talles").split(" ")[0]
+              : t("modal.talles")}{" "}
+            / &nbsp;
           </div>
           {sizes && sizes[0] === "UNIQUE" ? (
             <div>Talla única</div>
@@ -63,12 +104,15 @@ export default function ModalCard(props) {
                 return (
                   <div
                     className={
-                      activeSize === el
+                      activeSize === el || sizes.length === 1
                         ? "sizes interactiveDataBox-product-sizes__button_active"
                         : "sizes interactiveDataBox-product-sizes__button"
                     }
                     key={el}
-                    onClick={() => setActiveSize(el)}
+                    onClick={() => {
+                      setActiveSize(el);
+                      setSelectSizeError(false);
+                    }}
                   >
                     {talla}
                   </div>
@@ -185,7 +229,7 @@ export default function ModalCard(props) {
               <div className="modal-card__column_eighty">
                 <div className="modal-card__title">
                   <ReactFitty maxSize={75}>{title}</ReactFitty>
-                  </div>
+                </div>
               </div>
               <div className="modal-card__column_twenty">
                 <div
@@ -247,6 +291,7 @@ export default function ModalCard(props) {
                     variant="contained"
                     color="primary"
                     buttonSize="boton--medium"
+                    disabled={productSoldOut}
                     buttonStyle={
                       colorMode && colorMode === "dark"
                         ? "boton--back-orange--solid"
@@ -254,13 +299,16 @@ export default function ModalCard(props) {
                     }
                     icon={buttonIcon}
                     onClick={() => {
-                      handleAddClick(id);
+                      !productSoldOut && handleAddToCard(id);
                     }}
                   >
                     {buttonText}
                   </Button>
                 </div>
               </div>
+              {selectSizeError && (
+                <div className="error-message">{t("modal.sizesError")}</div>
+              )}
             </div>
             <hr
               className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
@@ -327,24 +375,18 @@ export default function ModalCard(props) {
                     ? "boton--back-orange--solid"
                     : "boton--primary--solid"
                 }
+                disabled={productSoldOut}
                 icon={buttonIcon}
                 onClick={() => {
-                  handleAddClick(id);
-                  toast(<Toast />, {
-                    position: "bottom-center",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: false,
-                    draggable: true,
-                    progress: undefined,
-                    className: "toast-black-background",
-                  });
+                  !productSoldOut && handleAddToCard(id);
                 }}
               >
                 {buttonText} - {formatPrice(price)}
               </Button>
             </div>
+            {selectSizeError && (
+              <div className="error-message">{t("modal.sizesError")}</div>
+            )}
           </div>
         </div>
       )}

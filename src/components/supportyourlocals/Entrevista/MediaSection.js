@@ -1,5 +1,5 @@
 import React from "react";
-// import ReactPlayer from "react-player";
+import ReactPlayer from "react-player";
 // import MediaLinks from "../../layout/MediaLinks";
 import TitleSection from "../TitleSection";
 import styled from "styled-components";
@@ -61,14 +61,14 @@ export default function MediaSection(props) {
       <TitleSection title="Media" />
       <StyledMediaLinks>
         {mediaUrls.map((n) => (
-          // <div className="mediaPlayer">
-          // <ReactPlayer url={n} />
-          <div>
-            <a href={n} rel="noreferrer" target="_blank">
-              {n.split("www.").length > 1 ? n.split("www.")[1] : n}
-            </a>
+          <div className="mediaPlayer">
+          <ReactPlayer url={n} />
+          {/* <div>
+             <a href={n} rel="noreferrer" target="_blank">
+               {n.split("www.").length > 1 ? n.split("www.")[1] : n}
+             </a>
+           </div> */}
           </div>
-          // </div>
         ))}
       </StyledMediaLinks>
       {/* <div className="xarxes-artista">

@@ -10,6 +10,7 @@ import Toast from "./../toast/Toast";
 import "./DropdownCart.css";
 import { setGuestUser, setLoggedUser } from "../../redux/actions/profile";
 import { useTranslation } from "react-i18next";
+import { ReactFitty } from "react-fitty";
 
 export default function DropdownCart(props) {
   const dispatch = useDispatch();
@@ -95,9 +96,16 @@ export default function DropdownCart(props) {
                       </div>
                     </div>
                     <div className="colCartProduct2">
-                      <div className="titleCartProduct">{el.name}</div>
+                      <div className="titleCartProduct">
+                        <ReactFitty maxSize={22}>
+                          {el.name.split("(")[0]}
+                        </ReactFitty>
+                      </div>
                       <div className="rowDetailedCart">
                         <div className="cartPriceProduct">{el.price}</div>
+                        <div className="quantityPriceProduct">
+                          {el.variant_details}
+                        </div>
                         <div className="quantityPriceProduct">
                           Qty: <span>{getQty(item_variants, el.id)}</span>
                         </div>
@@ -132,11 +140,16 @@ export default function DropdownCart(props) {
                   <div className="rowCartProduct">
                     <div className="colCartProduct1_mobile">
                       <div className="titleCartProduct">
-                        {el.name.split("(")[0]}
+                        <ReactFitty maxSize={22}>
+                          {el.name.split("(")[0]}
+                        </ReactFitty>
                       </div>
                       <div className="rowDetailedCart">
                         <div className="cartPriceProduct_mobile">
                           {el.price}
+                        </div>
+                        <div className="quantityPriceProduct">
+                          {el.variant_details}
                         </div>
                         <div className="quantityPriceProduct">
                           Qty: <span>{getQty(item_variants, el.id)}</span>

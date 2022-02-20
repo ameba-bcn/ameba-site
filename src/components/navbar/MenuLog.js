@@ -12,7 +12,10 @@ export default function MenuLog(props) {
   const [anchorEl1, setAnchorEl1] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isMember = user_profile === "MEMBER" || "LOGGED";
-  const userName = user_data.username.split(" ");
+  const userName = user_data.username.split(" ")[0];
+  const userNameShortened =
+    userName.length > 7 ? userName.slice(0, 7) + "..." : userName;
+
   const handleCloseSessio = () => {
     handleClick();
     setAnchorEl1(null);
@@ -31,10 +34,10 @@ export default function MenuLog(props) {
     <div>
       <a
         className="sessio-menu-button"
-        data-item={user_data.username === "" ? "SESSIÓ" : userName[0]}
+        data-item={user_data.username === "" ? "SESSIÓ" : userNameShortened}
         onClick={(e) => handleClickSessio(e)}
       >
-        {user_data.username === "" ? "SESSIÓ" : userName[0]}
+        {user_data.username === "" ? "SESSIÓ" : userNameShortened}
       </a>
       {!isMobile ? (
         <Menu

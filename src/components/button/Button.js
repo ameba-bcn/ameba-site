@@ -33,7 +33,7 @@ export default function Button(props) {
 
   return (
     <button
-      className={`boton ${checkButtonStyle} ${checkButtonSize} ${checkHoverStyle} ${disabled?"button-disabled":""}`}
+      className={`boton ${checkButtonStyle} ${checkButtonSize} ${!disabled && checkHoverStyle} ${disabled?"button-disabled":""}`}
       onClick={onClick}
       type={type}
       {...rest}

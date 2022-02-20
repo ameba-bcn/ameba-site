@@ -16,8 +16,9 @@ export default function ProducteDialog(props) {
     onClose(selectedValue);
   };
 
-  const handleAddClick = () => {
-    const variant_id = dataRow.variants[0].id || "";
+  const handleAddClick = (size) => {
+    const variantsObj = dataRow.variants.filter(x => x.attributes[0].value === size.toLowerCase())[0].id;
+    const variant_id = variantsObj || "";
     dispatch(addToCart(variant_id));
     handleClose();
   };
@@ -26,7 +27,9 @@ export default function ProducteDialog(props) {
     let arr = [];
     if (dataRow.variants) {
       dataRow.variants.forEach((element) => {
-        if (element.stock > 0) {
+        if (
+          element.stock > 0 || element.stock === -1
+          ) {
           arr.push(element.attributes[0].value.toUpperCase());
         }
       });
