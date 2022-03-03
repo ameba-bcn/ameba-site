@@ -17,6 +17,8 @@ export default function ActivitatDialog(props) {
     // artists,
     datetime,
     address,
+    header='',
+    has_stock
   } = dataRow;
 
   const [redirect, setRedirect] = useState(false);
@@ -54,10 +56,12 @@ export default function ActivitatDialog(props) {
       buttonIcon={<ReceiptIcon />}
       box1Title={t("modal.descripcio")}
       box1Text={description}
+      header={header}
       // box2Title={"ARTIST / LINE UP"}
       // box2Text={artists}
       type="ACTIVITAT"
       colorMode="light"
+      has_stock={has_stock}
     />
   );
 }

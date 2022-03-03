@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import { substractToCart } from "../../redux/actions/cart";
 import { clearMessage } from "../../redux/actions/message";
 import { isCORSInactive } from "../../utils/utils";
@@ -11,6 +12,7 @@ export default function TableProducts(props) {
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { item_variants = [] } = cart_data;
   const dispatch = useDispatch();
+  const [t] = useTranslation("translation");
 
   const substractItem = (id) => {
     dispatch(substractToCart(id))
@@ -33,7 +35,12 @@ export default function TableProducts(props) {
                 alt={"item-image-" + { item }}
               />
             </td>
-            <td className="reviewTable-col2">{item.name}</td>
+            <td className="reviewTable-col2">
+              {item.item_name}
+              <br/>
+              {item?.variant_details?.size !== "unique" &&
+               `${t("modal.talla")} ${item?.variant_details?.size}`}
+            </td>
             <td className="reviewTable-col3">{item.price}</td>
             <td className="reviewTable-col4">
               <div

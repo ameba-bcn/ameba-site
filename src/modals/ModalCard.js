@@ -39,6 +39,8 @@ export default function ModalCard(props) {
     isSubscriber,
     setIsSubscriber,
     colorMode,
+    header,
+    has_stock
   } = props;
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const types = ["PRODUCTE", "SOCI", "ACTIVITAT"];
@@ -46,7 +48,7 @@ export default function ModalCard(props) {
   const [selectSizeError, setSelectSizeError] = useState(false);
   const modalStyle = types.includes(type) ? type : types[0];
   const [t] = useTranslation("translation");
-  const productSoldOut = modalStyle === "PRODUCTE" && sizes.length === 0;
+  const productSoldOut = !has_stock || (modalStyle === "PRODUCTE" && sizes.length === 0);
 
   useEffect(() => {
     if (!!sizes.length) {
@@ -228,7 +230,7 @@ export default function ModalCard(props) {
             <div className="modal-card__row">
               <div className="modal-card__column_eighty">
                 <div className="modal-card__title">
-                  <ReactFitty maxSize={75}>{title}</ReactFitty>
+                  <ReactFitty maxSize={75}>{modalStyle === "ACTIVITAT"? header : title}</ReactFitty>
                 </div>
               </div>
               <div className="modal-card__column_twenty">

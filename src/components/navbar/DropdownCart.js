@@ -11,12 +11,16 @@ import "./DropdownCart.css";
 import { setGuestUser, setLoggedUser } from "../../redux/actions/profile";
 import { useTranslation } from "react-i18next";
 import { ReactFitty } from "react-fitty";
+import { truncate } from "../../utils/utils";
+import { MOBILE_SMALL } from "../../utils/constants";
+import { useMediaQuery } from "@material-ui/core";
 
 export default function DropdownCart(props) {
   const dispatch = useDispatch();
   const { isMobile = false, setCartMenuOpen = {} } = props;
   const { item_variants = [], total = 0 } = props.cartData;
   const { isLoggedIn } = useSelector((state) => state.auth);
+  const isMinMobile = useMediaQuery(MOBILE_SMALL);
   const arrMono = [];
   const [t] = useTranslation("translation");
 
@@ -98,13 +102,13 @@ export default function DropdownCart(props) {
                     <div className="colCartProduct2">
                       <div className="titleCartProduct">
                         <ReactFitty maxSize={22}>
-                          {el.name.split("(")[0]}
+                          {truncate(el.item_name, 25)}
                         </ReactFitty>
                       </div>
                       <div className="rowDetailedCart">
                         <div className="cartPriceProduct">{el.price}</div>
                         <div className="quantityPriceProduct">
-                          {el.variant_details}
+                          {el?.variant_details?.size !== 'unique' && el?.variant_details?.size}
                         </div>
                         <div className="quantityPriceProduct">
                           Qty: <span>{getQty(item_variants, el.id)}</span>
@@ -141,7 +145,7 @@ export default function DropdownCart(props) {
                     <div className="colCartProduct1_mobile">
                       <div className="titleCartProduct">
                         <ReactFitty maxSize={22}>
-                          {el.name.split("(")[0]}
+                          {truncate(el.item_name, isMinMobile? 25:40)}
                         </ReactFitty>
                       </div>
                       <div className="rowDetailedCart">
@@ -149,7 +153,7 @@ export default function DropdownCart(props) {
                           {el.price}
                         </div>
                         <div className="quantityPriceProduct">
-                          {el.variant_details}
+                          {el?.variant_details?.size !== 'unique' && el?.variant_details?.size}
                         </div>
                         <div className="quantityPriceProduct">
                           Qty: <span>{getQty(item_variants, el.id)}</span>

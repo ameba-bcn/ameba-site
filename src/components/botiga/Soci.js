@@ -25,7 +25,9 @@ export default function SociDialog(props) {
       return soci.name === "Pro";
     })[0] || {};
 
-  const { id, price_range, images } = isSubscriber ? socisSubs : socisPro;
+  const { id, price_range, images, description, benefits = "", has_stock } = isSubscriber
+    ? socisSubs
+    : socisPro;
 
   const handleClose = () => {
     onClose();
@@ -57,17 +59,14 @@ export default function SociDialog(props) {
       buttonText={t("modal.afegir")}
       buttonIcon={<ShoppingCartIcon />}
       box1Title={t("modal.descripcio")}
-      box1Text={
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donecornare nulla eros, eu tempor lorem imperdiet eget. Etiam a metus nulla. Vivamus tempor interdum felis viverra dapibus. Ut cursus magna ut pharetra lobortis. Mauris hendrerit risus ante, sed consectetur tellus vestibulum ut. Fusce ut aliquet erat. Donec in lacus maximus, ullamcorper enim vitae, euismod arcu."
-      }
+      box1Text={description}
       box2Title={t("modal.beneficis")}
-      box2Text={
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donecornare nulla eros, eu tempor lorem imperdiet eget. Etiam a metus nulla. Vivamus tempor interdum felis viverra dapibus. Ut cursus magna ut pharetra lobortis. Mauris hendrerit risus ante, sed consectetur tellus vestibulum ut. Fusce ut aliquet erat. Donec in lacus maximus, ullamcorper enim vitae, euismod arcu."
-      }
+      box2Text={benefits}
       type="SOCI"
       colorMode="dark"
       isSubscriber={isSubscriber}
       setIsSubscriber={setIsSubscriber}
+      has_stock={has_stock}
     />
   );
 }

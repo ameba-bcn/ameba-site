@@ -40,6 +40,7 @@
     },
     "modal": {
         "talles": "tallas disponibles",
+        "talla": "talla",
         "quota": "cuota de socio/a",
         "professional": "profesional",
         "localitzacio": "localización",

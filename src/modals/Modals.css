@@ -125,6 +125,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    padding-top: 3px;
 }
 
 .modal-card-mobile__title {
@@ -220,7 +221,7 @@ hr>.modal-card__hr_dashed {
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    /* margin-bottom: 0.3em; */
+    margin-bottom: 0.6em;
 }
 
 .modal-card___title_small {

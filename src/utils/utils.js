@@ -87,3 +87,8 @@ export function isCORSInactive() {
   if (false) return "http://localhost:8000";
   return "";
 }
+
+export const truncate = (string, length) => {
+  if (string.length < length) return string;
+  return string.substring(0, length).concat("...");
+};

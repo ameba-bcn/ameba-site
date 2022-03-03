@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 export default function ProducteDialog(props) {
   const { onClose, selectedValue, open, dataRow } = props;
-  const { id, name, price_range, images, description } = dataRow;
+  const { id, name, price_range, images, description, has_stock } = dataRow;
   const dispatch = useDispatch();
   const [sizes, setSizes] = useState([]);
   const [t] = useTranslation("translation");
@@ -53,6 +53,7 @@ export default function ProducteDialog(props) {
       box1Text={description}
       type="PRODUCTE"
       colorMode="light"
+      has_stock={has_stock}
     />
   );
 }
