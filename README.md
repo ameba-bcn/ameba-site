@@ -4,6 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 1.99
+- Cart with short name
+- Cart and dropdown with sizes
+- has_stock on use
+- SubHeader on event modal
+
 Version 1.98
 - Unisex sizes prevented
 - Bug: SupportYourLocals tags overflowing
