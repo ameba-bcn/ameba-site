@@ -193,6 +193,7 @@ export default function LlistatActivitats() {
           open={open}
           dataRow={eventData}
           onClose={handleClose}
+          setEventData={setEventData}
         />
       )}
     </div>

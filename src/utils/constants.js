@@ -78,3 +78,7 @@ export const MOBILE_SMALL = "(max-width:400px)";
 export const AMEBA_EMAIL = "info@ameba.cat";
 
 export const MEMBER = "Suporter";
+
+// This list contains posible names for normal & pro memberships
+export const MEMBER_LIST = ["Suporter", "Soci", "Socio"];
+export const PRO_MEMBER_LIST = ["Pro"];

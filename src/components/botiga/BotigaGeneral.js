@@ -30,7 +30,7 @@ export default function BotigaGeneral() {
   const externalId = value.id;
   const data = useSelector((state) => state.data);
   const { botiga = [] } = data;
-  const [productData, getProductData] = useState([
+  const [productData, setProductData] = useState([
     {
       id: 0,
       name: "",
@@ -56,7 +56,7 @@ export default function BotigaGeneral() {
     axiosInstance
       .get(`articles/${data.id}`, {})
       .then((res) => {
-        getProductData(res.data);
+        setProductData(res.data);
       })
       .then(handleClickOpen())
       .catch((error) => {
@@ -114,6 +114,7 @@ export default function BotigaGeneral() {
         <ProducteDialog
           open={open}
           dataRow={productData}
+          setProductData={setProductData}
           onClose={handleClose}
         />
       )}

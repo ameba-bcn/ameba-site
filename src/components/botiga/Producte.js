@@ -6,7 +6,7 @@ import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
 
 export default function ProducteDialog(props) {
-  const { onClose, selectedValue, open, dataRow } = props;
+  const { onClose, selectedValue, open, dataRow, setProductData } = props;
   const { id, name, price_range, images, description, has_stock } = dataRow;
   const dispatch = useDispatch();
   const [sizes, setSizes] = useState([]);
@@ -22,6 +22,13 @@ export default function ProducteDialog(props) {
     dispatch(addToCart(variant_id));
     handleClose();
   };
+
+    // desmontamos el dialog al cerrarlo
+    useEffect(() => {
+      return () => {
+        setProductData([])
+      }
+  }, [])
 
   useEffect(() => {
     let arr = [];

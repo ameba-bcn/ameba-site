@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import BotigaGeneral from "../components/botiga/BotigaGeneral";
 import PowerTitle from "../components/layout/PowerTitle";
@@ -6,25 +6,48 @@ import ProductBanner from "../components/botiga/ProductBanner";
 import SociDialog from "../components/botiga/Soci";
 import LettersMove from "./../components/layout/LettersMove";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { MEMBER, MOBILE_NORMAL } from "../utils/constants";
+import { MEMBER_LIST, MOBILE_NORMAL } from "../utils/constants";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { deleteStringDecimals } from "../utils/utils";
+import axiosInstance from "../axios";
 
 function Botiga() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [productData, setProductData] = useState([]);
   const data = useSelector((state) => state.data);
   const { membership = [] } = data;
   let location = useLocation();
   const queryString = require("query-string");
   const value = queryString.parse(location.search);
   const externalId = value.id;
+  const id_soci = membership.map((x) => x.id);
+
   const handleClick = () => {
-    setOpen(!open);
+    let arr = [];
+    axiosInstance
+      .get(`/subscriptions/${id_soci[0]}`, {})
+      .then((resposta) => {
+        arr.push(resposta.data);
+        id_soci.length > 1 &&
+          axiosInstance.get(`/subscriptions/${id_soci[1]}`, {}).then((res) => {
+            arr.push(res.data);
+          });
+      })
+      .then(() => {
+        setOpen(!open);
+        setProductData(arr);
+      })
+      .catch((error) => {
+        console.log("ERROL", error.response);
+      });
   };
+
   const [t] = useTranslation("translation");
   const isMobile = useMediaQuery(MOBILE_NORMAL);
-  const sociPreu = membership.filter((x) => x.name === MEMBER)[0]?.price_range;
+  const sociPreu = membership.filter((x) => MEMBER_LIST.includes(x.name))[0]
+    ?.price_range;
+
   useEffect(() => {
     if (externalId === "14" || externalId === "15") {
       handleClick();
@@ -45,7 +68,9 @@ function Botiga() {
           }
         />
       </div>
-      {open && <SociDialog open={open} onClose={handleClick} />}
+      {open && (
+        <SociDialog open={open} onClose={handleClick} dataRow={productData} setProductData={setProductData} />
+      )}
       <div className="BotigaContent">
         <BotigaGeneral />
       </div>

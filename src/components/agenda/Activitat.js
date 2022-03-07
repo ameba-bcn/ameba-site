@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/actions/cart";
 import { Redirect } from "react-router-dom";
@@ -7,7 +7,7 @@ import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
 
 export default function ActivitatDialog(props) {
-  const { onClose, selectedValue, open, dataRow } = props;
+  const { onClose, selectedValue, open, dataRow, setEventData } = props;
   const {
     id,
     name,
@@ -30,6 +30,13 @@ export default function ActivitatDialog(props) {
   const handleClose = () => {
     onClose(selectedValue);
   };
+
+  // desmontamos el dialog al cerrarlo
+  useEffect(() => {
+    return () => {
+      setEventData([])
+    }
+}, [])
 
   const handleAddClick = () => {
     const { variants = [] } = dataRow;

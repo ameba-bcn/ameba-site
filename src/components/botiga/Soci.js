@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/actions/cart";
 import { Redirect } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
-import { MEMBER } from "../../utils/constants";
+import { MEMBER_LIST, PRO_MEMBER_LIST } from "../../utils/constants";
 
 export default function SociDialog(props) {
-  const { onClose, open } = props;
+  const { onClose, open, dataRow, setProductData } = props;
   const { isLoggedIn } = useSelector((state) => state.auth);
   const data = useSelector((state) => state.data);
   const { membership = [] } = data;
@@ -17,17 +17,23 @@ export default function SociDialog(props) {
   const [redirect, setRedirect] = useState(false);
   const [t] = useTranslation("translation");
   const socisSubs =
-    membership.filter(function (soci) {
-      return soci.name === MEMBER;
+  dataRow.filter(function (soci) {
+      return MEMBER_LIST.includes(soci.name);
     })[0] || {};
   const socisPro =
-    membership.filter(function (soci) {
-      return soci.name === "Pro";
+  dataRow.filter(function (soci) {
+      return PRO_MEMBER_LIST.includes(soci.name);
     })[0] || {};
-
   const { id, price_range, images, description, benefits = "", has_stock } = isSubscriber
     ? socisSubs
     : socisPro;
+
+    useEffect(() => {
+      // Anything in here is fired on component mount.
+      return () => {
+          setProductData([])
+      }
+  }, [])
 
   const handleClose = () => {
     onClose();

@@ -20,7 +20,7 @@
     padding: 4rem;
 }
 
-.productCardDeck > i{
+.productCardDeck>i {
     width: 467px;
     margin: 0 auto;
 }
@@ -31,15 +31,13 @@
     margin-bottom: 3rem;
     overflow: hidden;
     max-width: 467px;
-    height: auto;
+    height: fit-content;
     display: inline-block;
     justify-content: center;
     min-width: 470px;
     background-color: white;
     cursor: pointer;
-
 }
-
 
 .productCardBody {
     overflow: hidden;
@@ -88,21 +86,18 @@
         min-width: 400px;
         margin-bottom: 1rem;
     }
-
     .productImgFrame {
         height: 100%;
         overflow: hidden
     }
-/* 
+    /* 
     .productTitle {
         font-size: 2rem;
     } */
-
     .productCardPrice {
         font-size: 2rem;
         line-height: 2.1rem;
     }
-
     .productCardDeck {
         padding: 1rem;
     }
@@ -112,14 +107,11 @@
     .fullcardBotiga {
         min-width: 240px;
     }
-
     .productCardPrice {
         font-size: 1.3rem;
         line-height: 0.9rem;
     }
-
     .productCardDeck {
         padding: 1rem;
     }
-
 }
