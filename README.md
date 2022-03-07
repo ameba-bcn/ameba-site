@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 2.0.0
+- Unmount modals
+- Membership load from constant
+
 Version 1.99
 - Cart with short name
 - Cart and dropdown with sizes
