@@ -5,9 +5,11 @@ import { Redirect } from "react-router-dom";
 import ReceiptIcon from "@material-ui/icons/Receipt";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
+import FullscreenSpinner from "../spinner/FullscreenSpinner";
 
 export default function ActivitatDialog(props) {
-  const { onClose, selectedValue, open, dataRow, setEventData } = props;
+  const { onClose, selectedValue, open, dataRow, setEventData, loading } =
+    props;
   const {
     id,
     name,
@@ -17,8 +19,8 @@ export default function ActivitatDialog(props) {
     // artists,
     datetime,
     address,
-    header='',
-    has_stock
+    header = "",
+    has_stock,
   } = dataRow;
 
   const [redirect, setRedirect] = useState(false);
@@ -34,9 +36,9 @@ export default function ActivitatDialog(props) {
   // desmontamos el dialog al cerrarlo
   useEffect(() => {
     return () => {
-      setEventData([])
-    }
-}, [])
+      setEventData([]);
+    };
+  }, []);
 
   const handleAddClick = () => {
     const { variants = [] } = dataRow;
@@ -48,7 +50,9 @@ export default function ActivitatDialog(props) {
 
   if (redirect) return <Redirect to={checkoutRedirect} />;
 
-  return (
+  return loading ? (
+    <FullscreenSpinner />
+  ) : (
     <ModalCard
       handleClose={handleClose}
       open={open}

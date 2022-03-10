@@ -43,13 +43,13 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
           ) : (
             <MembershipFormReadOnly />
           )}
-          <RowSeparator />
-          <MemberInfoRow>
+         <RowSeparator />
+           <MemberInfoRow>
             {t("perfil.vols-soci")} {isMember ? antiMember : ""}?<br />
             <span onClick={() => setOpen(true)}>{`< ${t(
               "perfil.mes-info"
             )} >`}</span>
-          </MemberInfoRow>
+          </MemberInfoRow> 
           <RowSeparator />
           <Button
             variant="contained"

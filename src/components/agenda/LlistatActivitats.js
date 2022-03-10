@@ -19,6 +19,7 @@ export default function LlistatActivitats() {
   const dispatch = useDispatch();
   const [redirect, setRedirect] = useState(false);
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const { agenda = [] } = useSelector((state) => state.data);
   const { user_profile = "" } = useSelector((state) => state.profile);
   const noResultsMessage = <span>No s'han trobat resultats</span>;
@@ -55,13 +56,16 @@ export default function LlistatActivitats() {
   };
 
   const fetchEvent = (data) => {
+    setLoading(true)
     axiosInstance
       .get(`events/${data.id}`, {})
       .then((res) => {
         setEventData(res.data);
+        setLoading(false)
       })
       .then(handleClickOpen())
       .catch((error) => {
+        setLoading(false)
         console.log("ERROL", error.response);
       });
   };
@@ -194,6 +198,7 @@ export default function LlistatActivitats() {
           dataRow={eventData}
           onClose={handleClose}
           setEventData={setEventData}
+          loading={loading}
         />
       )}
     </div>

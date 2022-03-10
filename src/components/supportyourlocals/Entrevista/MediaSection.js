@@ -62,8 +62,8 @@ export default function MediaSection(props) {
       <StyledMediaLinks>
         {mediaUrls.map((n) => (
           <div className="mediaPlayer">
-          <ReactPlayer url={n} />
-          {/* <div>
+            <ReactPlayer url={n} height="100px" />
+            {/* <div>
              <a href={n} rel="noreferrer" target="_blank">
                {n.split("www.").length > 1 ? n.split("www.")[1] : n}
              </a>

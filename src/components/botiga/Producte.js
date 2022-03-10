@@ -4,9 +4,11 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { addToCart } from "../../redux/actions/cart";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
+import FullscreenSpinner from "../spinner/FullscreenSpinner";
 
 export default function ProducteDialog(props) {
-  const { onClose, selectedValue, open, dataRow, setProductData } = props;
+  const { onClose, selectedValue, open, dataRow, setProductData, loading } =
+    props;
   const { id, name, price_range, images, description, has_stock } = dataRow;
   const dispatch = useDispatch();
   const [sizes, setSizes] = useState([]);
@@ -17,26 +19,26 @@ export default function ProducteDialog(props) {
   };
 
   const handleAddClick = (size) => {
-    const variantsObj = dataRow.variants.filter(x => x.attributes[0].value === size.toLowerCase())[0].id;
+    const variantsObj = dataRow.variants.filter(
+      (x) => x.attributes[0].value === size.toLowerCase()
+    )[0].id;
     const variant_id = variantsObj || "";
     dispatch(addToCart(variant_id));
     handleClose();
   };
 
-    // desmontamos el dialog al cerrarlo
-    useEffect(() => {
-      return () => {
-        setProductData([])
-      }
-  }, [])
+  // desmontamos el dialog al cerrarlo
+  useEffect(() => {
+    return () => {
+      setProductData([]);
+    };
+  }, []);
 
   useEffect(() => {
     let arr = [];
     if (dataRow.variants) {
       dataRow.variants.forEach((element) => {
-        if (
-          element.stock > 0 || element.stock === -1
-          ) {
+        if (element.stock > 0 || element.stock === -1) {
           arr.push(element.attributes[0].value.toUpperCase());
         }
       });
@@ -44,7 +46,9 @@ export default function ProducteDialog(props) {
     setSizes(arr);
   }, [dataRow]);
 
-  return (
+  return loading ? (
+    <FullscreenSpinner/>
+  ) : (
     <ModalCard
       handleClose={handleClose}
       open={open}

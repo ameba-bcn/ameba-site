@@ -14,6 +14,7 @@ import axiosInstance from "../axios";
 
 function Botiga() {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [productData, setProductData] = useState([]);
   const data = useSelector((state) => state.data);
   const { membership = [] } = data;
@@ -25,6 +26,7 @@ function Botiga() {
 
   const handleClick = () => {
     let arr = [];
+    setLoading(true);
     axiosInstance
       .get(`/subscriptions/${id_soci[0]}`, {})
       .then((resposta) => {
@@ -37,9 +39,11 @@ function Botiga() {
       .then(() => {
         setOpen(!open);
         setProductData(arr);
+        setLoading(false);
       })
       .catch((error) => {
         console.log("ERROL", error.response);
+        setLoading(false);
       });
   };
 
@@ -69,7 +73,13 @@ function Botiga() {
         />
       </div>
       {open && (
-        <SociDialog open={open} onClose={handleClick} dataRow={productData} setProductData={setProductData} />
+        <SociDialog
+          open={open}
+          onClose={handleClick}
+          dataRow={productData}
+          setProductData={setProductData}
+          loading={loading}
+        />
       )}
       <div className="BotigaContent">
         <BotigaGeneral />

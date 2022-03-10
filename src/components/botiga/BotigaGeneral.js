@@ -23,7 +23,8 @@ export const TitleStyled = styled.div`
 `;
 
 export default function BotigaGeneral() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [producteLoading, setProducteLoading] = useState(false);
   let location = useLocation();
   const queryString = require("query-string");
   const value = queryString.parse(location.search);
@@ -53,21 +54,24 @@ export default function BotigaGeneral() {
   };
 
   const fetchProduct = (data) => {
+    setProducteLoading(true);
     axiosInstance
       .get(`articles/${data.id}`, {})
       .then((res) => {
         setProductData(res.data);
+        setProducteLoading(false);
       })
       .then(handleClickOpen())
       .catch((error) => {
         console.log("ERROL", error.response);
+        setProducteLoading(false);
       });
   };
 
   useEffect(() => {
     if (externalId?.length > 0 && botiga?.length > 0) {
       const extIdInt = parseInt(externalId) || 0;
-      const product2Display = botiga.filter(x => x.id === extIdInt);
+      const product2Display = botiga.filter((x) => x.id === extIdInt);
       product2Display.length > 0 && fetchProduct(product2Display[0]);
     }
   }, [botiga]);
@@ -116,6 +120,7 @@ export default function BotigaGeneral() {
           dataRow={productData}
           setProductData={setProductData}
           onClose={handleClose}
+          loading={producteLoading}
         />
       )}
     </div>

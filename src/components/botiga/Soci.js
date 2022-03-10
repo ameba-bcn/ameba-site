@@ -6,9 +6,10 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
 import { MEMBER_LIST, PRO_MEMBER_LIST } from "../../utils/constants";
+import FullscreenSpinner from "../spinner/FullscreenSpinner";
 
 export default function SociDialog(props) {
-  const { onClose, open, dataRow, setProductData } = props;
+  const { onClose, open, dataRow = [], setProductData, loading } = props;
   const { isLoggedIn } = useSelector((state) => state.auth);
   const data = useSelector((state) => state.data);
   const { membership = [] } = data;
@@ -16,24 +17,31 @@ export default function SociDialog(props) {
   const [isSubscriber, setIsSubscriber] = useState(true);
   const [redirect, setRedirect] = useState(false);
   const [t] = useTranslation("translation");
+  const adaptedData = dataRow.length > 0 ? dataRow : membership;
   const socisSubs =
-  dataRow.filter(function (soci) {
+    adaptedData.filter(function (soci) {
       return MEMBER_LIST.includes(soci.name);
     })[0] || {};
   const socisPro =
-  dataRow.filter(function (soci) {
+    adaptedData.filter(function (soci) {
       return PRO_MEMBER_LIST.includes(soci.name);
     })[0] || {};
-  const { id, price_range, images, description, benefits = "", has_stock } = isSubscriber
-    ? socisSubs
-    : socisPro;
 
-    useEffect(() => {
-      // Anything in here is fired on component mount.
-      return () => {
-          setProductData([])
-      }
-  }, [])
+  const {
+    id,
+    price_range,
+    images,
+    description,
+    benefits = "",
+    has_stock,
+  } = isSubscriber ? socisSubs : socisPro;
+
+  useEffect(() => {
+    // component unmount.
+    return () => {
+      setProductData && setProductData([]);
+    };
+  }, []);
 
   const handleClose = () => {
     onClose();
@@ -53,7 +61,9 @@ export default function SociDialog(props) {
     return isLoggedIn ? null : <Redirect to="/login" />;
   }
 
-  return (
+  return loading ? (
+    <FullscreenSpinner />
+  ) : (
     <ModalCard
       handleClose={handleClose}
       open={open}
