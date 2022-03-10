@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Verion 2.0.1
+- React Player 
+- Modal loader
+
 Version 2.0.0
 - Unmount modals
 - Membership load from constant
