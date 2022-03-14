@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { substractToCart } from "../../redux/actions/cart";
 import { clearMessage } from "../../redux/actions/message";
-import { isCORSInactive } from "../../utils/utils";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ReviewTable } from "./Review.style";
 
@@ -31,7 +30,7 @@ export default function TableProducts(props) {
           <tr key={i}>
             <td className="reviewTable-col1">
               <img
-                src={isCORSInactive() + item.preview}
+                src={item.preview}
                 alt={"item-image-" + { item }}
               />
             </td>

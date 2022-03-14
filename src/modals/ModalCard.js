@@ -32,6 +32,7 @@ export default function ModalCard(props) {
     address,
     buttonText,
     buttonIcon,
+    extraButtons = [],
     box1Title,
     box1Text,
     box2Title,
@@ -40,7 +41,7 @@ export default function ModalCard(props) {
     setIsSubscriber,
     colorMode,
     header,
-    has_stock
+    has_stock,
   } = props;
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const types = ["PRODUCTE", "SOCI", "ACTIVITAT"];
@@ -48,27 +49,24 @@ export default function ModalCard(props) {
   const [selectSizeError, setSelectSizeError] = useState(false);
   const modalStyle = types.includes(type) ? type : types[0];
   const [t] = useTranslation("translation");
-  const productSoldOut = !has_stock || (modalStyle === "PRODUCTE" && sizes.length === 0);
-
+  const productSoldOut =
+    !has_stock || (modalStyle === "PRODUCTE" && sizes.length === 0);
+  console.log("props", props);
   useEffect(() => {
     if (!!sizes.length) {
       setActiveSize(sizes.length === 1 ? sizes[0] : []);
     }
   }, [sizes]);
 
-  
-
   const handleAddToCard = (id) => {
     if (activeSize.length === 0 && modalStyle === "PRODUCTE")
       setSelectSizeError(true);
     else {
       setSelectSizeError(false);
-      if(modalStyle === "PRODUCTE"){
+      if (modalStyle === "PRODUCTE") {
         handleAddClick(activeSize);
-      }
-      else{
+      } else {
         handleAddClick(id);
-
       }
       toast(<Toast />, {
         position: "bottom-center",
@@ -142,7 +140,7 @@ export default function ModalCard(props) {
                           }`}
               onClick={() => setIsSubscriber(true)}
             >
-              Subscriptor
+              {extraButtons[0]}
             </div>
             <div
               className={`interactiveDataBox-soci__button interactiveDataBox-soci__button-professional 
@@ -153,7 +151,7 @@ export default function ModalCard(props) {
                           }`}
               onClick={() => setIsSubscriber(false)}
             >
-              {t("modal.professional")}
+              {extraButtons[1]}
             </div>
           </div>
         </div>
@@ -230,7 +228,9 @@ export default function ModalCard(props) {
             <div className="modal-card__row">
               <div className="modal-card__column_eighty">
                 <div className="modal-card__title">
-                  <ReactFitty maxSize={75}>{modalStyle === "ACTIVITAT"? header : title}</ReactFitty>
+                  <ReactFitty maxSize={75}>
+                    {modalStyle === "ACTIVITAT" ? header : title}
+                  </ReactFitty>
                 </div>
               </div>
               <div className="modal-card__column_twenty">

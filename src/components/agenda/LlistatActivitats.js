@@ -9,7 +9,6 @@ import ActivitatDialog from "./Activitat";
 import {
   formatISODateToDate,
   formatISODateToHour,
-  isCORSInactive,
   sortByDate,
 } from "./../../utils/utils";
 import "./Agenda.css";
@@ -87,7 +86,7 @@ export default function LlistatActivitats() {
           <div className="row">
             <div className="column activitatImg">
               <img
-                src={isCORSInactive() + rowData.images}
+                src={rowData.images}
                 className="imgMiniActivitat"
                 alt=""
               />

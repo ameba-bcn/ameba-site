@@ -3,7 +3,6 @@ import ReactPlayer from "react-player";
 import { useSelector } from "react-redux";
 import LettersMove from "./../layout/LettersMove";
 import "./Associacio.css";
-import { isCORSInactive } from "./../../utils/utils";
 import { MOBILE_NORMAL } from "../../utils/constants";
 import { useMediaQuery } from "@material-ui/core";
 
@@ -14,7 +13,7 @@ function Associacio() {
   const { cover = [] } = data;
   const mediaIndex = isMobile ? 1 : 0;
   const { file = "" } = cover[mediaIndex] || {};
-  const urlMedia = isCORSInactive() + file;
+  const urlMedia = file;
   const staticImg = isMobile
     ? "/AmebaPortadaMobile.jpg"
     : "/AmebaPortadaDesktop.jpg";

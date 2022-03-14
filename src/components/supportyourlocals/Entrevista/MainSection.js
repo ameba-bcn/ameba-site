@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { isCORSInactive } from "../../../utils/utils";
 import TitleSection from "../TitleSection";
 
 export default function MainSection(props) {
@@ -33,7 +32,7 @@ export default function MainSection(props) {
           <div className="bio-img">
             <img
               className="bio-img-src"
-              src={isCORSInactive() + artist.images[0]}
+              src={artist.images[0]}
               alt={artist.name}
             />
           </div>

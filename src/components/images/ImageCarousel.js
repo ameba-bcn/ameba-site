@@ -5,7 +5,6 @@ import Button from "@material-ui/core/Button";
 import SwipeableViews from "react-swipeable-views";
 // import { autoPlay } from 'react-swipeable-views-utils';
 import "./ImageCarousel.css";
-import { isCORSInactive } from "../../utils/utils";
 
 // const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -42,7 +41,7 @@ function ImageCarousel(props) {
                 <img
                   alt={index}
                   className="image-carousel-img"
-                  src={isCORSInactive() + step}
+                  src={step}
                   style={loaded ? {} : { display: "none" }}
                   onLoad={() => setLoaded(true)}
                 />

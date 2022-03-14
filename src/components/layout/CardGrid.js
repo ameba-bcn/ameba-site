@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import "./CardGrid.css";
-import { createLastRowIterator, isCORSInactive } from "../../utils/utils";
+import { createLastRowIterator } from "../../utils/utils";
 import PlusButton from "../button/PlusButton";
 import { ReactFitty } from "react-fitty";
 import styled from "styled-components";
@@ -50,7 +50,7 @@ export default function CardGrid(props) {
                 <ReactFitty maxSize={200}>{name}</ReactFitty>
               </TitleStyled>
               <img
-                src={isCORSInactive() + images[0]}
+                src={images[0]}
                 alt={name}
                 className="cardSupportImgTop"
               />

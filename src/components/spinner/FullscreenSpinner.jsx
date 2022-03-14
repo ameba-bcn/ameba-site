@@ -137,7 +137,7 @@ const StyledSpinner = styled.div`
 `;
 
 const FullscreenSpinner = () => {
-  return <StyledSpinner class="loading">Loading</StyledSpinner>;
+  return <StyledSpinner className="loading">Loading</StyledSpinner>;
 };
 
 export default FullscreenSpinner;

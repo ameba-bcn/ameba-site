@@ -52,7 +52,8 @@
         "esgotat": "Producte esgotat"
     },
     "footer": {
-        "drets": "Tots els drets reservats"
+        "drets": "Tots els drets reservats",
+        "colab": "Amb la col·laboració de:"
     },
     "newsletter": {
         "subscriute": "subscriu-te"

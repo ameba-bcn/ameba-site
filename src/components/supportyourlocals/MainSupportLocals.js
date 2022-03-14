@@ -4,7 +4,6 @@ import GridListTile from "@material-ui/core/GridListTile";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useSelector } from "react-redux";
 import "./MainSupportLocals.css";
-import { isCORSInactive } from "../../utils/utils";
 
 function MainSupportLocals() {
   const breakpoint = useMediaQuery("(max-width:950px)");
@@ -24,7 +23,7 @@ function MainSupportLocals() {
           {support.slice(0, breakpoint ? 3 : 9).map((tile) => (
             <GridListTile key={tile.id} className="gridImg">
               <img
-                src={isCORSInactive() + tile.images[0]}
+                src={tile.images[0]}
                 alt={tile.name}
                 className="gridImages"
               />

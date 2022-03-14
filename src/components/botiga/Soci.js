@@ -36,6 +36,13 @@ export default function SociDialog(props) {
     has_stock,
   } = isSubscriber ? socisSubs : socisPro;
 
+  const socisButtonName = membership.filter((x) =>
+    MEMBER_LIST.includes(x.name)
+  )[0]?.name;
+  const proButtonName = membership.filter((x) =>
+    PRO_MEMBER_LIST.includes(x.name)
+  )[0]?.name;
+
   useEffect(() => {
     // component unmount.
     return () => {
@@ -74,6 +81,7 @@ export default function SociDialog(props) {
       imgArr={images}
       buttonText={t("modal.afegir")}
       buttonIcon={<ShoppingCartIcon />}
+      extraButtons={[socisButtonName, proButtonName]}
       box1Title={t("modal.descripcio")}
       box1Text={description}
       box2Title={t("modal.beneficis")}

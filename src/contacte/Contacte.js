@@ -22,6 +22,14 @@ function Contacte() {
           twit="ameba_bcn"
           yout="channel/UCH5ssfBCmgJ1IDM-pSn2cEg"
         />
+        <div className="colabText">
+          {t("footer.colab")}
+          <img
+            src={process.env.PUBLIC_URL + "/AjuntamentBcn.png"}
+            className="AjuntamentBcnImg"
+            alt="AjuntamentBcn"
+          />
+        </div>
         <div className="endingText">
           ©2020 AMEBA
           <br />

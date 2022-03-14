@@ -4,8 +4,7 @@ import ProducteDialog from "./Producte";
 import axiosInstance from "../../axios";
 import {
   createLastRowIterator,
-  formatPrice,
-  isCORSInactive,
+  formatPrice
 } from "./../../utils/utils";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
@@ -89,7 +88,7 @@ export default function BotigaGeneral() {
                 <div className="productImgFrame">
                   <img
                     className="productImgTop"
-                    src={isCORSInactive() + data.images[0]}
+                    src={data.images[0]}
                     alt={data.name}
                   />
                 </div>

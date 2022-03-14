@@ -2,7 +2,7 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import "./CardNew.css";
-import { formatISODateToDate, isCORSInactive } from "./../../utils/utils";
+import { formatISODateToDate } from "./../../utils/utils";
 import PlusButton from "./../button/PlusButton";
 
 const CardNew = React.memo((props) => {
@@ -18,7 +18,7 @@ const CardNew = React.memo((props) => {
         <div className="cardMediaImgBox">
           <img
             className="cardMedia"
-            src={isCORSInactive() + props.imatge}
+            src={props.imatge}
             alt={props.titol}
             title={props.titol}
           />
