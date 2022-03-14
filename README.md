@@ -3,6 +3,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # AMEBA FRONTEND
 
 ## Release changes
+Verion 2.0.2
+- Colaboration logos
+- Button supporter read from server
 
 Verion 2.0.1
 - React Player 
