@@ -16,6 +16,7 @@ import Toast from "../components/toast/Toast";
 import { useTranslation } from "react-i18next";
 import { ReactFitty } from "react-fitty";
 import "./Modals.css";
+import { StyledCloseIcon, StyledModalRow, StyledSizesRow } from "./ModalCardStyled";
 
 export default function ModalCard(props) {
   const {
@@ -85,15 +86,17 @@ export default function ModalCard(props) {
     let dataBoxDiv = <></>;
     if (modalStyle === "PRODUCTE") {
       let dataBoxDiv = (
-        <>
+        <StyledSizesRow>
           <div className="modal-card___title_small ">
             <PeopleAltIcon />{" "}
-            {productSoldOut
-              ? t("modal.esgotat")
-              : isMobile
-              ? t("modal.talles").split(" ")[0]
-              : t("modal.talles")}{" "}
-            / &nbsp;
+            <span>
+              {productSoldOut
+                ? t("modal.esgotat")
+                : isMobile
+                ? t("modal.talles").split(" ")[0]
+                : t("modal.talles")}{" "}
+              / &nbsp;
+            </span>
           </div>
           {sizes && sizes[0] === "UNIQUE" ? (
             <div>Talla única</div>
@@ -120,7 +123,7 @@ export default function ModalCard(props) {
               })}
             </>
           )}
-        </>
+        </StyledSizesRow>
       );
       return dataBoxDiv;
     }
@@ -128,7 +131,7 @@ export default function ModalCard(props) {
       let dataBoxDiv = (
         <div className="interactiveDataBox-soci__row">
           <div className="modal-card___title_small">
-            <PeopleAltIcon /> {t("modal.quota")} / &nbsp;
+            <PeopleAltIcon /> <span>{t("modal.quota")} / &nbsp;</span>
           </div>
           <div className="interactiveDataBox-soci__buttonBox">
             <div
@@ -164,9 +167,10 @@ export default function ModalCard(props) {
           {isMobile && (
             <div className="interactiveDataBox-activitat__row">
               <div className="modal-card___title_small">
-                <LocationOnIcon /> {t("modal.localitzacio")} / &nbsp;
+                <LocationOnIcon />{" "}
+                <span>{t("modal.localitzacio")} / &nbsp;</span>
               </div>
-              <div className="modal-card__column_sixtyfive interactiveDataBox-activitat__text-loca">
+              <div className="interactiveDataBox-activitat__text-loca">
                 <a
                   href="https://google.com/maps"
                   target="_blank"
@@ -179,7 +183,7 @@ export default function ModalCard(props) {
           )}
           <div className="interactiveDataBox-activitat__row">
             <div className="modal-card___title_small">
-              <CalendarTodayIcon /> {t("agenda.data")} / &nbsp;
+              <CalendarTodayIcon /> <span>{t("agenda.data")} / &nbsp;</span>
             </div>
             <div className="interactiveDataBox-activitat__text-data">
               <a
@@ -187,7 +191,7 @@ export default function ModalCard(props) {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                {datetime !== undefined ? datetime.split("T")[0] : ""}-
+                {datetime !== undefined ? datetime.split("T")[0] : ""}{" "}
                 {datetime !== undefined
                   ? datetime
                       .substring(
@@ -201,7 +205,7 @@ export default function ModalCard(props) {
           </div>
           <div className="interactiveDataBox-activitat__row">
             <span className="modal-card___title_small">
-              <LocalAtmIcon /> {t("modal.preu")} / &nbsp;
+              <LocalAtmIcon /> <span>{t("modal.preu")} / &nbsp;</span>
             </span>
             <span className="interactiveDataBox-activitat__text-data">
               {price}
@@ -221,10 +225,12 @@ export default function ModalCard(props) {
           <div
             className={`modal-card__background modal-card__background_${colorMode}`}
           >
-            <ClearIcon
-              className={`modal-card__close modal-card__close_${colorMode}`}
-              onClick={handleClose}
-            />
+              <StyledCloseIcon colorMode={colorMode}>
+                <ClearIcon
+                  // className={`modal-card__close modal-card__close_${colorMode}`}
+                  onClick={handleClose}
+                />
+              </StyledCloseIcon>
             <div className="modal-card__row">
               <div className="modal-card__column_eighty">
                 <div className="modal-card__title">
@@ -249,10 +255,11 @@ export default function ModalCard(props) {
               <div className="modal-card-location__row">
                 <div className="modal-card__column_thirtyfive">
                   <div className="modal-card___title_small">
-                    <LocationOnIcon /> {t("modal.localitzacio")} / &nbsp;
+                    <LocationOnIcon />{" "}
+                    <div>{t("modal.localitzacio")} / &nbsp;</div>
                   </div>
                 </div>
-                <div className="modal-card__column_sixtyfive interactiveDataBox-activitat__text-loca">
+                <div className="interactiveDataBox-activitat__text-loca">
                   <a
                     href="https://google.com/maps"
                     target="_blank"
@@ -267,51 +274,26 @@ export default function ModalCard(props) {
             <hr
               className={`modal-card__hr_solid modal-card__hr_solid-${colorMode}`}
             />
-            <div className="modal-card__row">
-              <div
-                className={
-                  modalStyle === "SOCI"
-                    ? "modal-card__column_hundred"
-                    : "modal-card__column_fiftyfive"
+            <StyledModalRow>
+              {interactiveDataBox()}
+              <Button
+                variant="contained"
+                color="primary"
+                buttonSize="boton--medium"
+                disabled={productSoldOut}
+                buttonStyle={
+                  colorMode && colorMode === "dark"
+                    ? "boton--back-orange--solid"
+                    : "boton--primary--solid"
                 }
+                icon={buttonIcon}
+                onClick={() => {
+                  !productSoldOut && handleAddToCard(id);
+                }}
               >
-                {interactiveDataBox()}
-              </div>
-              <div
-                className={
-                  modalStyle === "SOCI"
-                    ? "modal-card__column_hundred"
-                    : "modal-card__column_fourtyfive"
-                }
-              >
-                <div
-                  className={
-                    modalStyle === "SOCI" ? "modal-card__button-wrapper" : ""
-                  }
-                >
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    buttonSize="boton--medium"
-                    disabled={productSoldOut}
-                    buttonStyle={
-                      colorMode && colorMode === "dark"
-                        ? "boton--back-orange--solid"
-                        : "boton--primary--solid"
-                    }
-                    icon={buttonIcon}
-                    onClick={() => {
-                      !productSoldOut && handleAddToCard(id);
-                    }}
-                  >
-                    {buttonText}
-                  </Button>
-                </div>
-              </div>
-              {selectSizeError && (
-                <div className="error-message">{t("modal.sizesError")}</div>
-              )}
-            </div>
+                {buttonText}
+              </Button>
+            </StyledModalRow>
             <hr
               className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
             />

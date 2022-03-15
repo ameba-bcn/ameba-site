@@ -7,11 +7,13 @@
     background-color: #F2C571;
     margin: auto;
     min-width: 100%;
+    padding: 40px;
 }
 
 .gridList {
     width: 1800px;
-    height: 800px;
+    /* height: 800px; */
+    margin: -30px;
 }
 
 @media screen and (max-width: 950px) {

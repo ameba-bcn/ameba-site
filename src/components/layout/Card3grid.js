@@ -68,6 +68,7 @@ const Card3Grid = React.memo((props) => {
         <ActivitatDialog
           open={open}
           dataRow={eventData}
+          setEventData={setEventData}
           onClose={handleClose}
         />
       )}
