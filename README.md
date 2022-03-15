@@ -3,6 +3,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # AMEBA FRONTEND
 
 ## Release changes
+Verion 2.0.3
+- New modal interactiveBox layout
+- Modal title left align
+- Bugfix: OnClose activity modal crash
+
 Verion 2.0.2
 - Colaboration logos
 - Button supporter read from server
