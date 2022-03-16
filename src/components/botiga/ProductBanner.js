@@ -4,7 +4,7 @@ import "./ProductBanner.css";
 
 const ProductBanner = (props) => {
   return (
-    <div className="productBanner">
+    <div className="productBanner" onClick={() => props.handleClick()}>
       <div className="productBannerTitle">{props.title}</div>
       <div className="productBannerPlus">
         <PlusButton plusStyle="plus--red" plusSize="plus--big" />

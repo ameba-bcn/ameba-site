@@ -102,7 +102,7 @@ export default function Entrevista() {
         <>
           <LettersMove
             sentence={"l'associació de música electrònica de barcelona"}
-            color="#F2C571"
+            color={!hasActivitiesSection ? "#EB5E3E" : "#F2C571"}
           />
           <MediaSection
             mediaUrls={mediaUrls}
@@ -123,7 +123,7 @@ export default function Entrevista() {
       )}
       <LettersMove
         sentence={"l'associació de música electrònica de barcelona"}
-        color={"#FAE6C5"}
+        color={"#F2C571"}
       />
     </div>
   );

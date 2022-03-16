@@ -116,7 +116,7 @@
 .bio-section {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: stretch;
     align-content: center;
     width: 90%;
@@ -125,18 +125,21 @@
     padding-bottom: 30px;
 }
 
-.bio-highlights,
+
+/* .bio-highlights, */
+
 .bio-text,
 .bio-img {
-    width: 30%;
+    width: 45%;
     display: block;
-    margin: 0px 20px 0px 20px;
+    margin: 20px 0px 20px 0px;
+    margin: 10px auto;
 }
 
 .bio-text {
     text-align: left;
-    width: 25%;
-    font-size: 16px;
+    width: 55%;
+    font-size: 22px;
     font-family: "Montserrat", sans-serif;
 }
 
@@ -162,13 +165,13 @@
     width: 100%;
     height: auto;
     max-width: 550px;
-    margin: 20px 0px 20px 0px;
+    /* margin: 20px 0px 20px 0px; */
 }
 
 .entrevista-columnes {
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: stretch;
     align-content: center;
     width: 90%;

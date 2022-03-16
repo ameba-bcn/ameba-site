@@ -10,23 +10,6 @@ export default function MainSection(props) {
     <div className="bio-gral">
       <TitleSection title="BIO" />
       <div className="bio-section">
-        <div className="bio-highlights">
-          <div className="bio-data">
-            {t("support.top-menu.nom")}/ <span>{artist.name}</span>
-          </div>
-          <div className="bio-data">
-            {t("support.top-menu.ciutat")}/ <span>DUMMY TEXT</span>
-          </div>
-          <div className="bio-data">
-            {t("support.top-menu.segells")}/ <span>DUMMY TEXT</span>
-          </div>
-          <div className="bio-data">
-            {t("support.top-menu.projectes")}/ <span>DUMMY TEXT</span>
-          </div>
-          <div className="bio-data">
-            {t("support.top-menu.artistes")}/ <span>DUMMY TEXT</span>
-          </div>
-        </div>
         <div className="bio-text">{artist.biography}</div>
         {artist.images && (
           <div className="bio-img">

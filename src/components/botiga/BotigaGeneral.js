@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { ReactFitty } from "react-fitty";
 import { useLocation } from "react-router-dom";
+import { useMediaQuery } from "@material-ui/core";
 
 export const TitleStyled = styled.div`
   width: 75%;
@@ -43,6 +44,8 @@ export default function BotigaGeneral() {
       discount: "",
     },
   ]);
+
+  const isOneColumn = useMediaQuery("(max-width:1178px)");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -109,8 +112,8 @@ export default function BotigaGeneral() {
   return (
     <div className="productCardDeck">
       {cardGenerator}
-      {cardGenerator &&
-        createLastRowIterator(botiga, 467).map((n, index) => (
+      {(cardGenerator && !isOneColumn) &&
+        createLastRowIterator(botiga, 518).map((n, index) => (
           <i aria-hidden={true} key={index}></i>
         ))}
       {open && (

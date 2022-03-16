@@ -16,7 +16,11 @@ import Toast from "../components/toast/Toast";
 import { useTranslation } from "react-i18next";
 import { ReactFitty } from "react-fitty";
 import "./Modals.css";
-import { StyledCloseIcon, StyledModalRow, StyledSizesRow } from "./ModalCardStyled";
+import {
+  StyledCloseIcon,
+  StyledModalRow,
+  StyledSizesRow,
+} from "./ModalCardStyled";
 
 export default function ModalCard(props) {
   const {
@@ -121,6 +125,9 @@ export default function ModalCard(props) {
                   </div>
                 );
               })}
+              {selectSizeError && (
+                <div className="error-message">{t("modal.sizesError")}</div>
+              )}
             </>
           )}
         </StyledSizesRow>
@@ -225,12 +232,11 @@ export default function ModalCard(props) {
           <div
             className={`modal-card__background modal-card__background_${colorMode}`}
           >
-              <StyledCloseIcon colorMode={colorMode}>
-                <ClearIcon
-                  // className={`modal-card__close modal-card__close_${colorMode}`}
-                  onClick={handleClose}
-                />
-              </StyledCloseIcon>
+            <StyledCloseIcon colorMode={colorMode}>
+              <ClearIcon
+                onClick={handleClose}
+              />
+            </StyledCloseIcon>
             <div className="modal-card__row">
               <div className="modal-card__column_eighty">
                 <div className="modal-card__title">
@@ -368,9 +374,6 @@ export default function ModalCard(props) {
                 {buttonText} - {formatPrice(price)}
               </Button>
             </div>
-            {selectSizeError && (
-              <div className="error-message">{t("modal.sizesError")}</div>
-            )}
           </div>
         </div>
       )}

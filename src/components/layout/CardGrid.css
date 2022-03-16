@@ -10,22 +10,20 @@
 }
 
 .cardSupportDeck>i {
-    width: 36rem;
+    width: 570px;
     min-width: 570px;
     height: 340px;
-    margin: 0 auto;
+    margin: 0px 24px 48px 24px;
 }
 
 .fullcard {
-    flex: 1 0 30%;
-    margin: 0 auto;
-    margin-bottom: 3rem;
+    margin: 0px 24px 48px 24px;
     overflow: hidden;
-    width: 36rem;
+    width: 570px;
     height: 340px;
-    max-width: 36rem;
+    max-width: 570px;
     display: inline-block;
-    padding-right: 1rem;
+    /* padding-right: 1rem; */
     justify-content: center;
     min-width: 570px;
 }

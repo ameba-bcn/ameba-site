@@ -68,6 +68,7 @@ export const ReviewTable = styled.table`
       .reviewTable-col1 {
         text-align: left;
         width: 90px;
+        padding: 10px;
         @media (max-width: 420px) {
           display: none;
         }
@@ -79,6 +80,7 @@ export const ReviewTable = styled.table`
         font-size: 2rem;
         display: table-cell !important;
         overflow: hidden ;
+        padding: 10px;
         @media (max-width: 500px) {
           font-size: 1.5rem;
         }
@@ -90,6 +92,7 @@ export const ReviewTable = styled.table`
         font-size: 2.5rem;
         border-left: 2px dotted black;
         display: table-cell !important;
+        padding: 10px;
         @media (max-width: 500px) {
           font-size: 2rem;
         }
@@ -101,6 +104,7 @@ export const ReviewTable = styled.table`
         border-left: 2px dotted black;
         width: 100px;
         display: table-cell !important;
+        padding: 10px;
         & div {
           & svg {
             width: 30px;

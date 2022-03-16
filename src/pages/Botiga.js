@@ -6,7 +6,7 @@ import ProductBanner from "../components/botiga/ProductBanner";
 import SociDialog from "../components/botiga/Soci";
 import LettersMove from "./../components/layout/LettersMove";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { MEMBER_LIST, MOBILE_NORMAL } from "../utils/constants";
+import { MEMBER_LIST } from "../utils/constants";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { deleteStringDecimals } from "../utils/utils";
@@ -48,7 +48,7 @@ function Botiga() {
   };
 
   const [t] = useTranslation("translation");
-  const isMobile = useMediaQuery(MOBILE_NORMAL);
+  const isMobile = useMediaQuery("(max-width:1163px)");
   const sociPreu = membership.filter((x) => MEMBER_LIST.includes(x.name))[0]
     ?.price_range;
 
@@ -61,7 +61,7 @@ function Botiga() {
   return (
     <div className="Botiga">
       <PowerTitle title={t("menu.botiga")} className="SupportTitle" />
-      <div className="clickBanner" onClick={() => handleClick()}>
+      <div className="clickBanner">
         <ProductBanner
           title={
             isMobile
@@ -70,6 +70,7 @@ function Botiga() {
                   sociPreu
                 )}${t("banners.soci-llarg-pt2")}`
           }
+          handleClick={handleClick}
         />
       </div>
       {open && (

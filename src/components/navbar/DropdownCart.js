@@ -107,7 +107,7 @@ export default function DropdownCart(props) {
                       </div>
                       <div className="rowDetailedCart">
                         <div className="cartPriceProduct">{el.price}</div>
-                        <div className="quantityPriceProduct">
+                        <div className="quantitySizeProduct">
                           {el?.variant_details?.size !== 'unique' && el?.variant_details?.size}
                         </div>
                         <div className="quantityPriceProduct">
@@ -152,7 +152,7 @@ export default function DropdownCart(props) {
                         <div className="cartPriceProduct_mobile">
                           {el.price}
                         </div>
-                        <div className="quantityPriceProduct">
+                        <div className="quantitySizeProduct">
                           {el?.variant_details?.size !== 'unique' && el?.variant_details?.size}
                         </div>
                         <div className="quantityPriceProduct">

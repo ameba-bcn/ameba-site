@@ -15,20 +15,17 @@
 .productCardDeck {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
-    padding: 4rem;
+    padding: 0px 64px 64px 64px;
 }
 
 .productCardDeck>i {
-    width: 467px;
-    margin: 0 auto;
+    width: 518px;
 }
 
 .fullcardBotiga {
-    /* flex: 0 0 33.333333%; */
-    margin: 0 auto;
-    margin-bottom: 3rem;
+    margin: 24px;
     overflow: hidden;
     max-width: 467px;
     height: fit-content;
@@ -79,6 +76,12 @@
     position: relative;
     text-align: right;
     line-height: 2.9rem;
+}
+
+.clickBanner {
+    padding: 0px 20px;
+    display: flex;
+    justify-content: center;
 }
 
 @media screen and (max-width: 641px) {

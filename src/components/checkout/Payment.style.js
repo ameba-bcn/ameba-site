@@ -30,7 +30,7 @@ export const PaymentSummaryBox = styled.div`
   justify-content: center;
   border: 4px solid black;
   margin: 20px 0px;
-  padding: 0px 80px;
+  padding: 40px 80px;
   @media (max-width: 480px) {
     padding: 0px 40px;
   }

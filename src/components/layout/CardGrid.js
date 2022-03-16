@@ -6,6 +6,7 @@ import { createLastRowIterator } from "../../utils/utils";
 import PlusButton from "../button/PlusButton";
 import { ReactFitty } from "react-fitty";
 import styled from "styled-components";
+import { useMediaQuery } from "@material-ui/core";
 
 export default function CardGrid(props) {
   const { isAmebaDJ = false } = props; //Pendiente recibir si es entrevista por props
@@ -26,6 +27,7 @@ export default function CardGrid(props) {
     font-weight: 800;
     font-style: italic;
   `;
+  const isOneColumn = useMediaQuery("(max-width:1290px)");
 
   const filteredArtists =
     isAmebaDJ && !!support.length
@@ -49,11 +51,7 @@ export default function CardGrid(props) {
               <TitleStyled>
                 <ReactFitty maxSize={200}>{name}</ReactFitty>
               </TitleStyled>
-              <img
-                src={images[0]}
-                alt={name}
-                className="cardSupportImgTop"
-              />
+              <img src={images[0]} alt={name} className="cardSupportImgTop" />
               <div className="cardSupportPlusBox">
                 <PlusButton plusStyle="plus--obscure" plusSize="plus--big" />
               </div>
@@ -68,7 +66,8 @@ export default function CardGrid(props) {
     <div className="cardSupportDeck">
       {support.length > 0 && cardGenerator}
       {cardGenerator &&
-        createLastRowIterator(support, 550).map((n, index) => (
+        !isOneColumn &&
+        createLastRowIterator(support, 627, 40).map((n, index) => (
           <i aria-hidden={true} key={index}></i>
         ))}
     </div>
