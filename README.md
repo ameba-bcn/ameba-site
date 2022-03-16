@@ -3,6 +3,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # AMEBA FRONTEND
 
 ## Release changes
+Verion 2.0.4
+- Restyle alignments
+- Regrid cards
+
 Verion 2.0.3
 - New modal interactiveBox layout
 - Modal title left align
