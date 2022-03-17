@@ -3,6 +3,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # AMEBA FRONTEND
 
 ## Release changes
+Verion 2.0.5
+- Media iFrames
+- Safari IntersectionObserver
+- Wider toast
+
 Verion 2.0.4
 - Restyle alignments
 - Regrid cards
