@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import TitleSection from "../TitleSection";
 import axiosInstance from "../../../axios";
@@ -13,7 +13,7 @@ import "./Entrevista.css";
 export default function Entrevista() {
   let history = useHistory();
   let location = useLocation();
-  const { support } = useSelector((state) => state.data);
+  // const { support } = useSelector((state) => state.data);
   let urlID = location.pathname.substr(location.pathname.lastIndexOf("/") + 1);
   const [interview, setInterview] = useState([
     {
@@ -25,24 +25,24 @@ export default function Entrevista() {
       current_answers: [{ answer: "", question: "" }],
     },
   ]);
-  const mediaUrls = !!support.length
-    ? support.find((x) => x.id === parseInt(urlID))?.media_urls
-    : [];
+  // const mediaUrls = !!support.length
+  //   ? support.find((x) => x.id === parseInt(urlID))?.media_urls
+  //   : [];
   const [artist, setArtist] = useState([
     {
       id: 0,
       name: "",
       images: [],
       biography: "",
-      media_urls: [],
+      media: [],
       tags: [],
     },
   ]);
-  const tags = artist.tags || [];
+
+  const {tags=[], media: mediaUrls=[], has_interview:hasInterviews} = artist;
   const { is_ameba_dj = false } = artist;
   const hasMediaSection = !!mediaUrls.length;
   const hasActivitiesSection = false;
-  const hasInterviews = artist.has_interview;
 
   useEffect(() => {
     axiosInstance

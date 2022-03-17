@@ -19,7 +19,7 @@ export default function Navbar() {
 
   return (
     <div className="menuContainer">
-      <div className={`menuSuperior`}>
+      <div className="menuSuperior">
         <div className="menu-logo-box">
           <img
             src={process.env.PUBLIC_URL + "/AmebaLogo.png"}
