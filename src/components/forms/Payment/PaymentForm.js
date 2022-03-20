@@ -4,10 +4,13 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
+import { useDispatch } from "react-redux";
 import "./PaymentForm.css";
 import Button from "../../button/Button";
+import { closeFullscreen } from "../../../redux/actions/fullscreen";
 
 function PaymentForm() {
+  const dispatch = useDispatch();
   const [processing, setProcessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
@@ -59,12 +62,14 @@ function PaymentForm() {
       // details incomplete)
       setProcessing(false);
       setErrorMessage(error.message);
+      dispatch(closeFullscreen())
     } else {
       // Your customer will be redirected to your `return_url`. For some payment
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.
       setErrorMessage(error.message);
       setProcessing(false);
+      dispatch(closeFullscreen())
     }
   };
 

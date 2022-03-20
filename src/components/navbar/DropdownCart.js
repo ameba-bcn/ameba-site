@@ -14,6 +14,7 @@ import { ReactFitty } from "react-fitty";
 import { truncate } from "../../utils/utils";
 import { MOBILE_SMALL } from "../../utils/constants";
 import { useMediaQuery } from "@material-ui/core";
+import { openFullscreen } from "../../redux/actions/fullscreen";
 
 export default function DropdownCart(props) {
   const dispatch = useDispatch();
@@ -68,11 +69,12 @@ export default function DropdownCart(props) {
       });
   };
 
-  const checkoutToCart = (item_variants) => {
+  const checkoutToCart = () => {
     isLoggedIn ? dispatch(setLoggedUser()) : dispatch(setGuestUser());
     setCartMenuOpen(false);
     props.handleCloseMenu();
     props.closeDropDown();
+    dispatch(openFullscreen());
   };
 
   return (
@@ -126,7 +128,7 @@ export default function DropdownCart(props) {
                 color="primary"
                 buttonSize="boton--xxl"
                 buttonStyle="boton--primary--solid"
-                onClick={() => checkoutToCart(item_variants)}
+                onClick={() => checkoutToCart()}
               >
                 {t("checkout.finalitzarCompra")}
               </Button>
@@ -185,7 +187,7 @@ export default function DropdownCart(props) {
                 color="primary"
                 buttonSize="boton--xxl"
                 buttonStyle="boton--primary--solid"
-                onClick={() => checkoutToCart(item_variants)}
+                onClick={() => checkoutToCart()}
               >
                 {t("checkout.finalitzarCompra")}
               </Button>

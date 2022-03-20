@@ -11,7 +11,7 @@ const STYLES = [
 
 const SIZES = ["boton--medium", "boton--small", "boton--big", "boton--megaxxl"];
 
-const HOVER = ["bg-red", "bg-cream"];
+const HOVER = ["bg-red", "bg-cream", "bg-orange"];
 
 export default function Button(props) {
   const {

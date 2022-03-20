@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { ReactFitty } from "react-fitty";
 import "./Modals.css";
 import {
+  StyledCenterLabel,
   StyledCloseIcon,
   StyledModalRow,
   StyledSizesRow,
@@ -56,8 +57,8 @@ export default function ModalCard(props) {
   const [t] = useTranslation("translation");
   const productSoldOut =
     !has_stock || (modalStyle === "PRODUCTE" && sizes.length === 0);
-  console.log("props", props);
-  useEffect(() => {
+
+    useEffect(() => {
     if (!!sizes.length) {
       setActiveSize(sizes.length === 1 ? sizes[0] : []);
     }
@@ -97,13 +98,13 @@ export default function ModalCard(props) {
               {productSoldOut
                 ? t("modal.esgotat")
                 : isMobile
-                ? t("modal.talles").split(" ")[0]
-                : t("modal.talles")}{" "}
+                  ? t("modal.talles").split(" ")[0]
+                  : t("modal.talles")}{" "}
               / &nbsp;
             </span>
           </div>
           {sizes && sizes[0] === "UNIQUE" ? (
-            <div>Talla única</div>
+            <StyledCenterLabel>Talla única</StyledCenterLabel>
           ) : (
             <>
               {sizes?.map((el) => {
@@ -143,22 +144,20 @@ export default function ModalCard(props) {
           <div className="interactiveDataBox-soci__buttonBox">
             <div
               className={`interactiveDataBox-soci__button interactiveDataBox-soci__button-subscriber 
-                          ${
-                            isSubscriber
-                              ? "interactiveDataBox-soci__button-active"
-                              : "interactiveDataBox-soci__button-inactive"
-                          }`}
+                          ${isSubscriber
+                  ? "interactiveDataBox-soci__button-active"
+                  : "interactiveDataBox-soci__button-inactive"
+                }`}
               onClick={() => setIsSubscriber(true)}
             >
               {extraButtons[0]}
             </div>
             <div
               className={`interactiveDataBox-soci__button interactiveDataBox-soci__button-professional 
-                          ${
-                            isSubscriber
-                              ? "interactiveDataBox-soci__button-inactive"
-                              : "interactiveDataBox-soci__button-active"
-                          }`}
+                          ${isSubscriber
+                  ? "interactiveDataBox-soci__button-inactive"
+                  : "interactiveDataBox-soci__button-active"
+                }`}
               onClick={() => setIsSubscriber(false)}
             >
               {extraButtons[1]}
@@ -201,11 +200,11 @@ export default function ModalCard(props) {
                 {datetime !== undefined ? datetime.split("T")[0] : ""}{" "}
                 {datetime !== undefined
                   ? datetime
-                      .substring(
-                        datetime.lastIndexOf("T") + 1,
-                        datetime.lastIndexOf("Z")
-                      )
-                      .slice(0, -3)
+                    .substring(
+                      datetime.lastIndexOf("T") + 1,
+                      datetime.lastIndexOf("Z")
+                    )
+                    .slice(0, -3)
                   : ""}
               </a>
             </div>

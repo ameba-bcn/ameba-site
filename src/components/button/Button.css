@@ -86,6 +86,11 @@
     color: var(--negro);
 }
 
+.bg-orange:hover {
+    background-color: var(--naranja);
+    color: var(--negro);
+}
+
 .boton--back-orange--solid {
     background-color: var(--rojo);
     color: var(--crema);

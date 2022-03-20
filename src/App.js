@@ -44,6 +44,7 @@ import Booking from "./pages/Booking";
 import { deepComparision } from "./utils/utils";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -51,7 +52,7 @@ function App() {
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   const auth = useSelector((state) => state.auth);
-
+  const { isOpen } = useSelector((state) => state.fullscreen);
   const { user_member_data = {} } = auth;
 
   const isNewMember = deepComparision(user_member_data, {});
@@ -79,6 +80,7 @@ function App() {
 
   return (
     <div className="App">
+      {isOpen && <FullscreenCheckout />}
       <Menu />
       <UserContext.Provider value={value}>
         <ScrollTop showBelow={250} />

@@ -8,6 +8,7 @@ import Button from "../button/Button";
 import ErrorBox from "../forms/error/ErrorBox";
 import { clearMessage } from "../../redux/actions/message";
 import { useTranslation } from "react-i18next";
+import { closeFullscreen } from "../../redux/actions/fullscreen";
 
 const StyledFreeCheckoutParagraph = styled.div`
   font-size: 24px;
@@ -39,6 +40,7 @@ export default function FreeCheckout() {
         setError(false);
         dispatch(clearMessage());
         dispatch(getCart());
+        dispatch(closeFullscreen())
       })
       .catch(() => {
         setError(true);

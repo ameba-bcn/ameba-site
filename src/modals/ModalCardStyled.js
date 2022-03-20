@@ -40,3 +40,10 @@ export const StyledSizesRow = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
 `;
+
+export const StyledCenterLabel = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 22px;
+`;

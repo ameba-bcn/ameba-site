@@ -49,7 +49,10 @@
         "descripcio": "descripció",
         "beneficis": "beneficis",
         "sizesError": "Per poder avançar selecciona una talla",
-        "esgotat": "Producte esgotat"
+        "esgotat": "Producte esgotat",
+        "sortir": "sortir",
+        "sortir-text": "Si et trobes a la vista de pagament la cistella s'eliminarà. Estàs segur que vols sortir?",
+        "continua": "continua"
     },
     "footer": {
         "drets": "Tots els drets reservats",
