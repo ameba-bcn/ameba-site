@@ -3,25 +3,30 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # AMEBA FRONTEND
 
 ## Release changes
-Verion 2.0.5
+
+Version 2.0.6
+- Fullscreen checkout close header
+- Unique Size vertical align
+
+Version 2.0.5
 - Media iFrames
 - Safari IntersectionObserver
 - Wider toast
 
-Verion 2.0.4
+Version 2.0.4
 - Restyle alignments
 - Regrid cards
 
-Verion 2.0.3
+Version 2.0.3
 - New modal interactiveBox layout
 - Modal title left align
 - Bugfix: OnClose activity modal crash
 
-Verion 2.0.2
+Version 2.0.2
 - Colaboration logos
 - Button supporter read from server
 
-Verion 2.0.1
+Version 2.0.1
 - React Player 
 - Modal loader
 
