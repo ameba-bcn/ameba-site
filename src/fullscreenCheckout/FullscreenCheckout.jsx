@@ -4,6 +4,7 @@ import styled from "styled-components";
 import CloseModal from '../modals/CloseModal';
 import { closeFullscreen } from '../redux/actions/fullscreen';
 import { useTranslation } from "react-i18next";
+import { getCart } from '../redux/actions/cart';
 
 
 const StyledMacroFullscreenView = styled.div`
@@ -33,13 +34,12 @@ const StyledFullscreenNav = styled.div`
     align-items: center;
     padding: 30px;
     div{
-        font-size: 30px;
+        font-size: 40px;
         font-family: "Bebas Neue";
         color: #fae6c5;
         cursor: pointer;
     }
 `
-// https://medium.com/tinyso/how-to-create-a-modal-component-in-react-from-basic-to-advanced-a3357a2a716a
 const FullscreenCheckout = () => {
     const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
@@ -55,7 +55,8 @@ const FullscreenCheckout = () => {
 
     const handleExitFullscreen = () => {
         setOpen(false);
-        dispatch(closeFullscreen())
+        dispatch(closeFullscreen());
+        dispatch(getCart());
     }
 
     return (

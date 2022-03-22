@@ -14,7 +14,6 @@ import { ReactFitty } from "react-fitty";
 import { truncate } from "../../utils/utils";
 import { MOBILE_SMALL } from "../../utils/constants";
 import { useMediaQuery } from "@material-ui/core";
-import { openFullscreen } from "../../redux/actions/fullscreen";
 
 export default function DropdownCart(props) {
   const dispatch = useDispatch();
@@ -74,7 +73,6 @@ export default function DropdownCart(props) {
     setCartMenuOpen(false);
     props.handleCloseMenu();
     props.closeDropDown();
-    dispatch(openFullscreen());
   };
 
   return (

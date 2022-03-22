@@ -1,8 +1,8 @@
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import ErrorBox from "../forms/error/ErrorBox";
 import PaymentForm from "../forms/Payment/PaymentForm";
 import FreeCheckout from "./FreeCheckout";
@@ -15,10 +15,12 @@ import {
   PaymentSummaryBox,
 } from "./Payment.style";
 import { ReviewRowSeparator } from "./Review.style";
+import { openFullscreen } from "../../redux/actions/fullscreen";
 
 export default function Payment(props) {
-  const [t] = useTranslation("translation");
   const { isPaymentFree = false } = props;
+  const [t] = useTranslation("translation");
+  const dispatch = useDispatch();
   const { cart_data = {}, checkout = {} } = useSelector((state) => state.cart);
   const { checkout_stripe = {} } = checkout;
   const { client_secret = "", stripe_public = '' } = checkout_stripe;
@@ -30,6 +32,10 @@ export default function Payment(props) {
       theme: "stripe",
     },
   };
+  useEffect(() => {
+    dispatch(openFullscreen());
+  }, [])
+
 
   return (
     <PaymentContent>

@@ -8,6 +8,7 @@ import "./Card3grid.css";
 const Card3Grid = React.memo((props) => {
   const { activitats } = props;
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [eventData, setEventData] = useState([
     {
       id: 0,
@@ -27,14 +28,17 @@ const Card3Grid = React.memo((props) => {
   ]);
 
   const fetchEvent = (data) => {
+    setLoading(true)
     axiosInstance
       .get(`events/${data.id}`, {})
       .then((res) => {
         setEventData(res.data);
+        setLoading(false)
       })
       .then(handleClickOpen())
       .catch((error) => {
         console.log("ERROL", error.response);
+        setLoading(false)
       });
   };
   const handleClickOpen = () => {
@@ -70,6 +74,7 @@ const Card3Grid = React.memo((props) => {
           dataRow={eventData}
           setEventData={setEventData}
           onClose={handleClose}
+          loading={loading}
         />
       )}
     </Grid>

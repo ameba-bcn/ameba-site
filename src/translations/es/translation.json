@@ -51,7 +51,7 @@
         "sizesError": "Para poder avanzar selecciona una talla",
         "esgotat": "Producto agotado",
         "sortir": "salir",
-        "sortir-text": "Si sales y te encuentras en la vista de pago la cesta se eliminará. Estas seguro de salir?",
+        "sortir-text": "Si sales ahora la cesta se eliminará. Estas seguro?",
         "continua": "continúa"
     },
     "footer": {
