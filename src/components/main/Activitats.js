@@ -26,7 +26,7 @@ function Activitats() {
         color="#EB5E3E"
       />
       <div className="activitats-box">
-        <SectionTitle title="activitats" />
+        <SectionTitle title={t("support.menu.activitats")} />
         {activitats.length > 0 && (
           <Card3Grid className="Card3Block" activitats={activitats} />
         )}

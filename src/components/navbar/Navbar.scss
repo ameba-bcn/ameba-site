@@ -224,6 +224,9 @@
 .menu-lang {
     & li {
         cursor: pointer;
+        & a {
+            color: #fae6c5 !important;
+        }
         & a:last-child {
             margin-left: -20px;
         }
