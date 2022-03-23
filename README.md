@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 2.0.8
+- Translations
+
 Version 2.0.7
 - Safari IntersectionObserver
 - Translations
