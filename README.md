@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 2.0.7
+- Safari IntersectionObserver
+- Translations
+
 Version 2.0.6
 - Fullscreen checkout close header
 - Unique Size vertical align
