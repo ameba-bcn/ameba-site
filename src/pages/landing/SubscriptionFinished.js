@@ -28,14 +28,12 @@ export default function SubscriptionFinished(props) {
       <div className="full-height-msg">
         {!isSubmitted ? (
           <div className="single-msg">
-            Algo no ha anat bé...
+            {t("errors.general")}
             <br />
-            Contacta amb {AMEBA_EMAIL}
+            {t("errors.contacta")} {AMEBA_EMAIL}
           </div>
         ) : (
           <div className="single-msg">
-            Fet!
-            <br />
             {message}
           </div>
         )}

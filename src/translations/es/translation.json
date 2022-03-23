@@ -94,6 +94,8 @@
         "seguent": "siguiente"
     },
     "errors": {
-        "stripe": "Ha habido un error con el sistema de pago. Contacta con info@ameba.cat"
+        "stripe": "Ha habido un error con el sistema de pago. Contacta con info@ameba.cat",
+        "general": "Algo no ha ido bien...",
+        "contacta": "Contacta con "
     }
 }
