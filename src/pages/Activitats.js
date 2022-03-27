@@ -7,13 +7,13 @@ export default function Activitats() {
   return (
     <div className="Articles">
       <div className="ArticlesContent">
-        <Agenda/>
+        <Agenda />
       </div>
       <LettersMove
-                className="lettersMoveDiv"
-                sentence={t("banners.soci-curt")}
-                color="#EB5E3E"
-                />
+        className="lettersMoveDiv"
+        sentence={t("banners.soci-curt")}
+        color="#EB5E3E"
+      />
     </div>
   );
 }

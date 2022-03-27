@@ -1,6 +1,6 @@
 import React from "react";
-import GridList from "@material-ui/core/GridList";
-import GridListTile from "@material-ui/core/GridListTile";
+import { ImageList } from '@material-ui/core';
+import { ImageListItem } from '@material-ui/core';
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { useSelector } from "react-redux";
 import "./MainSupportLocals.css";
@@ -13,23 +13,23 @@ function MainSupportLocals() {
   return (
     <div className="backgroundGrid">
       {support.length > 0 && (
-        <GridList
+        <ImageList
           cols={breakpoint ? 1 : 3}
           rows={1}
-          spacing={20}
-          cellHeight={240}
+          gap={20}
+          rowHeight={240}
           className="gridList"
         >
           {support.slice(0, breakpoint ? 3 : 9).map((tile) => (
-            <GridListTile key={tile.id} className="gridImg">
+            <ImageListItem key={tile.id} className="gridImg">
               <img
                 src={tile.images[0]}
                 alt={tile.name}
                 className="gridImages"
               />
-            </GridListTile>
+            </ImageListItem>
           ))}
-        </GridList>
+        </ImageList>
       )}
     </div>
   );

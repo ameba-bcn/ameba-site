@@ -45,6 +45,7 @@ import { deepComparision } from "./utils/utils";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
+import SiteNotAvailable from "./pages/SiteNotAvailable";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -52,7 +53,7 @@ function App() {
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
 
   const auth = useSelector((state) => state.auth);
-  const { isOpen } = useSelector((state) => state.fullscreen);
+  const { isOpen, isSiteUnavailableOpen } = useSelector((state) => state.fullscreen);
   const { user_member_data = {} } = auth;
 
   const isNewMember = deepComparision(user_member_data, {});
@@ -81,37 +82,38 @@ function App() {
   return (
     <div className="App">
       {isOpen && <FullscreenCheckout />}
-      <Menu />
-      <UserContext.Provider value={value}>
-        <ScrollTop showBelow={250} />
-        <Switch>
-          <Route path="/activitats" component={Activitats} />
-          <Route path="/botiga" component={Botiga} />
-          <Route exact path="/support/:id" component={Entrevista} />
-          <Route path="/support" component={SupportYourLocals} />
-          <Route exact path="/booking/:id" component={Entrevista} />
-          <Route path="/booking" component={Booking} />
-          <Route path="/login" component={LogSession} />
-          <Route path="/recovery" component={PasswordRecovery} />
-          <Route path="/checkout" component={CheckoutPage} />
-          <Route path="/send-recovery" component={SendEmailPasswordRecovery} />
-          <Route path="/validate-email" component={ValidateEmail} />
-          <Route path="/activate" component={LogMailConfirmation} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/summary-checkout" component={CheckoutFinished} />
-          <Route path="/subscribe" component={SubscriptionFinished} />
-          <Route exact path="/" component={Home} />
-          <Route component={NotFound} />
-        </Switch>
-      </UserContext.Provider>
-      <ToastContainer
-        position="bottom-center"
-        closeButton={false}
-        closeOnClick
-        draggable
-        limit={1}
-      />
-      <Contacte />
+      {isSiteUnavailableOpen ? <SiteNotAvailable />
+        : <><Menu />
+          <UserContext.Provider value={value}>
+            <ScrollTop showBelow={250} />
+            <Switch>
+              <Route path="/activitats" component={Activitats} />
+              <Route path="/botiga" component={Botiga} />
+              <Route exact path="/support/:id" component={Entrevista} />
+              <Route path="/support" component={SupportYourLocals} />
+              <Route exact path="/booking/:id" component={Entrevista} />
+              <Route path="/booking" component={Booking} />
+              <Route path="/login" component={LogSession} />
+              <Route path="/recovery" component={PasswordRecovery} />
+              <Route path="/checkout" component={CheckoutPage} />
+              <Route path="/send-recovery" component={SendEmailPasswordRecovery} />
+              <Route path="/validate-email" component={ValidateEmail} />
+              <Route path="/activate" component={LogMailConfirmation} />
+              <Route path="/profile" component={Profile} />
+              <Route path="/summary-checkout" component={CheckoutFinished} />
+              <Route path="/subscribe" component={SubscriptionFinished} />
+              <Route exact path="/" component={Home} />
+              <Route component={NotFound} />
+            </Switch>
+          </UserContext.Provider>
+          <ToastContainer
+            position="bottom-center"
+            closeButton={false}
+            closeOnClick
+            draggable
+            limit={1}
+          />
+          <Contacte /></>}
     </div>
   );
 }

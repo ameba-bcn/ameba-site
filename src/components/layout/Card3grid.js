@@ -50,7 +50,7 @@ const Card3Grid = React.memo((props) => {
   };
 
   return (
-    <Grid container justify="center" className="Card3GridContainer">
+    <Grid container justifyContent="center" className="Card3GridContainer">
       {activitats &&
         activitats.map((data) => (
           <Grid
