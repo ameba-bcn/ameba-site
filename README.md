@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 2.0.10
+- Unavailable screen with countdown
+
 Version 2.0.9
 - Package versions bug
 
