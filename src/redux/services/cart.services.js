@@ -1,7 +1,6 @@
 import axiosInstance from "../../axios";
+import { API_URL } from "../../utils/constants";
 import { mergeCartIds } from "../../utils/utils";
-
-const API_URL = process.env.REACT_APP_API_HOST;
 
 const addInCart = (id) => {
   //  Detected user on LS case

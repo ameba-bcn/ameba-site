@@ -4,6 +4,7 @@ import CardNew from "./CardNew";
 import ActivitatDialog from "./../agenda/Activitat";
 import axiosInstance from "../../axios";
 import "./Card3grid.css";
+import { API_URL } from "../../utils/constants";
 
 const Card3Grid = React.memo((props) => {
   const { activitats } = props;
@@ -30,7 +31,7 @@ const Card3Grid = React.memo((props) => {
   const fetchEvent = (data) => {
     setLoading(true)
     axiosInstance
-      .get(`events/${data.id}`, {})
+      .get(`${API_URL}events/${data.id}`, {})
       .then((res) => {
         setEventData(res.data);
         setLoading(false)

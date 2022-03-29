@@ -82,3 +82,5 @@ export const MEMBER = "Suporter";
 // This list contains posible names for normal & pro memberships
 export const MEMBER_LIST = ["Supporter", "Soci", "Socio", "Supporter"];
 export const PRO_MEMBER_LIST = ["Pro", "Professional", "Profesional"];
+
+export const API_URL = process.env.REACT_APP_API_HOST || "http://localhost/api/";

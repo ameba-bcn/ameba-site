@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { ReactFitty } from "react-fitty";
 import { useLocation } from "react-router-dom";
 import { useMediaQuery } from "@material-ui/core";
+import { API_URL } from "../../utils/constants";
 
 export const TitleStyled = styled.div`
   width: 75%;
@@ -58,7 +59,7 @@ export default function BotigaGeneral() {
   const fetchProduct = (data) => {
     setProducteLoading(true);
     axiosInstance
-      .get(`articles/${data.id}`, {})
+      .get(`${API_URL}articles/${data.id}`, {})
       .then((res) => {
         setProductData(res.data);
         setProducteLoading(false);

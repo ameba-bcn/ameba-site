@@ -1,6 +1,5 @@
+import { API_URL } from "../../utils/constants";
 import axiosInstance from "./../../axios";
-
-const API_URL = process.env.REACT_APP_API_HOST || "http://localhost/api/";
 
 const register = (registerData) => {
   return axiosInstance.post(API_URL + "users/", registerData);

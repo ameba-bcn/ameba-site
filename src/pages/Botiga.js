@@ -6,7 +6,7 @@ import ProductBanner from "../components/botiga/ProductBanner";
 import SociDialog from "../components/botiga/Soci";
 import LettersMove from "./../components/layout/LettersMove";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { MEMBER_LIST } from "../utils/constants";
+import { API_URL, MEMBER_LIST } from "../utils/constants";
 import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import { deleteStringDecimals } from "../utils/utils";
@@ -28,11 +28,11 @@ function Botiga() {
     let arr = [];
     setLoading(true);
     axiosInstance
-      .get(`/subscriptions/${id_soci[0]}`, {})
+      .get(`${API_URL}/subscriptions/${id_soci[0]}`, {})
       .then((resposta) => {
         arr.push(resposta.data);
         id_soci.length > 1 &&
-          axiosInstance.get(`/subscriptions/${id_soci[1]}`, {}).then((res) => {
+          axiosInstance.get(`${API_URL}/subscriptions/${id_soci[1]}`, {}).then((res) => {
             arr.push(res.data);
           });
       })

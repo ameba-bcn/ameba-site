@@ -13,6 +13,7 @@ import {
 } from "./../../utils/utils";
 import "./Agenda.css";
 import { useTranslation } from "react-i18next";
+import { API_URL } from "../../utils/constants";
 
 export default function LlistatActivitats() {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ export default function LlistatActivitats() {
 
   const fetchAndAdd = (rowData) => {
     axiosInstance
-      .get(`events/${rowData.id}`, {})
+      .get(`${API_URL}events/${rowData.id}`, {})
       .then((res) => {
         dispatch(addToCart(res.data.variants[0].id));
       })
@@ -57,7 +58,7 @@ export default function LlistatActivitats() {
   const fetchEvent = (data) => {
     setLoading(true)
     axiosInstance
-      .get(`events/${data.id}`, {})
+      .get(`${API_URL}events/${data.id}`, {})
       .then((res) => {
         setEventData(res.data);
         setLoading(false)

@@ -9,6 +9,7 @@ import QuestionsSection from "./QuestionsSection";
 import MainSection from "./MainSection";
 import EntrevistaMenu from "./EntrevistaMenu";
 import "./Entrevista.css";
+import { API_URL } from "../../../utils/constants";
 
 export default function Entrevista() {
   let history = useHistory();
@@ -46,11 +47,11 @@ export default function Entrevista() {
 
   useEffect(() => {
     axiosInstance
-      .get(`artists/${urlID}/`, {})
+      .get(`${API_URL}artists/${urlID}/`, {})
       .then((resp) => {
         setArtist(resp.data);
         const interviewId = resp.data.interview_id;
-        axiosInstance.get(`interviews/${interviewId}/`, {}).then((res) => {
+        axiosInstance.get(`${API_URL}interviews/${interviewId}/`, {}).then((res) => {
           setInterview(res.data);
         });
       })

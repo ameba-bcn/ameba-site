@@ -1,6 +1,5 @@
 import axiosInstance from '../../axios';
-
-const API_URL = process.env.REACT_APP_API_HOST || "http://localhost/api/";
+import { API_URL } from '../../utils/constants';
 
 const subscribeNewsletter = (email) => {
     return axiosInstance.post(API_URL + "/subscribe/", {
