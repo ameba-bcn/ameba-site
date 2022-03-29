@@ -18,7 +18,7 @@ WebFont.load({
 });
 
 ReactDOM.render(
-  <BrowserRouter basename={process.env.PUBLIC_URL}>
+  <BrowserRouter>
     <Provider store={store}>
       {/* <React.StrictMode> */}
       <I18nextProvider i18n={i18next}>

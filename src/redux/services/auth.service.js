@@ -1,4 +1,3 @@
-import axios from "axios";
 import axiosInstance from "./../../axios";
 
 const API_URL = process.env.REACT_APP_API_HOST || "http://localhost/api/";
@@ -7,34 +6,8 @@ const register = (registerData) => {
   return axiosInstance.post(API_URL + "users/", registerData);
 };
 
-// const registerMember = (
-//   address,
-//   first_name,
-//   last_name,
-//   phone_number,
-//   username,
-//   password,
-//   email,
-//   cart_id
-// ) => {
-//   return axiosInstance
-//     .post(API_URL + "member_register/", {
-//       username,
-//       email,
-//       password,
-//       first_name,
-//       last_name,
-//       address,
-//       phone_number,
-//       cart_id,
-//     })
-//     .then((response) => {
-//       return response?.data;
-//     });
-// };
-
 const validateLocalToken = (refreshToken) => {
-  return axios
+  return axiosInstance
     .post(API_URL + "token/refresh/", {
       refresh: refreshToken,
     })
@@ -47,7 +20,7 @@ const validateLocalToken = (refreshToken) => {
 };
 
 const validateEmail = (token) => {
-  return axios
+  return axiosInstance
     .post(API_URL + "activate/", {
       token: token,
     })
@@ -57,7 +30,7 @@ const validateEmail = (token) => {
 };
 
 const passwordRecovery = (token, password) => {
-  return axios
+  return axiosInstance
     .post(API_URL + "recovery/", {
       token: token,
       password: password,
@@ -68,13 +41,13 @@ const passwordRecovery = (token, password) => {
 };
 
 const sendEmailPasswordRecovery = (email) => {
-  return axios.get(API_URL + `recovery/?email=${email}`).then((response) => {
+  return axiosInstance.get(API_URL + `recovery/?email=${email}`).then((response) => {
     return response?.data;
   });
 };
 
 const login = (email, password) => {
-  return axios
+  return axiosInstance
     .post(API_URL + "token/", {
       email,
       password,
@@ -90,7 +63,7 @@ const login = (email, password) => {
 };
 
 const getMemberProfile = () => {
-  return axios
+  return axiosInstance
     .get(API_URL + `users/current/member_profile/`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -102,7 +75,7 @@ const getMemberProfile = () => {
 };
 
 const updateMemberProfile = (identity_card, first_name, last_name, phone_number) => {
-  return axios
+  return axiosInstance
     .patch(
       API_URL + `users/current/member_profile/`,
       {
@@ -123,7 +96,7 @@ const updateMemberProfile = (identity_card, first_name, last_name, phone_number)
 };
 
 const createMemberProfile = (identity_card, first_name, last_name, phone_number) => {
-  return axios
+  return axiosInstance
     .post(
       API_URL + `users/current/member_profile/`,
       {
@@ -144,7 +117,7 @@ const createMemberProfile = (identity_card, first_name, last_name, phone_number)
 };
 
 const getUserData = () => {
-  return axios
+  return axiosInstance
     .get(API_URL + `users/current/`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -157,7 +130,7 @@ const getUserData = () => {
 
 const logout = () => {
   const refresh = localStorage.getItem("refresh");
-  return axios
+  return axiosInstance
     .delete(API_URL + `token/${refresh}/`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -172,7 +145,7 @@ const logout = () => {
 };
 
 const deleteUser = () => {
-  return axios
+  return axiosInstance
     .delete(API_URL + "users/current/", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
@@ -186,7 +159,6 @@ const deleteUser = () => {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   register,
-  // registerMember,
   validateLocalToken,
   login,
   logout,
