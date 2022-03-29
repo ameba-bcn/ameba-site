@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 2.0.12
+- CORS error
+
 Version 2.0.11
 - Delete ameba-site on baseURL
 - Restore axios headers
