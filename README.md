@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 2.0.13
+- Safari styling issues solved
+
 Version 2.0.12
 - CORS error
 
