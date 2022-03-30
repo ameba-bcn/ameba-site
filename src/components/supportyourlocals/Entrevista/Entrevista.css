@@ -1,6 +1,7 @@
 .top-section {
     display: flex;
     flex-direction: column;
+    min-height: min-content;
 }
 
 .top-section-gral {
