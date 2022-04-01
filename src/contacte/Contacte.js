@@ -31,7 +31,7 @@ function Contacte() {
           />
         </div>
         <div className="endingText">
-          ©2020 AMEBA
+          AMEBA 2022©
           <br />
           Associació de Música Electrònica de Barcelona - {t("footer.drets")}
         </div>

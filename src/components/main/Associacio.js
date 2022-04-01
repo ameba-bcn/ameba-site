@@ -39,6 +39,7 @@ function Associacio() {
           controls={false}
           onReady={() => setIsready(true)}
           onError={() => setIsready(false)}
+          playsinline={true}
         />
       </div>
       <LettersMove
