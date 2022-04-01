@@ -5,17 +5,19 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LettersMove from "./../layout/LettersMove";
 import "./Activitats.css";
-import { getNFirstElementsOfArray } from "../../utils/utils";
+import { sortByDate } from "../../utils/utils";
 import PlusButton from "../button/PlusButton";
 import { useTranslation } from "react-i18next";
 function Activitats() {
-  const [activitats, getActivitats] = useState([]);
+  const [activitats, setActivitats] = useState([]);
   const data = useSelector((state) => state.data);
   const { agenda = [] } = data;
   const [t] = useTranslation("translation");
 
   useEffect(() => {
-    if (!!agenda.length) getActivitats(getNFirstElementsOfArray(agenda, 3));
+    const sortedAgenda = sortByDate(agenda)
+    const slicedAgenda = sortedAgenda?.slice(0, 3);
+    if (!!slicedAgenda.length) setActivitats(slicedAgenda);
   }, [agenda]);
 
   return (
