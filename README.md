@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 2.0.14
+- Loader modal member on close
+- Three last activities on main
+
 Version 2.0.13
 - Safari styling issues solved
 
