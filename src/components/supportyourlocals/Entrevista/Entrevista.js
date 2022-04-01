@@ -40,7 +40,7 @@ export default function Entrevista() {
     },
   ]);
 
-  const {tags=[], media: mediaUrls=[], has_interview:hasInterviews} = artist;
+  const { tags = [], media: mediaUrls = [], has_interview: hasInterviews } = artist;
   const { is_ameba_dj = false } = artist;
   const hasMediaSection = !!mediaUrls.length;
   const hasActivitiesSection = false;

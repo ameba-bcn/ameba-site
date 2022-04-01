@@ -21,10 +21,10 @@ function Botiga() {
   let location = useLocation();
   const queryString = require("query-string");
   const value = queryString.parse(location.search);
-  const externalId = value.id;
+  const externalId = value?.id;
   const id_soci = membership.map((x) => x.id);
 
-  const handleClick = () => {
+  const handleOpen = () => {
     let arr = [];
     setLoading(true);
     axiosInstance
@@ -37,7 +37,7 @@ function Botiga() {
           });
       })
       .then(() => {
-        setOpen(!open);
+        setOpen(true);
         setProductData(arr);
         setLoading(false);
       })
@@ -47,6 +47,10 @@ function Botiga() {
       });
   };
 
+  const handleClose = () => {
+    setOpen(false);
+  }
+
   const [t] = useTranslation("translation");
   const isMobile = useMediaQuery("(max-width:1163px)");
   const sociPreu = membership.filter((x) => MEMBER_LIST.includes(x.name))[0]
@@ -54,7 +58,7 @@ function Botiga() {
 
   useEffect(() => {
     if (externalId === "14" || externalId === "15") {
-      handleClick();
+      handleOpen();
     }
   }, []);
 
@@ -70,13 +74,13 @@ function Botiga() {
                   sociPreu
                 )}${t("banners.soci-llarg-pt2")}`
           }
-          handleClick={handleClick}
+          handleClick={handleOpen}
         />
       </div>
       {open && (
         <SociDialog
           open={open}
-          onClose={handleClick}
+          onClose={handleClose}
           dataRow={productData}
           setProductData={setProductData}
           loading={loading}
