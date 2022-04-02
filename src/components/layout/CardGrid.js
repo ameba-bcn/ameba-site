@@ -1,12 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import "./CardGrid.css";
 import { createLastRowIterator } from "../../utils/utils";
 import PlusButton from "../button/PlusButton";
 import { ReactFitty } from "react-fitty";
 import styled from "styled-components";
 import { useMediaQuery } from "@material-ui/core";
+import { MOBILE_SMALL } from "../../utils/constants";
+import "./CardGrid.css";
 
 export default function CardGrid(props) {
   const { isAmebaDJ = false } = props; //Pendiente recibir si es entrevista por props
@@ -28,6 +29,8 @@ export default function CardGrid(props) {
     font-style: italic;
   `;
   const isOneColumn = useMediaQuery("(max-width:1290px)");
+  const isMobile = useMediaQuery(MOBILE_SMALL)
+  console.log("isMobile", isMobile)
 
   const filteredArtists =
     isAmebaDJ && !!support.length
@@ -53,7 +56,7 @@ export default function CardGrid(props) {
               </TitleStyled>
               <img src={images[0]} alt={name} className="cardSupportImgTop" />
               <div className="cardSupportPlusBox">
-                <PlusButton plusStyle="plus--obscure" plusSize="plus--big" />
+                <PlusButton plusStyle="plus--obscure" plusSize={isMobile ? "plus--medium" : "plus--big"} />
               </div>
               {!!tags.length && <div className="cardTagBox">{tags[0]}</div>}
             </div>

@@ -1,91 +1,93 @@
 .cardMediaImgBox {
-  width: 100%;
-  padding-top: 100%;
-  position: relative;
+    width: 100%;
+    padding-top: 100%;
+    position: relative;
 }
 
 .cardMedia {
-  -webkit-filter: grayscale(100%);
-  /* Safari 6.0 - 9.0 */
-  filter: grayscale(100%);
-  filter: brightness(50%);
-  max-width: 100%;
-  min-width: 100%;
-  height: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  /* object-fit: cover !important; */
+    -webkit-filter: grayscale(100%);
+    /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+    filter: brightness(50%);
+    max-width: 100%;
+    min-width: 100%;
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* object-fit: cover !important; */
 }
 
 .cardDateRow {
-  padding: 16px 0px 16px 16px;
+    padding: 16px 0px 16px 16px;
+    align-items: center;
 }
 
 .cardMediaTitleBox {
-  width: 100%;
-  height: 85%;
-  position: absolute;
-  bottom: 50px;
-  display: flex;
-  align-items: center;
+    width: 100%;
+    height: 85%;
+    position: absolute;
+    bottom: 50px;
+    display: flex;
+    align-items: center;
 }
+
 .cardMediaTitle {
-  color: #fae6c5;
-  text-align: center;
-  padding: 30% 0;
-  padding-left: 20px;
-  padding-right: 10px;
-  font-size: 7em;
-  font-family: "Bebas Neue";
-  font-weight: 400;
-  line-height: 0.8em;
-  text-align: left;
-  word-break: normal;
+    color: #fae6c5;
+    text-align: center;
+    padding: 30% 0;
+    padding-left: 20px;
+    padding-right: 10px;
+    font-size: 7em;
+    font-family: "Bebas Neue";
+    font-weight: 400;
+    line-height: 0.8em;
+    text-align: left;
+    word-break: normal;
 }
 
 .cardMediaSort {
-  position: absolute;
-  color: #fae6c5;
-  background-color: #1d1d1b;
-  top: 0;
-  width: fit-content;
-  height: 53px;
-  text-align: center;
-  padding: 4px 10px;
-  margin-top: 5%;
-  margin-left: 5%;
-  font-size: 3em;
-  font-family: "Bebas Neue";
-  font-weight: 400;
-  line-height: 1em;
-  text-align: left;
-  text-transform: uppercase;
+    position: absolute;
+    color: #fae6c5;
+    background-color: #1d1d1b;
+    top: 0;
+    width: fit-content;
+    height: 53px;
+    text-align: center;
+    padding: 4px 10px;
+    margin-top: 5%;
+    margin-left: 5%;
+    font-size: 3em;
+    font-family: "Bebas Neue";
+    font-weight: 400;
+    line-height: 1em;
+    text-align: left;
+    text-transform: uppercase;
 }
 
 .column1 {
-  width: 80%;
+    width: 80%;
 }
 
 .column2 {
-  width: 20%;
+    width: 20%;
 }
 
 .cardMediaDate {
-  font-size: 4.5em;
-  font-family: "Bebas Neue";
-  font-weight: 900;
-  line-height: 1em;
-  text-align: left;
-  overflow: hidden;
-  white-space: nowrap;
-  padding-left: 10px;
+    font-size: 4.5em;
+    font-family: "Bebas Neue";
+    font-weight: 900;
+    line-height: 1em;
+    text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    padding-left: 10px;
 }
 
 .cardFrame {
-  background-color: #fae6c5 !important;
-  width: 100%;
-  padding-top: 100%;
+    background-color: #fae6c5 !important;
+    width: 100%;
+    padding-top: 100%;
 }

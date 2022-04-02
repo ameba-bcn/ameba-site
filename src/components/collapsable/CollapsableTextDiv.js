@@ -22,7 +22,7 @@ export default function CollapsableTextDiv(props) {
       {minimizedText}
       <PlusButton
         plusStyle="plus--obscure"
-        plusSize="plus--medium"
+        plusSize="plus--small"
         onClick={() => setOpen(true)}
       />
     </PlusBox>

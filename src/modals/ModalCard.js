@@ -348,6 +348,12 @@ export default function ModalCard(props) {
             <div className="modal-card-mobile__description-content">
               <CollapsableTextDiv text={box1Text} />
             </div>
+            <div className="modal-card-mobile__description-title">
+              {box2Title}
+            </div>
+            <div className="modal-card-mobile__description-content">
+              <CollapsableTextDiv text={box2Text} />
+            </div>
             <hr
               className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
             />

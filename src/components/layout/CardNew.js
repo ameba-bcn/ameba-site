@@ -1,9 +1,11 @@
 import React from "react";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
-import "./CardNew.css";
 import { formatISODateToDate } from "./../../utils/utils";
 import PlusButton from "./../button/PlusButton";
+import { useMediaQuery } from "@material-ui/core";
+import { MOBILE_SMALL } from "../../utils/constants";
+import "./CardNew.css";
 
 const CardNew = React.memo((props) => {
   const processedText = (text) => {
@@ -11,6 +13,7 @@ const CardNew = React.memo((props) => {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + "...";
   };
+  const isMobile = useMediaQuery(MOBILE_SMALL)
 
   return (
     <Card>
@@ -32,7 +35,7 @@ const CardNew = React.memo((props) => {
             {formatISODateToDate(props.data)}
           </div>
           <div className="cardMediaPlus column2">
-            <PlusButton />
+            <PlusButton plusSize={isMobile? "plus--medium": "plus--big"}/>
           </div>
         </div>
       </CardActionArea>
