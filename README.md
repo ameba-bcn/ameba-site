@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 2.0.16
+- Plus Icon centered
+- Benefits on membership mobile modal
+
 Version 2.0.15
 - Portada iphone
 
