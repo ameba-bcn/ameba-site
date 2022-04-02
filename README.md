@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.0.0
+- Counter deleted, first release candidate
+
 Version 2.0.16
 - Plus Icon centered
 - Benefits on membership mobile modal
