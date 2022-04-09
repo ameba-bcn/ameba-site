@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.0.1
+- External article view
+- Copy article on clipboard
+
 Version 3.0.0
 - Counter deleted, first release candidate
 
