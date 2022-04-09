@@ -30,7 +30,6 @@ export default function CardGrid(props) {
   `;
   const isOneColumn = useMediaQuery("(max-width:1290px)");
   const isMobile = useMediaQuery(MOBILE_SMALL)
-  console.log("isMobile", isMobile)
 
   const filteredArtists =
     isAmebaDJ && !!support.length

@@ -83,4 +83,7 @@ export const MEMBER = "Suporter";
 export const MEMBER_LIST = ["Supporter", "Soci", "Socio", "Supporter"];
 export const PRO_MEMBER_LIST = ["Pro", "Professional", "Profesional"];
 
+export const productKinds = ["producte", "soci", "activitat"];
+export const productQueryKind = { "producte": "articles", "soci": "subscriptions", "activitat": "events" }
+
 export const API_URL = process.env.REACT_APP_API_HOST || "http://localhost/api/";

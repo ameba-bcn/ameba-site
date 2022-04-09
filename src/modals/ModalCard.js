@@ -1,26 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import { useMediaQuery } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
 import { formatPrice } from "../utils/utils";
-import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
-import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
-import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
+import LinkIcon from '@material-ui/icons/Link';
 import Button from "../components/button/Button";
 import ImageCarousel from "../components/images/ImageCarousel";
-import { MOBILE_NORMAL } from "../utils/constants";
+import { MOBILE_NORMAL, productKinds } from "../utils/constants";
 import CollapsableTextDiv from "../components/collapsable/CollapsableTextDiv";
 import { toast } from "react-toastify";
 import Toast from "../components/toast/Toast";
 import { useTranslation } from "react-i18next";
 import { ReactFitty } from "react-fitty";
+import InteractiveModalBox from "./InteractiveModalBox";
 import "./Modals.css";
 import {
-  StyledCenterLabel,
   StyledCloseIcon,
   StyledModalRow,
-  StyledSizesRow,
 } from "./ModalCardStyled";
 
 export default function ModalCard(props) {
@@ -50,19 +47,14 @@ export default function ModalCard(props) {
     has_stock,
   } = props;
   const isMobile = useMediaQuery(MOBILE_NORMAL);
-  const types = ["PRODUCTE", "SOCI", "ACTIVITAT"];
+  const types = productKinds;
   const [activeSize, setActiveSize] = useState([]);
   const [selectSizeError, setSelectSizeError] = useState(false);
-  const modalStyle = types.includes(type) ? type : types[0];
+  const [copied, setCopied] = useState(false);
+  const modalStyle = types.includes(type.toLowerCase()) ? type.toUpperCase() : types[0].toUpperCase();
   const [t] = useTranslation("translation");
   const productSoldOut =
     !has_stock || (modalStyle === "PRODUCTE" && sizes.length === 0);
-
-    useEffect(() => {
-    if (!!sizes.length) {
-      setActiveSize(sizes.length === 1 ? sizes[0] : []);
-    }
-  }, [sizes]);
 
   const handleAddToCard = (id) => {
     if (activeSize.length === 0 && modalStyle === "PRODUCTE")
@@ -87,142 +79,13 @@ export default function ModalCard(props) {
     }
   };
 
-  const interactiveDataBox = () => {
-    let dataBoxDiv = <></>;
-    if (modalStyle === "PRODUCTE") {
-      let dataBoxDiv = (
-        <StyledSizesRow>
-          <div className="modal-card___title_small ">
-            <PeopleAltIcon />{" "}
-            <span>
-              {productSoldOut
-                ? t("modal.esgotat")
-                : isMobile
-                  ? t("modal.talles").split(" ")[0]
-                  : t("modal.talles")}{" "}
-              / &nbsp;
-            </span>
-          </div>
-          {sizes && sizes[0] === "UNIQUE" ? (
-            <StyledCenterLabel>Talla única</StyledCenterLabel>
-          ) : (
-            <>
-              {sizes?.map((el) => {
-                const talla = el.split(" ")[0];
-                return (
-                  <div
-                    className={
-                      activeSize === el || sizes.length === 1
-                        ? "sizes interactiveDataBox-product-sizes__button_active"
-                        : "sizes interactiveDataBox-product-sizes__button"
-                    }
-                    key={el}
-                    onClick={() => {
-                      setActiveSize(el);
-                      setSelectSizeError(false);
-                    }}
-                  >
-                    {talla}
-                  </div>
-                );
-              })}
-              {selectSizeError && (
-                <div className="error-message">{t("modal.sizesError")}</div>
-              )}
-            </>
-          )}
-        </StyledSizesRow>
-      );
-      return dataBoxDiv;
-    }
-    if (modalStyle === "SOCI") {
-      let dataBoxDiv = (
-        <div className="interactiveDataBox-soci__row">
-          <div className="modal-card___title_small">
-            <PeopleAltIcon /> <span>{t("modal.quota")} / &nbsp;</span>
-          </div>
-          <div className="interactiveDataBox-soci__buttonBox">
-            <div
-              className={`interactiveDataBox-soci__button interactiveDataBox-soci__button-subscriber 
-                          ${isSubscriber
-                  ? "interactiveDataBox-soci__button-active"
-                  : "interactiveDataBox-soci__button-inactive"
-                }`}
-              onClick={() => setIsSubscriber(true)}
-            >
-              {extraButtons[0]}
-            </div>
-            <div
-              className={`interactiveDataBox-soci__button interactiveDataBox-soci__button-professional 
-                          ${isSubscriber
-                  ? "interactiveDataBox-soci__button-inactive"
-                  : "interactiveDataBox-soci__button-active"
-                }`}
-              onClick={() => setIsSubscriber(false)}
-            >
-              {extraButtons[1]}
-            </div>
-          </div>
-        </div>
-      );
-      return dataBoxDiv;
-    }
-    if (modalStyle === "ACTIVITAT") {
-      let dataBoxDiv = (
-        <>
-          {isMobile && (
-            <div className="interactiveDataBox-activitat__row">
-              <div className="modal-card___title_small">
-                <LocationOnIcon />{" "}
-                <span>{t("modal.localitzacio")} / &nbsp;</span>
-              </div>
-              <div className="interactiveDataBox-activitat__text-loca">
-                <a
-                  href="https://google.com/maps"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {address}
-                </a>
-              </div>
-            </div>
-          )}
-          <div className="interactiveDataBox-activitat__row">
-            <div className="modal-card___title_small">
-              <CalendarTodayIcon /> <span>{t("agenda.data")} / &nbsp;</span>
-            </div>
-            <div className="interactiveDataBox-activitat__text-data">
-              <a
-                href="https://google.com/calendar"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {datetime !== undefined ? datetime.split("T")[0] : ""}{" "}
-                {datetime !== undefined
-                  ? datetime
-                    .substring(
-                      datetime.lastIndexOf("T") + 1,
-                      datetime.lastIndexOf("Z")
-                    )
-                    .slice(0, -3)
-                  : ""}
-              </a>
-            </div>
-          </div>
-          <div className="interactiveDataBox-activitat__row">
-            <span className="modal-card___title_small">
-              <LocalAtmIcon /> <span>{t("modal.preu")} / &nbsp;</span>
-            </span>
-            <span className="interactiveDataBox-activitat__text-data">
-              {price}
-            </span>
-          </div>
-        </>
-      );
-      return dataBoxDiv;
-    }
-    return dataBoxDiv;
-  };
+  const handleCopyLink = () => {
+    const kind = modalStyle.toLowerCase()
+    const base_url = window.location.origin;
+    const copyUrl = `${base_url}/product?id=${id}&kind=${kind}`
+    navigator.clipboard.writeText(copyUrl)
+    setCopied(true)
+  }
 
   return (
     <Dialog onClose={handleClose} open={open}>
@@ -232,9 +95,11 @@ export default function ModalCard(props) {
             className={`modal-card__background modal-card__background_${colorMode}`}
           >
             <StyledCloseIcon colorMode={colorMode}>
+              <LinkIcon onClick={handleCopyLink} />
               <ClearIcon
                 onClick={handleClose}
               />
+              {copied?<div className="modal-card__copy">{t("modal.copiat")}</div>: null}
             </StyledCloseIcon>
             <div className="modal-card__row">
               <div className="modal-card__column_eighty">
@@ -280,7 +145,22 @@ export default function ModalCard(props) {
               className={`modal-card__hr_solid modal-card__hr_solid-${colorMode}`}
             />
             <StyledModalRow>
-              {interactiveDataBox()}
+              <InteractiveModalBox
+                modalStyle={modalStyle}
+                isMobile={isMobile}
+                productSoldOut={productSoldOut}
+                sizes={sizes}
+                isSubscriber={isSubscriber}
+                setIsSubscriber={setIsSubscriber}
+                activeSize={activeSize}
+                setActiveSize={setActiveSize}
+                selectSizeError={selectSizeError}
+                setSelectSizeError={setSelectSizeError}
+                extraButtons={extraButtons}
+                address={address}
+                datetime={datetime}
+                handleAddClick={handleAddClick}
+                price={price} />
               <Button
                 variant="contained"
                 color="primary"
@@ -326,10 +206,13 @@ export default function ModalCard(props) {
         <div
           className={`modal-card-mobile__background modal-card-mobile__background_${colorMode}`}
         >
-          <ClearIcon
-            className={`modal-card-mobile__close modal-card__close_${colorMode}`}
-            onClick={handleClose}
-          />
+          <div className="modal-card-mobile__close">
+            <LinkIcon onClick={handleCopyLink} />
+            <ClearIcon
+              onClick={handleClose}
+            />
+          {copied?<div className="modal-card-mobile__copy">{t("modal.copiat")}</div>: null}
+          </div>
           <div className="modal-card-mobile__row">
             <hr
               className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
@@ -358,7 +241,22 @@ export default function ModalCard(props) {
               className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
             />
             <div className="modal-card-mobile__row-interactiveDataBox">
-              {interactiveDataBox()}
+              <InteractiveModalBox
+                modalStyle={modalStyle}
+                isMobile={isMobile}
+                productSoldOut={productSoldOut}
+                sizes={sizes}
+                isSubscriber={isSubscriber}
+                setIsSubscriber={setIsSubscriber}
+                activeSize={activeSize}
+                setActiveSize={setActiveSize}
+                selectSizeError={selectSizeError}
+                setSelectSizeError={setSelectSizeError}
+                extraButtons={extraButtons}
+                address={address}
+                datetime={datetime}
+                handleAddClick={handleAddClick}
+                price={price} />
             </div>
             <div className="modal-card-mobile__button-wrapper">
               <Button

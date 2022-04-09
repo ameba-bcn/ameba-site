@@ -45,6 +45,7 @@ import { deepComparision } from "./utils/utils";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
+import ExternalEvents from "./pages/ExternalEvents";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -97,6 +98,7 @@ function App() {
           <Route path="/send-recovery" component={SendEmailPasswordRecovery} />
           <Route path="/validate-email" component={ValidateEmail} />
           <Route path="/activate" component={LogMailConfirmation} />
+          <Route path="/product" component={ExternalEvents} />
           <Route path="/profile" component={Profile} />
           <Route path="/summary-checkout" component={CheckoutFinished} />
           <Route path="/subscribe" component={SubscriptionFinished} />

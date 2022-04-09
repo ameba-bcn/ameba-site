@@ -11,8 +11,7 @@ import FullscreenSpinner from "../spinner/FullscreenSpinner";
 export default function SociDialog(props) {
   const { onClose, open, dataRow = [], setProductData, loading } = props;
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const data = useSelector((state) => state.data);
-  const { membership = [] } = data;
+  const { membership = [] } = useSelector((state) => state.data);
   const dispatch = useDispatch();
   const [isSubscriber, setIsSubscriber] = useState(true);
   const [redirect, setRedirect] = useState(false);

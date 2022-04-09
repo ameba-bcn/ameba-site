@@ -12,19 +12,17 @@ export const StyledModalRow = styled.div`
 `;
 
 export const StyledCloseIcon = styled.div`
-  align-items: flex-end;
+  justify-content: space-between;
   display: flex;
   width: 100%;
-  flex-direction: column;
+  flex-direction: row;
   margin-bottom: 20px;
   cursor: pointer;
   svg {
     float: right;
-    flex-grow: 1;
     max-height: 24px;
     margin-top: -20px;
     z-index: 1000;
-    /* margin-right: -1.5rem; */
   }
   svg:hover {
     color: ${(props) => (props.colorMode === "light" ? "#1d1d1b" : "#fae6c5")};

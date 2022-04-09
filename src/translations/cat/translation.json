@@ -52,7 +52,8 @@
         "esgotat": "Producte esgotat",
         "sortir": "sortir",
         "sortir-text": "Si surts la cistella s'eliminarà. Estàs segur que vols sortir?",
-        "continua": "continua"
+        "continua": "continua",
+        "copiat": "copiat!"
     },
     "footer": {
         "drets": "Tots els drets reservats",
@@ -96,6 +97,8 @@
     "errors": {
         "stripe": "Hi ha hagut un error amb el sistema de pagament. Contacta amb info@ameba.cat",
         "general": "Algo no ha anat bé...",
-        "contacta": "Contacta amb "
+        "contacta": "Contacta amb ",
+        "linkBuit1": "La ruta no es correcte.",
+        "linkBuit2": "No podem mostrarte res 🤷‍♂️"
     }
 }
