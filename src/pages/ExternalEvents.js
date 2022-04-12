@@ -10,18 +10,18 @@ import { addToCart } from '../redux/actions/cart';
 import { useLocation } from 'react-router-dom';
 
 const SyledExternalBox = styled.div`
-height: 100%;
-background-color: #FAE6C5;
+    height: 100%;
+    background-color: #FAE6C5;
 `
 
 const SyledExternalError = styled.div`
-height: 100%;
-display: flex;
-flex-direction: row;
-align-items: center;
-justify-content: center;
-font-family: "Bebas Neue";
-font-size: 30px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: "Bebas Neue";
+    font-size: 30px;
 `
 
 const ExternalEvents = () => {
@@ -49,18 +49,26 @@ const ExternalEvents = () => {
                 setProductData(res.data);
                 setProducteLoading(false);
             })
-            .catch((error) => {
-                console.log("ERROL", error.response);
+            .catch(err => {
                 setProducteLoading(false);
-            });
+                if (err.response) {
+                    console.log("ERROR: client received an error response (5xx, 4xx)", err.response);
+                } else if (err.request) {
+                    console.log("ERROR: client never received a response, or request never left", err.response);
+                } else {
+                    console.log("ERROR: anything else", err);
+                }
+            })
     }, [id, kind])
+
     const handleAddClick = () => {
         dispatch(addToCart(variants[0].id));
     }
+
     return (
         <div>
             <SyledExternalBox>
-                {producteLoading ? <SyledExternalError><span className="spinner-border" /> </SyledExternalError>: noProductData ? <SyledExternalError><br/>{t("errors.linkBuit1")}<br/><br/>{t("errors.linkBuit2")}<br/><br/></SyledExternalError> : <ExternalEvent productData={productData} handleAddClick={handleAddClick} kind={kind} />}
+                {producteLoading ? <SyledExternalError><span className="spinner-border" /> </SyledExternalError> : noProductData ? <SyledExternalError><br />{t("errors.linkBuit1")}<br /><br />{t("errors.linkBuit2")}<br /><br /></SyledExternalError> : <ExternalEvent productData={productData} handleAddClick={handleAddClick} kind={kind} />}
             </SyledExternalBox>
             <LettersMove
                 className="lettersMoveDiv"

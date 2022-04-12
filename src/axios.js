@@ -20,7 +20,7 @@ axiosInstance.interceptors.response.use(
     (response) => {
         return response;
     },
-    async function (error) {
+    async (error) => {
         console.log("Axios, On nok", error)
         const originalRequest = error.config;
 

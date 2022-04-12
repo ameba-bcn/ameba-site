@@ -50,6 +50,15 @@ export default function LlistatActivitats() {
         dispatch(addToCart(res.data.variants[0].id));
       })
       .then(setRedirect(true))
+      .catch(err => {
+        if (err.response) {
+          console.log("ERROL: client received an error response (5xx, 4xx)", err.response);
+        } else if (err.request) {
+          console.log("ERROL: client never received a response, or request never left", err.response); 
+        } else {
+          console.log("ERROL: anything else", err); 
+        }
+    })
       .catch((error) => {
         console.log("ERROL", error.response);
       });
@@ -64,10 +73,16 @@ export default function LlistatActivitats() {
         setLoading(false)
       })
       .then(handleClickOpen())
-      .catch((error) => {
+      .catch(err => {
         setLoading(false)
-        console.log("ERROL", error.response);
-      });
+        if (err.response) {
+          console.log("ERROL: client received an error response (5xx, 4xx)", err.response);
+        } else if (err.request) {
+          console.log("ERROL: client never received a response, or request never left", err.response); 
+        } else {
+          console.log("ERROL: anything else", err); 
+        }
+    })
   };
 
   const handleClickOpen = () => {

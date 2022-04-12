@@ -46,7 +46,7 @@ const ExternalEvent = ({ productData = {}, kind = '', handleAddClick }) => {
     let history = useHistory();
     const [activeSize, setActiveSize] = useState([]);
     const [selectSizeError, setSelectSizeError] = useState(false);
-    const [isSubscriber, setIsSubscriber] = useState(true);
+    const [isSubscriber, setIsSubscriber] = useState(id===14);
     const [sizes, setSizes] = useState([]);
     const [t] = useTranslation("translation");
     const isMobile = useMediaQuery(MOBILE_NORMAL);

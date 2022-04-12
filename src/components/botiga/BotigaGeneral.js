@@ -65,10 +65,16 @@ export default function BotigaGeneral() {
         setProducteLoading(false);
       })
       .then(handleClickOpen())
-      .catch((error) => {
-        console.log("ERROL", error.response);
+      .catch(err => {
         setProducteLoading(false);
-      });
+        if (err.response) {
+          console.log("ERROR: client received an error response (5xx, 4xx)", err.response);
+        } else if (err.request) {
+          console.log("ERROR: client never received a response, or request never left", err.response); 
+        } else {
+          console.log("ERROR: anything else", err); 
+        }
+    })
   };
 
   useEffect(() => {

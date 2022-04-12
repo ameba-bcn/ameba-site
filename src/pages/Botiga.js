@@ -41,10 +41,16 @@ function Botiga() {
         setProductData(arr);
         setLoading(false);
       })
-      .catch((error) => {
-        console.log("ERROL", error.response);
+      .catch(err => {
         setLoading(false);
-      });
+        if (err.response) {
+          console.log("ERROR: client received an error response (5xx, 4xx)", err.response);
+        } else if (err.request) {
+          console.log("ERROR: client never received a response, or request never left", err.response);
+        } else {
+          console.log("ERROR: anything else", err);
+        }
+      })
   };
 
   const handleClose = () => {
@@ -71,8 +77,8 @@ function Botiga() {
             isMobile
               ? t("banners.soci-curt")
               : `${t("banners.soci-llarg-pt1")}${deleteStringDecimals(
-                  sociPreu
-                )}${t("banners.soci-llarg-pt2")}`
+                sociPreu
+              )}${t("banners.soci-llarg-pt2")}`
           }
           handleClick={handleOpen}
         />

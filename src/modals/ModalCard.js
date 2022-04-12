@@ -80,6 +80,8 @@ export default function ModalCard(props) {
   };
 
   const handleCopyLink = () => {
+    console.log(isSubscriber)
+    const ID = modalStyle === "SOCI" ? id : id;
     const kind = modalStyle.toLowerCase()
     const base_url = window.location.origin;
     const copyUrl = `${base_url}/product?id=${id}&kind=${kind}`
