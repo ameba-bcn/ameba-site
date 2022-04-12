@@ -14,8 +14,9 @@ import TableProducts from "./TableProducts";
 function Review({ setError: setCheckoutError }, error) {
   const [t] = useTranslation("translation");
   const { cart_data = {} } = useSelector((state) => state.cart);
-  const { total } = cart_data;
-
+  const { total, item_variants } = cart_data;
+  const noAllSub = (element) => element.is_subscription === false;
+  const hasNoSubscription = item_variants.some(noAllSub)
   return (
     <ReviewContent>
       <ReviewTotalRow>
@@ -28,9 +29,9 @@ function Review({ setError: setCheckoutError }, error) {
       <DiscountCode />
       <ReviewRowSeparator isBig={true} />
       <ReviewFooter>
-        {t("checkout.review-footer-1")} <br />
-        {t("checkout.review-footer-2")} <br />
-        {t("checkout.review-footer-3")}
+        {hasNoSubscription ? <>{t("checkout.review-footer-1")} < br />
+          {t("checkout.review-footer-2")} < br />
+          {t("checkout.review-footer-3")} </> : <>{t("checkout.review-footer-4")}</>}
       </ReviewFooter>
       {error === true && <ErrorBox isError={error} />}
     </ReviewContent>

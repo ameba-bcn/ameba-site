@@ -8,8 +8,9 @@
         "pagament": "pagament",
         "pagament-gratis": "El procediment de compra no suposa cap càrreg per tant no cal realitzar pagament.",
         "review-footer-1": "Temporalment no fem enviaments de productes.",
-        "review-footer-2": "La recollida es pot fer de 10-14 i de 16-20 a Rhythm Control.",
-        "review-footer-3": "Si tens qualsevol dubte contacta'ns a info@ameba.cat"
+        "review-footer-2": "La recollida es pot fer de 15-19:45 de Dl a Ds a Rhythm Control(Bcn).",
+        "review-footer-3": "Si tens qualsevol dubte contacta'ns a info@ameba.cat",
+        "review-footer-4": "T'enviarem un email amb tota la informació."
     },
     "support": {
         "menu": {
