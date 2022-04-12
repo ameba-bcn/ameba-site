@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.0.2
+- New text on checkout membership
+- Copy link on PRO membership
+
 Version 3.0.1
 - External article view
 - Copy article on clipboard
