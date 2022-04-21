@@ -63,7 +63,7 @@ export function mergeCartIds(arr1, arr2) {
 // Requiere Styling del ancho del elemento i
 export function createLastRowIterator(arr, boxWidth, padding) {
   const ifPadding = padding ? parseInt(padding) : 0;
-  const rowLen = ~~((window.innerWidth-ifPadding) / boxWidth);
+  const rowLen = ~~((window.innerWidth - ifPadding) / boxWidth);
   const lengthEmptyCells = rowLen - (arr.length % rowLen);
   return arr.length && rowLen !== 0
     ? Array.apply(null, Array(lengthEmptyCells))
@@ -77,6 +77,10 @@ export const sortByDate = (array) => {
     return new Date(b.datetime) - new Date(a.datetime);
   });
   return array;
+};
+
+export const sortByProperty = (array, property) => {
+  return array.sort((a, b) => (a[property] > b[property]) ? 1 : ((b[property] > a[property]) ? -1 : 0))
 };
 
 export function deleteStringDecimals(price) {
