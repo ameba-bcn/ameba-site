@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.0.4
+- Parkfest img
+
 Version 3.0.3
 - Arrow in product modal img
 - SEO meta title
