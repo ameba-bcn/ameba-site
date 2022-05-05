@@ -237,6 +237,7 @@ hr>.modal-card__hr_dashed {
     text-align: justify;
     flex-grow: 1;
     line-height: initial;
+    white-space: pre-wrap;
 }
 
 .modal-card-mobile__description-content {

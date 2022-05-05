@@ -142,6 +142,7 @@
     width: 55%;
     font-size: 22px;
     font-family: "Montserrat", sans-serif;
+    white-space: pre-wrap;
 }
 
 .bio-highlights {
@@ -207,6 +208,7 @@
     -webkit-animation: fade 1s 1;
     max-width: 100%;
     line-height: 1.5em;
+    white-space: pre-wrap;
 }
 
 @keyframes fade {
