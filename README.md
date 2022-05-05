@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.0.5
+- White spaces in content 
+
 Version 3.0.4
 - Parkfest img
 
