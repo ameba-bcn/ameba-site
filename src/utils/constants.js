@@ -64,8 +64,8 @@ export const ERROR = {
         : "Descuento: este campo es obligatorio",
     FORMAT:
       localStorage.getItem("i18nextLng") === "ca"
-        ? "Descompte: format erroni"
-        : "Descuento: formato erróneo",
+        ? "Descompte: format o longitud(6 lletres) erroni"
+        : "Descuento: formato o longitud(6 letras) erróneo",
   },
 };
 
