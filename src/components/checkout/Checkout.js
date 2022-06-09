@@ -50,14 +50,13 @@ function Checkout() {
   useEffect(() => {
     dispatch(getMemberProfile());
   }, [dispatch]);
-
   if (!item_variants.length || !isLoggedIn) return <Redirect to="/" />;
 
   const handleNext = () => {
     if (activeStep === 1) {
       setLoading(true)
       dispatch(checkoutCart())
-       .then(()=> !isPaymentFree && dispatch(checkoutPaymentCart(id)))
+        .then(() => !isPaymentFree && dispatch(checkoutPaymentCart(id)))
         .then(() => {
           setActiveStep(activeStep + 1);
           setError(false);
@@ -101,49 +100,49 @@ function Checkout() {
           </>
         );
       case 2:
-        return <Payment isPaymentFree={isPaymentFree} />;
+        return <Payment/>;
       default:
         throw new Error("Unknown step");
     }
   };
 
   return (
-      <CheckoutFrame>
-        <CheckoutBox>
-          <CheckoutTitle>{t("checkout.pagament")}</CheckoutTitle>
-          <CheckoutSubtitle>{steps[activeStep]}</CheckoutSubtitle>
-          <Stepper arraySteps={steps} activeStep={activeStep} />
-          <CheckoutContent>{getStepContent(activeStep)}</CheckoutContent>
-          {error && <ErrorBox isError={error} />}
-          {loading && <span className="spinner-border"></span> }
-          <CheckoutButtons>
-            {activeStep !== 0 && (
-              <Button
-                variant="contained"
-                color="primary"
-                buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
-                buttonStyle="boton--primary--solid"
-                disabled={loading}
-                onClick={handleBack}
-              >
-                {t("boto.enrere")}
-              </Button>
-            )}
-            {activeStep < steps.length - 1 && !userIsEditingData && (
-              <Button
-                variant="contained"
-                color="primary"
-                buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
-                buttonStyle="boton--primary--solid"
-                disabled={loading}
-                onClick={handleNext}
-              >
-                {t("boto.seguent")}
-              </Button>
-            )}
-          </CheckoutButtons>
-        </CheckoutBox>
-      </CheckoutFrame>
+    <CheckoutFrame>
+      <CheckoutBox>
+        <CheckoutTitle>{t("checkout.pagament")}</CheckoutTitle>
+        <CheckoutSubtitle>{steps[activeStep]}</CheckoutSubtitle>
+        <Stepper arraySteps={steps} activeStep={activeStep} />
+        <CheckoutContent>{getStepContent(activeStep)}</CheckoutContent>
+        {error && <ErrorBox isError={error} />}
+        {loading && <span className="spinner-border"></span>}
+        <CheckoutButtons>
+          {activeStep !== 0 && (
+            <Button
+              variant="contained"
+              color="primary"
+              buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
+              buttonStyle="boton--primary--solid"
+              disabled={loading}
+              onClick={handleBack}
+            >
+              {t("boto.enrere")}
+            </Button>
+          )}
+          {activeStep < steps.length - 1 && !userIsEditingData && (
+            <Button
+              variant="contained"
+              color="primary"
+              buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
+              buttonStyle="boton--primary--solid"
+              disabled={loading}
+              onClick={handleNext}
+            >
+              {t("boto.seguent")}
+            </Button>
+          )}
+        </CheckoutButtons>
+      </CheckoutBox>
+    </CheckoutFrame>
   );
 }
 

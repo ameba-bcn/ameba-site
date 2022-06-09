@@ -18,11 +18,11 @@ import { ReviewRowSeparator } from "./Review.style";
 import { openFullscreen } from "../../redux/actions/fullscreen";
 
 export default function Payment(props) {
-  const { isPaymentFree = false } = props;
   const [t] = useTranslation("translation");
   const dispatch = useDispatch();
   const { cart_data = {}, checkout = {} } = useSelector((state) => state.cart);
-  const { checkout_stripe = {} } = checkout;
+  const { checkout_stripe = {}, amount } = checkout;
+  const isPaymentFree = amount === 0;
   const { client_secret = "", stripe_public = '' } = checkout_stripe;
   const { total } = cart_data;
   const stripePromise = loadStripe(stripe_public);
@@ -35,7 +35,6 @@ export default function Payment(props) {
   useEffect(() => {
     dispatch(openFullscreen());
   }, [])
-
 
   return (
     <PaymentContent>
@@ -50,21 +49,20 @@ export default function Payment(props) {
           <ReviewRowSeparator isBig={false} />
         </PaymentReview>
       </PaymentSummaryBox>
-      {stripe_public ? (
-        checkout_stripe && (
-          <PaymentBox>
-            {isPaymentFree ? (
-              <FreeCheckout />
-            ) : (
-              <Elements stripe={stripePromise} options={options}>
-                <PaymentForm />
-              </Elements>
-            )}
-          </PaymentBox>
-        )
-      ) : (
-        <ErrorBox message={t("errors.stripe")} isError={true} />
-      )}
+
+
+      <PaymentBox>
+        {isPaymentFree ? (
+          <FreeCheckout />
+        ) : (
+          !!stripe_public && checkout_stripe ? (
+            <Elements stripe={stripePromise} options={options}>
+              <PaymentForm />
+            </Elements>)
+            :
+            <ErrorBox message={t("errors.stripe")} isError={true} />)}
+      </PaymentBox>
+
     </PaymentContent>
   );
 }
