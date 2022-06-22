@@ -15,18 +15,14 @@ function Associacio() {
   const { file = "" } = cover[mediaIndex] || {};
   const urlMedia = file;
   const staticImg = isMobile
-    ? "/amebaParkfest2022Mobile.jpg"
-    : "/amebaParkfest2022Web.jpg";
-
-    // const staticImg = isMobile
-    // ? "/AmebaPortadaMobile.jpg"
-    // : "/AmebaPortadaDesktop.jpg";
+    ? "/AmebaPortadaMobile.jpg"
+    : "/AmebaPortadaDesktop.jpg";
 
   return (
     <div className="Bloque" id="associacio">
       <div className="cover-box">
         {/* Loading a image meanwhile is loading video */}
-        {/* {!isReady && (
+        {!isReady && (
           <img
             src={process.env.PUBLIC_URL + staticImg}
             className="portadaFallback"
@@ -44,11 +40,6 @@ function Associacio() {
           onReady={() => setIsready(true)}
           onError={() => setIsready(false)}
           playsinline={true}
-        /> */}
-        <img
-          src={process.env.PUBLIC_URL + staticImg}
-          className="portadaFallback"
-          alt=""
         />
       </div>
       <LettersMove
