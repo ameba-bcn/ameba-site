@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.0.7
+- Classic cover
+
 Version 3.0.6
 - Free payments doesn't hit Stripe
 
