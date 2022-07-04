@@ -7,7 +7,7 @@ import "./ProductBanner.css";
 const ProductBanner = (props) => {
   const isMobile = useMediaQuery(MOBILE_NORMAL)
   return (
-    <div className="productBanner" onClick={() => props.handleClick()}>
+    <div className="productBanner">
       <div className="productBannerTitle">{props.title}</div>
       <PlusButton plusStyle="plus--red" plusSize={isMobile ? "plus--small" : "plus--big"} />
     </div>

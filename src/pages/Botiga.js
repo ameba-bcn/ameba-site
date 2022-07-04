@@ -8,7 +8,7 @@ import LettersMove from "./../components/layout/LettersMove";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { API_URL, MEMBER_LIST } from "../utils/constants";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { deleteStringDecimals } from "../utils/utils";
 import axiosInstance from "../axios";
 
@@ -72,16 +72,23 @@ function Botiga() {
     <div className="Botiga">
       <PowerTitle title={t("menu.botiga")} className="SupportTitle" />
       <div className="clickBanner">
-        <ProductBanner
-          title={
-            isMobile
-              ? t("banners.soci-curt")
-              : `${t("banners.soci-llarg-pt1")}${deleteStringDecimals(
-                sociPreu
-              )}${t("banners.soci-llarg-pt2")}`
-          }
-          handleClick={handleOpen}
-        />
+        <NavLink
+          style={{ textDecoration: "none" }}
+          to={{
+            pathname: '/memberships',
+          }}
+        >
+          <ProductBanner
+            title={
+              isMobile
+                ? t("banners.soci-curt")
+                : `${t("banners.soci-llarg-pt1")}${deleteStringDecimals(
+                  sociPreu
+                )}${t("banners.soci-llarg-pt2")}`
+            }
+          // handleClick={handleOpen}
+          />
+        </NavLink>
       </div>
       {open && (
         <SociDialog
@@ -98,6 +105,7 @@ function Botiga() {
       <LettersMove
         className="lettersMoveDiv"
         sentence={t("banners.soci-curt")}
+        link="/memberships"
         color="#EB5E3E"
       />
     </div>

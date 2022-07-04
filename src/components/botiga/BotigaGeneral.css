@@ -84,6 +84,11 @@
     justify-content: center;
 }
 
+.clickBanner a {
+    width: 100%;
+    display: contents;
+}
+
 @media screen and (max-width: 641px) {
     .fullcardBotiga {
         min-width: 400px;

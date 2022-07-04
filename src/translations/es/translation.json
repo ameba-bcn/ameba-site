@@ -1,6 +1,7 @@
 {
     "menu": {
-        "botiga": "tienda"
+        "botiga": "tienda",
+        "soci-menu": "HAZTE SOCIO"
     },
     "checkout": {
         "finalitzarCompra": "finalizar compra",
@@ -101,5 +102,8 @@
         "contacta": "Contacta con ",
         "linkBuit1": "La ruta no es correcta.",
         "linkBuit2": "No podemos mostrarte nada 🤷‍♂️"
+    },
+    "soci": {
+        "disclaimer": "Para poder finalizar el procedimiento accede a la cesta y realiza el pago"
     }
 }

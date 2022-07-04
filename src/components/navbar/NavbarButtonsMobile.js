@@ -8,11 +8,10 @@ export default function NavbarButtonsMobile(props) {
   const { isLoggedIn = false, click, handleClick, isMobile } = props;
   const [t, i18next] = useTranslation("translation");
 
-  const handleChangeLanguage = (lang) => {   
+  const handleChangeLanguage = (lang) => {
     const currentLang = localStorage.getItem("i18nextLng");
     if (currentLang !== lang) {
       i18next.changeLanguage(lang);
-      // localStorage.setItem("i18nextLng", lang);
       window.location.reload(false);
     }
   };
@@ -21,6 +20,11 @@ export default function NavbarButtonsMobile(props) {
     <div className="nav-ul_box-mobile">
       {click && (
         <ul className="nav-ul_mobile">
+          <li>
+            <NavLink to="/memberships" data-item={t("menu.soci-menu")} onClick={handleClick}>
+              {t("menu.soci-menu")}
+            </NavLink>
+          </li>
           <li>
             <NavLink to="/activitats" data-item="AGENDA" onClick={handleClick}>
               AGENDA
@@ -57,7 +61,7 @@ export default function NavbarButtonsMobile(props) {
           <div className="menu-lang">
             <li>
               <a
-               onClick={() => handleChangeLanguage("ca")}
+                onClick={() => handleChangeLanguage("ca")}
                 data-item="CAT/"
               >
                 CAT/

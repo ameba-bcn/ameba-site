@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 import { RowSeparator } from "../../GlobalStyles.style";
 import { deleteUser } from "../../redux/actions/auth";
 import SociDialog from "../botiga/Soci";
@@ -43,13 +44,22 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
           ) : (
             <MembershipFormReadOnly />
           )}
-         <RowSeparator />
-           <MemberInfoRow>
+          <RowSeparator />
+          <MemberInfoRow>
             {t("perfil.vols-soci")} {isMember ? antiMember : ""}?<br />
-            <span onClick={() => setOpen(true)}>{`< ${t(
-              "perfil.mes-info"
-            )} >`}</span>
-          </MemberInfoRow> 
+            <NavLink
+              style={{ textDecoration: "none", color: "#1d1d1b" }}
+              to={{
+                pathname: '/memberships',
+              }}
+            >
+              <span style={{ textDecoration: 'none' }}
+              // onClick={() => setOpen(true)}
+              >
+                {`< ${t("perfil.mes-info")} >`}
+              </span>
+            </NavLink>
+          </MemberInfoRow>
           <RowSeparator />
           <Button
             variant="contained"

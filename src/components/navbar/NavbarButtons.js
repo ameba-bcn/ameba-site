@@ -21,6 +21,11 @@ export default function NavbarButtons(props) {
     <div className="menuButtons">
       <ul className="nav-ul">
         <li>
+          <NavLink to="/memberships" data-item={t("menu.soci-menu")}>
+            {t("menu.soci-menu")}
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/activitats" data-item="AGENDA">
             AGENDA
           </NavLink>

@@ -15,10 +15,11 @@ export default function Booking() {
         className="SupportTitle"
         subtitle="AMEBA Roster"
       />
-      <CardGrid isAmebaDJ={true}/>
+      <CardGrid isAmebaDJ={true} />
       <LettersMove
         className="lettersMoveDiv"
         sentence={t("banners.soci-curt")}
+        link="/memberships"
         color="#FAE6C5"
       />
     </div>

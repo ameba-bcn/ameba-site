@@ -69,7 +69,7 @@ export const ERROR = {
   },
 };
 
-export const MOBILE_BIG = "(max-width:1150px)";
+export const MOBILE_BIG = "(max-width:1275px)";
 
 export const MOBILE_NORMAL = "(max-width:760px)";
 
@@ -82,6 +82,7 @@ export const MEMBER = "Suporter";
 // This list contains posible names for normal & pro memberships
 export const MEMBER_LIST = ["Supporter", "Soci", "Socio", "Supporter"];
 export const PRO_MEMBER_LIST = ["Pro", "Professional", "Profesional"];
+export const MEMBER_ID = 14;
 
 export const productKinds = ["producte", "soci", "activitat"];
 export const productQueryKind = { "producte": "articles", "soci": "subscriptions", "activitat": "events" }

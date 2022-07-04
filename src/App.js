@@ -46,6 +46,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
 import ExternalEvents from "./pages/ExternalEvents";
+import Memberships from "./pages/Memberships";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -95,6 +96,7 @@ function App() {
           <Route path="/login" component={LogSession} />
           <Route path="/recovery" component={PasswordRecovery} />
           <Route path="/checkout" component={CheckoutPage} />
+          <Route path="/memberships" component={Memberships} />
           <Route path="/send-recovery" component={SendEmailPasswordRecovery} />
           <Route path="/validate-email" component={ValidateEmail} />
           <Route path="/activate" component={LogMailConfirmation} />
