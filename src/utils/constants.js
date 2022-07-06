@@ -69,7 +69,7 @@ export const ERROR = {
   },
 };
 
-export const MOBILE_BIG = "(max-width:1275px)";
+export const MOBILE_BIG = "(max-width:1360px)";
 
 export const MOBILE_NORMAL = "(max-width:760px)";
 
@@ -88,3 +88,10 @@ export const productKinds = ["producte", "soci", "activitat"];
 export const productQueryKind = { "producte": "articles", "soci": "subscriptions", "activitat": "events" }
 
 export const API_URL = process.env.REACT_APP_API_HOST || "http://localhost/api/";
+
+export const FLICKR_URL = "https://api.flickr.com/services/rest/?method=flickr.galleries.getPhotos"
+export const FLICKR_KEY = "d42519b6c54602915c2d98ee7e717f73"
+export const FLICKR_ALBUM_ID = "72177720300333067"
+// export const FLICKR_KEY = "b3014467d042f84ff54e71399fcbcc06"
+export const FLICKR_SECRET = "45216314df67fd07"
+// export const FLICKR_SECRET = "97256cdfd6c477b6"

@@ -38,6 +38,8 @@
         "react-swipeable-views": "^0.13.9",
         "react-toastify": "^8.1.0",
         "react-update": "^0.4.4",
+        "react-viewerjs": "^0.1.9",
+        "react-xml-parser": "^1.1.8",
         "redux": "^4.0.5",
         "redux-thunk": "^2.3.0",
         "save-dev": "0.0.1-security",

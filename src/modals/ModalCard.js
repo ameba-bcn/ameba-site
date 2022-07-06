@@ -80,8 +80,6 @@ export default function ModalCard(props) {
   };
 
   const handleCopyLink = () => {
-    console.log(isSubscriber)
-    const ID = modalStyle === "SOCI" ? id : id;
     const kind = modalStyle.toLowerCase()
     const base_url = window.location.origin;
     const copyUrl = `${base_url}/product?id=${id}&kind=${kind}`
@@ -101,7 +99,7 @@ export default function ModalCard(props) {
               <ClearIcon
                 onClick={handleClose}
               />
-              {copied?<div className="modal-card__copy">{t("modal.copiat")}</div>: null}
+              {copied ? <div className="modal-card__copy">{t("modal.copiat")}</div> : null}
             </StyledCloseIcon>
             <div className="modal-card__row">
               <div className="modal-card__column_eighty">
@@ -213,7 +211,7 @@ export default function ModalCard(props) {
             <ClearIcon
               onClick={handleClose}
             />
-          {copied?<div className="modal-card-mobile__copy">{t("modal.copiat")}</div>: null}
+            {copied ? <div className="modal-card-mobile__copy">{t("modal.copiat")}</div> : null}
           </div>
           <div className="modal-card-mobile__row">
             <hr

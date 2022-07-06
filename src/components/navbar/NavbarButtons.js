@@ -45,6 +45,11 @@ export default function NavbarButtons(props) {
             BOOKING
           </NavLink>
         </li>
+        <li>
+          <NavLink to="/galery" data-item="GALERIA">
+            GALERIA
+          </NavLink>
+        </li>
 
         <div className="liMenuOptions logname-li">
           {!isLoggedIn ? (
