@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.0.9
+- New Image Gallery View
+- New library for display detailed images
+
 Version 3.0.8
 - New membership view
 - Improved membership flow
