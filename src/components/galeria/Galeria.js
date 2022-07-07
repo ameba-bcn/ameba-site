@@ -26,7 +26,7 @@ const Galeria = (props) => {
             <RViewer imageUrls={images}>
                 <StyledGallery>
                     {images.map((image, index) =>
-                        <RViewerTrigger key={image}>
+                        <RViewerTrigger key={image} index={index}>
                             <img src={image} alt="" />
                         </RViewerTrigger>)}
                 </StyledGallery>

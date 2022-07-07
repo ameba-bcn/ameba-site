@@ -27,7 +27,7 @@ export default function Galery() {
     const SERVER_ID = attributes.server
     const ID = attributes.id
     const SECRET = attributes.secret
-    const photoUrl = `https://live.staticflickr.com/${SERVER_ID}/${ID}_${SECRET}.jpg`
+    const photoUrl = `https://live.staticflickr.com/${SERVER_ID}/${ID}_${SECRET}_b.jpg`
     return photoUrl
   })
 
