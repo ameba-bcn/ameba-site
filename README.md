@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.1.0
+- Gallery images bigger size
+- Open image bug solved
+
 Version 3.0.9
 - New Image Gallery View
 - New library for display detailed images
