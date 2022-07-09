@@ -194,6 +194,9 @@ const getCart = () => {
     return axiosInstance.get(`${API_URL}carts/${cart_uuid}/`).then((response) => {
       localStorage.setItem("cart_id", response?.data.id);
       return response?.data;
+    }).catch(() => {
+      const cart_uuid = localStorage.getItem("cart_id");
+      if (cart_uuid) localStorage.removeItem("cart_id");
     });
   }
 };
