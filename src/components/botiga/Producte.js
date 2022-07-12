@@ -20,8 +20,8 @@ export default function ProducteDialog(props) {
 
   const handleAddClick = (size) => {
     const variantsObj = dataRow.variants.filter(
-      (x) => x.attributes[0].value === size.toLowerCase()
-    )[0].id;
+      (x) => x.attributes[0]?.value?.toLowerCase() === size.toLowerCase()
+    )[0]?.id;
     const variant_id = variantsObj || "";
     dispatch(addToCart(variant_id));
     handleClose();
@@ -47,7 +47,7 @@ export default function ProducteDialog(props) {
   }, [dataRow]);
 
   return loading ? (
-    <FullscreenSpinner/>
+    <FullscreenSpinner />
   ) : (
     <ModalCard
       handleClose={handleClose}
