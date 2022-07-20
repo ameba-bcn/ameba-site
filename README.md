@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.1.2
+- Bugfix: Gallery
+
 Version 3.1.1
 - LS Cart id deleted after bar cart rq
 
