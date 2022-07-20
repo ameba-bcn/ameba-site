@@ -47,7 +47,7 @@ import "react-toastify/dist/ReactToastify.css";
 import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
 import ExternalEvents from "./pages/ExternalEvents";
 import Memberships from "./pages/Memberships";
-import Galery from "./pages/Galery";
+import Gallery from "./pages/Gallery";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -94,7 +94,7 @@ function App() {
           <Route path="/support" component={SupportYourLocals} />
           <Route exact path="/booking/:id" component={Entrevista} />
           <Route path="/booking" component={Booking} />
-          <Route path="/galery" component={Galery} />
+          <Route path="/gallery" component={Gallery} />
           <Route path="/login" component={LogSession} />
           <Route path="/recovery" component={PasswordRecovery} />
           <Route path="/checkout" component={CheckoutPage} />

@@ -50,7 +50,7 @@ export default function NavbarButtonsMobile(props) {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/galery" data-item="GALERIA" onClick={handleClick}>
+            <NavLink to="/gallery" data-item="GALERIA" onClick={handleClick}>
               GALERIA
             </NavLink>
           </li>

@@ -46,7 +46,7 @@ export default function NavbarButtons(props) {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/galery" data-item="GALERIA">
+          <NavLink to="/gallery" data-item="GALERIA">
             GALERIA
           </NavLink>
         </li>
