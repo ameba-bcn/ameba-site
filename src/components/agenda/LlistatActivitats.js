@@ -7,6 +7,7 @@ import { TiTicket } from "react-icons/ti";
 import axiosInstance from "../../axios";
 import ActivitatDialog from "./Activitat";
 import {
+  formatDateToHour,
   formatISODateToDate,
   formatISODateToHour,
   sortByDate,
@@ -116,7 +117,7 @@ export default function LlistatActivitats() {
             <div className="horaDataPetit">
               <h5 className="mainActivitatSubtitle">
                 {formatISODateToDate(rowData.datetime)}{" "}
-                {formatISODateToHour(rowData.datetime)}
+                {formatDateToHour(rowData.datetime)}
               </h5>
             </div>
           </div>
@@ -152,7 +153,7 @@ export default function LlistatActivitats() {
         render: (rowData) => (
           <div className="horaDataActivitat">
             <h1 className="mainActivitatTitle">
-              {formatISODateToHour(rowData.datetime)}
+              {formatDateToHour(rowData.datetime)}
             </h1>
           </div>
         ),
