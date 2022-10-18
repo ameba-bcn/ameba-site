@@ -5,6 +5,7 @@ import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import { StyledCenterLabel, StyledSizesRow } from './ModalCardStyled';
+import { formatDateToHour } from '../utils/utils';
 
 const InteractiveModalBox = (props) => {
     const {
@@ -134,14 +135,7 @@ const InteractiveModalBox = (props) => {
                                 rel="noopener noreferrer"
                             >
                                 {datetime !== undefined ? datetime.split("T")[0] : ""}{" "}
-                                {datetime !== undefined
-                                    ? datetime
-                                        .substring(
-                                            datetime.lastIndexOf("T") + 1,
-                                            datetime.lastIndexOf("Z")
-                                        )
-                                        .slice(0, -3)
-                                    : ""}
+                                {formatDateToHour(datetime)}
                             </a>
                         </div>
                     </div>

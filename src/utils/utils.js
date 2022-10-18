@@ -39,6 +39,16 @@ export function formatISODateToHour(sDate) {
   );
 }
 
+export function formatDateToHour(datetime) {
+  if (datetime !== undefined) return datetime
+    .substring(
+      datetime.lastIndexOf("T") + 1,
+      datetime.lastIndexOf("Z")
+    )
+    .slice(0, -3)
+  return "";
+}
+
 export function deepComparision(obj1, obj2) {
   if (obj1 && obj2) return JSON.stringify(obj1) === JSON.stringify(obj2);
   return false;
