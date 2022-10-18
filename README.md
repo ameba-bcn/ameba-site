@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.1.3
+- Bugfix: Dates
+
 Version 3.1.2
 - Bugfix: Gallery
 
