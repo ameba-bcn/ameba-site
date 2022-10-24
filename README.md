@@ -4,6 +4,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.2.0
+- Toast redirect checkout
+- Login redirect checkout if cart has items
+- Back button implemented on last step of checkout
+- Modal for back button implemented on last step
+- Bug: Soci/Professional button inverted
+
 Version 3.1.3
 - Bugfix: Dates
 
