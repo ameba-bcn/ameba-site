@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from 'react-i18next';
 import styled from "styled-components";
 import LettersMove from '../components/layout/LettersMove';
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { MEMBER_ID, MEMBER_LIST, MOBILE_NORMAL, PRO_MEMBER_LIST } from '../utils/constants';
 import { addToCart } from '../redux/actions/cart';
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
@@ -63,7 +62,6 @@ const Memberships = () => {
     const [selectSizeError, setSelectSizeError] = useState(false);
     const modalStyle = "SOCI"
     const productSoldOut = !has_stock;
-    const buttonIcon = () => <ShoppingCartIcon />;
     const buttonText = t("modal.afegir");
     const box1Title = t("modal.descripcio")
     const box2Title = t("modal.beneficis")
@@ -118,7 +116,6 @@ const Memberships = () => {
                                                 ? "boton--back-orange--solid"
                                                 : "boton--primary--solid"
                                         }
-                                        icon={buttonIcon}
                                         onClick={() => {
                                             !productSoldOut && handleAddClick(id);
                                         }}>

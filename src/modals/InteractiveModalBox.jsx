@@ -88,7 +88,7 @@ const InteractiveModalBox = (props) => {
                                     ? "interactiveDataBox-soci__button-active"
                                     : "interactiveDataBox-soci__button-inactive"
                                 }`}
-                            onClick={() => setIsSubscriber(true)}
+                            onClick={() => setIsSubscriber(false)}
                         >
                             {extraButtons[0]}
                         </div>
@@ -98,7 +98,7 @@ const InteractiveModalBox = (props) => {
                                     ? "interactiveDataBox-soci__button-inactive"
                                     : "interactiveDataBox-soci__button-active"
                                 }`}
-                            onClick={() => setIsSubscriber(false)}
+                            onClick={() => setIsSubscriber(true)}
                         >
                             {extraButtons[1]}
                         </div>

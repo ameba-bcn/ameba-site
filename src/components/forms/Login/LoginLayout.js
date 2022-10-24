@@ -9,7 +9,7 @@ const LoginLayout = (props) => {
   const [t] = useTranslation("translation");
   const cart = useSelector((state) => state.cart);
   const { cart_data = {} } = cart;
-  const { state = {} } = cart_data;
+  const { state = {}, item_variant_ids = [] } = cart_data;
   const [redirect, setRedirect] = useState(false);
   const [recover, setRecover] = useState(false);
   const [displayError, setDisplayError] = useState(false);
@@ -23,17 +23,10 @@ const LoginLayout = (props) => {
   };
 
   if (redirect) {
-    const { needs_checkout, has_subscriptions, has_article, has_memberships } =
-      state || {};
-    if (
-      needs_checkout === false &&
-      has_subscriptions === 1 &&
-      has_memberships === false
-    ) {
+    if (item_variant_ids.length > 0) {
       return <Redirect to="/checkout" />;
-    } else if (needs_checkout === false && has_article === 1) {
-      return <Redirect to="/checkout" />;
-    } else {
+    }
+    else {
       return <Redirect to="/" />;
     }
   }

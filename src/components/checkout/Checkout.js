@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
 import Review from "./Review";
-import { checkoutCart, checkoutPaymentCart } from "../../redux/actions/cart";
+import { checkoutCart, checkoutPaymentCart, getCart } from "../../redux/actions/cart";
 import { isMemberCheckout } from "../../utils/utils";
 import "./Checkout.css";
 import Button from "../button/Button";
@@ -25,17 +25,20 @@ import Payment from "./Payment";
 import { useMediaQuery } from "@material-ui/core";
 import { MOBILE_NORMAL, MOBILE_SMALL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
+import { closeFullscreen } from "../../redux/actions/fullscreen";
+import CloseModal from "../../modals/CloseModal";
 
 function Checkout() {
   const dispatch = useDispatch();
   const [t] = useTranslation("translation");
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { isLoggedIn = false } = useSelector((state) => state.auth);
-  const { total = "", item_variants = [], id=""} = cart_data;
+  const { total = "", item_variants = [], id = "" } = cart_data;
   const isPaymentFree = total === "0.00 €";
   const hasMembershipInCart = isMemberCheckout(item_variants); // sacar del carro cuando esté en back
   const [activeStep, setActiveStep] = useState(hasMembershipInCart ? 0 : 1);
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const userIsEditingData =
@@ -100,11 +103,25 @@ function Checkout() {
           </>
         );
       case 2:
-        return <Payment/>;
+        return <Payment />;
       default:
         throw new Error("Unknown step");
     }
   };
+
+  const handleOpen = () => {
+    setOpen(true);
+  }
+
+  const handleCloseModal = () => {
+    setOpen(false);
+  }
+
+  const handleExitFullscreen = () => {
+    setOpen(false);
+    dispatch(closeFullscreen());
+    dispatch(getCart());
+  }
 
   return (
     <CheckoutFrame>
@@ -117,7 +134,7 @@ function Checkout() {
         {loading && <span className="spinner-border"></span>}
         <CheckoutButtons>
           {activeStep !== 0 && (
-            <Button
+            activeStep < 2 ? <Button
               variant="contained"
               color="primary"
               buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
@@ -126,7 +143,17 @@ function Checkout() {
               onClick={handleBack}
             >
               {t("boto.enrere")}
-            </Button>
+            </Button> :
+              <Button
+                variant="contained"
+                color="primary"
+                buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
+                buttonStyle="boton--primary--solid"
+                disabled={loading}
+                onClick={() => handleOpen()}
+              >
+                {t("modal.sortir")}
+              </Button>
           )}
           {activeStep < steps.length - 1 && !userIsEditingData && (
             <Button
@@ -140,6 +167,7 @@ function Checkout() {
               {t("boto.seguent")}
             </Button>
           )}
+          <CloseModal open={open} handleClose={handleCloseModal} handleExitFullscreen={handleExitFullscreen} />
         </CheckoutButtons>
       </CheckoutBox>
     </CheckoutFrame>
