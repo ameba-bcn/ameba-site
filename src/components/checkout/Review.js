@@ -11,7 +11,7 @@ import {
 } from "./Review.style";
 import TableProducts from "./TableProducts";
 
-function Review({ setError: setCheckoutError }, error) {
+function Review({ setError: setCheckoutError, error }) {
   const [t] = useTranslation("translation");
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { total, item_variants } = cart_data;
