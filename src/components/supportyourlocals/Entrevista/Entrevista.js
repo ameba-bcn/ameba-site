@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import TitleSection from "../TitleSection";
 import axiosInstance from "../../../axios";
@@ -26,6 +26,10 @@ export default function Entrevista() {
       current_answers: [{ answer: "", question: "" }],
     },
   ]);
+  const data = useSelector((state) => state.data);
+  const { support = [] } = data;
+  const [urlData] = support.filter((x) => x?.name?.replace(/\s+/g, '-')?.toLowerCase() === urlID)
+  const ID = urlData?.id
   // const mediaUrls = !!support.length
   //   ? support.find((x) => x.id === parseInt(urlID))?.media_urls
   //   : [];
@@ -47,7 +51,7 @@ export default function Entrevista() {
 
   useEffect(() => {
     axiosInstance
-      .get(`${API_URL}artists/${urlID}/`, {})
+      .get(`${API_URL}artists/${ID}/`, {})
       .then((resp) => {
         setArtist(resp.data);
         const interviewId = resp.data.interview_id;
@@ -64,7 +68,7 @@ export default function Entrevista() {
           console.log("ERROR: anything else", err);
         }
       })
-  }, [urlID]);
+  }, [ID]);
 
   return (
     <div className="top-section">

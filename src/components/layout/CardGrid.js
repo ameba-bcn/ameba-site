@@ -40,12 +40,13 @@ export default function CardGrid(props) {
     !!filteredArtists.length &&
     filteredArtists.map((data) => {
       const { id = 0, images = [], name = "", tags = [] } = data;
+      const urlName = name.replace(/\s+/g, '-')?.toLowerCase();
       return (
         <div className="fullcard" key={id}>
           <NavLink
             style={{ textDecoration: "none" }}
             to={{
-              pathname: isAmebaDJ ? "/booking/" + id : "/support/" + id,
+              pathname: isAmebaDJ ? "/booking/" + urlName : "/support/" + urlName,
               aboutProps: data,
             }}
           >
