@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.2.1
+- Artist names in url
+
 Version 3.2.0
 - Toast redirect checkout
 - Login redirect checkout if cart has items
