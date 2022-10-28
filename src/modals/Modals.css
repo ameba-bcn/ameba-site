@@ -359,7 +359,7 @@ hr>.modal-card__hr_dashed {
     margin-left: 0.5rem;
 }
 
-.interactiveDataBox-soci__button-active {
+.interactiveDataBox-soci__button-inactive {
     border-style: solid;
     border-color: #eb5e3e;
     background-color: #1d1d1b;
@@ -367,7 +367,7 @@ hr>.modal-card__hr_dashed {
     padding-top: 0.1rem;
 }
 
-.interactiveDataBox-soci__button-inactive {
+.interactiveDataBox-soci__button-active {
     background-color: #eb5e3e;
     padding-top: 0.4rem;
     line-height: 2.2rem;

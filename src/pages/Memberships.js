@@ -39,7 +39,9 @@ const Memberships = () => {
     const [t] = useTranslation("translation");
     const dispatch = useDispatch();
     const { membership = [] } = useSelector((state) => state.data);
-    const [productData, setProductData] = useState(membership[0])
+    const [membershipSoci] = membership.filter(el => el.id === MEMBER_ID)
+    const [membershipPro] = membership.filter(el => el.id !== MEMBER_ID)
+    const [productData, setProductData] = useState(membershipSoci)
     const isMobile = useMediaQuery(MOBILE_NORMAL);
     const { cart_data = {} } = useSelector((state) => state.cart);
     const { item_variants = [] } = cart_data;
@@ -66,9 +68,10 @@ const Memberships = () => {
     const box1Title = t("modal.descripcio")
     const box2Title = t("modal.beneficis")
 
+
     useEffect(() => {
-        setProductData(isSubscriber ? membership[0] : membership[1])
-    }, [membership, isSubscriber])
+        setProductData(isSubscriber ? membershipSoci : membershipPro)
+    }, [membership, isSubscriber, setIsSubscriber])
 
     const handleAddClick = () => {
         dispatch(addToCart(variants[0]));
