@@ -4,6 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.2.4
+- Url enrichemnt in description box
+
 Version 3.2.3
 - Bugfix: inverted button membership
 
