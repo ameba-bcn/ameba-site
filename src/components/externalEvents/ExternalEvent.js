@@ -15,6 +15,7 @@ import Button from '../button/Button';
 import { useHistory } from 'react-router-dom';
 import { MEMBER_LIST, MOBILE_NORMAL, productKinds, PRO_MEMBER_LIST } from '../../utils/constants';
 import { StyledExternalButtonBox, StyledExternalEventBox, StyledExternalEventCol1, StyledExternalEventCol2, StyledTitleBox } from './StyledExternalEvent';
+import { urlify } from '../../utils/utils';
 
 const ExternalEvent = ({ productData = {}, kind = '', handleAddClick }) => {
     const {
@@ -46,7 +47,7 @@ const ExternalEvent = ({ productData = {}, kind = '', handleAddClick }) => {
     let history = useHistory();
     const [activeSize, setActiveSize] = useState([]);
     const [selectSizeError, setSelectSizeError] = useState(false);
-    const [isSubscriber, setIsSubscriber] = useState(id===14);
+    const [isSubscriber, setIsSubscriber] = useState(id === 14);
     const [sizes, setSizes] = useState([]);
     const [t] = useTranslation("translation");
     const isMobile = useMediaQuery(MOBILE_NORMAL);
@@ -171,12 +172,12 @@ const ExternalEvent = ({ productData = {}, kind = '', handleAddClick }) => {
                         </span>
                     </div>}
                     <div className="modal-card__description-title-external">{box1Title}</div>
-                    <div className="modal-card__description-content">{description}</div>
+                    <div className="modal-card__description-content">{urlify(description)}</div>
                     {box2Title && (
                         <>
                             {modalStyle === "SOCI" && <> <div className="modal-card__description-title-external">{box2Title}</div>
                                 <div className="modal-card__description-content">
-                                    {benefits}
+                                    {urlify(benefits)}
                                 </div></>}
                         </>
                     )}

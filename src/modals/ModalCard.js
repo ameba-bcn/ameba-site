@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import { useMediaQuery } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
-import { formatPrice } from "../utils/utils";
+import { formatPrice, urlify } from "../utils/utils";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import LinkIcon from '@material-ui/icons/Link';
 import Button from "../components/button/Button";
@@ -183,7 +183,7 @@ export default function ModalCard(props) {
               className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
             />
             <div className="modal-card__description-title">{box1Title}</div>
-            <div className="modal-card__description-content">{box1Text}</div>
+            <div className="modal-card__description-content">{urlify(box1Text)}</div>
             {box2Title && (
               <>
                 <hr
@@ -191,7 +191,7 @@ export default function ModalCard(props) {
                 />
                 <div className="modal-card__description-title">{box2Title}</div>
                 <div className="modal-card__description-content">
-                  {box2Text}
+                  <pre>{urlify(box2Text)}</pre>
                 </div>
               </>
             )}

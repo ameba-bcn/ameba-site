@@ -102,3 +102,14 @@ export const truncate = (string, length) => {
   if (string.length < length) return string;
   return string.substring(0, length).concat("...");
 };
+
+export const urlify = (text) => {
+  const urlRegex = /(https?:\/\/[^\s]+)/g;
+  return text.split(urlRegex)
+    .map(part => {
+      if (part.match(urlRegex)) {
+        return <a href={part}>{part}</a>;
+      }
+      return part;
+    });
+}

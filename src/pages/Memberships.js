@@ -14,7 +14,7 @@ import InteractiveModalBox from '../modals/InteractiveModalBox';
 import { useMediaQuery } from '@material-ui/core';
 import { toast } from 'react-toastify';
 import Toast from '../components/toast/Toast';
-import { isMemberCheckout } from '../utils/utils';
+import { isMemberCheckout, urlify } from '../utils/utils';
 
 const SyledExternalBox = styled.div`
     height: 100%;
@@ -152,12 +152,12 @@ const Memberships = () => {
                                     </span>
                                 </div>
                                 <div className="modal-card__description-title-external">{box1Title}</div>
-                                <div className="modal-card__description-content">{description}</div>
+                                <div className="modal-card__description-content">{urlify(description)}</div>
                                 {box2Title && (
                                     <>
                                         {benefits && <> <div className="modal-card__description-title-external">{box2Title}</div>
                                             <div className="modal-card__description-content">
-                                                {benefits}
+                                                {urlify(benefits)}
                                             </div></>}
                                     </>
                                 )}
