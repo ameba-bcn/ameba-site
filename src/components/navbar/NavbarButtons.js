@@ -40,11 +40,11 @@ export default function NavbarButtons(props) {
             #SUPPORTYOURLOCALS
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/booking" data-item="BOOKING">
             BOOKING
           </NavLink>
-        </li>
+        </li> */}
         <li>
           <NavLink to="/gallery" data-item="GALERIA">
             GALERIA

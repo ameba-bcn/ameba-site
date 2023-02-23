@@ -44,11 +44,11 @@ export default function NavbarButtonsMobile(props) {
               #SUPPORTYOURLOCALS
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to="/booking" data-item="BOOKING" onClick={handleClick}>
               BOOKING
             </NavLink>
-          </li>
+          </li> */}
           <li>
             <NavLink to="/gallery" data-item="GALERIA" onClick={handleClick}>
               GALERIA
