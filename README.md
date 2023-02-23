@@ -4,16 +4,24 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.2.5
+
+- Booking section hidden but accesible by url
+
 Version 3.2.4
+
 - Url enrichemnt in description box
 
 Version 3.2.3
+
 - Bugfix: inverted button membership
 
 Version 3.2.1
+
 - Artist names in url
 
 Version 3.2.0
+
 - Toast redirect checkout
 - Login redirect checkout if cart has items
 - Back button implemented on last step of checkout
@@ -21,124 +29,157 @@ Version 3.2.0
 - Bug: Soci/Professional button inverted
 
 Version 3.1.3
+
 - Bugfix: Dates
 
 Version 3.1.2
+
 - Bugfix: Gallery
 
 Version 3.1.1
+
 - LS Cart id deleted after bar cart rq
 
 Version 3.1.0
+
 - Gallery images bigger size
 - Open image bug solved
 
 Version 3.0.9
+
 - New Image Gallery View
 - New library for display detailed images
 
 Version 3.0.8
+
 - New membership view
 - Improved membership flow
 
 Version 3.0.7
+
 - Classic cover
 
 Version 3.0.6
+
 - Free payments doesn't hit Stripe
 
 Version 3.0.5
-- White spaces in content 
+
+- White spaces in content
 
 Version 3.0.4
+
 - Parkfest img
 
 Version 3.0.3
+
 - Arrow in product modal img
 - SEO meta title
 
 Version 3.0.2
+
 - New text on checkout membership
 - Copy link on PRO membership
 
 Version 3.0.1
+
 - External article view
 - Copy article on clipboard
 
 Version 3.0.0
+
 - Counter deleted, first release candidate
 
 Version 2.0.16
+
 - Plus Icon centered
 - Benefits on membership mobile modal
 
 Version 2.0.15
+
 - Portada iphone
 
 Version 2.0.14
+
 - Loader modal member on close
 - Three last activities on main
 
 Version 2.0.13
+
 - Safari styling issues solved
 
 Version 2.0.12
+
 - CORS error
 
 Version 2.0.11
+
 - Delete ameba-site on baseURL
 - Restore axios headers
 
 Version 2.0.10
+
 - Unavailable screen with countdown
 
 Version 2.0.9
+
 - Package versions bug
 
 Version 2.0.8
+
 - Translations
 
 Version 2.0.7
+
 - Safari IntersectionObserver
 - Translations
 
 Version 2.0.6
+
 - Fullscreen checkout close header
 - Unique Size vertical align
 
 Version 2.0.5
+
 - Media iFrames
 - Safari IntersectionObserver
 - Wider toast
 
 Version 2.0.4
+
 - Restyle alignments
 - Regrid cards
 
 Version 2.0.3
+
 - New modal interactiveBox layout
 - Modal title left align
 - Bugfix: OnClose activity modal crash
 
 Version 2.0.2
+
 - Colaboration logos
 - Button supporter read from server
 
 Version 2.0.1
-- React Player 
+
+- React Player
 - Modal loader
 
 Version 2.0.0
+
 - Unmount modals
 - Membership load from constant
 
 Version 1.99
+
 - Cart with short name
 - Cart and dropdown with sizes
 - has_stock on use
 - SubHeader on event modal
 
 Version 1.98
+
 - Unisex sizes prevented
 - Bug: SupportYourLocals tags overflowing
 - Plus modal on mobile restyled
@@ -147,45 +188,56 @@ Version 1.98
 - Fallback when loading fonts& and icons
 
 Version 1.97
+
 - Bug: Constant fix
 
 Version 1.96
+
 - Bug: display BE response on psswd recovery flow
 - Bug: Avoid hardcoded price on banner
 - Bug: Roster copy
 
 Version 1.95
+
 - Bug: Bookings collapsed
 
 Version 1.94
+
 - Bug: Bookings links artists
 - Bug: Artist media links
 - Bug: Wrong breadcrumb title
 - Bug: manifesto text format
 
 Version 1.93
+
 - Payment redirects after successfull payment
 
 Version 1.92
+
 - Payment stripe key consumed from ep
 
 Version 1.91
+
 - Product landing by url queries
 
 Version 1.9
+
 - Payment reads stripe env
 - Errors translated
 
 Version 1.8
+
 - Payment component updated
 - Hover cards with effect
 
 Version 1.7
+
 - FE Translated
 - Validate on submit, not on type
 - Hover in cards bug
 
 Version 1.6
+
 - Checkout Styling
 - Font auto resize
 - New videos on landing
@@ -193,22 +245,26 @@ Version 1.6
 - SupportYourLocals fragmented in small components
 
 Version 1.5
+
 - Loading Styling
 - SupportYourLocals subdivided by smaller components
 - Password recovery bugfix
 
 Version 1.4
+
 - DiscountCode
 - NodeModules Lib cleaned
 - MiniTable products on Summary
 - Profile View updated
 
 Version 1.3
+
 - Multilanguage
 - Form errors restyled
 - New checkout look&feel
 
 Version 1.2
+
 - Free shopping process
 - SubscriptionBox
 - Back error handling
@@ -221,18 +277,22 @@ Version 1.2
 - Restyled from dessign
 
 Version 1.1
+
 - Profile data on logged user
 - Bugfix stepper checkout on non member
 
 Version 1.0
+
 - New view BOOKING
 - Complete new Membership flow
 - Bugfix
 
 Version 0.9.1
+
 - Bugfix
 
 Version 0.9
+
 - Fill back button
 - Error handling request responses
 - Filter and search in Agenda
@@ -241,6 +301,7 @@ Version 0.9
 - Bugfix: Delete cart error, max 3 activities in Main...
 
 Version 0.8
+
 - Scroll to top on access page
 - Event List images adjustment
 - Cast video options disabled
@@ -248,7 +309,8 @@ Version 0.8
 - Duplicate product bugfix
 
 Version 0.7
-- Main cart events responsive restyle 
+
+- Main cart events responsive restyle
 - SupportYourLocals cards responsive
 - New Button component
 - New Plus button component
@@ -256,6 +318,7 @@ Version 0.7
 - Mobile menu
 
 Version 0.6
+
 - Profile user data load logic created
 - Profile user data edit logic created
 - BugFix: Main activities cards restyled, title unbound error
@@ -263,18 +326,21 @@ Version 0.6
 - Prettier included
 
 Version 0.5
+
 - About implemented
 - BugFix: Logout crashes app on two tabs
 - BugFix: Logout freeze
 - BugFix: Activities clickable on main
 
 Version 0.4
+
 - New login flow including cart_id asigned to user
 - New register flow including cart_id asigned to user
 - New register new member flow including cart_id asigned to user
 - New checkout cart and checkout member flow including cart_id asigned to user
 
 Version 0.3
+
 - New newsletter form on footer
 - Performace and rerenders optimized
 - Store tracks user status
@@ -283,22 +349,27 @@ Version 0.3
 - Profile view user first approach
 
 Version 0.2
+
 - Membership procedure
 - Modals mobile adapted
 - Password recovery implemented
 - Email verification implemented
 
 Version 0.1
+
 - Implemented checkout procedure
 
-
 ## Start with Docker
+
 - Instalar Docker
 - En el directorio raíz del proyecto, build del proyecto:
+
 ```
 docker build . -t ameba-site
 ```
+
 - Deploy
+
 ```
 docker run ameba-site
 ```
@@ -370,7 +441,7 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 
-
 ### `versions` and `compatibility`
+
 node 14.15.0
 npm install node-sass@4.14.0
