@@ -133,6 +133,11 @@ input:-webkit-autofill:active {
     font-family: "Montserrat", sans-serif;
 }
 
+.linkEndingText{
+    text-decoration: none;
+    color: black !important;
+}
+
 .colabText {
     font-family: "Montserrat", sans-serif;
     margin-bottom: 24px;

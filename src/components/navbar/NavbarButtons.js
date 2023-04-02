@@ -46,6 +46,11 @@ export default function NavbarButtons(props) {
           </NavLink>
         </li> */}
         <li>
+          <NavLink to="/projects" data-item={t("menu.projectes")}>
+            {t("menu.projectes")}
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/gallery" data-item="GALERIA">
             GALERIA
           </NavLink>

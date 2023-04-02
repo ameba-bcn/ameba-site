@@ -1,109 +1,110 @@
 {
+  "menu": {
+    "botiga": "botiga",
+    "soci-menu": "FES-TE SOCI",
+    "projectes": "PROJECTES"
+  },
+  "checkout": {
+    "finalitzarCompra": "finalitzar compra",
+    "cistella": "cistella",
+    "pagament": "pagament",
+    "pagament-gratis": "El procediment de compra no suposa cap càrreg per tant no cal realitzar pagament.",
+    "review-footer-1": "Temporalment no fem enviaments de productes.",
+    "review-footer-2": "La recollida es pot fer de 15-19:45 de Dl a Ds a Rhythm Control(Bcn).",
+    "review-footer-3": "Si tens qualsevol dubte contacta'ns a info@ameba.cat",
+    "review-footer-4": "T'enviarem un email amb tota la informació."
+  },
+  "support": {
     "menu": {
-        "botiga": "botiga",
-        "soci-menu": "FES-TE SOCI"
+      "bio": "bio",
+      "entrevista": "entrevista",
+      "media": "media",
+      "activitats": "activitats"
     },
-    "checkout": {
-        "finalitzarCompra": "finalitzar compra",
-        "cistella": "cistella",
-        "pagament": "pagament",
-        "pagament-gratis": "El procediment de compra no suposa cap càrreg per tant no cal realitzar pagament.",
-        "review-footer-1": "Temporalment no fem enviaments de productes.",
-        "review-footer-2": "La recollida es pot fer de 15-19:45 de Dl a Ds a Rhythm Control(Bcn).",
-        "review-footer-3": "Si tens qualsevol dubte contacta'ns a info@ameba.cat",
-        "review-footer-4": "T'enviarem un email amb tota la informació."
+    "top-menu": {
+      "nom": "nom",
+      "ciutat": "ciutat",
+      "segells": "segells",
+      "projectes": "projectes",
+      "artistes": "artistes"
     },
-    "support": {
-        "menu": {
-            "bio": "bio",
-            "entrevista": "entrevista",
-            "media": "media",
-            "activitats": "activitats"
-        },
-        "top-menu": {
-            "nom": "nom",
-            "ciutat": "ciutat",
-            "segells": "segells",
-            "projectes": "projectes",
-            "artistes": "artistes"
-        },
-        "title": {
-            "subtitle": "* conèix als artistes que donen vida a l'escena de la ciutat *"
-        }
-    },
-    "banners": {
-        "soci-curt": "fes-te soci/a",
-        "soci-llarg-pt1": "fes-te soci/a d'ameba desde ",
-        "soci-llarg-pt2": "/any"
-    },
-    "agenda": {
-        "data": "data",
-        "activitat": "activitat"
-    },
-    "modal": {
-        "talles": "talles disponibles",
-        "talla": "talla",
-        "quota": "quota de soci/a",
-        "professional": "professional",
-        "localitzacio": "localització",
-        "preu": "preu",
-        "afegir": "afegir a cistella",
-        "descripcio": "descripció",
-        "beneficis": "beneficis",
-        "sizesError": "Per poder avançar selecciona una talla",
-        "esgotat": "Producte esgotat",
-        "sortir": "sortir",
-        "sortir-text": "Si surts la cistella s'eliminarà. Estàs segur que vols sortir?",
-        "continua": "continua",
-        "copiat": "copiat!"
-    },
-    "footer": {
-        "drets": "Tots els drets reservats",
-        "colab": "Amb la col·laboració de:"
-    },
-    "newsletter": {
-        "subscriute": "subscriu-te"
-    },
-    "login": {
-        "registrat": "Registra't",
-        "recupera-curt": "Recupera contrassenya",
-        "recupera-llarg": "Recupera la teva contrassenya",
-        "inicia": "Ja estàs registrat? Inicia sessió",
-        "encara": "Encara no ets soci/a? Informat aquí!",
-        "modifica": "Modifica la teva contrassenya",
-        "recupera": "Hem enviat una contrassenya nova al teu correu electrònic. Verifícala per poder continuar.",
-        "link-recupera": "No has rebut cap correu? Torna-ho a intentar"
-    },
-    "form": {
-        "nom": "nom",
-        "cognom": "cognom",
-        "telefon": "telèfon",
-        "soci": "nºsoci",
-        "descompte": "descompte",
-        "usuari": "usuari",
-        "contrassenya": "contrassenya"
-    },
-    "perfil": {
-        "dades": "dades personals",
-        "vols-soci": "Vols ser soci",
-        "mes-info": "més info aqui",
-        "baixa": "Donar-se de baixa"
-    },
-    "boto": {
-        "cancela": "cancel·la",
-        "guarda": "guarda",
-        "finalitza": "finalitza",
-        "enrere": "enrere",
-        "seguent": "següent pas"
-    },
-    "errors": {
-        "stripe": "Hi ha hagut un error amb el sistema de pagament. Contacta amb info@ameba.cat",
-        "general": "Algo no ha anat bé...",
-        "contacta": "Contacta amb ",
-        "linkBuit1": "La ruta no es correcte.",
-        "linkBuit2": "No podem mostrarte res 🤷‍♂️"
-    },
-    "soci": {
-        "disclaimer": "Per a poder finalitzar el procediment accedeix a la cistella i realitza el pagament"
+    "title": {
+      "subtitle": "* conèix als artistes que donen vida a l'escena de la ciutat *"
     }
+  },
+  "banners": {
+    "soci-curt": "fes-te soci/a",
+    "soci-llarg-pt1": "fes-te soci/a d'ameba desde ",
+    "soci-llarg-pt2": "/any"
+  },
+  "agenda": {
+    "data": "data",
+    "activitat": "activitat"
+  },
+  "modal": {
+    "talles": "talles disponibles",
+    "talla": "talla",
+    "quota": "quota de soci/a",
+    "professional": "professional",
+    "localitzacio": "localització",
+    "preu": "preu",
+    "afegir": "afegir a cistella",
+    "descripcio": "descripció",
+    "beneficis": "beneficis",
+    "sizesError": "Per poder avançar selecciona una talla",
+    "esgotat": "Producte esgotat",
+    "sortir": "sortir",
+    "sortir-text": "Si surts la cistella s'eliminarà. Estàs segur que vols sortir?",
+    "continua": "continua",
+    "copiat": "copiat!"
+  },
+  "footer": {
+    "drets": "Tots els drets reservats",
+    "colab": "Amb la col·laboració de:"
+  },
+  "newsletter": {
+    "subscriute": "subscriu-te"
+  },
+  "login": {
+    "registrat": "Registra't",
+    "recupera-curt": "Recupera contrassenya",
+    "recupera-llarg": "Recupera la teva contrassenya",
+    "inicia": "Ja estàs registrat? Inicia sessió",
+    "encara": "Encara no ets soci/a? Informat aquí!",
+    "modifica": "Modifica la teva contrassenya",
+    "recupera": "Hem enviat una contrassenya nova al teu correu electrònic. Verifícala per poder continuar.",
+    "link-recupera": "No has rebut cap correu? Torna-ho a intentar"
+  },
+  "form": {
+    "nom": "nom",
+    "cognom": "cognom",
+    "telefon": "telèfon",
+    "soci": "nºsoci",
+    "descompte": "descompte",
+    "usuari": "usuari",
+    "contrassenya": "contrassenya"
+  },
+  "perfil": {
+    "dades": "dades personals",
+    "vols-soci": "Vols ser soci",
+    "mes-info": "més info aqui",
+    "baixa": "Donar-se de baixa"
+  },
+  "boto": {
+    "cancela": "cancel·la",
+    "guarda": "guarda",
+    "finalitza": "finalitza",
+    "enrere": "enrere",
+    "seguent": "següent pas"
+  },
+  "errors": {
+    "stripe": "Hi ha hagut un error amb el sistema de pagament. Contacta amb info@ameba.cat",
+    "general": "Algo no ha anat bé...",
+    "contacta": "Contacta amb ",
+    "linkBuit1": "La ruta no es correcte.",
+    "linkBuit2": "No podem mostrarte res 🤷‍♂️"
+  },
+  "soci": {
+    "disclaimer": "Per a poder finalitzar el procediment accedeix a la cistella i realitza el pagament"
+  }
 }

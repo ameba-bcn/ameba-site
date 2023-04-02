@@ -48,6 +48,7 @@ import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
 import ExternalEvents from "./pages/ExternalEvents";
 import Memberships from "./pages/Memberships";
 import Gallery from "./pages/Gallery";
+import Projects from "./pages/Projects";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -94,6 +95,7 @@ function App() {
           <Route path="/support" component={SupportYourLocals} />
           <Route exact path="/booking/:id" component={Entrevista} />
           <Route path="/booking" component={Booking} />
+          <Route path="/projects" component={Projects} />
           <Route path="/gallery" component={Gallery} />
           <Route path="/login" component={LogSession} />
           <Route path="/recovery" component={PasswordRecovery} />
