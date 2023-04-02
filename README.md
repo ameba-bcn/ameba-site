@@ -4,6 +4,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Release changes
 
+Version 3.2.6
+
+- Projects section created
+
 Version 3.2.5
 
 - Booking section hidden but accesible by url
