@@ -161,7 +161,7 @@ export default function ModalCard(props) {
                 datetime={datetime}
                 handleAddClick={handleAddClick}
                 price={price} />
-              <Button
+              {!productSoldOut && <Button
                 variant="contained"
                 color="primary"
                 buttonSize="boton--medium"
@@ -177,7 +177,7 @@ export default function ModalCard(props) {
                 }}
               >
                 {buttonText}
-              </Button>
+              </Button>}
             </StyledModalRow>
             <hr
               className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}

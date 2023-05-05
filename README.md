@@ -1,8 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 # AMEBA FRONTEND
 
 ## Release changes
+
+Version 3.2.7
+
+- Buy button hidden for free events
 
 Version 3.2.6
 

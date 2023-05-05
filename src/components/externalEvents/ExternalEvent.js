@@ -112,7 +112,7 @@ const ExternalEvent = ({ productData = {}, kind = '', handleAddClick }) => {
                 <StyledExternalEventCol1>
                     <ImageCarousel imgList={images} />
                     <StyledExternalButtonBox>
-                        <Button
+                        {!productSoldOut && <Button
                             variant="contained"
                             color="primary"
                             buttonSize="boton--medium"
@@ -127,7 +127,7 @@ const ExternalEvent = ({ productData = {}, kind = '', handleAddClick }) => {
                                 !productSoldOut && handleAddToCard(id);
                             }}>
                             {buttonText}
-                        </Button>
+                        </Button>}
                     </StyledExternalButtonBox>
                 </StyledExternalEventCol1>
                 <StyledExternalEventCol2>
