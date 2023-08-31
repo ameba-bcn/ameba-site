@@ -30,11 +30,11 @@ export default function NavbarButtonsMobile(props) {
               AGENDA
             </NavLink>
           </li>
-          <li>
+          {/* <li>
             <NavLink to="/botiga" data-item={t("menu.botiga")} onClick={handleClick}>
               {t("menu.botiga")}
             </NavLink>
-          </li>
+          </li> */}
           <li>
             <NavLink
               to="/support"

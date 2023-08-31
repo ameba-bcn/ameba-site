@@ -13,7 +13,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Home from "./pages/Home";
 import Activitats from "./pages/Activitats";
-import Botiga from "./pages/Botiga";
+// import Botiga from "./pages/Botiga";
 import Entrevista from "./components/supportyourlocals/Entrevista/Entrevista";
 import SupportYourLocals from "./pages/SupportYourLocals";
 import NotFound from "./pages/NotFound";
@@ -90,7 +90,7 @@ function App() {
         <ScrollTop showBelow={250} />
         <Switch>
           <Route path="/activitats" component={Activitats} />
-          <Route path="/botiga" component={Botiga} />
+          {/* <Route path="/botiga" component={Botiga} /> */}
           <Route exact path="/support/:id" component={Entrevista} />
           <Route path="/support" component={SupportYourLocals} />
           <Route exact path="/booking/:id" component={Entrevista} />
