@@ -2,6 +2,10 @@
 
 ## Release changes
 
+Version 3.2.8
+
+- Shop temporally hidden due stock issues
+
 Version 3.2.7
 
 - Buy button hidden for free events
