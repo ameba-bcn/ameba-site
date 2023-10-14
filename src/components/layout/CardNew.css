@@ -23,6 +23,13 @@
 .cardDateRow {
     padding: 16px 0px 16px 16px;
     align-items: center;
+    position: relative;
+    background-color:#fae6c5;;
+}
+
+.cardDateRow.row {
+    margin-left:0px;
+    margin-right:0px;
 }
 
 .cardMediaTitleBox {
