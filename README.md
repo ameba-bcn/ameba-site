@@ -2,6 +2,11 @@
 
 ## Release changes
 
+Version 3.2.9
+
+- Fix: Button styles on active/innactive disabled
+- Fix: Restyled main view card footer
+
 Version 3.2.8
 
 - Shop temporally hidden due stock issues
