@@ -341,6 +341,10 @@ hr>.modal-card__hr_dashed {
     display: flex;
 }
 
+.isPro{
+        margin-left: 12px;
+}
+
 .interactiveDataBox-soci__button {
     text-transform: uppercase;
     cursor: pointer;
@@ -360,8 +364,8 @@ hr>.modal-card__hr_dashed {
 }
 
 .interactiveDataBox-soci__button-inactive {
-    border-style: solid;
-    border-color: #eb5e3e;
+    /* border-style: solid; */
+    /* border-color: #eb5e3e; */
     background-color: #1d1d1b;
     line-height: 2.5rem;
     padding-top: 0.1rem;

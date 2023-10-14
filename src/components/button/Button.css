@@ -81,12 +81,27 @@
     color: var(--negro);
 }
 
+.bg-red.active {
+    background-color: var(--rojo);
+    color: var(--crema);
+}
+
 .bg-cream:hover {
     background-color: var(--crema);
     color: var(--negro);
 }
 
+.bg-cream.active {
+    background-color: var(--crema);
+    color: var(--negro);
+}
+
 .bg-orange:hover {
+    background-color: var(--naranja);
+    color: var(--negro);
+}
+
+.bg-orange:active {
     background-color: var(--naranja);
     color: var(--negro);
 }
