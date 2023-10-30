@@ -2,6 +2,10 @@
 
 ## Release changes
 
+Version 3.2.10
+
+- Fix disabled events
+
 Version 3.2.9
 
 - Fix: Button styles on active/innactive disabled
