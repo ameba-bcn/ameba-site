@@ -39,7 +39,8 @@
   },
   "agenda": {
     "data": "fecha",
-    "activitat": "actividad"
+    "activitat": "actividad",
+    "inactiu": "Evento inactivo"
   },
   "modal": {
     "talles": "tallas disponibles",

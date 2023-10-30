@@ -40,12 +40,10 @@ export function formatISODateToHour(sDate) {
 }
 
 export function formatDateToHour(datetime) {
-  if (datetime !== undefined) return datetime
-    .substring(
-      datetime.lastIndexOf("T") + 1,
-      datetime.lastIndexOf("Z")
-    )
-    .slice(0, -3)
+  if (datetime !== undefined)
+    return datetime
+      .substring(datetime.lastIndexOf("T") + 1, datetime.lastIndexOf("Z"))
+      .slice(0, -3);
   return "";
 }
 
@@ -90,7 +88,9 @@ export const sortByDate = (array) => {
 };
 
 export const sortByProperty = (array, property) => {
-  return array.sort((a, b) => (a[property] > b[property]) ? 1 : ((b[property] > a[property]) ? -1 : 0))
+  return array.sort((a, b) =>
+    a[property] > b[property] ? 1 : b[property] > a[property] ? -1 : 0
+  );
 };
 
 export function deleteStringDecimals(price) {
@@ -105,11 +105,13 @@ export const truncate = (string, length) => {
 
 export const urlify = (text) => {
   const urlRegex = /(https?:\/\/[^\s]+)/g;
-  return text.split(urlRegex)
-    .map(part => {
-      if (part.match(urlRegex)) {
-        return <a href={part}>{part}</a>;
-      }
-      return part;
-    });
-}
+  return text.split(urlRegex).map((part) => {
+    if (part.match(urlRegex)) {
+      return (
+        // eslint-disable-next-line
+        <a href={part}>{part}</a>
+      );
+    }
+    return part;
+  });
+};

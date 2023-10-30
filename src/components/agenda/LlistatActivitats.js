@@ -9,7 +9,6 @@ import ActivitatDialog from "./Activitat";
 import {
   formatDateToHour,
   formatISODateToDate,
-  formatISODateToHour,
   sortByDate,
 } from "./../../utils/utils";
 import "./Agenda.css";
@@ -23,7 +22,7 @@ export default function LlistatActivitats() {
   const [loading, setLoading] = useState(false);
   const { agenda = [] } = useSelector((state) => state.data);
   const { user_profile = "" } = useSelector((state) => state.profile);
-  const noResultsMessage = <span>No s'han trobat resultats</span>;
+  const noResultsMessage = <span>No s&apos;han trobat resultats</span>;
   const [t] = useTranslation("translation");
 
   const [eventData, setEventData] = useState([
@@ -51,39 +50,51 @@ export default function LlistatActivitats() {
         dispatch(addToCart(res.data.variants[0].id));
       })
       .then(setRedirect(true))
-      .catch(err => {
+      .catch((err) => {
         if (err.response) {
-          console.log("ERROL: client received an error response (5xx, 4xx)", err.response);
+          console.log(
+            "ERROR: client received an error response (5xx, 4xx)",
+            err.response
+          );
         } else if (err.request) {
-          console.log("ERROL: client never received a response, or request never left", err.response); 
+          console.log(
+            "ERROR: client never received a response, or request never left",
+            err.response
+          );
         } else {
-          console.log("ERROL: anything else", err); 
+          console.log("ERROR", err);
         }
-    })
+      })
       .catch((error) => {
-        console.log("ERROL", error.response);
+        console.log("ERROR", error.response);
       });
   };
 
   const fetchEvent = (data) => {
-    setLoading(true)
+    setLoading(true);
     axiosInstance
       .get(`${API_URL}events/${data.id}`, {})
       .then((res) => {
         setEventData(res.data);
-        setLoading(false)
+        setLoading(false);
       })
       .then(handleClickOpen())
-      .catch(err => {
-        setLoading(false)
+      .catch((err) => {
+        setLoading(false);
         if (err.response) {
-          console.log("ERROL: client received an error response (5xx, 4xx)", err.response);
+          console.log(
+            "ERROL: client received an error response (5xx, 4xx)",
+            err.response
+          );
         } else if (err.request) {
-          console.log("ERROL: client never received a response, or request never left", err.response); 
+          console.log(
+            "ERROL: client never received a response, or request never left",
+            err.response
+          );
         } else {
-          console.log("ERROL: anything else", err); 
+          console.log("ERROL: anything else", err);
         }
-    })
+      });
   };
 
   const handleClickOpen = () => {
@@ -102,11 +113,7 @@ export default function LlistatActivitats() {
         render: (rowData) => (
           <div className="row">
             <div className="column activitatImg">
-              <img
-                src={rowData.images}
-                className="imgMiniActivitat"
-                alt=""
-              />
+              <img src={rowData.images} className="imgMiniActivitat" alt="" />
             </div>
             <div className="column activitatDescripcio">
               <h5 className="mainActivitatSubtitle">{rowData.address}</h5>
@@ -190,13 +197,21 @@ export default function LlistatActivitats() {
             fetchEvent(selectedRow);
           }}
           actions={[
-            {
-              icon: () => <TiTicket className="cardActivitat" />,
-              tooltip: "Reserva",
-              onClick: (event, rowData) => {
-                fetchAndAdd(rowData);
+            (rowdata) => ({
+              icon: () => (
+                <TiTicket
+                  disabled={!rowdata.hasStock}
+                  className="cardActivitat"
+                />
+              ),
+              tooltip: rowdata.hasStock ? "Reserva" : t("agenda.inactiu"),
+              onClick: (event, rowdata) => {
+                console.log("esee", rowdata.hasStock);
+                const { hasStock } = rowdata;
+                hasStock && fetchAndAdd(rowdata);
               },
-            },
+              disabled: !rowdata.hasStock,
+            }),
           ]}
           localization={{
             header: {
