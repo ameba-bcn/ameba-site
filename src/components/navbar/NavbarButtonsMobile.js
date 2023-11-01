@@ -64,6 +64,11 @@ export default function NavbarButtonsMobile(props) {
             </NavLink>
           </li> */}
         <li>
+          <NavLink to="/socis" data-item="SOCI@S" onClick={closeMenu}>
+            SOCI@S
+          </NavLink>
+        </li>
+        <li>
           <NavLink
             to="/projects"
             data-item={t("menu.projectes")}

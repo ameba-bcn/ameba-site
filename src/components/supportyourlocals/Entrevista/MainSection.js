@@ -1,10 +1,8 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import TitleSection from "../TitleSection";
 
 export default function MainSection(props) {
   const { artist = {} } = props;
-  const [t] = useTranslation("translation");
 
   return (
     <div className="bio-gral">

@@ -48,6 +48,11 @@ export default function NavbarButtons(props) {
           </NavLink>
         </li> */}
         <li>
+          <NavLink to="/socis" data-item="SOCI@S">
+            SOCI@S
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/projects" data-item={t("menu.projectes")}>
             {t("menu.projectes")}
           </NavLink>
