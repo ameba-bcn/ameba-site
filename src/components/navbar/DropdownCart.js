@@ -71,7 +71,7 @@ export default function DropdownCart(props) {
   const checkoutToCart = () => {
     isLoggedIn ? dispatch(setLoggedUser()) : dispatch(setGuestUser());
     setCartMenuOpen(false);
-    props.handleCloseMenu();
+    isMobile && props.handleCloseMenu();
     props.closeDropDown();
   };
 
@@ -108,7 +108,8 @@ export default function DropdownCart(props) {
                       <div className="rowDetailedCart">
                         <div className="cartPriceProduct">{el.price}</div>
                         <div className="quantitySizeProduct">
-                          {el?.variant_details?.size !== 'unique' && el?.variant_details?.size}
+                          {el?.variant_details?.size !== "unique" &&
+                            el?.variant_details?.size}
                         </div>
                         <div className="quantityPriceProduct">
                           Qty: <span>{getQty(item_variants, el.id)}</span>
@@ -145,7 +146,7 @@ export default function DropdownCart(props) {
                     <div className="colCartProduct1_mobile">
                       <div className="titleCartProduct">
                         <ReactFitty maxSize={22}>
-                          {truncate(el.item_name, isMinMobile? 25:40)}
+                          {truncate(el.item_name, isMinMobile ? 25 : 40)}
                         </ReactFitty>
                       </div>
                       <div className="rowDetailedCart">
@@ -153,7 +154,8 @@ export default function DropdownCart(props) {
                           {el.price}
                         </div>
                         <div className="quantitySizeProduct">
-                          {el?.variant_details?.size !== 'unique' && el?.variant_details?.size}
+                          {el?.variant_details?.size !== "unique" &&
+                            el?.variant_details?.size}
                         </div>
                         <div className="quantityPriceProduct">
                           Qty: <span>{getQty(item_variants, el.id)}</span>

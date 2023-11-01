@@ -6,12 +6,17 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 function Cart(props) {
-  const { isMobile, onClick = {}, click } = props;
+  const {
+    isMobile = false,
+    closeMenu,
+    openCartMenu,
+    closeCartMenu,
+    isCartMenuOpen,
+  } = props;
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { item_variants = [], count = 0 } = cart_data;
   const [anchorEl, setAnchorEl] = useState();
   const [cartMenuOpen, setCartMenuOpen] = useState(false);
-  const [isCartMobileOpen, setIsCartMobileOpen] = useState(false);
   const [t] = useTranslation("translation");
   if (cart_data && item_variants.length < 1 && cartMenuOpen) {
     setCartMenuOpen(false);
@@ -20,7 +25,7 @@ function Cart(props) {
   const handleOpenCart = (event) => {
     setAnchorEl(event.currentTarget);
     if (isMobile) {
-      setIsCartMobileOpen(!isCartMobileOpen);
+      isCartMenuOpen ? closeCartMenu() : openCartMenu();
     } else {
       setCartMenuOpen(true);
     }
@@ -29,7 +34,7 @@ function Cart(props) {
   const handleCloseCart = () => {
     setAnchorEl(null);
     if (isMobile) {
-      setIsCartMobileOpen(false);
+      closeCartMenu();
     } else {
       setCartMenuOpen(false);
     }
@@ -59,7 +64,7 @@ function Cart(props) {
                   cartData={cart_data}
                   closeDropDown={() => handleCloseCart()}
                   isMobile={false}
-                  handleCloseMenu={onClick}
+                  handleCloseMenu={closeMenu}
                   setCartMenuOpen={setCartMenuOpen}
                 />
               </div>
@@ -75,14 +80,13 @@ function Cart(props) {
         >
           {t("checkout.cistella")}
         </a>
-        {isCartMobileOpen && (
+        {isCartMenuOpen && (
           <div className="cart-mobile__box">
             <DropdownCart
               cartData={cart_data}
               closeDropDown={() => handleCloseCart()}
               isMobile={isMobile}
-              handleCloseMenu={onClick}
-              click={click}
+              handleCloseMenu={closeMenu}
               setCartMenuOpen={setCartMenuOpen}
             />
           </div>

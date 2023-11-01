@@ -5,29 +5,39 @@ import Menu from "@material-ui/core/Menu";
 import { logout } from "../../redux/actions/auth";
 
 export default function MenuLog(props) {
-  const { isMobile, handleClick = {} } = props;
+  const {
+    isMobile = false,
+    closeMenu = {},
+    isProfileMenuOpen = false,
+    openProfileMenu = {},
+    closeProfileMenu = {},
+  } = props;
   const { user_data } = useSelector((state) => state.auth);
   const { user_profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const [anchorEl1, setAnchorEl1] = useState(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isMember = user_profile === "MEMBER" || "LOGGED";
   const userName = user_data.username.split(" ")[0];
   const userNameShortened =
     userName.length > 7 ? userName.slice(0, 7) + "..." : userName;
 
   const handleCloseSessio = () => {
-    handleClick();
+    if (isMobile) {
+      closeMenu();
+    }
+    closeProfileMenu();
     setAnchorEl1(null);
   };
 
-  const handleClickSessio = (event) => {
+  const handleOpenSessio = (event) => {
     setAnchorEl1(event.currentTarget);
-    setMobileMenuOpen(!mobileMenuOpen);
+    isProfileMenuOpen ? handleCloseSessio() : openProfileMenu();
   };
 
   const logoutMenu = () => {
-    handleClick();
+    if (isMobile) {
+      closeMenu();
+    }
     dispatch(logout());
   };
   return (
@@ -35,7 +45,7 @@ export default function MenuLog(props) {
       <a
         className="sessio-menu-button"
         data-item={user_data.username === "" ? "SESSIÓ" : userNameShortened}
-        onClick={(e) => handleClickSessio(e)}
+        onClick={(e) => handleOpenSessio(e)}
       >
         {user_data.username === "" ? "SESSIÓ" : userNameShortened}
       </a>
@@ -63,7 +73,7 @@ export default function MenuLog(props) {
           </div>
         </Menu>
       ) : (
-        mobileMenuOpen && (
+        isProfileMenuOpen && (
           <div className="menu-mobile-session-box">
             <div className="menu-mobile-session">
               <NavLink

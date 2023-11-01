@@ -1,15 +1,26 @@
-import React from "react";
+import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import MenuLog from "./MenuLog";
 import Cart from "./Cart";
 import { useTranslation } from "react-i18next";
+import { useMenuHandler } from "./use-menu-handler";
+import useOutsideClick from "../../hooks/use-outside-click";
 
 export default function NavbarButtonsMobile(props) {
-  const { isLoggedIn = false, click, handleClick, isMobile } = props;
+  const ref = useRef();
+  const { isLoggedIn = false, handleClick: closeMenu } = props;
   const [t, i18next] = useTranslation("translation");
+  const [
+    { openCartMenu, closeCartMenu, openProfileMenu, closeProfileMenu },
+    { isCartMenuOpen, isProfileMenuOpen },
+  ] = useMenuHandler();
 
+  useOutsideClick(ref, () => {
+    closeMenu();
+  });
+
+  const currentLang = localStorage.getItem("i18nextLng");
   const handleChangeLanguage = (lang) => {
-    const currentLang = localStorage.getItem("i18nextLng");
     if (currentLang !== lang) {
       i18next.changeLanguage(lang);
       window.location.reload(false);
@@ -17,76 +28,102 @@ export default function NavbarButtonsMobile(props) {
   };
 
   return (
-    <div className="nav-ul_box-mobile">
-      {click && (
-        <ul className="nav-ul_mobile">
-          <li>
-            <NavLink to="/memberships" data-item={t("menu.soci-menu")} onClick={handleClick}>
-              {t("menu.soci-menu")}
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/activitats" data-item="AGENDA" onClick={handleClick}>
-              AGENDA
-            </NavLink>
-          </li>
-          {/* <li>
-            <NavLink to="/botiga" data-item={t("menu.botiga")} onClick={handleClick}>
+    <div className="nav-ul_box-mobile" ref={ref}>
+      <ul className="nav-ul_mobile">
+        <li>
+          <NavLink
+            to="/memberships"
+            data-item={t("menu.soci-menu")}
+            onClick={closeMenu}
+          >
+            {t("menu.soci-menu")}
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/activitats" data-item="AGENDA" onClick={closeMenu}>
+            AGENDA
+          </NavLink>
+        </li>
+        {/* <li>
+            <NavLink to="/botiga" data-item={t("menu.botiga")} onClick={closeMenu}>
               {t("menu.botiga")}
             </NavLink>
           </li> */}
-          <li>
-            <NavLink
-              to="/support"
-              data-item="#SUPPORTYOURLOCALS"
-              onClick={handleClick}
-            >
-              #SUPPORTYOURLOCALS
-            </NavLink>
-          </li>
-          {/* <li>
-            <NavLink to="/booking" data-item="BOOKING" onClick={handleClick}>
+        <li>
+          <NavLink
+            to="/support"
+            data-item="#SUPPORTYOURLOCALS"
+            onClick={closeMenu}
+          >
+            #SUPPORTYOURLOCALS
+          </NavLink>
+        </li>
+        {/* <li>
+            <NavLink to="/booking" data-item="BOOKING" onClick={closeMenu}>
               BOOKING
             </NavLink>
           </li> */}
-          <li>
-            <NavLink to="/projects" data-item={t("menu.projectes")}>
-              {t("menu.projectes")}
+        <li>
+          <NavLink
+            to="/projects"
+            data-item={t("menu.projectes")}
+            onClick={closeMenu}
+          >
+            {t("menu.projectes")}
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/gallery" data-item="GALERIA" onClick={closeMenu}>
+            GALERIA
+          </NavLink>
+        </li>
+        <div className="liMenuOptions logname-li-mobile">
+          {!isLoggedIn ? (
+            <NavLink to="/login" data-item="LOGIN" onClick={closeMenu}>
+              LOGIN
             </NavLink>
-          </li>
+          ) : (
+            <MenuLog
+              isMobile
+              closeMenu={closeMenu}
+              isProfileMenuOpen={isProfileMenuOpen}
+              openProfileMenu={openProfileMenu}
+              closeProfileMenu={closeProfileMenu}
+            />
+          )}
+        </div>
+        <div className="menu-lang">
           <li>
-            <NavLink to="/gallery" data-item="GALERIA" onClick={handleClick}>
-              GALERIA
-            </NavLink>
+            <a
+              onClick={() => {
+                handleChangeLanguage("ca");
+                closeMenu;
+              }}
+              data-item="CAT"
+              className={currentLang === "ca" ? "active" : ""}
+            >
+              CAT
+            </a>
+            <a
+              onClick={() => {
+                handleChangeLanguage("es");
+                closeMenu;
+              }}
+              data-item="/CAST"
+              className={currentLang === "es" ? "active" : ""}
+            >
+              /CAST
+            </a>
           </li>
-          <div className="liMenuOptions logname-li-mobile">
-            {!isLoggedIn ? (
-              <NavLink to="/login" data-item="LOGIN" onClick={handleClick}>
-                LOGIN
-              </NavLink>
-            ) : (
-              <MenuLog isMobile handleClick={handleClick} />
-            )}
-          </div>
-          <div className="menu-lang">
-            <li>
-              <a
-                onClick={() => handleChangeLanguage("ca")}
-                data-item="CAT/"
-              >
-                CAT/
-              </a>
-              <a
-                onClick={() => handleChangeLanguage("es")}
-                data-item="CAST"
-              >
-                CAST
-              </a>
-            </li>
-          </div>
-          <Cart isMobile={isMobile} onClick={handleClick} click={click} />
-        </ul>
-      )}
+        </div>
+        <Cart
+          isMobile={true}
+          closeMenu={closeMenu}
+          openCartMenu={openCartMenu}
+          closeCartMenu={closeCartMenu}
+          isCartMenuOpen={isCartMenuOpen}
+        />
+      </ul>
     </div>
   );
 }

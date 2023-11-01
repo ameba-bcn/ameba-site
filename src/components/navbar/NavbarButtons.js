@@ -3,13 +3,15 @@ import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import MenuLog from "./MenuLog";
 import Cart from "./Cart";
+import { useMenuHandler } from "./use-menu-handler";
 
 export default function NavbarButtons(props) {
-  const { isLoggedIn = false, handleClick = {}, click, isMobile } = props;
+  const { isLoggedIn = false, handleClick: closeMenu } = props;
   const [t, i18next] = useTranslation("translation");
-
+  const [{ openProfileMenu, closeProfileMenu }, { isProfileMenuOpen }] =
+    useMenuHandler();
+  const currentLang = localStorage.getItem("i18nextLng");
   const handleChangeLanguage = (lang) => {
-    const currentLang = localStorage.getItem("i18nextLng");
     if (currentLang !== lang) {
       i18next.changeLanguage(lang);
       localStorage.setItem("i18nextLng", lang);
@@ -62,20 +64,33 @@ export default function NavbarButtons(props) {
               LOGIN
             </NavLink>
           ) : (
-            <MenuLog handleClick={handleClick} />
+            <MenuLog
+              closeMenu={closeMenu}
+              isProfileMenuOpen={isProfileMenuOpen}
+              openProfileMenu={openProfileMenu}
+              closeProfileMenu={closeProfileMenu}
+            />
           )}
         </div>
         <div className="menu-lang">
           <li>
-            <a onClick={() => handleChangeLanguage("ca")} data-item="CAT/">
+            <a
+              onClick={() => handleChangeLanguage("ca")}
+              data-item="CAT/"
+              className={currentLang === "ca" ? "active" : ""}
+            >
               CAT/
             </a>
-            <a onClick={() => handleChangeLanguage("es")} data-item="CAST">
+            <a
+              onClick={() => handleChangeLanguage("es")}
+              data-item="CAST"
+              className={currentLang === "es" ? "active" : ""}
+            >
               CAST
             </a>
           </li>
         </div>
-        <Cart onClick={handleClick} click={click} isMobile={isMobile} />
+        <Cart />
       </ul>
     </div>
   );
