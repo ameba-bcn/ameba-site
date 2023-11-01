@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { RowSeparator } from "../../GlobalStyles.style";
 import { deleteUser } from "../../redux/actions/auth";
+import { RowSeparator } from "../../styles/GlobalStyles.style";
 import SociDialog from "../botiga/Soci";
 import Button from "../button/Button";
 import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
@@ -50,11 +50,12 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
             <NavLink
               style={{ textDecoration: "none", color: "#1d1d1b" }}
               to={{
-                pathname: '/memberships',
+                pathname: "/memberships",
               }}
             >
-              <span style={{ textDecoration: 'none' }}
-              // onClick={() => setOpen(true)}
+              <span
+                style={{ textDecoration: "none" }}
+                // onClick={() => setOpen(true)}
               >
                 {`< ${t("perfil.mes-info")} >`}
               </span>

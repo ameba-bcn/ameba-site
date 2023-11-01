@@ -12,3 +12,9 @@ export const RowSeparator = styled.div`
   border-bottom: 2px solid black;
   margin: 5px auto;
 `;
+
+export const StyledHeightBlock = styled.div`
+  display: flex;
+  width: 100%;
+  height: ${(props) => (props.height ? `${props.height}px` : "24px")};
+`;

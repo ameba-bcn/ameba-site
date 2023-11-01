@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import LettersMove from "../../components/layout/LettersMove";
 import PowerTitle from "../../components/layout/PowerTitle";
 import CardLayout from "../../components/layout/CardLayout/CardLayout";
-import { StyledHeightBlock } from "../../styles/GlobalStyles";
+import { StyledHeightBlock } from "../../styles/GlobalStyles.style";
 import { StyledSectionDescription } from "../../styles/StyledSections";
 
 export const StyledSocios = styled.div`
