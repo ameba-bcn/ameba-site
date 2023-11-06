@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { StyledSearchBox } from "./SearchBox.style";
+import { StyledIconSearchBox, StyledSearchBox } from "./SearchBox.style";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import useOutsideClick from "../../hooks/use-outside-click";
 
@@ -26,7 +26,7 @@ const SearchBox = ({
 
   if (hidden) {
     return (
-      <div ref={ref}>
+      <StyledIconSearchBox ref={ref}>
         {toggleHidden ? (
           <SearchOutlinedIcon onClick={() => setToggleHidden(!toggleHidden)} />
         ) : (
@@ -37,7 +37,7 @@ const SearchBox = ({
             value={searchInput}
           />
         )}
-      </div>
+      </StyledIconSearchBox>
     );
   }
 
