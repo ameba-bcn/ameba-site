@@ -24,9 +24,9 @@ import Button from "../components/button/Button";
 import InteractiveModalBox from "../modals/InteractiveModalBox";
 import { useMediaQuery } from "@material-ui/core";
 import { toast } from "react-toastify";
-import Toast from "../components/toast/Toast";
 import { isMemberCheckout, urlify } from "../utils/utils";
 import { NavLink } from "react-router-dom";
+import CartToast from "../components/toast/CartToast";
 
 const SyledExternalBox = styled.div`
   height: 100%;
@@ -90,7 +90,7 @@ const Memberships = () => {
 
   const handleAddClick = () => {
     dispatch(addToCart(variants[0]));
-    toast(<Toast />, {
+    toast(<CartToast />, {
       position: "bottom-center",
       autoClose: 3000,
       hideProgressBar: false,

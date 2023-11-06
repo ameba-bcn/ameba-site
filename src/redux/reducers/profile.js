@@ -6,29 +6,26 @@ import {
   SUBSCRIBE_FAIL,
 } from "../actions/types";
 
-const initialState = { user_profile: "" };
-// eslint-disable-next-line import/no-anonymous-default-export
+const initialState = { user_profile: "", message: "" };
+
 export default function (state = initialState, action) {
-  const { type } = action;
+  const { type, payload } = action;
 
   switch (type) {
     case GUEST_USER:
-      return { user_profile: "GUEST" };
+      return { ...state, user_profile: "GUEST" };
 
     case LOGGED_USER:
-      return { user_profile: "LOGGED" };
+      return { ...state, user_profile: "LOGGED" };
 
     case MEMBER_USER:
-      return { user_profile: "MEMBER" };
+      return { ...state, user_profile: "MEMBER" };
 
     case SUBSCRIBE_SUCCESS:
-      return {
-        ...state,
-      };
-
     case SUBSCRIBE_FAIL:
       return {
         ...state,
+        message: payload,
       };
 
     default:

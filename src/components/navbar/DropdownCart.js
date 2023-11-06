@@ -6,7 +6,6 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import Button from "../button/Button";
 import { toast } from "react-toastify";
-import Toast from "./../toast/Toast";
 import "./DropdownCart.css";
 import { setGuestUser, setLoggedUser } from "../../redux/actions/profile";
 import { useTranslation } from "react-i18next";
@@ -14,6 +13,7 @@ import { ReactFitty } from "react-fitty";
 import { truncate } from "../../utils/utils";
 import { MOBILE_SMALL } from "../../utils/constants";
 import { useMediaQuery } from "@material-ui/core";
+import CartToast from "../toast/CartToast";
 
 export default function DropdownCart(props) {
   const dispatch = useDispatch();
@@ -38,7 +38,7 @@ export default function DropdownCart(props) {
   const addItem = (id) => {
     dispatch(addToCart(id));
     isMobile &&
-      toast(<Toast />, {
+      toast(<CartToast />, {
         position: "bottom-center",
         autoClose: 3000,
         hideProgressBar: false,
@@ -56,8 +56,8 @@ export default function DropdownCart(props) {
     }
     dispatch(substractToCart(id));
     isMobile &&
-      toast(<Toast />, {
-        position: "bottom-center",
+      toast(<CartToast />, {
+        position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
         closeOnClick: true,

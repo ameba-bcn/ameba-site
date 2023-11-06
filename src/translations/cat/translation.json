@@ -74,7 +74,8 @@
     "encara": "Encara no ets soci/a? Informat aquí!",
     "modifica": "Modifica la teva contrassenya",
     "recupera": "Hem enviat una contrassenya nova al teu correu electrònic. Verifícala per poder continuar.",
-    "link-recupera": "No has rebut cap correu? Torna-ho a intentar"
+    "link-recupera": "No has rebut cap correu? Torna-ho a intentar",
+    "verifica": "Compte verificat: Benvingut!"
   },
   "form": {
     "nom": "nom",
@@ -107,5 +108,8 @@
   },
   "soci": {
     "disclaimer": "Per a poder finalitzar el procediment accedeix a la cistella i realitza el pagament"
+  },
+  "general": {
+    "agraiment": "Petició rebuda. Gràcies!"
   }
 }

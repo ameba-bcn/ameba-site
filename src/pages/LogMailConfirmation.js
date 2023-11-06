@@ -12,6 +12,7 @@ export default function LogMailConfirmation(props) {
   const [displayError, setDisplayError] = useState(false);
   const [t] = useTranslation("translation");
 
+  // eslint-disable-next-line no-undef
   const queryString = require("query-string");
   const parsed = queryString.parse(props.location.search);
   const strToken = parsed.token;
@@ -33,11 +34,11 @@ export default function LogMailConfirmation(props) {
       <div className="full-height-msg">
         {hasQueryParams ? (
           <div className="single-msg">
-            {displayError && message ? message : "Compte verificat: Benvingut!"}
+            {displayError && message ? message : t("login.verifica")}
           </div>
         ) : (
           <div className="single-msg">
-            T'hem enviat un mail de confirmació, confirma l'enllaç
+            T&apos;hem enviat un mail de confirmació, confirma l&apos;enllaç
           </div>
         )}
       </div>

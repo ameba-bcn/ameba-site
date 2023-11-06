@@ -74,7 +74,8 @@
     "encara": "Aún no eres socio/a? Informate aquí!",
     "modifica": "Modifica tu contraseña",
     "recupera": "Hemos enviado una contraseña nueva a tu correo electrónico. Verifícala para poder continuar.",
-    "link-recupera": "No has rebut cap correu? Torna-ho a intentar"
+    "link-recupera": "No has rebut cap correu? Torna-ho a intentar",
+    "verifica": "Cuenta verificada. Bienvenido!"
   },
   "form": {
     "nom": "nombre",
@@ -107,5 +108,8 @@
   },
   "soci": {
     "disclaimer": "Para poder finalizar el procedimiento accede a la cesta y realiza el pago"
+  },
+  "general": {
+    "agraiment": "Petición recibida. Gracias!"
   }
 }
