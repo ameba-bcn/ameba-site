@@ -35,7 +35,8 @@ export default function TableProducts(props) {
             <td className="reviewTable-col2">
               {item.item_name}
               <br />
-              {item?.variant_details?.size !== "unique" &&
+              {item?.variant_details?.size &&
+                item?.variant_details?.size !== "unique" &&
                 `${t("modal.talla")} ${item?.variant_details?.size}`}
             </td>
             <td className="reviewTable-col3">
