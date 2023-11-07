@@ -134,8 +134,7 @@ export const priceMayDiscount = (price, discount, discountName) => {
           {currency}
           {discountName
             ? ` ${discountName}`
-            : ` -> 
-          ${discount}% ${t("form.descompte")}`}
+            : ` -> ${discount}% ${t("form.descompte")}`}
         </span>
       </>
     );
