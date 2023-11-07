@@ -33,6 +33,7 @@ export default function SociDialog(props) {
     description,
     benefits = "",
     has_stock,
+    discount = 0,
   } = isSubscriber ? socisSubs : socisPro;
 
   const socisButtonName = membership.filter((x) =>
@@ -90,6 +91,7 @@ export default function SociDialog(props) {
       isSubscriber={isSubscriber}
       setIsSubscriber={setIsSubscriber}
       has_stock={has_stock}
+      discount={discount}
     />
   );
 }

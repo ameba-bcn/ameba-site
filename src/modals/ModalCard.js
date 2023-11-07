@@ -4,7 +4,7 @@ import { useMediaQuery } from "@material-ui/core";
 import ClearIcon from "@material-ui/icons/Clear";
 import { formatPrice, urlify } from "../utils/utils";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import LinkIcon from '@material-ui/icons/Link';
+import LinkIcon from "@material-ui/icons/Link";
 import Button from "../components/button/Button";
 import ImageCarousel from "../components/images/ImageCarousel";
 import { MOBILE_NORMAL, productKinds } from "../utils/constants";
@@ -15,10 +15,7 @@ import { useTranslation } from "react-i18next";
 import { ReactFitty } from "react-fitty";
 import InteractiveModalBox from "./InteractiveModalBox";
 import "./Modals.css";
-import {
-  StyledCloseIcon,
-  StyledModalRow,
-} from "./ModalCardStyled";
+import { StyledCloseIcon, StyledModalRow } from "./ModalCardStyled";
 
 export default function ModalCard(props) {
   const {
@@ -45,13 +42,16 @@ export default function ModalCard(props) {
     colorMode,
     header,
     has_stock,
+    discount,
   } = props;
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const types = productKinds;
   const [activeSize, setActiveSize] = useState([]);
   const [selectSizeError, setSelectSizeError] = useState(false);
   const [copied, setCopied] = useState(false);
-  const modalStyle = types.includes(type.toLowerCase()) ? type.toUpperCase() : types[0].toUpperCase();
+  const modalStyle = types.includes(type.toLowerCase())
+    ? type.toUpperCase()
+    : types[0].toUpperCase();
   const [t] = useTranslation("translation");
   const productSoldOut =
     !has_stock || (modalStyle === "PRODUCTE" && sizes.length === 0);
@@ -80,13 +80,13 @@ export default function ModalCard(props) {
   };
 
   const handleCopyLink = () => {
-    const kind = modalStyle.toLowerCase()
+    const kind = modalStyle.toLowerCase();
     const base_url = window.location.origin;
-    const copyUrl = `${base_url}/product?id=${id}&kind=${kind}`
-    navigator.clipboard.writeText(copyUrl)
-    setCopied(true)
-  }
-
+    const copyUrl = `${base_url}/product?id=${id}&kind=${kind}`;
+    navigator.clipboard.writeText(copyUrl);
+    setCopied(true);
+  };
+  console.log("discount", discount);
   return (
     <Dialog onClose={handleClose} open={open}>
       {!isMobile && (
@@ -96,10 +96,10 @@ export default function ModalCard(props) {
           >
             <StyledCloseIcon colorMode={colorMode}>
               <LinkIcon onClick={handleCopyLink} />
-              <ClearIcon
-                onClick={handleClose}
-              />
-              {copied ? <div className="modal-card__copy">{t("modal.copiat")}</div> : null}
+              <ClearIcon onClick={handleClose} />
+              {copied ? (
+                <div className="modal-card__copy">{t("modal.copiat")}</div>
+              ) : null}
             </StyledCloseIcon>
             <div className="modal-card__row">
               <div className="modal-card__column_eighty">
@@ -160,30 +160,36 @@ export default function ModalCard(props) {
                 address={address}
                 datetime={datetime}
                 handleAddClick={handleAddClick}
-                price={price} />
-              {!productSoldOut && <Button
-                variant="contained"
-                color="primary"
-                buttonSize="boton--medium"
-                disabled={productSoldOut}
-                buttonStyle={
-                  colorMode && colorMode === "dark"
-                    ? "boton--back-orange--solid"
-                    : "boton--primary--solid"
-                }
-                icon={buttonIcon}
-                onClick={() => {
-                  !productSoldOut && handleAddToCard(id);
-                }}
-              >
-                {buttonText}
-              </Button>}
+                price={price}
+                discount={discount}
+              />
+              {!productSoldOut && (
+                <Button
+                  variant="contained"
+                  color="primary"
+                  buttonSize="boton--medium"
+                  disabled={productSoldOut}
+                  buttonStyle={
+                    colorMode && colorMode === "dark"
+                      ? "boton--back-orange--solid"
+                      : "boton--primary--solid"
+                  }
+                  icon={buttonIcon}
+                  onClick={() => {
+                    !productSoldOut && handleAddToCard(id);
+                  }}
+                >
+                  {buttonText}
+                </Button>
+              )}
             </StyledModalRow>
             <hr
               className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
             />
             <div className="modal-card__description-title">{box1Title}</div>
-            <div className="modal-card__description-content">{urlify(box1Text)}</div>
+            <div className="modal-card__description-content">
+              {urlify(box1Text)}
+            </div>
             {box2Title && (
               <>
                 <hr
@@ -208,10 +214,10 @@ export default function ModalCard(props) {
         >
           <div className="modal-card-mobile__close">
             <LinkIcon onClick={handleCopyLink} />
-            <ClearIcon
-              onClick={handleClose}
-            />
-            {copied ? <div className="modal-card-mobile__copy">{t("modal.copiat")}</div> : null}
+            <ClearIcon onClick={handleClose} />
+            {copied ? (
+              <div className="modal-card-mobile__copy">{t("modal.copiat")}</div>
+            ) : null}
           </div>
           <div className="modal-card-mobile__row">
             <hr
@@ -256,7 +262,8 @@ export default function ModalCard(props) {
                 address={address}
                 datetime={datetime}
                 handleAddClick={handleAddClick}
-                price={price} />
+                price={price}
+              />
             </div>
             <div className="modal-card-mobile__button-wrapper">
               <Button

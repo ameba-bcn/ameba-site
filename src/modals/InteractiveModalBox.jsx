@@ -5,7 +5,7 @@ import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import { StyledCenterLabel, StyledSizesRow } from "./ModalCardStyled";
-import { formatDateToHour } from "../utils/utils";
+import { formatDateToHour, priceMayDiscount } from "../utils/utils";
 import Button from "../components/button/Button";
 
 const InteractiveModalBox = (props) => {
@@ -24,11 +24,12 @@ const InteractiveModalBox = (props) => {
     address,
     datetime,
     price,
+    discount,
   } = props;
 
   const [t] = useTranslation("translation");
   useEffect(() => {
-    if (!!sizes.length) {
+    if (sizes?.length > 0) {
       setActiveSize(sizes.length === 1 ? sizes[0] : []);
     }
   }, [sizes]);
@@ -138,7 +139,7 @@ const InteractiveModalBox = (props) => {
               <LocalAtmIcon /> <span>{t("modal.preu")} / &nbsp;</span>
             </span>
             <span className="interactiveDataBox-activitat__text-data">
-              {price}
+              {priceMayDiscount(price, discount)}
             </span>
           </div>
         </>
