@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import {
-  ToastBox,
-  ToastLeftInBox,
-  ToastRightInBox,
-} from "./Toast.style";
+import { ToastBox, ToastLeftInBox, ToastRightInBox } from "./Toast.style";
 
 export default function Toast() {
   const { cart_data = {} } = useSelector((state) => state.cart);
   const profile = useSelector((state) => state.profile);
   const { user_profile = "" } = profile;
-  const checkoutRedirect = user_profile === "LOGGED" || user_profile === "MEMBER" ? "/checkout" : "/login";
+  const checkoutRedirect =
+    user_profile === "LOGGED" || user_profile === "MEMBER"
+      ? "/checkout"
+      : "/login";
   const [redirect, setRedirect] = useState(false);
   if (redirect) return <Redirect to={checkoutRedirect} />;
   const { item_variants = [] } = cart_data;
 
   return (
-    <ToastBox onClick={() => { console.log("a la verga"); setRedirect(true) }}>
+    <ToastBox onClick={() => setRedirect(true)}>
       <ToastLeftInBox>
         tens{" "}
         <span>
