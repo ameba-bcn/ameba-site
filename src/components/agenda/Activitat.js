@@ -18,6 +18,7 @@ export default function ActivitatDialog(props) {
     description,
     // artists,
     datetime,
+    discount = 0,
     address,
     header = "",
     has_stock,
@@ -68,6 +69,7 @@ export default function ActivitatDialog(props) {
       box1Title={t("modal.descripcio")}
       box1Text={description}
       header={header}
+      discount={discount}
       // box2Title={"ARTIST / LINE UP"}
       // box2Text={artists}
       type="ACTIVITAT"

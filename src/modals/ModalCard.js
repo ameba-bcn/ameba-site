@@ -42,6 +42,7 @@ export default function ModalCard(props) {
     colorMode,
     header,
     has_stock,
+    discount,
   } = props;
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const types = productKinds;
@@ -85,7 +86,6 @@ export default function ModalCard(props) {
     navigator.clipboard.writeText(copyUrl);
     setCopied(true);
   };
-
   return (
     <Dialog onClose={handleClose} open={open}>
       {!isMobile && (
@@ -160,6 +160,7 @@ export default function ModalCard(props) {
                 datetime={datetime}
                 handleAddClick={handleAddClick}
                 price={price}
+                discount={discount}
               />
               {!productSoldOut && (
                 <Button

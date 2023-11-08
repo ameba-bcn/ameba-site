@@ -2,6 +2,14 @@
 
 ## Release changes
 
+Version 3.2.12
+
+- Delivery copies updated
+
+Version 3.2.11
+
+- Discount copies clarification
+
 Version 3.2.10
 
 - Fix disabled events

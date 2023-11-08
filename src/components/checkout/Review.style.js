@@ -79,7 +79,7 @@ export const ReviewTable = styled.table`
         line-height: 1em;
         font-size: 2rem;
         display: table-cell !important;
-        overflow: hidden ;
+        overflow: hidden;
         padding: 10px;
         @media (max-width: 500px) {
           font-size: 1.5rem;
@@ -93,6 +93,7 @@ export const ReviewTable = styled.table`
         border-left: 2px dotted black;
         display: table-cell !important;
         padding: 10px;
+        line-height: 40px;
         @media (max-width: 500px) {
           font-size: 2rem;
         }
@@ -114,11 +115,11 @@ export const ReviewTable = styled.table`
         @media (max-width: 400px) {
           width: auto;
           & div {
-          & svg {
-            width: 20px;
-            height: auto;
+            & svg {
+              width: 20px;
+              height: auto;
+            }
           }
-        }
         }
       }
     }
@@ -131,6 +132,6 @@ export const ReviewFooter = styled.div`
   font-weight: 300;
   margin-bottom: 20px;
   @media (max-width: 380px) {
-          font-size: 1.5rem;
-        }
+    font-size: 1.5rem;
+  }
 `;

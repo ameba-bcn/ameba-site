@@ -1,3 +1,6 @@
+import React from "react";
+import { useTranslation } from "react-i18next";
+
 export function getIDValuesFromArrayObj(ObjectArray = []) {
   let resultArray = [];
   ObjectArray.map((i) => resultArray.push(i.id));
@@ -114,4 +117,27 @@ export const urlify = (text) => {
     }
     return part;
   });
+};
+
+export const priceMayDiscount = (price, discount, discountName) => {
+  if (discount) {
+    const numPrice = parseFloat(price);
+    const currency = price.slice(-1);
+    const [t] = useTranslation("translation");
+    return (
+      <>
+        <span style={{ textDecoration: "line-through" }}>{price}</span>{" "}
+        <span>
+          {` `}
+          {numPrice - numPrice * (discount / 100)}
+          {` `}
+          {currency}
+          {discountName
+            ? ` ${discountName}`
+            : ` -> ${discount}% ${t("form.descompte")}`}
+        </span>
+      </>
+    );
+  }
+  return price;
 };

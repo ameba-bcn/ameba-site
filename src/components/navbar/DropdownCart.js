@@ -10,7 +10,7 @@ import "./DropdownCart.css";
 import { setGuestUser, setLoggedUser } from "../../redux/actions/profile";
 import { useTranslation } from "react-i18next";
 import { ReactFitty } from "react-fitty";
-import { truncate } from "../../utils/utils";
+import { priceMayDiscount, truncate } from "../../utils/utils";
 import { MOBILE_SMALL } from "../../utils/constants";
 import { useMediaQuery } from "@material-ui/core";
 import CartToast from "../toast/CartToast";
@@ -106,7 +106,13 @@ export default function DropdownCart(props) {
                         </ReactFitty>
                       </div>
                       <div className="rowDetailedCart">
-                        <div className="cartPriceProduct">{el.price}</div>
+                        <div className="cartPriceProduct">
+                          {priceMayDiscount(
+                            el?.price,
+                            el?.discount_value,
+                            el?.discount_name
+                          )}
+                        </div>
                         <div className="quantitySizeProduct">
                           {el?.variant_details?.size !== "unique" &&
                             el?.variant_details?.size}
@@ -151,7 +157,11 @@ export default function DropdownCart(props) {
                       </div>
                       <div className="rowDetailedCart">
                         <div className="cartPriceProduct_mobile">
-                          {el.price}
+                          {priceMayDiscount(
+                            el?.price,
+                            el?.discount_value,
+                            el?.discount_name
+                          )}
                         </div>
                         <div className="quantitySizeProduct">
                           {el?.variant_details?.size !== "unique" &&

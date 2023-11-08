@@ -302,6 +302,7 @@ hr>.modal-card__hr_dashed {
     align-items: center;
     padding-right: 1rem;
     width: 100%;
+    white-space: pre-wrap;
 }
 
 .interactiveDataBox-activitat__text-data {

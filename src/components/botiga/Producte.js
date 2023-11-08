@@ -9,7 +9,15 @@ import FullscreenSpinner from "../spinner/FullscreenSpinner";
 export default function ProducteDialog(props) {
   const { onClose, selectedValue, open, dataRow, setProductData, loading } =
     props;
-  const { id, name, price_range, images, description, has_stock } = dataRow;
+  const {
+    id,
+    name,
+    price_range,
+    images,
+    description,
+    has_stock,
+    discount = 0,
+  } = dataRow;
   const dispatch = useDispatch();
   const [sizes, setSizes] = useState([]);
   const [t] = useTranslation("translation");
@@ -65,6 +73,7 @@ export default function ProducteDialog(props) {
       type="PRODUCTE"
       colorMode="light"
       has_stock={has_stock}
+      discount={discount}
     />
   );
 }
