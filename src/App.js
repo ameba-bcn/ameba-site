@@ -37,7 +37,7 @@ import {
   botigaAll,
   getAbout,
   getCover,
-  membershipAll
+  membershipAll,
 } from "./redux/actions/data";
 import { getCart } from "./redux/actions/cart";
 import Booking from "./pages/Booking";
