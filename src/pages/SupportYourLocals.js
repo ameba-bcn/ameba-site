@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import PowerTitle from "../components/layout/PowerTitle";
 import "../components/supportyourlocals/SupportYourLocals.css";
@@ -10,7 +10,7 @@ import SearchBox from "../components/searchBox/SearchBox";
 export default function SupportYourLocals() {
   const [t] = useTranslation("translation");
 
-  const [searchInput, setSearchInput] = React.useState("");
+  const [searchInput, setSearchInput] = useState("");
   const { support } = useSelector((state) => state.data);
   const filteredArtists = support.filter(
     (artist) =>

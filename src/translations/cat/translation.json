@@ -110,6 +110,7 @@
     "disclaimer": "Per a poder finalitzar el procediment accedeix a la cistella i realitza el pagament"
   },
   "general": {
-    "agraiment": "Petició rebuda. Gràcies!"
+    "agraiment": "Petició rebuda. Gràcies!",
+    "cerca": "Cerca"
   }
 }

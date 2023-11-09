@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
@@ -7,6 +7,7 @@ import PowerTitle from "../../components/layout/PowerTitle";
 import CardLayout from "../../components/layout/CardLayout/CardLayout";
 import { StyledHeightBlock } from "../../styles/GlobalStyles.style";
 import { StyledSectionDescription } from "../../styles/StyledSections";
+import SearchBox from "../../components/searchBox/SearchBox";
 
 export const StyledSocios = styled.div`
   height: auto;
@@ -14,9 +15,15 @@ export const StyledSocios = styled.div`
 `;
 
 const Socios = () => {
+  const [searchInput, setSearchInput] = useState("");
   const [t] = useTranslation("translation");
-  const { support } = useSelector((state) => state.data);
-  console.log(support);
+  const { support: member_projects } = useSelector((state) => state.data);
+  const filteredProjects = member_projects.filter(
+    (artist) =>
+      artist?.is_ameba_dj === false &&
+      artist?.name?.toLowerCase()?.includes(searchInput?.toLowerCase())
+  );
+  console.log(member_projects);
   return (
     <StyledSocios>
       <PowerTitle title="soci@s" className="SupportTitle" />
@@ -28,7 +35,13 @@ const Socios = () => {
         está la cosa muy malar diodenoo pupita caballo blanco caballo negroorl.
       </StyledSectionDescription>
       <StyledHeightBlock />
-      <CardLayout cardList={support} urlRoot="socis" />
+      <SearchBox
+        searchText="Busca"
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        hidden={true}
+      />
+      <CardLayout cardList={filteredProjects} urlRoot="socis" />
       <LettersMove
         className="lettersMoveDiv"
         sentence={t("banners.soci-curt")}

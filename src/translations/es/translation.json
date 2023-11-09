@@ -110,6 +110,7 @@
     "disclaimer": "Para poder finalizar el procedimiento accede a la cesta y realiza el pago"
   },
   "general": {
-    "agraiment": "Petición recibida. Gracias!"
+    "agraiment": "Petición recibida. Gracias!",
+    "cerca": "Busca"
   }
 }
