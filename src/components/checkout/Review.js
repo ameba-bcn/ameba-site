@@ -2,7 +2,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import DiscountCode from "../forms/DiscountForm/DiscountCode";
-import ErrorBox from "../forms/error/ErrorBox";
 import {
   ReviewContent,
   ReviewFooter,
@@ -11,7 +10,7 @@ import {
 } from "./Review.style";
 import TableProducts from "./TableProducts";
 
-function Review({ setError: setCheckoutError, error }) {
+function Review() {
   const [t] = useTranslation("translation");
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { total, item_variants } = cart_data;
@@ -24,7 +23,7 @@ function Review({ setError: setCheckoutError, error }) {
         <div> {total}</div>
       </ReviewTotalRow>
       <ReviewRowSeparator isBig={true} />
-      <TableProducts setError={setCheckoutError} />
+      <TableProducts />
       <ReviewRowSeparator isBig={true} />
       <DiscountCode />
       <ReviewRowSeparator isBig={true} />
@@ -38,7 +37,6 @@ function Review({ setError: setCheckoutError, error }) {
           <>{t("checkout.review-footer-4")}</>
         )}
       </ReviewFooter>
-      {error === true && <ErrorBox isError={error} />}
     </ReviewContent>
   );
 }

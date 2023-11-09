@@ -589,3 +589,28 @@ label {
 .logFormEmailPasswordRecovery {
     margin-top: 1.8rem !important;
 }
+
+/* Toasts */
+.notificationToast-success{
+    color: #1D1D1B;
+    font-weight: bold;
+    background-color: #BBE5C2;
+}
+
+.notificationToast-error{
+    color: #1D1D1B;
+    font-weight: bold;
+    background-color: #F9ADB3;
+}
+
+.notificationToast-warning{
+    color: #1D1D1B;
+    font-weight: bold;
+    background-color: #F5F1BB;
+}
+
+.notificationToast-info{
+    color: #1D1D1B;
+    font-weight: bold;
+    background-color: #A2D8F4;
+}

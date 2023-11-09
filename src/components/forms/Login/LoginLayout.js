@@ -2,17 +2,15 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import ErrorBox from "../error/ErrorBox";
 import LoginForm from "./LoginForm";
 
 const LoginLayout = (props) => {
   const [t] = useTranslation("translation");
   const cart = useSelector((state) => state.cart);
   const { cart_data = {} } = cart;
-  const { state = {}, item_variant_ids = [] } = cart_data;
+  const { item_variant_ids = [] } = cart_data;
   const [redirect, setRedirect] = useState(false);
   const [recover, setRecover] = useState(false);
-  const [displayError, setDisplayError] = useState(false);
 
   const showRegistration = () => {
     props.setViewState("registration");
@@ -25,8 +23,7 @@ const LoginLayout = (props) => {
   if (redirect) {
     if (item_variant_ids.length > 0) {
       return <Redirect to="/checkout" />;
-    }
-    else {
+    } else {
       return <Redirect to="/" />;
     }
   }
@@ -38,12 +35,7 @@ const LoginLayout = (props) => {
       <div className="card card-container card-login">
         <div className="logTitle">login</div>
 
-        <LoginForm
-          setRedirect={setRedirect}
-          setDisplayError={setDisplayError}
-        />
-
-        {displayError && <ErrorBox isError={displayError} />}
+        <LoginForm setRedirect={setRedirect} />
 
         <span
           className="logTextosLink logTextosLinkRegistrat"

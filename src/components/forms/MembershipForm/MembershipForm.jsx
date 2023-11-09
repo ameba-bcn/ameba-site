@@ -13,12 +13,7 @@ import { LogFormBox, LogFormError } from "../Log.style";
 import { validate } from "../MembershipForm/MembershipValidate";
 import { useTranslation } from "react-i18next";
 
-export default function MembershipForm({
-  setDisplayError,
-  handleNext,
-  setSuccessful,
-  setButtonDisabled,
-}) {
+export default function MembershipForm({ handleNext, setButtonDisabled }) {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [dataHasChanged, setDataHasChanged] = useState(false);
@@ -76,14 +71,11 @@ export default function MembershipForm({
       )
         .then(() => {
           setLoading(false);
-          setSuccessful(true);
           setButtonDisabled && setButtonDisabled(false);
           setDataHasChanged(false);
-          setDisplayError(false);
           handleNext && handleNext();
         })
         .catch(() => {
-          setDisplayError(true);
           setLoading(false);
         });
     } else {
@@ -92,14 +84,11 @@ export default function MembershipForm({
       )
         .then(() => {
           setLoading(false);
-          setSuccessful(true);
           setButtonDisabled && setButtonDisabled(false);
           setDataHasChanged(false);
-          setDisplayError(false);
           handleNext();
         })
         .catch(() => {
-          setDisplayError(true);
           setLoading(false);
         });
     }

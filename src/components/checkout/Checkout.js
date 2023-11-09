@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
 import Review from "./Review";
-import { checkoutCart, checkoutPaymentCart, getCart } from "../../redux/actions/cart";
+import {
+  checkoutCart,
+  checkoutPaymentCart,
+  getCart,
+} from "../../redux/actions/cart";
 import { isMemberCheckout } from "../../utils/utils";
 import "./Checkout.css";
 import Button from "../button/Button";
 import { getMemberProfile } from "../../redux/actions/auth";
 import { Redirect } from "react-router-dom";
-import ErrorBox from "../forms/error/ErrorBox";
-import { clearMessage } from "../../redux/actions/message";
 import MembershipFormReadOnly from "../forms/MembershipForm/MembershipFormReadOnly";
 import Stepper from "../stepper/Stepper";
 import {
@@ -39,7 +41,6 @@ function Checkout() {
   const [activeStep, setActiveStep] = useState(hasMembershipInCart ? 0 : 1);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const userIsEditingData =
     buttonDisabled && activeStep === 0 && hasMembershipInCart;
@@ -57,17 +58,14 @@ function Checkout() {
 
   const handleNext = () => {
     if (activeStep === 1) {
-      setLoading(true)
+      setLoading(true);
       dispatch(checkoutCart())
         .then(() => !isPaymentFree && dispatch(checkoutPaymentCart(id)))
         .then(() => {
           setActiveStep(activeStep + 1);
-          setError(false);
-          dispatch(clearMessage());
           setLoading(false);
         })
         .catch(() => {
-          setError(true);
           setLoading(false);
         });
     } else {
@@ -78,7 +76,6 @@ function Checkout() {
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
-    setError(false);
     isMobile && window.scrollTo(0, 0);
   };
 
@@ -88,9 +85,7 @@ function Checkout() {
         return (
           <CheckoutMemberFrame>
             {hasMembershipInCart ? (
-              <MembershipFormLayout
-                setButtonDisabled={setButtonDisabled}
-              />
+              <MembershipFormLayout setButtonDisabled={setButtonDisabled} />
             ) : (
               <MembershipFormReadOnly isCheckout={true} />
             )}
@@ -99,7 +94,7 @@ function Checkout() {
       case 1:
         return (
           <>
-            <Review setError={setError} error={error} />
+            <Review />
           </>
         );
       case 2:
@@ -111,17 +106,17 @@ function Checkout() {
 
   const handleOpen = () => {
     setOpen(true);
-  }
+  };
 
   const handleCloseModal = () => {
     setOpen(false);
-  }
+  };
 
   const handleExitFullscreen = () => {
     setOpen(false);
     dispatch(closeFullscreen());
     dispatch(getCart());
-  }
+  };
 
   return (
     <CheckoutFrame>
@@ -130,20 +125,21 @@ function Checkout() {
         <CheckoutSubtitle>{steps[activeStep]}</CheckoutSubtitle>
         <Stepper arraySteps={steps} activeStep={activeStep} />
         <CheckoutContent>{getStepContent(activeStep)}</CheckoutContent>
-        {error && <ErrorBox isError={error} />}
         {loading && <span className="spinner-border"></span>}
         <CheckoutButtons>
-          {activeStep !== 0 && (
-            activeStep < 2 ? <Button
-              variant="contained"
-              color="primary"
-              buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
-              buttonStyle="boton--primary--solid"
-              disabled={loading}
-              onClick={handleBack}
-            >
-              {t("boto.enrere")}
-            </Button> :
+          {activeStep !== 0 &&
+            (activeStep < 2 ? (
+              <Button
+                variant="contained"
+                color="primary"
+                buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
+                buttonStyle="boton--primary--solid"
+                disabled={loading}
+                onClick={handleBack}
+              >
+                {t("boto.enrere")}
+              </Button>
+            ) : (
               <Button
                 variant="contained"
                 color="primary"
@@ -154,7 +150,7 @@ function Checkout() {
               >
                 {t("modal.sortir")}
               </Button>
-          )}
+            ))}
           {activeStep < steps.length - 1 && !userIsEditingData && (
             <Button
               variant="contained"
@@ -167,7 +163,11 @@ function Checkout() {
               {t("boto.seguent")}
             </Button>
           )}
-          <CloseModal open={open} handleClose={handleCloseModal} handleExitFullscreen={handleExitFullscreen} />
+          <CloseModal
+            open={open}
+            handleClose={handleCloseModal}
+            handleExitFullscreen={handleExitFullscreen}
+          />
         </CheckoutButtons>
       </CheckoutBox>
     </CheckoutFrame>

@@ -3,16 +3,16 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { subscribeNewsletter } from "../../../redux/actions/profile";
-import { isEmptyObject } from "../../../utils/utils";
+import notificationToast, { isEmptyObject } from "../../../utils/utils";
 import Button from "../../button/Button";
-import ErrorBox from "../error/ErrorBox";
 import InputField from "../InputField/InputField";
 import { LogFormError } from "../Log.style";
 import { validate } from "../NewsletterForm/NewletterFormValidate";
 
-export default function NewsletterForm({ setIsSubmitted }, isSubmitted) {
+export default function NewsletterForm({ setIsSubmitted }) {
   const [t] = useTranslation("translation");
   const [loading, setLoading] = useState(false);
+
   const dispatch = useDispatch();
   const handleSubmit = (value) => {
     setLoading(true);
@@ -24,6 +24,7 @@ export default function NewsletterForm({ setIsSubmitted }, isSubmitted) {
       .catch(() => {
         setLoading(false);
         setIsSubmitted(false);
+        notificationToast("", "error");
       });
   };
 
@@ -72,7 +73,6 @@ export default function NewsletterForm({ setIsSubmitted }, isSubmitted) {
             )}
           </Button>
         </div>
-        {!isSubmitted && <ErrorBox isError={!isSubmitted} />}
       </form>
       {!isEmptyObject(formik.errors) && (
         <LogFormError>

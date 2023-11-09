@@ -6,28 +6,24 @@ import { LogFormError } from "../Log.style";
 import { validate } from "./PasswordRecoveryFormValidate";
 import { passwordRecovery } from "../../../redux/actions/auth";
 import { useFormik } from "formik";
-import ErrorBox from "../error/ErrorBox";
 import { isEmptyObject } from "../../../utils/utils";
 import { useTranslation } from "react-i18next";
 
 export default function PasswordRecoveryForm(props) {
-  const { isSubmitted, strToken } = props;
+  const { strToken, setIsSubmitted } = props;
   const [t] = useTranslation("translation");
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
 
   const handleSubmit = (value) => {
     setLoading(true);
     dispatch(passwordRecovery(strToken, value.password))
       .then(() => {
-        props.setIsSubmitted(true);
+        setIsSubmitted(true);
         setLoading(false);
-        setIsClicked(false);
       })
       .catch(() => {
-        setIsClicked(true);
-        props.setIsSubmitted(false);
+        setIsSubmitted(false);
         setLoading(false);
       });
   };
@@ -83,7 +79,6 @@ export default function PasswordRecoveryForm(props) {
           )}
         </Button>
       </div>
-      {!props.isSubmitted && isClicked && <ErrorBox isError={!isSubmitted} />}
     </form>
   );
 }

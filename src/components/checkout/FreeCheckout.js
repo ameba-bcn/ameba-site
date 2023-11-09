@@ -5,8 +5,6 @@ import { Redirect } from "react-router";
 import { getMemberProfile } from "../../redux/actions/auth";
 import { checkoutPaymentCart, getCart } from "../../redux/actions/cart";
 import Button from "../button/Button";
-import ErrorBox from "../forms/error/ErrorBox";
-import { clearMessage } from "../../redux/actions/message";
 import { useTranslation } from "react-i18next";
 import { closeFullscreen } from "../../redux/actions/fullscreen";
 
@@ -15,15 +13,15 @@ const StyledFreeCheckoutParagraph = styled.div`
 `;
 
 const StyledFreeCheckout = styled.div`
-    min-height: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    button {
-      padding: 10px 50px;
-    }
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  button {
+    padding: 10px 50px;
+  }
 `;
 
 export default function FreeCheckout() {
@@ -32,19 +30,12 @@ export default function FreeCheckout() {
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { id = "" } = cart_data;
   const [redirect, setRedirect] = useState(false);
-  const [error, setError] = useState(false);
   const handleFinishPayment = () => {
-    dispatch(checkoutPaymentCart(id))
-      .then(() => {
-        dispatch(getMemberProfile());
-        setError(false);
-        dispatch(clearMessage());
-        dispatch(getCart());
-        dispatch(closeFullscreen())
-      })
-      .catch(() => {
-        setError(true);
-      });
+    dispatch(checkoutPaymentCart(id)).then(() => {
+      dispatch(getMemberProfile());
+      dispatch(getCart());
+      dispatch(closeFullscreen());
+    });
     setRedirect(true);
   };
 
@@ -55,7 +46,6 @@ export default function FreeCheckout() {
       <StyledFreeCheckoutParagraph>
         {t("checkout.pagament-gratis")}
       </StyledFreeCheckoutParagraph>
-      {error && <ErrorBox isError={error} />}
       <Button
         variant="contained"
         color="primary"

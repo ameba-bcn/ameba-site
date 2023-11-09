@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./BotigaGeneral.css";
 import ProducteDialog from "./Producte";
 import axiosInstance from "../../axios";
-import {
-  createLastRowIterator,
-  formatPrice
-} from "./../../utils/utils";
+import { createLastRowIterator, formatPrice } from "./../../utils/utils";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { ReactFitty } from "react-fitty";
@@ -27,6 +24,7 @@ export default function BotigaGeneral() {
   const [open, setOpen] = useState(false);
   const [producteLoading, setProducteLoading] = useState(false);
   let location = useLocation();
+  // eslint-disable-next-line no-undef
   const queryString = require("query-string");
   const value = queryString.parse(location.search);
   const externalId = value.id;
@@ -65,16 +63,22 @@ export default function BotigaGeneral() {
         setProducteLoading(false);
       })
       .then(handleClickOpen())
-      .catch(err => {
+      .catch((err) => {
         setProducteLoading(false);
         if (err.response) {
-          console.log("ERROR: client received an error response (5xx, 4xx)", err.response);
+          console.log(
+            "ERROR: client received an error response (5xx, 4xx)",
+            err.response
+          );
         } else if (err.request) {
-          console.log("ERROR: client never received a response, or request never left", err.response); 
+          console.log(
+            "ERROR: client never received a response, or request never left",
+            err.response
+          );
         } else {
-          console.log("ERROR: anything else", err); 
+          console.log("ERROR: anything else", err);
         }
-    })
+      });
   };
 
   useEffect(() => {
@@ -119,7 +123,8 @@ export default function BotigaGeneral() {
   return (
     <div className="productCardDeck">
       {cardGenerator}
-      {(cardGenerator && !isOneColumn) &&
+      {cardGenerator &&
+        !isOneColumn &&
         createLastRowIterator(botiga, 518).map((n, index) => (
           <i aria-hidden={true} key={index}></i>
         ))}

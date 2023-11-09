@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { LogFormError } from "../Log.style";
 import { validate } from "./DiscountCodeValidate";
 import { useFormik } from "formik";
-import ErrorBox from "../error/ErrorBox";
 import { DiscountRow } from "./DiscountCode.style";
 import { isEmptyObject } from "../../../utils/utils";
 import { applyDiscount } from "../../../redux/actions/cart";
@@ -17,7 +16,6 @@ export default function DiscountCode() {
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { item_variant_ids = [] } = cart_data;
   const [loading, setLoading] = useState(false);
-  const [errorsOnSubmit, setErrorsOnSubmit] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -35,11 +33,9 @@ export default function DiscountCode() {
     setLoading(true);
     dispatch(applyDiscount(item_variant_ids, value.code))
       .then(() => {
-        setErrorsOnSubmit(false);
         setLoading(false);
       })
       .catch(() => {
-        setErrorsOnSubmit(true);
         setLoading(false);
       });
   };
@@ -82,7 +78,6 @@ export default function DiscountCode() {
           </LogFormError>
         )}
       </DiscountRow>
-      {errorsOnSubmit && <ErrorBox isError={errorsOnSubmit} />}
     </form>
   );
 }

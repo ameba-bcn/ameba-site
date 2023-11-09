@@ -112,13 +112,7 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       </UserContext.Provider>
-      <ToastContainer
-        position="bottom-center"
-        closeButton={false}
-        closeOnClick
-        draggable
-        limit={1}
-      />
+      <ToastContainer position="bottom-center" />
       <Contacte />
     </div>
   );

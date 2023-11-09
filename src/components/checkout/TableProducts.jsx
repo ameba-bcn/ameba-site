@@ -2,27 +2,18 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { substractToCart } from "../../redux/actions/cart";
-import { clearMessage } from "../../redux/actions/message";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { ReviewTable } from "./Review.style";
 import { priceMayDiscount } from "../../utils/utils";
 
-export default function TableProducts(props) {
-  const { setError } = props;
+export default function TableProducts() {
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { item_variants = [] } = cart_data;
   const dispatch = useDispatch();
   const [t] = useTranslation("translation");
 
   const substractItem = (id) => {
-    dispatch(substractToCart(id))
-      .then(() => {
-        setError(false);
-        dispatch(clearMessage());
-      })
-      .catch(() => {
-        setError(true);
-      });
+    dispatch(substractToCart(id));
   };
   return (
     <ReviewTable>
