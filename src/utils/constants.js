@@ -69,7 +69,7 @@ export const ERROR = {
   },
 };
 
-export const MOBILE_BIG = "(max-width:1360px)";
+export const MOBILE_BIG = "(max-width:1500px)";
 
 export const MOBILE_NORMAL = "(max-width:760px)";
 

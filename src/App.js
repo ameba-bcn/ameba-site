@@ -49,6 +49,9 @@ import ExternalEvents from "./pages/ExternalEvents";
 import Memberships from "./pages/Memberships";
 import Gallery from "./pages/Gallery";
 import Projects from "./pages/Projects";
+import Socios from "./pages/socios/Socios";
+import SociosDetailed from "./pages/socios/components/SociosDetailed";
+import Directorio from "./pages/Directorio";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -96,6 +99,9 @@ function App() {
           <Route exact path="/booking/:id" component={Entrevista} />
           <Route path="/booking" component={Booking} />
           <Route path="/projects" component={Projects} />
+          <Route exact path="/socis/:id" component={SociosDetailed} />
+          <Route path="/socis" component={Socios} />
+          <Route path="/directorio" component={Directorio} />
           <Route path="/gallery" component={Gallery} />
           <Route path="/login" component={LogSession} />
           <Route path="/recovery" component={PasswordRecovery} />
