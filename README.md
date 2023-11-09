@@ -2,6 +2,10 @@
 
 ## Release changes
 
+Version 3.2.13
+
+- Refactor redux messages
+
 Version 3.2.12
 
 - Delivery copies updated

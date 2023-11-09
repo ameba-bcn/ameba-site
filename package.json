@@ -1,6 +1,6 @@
 {
   "name": "ameba-site",
-  "version": "3.2.12",
+  "version": "3.2.13",
   "private": true,
   "homepage": "https://ameba-bcn.github.io/ameba-site/",
   "dependencies": {
