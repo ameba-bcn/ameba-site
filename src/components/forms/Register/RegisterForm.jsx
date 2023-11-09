@@ -9,7 +9,7 @@ import { register } from "../../../redux/actions/auth";
 import { isEmptyObject } from "../../../utils/utils";
 import { useTranslation } from "react-i18next";
 
-export default function RegisterForm({ setRedirect, setDisplayError }) {
+export default function RegisterForm({ setRedirect }) {
   const [t] = useTranslation("translation");
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { id = null } = cart_data;
@@ -29,7 +29,6 @@ export default function RegisterForm({ setRedirect, setDisplayError }) {
         setRedirect(true);
       })
       .catch(() => {
-        setDisplayError(true);
         setLoading(false);
       });
   };
@@ -102,7 +101,11 @@ export default function RegisterForm({ setRedirect, setDisplayError }) {
           buttonStyle="boton--primary--solid"
           hoverStyle="bg-cream"
         >
-          {loading ? <span className="spinner-border"></span> : <>{t("login.registrat")}</>}
+          {loading ? (
+            <span className="spinner-border"></span>
+          ) : (
+            <>{t("login.registrat")}</>
+          )}
         </Button>
       </form>
     </LogFormBox>

@@ -50,22 +50,23 @@ const addInCart = (id) => {
       });
     } else {
       //  No es primer producto del carrito
-      return axiosInstance.get(`${API_URL}carts/${cart_uuid}/`).then((response) => {
-        const cartItems = response.data.item_variant_ids;
-        cartItems.push(id);
-        return axiosInstance
-          .patch(`${API_URL}carts/${cart_uuid}/`, {
-            item_variant_ids: cartItems,
-          })
-          .then((response) => {
-            localStorage.setItem("cart_id", response?.data.id);
-            return response?.data;
-          });
-      });
+      return axiosInstance
+        .get(`${API_URL}carts/${cart_uuid}/`)
+        .then((response) => {
+          const cartItems = response.data.item_variant_ids;
+          cartItems.push(id);
+          return axiosInstance
+            .patch(`${API_URL}carts/${cart_uuid}/`, {
+              item_variant_ids: cartItems,
+            })
+            .then((response) => {
+              localStorage.setItem("cart_id", response?.data.id);
+              return response?.data;
+            });
+        });
     }
   }
 };
-
 
 const removeItemCart = (id) => {
   const accessToken = localStorage.getItem("access");
@@ -101,19 +102,23 @@ const removeItemCart = (id) => {
     //  Not detected user on LS case
   } else {
     const cart_uuid = localStorage.getItem("cart_id");
-    return axiosInstance.get(`${API_URL}carts/${cart_uuid}/`).then((response) => {
-      const cartItems = response.data.item_variant_ids;
-      const index = cartItems.indexOf(id);
-      if (index > -1) {
-        cartItems.splice(index, 1);
-      }
-      return axiosInstance
-        .patch(`${API_URL}carts/${cart_uuid}/`, { item_variant_ids: cartItems })
-        .then((response) => {
-          localStorage.setItem("cart_id", response?.data.id);
-          return response?.data;
-        });
-    });
+    return axiosInstance
+      .get(`${API_URL}carts/${cart_uuid}/`)
+      .then((response) => {
+        const cartItems = response.data.item_variant_ids;
+        const index = cartItems.indexOf(id);
+        if (index > -1) {
+          cartItems.splice(index, 1);
+        }
+        return axiosInstance
+          .patch(`${API_URL}carts/${cart_uuid}/`, {
+            item_variant_ids: cartItems,
+          })
+          .then((response) => {
+            localStorage.setItem("cart_id", response?.data.id);
+            return response?.data;
+          });
+      });
   }
 };
 
@@ -191,13 +196,16 @@ const getCart = () => {
         }
       });
   } else {
-    return axiosInstance.get(`${API_URL}carts/${cart_uuid}/`).then((response) => {
-      localStorage.setItem("cart_id", response?.data.id);
-      return response?.data;
-    }).catch(() => {
-      const cart_uuid = localStorage.getItem("cart_id");
-      if (cart_uuid) localStorage.removeItem("cart_id");
-    });
+    return axiosInstance
+      .get(`${API_URL}carts/${cart_uuid}/`)
+      .then((response) => {
+        localStorage.setItem("cart_id", response?.data.id);
+        return response?.data;
+      })
+      .catch(() => {
+        const cart_uuid = localStorage.getItem("cart_id");
+        if (cart_uuid) localStorage.removeItem("cart_id");
+      });
   }
 };
 
@@ -233,7 +241,6 @@ const applyDiscount = (item_variants, discountCode) => {
     });
 };
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   addInCart,
   deleteFullCart,
@@ -242,5 +249,5 @@ export default {
   checkoutPaymentCart,
   getCart,
   deleteCartAfterSuccesfullCheckout,
-  applyDiscount
+  applyDiscount,
 };

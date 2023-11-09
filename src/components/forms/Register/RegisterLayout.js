@@ -4,14 +4,12 @@ import { Redirect } from "react-router-dom";
 import AddIcon from "@material-ui/icons/Add";
 import SociDialog from "../../botiga/Soci";
 import RegisterForm from "./RegisterForm";
-import ErrorBox from "../error/ErrorBox";
 import { useTranslation } from "react-i18next";
 
 const RegisterLayout = (props) => {
   const [t] = useTranslation("translation");
   const profile = useSelector((state) => state.profile);
   const { user_profile = "" } = profile;
-  const [displayError, setDisplayError] = useState(false);
   const [redirect, setRedirect] = useState(false);
   const [open, setOpen] = React.useState(false);
 
@@ -35,12 +33,7 @@ const RegisterLayout = (props) => {
             <AddIcon className="sociLogBannerPlus" />
           </div>
         )}
-        <RegisterForm
-          setDisplayError={setDisplayError}
-          setRedirect={setRedirect}
-        />
-
-        {displayError && <ErrorBox isError={displayError} />}
+        <RegisterForm setRedirect={setRedirect} />
 
         <span className="logTextosLink" onClick={showLogin}>
           {`- ${t("login.inicia")} -`}

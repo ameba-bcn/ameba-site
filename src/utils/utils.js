@@ -1,5 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 export function getIDValuesFromArrayObj(ObjectArray = []) {
   let resultArray = [];
@@ -141,3 +142,59 @@ export const priceMayDiscount = (price, discount, discountName) => {
   }
   return price;
 };
+
+export default function notificationToast(text = "", type = "success") {
+  const finalMessage = () => {
+    if (text === "") {
+      if (type === "error") {
+        return "Oops! Something went wrong. Please try again later.";
+      }
+      return "Tutto bene!";
+    }
+    return text;
+  };
+
+  if (type === "success") {
+    return toast.success(finalMessage, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000, //3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      className: "notificationToast-success",
+      theme: "success",
+    });
+  }
+  if (type === "error") {
+    return toast.error(finalMessage, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000, //3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      className: "notificationToast-error",
+      theme: "error",
+    });
+  }
+  if (type === "warning") {
+    return toast.warning(finalMessage, {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000, //3 seconds
+      hideProgressBar: false,
+      closeOnClick: true,
+      draggable: true,
+      className: "notificationToast-warning",
+      theme: "warning",
+    });
+  }
+  return toast.info(finalMessage, {
+    position: toast.POSITION.TOP_RIGHT,
+    autoClose: 3000, //3 seconds
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    className: "notificationToast-info",
+    theme: "info",
+  });
+}

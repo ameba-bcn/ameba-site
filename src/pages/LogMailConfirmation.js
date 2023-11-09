@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { validateEmail } from "./../redux/actions/auth";
 import LettersMove from "./../components/layout/LettersMove";
@@ -7,9 +7,7 @@ import { useTranslation } from "react-i18next";
 
 export default function LogMailConfirmation(props) {
   const dispatch = useDispatch();
-  const { message = "" } = useSelector((state) => state.message);
   const [hasQueryParams, setHasQueryParams] = useState(false);
-  const [displayError, setDisplayError] = useState(false);
   const [t] = useTranslation("translation");
 
   // eslint-disable-next-line no-undef
@@ -19,9 +17,7 @@ export default function LogMailConfirmation(props) {
 
   useEffect(() => {
     if (strToken) {
-      dispatch(validateEmail(strToken))
-        .then(setHasQueryParams(true))
-        .catch(setDisplayError(true));
+      dispatch(validateEmail(strToken)).then(setHasQueryParams(true));
     }
   }, [strToken, dispatch]);
 
@@ -33,9 +29,7 @@ export default function LogMailConfirmation(props) {
     <>
       <div className="full-height-msg">
         {hasQueryParams ? (
-          <div className="single-msg">
-            {displayError && message ? message : t("login.verifica")}
-          </div>
+          <div className="single-msg">{t("login.verifica")}</div>
         ) : (
           <div className="single-msg">
             T&apos;hem enviat un mail de confirmació, confirma l&apos;enllaç

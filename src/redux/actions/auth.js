@@ -14,7 +14,6 @@ import {
   PASSWORD_RECOVERY_SUCCESS,
   PASSWORD_RECOVERY_FAIL,
   LOGOUT,
-  SET_MESSAGE,
   DELETE_CART,
   GUEST_USER,
   LOGGED_USER,
@@ -29,6 +28,7 @@ import {
 } from "./types";
 
 import AuthService from "../services/auth.service";
+import notificationToast from "../../utils/utils";
 
 export const register = (registerData) => (dispatch) => {
   return AuthService.register(registerData).then(
@@ -37,10 +37,7 @@ export const register = (registerData) => (dispatch) => {
         type: REGISTER_SUCCESS,
       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: response.data.message,
-      });
+      notificationToast(response.data.message, "success");
 
       return Promise.resolve();
     },
@@ -50,10 +47,7 @@ export const register = (registerData) => (dispatch) => {
         type: REGISTER_FAIL,
       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+      notificationToast(message, "error");
 
       return Promise.reject();
     }
@@ -77,7 +71,7 @@ export const getMemberProfile = () => (dispatch) => {
       return Promise.resolve();
     },
     (error) => {
-      const message = error.response.data.detail;
+      const message = error.response?.data.detail;
       dispatch({
         type: GET_MEMBER_PROFILE_FAIL,
         payload: message,
@@ -107,19 +101,14 @@ export const updateMemberProfile =
           payload: response,
         });
 
-        dispatch({
-          type: SET_MESSAGE,
-          payload: "Update data member success",
-        });
+        notificationToast("Update data member success", "success");
 
         return Promise.resolve();
       },
       (error) => {
-        const message = error.response.data.detail;
-        dispatch({
-          type: SET_MESSAGE,
-          payload: message,
-        });
+        const message = error.response?.data.detail;
+
+        notificationToast(message, "error");
 
         return Promise.reject();
       }
@@ -147,11 +136,9 @@ export const createMemberProfile =
         return Promise.resolve();
       },
       (error) => {
-        const message = error.response.data;
-        dispatch({
-          type: SET_MESSAGE,
-          payload: JSON.stringify(message),
-        });
+        const message = error.response?.data;
+
+        notificationToast(JSON.stringify(message), "error");
 
         return Promise.reject();
       }
@@ -172,15 +159,12 @@ export const validateEmail = (token) => (dispatch) => {
       return Promise.resolve();
     },
     (error) => {
-      const message = error.response.data?.detail;
+      const message = error.response?.data?.detail;
       dispatch({
         type: VALIDATE_FAIL,
         payload: message,
       });
-      dispatch({
-        type: SET_MESSAGE,
-        payload: JSON.stringify(message),
-      });
+      notificationToast(JSON.stringify(message), "error");
 
       return Promise.reject();
     }
@@ -226,17 +210,14 @@ export const login = (username, password) => (dispatch) => {
       return Promise.resolve();
     },
     (error) => {
-      const message = error.response.data?.detail;
+      const message = error.response?.data?.detail;
       dispatch({
         type: LOGIN_FAIL,
       });
       dispatch({
         type: GUEST_USER,
       });
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+      notificationToast(message, "error");
 
       return Promise.reject();
     }
@@ -254,15 +235,12 @@ export const getUserData = () => (dispatch) => {
       return Promise.resolve();
     },
     (error) => {
-      const message = error.response.data?.detail;
+      const message = error.response?.data?.detail;
       dispatch({
         type: GET_USER_FAIL,
       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+      notificationToast(message, "error");
 
       return Promise.reject();
     }
@@ -278,24 +256,18 @@ export const passwordRecovery = (token, password) => (dispatch) => {
         type: PASSWORD_RECOVERY_SUCCESS,
       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+      notificationToast(message, "success");
 
       return Promise.resolve();
     },
     (error) => {
-      const message = error.response.data?.detail;
+      const message = error.response?.data?.detail;
       dispatch({
         type: PASSWORD_RECOVERY_FAIL,
         payload: message,
       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+      notificationToast(message, "error");
 
       return Promise.reject();
     }
@@ -310,24 +282,18 @@ export const sendEmailPasswordRecovery = (email) => (dispatch) => {
         type: SEND_EMAIL_PASSWORD_RECOVERY_SUCCESS,
       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+      notificationToast(message, "success");
 
       return Promise.resolve();
     },
     (error) => {
-      const message = error.response.data?.detail;
+      const message = error.response?.data?.detail;
       dispatch({
         type: SEND_EMAIL_PASSWORD_RECOVERY_FAIL,
         payload: message,
       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+      notificationToast(message, "error");
 
       return Promise.reject();
     }
@@ -352,11 +318,7 @@ export const logout = () => (dispatch) => {
       // });
     },
     (error) => {
-      const message = error.response.data;
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+      const message = error.response?.data;
       dispatch({
         type: DELETE_CART,
       });
@@ -366,10 +328,8 @@ export const logout = () => (dispatch) => {
       dispatch({
         type: CLEAR_USER_DATA,
       });
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+      notificationToast(message, "error");
+
       return Promise.reject();
     }
   );
@@ -385,7 +345,7 @@ export const deleteUser = () => (dispatch) => {
       return Promise.resolve();
     },
     (error) => {
-      const message = error.response.data?.detail;
+      const message = error.response?.data?.detail;
       dispatch({
         type: DELETE_USER_FAIL,
         payload: message,

@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import LettersMove from "../components/layout/LettersMove";
-import { isEmptyObject } from "../utils/utils";
 import PasswordRecoveryForm from "./../components/forms/PasswordRecoveryForm/PasswordRecoveryForm";
 
 export default function PasswordRecovery(props) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [strToken, setStrToken] = useState("");
+  // eslint-disable-next-line no-undef
   const queryString = require("query-string");
   const parsed = queryString.parse(props.location.search);
   const [t] = useTranslation("translation");
-  const message = useSelector((state) => state.message);
 
   useEffect(() => {
     setStrToken(parsed["token"]);
@@ -23,19 +21,10 @@ export default function PasswordRecovery(props) {
       <div className="cardForm">
         <div className="card card-container card-login">
           <div className="logTitle">{t("login.recupera-curt")}</div>
-          {isSubmitted ? (
-            <>
-              <div className="full-height-msg">
-                <div className="single-msg">
-                  {isEmptyObject(message) ? "" : message.message}
-                </div>
-              </div>
-            </>
-          ) : (
+          {isSubmitted ? null : (
             <>
               <PasswordRecoveryForm
                 setIsSubmitted={setIsSubmitted}
-                isSubmitted={isSubmitted}
                 strToken={strToken}
               />
               <span className="logTextosLink">

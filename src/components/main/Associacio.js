@@ -24,6 +24,7 @@ function Associacio() {
         {/* Loading a image meanwhile is loading video */}
         {!isReady && (
           <img
+            // eslint-disable-next-line no-undef
             src={process.env.PUBLIC_URL + staticImg}
             className="portadaFallback"
             alt=""

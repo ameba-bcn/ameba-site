@@ -40,9 +40,11 @@ const passwordRecovery = (token, password) => {
 };
 
 const sendEmailPasswordRecovery = (email) => {
-  return axiosInstance.get(API_URL + `recovery/?email=${email}`).then((response) => {
-    return response?.data;
-  });
+  return axiosInstance
+    .get(API_URL + `recovery/?email=${email}`)
+    .then((response) => {
+      return response?.data;
+    });
 };
 
 const login = (email, password) => {
@@ -73,7 +75,12 @@ const getMemberProfile = () => {
     });
 };
 
-const updateMemberProfile = (identity_card, first_name, last_name, phone_number) => {
+const updateMemberProfile = (
+  identity_card,
+  first_name,
+  last_name,
+  phone_number
+) => {
   return axiosInstance
     .patch(
       API_URL + `users/current/member_profile/`,
@@ -94,7 +101,12 @@ const updateMemberProfile = (identity_card, first_name, last_name, phone_number)
     });
 };
 
-const createMemberProfile = (identity_card, first_name, last_name, phone_number) => {
+const createMemberProfile = (
+  identity_card,
+  first_name,
+  last_name,
+  phone_number
+) => {
   return axiosInstance
     .post(
       API_URL + `users/current/member_profile/`,
@@ -155,7 +167,6 @@ const deleteUser = () => {
     });
 };
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   register,
   validateLocalToken,

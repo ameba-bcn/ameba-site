@@ -6,6 +6,7 @@ import {
   SUBSCRIBE_FAIL,
 } from "./types";
 import StateService from "./../services/profile.services";
+import notificationToast from "../../utils/utils";
 
 export const setGuestUser = () => ({
   type: GUEST_USER,
@@ -27,16 +28,17 @@ export const subscribeNewsletter = (email) => (dispatch) => {
         type: SUBSCRIBE_SUCCESS,
         payload: message,
       });
+      notificationToast(message, "success");
 
       return Promise.resolve();
     },
     (error) => {
-      const message = error.response.data.email;
+      const message = error.response?.data?.email;
       dispatch({
         type: SUBSCRIBE_FAIL,
         payload: message,
       });
-
+      notificationToast(message, "error");
       return Promise.reject();
     }
   );

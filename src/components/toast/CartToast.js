@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import { ToastBox, ToastLeftInBox, ToastRightInBox } from "./CartToast.style";
+import {
+  ToastBox,
+  ToastLeftInBox,
+  ToastRightInBox,
+} from "./CartToast.style.js";
 
 export default function CartToast() {
   const { cart_data = {} } = useSelector((state) => state.cart);

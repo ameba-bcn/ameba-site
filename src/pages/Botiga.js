@@ -19,6 +19,7 @@ function Botiga() {
   const data = useSelector((state) => state.data);
   const { membership = [] } = data;
   let location = useLocation();
+  // eslint-disable-next-line no-undef
   const queryString = require("query-string");
   const value = queryString.parse(location.search);
   const externalId = value?.id;
@@ -28,34 +29,42 @@ function Botiga() {
     let arr = [];
     setLoading(true);
     axiosInstance
-      .get(`${API_URL}/subscriptions/${id_soci[0]}`, {})
+      .get(`${API_URL}subscriptions/${id_soci[0]}`, {})
       .then((resposta) => {
         arr.push(resposta.data);
         id_soci.length > 1 &&
-          axiosInstance.get(`${API_URL}/subscriptions/${id_soci[1]}`, {}).then((res) => {
-            arr.push(res.data);
-          });
+          axiosInstance
+            .get(`${API_URL}subscriptions/${id_soci[1]}`, {})
+            .then((res) => {
+              arr.push(res.data);
+            });
       })
       .then(() => {
         setOpen(true);
         setProductData(arr);
         setLoading(false);
       })
-      .catch(err => {
+      .catch((err) => {
         setLoading(false);
         if (err.response) {
-          console.log("ERROR: client received an error response (5xx, 4xx)", err.response);
+          console.log(
+            "ERROR: client received an error response (5xx, 4xx)",
+            err.response
+          );
         } else if (err.request) {
-          console.log("ERROR: client never received a response, or request never left", err.response);
+          console.log(
+            "ERROR: client never received a response, or request never left",
+            err.response
+          );
         } else {
           console.log("ERROR: anything else", err);
         }
-      })
+      });
   };
 
   const handleClose = () => {
     setOpen(false);
-  }
+  };
 
   const [t] = useTranslation("translation");
   const isMobile = useMediaQuery("(max-width:1163px)");
@@ -75,7 +84,7 @@ function Botiga() {
         <NavLink
           style={{ textDecoration: "none" }}
           to={{
-            pathname: '/memberships',
+            pathname: "/memberships",
           }}
         >
           <ProductBanner
@@ -83,10 +92,10 @@ function Botiga() {
               isMobile
                 ? t("banners.soci-curt")
                 : `${t("banners.soci-llarg-pt1")}${deleteStringDecimals(
-                  sociPreu
-                )}${t("banners.soci-llarg-pt2")}`
+                    sociPreu
+                  )}${t("banners.soci-llarg-pt2")}`
             }
-          // handleClick={handleOpen}
+            // handleClick={handleOpen}
           />
         </NavLink>
       </div>

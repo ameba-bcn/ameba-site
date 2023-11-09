@@ -6,7 +6,7 @@ import axiosInstance from "../../axios";
 import "./Card3grid.css";
 import { API_URL } from "../../utils/constants";
 
-const Card3Grid = React.memo((props) => {
+const Card3Grid = (props) => {
   const { activitats } = props;
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -29,24 +29,30 @@ const Card3Grid = React.memo((props) => {
   ]);
 
   const fetchEvent = (data) => {
-    setLoading(true)
+    setLoading(true);
     axiosInstance
       .get(`${API_URL}events/${data.id}`, {})
       .then((res) => {
         setEventData(res.data);
-        setLoading(false)
+        setLoading(false);
       })
       .then(handleClickOpen())
-      .catch(err => {
-        setLoading(false)
+      .catch((err) => {
+        setLoading(false);
         if (err.response) {
-          console.log("ERROR: client received an error response (5xx, 4xx)", err.response);
+          console.log(
+            "ERROR: client received an error response (5xx, 4xx)",
+            err.response
+          );
         } else if (err.request) {
-          console.log("ERROR: client never received a response, or request never left", err.response);
+          console.log(
+            "ERROR: client never received a response, or request never left",
+            err.response
+          );
         } else {
           console.log("ERROR: anything else", err);
         }
-      })
+      });
   };
   const handleClickOpen = () => {
     setOpen(true);
@@ -86,6 +92,6 @@ const Card3Grid = React.memo((props) => {
       )}
     </Grid>
   );
-});
+};
 
-export default Card3Grid;
+export default React.memo(Card3Grid);

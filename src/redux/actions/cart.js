@@ -13,12 +13,12 @@ import {
   DELETE_CART_FAIL,
   DESTROY_CART,
   DESTROY_CART_FAIL,
-  SET_MESSAGE,
   DISCOUNT_CODE_APPLIED,
-  DISCOUNT_CODE_FAIL
+  DISCOUNT_CODE_FAIL,
 } from "./types";
 
 import CartService from "../services/cart.services";
+import notificationToast from "../../utils/utils";
 
 export const addToCart = (id) => (dispatch) => {
   return CartService.addInCart(id).then(
@@ -37,6 +37,8 @@ export const addToCart = (id) => (dispatch) => {
         type: ADD_FAIL,
         payload: message,
       });
+
+      notificationToast(message, "error");
 
       return Promise.reject();
     }
@@ -60,6 +62,8 @@ export const substractToCart = (id) => (dispatch) => {
         type: SUBS_FAIL,
         payload: message,
       });
+
+      notificationToast(message, "error");
 
       return Promise.reject();
     }
@@ -97,7 +101,6 @@ export const checkoutCart = () => (dispatch) => {
         payload: response,
       });
 
-
       return Promise.resolve();
     },
     (error) => {
@@ -107,10 +110,7 @@ export const checkoutCart = () => (dispatch) => {
         payload: message,
       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+      notificationToast(message, "error");
 
       return Promise.reject();
     }
@@ -128,16 +128,13 @@ export const checkoutPaymentCart = (id) => (dispatch) => {
       return Promise.resolve();
     },
     (error) => {
-      const message = error.response?.data?.detail;
+      const message = error?.response?.data?.detail;
       dispatch({
         type: CHECKOUT_PAYMENT_FAIL,
         payload: message,
       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+      notificationToast(message, "error");
 
       return Promise.reject();
     }
@@ -167,6 +164,8 @@ export const deleteFullCart = () => (dispatch) => {
         payload: message,
       });
 
+      notificationToast(message, "error");
+
       return Promise.reject();
     }
   );
@@ -179,7 +178,6 @@ export const deleteCartAfterCheckout = () => (dispatch) => {
         type: DESTROY_CART,
         payload: response,
       });
-
 
       return Promise.resolve();
     },
@@ -194,10 +192,7 @@ export const deleteCartAfterCheckout = () => (dispatch) => {
         payload: message,
       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+      notificationToast(message, "error");
 
       return Promise.reject();
     }
@@ -220,16 +215,13 @@ export const applyDiscount = (item_variants, discountCode) => (dispatch) => {
       return Promise.resolve();
     },
     (error) => {
-      const message = error.response?.data?.discount_code[0];
+      const message = error?.response?.data?.discount_code[0];
       dispatch({
         type: DISCOUNT_CODE_FAIL,
         payload: message,
       });
 
-      dispatch({
-        type: SET_MESSAGE,
-        payload: message,
-      });
+      notificationToast(message, "error");
 
       return Promise.reject();
     }

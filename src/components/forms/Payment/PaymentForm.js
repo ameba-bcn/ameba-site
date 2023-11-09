@@ -8,13 +8,13 @@ import { useDispatch } from "react-redux";
 import "./PaymentForm.css";
 import Button from "../../button/Button";
 import { closeFullscreen } from "../../../redux/actions/fullscreen";
+import notificationToast from "../../../utils/utils";
 
 function PaymentForm() {
   const dispatch = useDispatch();
   const [processing, setProcessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
-  const [errorMessage, setErrorMessage] = useState(null);
 
   const cardStyle = {
     hidePostalCode: true,
@@ -61,15 +61,14 @@ function PaymentForm() {
       // confirming the payment. Show error to your customer (e.g., payment
       // details incomplete)
       setProcessing(false);
-      setErrorMessage(error.message);
-      dispatch(closeFullscreen())
+      notificationToast(error.message, "error");
+      dispatch(closeFullscreen());
     } else {
       // Your customer will be redirected to your `return_url`. For some payment
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.
-      setErrorMessage(error.message);
       setProcessing(false);
-      dispatch(closeFullscreen())
+      dispatch(closeFullscreen());
     }
   };
 
@@ -95,8 +94,6 @@ function PaymentForm() {
               )}
             </span>
           </Button>
-          {/* Show error message to your customers */}
-          {errorMessage && <div>{errorMessage}</div>}
         </form>
       </div>
     </div>

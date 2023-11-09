@@ -25,7 +25,6 @@ const initialState = {
   stripe: false,
 };
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
@@ -74,7 +73,7 @@ export default function (state = initialState, action) {
     case CHECKOUT_PAYMENT:
       return {
         ...state,
-        checkout: {...state.checkout, checkout_stripe:payload},
+        checkout: { ...state.checkout, checkout_stripe: payload },
         stripe: true,
       };
     case CHECKOUT_PAYMENT_FAIL:
