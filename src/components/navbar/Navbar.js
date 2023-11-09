@@ -28,6 +28,9 @@ export default function Navbar() {
             <NavLink to="/" data-item="AMEBA">
               AMEBA
             </NavLink>
+            <NavLink to="/" data-item="AMEBA">
+              AMEBA
+            </NavLink>
           </div>
           {isMobile ? (
             <div className="menuIcon">
