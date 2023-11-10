@@ -21,12 +21,10 @@ import { Switch, Route } from "react-router-dom";
 import Contacte from "./contacte/Contacte";
 import Menu from "./components/navbar/Navbar";
 import LogSession from "./pages/LogSession";
-import Profile from "./pages/Profile";
 import CheckoutPage from "./pages/CheckoutPage";
 import CheckoutFinished from "./pages/landing/CheckoutFinished";
 import SubscriptionFinished from "./pages/landing/SubscriptionFinished";
 import LogMailConfirmation from "./pages/LogMailConfirmation";
-import PasswordRecovery from "./pages/PasswordRecovery";
 import SendEmailPasswordRecovery from "./pages/SendEmailPasswordRecovery";
 import ValidateEmail from "./pages/ValidateEmail";
 import ScrollTop from "./components/layout/ScrollTop";
@@ -48,10 +46,12 @@ import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
 import ExternalEvents from "./pages/ExternalEvents";
 import Memberships from "./pages/Memberships";
 import Gallery from "./pages/Gallery";
-import Projects from "./pages/Projects";
 import Socios from "./pages/socios/Socios";
 import SociosDetailed from "./pages/socios/components/SociosDetailed";
 import Directorio from "./pages/Directorio";
+import Profile from "./pages/profile/Profile";
+import PasswordRecovery from "./pages/PasswordRecovery";
+import Projects from "./pages/Projects";
 
 function App() {
   const [user, setUser] = useState(null);

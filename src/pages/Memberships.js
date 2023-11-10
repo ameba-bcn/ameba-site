@@ -27,26 +27,11 @@ import { toast } from "react-toastify";
 import { isMemberCheckout, urlify } from "../utils/utils";
 import { NavLink } from "react-router-dom";
 import CartToast from "../components/toast/CartToast";
+import DisclaimerBox from "../components/disclaimerBox/DisclaimerBox";
 
 const SyledExternalBox = styled.div`
   height: 100%;
   background-color: #fae6c5;
-`;
-
-const SyledDisclaimer = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-family: "Bebas Neue";
-  font-size: 30px;
-  border-style: solid;
-  border-color: #eb5e3e;
-  margin-top: 20px;
-  text-decoration: none !important;
-  color: #1d1d1b !important;
 `;
 
 const Memberships = () => {
@@ -191,7 +176,7 @@ const Memberships = () => {
                 )}
                 {hasMembershipInCart && (
                   <NavLink to={checkoutRedirect}>
-                    <SyledDisclaimer>{t("soci.disclaimer")}</SyledDisclaimer>
+                    <DisclaimerBox text={t("soci.disclaimer")} />
                   </NavLink>
                 )}
               </StyledExternalEventCol2>

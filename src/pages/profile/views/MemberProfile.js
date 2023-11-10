@@ -3,12 +3,12 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { deleteUser } from "../../redux/actions/auth";
-import { RowSeparator } from "../../styles/GlobalStyles.style";
-import SociDialog from "../botiga/Soci";
-import Button from "../button/Button";
-import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
-import MembershipFormReadOnly from "../forms/MembershipForm/MembershipFormReadOnly";
+import SociDialog from "../../../components/botiga/Soci";
+import Button from "../../../components/button/Button";
+import MembershipFormLayout from "../../../components/forms/MembershipForm/MembershipFormLayout";
+import MembershipFormReadOnly from "../../../components/forms/MembershipForm/MembershipFormReadOnly";
+import { deleteUser } from "../../../redux/actions/auth";
+import { RowSeparator } from "../../../styles/GlobalStyles.style";
 import {
   MemberInfoRow,
   MemberProfileBox,

@@ -6,8 +6,8 @@ const wideExpandAnimation = keyframes`
 `;
 
 const wideCollapseAnimation = keyframes`
-  0% {font-size: 20px ; opacity: 0.6;}
-  100% { ont-size: 30px; ; opacity: 1;}
+  0% {font-size: 28px ; opacity: 0.8;}
+  100% { font-size: 30px; ; opacity: 1;}
 `;
 
 export const StyledSearchBox = styled.input`
@@ -69,7 +69,7 @@ export const StyledIconSearchBox = styled.div`
     font-size: 30px;
 
     animation-name: ${wideCollapseAnimation};
-    animation-duration: 0.3s;
+    animation-duration: 0.2s;
     animation-timing-function: ease-in;
   }
 `;

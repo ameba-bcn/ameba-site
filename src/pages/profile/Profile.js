@@ -1,14 +1,14 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
-import LettersMove from "./../components/layout/LettersMove";
-import MemberProfile from "../components/profile/MemberProfile";
-import { isEmptyObject } from "../utils/utils";
+import LettersMove from "../../components/layout/LettersMove";
+import { isEmptyObject } from "../../utils/utils";
 import { useTranslation } from "react-i18next";
-import MemberProject from "../components/profile/MemberProject";
-import Breadcrums from "../components/breadcrums/Breadcrums";
-import useBreadcrumsSteps from "../components/breadcrums/use-breadcrums-steps";
-import QrView from "../components/profile/QrView";
+import Breadcrums from "../../components/breadcrums/Breadcrums";
+import useBreadcrumsSteps from "../../components/breadcrums/use-breadcrums-steps";
+import MemberProfile from "./views/MemberProfile";
+import QrView from "./views/QrView";
+import MemberProject from "./views/MemberProject";
 
 export default function Profile() {
   const auth = useSelector((state) => state.auth);
