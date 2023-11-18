@@ -28,23 +28,28 @@ export default function Entrevista() {
   ]);
   const data = useSelector((state) => state.data);
   const { support = [] } = data;
-  const [urlData] = support.filter((x) => x?.name?.replace(/\s+/g, '-')?.toLowerCase() === urlID)
-  const ID = urlData?.id
+  const [urlData] = support.filter(
+    (x) => x?.name?.replace(/\s+/g, "-")?.toLowerCase() === urlID
+  );
+  const ID = urlData?.id;
   // const mediaUrls = !!support.length
   //   ? support.find((x) => x.id === parseInt(urlID))?.media_urls
   //   : [];
-  const [artist, setArtist] = useState([
-    {
-      id: 0,
-      name: "",
-      images: [],
-      biography: "",
-      media: [],
-      tags: [],
-    },
-  ]);
+  const [artist, setArtist] = useState({
+    id: 0,
+    name: "",
+    images: [],
+    biography: "",
+    media: [],
+    tags: [],
+    created: "",
+  });
 
-  const { tags = [], media: mediaUrls = [], has_interview: hasInterviews } = artist;
+  const {
+    tags = [],
+    media: mediaUrls = [],
+    has_interview: hasInterviews,
+  } = artist;
   const { is_ameba_dj = false } = artist;
   const hasMediaSection = !!mediaUrls.length;
   const hasActivitiesSection = false;
@@ -55,19 +60,27 @@ export default function Entrevista() {
       .then((resp) => {
         setArtist(resp.data);
         const interviewId = resp.data.interview_id;
-        axiosInstance.get(`${API_URL}interviews/${interviewId}/`, {}).then((res) => {
-          setInterview(res.data);
-        });
+        axiosInstance
+          .get(`${API_URL}interviews/${interviewId}/`, {})
+          .then((res) => {
+            setInterview(res.data);
+          });
       })
-      .catch(err => {
+      .catch((err) => {
         if (err.response) {
-          console.log("ERROR: client received an error response (5xx, 4xx)", err.response);
+          console.log(
+            "ERROR: client received an error response (5xx, 4xx)",
+            err.response
+          );
         } else if (err.request) {
-          console.log("ERROR: client never received a response, or request never left", err.response);
+          console.log(
+            "ERROR: client never received a response, or request never left",
+            err.response
+          );
         } else {
           console.log("ERROR: anything else", err);
         }
-      })
+      });
   }, [ID]);
 
   return (

@@ -1,16 +1,21 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+import { formatISODateToDate } from "../../../utils/utils";
 import TitleSection from "../TitleSection";
 
 export default function MainSection(props) {
   const { artist = {} } = props;
-  const [t] = useTranslation("translation");
-
+  const { created = "" } = artist;
+  console.log(created, formatISODateToDate(created));
   return (
     <div className="bio-gral">
       <TitleSection title="BIO" />
       <div className="bio-section">
-        <div className="bio-text">{artist.biography}</div>
+        <div className="bio-text">
+          {created.length > 0 && (
+            <span>{`(${formatISODateToDate(created)}) // `}</span>
+          )}
+          {artist.biography}
+        </div>
         {artist.images && (
           <div className="bio-img">
             <img
