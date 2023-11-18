@@ -25,7 +25,10 @@ const getCover = () => {
   return axiosInstance.get(`${API_URL}covers/`, {});
 };
 
-// eslint-disable-next-line import/no-anonymous-default-export
+const getColaborators = () => {
+  return axiosInstance.get(`${API_URL}collaborators/`, {});
+};
+
 export default {
   supportYourLocalsAll,
   agendaAll,
@@ -33,4 +36,5 @@ export default {
   membershipAll,
   getAbout,
   getCover,
+  getColaborators,
 };

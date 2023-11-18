@@ -9,6 +9,7 @@ import {
   GET_ALL_MEMBERSHIPS_FAIL,
   GET_ABOUT,
   GET_COVER,
+  GET_COLABORATORS,
 } from "../actions/types";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
   botiga: [],
   about: {},
   cover: [],
+  collaborators: [],
 };
 
 export default function (state = initialState, action) {
@@ -71,6 +73,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         cover: payload,
+      };
+    case GET_COLABORATORS:
+      return {
+        ...state,
+        collaborators: payload,
       };
     default:
       return state;

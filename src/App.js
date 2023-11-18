@@ -38,6 +38,7 @@ import {
   getAbout,
   getCover,
   membershipAll,
+  getColaborators,
 } from "./redux/actions/data";
 import { getCart } from "./redux/actions/cart";
 import Booking from "./pages/Booking";
@@ -79,6 +80,7 @@ function App() {
     dispatch(membershipAll());
     dispatch(getAbout());
     dispatch(getCover());
+    dispatch(getColaborators());
     dispatch(getCart());
   }, [dispatch, isNewMember]);
 

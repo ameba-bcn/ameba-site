@@ -9,6 +9,7 @@ import {
   GET_ABOUT,
   GET_COVER,
   GET_ALL_AGENDA_FAIL,
+  GET_COLABORATORS,
 } from "./types";
 import DataService from "../services/data.service";
 
@@ -105,6 +106,17 @@ export const getCover = () => (dispatch) => {
   return DataService.getCover().then((response) => {
     dispatch({
       type: GET_COVER,
+      payload: response?.data,
+    });
+
+    return Promise.resolve();
+  });
+};
+
+export const getColaborators = () => (dispatch) => {
+  return DataService.getColaborators().then((response) => {
+    dispatch({
+      type: GET_COLABORATORS,
       payload: response?.data,
     });
 
