@@ -1,12 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { createLastRowIterator } from "../../../utils/utils";
-import PlusButton from "../../button/PlusButton";
 import { ReactFitty } from "react-fitty";
 import styled from "styled-components";
 import { useMediaQuery } from "@material-ui/core";
 import { MOBILE_SMALL } from "../../../utils/constants";
 import { StyledCardLayout } from "./StyledCardLayout";
+import PlusButton from "../../button/PlusButton";
+import { createLastRowIterator, sortByProperty } from "../../../utils/utils";
 
 export default function CardLayout(props) {
   const { cardList = [], urlRoot } = props; //Pendiente recibir si es entrevista por props
@@ -31,7 +31,7 @@ export default function CardLayout(props) {
 
   const cardGenerator =
     !!cardList.length &&
-    cardList.map((data) => {
+    sortByProperty(cardList, "created", false)?.map((data) => {
       const { id = 0, images = [], name = "", tags = [] } = data;
       const urlName = name.replace(/\s+/g, "-")?.toLowerCase();
       return (

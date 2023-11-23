@@ -7,9 +7,10 @@ export const Paragraph1 = styled.div`
 `;
 
 export const RowSeparator = styled.div`
-  width: 85%;
+  width: ${(props) => (props.width ? `${props.width}%` : "85%")};
   height: 2px;
-  border-bottom: 2px solid black;
+  border-bottom: ${(props) =>
+    props.border ? `${props.border}` : "2px solid black"};
   margin: 5px auto;
 `;
 

@@ -55,6 +55,7 @@ const Memberships = () => {
     benefits = "",
     has_stock = true,
     id = MEMBER_ID,
+    maps_url = null,
   } = productData || {};
 
   const [isSubscriber, setIsSubscriber] = useState(id === MEMBER_ID);
@@ -143,6 +144,7 @@ const Memberships = () => {
                   datetime={datetime}
                   handleAddClick={handleAddClick}
                   price={price_range}
+                  maps_url={maps_url}
                 />
 
                 <div className="interactiveDataBox-activitat__row">

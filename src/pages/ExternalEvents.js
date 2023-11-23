@@ -40,9 +40,6 @@ const ExternalEvents = () => {
     ? productQueryKind[kind]
     : "events";
   const noProductData = Object.keys(productData).length === 0;
-  // http://localhost/product?id=14&kind=SOCI
-  // http://localhost/product?id=12&kind=ACTIVITAT
-  // http://localhost/product?id=1&kind=PRODUCTE
 
   useEffect(() => {
     const url = `${API_URL}${url_kinds}/${id}/`;
@@ -55,19 +52,7 @@ const ExternalEvents = () => {
       })
       .catch((err) => {
         setProducteLoading(false);
-        if (err.response) {
-          console.log(
-            "ERROR: client received an error response (5xx, 4xx)",
-            err.response
-          );
-        } else if (err.request) {
-          console.log(
-            "ERROR: client never received a response, or request never left",
-            err.response
-          );
-        } else {
-          console.log("ERROR: anything else", err);
-        }
+        console.warn("ERROR: ", err);
       });
   }, [id, kind]);
 

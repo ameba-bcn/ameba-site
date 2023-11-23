@@ -31,17 +31,18 @@ export default function Entrevista() {
     (x) => x?.name?.replace(/\s+/g, "-")?.toLowerCase() === urlID
   );
   const ID = urlData?.id;
-
-  const [artist, setArtist] = useState([
-    {
-      id: 0,
-      name: "",
-      images: [],
-      biography: "",
-      media: [],
-      tags: [],
-    },
-  ]);
+  // const mediaUrls = !!support.length
+  //   ? support.find((x) => x.id === parseInt(urlID))?.media_urls
+  //   : [];
+  const [artist, setArtist] = useState({
+    id: 0,
+    name: "",
+    images: [],
+    biography: "",
+    media: [],
+    tags: [],
+    created: "",
+  });
 
   const {
     tags = [],
@@ -65,19 +66,7 @@ export default function Entrevista() {
           });
       })
       .catch((err) => {
-        if (err.response) {
-          console.log(
-            "ERROR: client received an error response (5xx, 4xx)",
-            err.response
-          );
-        } else if (err.request) {
-          console.log(
-            "ERROR: client never received a response, or request never left",
-            err.response
-          );
-        } else {
-          console.log("ERROR: anything else", err);
-        }
+        console.warn("ERROR: ", err);
       });
   }, [ID]);
 

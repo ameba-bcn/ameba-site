@@ -91,10 +91,16 @@ export const sortByDate = (array) => {
   return array;
 };
 
-export const sortByProperty = (array, property) => {
-  return array.sort((a, b) =>
-    a[property] > b[property] ? 1 : b[property] > a[property] ? -1 : 0
-  );
+export const sortByProperty = (array, property, asc = true) => {
+  if (asc) {
+    return array.sort((a, b) =>
+      a[property] > b[property] ? 1 : b[property] > a[property] ? -1 : 0
+    );
+  } else {
+    return array.sort((a, b) =>
+      a[property] > b[property] ? -1 : b[property] > a[property] ? 1 : 0
+    );
+  }
 };
 
 export function deleteStringDecimals(price) {
