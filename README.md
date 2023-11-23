@@ -2,6 +2,12 @@
 
 ## Release changes
 
+Version 3.2.14
+
+- maps_url on events
+- console.log deletion
+- Created at on interviews
+
 Version 3.2.13
 
 - Refactor redux messages
