@@ -21,11 +21,11 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    console.log("Axios, On nok", error);
+    console.warn("Axios, On nok", error);
     const originalRequest = error.config;
 
     if (typeof error.response === "undefined") {
-      console.log(
+      console.warn(
         "A server/network error occurred. " +
           "Sorry about this - we will get it fixed shortly."
       );
@@ -51,7 +51,7 @@ axiosInstance.interceptors.response.use(
         const tokenParts = JSON.parse(atob(refreshToken.split(".")[1]));
         //La fecha esta en segundos, la reformateamos
         const now = Math.ceil(Date.now() / 1000);
-        console.log(tokenParts.exp);
+        console.warn(tokenParts.exp);
 
         if (tokenParts.exp > now) {
           return axiosInstance
@@ -67,16 +67,16 @@ axiosInstance.interceptors.response.use(
               return axiosInstance(originalRequest);
             })
             .catch((err) => {
-              console.log(err);
+              console.warn(err);
             });
         } else {
-          console.log("Refresh page token is expired", tokenParts.exp, now);
+          console.warn("Refresh page token is expired", tokenParts.exp, now);
           if (typeof window !== "undefined") {
             window.location.href = "/login/";
           }
         }
       } else {
-        console.log("Refresh token not available");
+        console.warn("Refresh token not available");
         if (typeof window !== "undefined") {
           window.location.href = "/login/";
         }

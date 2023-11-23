@@ -25,6 +25,7 @@ const InteractiveModalBox = (props) => {
     datetime,
     price,
     discount,
+    maps_url,
   } = props;
 
   const [t] = useTranslation("translation");
@@ -110,7 +111,9 @@ const InteractiveModalBox = (props) => {
               </div>
               <div className="interactiveDataBox-activitat__text-loca">
                 <a
-                  href="https://google.com/maps"
+                  href={
+                    maps_url?.length > 0 ? maps_url : "https://google.com/maps"
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                 >

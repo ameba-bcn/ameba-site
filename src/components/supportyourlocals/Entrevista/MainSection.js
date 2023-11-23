@@ -5,7 +5,7 @@ import TitleSection from "../TitleSection";
 export default function MainSection(props) {
   const { artist = {} } = props;
   const { created = "" } = artist;
-  console.log(created, formatISODateToDate(created));
+
   return (
     <div className="bio-gral">
       <TitleSection title="BIO" />

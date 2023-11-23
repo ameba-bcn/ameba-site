@@ -40,6 +40,7 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
     benefits = "",
     has_stock = true,
     id,
+    maps_url,
   } = productData;
 
   useEffect(() => {
@@ -165,6 +166,7 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
             datetime={datetime}
             handleAddClick={handleAddClick}
             price={price_range}
+            maps_url={maps_url}
           />
           {modalStyle === "ACTIVITAT" && (
             <div className="modal-card-location__row">
@@ -173,7 +175,9 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
               </div>
               <div className="interactiveDataBox-activitat__text-loca-fullview">
                 <a
-                  href="https://google.com/maps"
+                  href={
+                    maps_url?.length > 0 ? maps_url : "https://google.com/maps"
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                 >

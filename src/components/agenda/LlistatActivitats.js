@@ -50,23 +50,8 @@ export default function LlistatActivitats() {
         dispatch(addToCart(res.data.variants[0].id));
       })
       .then(setRedirect(true))
-      .catch((err) => {
-        if (err.response) {
-          console.log(
-            "ERROR: client received an error response (5xx, 4xx)",
-            err.response
-          );
-        } else if (err.request) {
-          console.log(
-            "ERROR: client never received a response, or request never left",
-            err.response
-          );
-        } else {
-          console.log("ERROR", err);
-        }
-      })
       .catch((error) => {
-        console.log("ERROR", error.response);
+        console.warn("ERROR", error.response);
       });
   };
 
@@ -81,19 +66,7 @@ export default function LlistatActivitats() {
       .then(handleClickOpen())
       .catch((err) => {
         setLoading(false);
-        if (err.response) {
-          console.log(
-            "ERROL: client received an error response (5xx, 4xx)",
-            err.response
-          );
-        } else if (err.request) {
-          console.log(
-            "ERROL: client never received a response, or request never left",
-            err.response
-          );
-        } else {
-          console.log("ERROL: anything else", err);
-        }
+        console.warn("ERROR: ", err);
       });
   };
 
@@ -206,7 +179,6 @@ export default function LlistatActivitats() {
               ),
               tooltip: rowdata.hasStock ? "Reserva" : t("agenda.inactiu"),
               onClick: (event, rowdata) => {
-                console.log("esee", rowdata.hasStock);
                 const { hasStock } = rowdata;
                 hasStock && fetchAndAdd(rowdata);
               },

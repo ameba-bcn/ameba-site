@@ -16,12 +16,12 @@ export default function ActivitatDialog(props) {
     price_range,
     images,
     description,
-    // artists,
     datetime,
     discount = 0,
     address,
     header = "",
     has_stock,
+    maps_url = null,
   } = dataRow;
 
   const [redirect, setRedirect] = useState(false);
@@ -33,7 +33,6 @@ export default function ActivitatDialog(props) {
   const handleClose = () => {
     onClose(selectedValue);
   };
-
   // desmontamos el dialog al cerrarlo
   useEffect(() => {
     return () => {
@@ -75,6 +74,7 @@ export default function ActivitatDialog(props) {
       type="ACTIVITAT"
       colorMode="light"
       has_stock={has_stock}
+      maps_url={maps_url}
     />
   );
 }

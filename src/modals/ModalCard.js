@@ -43,6 +43,7 @@ export default function ModalCard(props) {
     header,
     has_stock,
     discount,
+    maps_url = null,
   } = props;
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const types = productKinds;
@@ -130,7 +131,11 @@ export default function ModalCard(props) {
                 </div>
                 <div className="interactiveDataBox-activitat__text-loca">
                   <a
-                    href="https://google.com/maps"
+                    href={
+                      maps_url?.length > 0
+                        ? maps_url
+                        : "https://google.com/maps"
+                    }
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -161,6 +166,7 @@ export default function ModalCard(props) {
                 handleAddClick={handleAddClick}
                 price={price}
                 discount={discount}
+                maps_url={maps_url}
               />
               {!productSoldOut && (
                 <Button
@@ -262,6 +268,7 @@ export default function ModalCard(props) {
                 datetime={datetime}
                 handleAddClick={handleAddClick}
                 price={price}
+                maps_url={maps_url}
               />
             </div>
             <div className="modal-card-mobile__button-wrapper">
