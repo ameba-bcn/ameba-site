@@ -1,13 +1,15 @@
+/* eslint-disable no-undef */
 import React from "react";
+import { useSelector } from "react-redux";
 import NewsletterFormLayout from "../components/forms/NewsletterForm/NewsletterFormLayout";
 import "./Contacte.css";
 import MediaLinks from "../components/layout/MediaLinks";
 import LettersMove from "./../components/layout/LettersMove";
 import { useTranslation } from "react-i18next";
-//Falta Mixcloud & Twitch
 
 function Contacte() {
   const [t] = useTranslation("translation");
+  const { collaborators = [] } = useSelector((state) => state.data);
   return (
     <div className="bloqueContacto" id="contacte">
       <div className="contenedorContacto">
@@ -22,12 +24,17 @@ function Contacte() {
         />
         <div className="colabText">
           {t("footer.colab")}
-          <img
-            // eslint-disable-next-line no-undef
-            src={process.env.PUBLIC_URL + "/AjuntamentBcn.png"}
-            className="AjuntamentBcnImg"
-            alt="AjuntamentBcn"
-          />
+          {collaborators.map((el) => {
+            if (el.is_active)
+              return (
+                <img
+                  src={el.image}
+                  className="AjuntamentBcnImg"
+                  alt="AjuntamentBcn"
+                  key={el.name}
+                />
+              );
+          })}
         </div>
         <div className="endingText">
           AMEBA 2022©

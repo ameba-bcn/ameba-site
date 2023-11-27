@@ -2,6 +2,10 @@
 
 ## Release changes
 
+Version 3.2.15
+
+- Collaborators on footer from API
+
 Version 3.2.14
 
 - maps_url on events
