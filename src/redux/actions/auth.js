@@ -83,12 +83,13 @@ export const getMemberProfile = () => (dispatch) => {
 };
 
 export const updateMemberProfile =
-  (identity_card, first_name, last_name, phone_number) => (dispatch) => {
+  (identity_card, first_name, last_name, phone_number, alias) => (dispatch) => {
     return AuthService.updateMemberProfile(
       identity_card,
       first_name,
       last_name,
-      phone_number
+      phone_number,
+      alias
     ).then(
       (response) => {
         dispatch({

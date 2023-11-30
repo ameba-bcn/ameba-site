@@ -29,6 +29,10 @@ const getCollaborators = () => {
   return axiosInstance.get(`${API_URL}collaborators/`, {});
 };
 
+const getMemberProjects = () => {
+  return axiosInstance.get(`${API_URL}member-projects/`, {});
+};
+
 export default {
   supportYourLocalsAll,
   agendaAll,
@@ -37,4 +41,5 @@ export default {
   getAbout,
   getCover,
   getCollaborators,
+  getMemberProjects,
 };

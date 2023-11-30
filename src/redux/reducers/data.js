@@ -10,6 +10,7 @@ import {
   GET_ABOUT,
   GET_COVER,
   GET_COLLABORATORS,
+  GET_MEMBER_PROJECTS,
 } from "../actions/types";
 
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   about: {},
   cover: [],
   collaborators: [],
+  member_projects: [],
 };
 
 export default function (state = initialState, action) {
@@ -30,7 +32,6 @@ export default function (state = initialState, action) {
         ...state,
         support: payload,
       };
-
     case GET_ALL_SUPPORT_FAIL:
       return {
         ...state,
@@ -40,7 +41,6 @@ export default function (state = initialState, action) {
         ...state,
         agenda: payload,
       };
-
     case GET_ALL_AGENDA_FAIL:
       return {
         ...state,
@@ -50,7 +50,6 @@ export default function (state = initialState, action) {
         ...state,
         botiga: payload,
       };
-
     case GET_ALL_BOTIGA_FAIL:
       return {
         ...state,
@@ -78,6 +77,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         collaborators: payload,
+      };
+    case GET_MEMBER_PROJECTS:
+      return {
+        ...state,
+        member_projects: payload,
       };
     default:
       return state;

@@ -15,7 +15,6 @@ const useBreadcrumsSteps = () => {
   const [state, dispatchSteps] = useReducer(stepsReducer, { step: 0 });
   const actionCreators = {
     changeStep: (stepIndex) => {
-      console.log("OG", stepIndex);
       dispatchSteps({
         type: MODIFY_STEP,
         payload: stepIndex,

@@ -7,14 +7,15 @@ const Breadcrums = (props) => {
   return (
     <BreadcrumsStyled>
       {steps.map((s, index) => (
-        <span
-          className={step === index ? "active" : ""}
-          onClick={() => changeStep(index)}
-          key={s}
-        >
-          {" "}
-          {`${s} ${index === steps.length - 1 ? " " : " / "}`}{" "}
-        </span>
+        <div key={s}>
+          {index !== 0 ? " / " : ""}
+          <span
+            className={step === index ? "active" : ""}
+            onClick={() => changeStep(index)}
+          >
+            {s}
+          </span>{" "}
+        </div>
       ))}
     </BreadcrumsStyled>
   );

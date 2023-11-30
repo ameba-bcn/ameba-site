@@ -79,7 +79,8 @@ const updateMemberProfile = (
   identity_card,
   first_name,
   last_name,
-  phone_number
+  phone_number,
+  alias
 ) => {
   return axiosInstance
     .patch(
@@ -89,6 +90,7 @@ const updateMemberProfile = (
         first_name,
         last_name,
         phone_number,
+        alias,
       },
       {
         headers: {
@@ -167,6 +169,46 @@ const deleteUser = () => {
     });
 };
 
+const getMemberProject = () => {
+  return axiosInstance
+    .get(API_URL + `users/current/member_profile/`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    })
+    .then((response) => {
+      return response?.data;
+    });
+};
+
+const updateMemberProject = (
+  identity_card,
+  first_name,
+  last_name,
+  phone_number,
+  alias
+) => {
+  return axiosInstance
+    .patch(
+      API_URL + `users/current/member_profile/`,
+      {
+        identity_card,
+        first_name,
+        last_name,
+        phone_number,
+        alias,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access")}`,
+        },
+      }
+    )
+    .then((response) => {
+      return response?.data;
+    });
+};
+
 export default {
   register,
   validateLocalToken,
@@ -180,4 +222,6 @@ export default {
   updateMemberProfile,
   createMemberProfile,
   deleteUser,
+  getMemberProject,
+  updateMemberProject,
 };

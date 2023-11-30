@@ -8,14 +8,13 @@ export const Input = styled.input`
   line-height: 1.5;
   background-clip: padding-box;
   border: 1px solid #ced4da;
-  /* background-color: #fae6c5; */
   background-color: transparent;
   border: 4px solid #1d1d1b;
   border-radius: 0rem;
   padding-top: 14px;
   font-family: "Montserrat", sans-serif;
   color: #1d1d1b;
-  font-size: 1.2rem;
+  font-size: 18px;
   font-weight: bold;
 
   ${(props) =>

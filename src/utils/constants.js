@@ -67,6 +67,12 @@ export const ERROR = {
         ? "Descompte: format o longitud(6 lletres) erroni"
         : "Descuento: formato o longitud(6 letras) erróneo",
   },
+  TITLE: {
+    REQUIRED:
+      localStorage.getItem("i18nextLng") === "ca"
+        ? "Email: aquest camp es obligatori"
+        : "Email: este campo es obligatorio",
+  },
 };
 
 export const MOBILE_BIG = "(max-width:1500px)";
@@ -100,3 +106,6 @@ export const FLICKR_URL =
 export const FLICKR_KEY = "d42519b6c54602915c2d98ee7e717f73";
 export const FLICKR_ALBUM_ID = "72177720300073940";
 export const FLICKR_SECRET = "45216314df67fd07";
+
+export const TEXT_EDITOR_KEY =
+  "3tpoe00fct6ffh0uhj84y2twrfb2e64jy0b7o0yhvmme31o1";

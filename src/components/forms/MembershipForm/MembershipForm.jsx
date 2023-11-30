@@ -20,6 +20,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
   const auth = useSelector((state) => state.auth);
   const { user_member_data = {} } = auth;
   const initialMemberValues = {
+    alias: user_member_data.alias,
     first_name: user_member_data.first_name,
     last_name: user_member_data.last_name,
     identity_card: user_member_data.identity_card,
@@ -29,6 +30,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
   const isNewMember = deepComparision(user_member_data, {});
 
   const InitialValues = {
+    alias: user_member_data.alias || "",
     first_name: initialMemberValues.first_name || "",
     last_name: initialMemberValues.last_name || "",
     identity_card: initialMemberValues.identity_card || "",
@@ -63,11 +65,23 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
   };
 
   const handleSubmit = (values) => {
-    const { first_name, last_name, identity_card, phone_number } = values;
+    const {
+      first_name,
+      last_name,
+      identity_card,
+      phone_number,
+      alias = "",
+    } = values;
     setLoading(true);
     if (!isNewMember) {
       dispatch(
-        updateMemberProfile(identity_card, first_name, last_name, phone_number)
+        updateMemberProfile(
+          identity_card,
+          first_name,
+          last_name,
+          phone_number,
+          alias
+        )
       )
         .then(() => {
           setLoading(false);
@@ -80,7 +94,13 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
         });
     } else {
       dispatch(
-        createMemberProfile(identity_card, first_name, last_name, phone_number)
+        createMemberProfile(
+          identity_card,
+          first_name,
+          last_name,
+          phone_number,
+          alias
+        )
       )
         .then(() => {
           setLoading(false);
@@ -111,6 +131,22 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
             />
           </div>
         )}
+        <div>
+          <InputField
+            id="alias"
+            name="alias"
+            type="text"
+            label="alias"
+            onChange={formik.handleChange}
+            onBlur={(e) => {
+              formik.handleBlur(e);
+              handleBlur(formik.values);
+            }}
+            slimLine={true}
+            value={formik.values.alias}
+            valid={!formik.errors.alias}
+          />
+        </div>
         <div>
           <InputField
             id="first_name"
