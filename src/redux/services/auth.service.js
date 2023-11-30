@@ -80,7 +80,7 @@ const updateMemberProfile = (
   first_name,
   last_name,
   phone_number,
-  alias
+  user
 ) => {
   return axiosInstance
     .patch(
@@ -90,7 +90,7 @@ const updateMemberProfile = (
         first_name,
         last_name,
         phone_number,
-        alias,
+        user,
       },
       {
         headers: {
@@ -186,7 +186,7 @@ const updateMemberProject = (
   first_name,
   last_name,
   phone_number,
-  alias
+  user
 ) => {
   return axiosInstance
     .patch(
@@ -196,7 +196,7 @@ const updateMemberProject = (
         first_name,
         last_name,
         phone_number,
-        alias,
+        user,
       },
       {
         headers: {

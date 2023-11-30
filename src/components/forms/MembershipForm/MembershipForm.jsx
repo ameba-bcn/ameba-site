@@ -20,7 +20,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
   const auth = useSelector((state) => state.auth);
   const { user_member_data = {} } = auth;
   const initialMemberValues = {
-    alias: user_member_data.alias,
+    user: user_member_data.user,
     first_name: user_member_data.first_name,
     last_name: user_member_data.last_name,
     identity_card: user_member_data.identity_card,
@@ -30,7 +30,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
   const isNewMember = deepComparision(user_member_data, {});
 
   const InitialValues = {
-    alias: user_member_data.alias || "",
+    user: user_member_data.user || "",
     first_name: initialMemberValues.first_name || "",
     last_name: initialMemberValues.last_name || "",
     identity_card: initialMemberValues.identity_card || "",
@@ -70,7 +70,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
       last_name,
       identity_card,
       phone_number,
-      alias = "",
+      user = "",
     } = values;
     setLoading(true);
     if (!isNewMember) {
@@ -80,7 +80,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
           first_name,
           last_name,
           phone_number,
-          alias
+          user
         )
       )
         .then(() => {
@@ -99,7 +99,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
           first_name,
           last_name,
           phone_number,
-          alias
+          user
         )
       )
         .then(() => {
@@ -133,18 +133,18 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
         )}
         <div>
           <InputField
-            id="alias"
-            name="alias"
+            id="user"
+            name="user"
             type="text"
-            label="alias"
+            label={t("form.usuari")}
             onChange={formik.handleChange}
             onBlur={(e) => {
               formik.handleBlur(e);
               handleBlur(formik.values);
             }}
             slimLine={true}
-            value={formik.values.alias}
-            valid={!formik.errors.alias}
+            value={formik.values.user}
+            valid={!formik.errors.user}
           />
         </div>
         <div>

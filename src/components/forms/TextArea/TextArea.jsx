@@ -8,30 +8,23 @@ import {
 import { TEXT_EDITOR_KEY } from "../../../utils/constants.js";
 
 const TextArea = (props) => {
-  const { bioText, setBioText } = props;
+  const { initText = "", setText, label = "" } = props;
   const editorRef = useRef(null);
 
   return (
     <>
       <TextAreaLabelBox>
-        <TextAreaLabel>{` bio `}</TextAreaLabel>
+        <TextAreaLabel>{` ${label} `}</TextAreaLabel>
       </TextAreaLabelBox>
       <TextAreaStyled>
         <Editor
           apiKey={TEXT_EDITOR_KEY}
           onInit={(evt, editor) => (editorRef.current = editor)}
-          initialValue={
-            bioText.length > 0 ? (
-              <p>{bioText}</p>
-            ) : (
-              <p>This is the initial content of the editor.</p>
-            )
-          }
+          initialValue={`<p>${initText}</p>`}
           onEditorChange={(newValue) => {
-            setBioText(newValue);
+            setText(newValue);
           }}
           init={{
-            height: 500,
             menubar: false,
             plugins: [
               "advlist",
@@ -52,7 +45,12 @@ const TextArea = (props) => {
               "code",
               "help",
               "wordcount",
+              "autoresize",
             ],
+            width: "100%",
+            height: 400,
+            autoresize_min_height: 400,
+            autoresize_max_height: 800,
             toolbar:
               "undo redo | blocks | " +
               "bold italic forecolor | alignleft aligncenter " +

@@ -84,7 +84,13 @@
     "soci": "nºsocio",
     "descompte": "descuento",
     "usuari": "usuario",
-    "contrassenya": "contraseña"
+    "contrassenya": "contraseña",
+    "titol": "título",
+    "imatges": "imágenes",
+    "elimina-imatges": "Eliminar todas",
+    "carrega-imatges": "Abre para subir nuevas imágenes",
+    "actualitza": "actualiza",
+    "elimina": "elimina"
   },
   "perfil": {
     "dades": "datos personales",

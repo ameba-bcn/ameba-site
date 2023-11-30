@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from "react";
-import ImageUploading from "react-images-uploading";
 import { useFormik } from "formik";
 import { validate } from "./MemberProjectValidate";
 import InputField from "../../../components/forms/InputField/InputField";
 import { LogFormBox, LogFormError } from "../../../components/forms/Log.style";
-import {
-  MemberProjectFrame,
-  StyledImageBox,
-  StyledImageLabel,
-  StyledImageLabelBox,
-} from "./MemberProject.style";
+import { MemberProjectFrame } from "./MemberProject.style";
 import Button from "../../../components/button/Button";
 import { isEmptyObject } from "../../../utils/utils";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import TextArea from "../../../components/forms/TextArea/TextArea";
 import authService from "../../../redux/services/auth.service";
+import { useTranslation } from "react-i18next";
+import ImageLoader from "../../../components/image-loader/ImageLoader";
 
 const MemberProject = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [bioText, setBioText] = useState("");
-
+  const initialText =
+    "Lorem fistrum hasta luego Lucas jarl qué dise usteer caballo blanco caballo negroorl la caidita ese pedazo de quietooor de la pradera. Sexuarl qué dise usteer se calle ustée amatomaa. Va usté muy cargadoo a peich a wan ese pedazo de hasta luego Lucas te voy a borrar el cerito. Caballo blanco caballo negroorl diodeno está la cosa muy malar te va a hasé pupitaa tiene musho peligro fistro. A wan ese pedazo de condemor te va a hasé pupitaa a gramenawer no puedor quietooor por la gloria de mi madre ese que llega ahorarr apetecan. Se calle ustée no puedor quietooor diodeno pecador.";
+  const [text, setText] = useState(initialText);
+  const [t] = useTranslation("translation");
   useEffect(() => {
     authService
       .getMemberProject()
@@ -31,22 +29,17 @@ const MemberProject = () => {
       .catch(() => setLoading(false));
   }, []);
 
-  const maxNumber = 4;
-
   const handleSubmitLogin = (val) => {
-    console.log("val", { ...val, bio: bioText });
+    console.log("val", { ...val, description: text, img: images });
     // authService.updateMemberProject({});
   };
 
-  const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
-    setImages(imageList);
-  };
   const formik = useFormik({
     initialValues: {
-      title: "",
-      bio: "",
+      title: "lelele",
+      description: "",
+      media: "",
+      img: "",
     },
     validate,
     validateOnChange: false,
@@ -58,7 +51,7 @@ const MemberProject = () => {
 
   const demoText =
     "instrucciones de en que consiste visualizar tu proyecto, etc";
-  console.log(bioText);
+  console.log(text);
   return (
     <MemberProjectFrame>
       <DisclaimerBox
@@ -73,7 +66,7 @@ const MemberProject = () => {
               id="title"
               name="title"
               type="text"
-              label="title"
+              label={t("form.titol")}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.title}
@@ -82,10 +75,11 @@ const MemberProject = () => {
             />
           </div>
           <TextArea
-            id="bio"
-            name="bio"
-            bioText={bioText}
-            setBioText={setBioText}
+            id="description"
+            name="description"
+            initText={initialText}
+            setText={setText}
+            label={t("modal.descripcio")}
           />
           <div>
             <InputField
@@ -95,75 +89,13 @@ const MemberProject = () => {
               label="link"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.title}
+              value={formik.values.link}
               slimLine={true}
               valid={true}
             />
           </div>
-          <StyledImageLabelBox>
-            <StyledImageLabel>{` images `}</StyledImageLabel>
-          </StyledImageLabelBox>
-          <StyledImageBox>
-            <ImageUploading
-              multiple
-              value={images}
-              onChange={onChange}
-              maxNumber={maxNumber}
-              dataURLKey="data_url"
-            >
-              {({
-                imageList,
-                onImageUpload,
-                onImageRemoveAll,
-                onImageUpdate,
-                onImageRemove,
-                isDragging,
-                dragProps,
-              }) => (
-                // write your building UI
-                <div className="upload__image-wrapper">
-                  {imageList.map((image, index) => (
-                    <div key={index} className="image-item">
-                      <img src={image["data_url"]} alt="" width="100" />
-                      <div className="image-item__btn-wrapper">
-                        <button onClick={() => onImageUpdate(index)}>
-                          Update
-                        </button>
-                        <button onClick={() => onImageRemove(index)}>
-                          Remove
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    buttonSize="boton--medium"
-                    buttonStyle="boton--primary--outline"
-                    hoverStyle="bg-cream"
-                    style={isDragging ? { color: "red" } : undefined}
-                    onClick={onImageUpload}
-                    {...dragProps}
-                  >
-                    Click or Drop here
-                  </Button>
-                  &nbsp;
-                  {images.length !== 0 && (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      buttonSize="boton--medium"
-                      buttonStyle="boton--primary--outline"
-                      hoverStyle="bg-cream"
-                      onClick={() => onImageRemoveAll}
-                    >
-                      Remove all images
-                    </Button>
-                  )}
-                </div>
-              )}
-            </ImageUploading>
-          </StyledImageBox>
+
+          <ImageLoader maxNumber={4} images={images} setImages={setImages} />
 
           {!isEmptyObject(formik.errors) && (
             <LogFormError>

@@ -22,7 +22,7 @@ export const TextAreaLabel = styled.div`
 export const TextAreaStyled = styled.div`
   display: block;
   width: 100%;
-  height: 508px;
+  height: 100%;
   border: 4px solid #1d1d1b;
   border-radius: 0px;
   .tox-tinymce {
