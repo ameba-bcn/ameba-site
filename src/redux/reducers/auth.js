@@ -47,7 +47,6 @@ const initialState = access
   ? { isLoggedIn: true, user, user_data, user_member_data }
   : { isLoggedIn: false, user: null, user_data, user_member_data };
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {

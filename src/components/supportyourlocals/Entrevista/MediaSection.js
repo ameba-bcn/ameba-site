@@ -58,23 +58,26 @@ export default function MediaSection(props) {
 
   const StyledMediaPlayer = styled.div`
     width: 90%;
-  `
+  `;
   return (
     <StyledMediaGral bgColor={bgColor} className="media-gral">
       <TitleSection title="Media" />
       <StyledMediaLinks>
         {mediaUrls.map((n) => {
           return (
-            <StyledMediaPlayer>
+            <StyledMediaPlayer key={n}>
               {/* <ReactPlayer url={n} height="100px" /> */}
-              <div className="content" dangerouslySetInnerHTML={{ __html: `${n}` }}></div>
+              <div
+                className="content"
+                dangerouslySetInnerHTML={{ __html: `${n}` }}
+              ></div>
               {/* <div>
              <a href={n} rel="noreferrer" target="_blank">
                {n.split("www.").length > 1 ? n.split("www.")[1] : n}
              </a>
            </div> */}
             </StyledMediaPlayer>
-          )
+          );
         })}
       </StyledMediaLinks>
       {/* <div className="xarxes-artista">
