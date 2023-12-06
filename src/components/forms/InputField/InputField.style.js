@@ -74,7 +74,7 @@ export const InputLabelBox = styled.div`
 export const InputLabel = styled.div`
   display: inline-block;
   background-color: #fae6c5;
-  width: min-content;
+  width: fit-content;
   color: #1d1d1b;
   text-transform: uppercase;
   font-family: "Bebas Neue";

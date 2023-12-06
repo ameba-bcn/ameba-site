@@ -18,7 +18,20 @@ export const phoneValidation = (value) => {
   return !/^(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}/i.test(value);
 };
 
-export const codeValidation = (value) =>{
+export const codeValidation = (value) => {
   if (!value) return false;
-  return (value.length === 6);
-}
+  return value.length === 6;
+};
+
+export const iframesValidation = (value) => {
+  console.log("in validation", value);
+  if (!value) return false;
+  return ("" + value).match(
+    /<iframe[^\>]+src=["'](https?:\/\/[^"']+)["'][^\>]*>.*<\/iframe>/
+  );
+};
+
+export const urlValidation = (value) => {
+  if (!value) return false;
+  return ("" + value).match(/^(http|https):\/\/[^ "]+$/);
+};

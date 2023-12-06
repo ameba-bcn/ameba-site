@@ -85,7 +85,7 @@ const MemberProject = () => {
             setText={setText}
             label={t("modal.descripcio")}
           />
-          <MediaLinksForm label="link" />
+          <MediaLinksForm label="afegeix un link" />
 
           <ImageLoader maxNumber={4} images={images} setImages={setImages} />
 
