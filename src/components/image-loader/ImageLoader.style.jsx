@@ -3,12 +3,19 @@ import styled from "styled-components";
 export const StyledImageBox = styled.div`
   border: 4px solid #1d1d1b;
   border-radius: 0px;
-  min-height: 200px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  align-items: ${(props) =>
+    props.imageList?.length > 0 ? "space-between" : "center"};
   padding: 24px;
+  .image-item {
+    margin: 0px 12px 18px 0px;
+  }
   .upload__image-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 `;
 

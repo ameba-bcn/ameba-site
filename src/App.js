@@ -50,7 +50,6 @@ import Memberships from "./pages/Memberships";
 import Gallery from "./pages/Gallery";
 import Socios from "./pages/socios/Socios";
 import SociosDetailed from "./pages/socios/components/SociosDetailed";
-import Directorio from "./pages/Directorio";
 import Profile from "./pages/profile/Profile";
 import PasswordRecovery from "./pages/PasswordRecovery";
 import Projects from "./pages/Projects";
@@ -105,7 +104,6 @@ function App() {
           <Route path="/projects" component={Projects} />
           <Route exact path="/socis/:id" component={SociosDetailed} />
           <Route path="/socis" component={Socios} />
-          <Route path="/directorio" component={Directorio} />
           <Route path="/gallery" component={Gallery} />
           <Route path="/login" component={LogSession} />
           <Route path="/recovery" component={PasswordRecovery} />

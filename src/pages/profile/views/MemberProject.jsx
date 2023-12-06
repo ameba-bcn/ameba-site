@@ -6,13 +6,15 @@ import { LogFormBox, LogFormError } from "../../../components/forms/Log.style";
 import { MemberProjectFrame } from "./MemberProject.style";
 import Button from "../../../components/button/Button";
 import { isEmptyObject } from "../../../utils/utils";
-import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import TextArea from "../../../components/forms/TextArea/TextArea";
 import authService from "../../../redux/services/auth.service";
 import { useTranslation } from "react-i18next";
 import ImageLoader from "../../../components/image-loader/ImageLoader";
+import MediaLinksForm from "./components/MediaLinksForm";
+import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 
 const MemberProject = () => {
+  const [initialProjectData, setInitialProjectData] = useState({});
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const initialText =
@@ -23,53 +25,55 @@ const MemberProject = () => {
     authService
       .getMemberProject()
       .then((data) => {
-        console.log("recibimos data y seteamos valores", data);
+        // console.log("recibimos data y seteamos valores", data);
         setLoading(false);
+        setInitialProjectData(data);
+        data.images && setImages(data.images);
       })
       .catch(() => setLoading(false));
   }, []);
 
-  const handleSubmitLogin = (val) => {
-    console.log("val", { ...val, description: text, img: images });
-    // authService.updateMemberProject({});
+  const handleSubmit = (val) => {
+    console.log("val", { ...val, description: text, images: images });
+    authService.updateMemberProject({
+      ...val,
+    });
   };
 
   const formik = useFormik({
     initialValues: {
-      title: "lelele",
-      description: "",
-      media: "",
-      img: "",
+      ...initialProjectData,
+      images: initialProjectData?.images,
     },
+    enableReinitialize: true,
     validate,
     validateOnChange: false,
     validateOnBlur: false,
     onSubmit: (values) => {
-      handleSubmitLogin(values);
+      handleSubmit(values);
     },
   });
 
   const demoText =
-    "instrucciones de en que consiste visualizar tu proyecto, etc";
-  console.log(text);
+    "En aquesta vista pots editar el teu projecte personal. Un cop guardats el scanvis podràs visualitzar-ho a la vista de /soci@s";
   return (
     <MemberProjectFrame>
-      <DisclaimerBox
-        text={demoText}
-        id="project-disclaimer"
-        borderColor="black"
-      />
       <LogFormBox>
-        <form onSubmit={formik.handleSubmit}>
+        <form className="formMembership" onSubmit={formik.handleSubmit}>
+          <DisclaimerBox
+            text={demoText}
+            id="project-disclaimer"
+            borderColor="black"
+          />
           <div>
             <InputField
-              id="title"
-              name="title"
+              id="name"
+              name="name"
               type="text"
               label={t("form.titol")}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.title}
+              value={formik.values.name}
               slimLine={true}
               valid={true}
             />
@@ -81,19 +85,7 @@ const MemberProject = () => {
             setText={setText}
             label={t("modal.descripcio")}
           />
-          <div>
-            <InputField
-              id="media"
-              name="media"
-              type="text"
-              label="link"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.link}
-              slimLine={true}
-              valid={true}
-            />
-          </div>
+          <MediaLinksForm label="link" />
 
           <ImageLoader maxNumber={4} images={images} setImages={setImages} />
 

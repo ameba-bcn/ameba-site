@@ -70,8 +70,8 @@ export const ERROR = {
   TITLE: {
     REQUIRED:
       localStorage.getItem("i18nextLng") === "ca"
-        ? "Email: aquest camp es obligatori"
-        : "Email: este campo es obligatorio",
+        ? "Títol: aquest camp es obligatori"
+        : "Título: este campo es obligatorio",
   },
 };
 

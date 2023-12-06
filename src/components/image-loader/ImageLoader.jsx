@@ -16,7 +16,7 @@ const ImageLoader = (props) => {
 
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    console.log(imageList, addUpdateIndex);
+    // console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
 
@@ -25,7 +25,7 @@ const ImageLoader = (props) => {
       <StyledImageLabelBox>
         <StyledImageLabel>{` ${t("form.imatges")} `}</StyledImageLabel>
       </StyledImageLabelBox>
-      <StyledImageBox>
+      <StyledImageBox imageList={images}>
         <ImageUploading
           multiple
           value={images}
@@ -43,45 +43,49 @@ const ImageLoader = (props) => {
             dragProps,
           }) => (
             // write your building UI
-            <div className="upload__image-wrapper">
-              {imageList.map((image, index) => (
-                <div key={index} className="image-item">
-                  <img src={image["data_url"]} alt="" width="100" />
-                  <div className="image-item__btn-wrapper">
-                    <ReplayIcon onClick={() => onImageUpdate(index)} />
-                    <DeleteOutlineIcon onClick={() => onImageRemove(index)} />
+            <>
+              <div className="upload__image-wrapper">
+                {imageList.map((image, index) => (
+                  <div key={index} className="image-item">
+                    <img src={image} alt="" width="100" />
+                    <div className="image-item__btn-wrapper">
+                      <ReplayIcon onClick={() => onImageUpdate(index)} />
+                      <DeleteOutlineIcon onClick={() => onImageRemove(index)} />
+                    </div>
                   </div>
-                </div>
-              ))}
-              <Button
-                variant="contained"
-                color="primary"
-                buttonSize="boton--small"
-                buttonStyle="boton--primary--outline"
-                hoverStyle="bg-cream"
-                style={isDragging ? { color: "red" } : undefined}
-                onClick={onImageUpload}
-                {...dragProps}
-              >
-                {t("form.carrega-imatges")}
-              </Button>
-              &nbsp;
-              {images.length !== 0 && (
+                ))}
+              </div>
+              <div>
                 <Button
                   variant="contained"
                   color="primary"
                   buttonSize="boton--small"
                   buttonStyle="boton--primary--outline"
                   hoverStyle="bg-cream"
-                  onClick={() => {
-                    onImageRemoveAll();
-                    setImages([]);
-                  }}
+                  style={isDragging ? { color: "red" } : undefined}
+                  onClick={onImageUpload}
+                  {...dragProps}
                 >
-                  {t("form.elimina-imatges")}
+                  {t("form.carrega-imatges")}
                 </Button>
-              )}
-            </div>
+                &nbsp;
+                {images.length !== 0 && (
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    buttonSize="boton--small"
+                    buttonStyle="boton--primary--outline"
+                    hoverStyle="bg-cream"
+                    onClick={() => {
+                      onImageRemoveAll();
+                      setImages([]);
+                    }}
+                  >
+                    {t("form.elimina-imatges")}
+                  </Button>
+                )}
+              </div>
+            </>
           )}
         </ImageUploading>
       </StyledImageBox>

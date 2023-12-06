@@ -6,8 +6,8 @@ import LettersMove from "../../components/layout/LettersMove";
 import PowerTitle from "../../components/layout/PowerTitle";
 import CardLayout from "../../components/layout/CardLayout/CardLayout";
 import { StyledHeightBlock } from "../../styles/GlobalStyles.style";
-import { StyledSectionDescription } from "../../styles/StyledSections";
 import SearchBox from "../../components/searchBox/SearchBox";
+import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 
 export const StyledSocios = styled.div`
   height: auto;
@@ -23,17 +23,20 @@ const Socios = () => {
       artist?.is_ameba_dj === false &&
       artist?.name?.toLowerCase()?.includes(searchInput?.toLowerCase())
   );
-  console.log(member_projects);
+  const demoText = `Lorem fistrum por la gloria de mi madre tiene musho peligro se calle
+  ustée. Quietooor ese pedazo de quietooor fistro apetecan pecador te voy
+  a borrar el cerito tiene musho peligro tiene musho peligro me cago en
+  tus muelas. Va usté muy cargadoo está la cosa muy malar se calle ustée
+  está la cosa muy malar diodenoo pupita caballo blanco caballo negroorl.`;
+
   return (
     <StyledSocios>
       <PowerTitle title="soci@s" className="SupportTitle" />
-      <StyledSectionDescription>
-        Lorem fistrum por la gloria de mi madre tiene musho peligro se calle
-        ustée. Quietooor ese pedazo de quietooor fistro apetecan pecador te voy
-        a borrar el cerito tiene musho peligro tiene musho peligro me cago en
-        tus muelas. Va usté muy cargadoo está la cosa muy malar se calle ustée
-        está la cosa muy malar diodenoo pupita caballo blanco caballo negroorl.
-      </StyledSectionDescription>
+      <DisclaimerBox
+        text={demoText}
+        id="project-disclaimer"
+        borderColor="black"
+      />
       <StyledHeightBlock />
       <SearchBox
         searchText="Busca"

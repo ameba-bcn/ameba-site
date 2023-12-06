@@ -171,7 +171,7 @@ const deleteUser = () => {
 
 const getMemberProject = () => {
   return axiosInstance
-    .get(API_URL + `users/current/member_profile/`, {
+    .get(API_URL + `users/current/member_projects/`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("access")}`,
       },
@@ -181,22 +181,16 @@ const getMemberProject = () => {
     });
 };
 
-const updateMemberProject = (
-  identity_card,
-  first_name,
-  last_name,
-  phone_number,
-  user
-) => {
+const updateMemberProject = (name, description, images, media, tags) => {
   return axiosInstance
     .patch(
-      API_URL + `users/current/member_profile/`,
+      API_URL + `users/current/member_projects/`,
       {
-        identity_card,
-        first_name,
-        last_name,
-        phone_number,
-        user,
+        name,
+        description,
+        images,
+        media,
+        tags,
       },
       {
         headers: {
