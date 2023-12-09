@@ -110,17 +110,10 @@ const MediaLinksForm = (props) => {
       setError(null);
     }
   };
-  console.warn(error, currentLink);
 
   const handleChange = (e) => {
     e.preventDefault();
     setCurrentLink(e.target.value);
-    console.log(
-      "handeChange",
-      iframesValidation(e.target.value),
-      urlValidation(e.target.value),
-      e.target.value.length === 0
-    );
     if (
       iframesValidation(e.target.value) ||
       urlValidation(e.target.value) ||

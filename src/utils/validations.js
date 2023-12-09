@@ -24,7 +24,6 @@ export const codeValidation = (value) => {
 };
 
 export const iframesValidation = (value) => {
-  console.log("in validation", value);
   if (!value) return false;
   return ("" + value).match(
     /<iframe[^\>]+src=["'](https?:\/\/[^"']+)["'][^\>]*>.*<\/iframe>/

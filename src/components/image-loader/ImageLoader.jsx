@@ -16,10 +16,8 @@ const ImageLoader = (props) => {
 
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    // console.log(imageList, addUpdateIndex);
     setImages(imageList);
   };
-
   return (
     <>
       <StyledImageLabelBox>
@@ -31,7 +29,8 @@ const ImageLoader = (props) => {
           value={images}
           onChange={onChange}
           maxNumber={maxNumber}
-          dataURLKey="data_url"
+          dataURLKey="image"
+          acceptType={["jpg", "jpeg", "gif", "png"]}
         >
           {({
             imageList,
@@ -42,12 +41,11 @@ const ImageLoader = (props) => {
             isDragging,
             dragProps,
           }) => (
-            // write your building UI
             <>
               <div className="upload__image-wrapper">
                 {imageList.map((image, index) => (
                   <div key={index} className="image-item">
-                    <img src={image} alt="" width="100" />
+                    <img src={image.image} alt="" width="100" />
                     <div className="image-item__btn-wrapper">
                       <ReplayIcon onClick={() => onImageUpdate(index)} />
                       <DeleteOutlineIcon onClick={() => onImageRemove(index)} />
@@ -63,7 +61,10 @@ const ImageLoader = (props) => {
                   buttonStyle="boton--primary--outline"
                   hoverStyle="bg-cream"
                   style={isDragging ? { color: "red" } : undefined}
-                  onClick={onImageUpload}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    onImageUpload();
+                  }}
                   {...dragProps}
                 >
                   {t("form.carrega-imatges")}

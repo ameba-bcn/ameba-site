@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import { iframesValidation } from "../../utils/validations";
@@ -55,7 +55,6 @@ export const StyledLinkLabel = styled.div`
 
 const LinkBox = (props) => {
   const { editMode = false, mediaLinks = [], setMediaLinks = () => {} } = props;
-  console.log("mediaLinks", mediaLinks);
   return (
     <>
       <StyledLinkLabelBox>
@@ -64,7 +63,7 @@ const LinkBox = (props) => {
       <StyledLinkBox>
         {mediaLinks.map((link, index) =>
           iframesValidation(link) ? (
-            <div className="link-row">
+            <div className="link-row" key={link}>
               {editMode ? (
                 <div className="delete-link-icon">
                   <DeleteOutlineIcon
