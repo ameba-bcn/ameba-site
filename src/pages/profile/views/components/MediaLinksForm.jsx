@@ -170,7 +170,9 @@ const MediaLinksForm = (props) => {
               </span>
             </SyledLinkInput>
           )}
-          {error?.length !== 0 && <LogFormError>{error}</LogFormError>}
+          {currentLink.length > 0 && error?.length !== 0 && (
+            <LogFormError>{error}</LogFormError>
+          )}
         </>
       ) : (
         <>

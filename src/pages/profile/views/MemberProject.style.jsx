@@ -12,4 +12,17 @@ export const MemberProjectFrame = styled.div`
     margin-top: 0px;
     margin-bottom: 20px;
   }
+  .formMembership {
+    width: 100%;
+  }
+`;
+
+export const MemberFormBox = styled.div`
+  margin: 20px 10px;
+  width: 100%;
+  & > form {
+    .field-wrapper {
+      margin-bottom: 20px;
+    }
+  }
 `;

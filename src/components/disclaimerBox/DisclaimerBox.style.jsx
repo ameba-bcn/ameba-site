@@ -16,13 +16,13 @@ export const SyledDisclaimer = styled.div`
   border-width: 8px;
   background-color: ${(props) => (props.bgColor ? props.bgColor : "#eb5e3e")};
   margin-top: 20px;
-  padding: 12px;
+  padding: 12px 18px;
   text-decoration: none !important;
   color: #1d1d1b !important;
   .close-icon {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    top: 8px;
+    right: 8px;
     cursor: pointer;
   }
 `;

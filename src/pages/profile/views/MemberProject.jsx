@@ -2,10 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import InputField from "../../../components/forms/InputField/InputField";
-import { LogFormBox, LogFormError } from "../../../components/forms/Log.style";
-import { MemberProjectFrame } from "./MemberProject.style";
+import { LogFormError } from "../../../components/forms/Log.style";
+import { MemberFormBox, MemberProjectFrame } from "./MemberProject.style";
 import Button from "../../../components/button/Button";
-import { isEmptyObject } from "../../../utils/utils";
 import TextArea from "../../../components/forms/TextArea/TextArea";
 import authService from "../../../redux/services/auth.service";
 import { useTranslation } from "react-i18next";
@@ -28,10 +27,11 @@ const MemberProject = () => {
   const [mediaLinks, setMediaLinks] = useState(
     initialProjectData.media_urls || []
   );
-
+  const isActive = initialProjectData.isActive;
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [t] = useTranslation("translation");
+
   useEffect(() => {
     authService
       .getMemberProject()
@@ -86,14 +86,17 @@ const MemberProject = () => {
     },
   });
 
-  const demoText =
+  const gralText =
     "En aquesta vista pots editar el teu projecte personal. Un cop guardats els canvis podràs visualitzar-ho a la vista de /soci@s";
+  const noMemberText =
+    "Sembla que la teva membresia ha expirat. Per a poder editar el teu projecte personal, has de renovar la teva membresia.";
+
   return (
     <MemberProjectFrame>
-      <LogFormBox>
+      <MemberFormBox>
         <form className="formMembership" onSubmit={formik.handleSubmit}>
           <DisclaimerBox
-            text={demoText}
+            text={isActive ? gralText : noMemberText}
             id="project-disclaimer"
             borderColor="black"
           />
@@ -137,7 +140,7 @@ const MemberProject = () => {
             />
           </div>
           <div className="field-wrapper">
-            <ImageLoader maxNumber={4} images={images} setImages={setImages} />
+            <ImageLoader maxNumber={6} images={images} setImages={setImages} />
             {images === null && (
               <LogFormError>
                 <div>{ERROR.GENERIC.REQUIRED}</div>
@@ -164,7 +167,7 @@ const MemberProject = () => {
             </Button>
           </div>
         </form>
-      </LogFormBox>
+      </MemberFormBox>
     </MemberProjectFrame>
   );
 };

@@ -15,12 +15,24 @@ const StyledLinkBox = styled.div`
     display: flex;
     flex-direction: row;
     width: 100%;
+    margin: 6px 0px;
     .content {
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      width: 100%;
+      font-size: 30px;
+      font-family: "Bebas Neue";
+      font-weight: 800;
+      line-height: 1em;
+      color: #212529;
+      text-decoration: none;
+      text-overflow: ellipsis;
+      @media (max-width: 500px) {
+        font-size: 24px;
+      }
     }
   }
   .delete-link-icon {
