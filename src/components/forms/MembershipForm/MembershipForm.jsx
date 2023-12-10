@@ -118,7 +118,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
     <LogFormBox>
       <form onSubmit={formik.handleSubmit}>
         {!isNewMember && (
-          <div>
+          <div className="field-wrapper">
             <InputField
               id="memberNum"
               name="memberNum"

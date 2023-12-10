@@ -73,6 +73,12 @@ export const ERROR = {
         ? "Títol: aquest camp es obligatori"
         : "Título: este campo es obligatorio",
   },
+  GENERIC: {
+    REQUIRED:
+      localStorage.getItem("i18nextLng") === "ca"
+        ? "Aquest camp es obligatori"
+        : "Este campo es obligatorio",
+  },
 };
 
 export const MOBILE_BIG = "(max-width:1500px)";

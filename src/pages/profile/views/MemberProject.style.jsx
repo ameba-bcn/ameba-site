@@ -9,5 +9,7 @@ export const MemberProjectFrame = styled.div`
   margin: 0 auto;
   #project-disclaimer {
     width: 100%;
+    margin-top: 0px;
+    margin-bottom: 20px;
   }
 `;

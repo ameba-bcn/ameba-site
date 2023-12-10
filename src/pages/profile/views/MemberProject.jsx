@@ -14,19 +14,23 @@ import MediaLinksForm from "./components/MediaLinksForm";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import { setUploadedImages } from "../../../redux/actions/profile";
 import { validate } from "./MemberProjectValidate";
+import { ERROR } from "../../../utils/constants";
+import CheckBox from "../../../components/layout/CheckBox";
 
 const MemberProject = () => {
   const [initialProjectData, setInitialProjectData] = useState({});
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(initialProjectData.image || []);
+  const [isPublic, setIsPublic] = useState(initialProjectData.public || false);
   const [description, setDescription] = useState(
     initialProjectData.description || ""
   );
   const [storedImages, setStoredImages] = useState([]);
+  const [mediaLinks, setMediaLinks] = useState(
+    initialProjectData.media_urls || []
+  );
 
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const initialText =
-    "Lorem fistrum hasta luego Lucas jarl qué dise usteer caballo blanco caballo negroorl la caidita ese pedazo de quietooor de la pradera. Sexuarl qué dise usteer se calle ustée amatomaa. Va usté muy cargadoo a peich a wan ese pedazo de hasta luego Lucas te voy a borrar el cerito. Caballo blanco caballo negroorl diodeno está la cosa muy malar te va a hasé pupitaa tiene musho peligro fistro. A wan ese pedazo de condemor te va a hasé pupitaa a gramenawer no puedor quietooor por la gloria de mi madre ese que llega ahorarr apetecan. Se calle ustée no puedor quietooor diodeno pecador.";
   const [t] = useTranslation("translation");
   useEffect(() => {
     authService
@@ -34,12 +38,27 @@ const MemberProject = () => {
       .then((data) => {
         setLoading(false);
         setInitialProjectData(data);
+        setIsPublic(data.public);
+        setImages(Array(data.image));
       })
       .catch(() => setLoading(false));
   }, []);
 
   const handleSubmit = (val) => {
-    authService.updateMemberProject({ ...val, description: description });
+    if (description.length === 0) {
+      setDescription(null);
+    }
+    if (images?.length === 0) {
+      setImages(null);
+    } else {
+      authService.updateMemberProject({
+        ...val,
+        description: description,
+        media_urls: mediaLinks,
+        image: images,
+        public: isPublic || false,
+      });
+    }
   };
 
   const uploadImage = () => {
@@ -78,7 +97,7 @@ const MemberProject = () => {
             id="project-disclaimer"
             borderColor="black"
           />
-          <div>
+          <div className="field-wrapper">
             <InputField
               id="project_name"
               name="project_name"
@@ -86,39 +105,64 @@ const MemberProject = () => {
               label={t("form.titol")}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.project_name}
+              value={formik.values.project_name || ""}
               slimLine={true}
               valid={true}
             />
+            {!!formik.errors.project_name && (
+              <LogFormError>
+                <div>{formik.errors.project_name}</div>
+              </LogFormError>
+            )}
           </div>
-          <TextArea
-            id="description"
-            name="description"
-            initText={initialProjectData.description || ""}
-            setText={setDescription}
-            label={t("modal.descripcio")}
-          />
-          <MediaLinksForm label="afegeix un link" />
-
-          <ImageLoader maxNumber={4} images={images} setImages={setImages} />
-
-          {!isEmptyObject(formik.errors) && (
-            <LogFormError>
-              {Object.values(formik.errors).map((x) => {
-                return <div key={x}>{x}</div>;
-              })}
-            </LogFormError>
-          )}
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            buttonSize="boton--medium"
-            buttonStyle="boton--primary--solid"
-            hoverStyle="bg-orange"
-          >
-            {loading ? <span className="spinner-border"></span> : <>guarda</>}
-          </Button>
+          <div className={description === null ? "" : "field-wrapper"}>
+            <TextArea
+              id="description"
+              name="description"
+              initText={initialProjectData.description || ""}
+              setText={setDescription}
+              label={t("modal.descripcio")}
+            />
+            {description === null && (
+              <LogFormError>
+                <div>{ERROR.GENERIC.REQUIRED}</div>
+              </LogFormError>
+            )}
+          </div>
+          <div className="field-wrapper">
+            <MediaLinksForm
+              label="link"
+              mediaLinks={mediaLinks}
+              setMediaLinks={setMediaLinks}
+            />
+          </div>
+          <div className="field-wrapper">
+            <ImageLoader maxNumber={4} images={images} setImages={setImages} />
+            {images === null && (
+              <LogFormError>
+                <div>{ERROR.GENERIC.REQUIRED}</div>
+              </LogFormError>
+            )}
+          </div>
+          <div className="field-wrapper">
+            <CheckBox
+              label={isPublic ? "Publicat" : "No publicat"}
+              checked={isPublic}
+              onChange={(e) => setIsPublic(!e)}
+            />
+          </div>
+          <div className="button-box">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              buttonSize="boton--medium"
+              buttonStyle="boton--primary--solid"
+              hoverStyle="bg-orange"
+            >
+              {loading ? <span className="spinner-border"></span> : <>guarda</>}
+            </Button>
+          </div>
         </form>
       </LogFormBox>
     </MemberProjectFrame>

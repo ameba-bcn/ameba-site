@@ -32,8 +32,17 @@ export default function CardLayout(props) {
   const cardGenerator =
     !!cardList.length &&
     sortByProperty(cardList, "created", false)?.map((data) => {
-      const { id = 0, images = [], name = "", tags = [] } = data;
-      const urlName = name.replace(/\s+/g, "-")?.toLowerCase();
+      console.log("data", data);
+      const {
+        id = 0,
+        images = [],
+        name = "",
+        tags = [],
+        image,
+        project_name,
+      } = data;
+      const baseName = project_name ? project_name : name;
+      const urlName = baseName.replace(/\s+/g, "-")?.toLowerCase();
       return (
         <div className="fullcard" key={id}>
           <NavLink
@@ -45,9 +54,15 @@ export default function CardLayout(props) {
           >
             <div className="cardSupport">
               <TitleStyled>
-                <ReactFitty maxSize={200}>{name}</ReactFitty>
+                <ReactFitty maxSize={200}>
+                  {project_name ? project_name : name}
+                </ReactFitty>
               </TitleStyled>
-              <img src={images[0]} alt={name} className="cardSupportImgTop" />
+              <img
+                src={image ? image : images[0]}
+                alt={name}
+                className="cardSupportImgTop"
+              />
               <div className="cardSupportPlusBox">
                 <PlusButton
                   plusStyle="plus--obscure"

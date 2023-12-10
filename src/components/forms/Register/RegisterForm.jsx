@@ -50,7 +50,7 @@ export default function RegisterForm({ setRedirect }) {
   return (
     <LogFormBox>
       <form onSubmit={formik.handleSubmit}>
-        <div>
+        <div className="field-wrapper">
           <InputField
             id="username"
             name="username"

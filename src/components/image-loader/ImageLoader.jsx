@@ -70,7 +70,7 @@ const ImageLoader = (props) => {
                   {t("form.carrega-imatges")}
                 </Button>
                 &nbsp;
-                {images.length !== 0 && (
+                {images?.length !== 0 && (
                   <Button
                     variant="contained"
                     color="primary"

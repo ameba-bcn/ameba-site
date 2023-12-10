@@ -56,9 +56,9 @@ export const StyledLinkLabel = styled.div`
 const LinkBox = (props) => {
   const { editMode = false, mediaLinks = [], setMediaLinks = () => {} } = props;
   return (
-    <>
+    <div style={{ marginTop: "-14px" }}>
       <StyledLinkLabelBox>
-        <StyledLinkLabel>previsualització de links</StyledLinkLabel>
+        <StyledLinkLabel>previsualització</StyledLinkLabel>
       </StyledLinkLabelBox>
       <StyledLinkBox>
         {mediaLinks.map((link, index) =>
@@ -79,7 +79,7 @@ const LinkBox = (props) => {
               />
             </div>
           ) : (
-            <div className="link-row">
+            <div className="link-row" key={link}>
               {editMode ? (
                 <div className="delete-link-icon">
                   <DeleteOutlineIcon
@@ -100,7 +100,7 @@ const LinkBox = (props) => {
           )
         )}
       </StyledLinkBox>
-    </>
+    </div>
   );
 };
 

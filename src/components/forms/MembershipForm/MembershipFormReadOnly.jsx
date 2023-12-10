@@ -22,7 +22,7 @@ export default function MembershipFormReadOnly(props) {
       <div className="card card-container card-login">
         <LogFormBox>
           <form>
-            <div>
+            <div className="field-wrapper">
               <InputField
                 id="userName"
                 name="userName"
@@ -48,7 +48,7 @@ export default function MembershipFormReadOnly(props) {
         </LogFormBox>
         {!isCheckout && (
           <span className="logTextosLink" onClick={showPasswordRecover}>
-             {`- ${t("login.modifica")} -`}
+            {`- ${t("login.modifica")} -`}
           </span>
         )}
       </div>

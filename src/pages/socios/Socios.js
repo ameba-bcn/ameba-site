@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import LettersMove from "../../components/layout/LettersMove";
@@ -8,6 +8,7 @@ import CardLayout from "../../components/layout/CardLayout/CardLayout";
 import { StyledHeightBlock } from "../../styles/GlobalStyles.style";
 import SearchBox from "../../components/searchBox/SearchBox";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
+import { getMemberProjects } from "../../redux/actions/data";
 
 export const StyledSocios = styled.div`
   height: auto;
@@ -15,14 +16,17 @@ export const StyledSocios = styled.div`
 `;
 
 const Socios = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMemberProjects());
+  }, []);
+
   const [searchInput, setSearchInput] = useState("");
   const [t] = useTranslation("translation");
-  const { support: member_projects } = useSelector((state) => state.data);
-  const filteredProjects = member_projects.filter(
-    (artist) =>
-      artist?.is_ameba_dj === false &&
-      artist?.name?.toLowerCase()?.includes(searchInput?.toLowerCase())
-  );
+  const { member_projects } = useSelector((state) => state.data);
+  console.log("member_projects", member_projects);
+
   const demoText = `Lorem fistrum por la gloria de mi madre tiene musho peligro se calle
   ustée. Quietooor ese pedazo de quietooor fistro apetecan pecador te voy
   a borrar el cerito tiene musho peligro tiene musho peligro me cago en
@@ -44,7 +48,7 @@ const Socios = () => {
         setSearchInput={setSearchInput}
         hidden={true}
       />
-      <CardLayout cardList={filteredProjects} urlRoot="socis" />
+      <CardLayout cardList={member_projects} urlRoot="socis" />
       <LettersMove
         className="lettersMoveDiv"
         sentence={t("banners.soci-curt")}

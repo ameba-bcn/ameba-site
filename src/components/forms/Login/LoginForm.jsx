@@ -50,7 +50,7 @@ export default function LoginForm({ setRedirect }) {
   return (
     <LogFormBox>
       <form onSubmit={formik.handleSubmit}>
-        <div>
+        <div className="field-wrapper">
           <InputField
             id="emailLogin"
             name="email"

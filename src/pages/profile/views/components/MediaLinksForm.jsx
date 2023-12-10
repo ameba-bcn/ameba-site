@@ -24,6 +24,21 @@ export const SyledLinkInput = styled.div`
   }
 `;
 
+export const SyledAddLink = styled.div`
+  text-transform: uppercase;
+  font-family: "Bebas Neue";
+  font-size: 32px;
+  width: 100%;
+  height: 100%;
+  border: 4px solid #1d1d1b;
+  border-radius: 0px;
+  cursor: pointer;
+  :hover {
+    font-weight: 500;
+    text-decoration: underline;
+  }
+`;
+
 export const Textarea = styled.textarea`
   display: block;
   width: 100%;
@@ -36,7 +51,7 @@ export const Textarea = styled.textarea`
   border: 1px solid #ced4da;
   background-color: transparent;
   border: 4px solid #1d1d1b;
-  border-radius: 0rem;
+  border-radius: 0px;
   padding-top: 14px;
   font-family: "Montserrat", sans-serif;
   color: #1d1d1b;
@@ -98,16 +113,17 @@ const mockedLinks = [
 ];
 
 const MediaLinksForm = (props) => {
-  const { label = "" } = props;
+  const { label = "", mediaLinks, setMediaLinks } = props;
   const [currentLink, setCurrentLink] = useState("");
-  const [mediaLinks, setMediaLinks] = useState(mockedLinks);
   const [error, setError] = useState("");
+  const [editMode, setEditMode] = useState(false);
 
   const handleAddLink = (e) => {
     if (error.length === 0 && currentLink.length !== 0) {
       setMediaLinks([...mediaLinks, currentLink]);
       setCurrentLink("");
       setError(null);
+      setEditMode(false);
     }
   };
 
@@ -124,45 +140,58 @@ const MediaLinksForm = (props) => {
   };
 
   return (
-    <form>
-      <>
-        <InputLabelBox>
-          <InputLabel>{label}</InputLabel>
-        </InputLabelBox>
+    <>
+      {editMode ? (
+        <>
+          <InputLabelBox>
+            <InputLabel>{label}</InputLabel>
+          </InputLabelBox>
 
-        <Textarea
-          id="media"
-          type="text"
-          label="link"
-          placeholder=""
-          className=""
-          onChange={handleChange}
-          value={currentLink}
-          slimLine={true}
-          valid={true}
-          onKeyPress={(event) => {
-            if (event.key === "Enter") {
-              handleAddLink(event);
-            }
-          }}
-        />
-        {currentLink.length > 0 && error?.length === 0 && (
-          <SyledLinkInput>
-            <span className="send" onClick={handleAddLink}>
-              envia
-            </span>
-          </SyledLinkInput>
-        )}
-        {error?.length !== 0 && <LogFormError>{error}</LogFormError>}
-      </>
-      <div>
-        <LinkBox
-          mediaLinks={mediaLinks}
-          setMediaLinks={setMediaLinks}
-          editMode={true}
-        />
-      </div>
-    </form>
+          <Textarea
+            id="media"
+            type="text"
+            label="link"
+            placeholder=""
+            className=""
+            onChange={handleChange}
+            value={currentLink}
+            slimLine={true}
+            valid={true}
+            onKeyPress={(event) => {
+              if (event.key === "Enter") {
+                handleAddLink(event);
+              }
+            }}
+          />
+          {currentLink.length > 0 && error?.length === 0 && (
+            <SyledLinkInput>
+              <span className="send" onClick={handleAddLink}>
+                envia
+              </span>
+            </SyledLinkInput>
+          )}
+          {error?.length !== 0 && <LogFormError>{error}</LogFormError>}
+        </>
+      ) : (
+        <>
+          <InputLabelBox>
+            <InputLabel>{label}</InputLabel>
+          </InputLabelBox>
+          <SyledAddLink onClick={() => setEditMode(true)}>
+            ++ add link ++
+          </SyledAddLink>
+        </>
+      )}
+      {mediaLinks.length > 0 && (
+        <div>
+          <LinkBox
+            mediaLinks={mediaLinks}
+            setMediaLinks={setMediaLinks}
+            editMode={true}
+          />
+        </div>
+      )}
+    </>
   );
 };
 

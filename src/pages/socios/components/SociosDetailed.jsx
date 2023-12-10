@@ -1,6 +1,8 @@
 /* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import DOMPurify from "dompurify";
 import axiosInstance from "../../../axios";
 import ImageCarousel from "../../../components/images/ImageCarousel";
 import LettersMove from "../../../components/layout/LettersMove";
@@ -15,35 +17,27 @@ const mockedLinks = [
 ];
 
 const SociosDetailed = () => {
+  const history = useHistory();
+
   const dummyList = [
-    "/media/images/article-totebag-modular-500x500.jpg",
-    "/media/images/article-camiseta-ameba-vinil-469x469.png",
-    "/media/images/article-camiseta-ameba-new-469x469.png",
+    "/media/image/article-totebag-modular-500x500.jpg",
+    "/media/image/article-camiseta-ameba-vinil-469x469.png",
+    "/media/image/article-camiseta-ameba-new-469x469.png",
   ];
-  const [artist, setArtist] = useState({});
+  const [project, setProject] = useState({});
   let urlID = location.pathname.substr(location.pathname.lastIndexOf("/") + 1);
-  const data = useSelector((state) => state.data);
-  const { support = [] } = data;
-  const [urlData] = support.filter(
-    (x) => x?.name?.replace(/\s+/g, "-")?.toLowerCase() === urlID
+  const { member_projects = [] } = useSelector((state) => state.data);
+  const [urlData] = member_projects.filter(
+    (x) => x?.project_name?.replace(/\s+/g, "-")?.toLowerCase() === urlID
   );
 
-  const obj = {
-    member_name: "fulanita",
-    name: "Dummy project",
-    descrption:
-      "Lorem fistrum ese que llega no te digo trigo por no llamarte Rodrigor a wan torpedo diodeno. Jarl te va a hasé pupitaa diodenoo está la cosa muy malar no te digo trigo por no llamarte Rodrigor pecador ese hombree fistro diodeno ese que llega. Ese que llega hasta luego Lucas caballo blanco caballo negroorl quietooor qué dise usteer hasta luego Lucas ese hombree tiene musho peligro me cago en tus muelas a peich.",
-    images: dummyList,
-    links: [],
-  };
-
-  const { name, descrption, images, member_name } = obj;
+  const { project_name, description, image, media_urls, first_name } = project;
   const ID = urlData?.id;
   useEffect(() => {
     axiosInstance
-      .get(`${API_URL}artists/${ID}/`, {})
+      .get(`${API_URL}members/${ID}/`, {})
       .then((resp) => {
-        setArtist(resp.data);
+        setProject(resp.data);
       })
       .catch((err) => {
         console.warn("ERROR: something gone wrong", err);
@@ -56,39 +50,45 @@ const SociosDetailed = () => {
         <div className="top-section_entr">
           <div className="ts-breadcrumbs">
             <span onClick={() => history.push("/")}>AMEBA</span> /{" "}
-            <span onClick={() => history.goBack()}>#SOCI@S</span> /{" "}
-            {member_name}
+            <span onClick={() => history.push("/socis")}>#SOCI@S</span> /{" "}
+            {project_name}
           </div>
-          <div className="ts-title">{name}</div>
+          <div className="ts-title">{project_name}</div>
           {/* Tags para el futuro */}
-          {artist?.tags?.length > 0 && (
+          {/* {project?.tags?.length > 0 && (
             <div className="ts-tags">
-              {artist?.tags.map((n) => (
+              {project?.tags.map((n) => (
                 <div className="tags-e" key={n}>
                   {n}
                 </div>
               ))}
             </div>
-          )}
+          )} */}
         </div>
         <div className="bio-gral">
-          <TitleSection title={`by ${member_name}`} />
+          <TitleSection title={`by ${first_name}`} />
           <div className="bio-section">
-            <div className="bio-text">{descrption}</div>
-            {artist.images && (
+            <div
+              className="bio-text"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(description),
+              }}
+            />
+            {project.image && (
               <div className="bio-img">
-                <ImageCarousel imgList={images} />
+                <ImageCarousel imgList={Array(image)} />
               </div>
             )}
           </div>
         </div>
-        <LinkBox mediaLinks={mockedLinks} />
+        <div className="link-section">
+          <LinkBox mediaLinks={media_urls} />
+        </div>
+        <LettersMove
+          sentence={"l'associació de música electrònica de barcelona"}
+          color={"#F2C571"}
+        />
       </div>
-
-      <LettersMove
-        sentence={"l'associació de música electrònica de barcelona"}
-        color={"#F2C571"}
-      />
     </StyledSociosMain>
   );
 };

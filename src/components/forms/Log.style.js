@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const LogFormBox = styled.div`
-margin: 20px 10px;
+  margin: 20px 10px;
   & > form {
-      & > div{
-          margin-bottom: 20px;
-      }
+    .field-wrapper {
+      margin-bottom: 20px;
+    }
   }
 `;
 
@@ -15,18 +15,17 @@ export const LogFormError = styled.div`
   margin: 0 auto;
   padding-top: 5px;
   padding-bottom: 5px;
-  color: #EB5E3E;
+  color: #eb5e3e;
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   font-weight: bold;
 `;
 
-
 export const CardContainer = styled.div`
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    word-wrap: break-word;
-    margin: 0 auto;
-    max-width: 500px !important;
-`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  margin: 0 auto;
+  max-width: 500px !important;
+`;
