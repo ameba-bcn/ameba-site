@@ -113,7 +113,7 @@ const mockedLinks = [
 ];
 
 const MediaLinksForm = (props) => {
-  const { label = "", mediaLinks, setMediaLinks } = props;
+  const { label = "", mediaLinks, setMediaLinks, disabled = false } = props;
   const [currentLink, setCurrentLink] = useState("");
   const [error, setError] = useState("");
   const [editMode, setEditMode] = useState(false);
@@ -141,7 +141,7 @@ const MediaLinksForm = (props) => {
 
   return (
     <>
-      {editMode ? (
+      {editMode || disabled ? (
         <>
           <InputLabelBox>
             <InputLabel>{label}</InputLabel>
@@ -162,6 +162,7 @@ const MediaLinksForm = (props) => {
                 handleAddLink(event);
               }
             }}
+            disabled={disabled}
           />
           {currentLink.length > 0 && error?.length === 0 && (
             <SyledLinkInput>

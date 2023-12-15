@@ -4,7 +4,8 @@ import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import { iframesValidation } from "../../utils/validations";
 
 const StyledLinkBox = styled.div`
-  border: 4px solid #1d1d1b;
+  border: ${(props) =>
+    props.thinLine ? "1px solid #1d1d1b" : "4px solid #1d1d1b"};
   border-radius: 0px;
   padding: 24px;
   display: flex;
@@ -66,13 +67,20 @@ export const StyledLinkLabel = styled.div`
 `;
 
 const LinkBox = (props) => {
-  const { editMode = false, mediaLinks = [], setMediaLinks = () => {} } = props;
+  const {
+    label = "previsualització",
+    editMode = false,
+    thinLine = false,
+    mediaLinks = [],
+    setMediaLinks = () => {},
+  } = props;
+
   return (
     <div style={{ marginTop: "-14px" }}>
       <StyledLinkLabelBox>
-        <StyledLinkLabel>previsualització</StyledLinkLabel>
+        <StyledLinkLabel>{label}</StyledLinkLabel>
       </StyledLinkLabelBox>
-      <StyledLinkBox>
+      <StyledLinkBox thinLine={thinLine}>
         {mediaLinks.map((link, index) =>
           iframesValidation(link) ? (
             <div className="link-row" key={link}>

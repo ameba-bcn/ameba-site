@@ -8,7 +8,7 @@ import {
 import { TEXT_EDITOR_KEY } from "../../../utils/constants.js";
 
 const TextArea = (props) => {
-  const { initText = "", setText, label = "" } = props;
+  const { initText = "", setText, label = "", disabled = false } = props;
   const editorRef = useRef(null);
 
   return (
@@ -19,6 +19,7 @@ const TextArea = (props) => {
       <TextAreaStyled>
         <Editor
           apiKey={TEXT_EDITOR_KEY}
+          disabled={disabled}
           onInit={(evt, editor) => (editorRef.current = editor)}
           initialValue={`<p>${initText}</p>`}
           onEditorChange={(newValue) => {

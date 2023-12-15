@@ -11,12 +11,12 @@ import {
 } from "./ImageLoader.style";
 
 const ImageLoader = (props) => {
-  const { maxNumber = 6, images, setImages } = props;
+  const { maxNumber = 6, images, setImages, disabled = false } = props;
   const [t] = useTranslation("translation");
 
   const onChange = (imageList, addUpdateIndex) => {
     // data for submit
-    setImages(imageList);
+    if (!disabled) setImages(imageList);
   };
   return (
     <>
@@ -47,8 +47,12 @@ const ImageLoader = (props) => {
                   <div key={index} className="image-item">
                     <img src={image.image} alt="" width="100" />
                     <div className="image-item__btn-wrapper">
-                      <ReplayIcon onClick={() => onImageUpdate(index)} />
-                      <DeleteOutlineIcon onClick={() => onImageRemove(index)} />
+                      <ReplayIcon
+                        onClick={() => !disabled && onImageUpdate(index)}
+                      />
+                      <DeleteOutlineIcon
+                        onClick={() => !disabled && onImageRemove(index)}
+                      />
                     </div>
                   </div>
                 ))}
@@ -61,9 +65,10 @@ const ImageLoader = (props) => {
                   buttonStyle="boton--primary--outline"
                   hoverStyle="bg-cream"
                   style={isDragging ? { color: "red" } : undefined}
+                  disabled={disabled}
                   onClick={(e) => {
                     e.preventDefault();
-                    onImageUpload();
+                    !disabled && onImageUpload();
                   }}
                   {...dragProps}
                 >
@@ -77,9 +82,13 @@ const ImageLoader = (props) => {
                     buttonSize="boton--small"
                     buttonStyle="boton--primary--outline"
                     hoverStyle="bg-cream"
-                    onClick={() => {
-                      onImageRemoveAll();
-                      setImages([]);
+                    disabled={disabled}
+                    onClick={(e) => {
+                      if (!disabled) {
+                        e.preventDefault();
+                        onImageRemoveAll();
+                        setImages([]);
+                      }
                     }}
                   >
                     {t("form.elimina-imatges")}

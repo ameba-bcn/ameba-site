@@ -90,7 +90,7 @@ const MemberProject = () => {
     "En aquesta vista pots editar el teu projecte personal. Un cop guardats els canvis podràs visualitzar-ho a la vista de /soci@s";
   const noMemberText =
     "Sembla que la teva membresia ha expirat. Per a poder editar el teu projecte personal, has de renovar la teva membresia.";
-
+  const isReadOnly = false;
   return (
     <MemberProjectFrame>
       <MemberFormBox>
@@ -111,6 +111,7 @@ const MemberProject = () => {
               value={formik.values.project_name || ""}
               slimLine={true}
               valid={true}
+              disabled={isReadOnly}
             />
             {!!formik.errors.project_name && (
               <LogFormError>
@@ -125,6 +126,7 @@ const MemberProject = () => {
               initText={initialProjectData.description || ""}
               setText={setDescription}
               label={t("modal.descripcio")}
+              disabled={isReadOnly}
             />
             {description === null && (
               <LogFormError>
@@ -137,10 +139,16 @@ const MemberProject = () => {
               label="link"
               mediaLinks={mediaLinks}
               setMediaLinks={setMediaLinks}
+              disabled={isReadOnly}
             />
           </div>
           <div className="field-wrapper">
-            <ImageLoader maxNumber={6} images={images} setImages={setImages} />
+            <ImageLoader
+              maxNumber={6}
+              images={images}
+              setImages={setImages}
+              disabled={isReadOnly}
+            />
             {images === null && (
               <LogFormError>
                 <div>{ERROR.GENERIC.REQUIRED}</div>
@@ -152,6 +160,7 @@ const MemberProject = () => {
               label={isPublic ? "Publicat" : "No publicat"}
               checked={isPublic}
               onChange={(e) => setIsPublic(!e)}
+              disabled={isReadOnly}
             />
           </div>
           <div className="button-box">

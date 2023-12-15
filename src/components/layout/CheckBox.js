@@ -77,7 +77,7 @@ const StyledCheckBox = styled.div`
   }
 `;
 
-const CheckBox = ({ label = "", checked, onChange }) => (
+const CheckBox = ({ label = "", checked, onChange, disabled = false }) => (
   <StyledCheckBox>
     <div className="checkbox-wrapper-40">
       <label>
@@ -85,6 +85,7 @@ const CheckBox = ({ label = "", checked, onChange }) => (
           type="checkbox"
           defaultChecked={!checked}
           onClick={() => onChange(checked)}
+          disabled={disabled}
         />
         <span className="checkbox"></span>
         <span>{label}</span>

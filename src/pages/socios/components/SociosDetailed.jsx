@@ -82,7 +82,7 @@ const SociosDetailed = () => {
           </div>
         </div>
         <div className="link-section">
-          <LinkBox mediaLinks={media_urls} />
+          <LinkBox mediaLinks={media_urls} label="links" thinLine={true} />
         </div>
         <LettersMove
           sentence={"l'associació de música electrònica de barcelona"}
