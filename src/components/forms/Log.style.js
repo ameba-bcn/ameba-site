@@ -7,6 +7,9 @@ export const LogFormBox = styled.div`
       margin-bottom: 20px;
     }
   }
+  .submit {
+    margin-top: 20px;
+  }
 `;
 
 export const LogFormError = styled.div`

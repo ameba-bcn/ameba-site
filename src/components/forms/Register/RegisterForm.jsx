@@ -62,7 +62,7 @@ export default function RegisterForm({ setRedirect }) {
             valid={true}
           />
         </div>
-        <div>
+        <div className="field-wrapper">
           <InputField
             id="emailRegister"
             name="email"
@@ -74,7 +74,7 @@ export default function RegisterForm({ setRedirect }) {
             valid={true}
           />
         </div>
-        <div>
+        <div className="field-wrapper">
           <InputField
             id="password"
             name="password"
@@ -96,6 +96,7 @@ export default function RegisterForm({ setRedirect }) {
         <Button
           type="submit"
           variant="contained"
+          className="submit"
           color="primary"
           buttonSize="boton--medium"
           buttonStyle="boton--primary--solid"

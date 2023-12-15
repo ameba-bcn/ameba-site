@@ -131,7 +131,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
             />
           </div>
         )}
-        <div>
+        <div className="field-wrapper">
           <InputField
             id="user"
             name="user"
@@ -147,7 +147,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
             valid={!formik.errors.user}
           />
         </div>
-        <div>
+        <div className="field-wrapper">
           <InputField
             id="first_name"
             name="first_name"
@@ -163,7 +163,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
             valid={!formik.errors.first_name}
           />
         </div>
-        <div>
+        <div className="field-wrapper">
           <InputField
             id="last_name"
             name="last_name"
@@ -179,7 +179,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
             valid={!formik.errors.last_name}
           />
         </div>
-        <div>
+        <div className="field-wrapper">
           <InputField
             id="identity_card"
             name="identity_card"
@@ -195,7 +195,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
             valid={!formik.errors.identity_card}
           />
         </div>
-        <div>
+        <div className="field-wrapper">
           <InputField
             id="phone_number"
             name="phone_number"
@@ -225,6 +225,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
             <div className="column">
               <Button
                 variant="contained"
+                className="submit"
                 color="primary"
                 buttonSize="boton--medium"
                 buttonStyle="boton--primary--solid"

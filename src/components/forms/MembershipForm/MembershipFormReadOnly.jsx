@@ -33,7 +33,7 @@ export default function MembershipFormReadOnly(props) {
                 disabled={true}
               />
             </div>
-            <div>
+            <div className="field-wrapper">
               <InputField
                 id="emailMemberReadOnly"
                 name="email"
