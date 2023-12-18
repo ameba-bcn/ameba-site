@@ -14,6 +14,9 @@ export const MemberProjectFrame = styled.div`
   }
   .formMembership {
     width: 100%;
+    @media screen and (max-width: 610px) {
+      padding: 0px 20px;
+    }
   }
 `;
 

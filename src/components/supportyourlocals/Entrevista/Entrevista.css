@@ -253,6 +253,20 @@
     margin: 1px;
 }
 
+
+@media screen and (max-width: 1345px) {
+    .bio-highlights {
+        display: none;
+    }
+    .bio-img {
+        width: 80%;
+    }
+    .bio-text {
+        width: 80%;
+        max-width: 650px;
+    }
+}
+
 @media screen and (max-width: 820px) {
     .entrevista-columnes {
         align-content: flex-start;
@@ -270,15 +284,9 @@
     }
 }
 
-@media screen and (max-width: 1345px) {
-    .bio-highlights {
-        display: none;
-    }
-    .bio-img {
-        width: 80%;
-    }
-    .bio-text {
-        width: 80%;
-        max-width: 650px;
+@media screen and (max-width: 300px) {
+    .ts-title {
+        font-size: 60px;
     }
 }
+

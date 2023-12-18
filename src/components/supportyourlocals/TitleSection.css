@@ -5,6 +5,12 @@
   line-height: 0.6em;
 }
 
+@media (max-width: 700px) {
+  .title-section-support{
+      font-size: 44px;
+  }
+}
+
 .hr-section {
   width: 90%;
   border-top: 1px solid #1d1d1b;

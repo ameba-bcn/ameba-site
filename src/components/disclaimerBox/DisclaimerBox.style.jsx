@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const SyledDisclaimer = styled.div`
-  width: 100%;
   position: relative;
   display: flex;
   flex-direction: row;
@@ -15,7 +14,7 @@ export const SyledDisclaimer = styled.div`
     props.borderColor ? props.borderColor : "#1D1D1B"};
   border-width: 8px;
   background-color: ${(props) => (props.bgColor ? props.bgColor : "#eb5e3e")};
-  margin-top: 20px;
+  margin: 20px;
   padding: 12px 18px;
   text-decoration: none !important;
   color: #1d1d1b !important;
