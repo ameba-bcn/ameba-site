@@ -2,6 +2,10 @@
 
 ## Release changes
 
+Version 3.2.16
+
+- Updated message on unsubscribe, deleted wrong unsubscribe button
+
 Version 3.2.15
 
 - Collaborators on footer from API
