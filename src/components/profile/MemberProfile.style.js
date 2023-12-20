@@ -49,3 +49,9 @@ export const MemberInfoRow = styled.div`
     cursor: pointer;
   }
 `;
+
+export const MessageFormat = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;

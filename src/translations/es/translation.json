@@ -90,7 +90,8 @@
     "dades": "datos personales",
     "vols-soci": "¿Quieres ser socio",
     "mes-info": "mas info aquí",
-    "baixa": "Darse de baja"
+    "baixa": "Darse de baja",
+    "baixa-missatge": "Para darte de baja y cancelar tu subscripción automática escribe un correo a"
   },
   "boto": {
     "cancela": "cancela",
