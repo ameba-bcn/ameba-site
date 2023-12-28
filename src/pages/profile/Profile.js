@@ -14,7 +14,7 @@ export default function Profile() {
   const auth = useSelector((state) => state.auth);
   const { user_member_data, user_data } = useSelector((state) => state.auth);
   const { isLoggedIn = false } = auth;
-  const { username = "" } = user_data;
+  const { username = "", member } = user_data;
   const isMember = !isEmptyObject(user_member_data);
   const [t] = useTranslation("translation");
   const { step, changeStep } = useBreadcrumsSteps();
@@ -23,20 +23,26 @@ export default function Profile() {
     return <Redirect to="/" />;
   }
 
-  const arrView = [
-    <MemberProfile isMember={isMember} key="member-profile" />,
-    <MemberProject key="member-project" />,
-    <QrView key="qr-view-profile" />,
-  ];
+  const arrView = member
+    ? [
+        <MemberProfile isMember={isMember} key="member-profile" />,
+        <MemberProject key="member-project" />,
+        <QrView key="qr-view-profile" />,
+      ]
+    : [<MemberProfile isMember={isMember} key="member-profile" />];
+
+  const profileOptions = member ? ["PROFILE", "PROJECT", "QR"] : ["PROFILE"];
 
   return (
     <div className="logViewYellow">
       <div className="profileTitle">{`Hola ${username}!`}</div>
-      <Breadcrums
-        steps={["PROFILE", "PROJECT", "QR"]}
-        step={step}
-        changeStep={changeStep}
-      />
+      {profileOptions.length > 1 && (
+        <Breadcrums
+          steps={profileOptions}
+          step={step}
+          changeStep={changeStep}
+        />
+      )}
       {arrView[step]}
       <LettersMove
         className="lettersMoveDiv"

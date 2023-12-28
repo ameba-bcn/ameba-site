@@ -13,7 +13,7 @@ export const stepsReducer = (state, { type, payload }) => {
 
 const useBreadcrumsSteps = () => {
   // TODO: add a default step
-  const [state, dispatchSteps] = useReducer(stepsReducer, { step: 1 });
+  const [state, dispatchSteps] = useReducer(stepsReducer, { step: 0 });
   const actionCreators = {
     changeStep: (stepIndex) => {
       dispatchSteps({

@@ -26,7 +26,7 @@ export default function LogMailConfirmation(props) {
   }
 
   return (
-    <>
+    <div>
       <div className="full-height-msg">
         {hasQueryParams ? (
           <div className="single-msg">{t("login.verifica")}</div>
@@ -35,13 +35,13 @@ export default function LogMailConfirmation(props) {
             T&apos;hem enviat un mail de confirmació, confirma l&apos;enllaç
           </div>
         )}
+        <LettersMove
+          className="lettersMoveDiv"
+          sentence={t("banners.soci-curt")}
+          link="/memberships"
+          color="#FAE6C5"
+        />
       </div>
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
-        color="#FAE6C5"
-      />
-    </>
+    </div>
   );
 }

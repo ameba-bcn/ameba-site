@@ -27,17 +27,15 @@ const Socios = () => {
   const { member_projects } = useSelector((state) => state.data);
   console.log("member_projects", member_projects);
 
-  const demoText = `Lorem fistrum por la gloria de mi madre tiene musho peligro se calle
-  ustée. Quietooor ese pedazo de quietooor fistro apetecan pecador te voy
-  a borrar el cerito tiene musho peligro tiene musho peligro me cago en
-  tus muelas. Va usté muy cargadoo está la cosa muy malar se calle ustée
-  está la cosa muy malar diodenoo pupita caballo blanco caballo negroorl.`;
-
   return (
     <StyledSocios>
       <PowerTitle title="soci@s" className="SupportTitle" />
       <DisclaimerBox
-        text={demoText}
+        text={
+          member_projects.length === 0
+            ? t("general.sense-resultats")
+            : t("soci.missatge-ppal")
+        }
         id="project-disclaimer"
         borderColor="black"
       />

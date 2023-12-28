@@ -55,21 +55,21 @@ const MemberProject = () => {
         ...val,
         description: description,
         media_urls: mediaLinks,
-        image: images,
+        upload_images: images,
         public: isPublic || false,
       });
     }
   };
 
-  const uploadImage = () => {
-    images.map((img) => {
-      authService.uploadImage(img).then((data) => {
-        const { image } = data;
-        // setStoredImages(storedImages.push(image));
-        dispatch(setUploadedImages(String(image)));
-      });
-    });
-  };
+  // const uploadImage = () => {
+  //   images.map((img) => {
+  //     authService.uploadImage(img).then((data) => {
+  //       const { image } = data;
+  //       // setStoredImages(storedImages.push(image));
+  //       dispatch(setUploadedImages(String(image)));
+  //     });
+  //   });
+  // };
   console.log("initialProjectData", initialProjectData);
   const formik = useFormik({
     initialValues: {
@@ -86,17 +86,14 @@ const MemberProject = () => {
     },
   });
 
-  const gralText =
-    "En aquesta vista pots editar el teu projecte personal. Un cop guardats els canvis podràs visualitzar-ho a la vista de /soci@s";
-  const noMemberText =
-    "Sembla que la teva membresia ha expirat. Per a poder editar el teu projecte personal, has de renovar la teva membresia.";
   const isReadOnly = false;
+
   return (
     <MemberProjectFrame>
       <MemberFormBox>
         <form className="formMembership" onSubmit={formik.handleSubmit}>
           <DisclaimerBox
-            text={isActive ? gralText : noMemberText}
+            text={isActive ? t("soci.perfil-gral") : t("soci.no-soci-perfil")}
             id="project-disclaimer"
             borderColor="black"
           />
@@ -157,7 +154,7 @@ const MemberProject = () => {
           </div>
           <div className="field-wrapper">
             <CheckBox
-              label={isPublic ? "Publicat" : "No publicat"}
+              label={isPublic ? t("form.publicat") : t("form.no-publicat")}
               checked={isPublic}
               onChange={(e) => setIsPublic(!e)}
               disabled={isReadOnly}
@@ -172,7 +169,11 @@ const MemberProject = () => {
               buttonStyle="boton--primary--solid"
               hoverStyle="bg-orange"
             >
-              {loading ? <span className="spinner-border"></span> : <>guarda</>}
+              {loading ? (
+                <span className="spinner-border"></span>
+              ) : (
+                <>{t("boto.guarda")}</>
+              )}
             </Button>
           </div>
         </form>

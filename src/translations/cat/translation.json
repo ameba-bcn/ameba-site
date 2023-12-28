@@ -90,7 +90,9 @@
     "elimina-imatges": "Elimina totes",
     "carrega-imatges": "Obre per pujar noves imatges",
     "actualitza": "actualitza",
-    "elimina": "elimina"
+    "elimina": "elimina",
+    "publicat": "publicat",
+    "no-publicat": "no publicat"
   },
   "perfil": {
     "dades": "dades personals",
@@ -113,10 +115,15 @@
     "linkBuit2": "No podem mostrarte res 🤷‍♂️"
   },
   "soci": {
-    "disclaimer": "Per a poder finalitzar el procediment accedeix a la cistella i realitza el pagament"
+    "disclaimer": "Per a poder finalitzar el procediment accedeix a la cistella i realitza el pagament",
+    "missatge-ppal": "En aquesta vista podras conèixer els projectes dels nostres soci@s. Si vols que els teus projectes apareguin aquí, fes-te soci@.",
+    "perfil-gral": "En aquesta vista pots editar el teu projecte personal. Un cop guardats els canvis podràs visualitzar-ho a la vista de /soci@s",
+    "no-soci-perfil": "Sembla que la teva membresia ha expirat. Per a poder editar el teu projecte personal, has de renovar la teva membresia.",
+    "carnet": "Aquest es el teu carnet de soci, amb ell podràs accedir a tots els descomptes, events i promocions que t'oferim."
   },
   "general": {
     "agraiment": "Petició rebuda. Gràcies!",
-    "cerca": "Cerca"
+    "cerca": "Cerca",
+    "sense-resultats": "No hay resultados"
   }
 }
