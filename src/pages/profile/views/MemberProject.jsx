@@ -18,7 +18,7 @@ import CheckBox from "../../../components/layout/CheckBox";
 
 const MemberProject = () => {
   const [initialProjectData, setInitialProjectData] = useState({});
-  const [images, setImages] = useState(initialProjectData.image || []);
+  const [images, setImages] = useState(initialProjectData.images || []);
   const [isPublic, setIsPublic] = useState(initialProjectData.public || false);
   const [description, setDescription] = useState(
     initialProjectData.description || ""
@@ -39,7 +39,7 @@ const MemberProject = () => {
         setLoading(false);
         setInitialProjectData(data);
         setIsPublic(data.public);
-        setImages(Array(data.image));
+        setImages(data.images || []);
       })
       .catch(() => setLoading(false));
   }, []);
@@ -51,11 +51,12 @@ const MemberProject = () => {
     if (images?.length === 0) {
       setImages(null);
     } else {
+      const aa = images.map((img) => img.image);
       authService.updateMemberProject({
         ...val,
         description: description,
         media_urls: mediaLinks,
-        upload_images: images,
+        upload_images: aa,
         public: isPublic || false,
       });
     }
@@ -70,7 +71,7 @@ const MemberProject = () => {
   //     });
   //   });
   // };
-  console.log("initialProjectData", initialProjectData);
+
   const formik = useFormik({
     initialValues: {
       ...initialProjectData,

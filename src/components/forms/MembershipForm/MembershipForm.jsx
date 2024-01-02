@@ -20,7 +20,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
   const auth = useSelector((state) => state.auth);
   const { user_member_data = {} } = auth;
   const initialMemberValues = {
-    user: user_member_data.user,
+    username: user_member_data.username,
     first_name: user_member_data.first_name,
     last_name: user_member_data.last_name,
     identity_card: user_member_data.identity_card,
@@ -30,7 +30,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
   const isNewMember = deepComparision(user_member_data, {});
 
   const InitialValues = {
-    user: user_member_data.user || "",
+    username: user_member_data.username || "",
     first_name: initialMemberValues.first_name || "",
     last_name: initialMemberValues.last_name || "",
     identity_card: initialMemberValues.identity_card || "",
@@ -70,7 +70,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
       last_name,
       identity_card,
       phone_number,
-      user = "",
+      username = "",
     } = values;
     setLoading(true);
     if (!isNewMember) {
@@ -80,7 +80,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
           first_name,
           last_name,
           phone_number,
-          user
+          username
         )
       )
         .then(() => {
@@ -99,7 +99,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
           first_name,
           last_name,
           phone_number,
-          user
+          username
         )
       )
         .then(() => {
@@ -133,8 +133,8 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
         )}
         <div className="field-wrapper">
           <InputField
-            id="user"
-            name="user"
+            id="username"
+            name="username"
             type="text"
             label={t("form.usuari")}
             onChange={formik.handleChange}
@@ -143,8 +143,8 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
               handleBlur(formik.values);
             }}
             slimLine={true}
-            value={formik.values.user}
-            valid={!formik.errors.user}
+            value={formik.values.username}
+            valid={!formik.errors.username}
           />
         </div>
         <div className="field-wrapper">

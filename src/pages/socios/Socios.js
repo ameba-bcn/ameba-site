@@ -25,7 +25,6 @@ const Socios = () => {
   const [searchInput, setSearchInput] = useState("");
   const [t] = useTranslation("translation");
   const { member_projects } = useSelector((state) => state.data);
-  console.log("member_projects", member_projects);
 
   return (
     <StyledSocios>

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
+import { useTranslation } from "react-i18next";
 import ImageCarousel from "../../../components/images/ImageCarousel";
+import stateService from "./../../../redux/services/profile.services";
 import { StyledQrBox } from "./QrView.style";
 
 const QrView = () => {
   // Aqui vamos a recoger el nuevo EP y escribiremos una var tipo array
   // [{url:'',description:''}]
+  const [t] = useTranslation("translation");
 
   const dummyList = [
     "/media/images/article-totebag-modular-500x500.jpg",
@@ -13,14 +16,22 @@ const QrView = () => {
     "/media/images/article-camiseta-ameba-new-469x469.png",
   ];
 
-  const demoText =
-    "Lorem fistrum no te digo trigo por no llamarte Rodrigor tiene musho peligro condemor. Me cago en tus muelas no te digo trigo por no llamarte Rodrigor mamaar de la pradera amatomaa a wan. La caidita diodeno ese hombree amatomaa pupita sexuarl fistro ese que llega sexuarl amatomaa a peich.";
+  useEffect(() => {
+    // stateService.getCarnet().then((data) => {
+    //   console.log(data);
+    // });
+  }, []);
+
   return (
     <StyledQrBox>
+      <DisclaimerBox
+        text={t("soci.carnet")}
+        id="qr-disclaimer"
+        borderColor="black"
+      />
       <div className="qr-img">
         <ImageCarousel imgList={dummyList} />
       </div>
-      <DisclaimerBox text={demoText} id="qr-disclaimer" borderColor="black" />
     </StyledQrBox>
   );
 };

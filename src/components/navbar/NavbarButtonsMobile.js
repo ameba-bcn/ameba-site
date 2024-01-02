@@ -63,11 +63,13 @@ export default function NavbarButtonsMobile(props) {
               BOOKING
             </NavLink>
           </li> */}
-        <li>
-          <NavLink to="/socis" data-item="SOCI@S" onClick={closeMenu}>
-            SOCI@S
-          </NavLink>
-        </li>
+        {localStorage.getItem("dev") === "true" ? (
+          <li>
+            <NavLink to="/socis" data-item="SOCI@S" onClick={closeMenu}>
+              SOCI@S
+            </NavLink>
+          </li>
+        ) : null}
         <li>
           <NavLink
             to="/projects"

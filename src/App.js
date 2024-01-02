@@ -53,6 +53,7 @@ import SociosDetailed from "./pages/socios/components/SociosDetailed";
 import Profile from "./pages/profile/Profile";
 import PasswordRecovery from "./pages/PasswordRecovery";
 import Projects from "./pages/Projects";
+import QrClient from "./pages/QrClient";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -110,6 +111,7 @@ function App() {
           <Route path="/checkout" component={CheckoutPage} />
           <Route path="/memberships" component={Memberships} />
           <Route path="/send-recovery" component={SendEmailPasswordRecovery} />
+          <Route path="/member-card" component={QrClient} />
           <Route path="/validate-email" component={ValidateEmail} />
           <Route path="/activate" component={LogMailConfirmation} />
           <Route path="/product" component={ExternalEvents} />

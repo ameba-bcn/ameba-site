@@ -4,6 +4,10 @@ import { phoneValidation } from "../../../utils/validations";
 export const validate = (values) => {
   const errors = {};
 
+  if (!values.username) {
+    errors.username = ERROR.USERNAME.REQUIRED;
+  }
+
   if (!values.first_name) {
     errors.first_name = ERROR.USERNAME.REQUIRED;
   }

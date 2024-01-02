@@ -15,7 +15,8 @@ export default function Profile() {
   const { user_member_data, user_data } = useSelector((state) => state.auth);
   const { isLoggedIn = false } = auth;
   const { username = "", member } = user_data;
-  const isMember = !isEmptyObject(user_member_data);
+  const isMember =
+    !isEmptyObject(user_member_data) && localStorage.getItem("dev") === "true";
   const [t] = useTranslation("translation");
   const { step, changeStep } = useBreadcrumsSteps();
 
@@ -23,7 +24,7 @@ export default function Profile() {
     return <Redirect to="/" />;
   }
 
-  const arrView = member
+  const arrView = isMember
     ? [
         <MemberProfile isMember={isMember} key="member-profile" />,
         <MemberProject key="member-project" />,
@@ -31,7 +32,7 @@ export default function Profile() {
       ]
     : [<MemberProfile isMember={isMember} key="member-profile" />];
 
-  const profileOptions = member ? ["PROFILE", "PROJECT", "QR"] : ["PROFILE"];
+  const profileOptions = isMember ? ["PROFILE", "PROJECT", "QR"] : ["PROFILE"];
 
   return (
     <div className="logViewYellow">

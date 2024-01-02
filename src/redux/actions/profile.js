@@ -4,7 +4,7 @@ import {
   MEMBER_USER,
   STORE_UPLOADED_IMAGES,
 } from "./types";
-import StateService from "./../services/profile.services";
+import stateService from "./../services/profile.services";
 import notificationToast from "../../utils/utils";
 
 export const setGuestUser = () => ({
@@ -20,7 +20,7 @@ export const setMember = () => ({
 });
 
 export const subscribeNewsletter = (email) => (dispatch) => {
-  return StateService.subscribeNewsletter(email).then(
+  return stateService.subscribeNewsletter(email).then(
     (response) => {
       const message = response?.data.detail;
       notificationToast(message, "success");
@@ -42,4 +42,21 @@ export const setUploadedImages = (url) => (dispatch) => {
   });
 
   return Promise.resolve();
+};
+
+export const getQrData = (token) => (dispatch) => {
+  return stateService.getCarnet(token).then(
+    (response) => {
+      dispatch({
+        type: GET_QR_DATA,
+        payload: response,
+      });
+      return Promise.resolve();
+    },
+    (error) => {
+      const message = error.response?.data.detail;
+      notificationToast(message, "error");
+      return Promise.reject();
+    }
+  );
 };

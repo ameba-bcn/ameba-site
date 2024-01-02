@@ -83,7 +83,7 @@ const CheckBox = ({ label = "", checked, onChange, disabled = false }) => (
       <label>
         <input
           type="checkbox"
-          defaultChecked={!checked}
+          defaultChecked={checked}
           onClick={() => onChange(checked)}
           disabled={disabled}
         />

@@ -11,11 +11,10 @@ import {
 } from "./ImageLoader.style";
 
 const ImageLoader = (props) => {
-  const { maxNumber = 6, images, setImages, disabled = false } = props;
+  const { maxNumber = 6, images = [], setImages, disabled = false } = props;
   const [t] = useTranslation("translation");
 
   const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
     if (!disabled) setImages(imageList);
   };
   return (
