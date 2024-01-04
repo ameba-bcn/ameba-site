@@ -2,6 +2,10 @@
 
 ## Release changes
 
+Version 3.2.17
+
+- Adapted to only one membership
+
 Version 3.2.16
 
 - Updated message on unsubscribe, deleted wrong unsubscribe button
