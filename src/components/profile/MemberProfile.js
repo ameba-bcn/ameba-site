@@ -4,9 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { RowSeparator } from "../../GlobalStyles.style";
-// import { deleteUser } from "../../redux/actions/auth";
 import SociDialog from "../botiga/Soci";
-// import Button from "../button/Button";
 import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
 import MembershipFormReadOnly from "../forms/MembershipForm/MembershipFormReadOnly";
 import {
@@ -21,11 +19,8 @@ import DisclaimerBox from "../disclaimerBox/DisclaimerBox";
 
 export default function MemberProfile({ setButtonDisabled, isMember }) {
   const [t] = useTranslation("translation");
-  // const dispatch = useDispatch();
   const { user_member_data } = useSelector((state) => state.auth);
-  const { type } = user_member_data;
-  const antiMember =
-    type === "PROFESSIONAL" ? "SUBSCRIPTOR" : t("modal.professional");
+  const { memberships = [] } = user_member_data;
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
@@ -48,7 +43,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
           )}
           <RowSeparator />
           <MemberInfoRow>
-            {t("perfil.vols-soci")} {isMember ? antiMember : ""}?<br />
+            {t("perfil.vols-soci")}?<br />
             <NavLink
               style={{ textDecoration: "none", color: "#1d1d1b" }}
               to={{
@@ -63,7 +58,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
               </span>
             </NavLink>
           </MemberInfoRow>
-          <RowSeparator />
+
           {/* <Button
             variant="contained"
             color="primary"
@@ -73,16 +68,21 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
           >
             {t("perfil.baixa")}
           </Button> */}
-          <DisclaimerBox
-            text={
-              <MessageFormat>
-                {t("perfil.baixa-missatge")}
-                <a className="linkEndingText" href="mailto:info@ameba.cat">
-                  info@ameba.cat
-                </a>
-              </MessageFormat>
-            }
-          />
+          {memberships.length > 0 && (
+            <>
+              <RowSeparator />
+              <DisclaimerBox
+                text={
+                  <MessageFormat>
+                    {t("perfil.baixa-missatge")}
+                    <a className="linkEndingText" href="mailto:info@ameba.cat">
+                      info@ameba.cat
+                    </a>
+                  </MessageFormat>
+                }
+              />
+            </>
+          )}
         </MemberProfileBoxBorder>
         {open && <SociDialog open={open} onClose={handleClick} />}
       </MemberProfileBox>

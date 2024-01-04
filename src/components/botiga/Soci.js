@@ -5,7 +5,6 @@ import { Redirect } from "react-router-dom";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
-import { MEMBER_LIST, PRO_MEMBER_LIST } from "../../utils/constants";
 import FullscreenSpinner from "../spinner/FullscreenSpinner";
 
 export default function SociDialog(props) {
@@ -16,15 +15,7 @@ export default function SociDialog(props) {
   const [isSubscriber, setIsSubscriber] = useState(true);
   const [redirect, setRedirect] = useState(false);
   const [t] = useTranslation("translation");
-  const adaptedData = dataRow.length > 0 ? dataRow : membership;
-  const socisSubs =
-    adaptedData.filter(function (soci) {
-      return MEMBER_LIST.includes(soci.name);
-    })[0] || {};
-  const socisPro =
-    adaptedData.filter(function (soci) {
-      return PRO_MEMBER_LIST.includes(soci.name);
-    })[0] || {};
+  const adaptedData = dataRow.length > 0 ? dataRow : membership[0];
 
   const {
     id,
@@ -34,14 +25,7 @@ export default function SociDialog(props) {
     benefits = "",
     has_stock,
     discount = 0,
-  } = isSubscriber ? socisSubs : socisPro;
-
-  const socisButtonName = membership.filter((x) =>
-    MEMBER_LIST.includes(x.name)
-  )[0]?.name;
-  const proButtonName = membership.filter((x) =>
-    PRO_MEMBER_LIST.includes(x.name)
-  )[0]?.name;
+  } = adaptedData;
 
   useEffect(() => {
     // component unmount.
@@ -81,7 +65,6 @@ export default function SociDialog(props) {
       imgArr={images}
       buttonText={t("modal.afegir")}
       buttonIcon={<ShoppingCartIcon />}
-      extraButtons={[socisButtonName, proButtonName]}
       box1Title={t("modal.descripcio")}
       box1Text={description}
       box2Title={t("modal.beneficis")}

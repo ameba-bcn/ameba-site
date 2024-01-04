@@ -3,12 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import LettersMove from "../components/layout/LettersMove";
-import {
-  MEMBER_ID,
-  MEMBER_LIST,
-  MOBILE_NORMAL,
-  PRO_MEMBER_LIST,
-} from "../utils/constants";
+import { MOBILE_NORMAL } from "../utils/constants";
 import { addToCart } from "../redux/actions/cart";
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import {
@@ -53,9 +48,7 @@ const Memberships = () => {
   const [t] = useTranslation("translation");
   const dispatch = useDispatch();
   const { membership = [] } = useSelector((state) => state.data);
-  const [membershipSoci] = membership.filter((el) => el.id === MEMBER_ID);
-  const [membershipPro] = membership.filter((el) => el.id !== MEMBER_ID);
-  const [productData, setProductData] = useState(membershipSoci);
+  const [productData, setProductData] = useState(membership[0]);
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { item_variants = [] } = cart_data;
@@ -69,11 +62,10 @@ const Memberships = () => {
     variants = [],
     benefits = "",
     has_stock = true,
-    id = MEMBER_ID,
+    id = null,
     maps_url = null,
   } = productData || {};
 
-  const [isSubscriber, setIsSubscriber] = useState(id === MEMBER_ID);
   const colorMode = "";
   const [activeSize, setActiveSize] = useState([]);
   const [selectSizeError, setSelectSizeError] = useState(false);
@@ -86,8 +78,8 @@ const Memberships = () => {
   const checkoutRedirect = isLoggedIn ? "/checkout" : "/login";
 
   useEffect(() => {
-    setProductData(isSubscriber ? membershipSoci : membershipPro);
-  }, [membership, isSubscriber, setIsSubscriber]);
+    setProductData(membership[0]);
+  }, [membership]);
 
   const handleAddClick = () => {
     dispatch(addToCart(variants[0]));
@@ -102,13 +94,8 @@ const Memberships = () => {
       className: "toast-black-background",
     });
   };
-  const socisButtonName = membership.filter((x) =>
-    MEMBER_LIST.includes(x.name)
-  )[0]?.name;
-  const proButtonName = membership.filter((x) =>
-    PRO_MEMBER_LIST.includes(x.name)
-  )[0]?.name;
-  const buttons = [socisButtonName, proButtonName];
+
+  const buttons = [membership[0]?.name];
 
   return (
     <div>
@@ -149,8 +136,6 @@ const Memberships = () => {
                   isMobile={isMobile}
                   productSoldOut={productSoldOut}
                   sizes={[]}
-                  isSubscriber={isSubscriber}
-                  setIsSubscriber={setIsSubscriber}
                   activeSize={activeSize}
                   setActiveSize={setActiveSize}
                   selectSizeError={selectSizeError}

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useMediaQuery } from "@material-ui/core";
 import { ReactFitty } from "react-fitty";
 import { toast } from "react-toastify";
@@ -12,12 +11,7 @@ import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import { useTranslation } from "react-i18next";
 import Button from "../button/Button";
 import { useHistory } from "react-router-dom";
-import {
-  MEMBER_LIST,
-  MOBILE_NORMAL,
-  productKinds,
-  PRO_MEMBER_LIST,
-} from "../../utils/constants";
+import { MOBILE_NORMAL, productKinds } from "../../utils/constants";
 import {
   StyledExternalButtonBox,
   StyledExternalEventBox,
@@ -55,7 +49,6 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
     setSizes(arr);
   }, [variants]);
 
-  const { membership = [] } = useSelector((state) => state.data);
   let history = useHistory();
   const [activeSize, setActiveSize] = useState([]);
   const [selectSizeError, setSelectSizeError] = useState(false);
@@ -77,13 +70,6 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
   const box1Title = t("modal.descripcio");
   const box2Title = t("modal.beneficis");
 
-  const socisButtonName = membership.filter((x) =>
-    MEMBER_LIST.includes(x.name)
-  )[0]?.name;
-  const proButtonName = membership.filter((x) =>
-    PRO_MEMBER_LIST.includes(x.name)
-  )[0]?.name;
-
   useEffect(() => {
     if (modalStyle === "SOCI") {
       if (isSubscriber) {
@@ -93,8 +79,6 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
       }
     }
   }, [isSubscriber]);
-
-  const buttons = modalStyle === "SOCI" ? [socisButtonName, proButtonName] : [];
 
   const handleAddToCard = (id) => {
     if (activeSize.length === 0 && modalStyle === "PRODUCTE")
@@ -162,7 +146,6 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
             setActiveSize={setActiveSize}
             selectSizeError={selectSizeError}
             setSelectSizeError={setSelectSizeError}
-            extraButtons={buttons}
             datetime={datetime}
             handleAddClick={handleAddClick}
             price={price_range}

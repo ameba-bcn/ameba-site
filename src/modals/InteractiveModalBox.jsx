@@ -6,7 +6,6 @@ import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import { StyledCenterLabel, StyledSizesRow } from "./ModalCardStyled";
 import { formatDateToHour, priceMayDiscount } from "../utils/utils";
-import Button from "../components/button/Button";
 
 const InteractiveModalBox = (props) => {
   const {
@@ -18,9 +17,6 @@ const InteractiveModalBox = (props) => {
     setActiveSize,
     selectSizeError,
     setSelectSizeError,
-    isSubscriber,
-    setIsSubscriber,
-    extraButtons,
     address,
     datetime,
     price,
@@ -86,18 +82,9 @@ const InteractiveModalBox = (props) => {
             <PeopleAltIcon /> <span>{t("modal.quota")} / &nbsp;</span>
           </div>
           <div className="interactiveDataBox-soci__buttonBox">
-            <Button
-              onClick={() => setIsSubscriber(true)}
-              className={`${isSubscriber ? "active" : ""}`}
-            >
-              {extraButtons[0]}
-            </Button>
-            <Button
-              onClick={() => setIsSubscriber(false)}
-              className={`isPro ${!isSubscriber ? "active" : ""}`}
-            >
-              {extraButtons[1]}
-            </Button>
+            <div className="modal-card___title_small">
+              <span>anual</span>
+            </div>
           </div>
         </div>
       )}

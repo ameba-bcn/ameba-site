@@ -79,11 +79,6 @@ export const AMEBA_EMAIL = "info@ameba.cat";
 
 export const MEMBER = "Suporter";
 
-// This list contains posible names for normal & pro memberships
-export const MEMBER_LIST = ["Supporter", "Soci", "Socio", "Supporter"];
-export const PRO_MEMBER_LIST = ["Pro", "Professional", "Profesional"];
-export const MEMBER_ID = 14;
-
 export const productKinds = ["producte", "soci", "activitat"];
 export const productQueryKind = {
   producte: "articles",

@@ -6,7 +6,7 @@ import ProductBanner from "../components/botiga/ProductBanner";
 import SociDialog from "../components/botiga/Soci";
 import LettersMove from "./../components/layout/LettersMove";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import { API_URL, MEMBER_LIST } from "../utils/constants";
+import { API_URL } from "../utils/constants";
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
 import { deleteStringDecimals } from "../utils/utils";
@@ -56,8 +56,7 @@ function Botiga() {
 
   const [t] = useTranslation("translation");
   const isMobile = useMediaQuery("(max-width:1163px)");
-  const sociPreu = membership.filter((x) => MEMBER_LIST.includes(x.name))[0]
-    ?.price_range;
+  const sociPreu = membership[0]?.price_range;
 
   useEffect(() => {
     if (externalId === "14" || externalId === "15") {
