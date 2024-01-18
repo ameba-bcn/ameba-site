@@ -234,7 +234,7 @@ hr>.modal-card__hr_dashed {
     font-size: 1.1rem;
     margin-top: -0.3rem;
     margin-bottom: 0.5rem;
-    text-align: justify;
+    text-align: left;
     flex-grow: 1;
     line-height: initial;
     white-space: pre-wrap;
