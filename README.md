@@ -2,6 +2,11 @@
 
 ## Release changes
 
+Version 3.2.18
+
+- Axios vulnerability version fixed
+- Deletion justify text alignment
+
 Version 3.2.17
 
 - Adapted to only one membership
