@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import LettersMove from "./../layout/LettersMove";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import "./Manifesto.css";
 
-export default function Manifesto() {
+const Manifesto = () => {
   const data = useSelector((state) => state.data);
   const [scroll, setScroll] = useState(false);
   const { about = {} } = data;
+  const [t] = useTranslation("translation");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,10 +38,13 @@ export default function Manifesto() {
         </div>
       </div>
       <LettersMove
-        className="lettersMoveAsso"
-        sentence="L'ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA "
-        color="#FAE6C5"
+        className="lettersMoveDiv"
+        sentence={t("banners.soci-curt")}
+        link="/memberships"
+        color="#EB5E3E"
       />
     </div>
   );
-}
+};
+
+export default Manifesto;

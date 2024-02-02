@@ -95,3 +95,5 @@ export const FLICKR_URL =
 export const FLICKR_KEY = "d42519b6c54602915c2d98ee7e717f73";
 export const FLICKR_ALBUM_ID = "72177720300073940";
 export const FLICKR_SECRET = "45216314df67fd07";
+
+export const radioDublabLink = "https://www.dublab.es/shows/ameba";

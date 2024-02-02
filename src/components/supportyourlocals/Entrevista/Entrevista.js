@@ -9,9 +9,9 @@ import QuestionsSection from "./QuestionsSection";
 import MainSection from "./MainSection";
 import EntrevistaMenu from "./EntrevistaMenu";
 import "./Entrevista.css";
-import { API_URL } from "../../../utils/constants";
+import { API_URL, radioDublabLink } from "../../../utils/constants";
 
-export default function Entrevista() {
+const Entrevista = () => {
   let history = useHistory();
   let location = useLocation();
   // const { support } = useSelector((state) => state.data);
@@ -105,7 +105,7 @@ export default function Entrevista() {
         <>
           <LettersMove
             sentence={"l'associació de música electrònica de barcelona"}
-            color={"#FFED00"}
+            color="#FFED00"
           />
           <QuestionsSection interview={interview} />
         </>
@@ -126,7 +126,7 @@ export default function Entrevista() {
         <>
           <LettersMove
             sentence={"l'associació de música electrònica de barcelona"}
-            color={"#EB5E3E"}
+            color="#EB5E3E"
           />
           <div className="activitats-gral">
             <TitleSection title="Activitats" />
@@ -134,9 +134,13 @@ export default function Entrevista() {
         </>
       )}
       <LettersMove
-        sentence={"l'associació de música electrònica de barcelona"}
-        color={"#F2C571"}
+        className="lettersMoveDiv"
+        sentence="AMEBA RADIO @ dublab"
+        link={radioDublabLink}
+        color="#F2C571"
       />
     </div>
   );
-}
+};
+
+export default Entrevista;

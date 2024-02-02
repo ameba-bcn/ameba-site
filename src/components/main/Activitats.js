@@ -8,7 +8,9 @@ import "./Activitats.css";
 import { sortByDate } from "../../utils/utils";
 import PlusButton from "../button/PlusButton";
 import { useTranslation } from "react-i18next";
-function Activitats() {
+import { radioDublabLink } from "../../utils/constants";
+
+const Activitats = () => {
   const [activitats, setActivitats] = useState([]);
   const data = useSelector((state) => state.data);
   const { agenda = [] } = data;
@@ -24,9 +26,8 @@ function Activitats() {
     <div className="Bloque" id="activitats">
       <LettersMove
         className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
-        color="#EB5E3E"
+        sentence="AMEBA RADIO @ dublab"
+        link={radioDublabLink}
       />
       <div className="activitats-box">
         <SectionTitle title={t("support.menu.activitats")} />
@@ -45,6 +46,6 @@ function Activitats() {
       </div>
     </div>
   );
-}
+};
 
 export default Activitats;

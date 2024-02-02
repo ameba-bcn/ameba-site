@@ -6,7 +6,7 @@ import "./Associacio.css";
 import { MOBILE_NORMAL } from "../../utils/constants";
 import { useMediaQuery } from "@material-ui/core";
 
-function Associacio() {
+const Associacio = () => {
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const [isReady, setIsready] = useState(false);
   const data = useSelector((state) => state.data);
@@ -24,7 +24,6 @@ function Associacio() {
         {/* Loading a image meanwhile is loading video */}
         {!isReady && (
           <img
-            // eslint-disable-next-line no-undef
             src={process.env.PUBLIC_URL + staticImg}
             className="portadaFallback"
             alt=""
@@ -46,10 +45,9 @@ function Associacio() {
       <LettersMove
         className="lettersMoveAsso"
         sentence="L'ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA "
-        color="#FAE6C5"
       />
     </div>
   );
-}
+};
 
 export default Associacio;

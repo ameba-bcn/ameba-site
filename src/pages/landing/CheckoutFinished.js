@@ -1,9 +1,8 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import LettersMove from "../../components/layout/LettersMove";
+import { radioDublabLink } from "../../utils/constants";
 
 function CheckoutFinished() {
-  const [t] = useTranslation("translation");
   return (
     <>
       <div className="full-height-msg">
@@ -15,7 +14,8 @@ function CheckoutFinished() {
       </div>
       <LettersMove
         className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
+        sentence="AMEBA RADIO @ dublab"
+        link={radioDublabLink}
         color="#EB5E3E"
       />
     </>

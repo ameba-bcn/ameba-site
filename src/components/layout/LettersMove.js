@@ -1,8 +1,8 @@
-/* eslint-disable no-unused-vars */
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { NavLink } from "react-router-dom";
 import "./LettersMove.css";
+import { isValidUrl } from "../../utils/validations";
 // https://stackoverflow.com/questions/10679367/css-moving-text-from-left-to-right
 
 const marqueee = keyframes`
@@ -37,31 +37,58 @@ const StyledWrapperLetters = styled.div`
     font-family: "Bebas Neue";
     font-weight: 500;
     text-transform: uppercase;
+    cursor: default;
+  }
+  a,
+  u {
+    text-decoration: none;
+  }
+  .cursor-redirect {
+    cursor: pointer;
   }
 `;
 
-export default function LettersMove(props) {
-  const { link = "" } = props;
-  return link.length > 0 ? (
-    <NavLink
-      style={{ textDecoration: "none" }}
-      to={{
-        pathname: link,
-      }}
-    >
+export default function LettersMove({
+  link = "",
+  sentence = "",
+  color = "#FAE6C5",
+}) {
+  if (isValidUrl(link))
+    return (
       <StyledWrapperLetters>
-        <div className="substituto-marquee">
-          <div className="marquee" style={{ color: props.color }}>
-            {Array.from(Array(24).keys()).map((x) => `- ${props.sentence} `)}
+        <a href={link} target="_blank">
+          <div className="substituto-marquee">
+            <div className="marquee cursor-redirect" style={{ color: color }}>
+              {Array.from(Array(24).keys()).map((x) => `- ${sentence} `)}
+            </div>
           </div>
-        </div>
+        </a>
       </StyledWrapperLetters>
-    </NavLink>
-  ) : (
+    );
+
+  if (link.length > 0)
+    return (
+      <NavLink
+        style={{ textDecoration: "none" }}
+        to={{
+          pathname: link,
+        }}
+      >
+        <StyledWrapperLetters>
+          <div className="substituto-marquee">
+            <div className="marquee cursor-redirect" style={{ color: color }}>
+              {Array.from(Array(24).keys()).map((x) => `- ${sentence} `)}
+            </div>
+          </div>
+        </StyledWrapperLetters>
+      </NavLink>
+    );
+
+  return (
     <StyledWrapperLetters>
       <div className="substituto-marquee">
-        <div className="marquee" style={{ color: props.color }}>
-          {Array.from(Array(24).keys()).map((x) => `- ${props.sentence} `)}
+        <div className="marquee" style={{ color: color }}>
+          {Array.from(Array(24).keys()).map((x) => `- ${sentence} `)}
         </div>
       </div>
     </StyledWrapperLetters>

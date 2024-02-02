@@ -4,6 +4,7 @@ import "../components/supportyourlocals/SupportYourLocals.css";
 import LettersMove from "./../components/layout/LettersMove";
 import CardGrid from "../components/layout/CardGrid";
 import { useTranslation } from "react-i18next";
+import { radioDublabLink } from "../utils/constants";
 
 export default function SupportYourLocals() {
   const [t] = useTranslation("translation");
@@ -18,8 +19,8 @@ export default function SupportYourLocals() {
       <CardGrid />
       <LettersMove
         className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
+        sentence="AMEBA RADIO @ dublab"
+        link={radioDublabLink}
         color="#FAE6C5"
       />
     </div>
