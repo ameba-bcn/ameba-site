@@ -2,6 +2,12 @@
     width: 100%;
     padding-top: 100%;
     position: relative;
+    transition: all 0.4s ease;
+}
+
+.cardFrame:hover .cardMediaImgBox {
+    transform: scale(1.05);
+    opacity: 0.9;
 }
 
 .cardMedia {
@@ -17,7 +23,6 @@
     left: 0;
     bottom: 0;
     right: 0;
-    /* object-fit: cover !important; */
 }
 
 .cardDateRow {

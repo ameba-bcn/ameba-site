@@ -17,7 +17,7 @@ function Activitats() {
   useEffect(() => {
     const sortedAgenda = sortByDate(agenda);
     const slicedAgenda = sortedAgenda.slice(0, 3);
-    if (slicedAgenda.length === 0) setActivitats(slicedAgenda);
+    if (slicedAgenda.length !== 0) setActivitats(slicedAgenda);
   }, [agenda]);
 
   return (
