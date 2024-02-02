@@ -51,12 +51,12 @@ const MemberProject = () => {
     if (images?.length === 0) {
       setImages(null);
     } else {
-      const aa = images.map((img) => img.image);
+      const upload_images = images.map((img) => img.image);
       authService.updateMemberProject({
         ...val,
         description: description,
         media_urls: mediaLinks,
-        upload_images: aa,
+        upload_images,
         public: isPublic || false,
       });
     }

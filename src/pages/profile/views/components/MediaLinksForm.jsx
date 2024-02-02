@@ -167,7 +167,7 @@ const MediaLinksForm = (props) => {
           {currentLink.length > 0 && error?.length === 0 && (
             <SyledLinkInput>
               <span className="send" onClick={handleAddLink}>
-                envia
+                add
               </span>
             </SyledLinkInput>
           )}
