@@ -50,7 +50,7 @@ export default function LoginForm({ setRedirect }) {
   return (
     <LogFormBox>
       <form onSubmit={formik.handleSubmit}>
-        <div>
+        <div className="field-wrapper">
           <InputField
             id="emailLogin"
             name="email"
@@ -62,7 +62,7 @@ export default function LoginForm({ setRedirect }) {
             valid={true}
           />
         </div>
-        <div>
+        <div className="field-wrapper">
           <InputField
             id="password"
             name="password"
@@ -83,6 +83,7 @@ export default function LoginForm({ setRedirect }) {
         )}
         <Button
           type="submit"
+          className="submit"
           variant="contained"
           color="primary"
           buttonSize="boton--medium"

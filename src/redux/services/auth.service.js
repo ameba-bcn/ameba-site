@@ -79,7 +79,8 @@ const updateMemberProfile = (
   identity_card,
   first_name,
   last_name,
-  phone_number
+  phone_number,
+  username
 ) => {
   return axiosInstance
     .patch(
@@ -89,6 +90,7 @@ const updateMemberProfile = (
         first_name,
         last_name,
         phone_number,
+        username,
       },
       {
         headers: {
@@ -167,6 +169,46 @@ const deleteUser = () => {
     });
 };
 
+const getMemberProject = () => {
+  return axiosInstance
+    .get(API_URL + `members/current/`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    })
+    .then((response) => {
+      return response?.data;
+    });
+};
+
+const updateMemberProject = (member_project) => {
+  return axiosInstance
+    .patch(API_URL + `members/current/`, member_project, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    })
+    .then((response) => {
+      return response?.data;
+    });
+};
+
+const uploadImage = (image) => {
+  const formData = new FormData();
+  formData.append("image", image?.file);
+  return axiosInstance
+    .post(API_URL + `members/current/image/`, formData, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+        "Content-Type": "application/json;charset=UTF-8/;multipart/form-data",
+      },
+    })
+    .then((response) => {
+      return response?.data;
+    });
+};
+
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   register,
   validateLocalToken,
@@ -180,4 +222,7 @@ export default {
   updateMemberProfile,
   createMemberProfile,
   deleteUser,
+  getMemberProject,
+  updateMemberProject,
+  uploadImage,
 };

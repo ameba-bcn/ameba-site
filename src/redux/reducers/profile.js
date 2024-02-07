@@ -2,12 +2,12 @@ import {
   GUEST_USER,
   LOGGED_USER,
   MEMBER_USER,
-  SUBSCRIBE_SUCCESS,
-  SUBSCRIBE_FAIL,
+  STORE_UPLOADED_IMAGES,
 } from "../actions/types";
 
-const initialState = { user_profile: "", message: "" };
+const initialState = { user_profile: "", images: [] };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
@@ -21,11 +21,11 @@ export default function (state = initialState, action) {
     case MEMBER_USER:
       return { ...state, user_profile: "MEMBER" };
 
-    case SUBSCRIBE_SUCCESS:
-    case SUBSCRIBE_FAIL:
+    case STORE_UPLOADED_IMAGES:
+      const currentImages = [...state.images, payload];
       return {
         ...state,
-        message: payload,
+        images: currentImages,
       };
 
     default:

@@ -47,6 +47,13 @@ export default function NavbarButtons(props) {
             BOOKING
           </NavLink>
         </li> */}
+        {localStorage.getItem("dev") === "true" ? (
+          <li>
+            <NavLink to="/socis" data-item="SOCI@S">
+              SOCI@S
+            </NavLink>
+          </li>
+        ) : null}
         <li>
           <NavLink to="/projects" data-item={t("menu.projectes")}>
             {t("menu.projectes")}

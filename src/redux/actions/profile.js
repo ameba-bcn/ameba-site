@@ -2,10 +2,9 @@ import {
   GUEST_USER,
   LOGGED_USER,
   MEMBER_USER,
-  SUBSCRIBE_SUCCESS,
-  SUBSCRIBE_FAIL,
+  STORE_UPLOADED_IMAGES,
 } from "./types";
-import StateService from "./../services/profile.services";
+import stateService from "./../services/profile.services";
 import notificationToast from "../../utils/utils";
 
 export const setGuestUser = () => ({
@@ -21,23 +20,41 @@ export const setMember = () => ({
 });
 
 export const subscribeNewsletter = (email) => (dispatch) => {
-  return StateService.subscribeNewsletter(email).then(
+  return stateService.subscribeNewsletter(email).then(
     (response) => {
       const message = response?.data.detail;
-      dispatch({
-        type: SUBSCRIBE_SUCCESS,
-        payload: message,
-      });
       notificationToast(message, "success");
 
       return Promise.resolve();
     },
     (error) => {
       const message = error.response?.data?.email;
+      notificationToast(message, "error");
+      return Promise.reject();
+    }
+  );
+};
+
+export const setUploadedImages = (url) => (dispatch) => {
+  dispatch({
+    type: STORE_UPLOADED_IMAGES,
+    payload: url,
+  });
+
+  return Promise.resolve();
+};
+
+export const getQrData = (token) => (dispatch) => {
+  return stateService.getCarnet(token).then(
+    (response) => {
       dispatch({
-        type: SUBSCRIBE_FAIL,
-        payload: message,
+        type: GET_QR_DATA,
+        payload: response,
       });
+      return Promise.resolve();
+    },
+    (error) => {
+      const message = error.response?.data.detail;
       notificationToast(message, "error");
       return Promise.reject();
     }

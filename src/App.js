@@ -21,12 +21,10 @@ import { Switch, Route } from "react-router-dom";
 import Contacte from "./contacte/Contacte";
 import Menu from "./components/navbar/Navbar";
 import LogSession from "./pages/LogSession";
-import Profile from "./pages/Profile";
 import CheckoutPage from "./pages/CheckoutPage";
 import CheckoutFinished from "./pages/landing/CheckoutFinished";
 import SubscriptionFinished from "./pages/landing/SubscriptionFinished";
 import LogMailConfirmation from "./pages/LogMailConfirmation";
-import PasswordRecovery from "./pages/PasswordRecovery";
 import SendEmailPasswordRecovery from "./pages/SendEmailPasswordRecovery";
 import ValidateEmail from "./pages/ValidateEmail";
 import ScrollTop from "./components/layout/ScrollTop";
@@ -39,6 +37,7 @@ import {
   getCover,
   membershipAll,
   getCollaborators,
+  getMemberProjects,
 } from "./redux/actions/data";
 import { getCart } from "./redux/actions/cart";
 import Booking from "./pages/Booking";
@@ -49,7 +48,12 @@ import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
 import ExternalEvents from "./pages/ExternalEvents";
 import Memberships from "./pages/Memberships";
 import Gallery from "./pages/Gallery";
+import Socios from "./pages/socios/Socios";
+import SociosDetailed from "./pages/socios/components/SociosDetailed";
+import Profile from "./pages/profile/Profile";
+import PasswordRecovery from "./pages/PasswordRecovery";
 import Projects from "./pages/Projects";
+import QrClient from "./pages/QrClient";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -82,6 +86,7 @@ function App() {
     dispatch(getCover());
     dispatch(getCollaborators());
     dispatch(getCart());
+    dispatch(getMemberProjects());
   }, [dispatch, isNewMember]);
 
   return (
@@ -98,12 +103,15 @@ function App() {
           <Route exact path="/booking/:id" component={Entrevista} />
           <Route path="/booking" component={Booking} />
           <Route path="/projects" component={Projects} />
+          <Route exact path="/socis/:id" component={SociosDetailed} />
+          <Route path="/socis" component={Socios} />
           <Route path="/gallery" component={Gallery} />
           <Route path="/login" component={LogSession} />
           <Route path="/recovery" component={PasswordRecovery} />
           <Route path="/checkout" component={CheckoutPage} />
           <Route path="/memberships" component={Memberships} />
           <Route path="/send-recovery" component={SendEmailPasswordRecovery} />
+          <Route path="/member-card" component={QrClient} />
           <Route path="/validate-email" component={ValidateEmail} />
           <Route path="/activate" component={LogMailConfirmation} />
           <Route path="/product" component={ExternalEvents} />

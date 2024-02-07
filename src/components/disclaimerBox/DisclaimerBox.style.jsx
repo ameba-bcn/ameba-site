@@ -15,7 +15,7 @@ export const SyledDisclaimer = styled.div`
   border-width: 8px;
   background-color: ${(props) => (props.bgColor ? props.bgColor : "#eb5e3e")};
   margin: 20px;
-  padding: 12px 18px;
+  padding: 12px 26px;
   text-decoration: none !important;
   color: #1d1d1b !important;
   .close-icon {

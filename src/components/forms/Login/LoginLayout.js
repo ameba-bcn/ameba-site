@@ -37,10 +37,7 @@ const LoginLayout = (props) => {
 
         <LoginForm setRedirect={setRedirect} />
 
-        <span
-          className="logTextosLink logTextosLinkRegistrat"
-          onClick={showRegistration}
-        >
+        <span className="logTextosLink" onClick={showRegistration}>
           {`- ${t("login.registrat")} -`}
         </span>
         <span className="logTextosLink" onClick={showPasswordRecover}>

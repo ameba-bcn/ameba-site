@@ -1,17 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { createLastRowIterator, sortByProperty } from "../../utils/utils";
-import PlusButton from "../button/PlusButton";
 import { ReactFitty } from "react-fitty";
 import styled from "styled-components";
 import { useMediaQuery } from "@material-ui/core";
-import { MOBILE_SMALL } from "../../utils/constants";
-import "./CardGrid.css";
+import { MOBILE_SMALL } from "../../../utils/constants";
+import { StyledCardLayout } from "./StyledCardLayout";
+import PlusButton from "../../button/PlusButton";
+import { createLastRowIterator, sortByProperty } from "../../../utils/utils";
 
-export default function CardGrid(props) {
-  const { isAmebaDJ = false } = props; //Pendiente recibir si es entrevista por props
-  const { support = [] } = useSelector((state) => state.data);
+export default function CardLayout(props) {
+  const { cardList = [], urlRoot } = props; //Pendiente recibir si es entrevista por props
 
   const TitleStyled = styled.div`
     position: absolute;
@@ -31,32 +29,40 @@ export default function CardGrid(props) {
   const isOneColumn = useMediaQuery("(max-width:1290px)");
   const isMobile = useMediaQuery(MOBILE_SMALL);
 
-  const filteredArtists =
-    isAmebaDJ && !!support.length
-      ? support.filter((artist) => artist.is_ameba_dj === true)
-      : support.filter((artist) => artist.is_ameba_dj === false) || support;
-
   const cardGenerator =
-    !!filteredArtists.length &&
-    sortByProperty(filteredArtists, "created", false)?.map((data) => {
-      const { id = 0, images = [], name = "", tags = [] } = data;
-      const urlName = name.replace(/\s+/g, "-")?.toLowerCase();
+    !!cardList.length &&
+    sortByProperty(cardList, "created", false)?.map((data) => {
+      console.log("data", data);
+      const {
+        id = 0,
+        images = [],
+        name = "",
+        tags = [],
+        image,
+        project_name,
+      } = data;
+      const baseName = project_name ? project_name : name;
+      const urlName = baseName.replace(/\s+/g, "-")?.toLowerCase();
       return (
         <div className="fullcard" key={id}>
           <NavLink
             style={{ textDecoration: "none" }}
             to={{
-              pathname: isAmebaDJ
-                ? "/booking/" + urlName
-                : "/support/" + urlName,
+              pathname: `/${urlRoot}/${urlName}`,
               aboutProps: data,
             }}
           >
             <div className="cardSupport">
               <TitleStyled>
-                <ReactFitty maxSize={200}>{name}</ReactFitty>
+                <ReactFitty maxSize={200}>
+                  {project_name ? project_name : name}
+                </ReactFitty>
               </TitleStyled>
-              <img src={images[0]} alt={name} className="cardSupportImgTop" />
+              <img
+                src={image ? image : images[0]}
+                alt={name}
+                className="cardSupportImgTop"
+              />
               <div className="cardSupportPlusBox">
                 <PlusButton
                   plusStyle="plus--obscure"
@@ -71,13 +77,13 @@ export default function CardGrid(props) {
     });
 
   return (
-    <div className="cardSupportDeck">
-      {support.length > 0 && cardGenerator}
+    <StyledCardLayout>
+      {cardList.length > 0 && cardGenerator}
       {cardGenerator &&
         !isOneColumn &&
-        createLastRowIterator(support, 627, 40).map((n, index) => (
+        createLastRowIterator(cardList, 627, 40).map((n, index) => (
           <i aria-hidden={true} key={index}></i>
         ))}
-    </div>
+    </StyledCardLayout>
   );
 }

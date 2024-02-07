@@ -11,7 +11,7 @@ const marqueee = keyframes`
     100% { transform: translateX(0%); }`;
 
 const StyledWrapperLetters = styled.div`
-  width: 100 %;
+  width: 100%;
   background: #1d1d1b;
   height: 42px;
   text-align: left;
@@ -28,7 +28,7 @@ const StyledWrapperLetters = styled.div`
       animation: ${marqueee} 7s linear infinite;
     }
     display: block;
-    min-width: 100 %;
+    min-width: 100%;
     left: 0;
     top: 0;
     white-space: nowrap;

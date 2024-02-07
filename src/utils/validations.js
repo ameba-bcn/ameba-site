@@ -35,3 +35,15 @@ export const isValidUrl = (urlString) => {
   ); // validate fragment locator
   return !!urlPattern.test(urlString);
 };
+
+export const iframesValidation = (value) => {
+  if (!value) return false;
+  return ("" + value).match(
+    /<iframe[^\>]+src=["'](https?:\/\/[^"']+)["'][^\>]*>.*<\/iframe>/
+  );
+};
+
+export const urlValidation = (value) => {
+  if (!value) return false;
+  return ("" + value).match(/^(http|https):\/\/[^ "]+$/);
+};

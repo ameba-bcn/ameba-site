@@ -1,43 +1,40 @@
-/* ARTICLES */
+import styled from "styled-components";
 
-.cardSupportDeck {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-    padding: 20px;
-}
-
-.cardSupportDeck>i {
+export const StyledCardLayout = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 20px;
+  .cardSupportDeck > i {
     width: 570px;
     min-width: 570px;
     height: 340px;
     margin: 0px 24px 48px 24px;
-}
+  }
 
-.fullcard {
+  .fullcard {
     margin: 0px 24px 48px 24px;
     overflow: hidden;
     width: 570px;
     height: 340px;
     max-width: 570px;
     display: inline-block;
-    /* padding-right: 1rem; */
     justify-content: center;
     min-width: 570px;
-}
+  }
 
-.cardSupport {
+  .cardSupport {
     overflow: hidden;
     width: 100%;
     height: 100%;
     position: relative;
     display: inline-block;
     background-color: black;
-}
+  }
 
-.cardSupportImgTop {
+  .cardSupportImgTop {
     display: block;
     width: 100%;
     height: 500px;
@@ -47,32 +44,32 @@
     transition: all 0.4s ease;
     opacity: 0.6;
     vertical-align: middle;
-}
+  }
 
-.cardSupport:hover .cardSupportImgTop {
+  .cardSupport:hover .cardSupportImgTop {
     transform: scale(1.05);
     opacity: 0.7;
-}
+  }
 
-.cardSupportImgTop:hover {
+  .cardSupportImgTop:hover {
     transform: scale(1.05);
     opacity: 0.7;
-}
+  }
 
-.cardSupportPlusBox {
+  .cardSupportPlusBox {
     position: absolute;
     width: 4rem;
     height: 4rem;
     right: 5%;
     bottom: 5%;
-}
+  }
 
-.cardSupportPlusBox>div>div {
+  .cardSupportPlusBox > div > div {
     font-size: 4em;
     line-height: 0.8em;
-}
+  }
 
-.cardTagBox {
+  .cardTagBox {
     position: absolute;
     text-transform: uppercase;
     width: auto;
@@ -85,17 +82,18 @@
     background-color: #1d1d1b;
     left: 5%;
     top: 5%;
-}
+  }
 
-@media screen and (max-width: 1500px) {
+  @media screen and (max-width: 1500px) {
     .fullcard {
-        flex: 1 0 50%;
+      flex: 1 0 50%;
     }
-}
+  }
 
-@media screen and (max-width: 600px) {
+  @media screen and (max-width: 600px) {
     .fullcard {
-        flex: 1 0 100%;
-        min-width: 200px;
+      flex: 1 0 100%;
+      min-width: 200px;
     }
-}
+  }
+`;

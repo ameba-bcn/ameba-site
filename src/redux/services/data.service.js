@@ -29,6 +29,11 @@ const getCollaborators = () => {
   return axiosInstance.get(`${API_URL}collaborators/`, {});
 };
 
+const getMemberProjects = () => {
+  return axiosInstance.get(`${API_URL}member_projects/`, {});
+};
+
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   supportYourLocalsAll,
   agendaAll,
@@ -37,4 +42,5 @@ export default {
   getAbout,
   getCover,
   getCollaborators,
+  getMemberProjects,
 };

@@ -14,7 +14,6 @@ import { API_URL, radioDublabLink } from "../../../utils/constants";
 const Entrevista = () => {
   let history = useHistory();
   let location = useLocation();
-  // const { support } = useSelector((state) => state.data);
   let urlID = location.pathname.substr(location.pathname.lastIndexOf("/") + 1);
   const [interview, setInterview] = useState([
     {
