@@ -103,6 +103,8 @@ export const productQueryKind = {
 export const API_URL =
   process.env.REACT_APP_API_HOST || "http://localhost/api/";
 
+export const BASE_URL = API_URL.replace("/ameba-site/", "/");
+
 export const FLICKR_URL =
   "https://api.flickr.com/services/rest/?method=flickr.galleries.getPhotos";
 export const FLICKR_KEY = "d42519b6c54602915c2d98ee7e717f73";

@@ -54,18 +54,11 @@ import Profile from "./pages/profile/Profile";
 import PasswordRecovery from "./pages/PasswordRecovery";
 import Projects from "./pages/Projects";
 import QrClient from "./pages/QrClient";
-import { API_URL } from "./utils/constants";
 
 function App() {
   const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
-  console.log(
-    "process.env.REACT_APP_API_HOST ",
-    process.env.REACT_APP_API_HOST
-  );
-  console.log("API_URL", API_URL);
-
   const auth = useSelector((state) => state.auth);
   const { isOpen } = useSelector((state) => state.fullscreen);
   const { user_member_data = {} } = auth;

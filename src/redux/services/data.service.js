@@ -1,5 +1,12 @@
 import axiosInstance from "../../axios";
-import { API_URL } from "../../utils/constants";
+import { API_URL, BASE_URL } from "../../utils/constants";
+
+console.log(
+  "in service process.env.REACT_APP_API_HOST ",
+  process.env.REACT_APP_API_HOST
+);
+console.log("in service BASE_URL", BASE_URL);
+console.log("in service API_URL", API_URL);
 
 const supportYourLocalsAll = () => {
   return axiosInstance.get(`${API_URL}artists/`, {});
