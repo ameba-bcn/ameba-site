@@ -1,10 +1,10 @@
 import axios from "axios";
+import { API_URL } from "./utils/constants";
 
-const baseURL = "api";
 const storedLang = localStorage.getItem("i18nextLng") || "ca";
 
 const axiosInstance = axios.create({
-  baseURL: baseURL,
+  baseURL: API_URL,
   timeout: 5000,
   headers: {
     Authorization: localStorage.getItem("access")
@@ -34,7 +34,7 @@ axiosInstance.interceptors.response.use(
 
     if (
       error.response.status === 401 &&
-      originalRequest.url === baseURL + "token/refresh/"
+      originalRequest.url === API_URL + "token/refresh/"
     ) {
       window.location.href = "/login/";
       return Promise.reject(error);
