@@ -32,7 +32,6 @@ export default function CardLayout(props) {
   const cardGenerator =
     !!cardList.length &&
     sortByProperty(cardList, "created", false)?.map((data) => {
-      console.log("data", data);
       const {
         id = 0,
         images = [],
