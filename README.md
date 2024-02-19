@@ -2,6 +2,10 @@
 
 ## Release changes
 
+Version 3.2.19
+
+- Fixed disabled events in Agenda
+
 Version 3.2.18
 
 - Axios vulnerability version fixed
