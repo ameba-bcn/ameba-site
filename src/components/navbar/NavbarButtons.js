@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import MenuLog from "./MenuLog";
 import Cart from "./Cart";
 import { useMenuHandler } from "./use-menu-handler";
+import { isDevMode } from "../../utils/utils";
 
 export default function NavbarButtons(props) {
   const { isLoggedIn = false, handleClick: closeMenu } = props;
@@ -47,7 +48,7 @@ export default function NavbarButtons(props) {
             BOOKING
           </NavLink>
         </li> */}
-        {localStorage.getItem("dev") === "true" ? (
+        {isDevMode() ? (
           <li>
             <NavLink to="/socis" data-item="SOCI@S">
               SOCI@S

@@ -205,3 +205,5 @@ export default function notificationToast(text = "", type = "success") {
     theme: "info",
   });
 }
+
+export const isDevMode = () => localStorage.getItem("dev") === "true";

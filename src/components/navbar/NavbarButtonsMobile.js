@@ -5,6 +5,7 @@ import Cart from "./Cart";
 import { useTranslation } from "react-i18next";
 import { useMenuHandler } from "./use-menu-handler";
 import useOutsideClick from "../../hooks/use-outside-click";
+import { isDevMode } from "../../utils/utils";
 
 export default function NavbarButtonsMobile(props) {
   const ref = useRef();
@@ -63,7 +64,7 @@ export default function NavbarButtonsMobile(props) {
               BOOKING
             </NavLink>
           </li> */}
-        {localStorage.getItem("dev") === "true" ? (
+        {isDevMode() ? (
           <li>
             <NavLink to="/socis" data-item="SOCI@S" onClick={closeMenu}>
               SOCI@S

@@ -173,16 +173,16 @@ export default function LlistatActivitats() {
             (rowdata) => ({
               icon: () => (
                 <TiTicket
-                  disabled={!rowdata.hasStock}
+                  disabled={!rowdata?.has_stock}
                   className="cardActivitat"
                 />
               ),
-              tooltip: rowdata.hasStock ? "Reserva" : t("agenda.inactiu"),
+              tooltip: rowdata.has_stock ? "Reserva" : t("agenda.inactiu"),
               onClick: (event, rowdata) => {
-                const { hasStock } = rowdata;
-                hasStock && fetchAndAdd(rowdata);
+                const { has_stock } = rowdata;
+                has_stock && fetchAndAdd(rowdata);
               },
-              disabled: !rowdata.hasStock,
+              disabled: !rowdata.has_stock,
             }),
           ]}
           localization={{

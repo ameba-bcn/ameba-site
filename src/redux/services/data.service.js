@@ -1,12 +1,5 @@
 import axiosInstance from "../../axios";
-import { API_URL, BASE_URL } from "../../utils/constants";
-
-console.log(
-  "in service process.env.REACT_APP_API_HOST ",
-  process.env.REACT_APP_API_HOST
-);
-console.log("in service BASE_URL", BASE_URL);
-console.log("in service API_URL", API_URL);
+import { API_URL } from "../../utils/constants";
 
 const supportYourLocalsAll = () => {
   return axiosInstance.get(`${API_URL}artists/`, {});
@@ -40,7 +33,6 @@ const getMemberProjects = () => {
   return axiosInstance.get(`${API_URL}member_projects/`, {});
 };
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   supportYourLocalsAll,
   agendaAll,

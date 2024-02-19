@@ -1,13 +1,6 @@
 import axios from "axios";
 import { API_URL, BASE_URL } from "./utils/constants";
 
-console.log(
-  "in axios process.env.REACT_APP_API_HOST ",
-  process.env.REACT_APP_API_HOST
-);
-console.log("in axios BASE_URL", BASE_URL);
-console.log("in axios API_URL", API_URL);
-
 const storedLang = localStorage.getItem("i18nextLng") || "ca";
 
 const axiosInstance = axios.create({
