@@ -5,7 +5,7 @@ import LettersMove from "./../components/layout/LettersMove";
 export default function ValidateEmail() {
   const [t] = useTranslation("translation");
   return (
-    <div>
+    <>
       <div className="full-height-msg">
         <div className="single-msg">
           Hem enviat un email de verificació. Valida-ho abans de continuar.
@@ -16,6 +16,6 @@ export default function ValidateEmail() {
         sentence={t("banners.soci-curt")}
         color="#EB5E3E"
       />
-    </div>
+    </>
   );
 }
