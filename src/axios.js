@@ -5,7 +5,7 @@ const storedLang = localStorage.getItem("i18nextLng") || "ca";
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
-  timeout: 5000,
+  timeout: 20000,
   headers: {
     Authorization: localStorage.getItem("access")
       ? `Bearer ${localStorage.getItem("access")}`
