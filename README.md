@@ -2,6 +2,12 @@
 
 ## Release changes
 
+Version 3.2.20
+
+- Material-icons: deletion
+- React-icons: deletion
+- AdHoc Design System created for icons
+
 Version 3.2.19
 
 - Fixed disabled events in Agenda
