@@ -1,11 +1,8 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import PeopleAltIcon from "@material-ui/icons/PeopleAlt";
-import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
-import LocalAtmIcon from "@material-ui/icons/LocalAtm";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
 import { StyledCenterLabel, StyledSizesRow } from "./ModalCardStyled";
 import { formatDateToHour, priceMayDiscount } from "../utils/utils";
+import Icon from "../components/ui/Icon";
 
 const InteractiveModalBox = (props) => {
   const {
@@ -22,6 +19,7 @@ const InteractiveModalBox = (props) => {
     price,
     discount,
     maps_url,
+    colorMode = "",
   } = props;
 
   const [t] = useTranslation("translation");
@@ -36,7 +34,7 @@ const InteractiveModalBox = (props) => {
       {modalStyle === "PRODUCTE" && (
         <StyledSizesRow>
           <div className="modal-card___title_small ">
-            <PeopleAltIcon />{" "}
+            <Icon icon="people" type={colorMode === "dark" ? "cream" : ""} />{" "}
             <span>
               {productSoldOut
                 ? t("modal.esgotat")
@@ -79,7 +77,8 @@ const InteractiveModalBox = (props) => {
       {modalStyle === "SOCI" && (
         <div className="interactiveDataBox-soci__row">
           <div className="modal-card___title_small">
-            <PeopleAltIcon /> <span>{t("modal.quota")} / &nbsp;</span>
+            <Icon icon="people" type={colorMode === "dark" ? "cream" : ""} />{" "}
+            <span>{t("modal.quota")} / &nbsp;</span>
           </div>
           <div className="interactiveDataBox-soci__buttonBox">
             <div className="modal-card___title_small">
@@ -93,7 +92,7 @@ const InteractiveModalBox = (props) => {
           {isMobile && (
             <div className="interactiveDataBox-activitat__row">
               <div className="modal-card___title_small">
-                <LocationOnIcon />{" "}
+                <Icon icon="place" type={colorMode === "dark" ? "cream" : ""} />{" "}
                 <span>{t("modal.localitzacio")} / &nbsp;</span>
               </div>
               <div className="interactiveDataBox-activitat__text-loca">
@@ -111,7 +110,11 @@ const InteractiveModalBox = (props) => {
           )}
           <div className="interactiveDataBox-activitat__row">
             <div className="modal-card___title_small">
-              <CalendarTodayIcon /> <span>{t("agenda.data")} / &nbsp;</span>
+              <Icon
+                icon="calendar"
+                type={colorMode === "dark" ? "cream" : ""}
+              />{" "}
+              <span>{t("agenda.data")} / &nbsp;</span>
             </div>
             <div className="interactiveDataBox-activitat__text-data">
               <a
@@ -126,7 +129,8 @@ const InteractiveModalBox = (props) => {
           </div>
           <div className="interactiveDataBox-activitat__row">
             <span className="modal-card___title_small">
-              <LocalAtmIcon /> <span>{t("modal.preu")} / &nbsp;</span>
+              <Icon icon="money" type={colorMode === "dark" ? "cream" : ""} />{" "}
+              <span>{t("modal.preu")} / &nbsp;</span>
             </span>
             <span className="interactiveDataBox-activitat__text-data">
               {priceMayDiscount(price, discount)}

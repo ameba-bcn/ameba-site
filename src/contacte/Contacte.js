@@ -1,17 +1,16 @@
-/* eslint-disable no-undef */
 import React from "react";
 import { useSelector } from "react-redux";
 import NewsletterFormLayout from "../components/forms/NewsletterForm/NewsletterFormLayout";
-import "./Contacte.css";
 import MediaLinks from "../components/layout/MediaLinks";
 import LettersMove from "./../components/layout/LettersMove";
 import { useTranslation } from "react-i18next";
+import { StyledContacte } from "./Contacte.styles.jsx";
 
 function Contacte() {
   const [t] = useTranslation("translation");
   const { collaborators = [] } = useSelector((state) => state.data);
   return (
-    <div className="bloqueContacto" id="contacte">
+    <StyledContacte id="contacte">
       <div className="contenedorContacto">
         <div className="newletterForm">
           <NewsletterFormLayout />
@@ -51,7 +50,7 @@ function Contacte() {
         sentence="L'ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA "
         color="#F2C571"
       />
-    </div>
+    </StyledContacte>
   );
 }
 

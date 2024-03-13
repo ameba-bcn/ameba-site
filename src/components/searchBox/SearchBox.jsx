@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { StyledIconSearchBox, StyledSearchBox } from "./SearchBox.style";
-import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import useOutsideClick from "../../hooks/use-outside-click";
+import Icon from "../ui/Icon";
 
 const SearchBox = ({
   searchInput,
@@ -31,7 +31,9 @@ const SearchBox = ({
       <StyledIconSearchBox>
         <div ref={ref}>
           {toggleHidden ? (
-            <SearchOutlinedIcon
+            <Icon
+              icon="search"
+              type="hoverable-cream"
               onClick={() => setToggleHidden(!toggleHidden)}
             />
           ) : (

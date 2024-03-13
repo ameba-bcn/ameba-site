@@ -1,10 +1,20 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
-import AddIcon from "@material-ui/icons/Add";
 import SociDialog from "../../botiga/Soci";
 import RegisterForm from "./RegisterForm";
 import { useTranslation } from "react-i18next";
+import Icon from "../../ui/Icon";
+import styled from "styled-components";
+
+export const StyledAddBox = styled.div`
+  margin-left: 0.5rem;
+  display: flex;
+  svg {
+    background-color: #1d1d1b;
+    scale: 1;
+  }
+`;
 
 const RegisterLayout = (props) => {
   const [t] = useTranslation("translation");
@@ -29,8 +39,10 @@ const RegisterLayout = (props) => {
         <div className="logTitle">{t("login.registrat")}</div>
         {user_profile !== "LOGGED" && (
           <div className="sociLogBanner" onClick={handleClick}>
-            {t("login.encara")}
-            <AddIcon className="sociLogBannerPlus" />
+            <div>{t("login.encara")}</div>
+            <StyledAddBox>
+              <Icon icon="plus" type="orange" />
+            </StyledAddBox>
           </div>
         )}
         <RegisterForm setRedirect={setRedirect} />

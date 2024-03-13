@@ -8,24 +8,25 @@ import { StyledCardLayout } from "./StyledCardLayout";
 import PlusButton from "../../button/PlusButton";
 import { createLastRowIterator, sortByProperty } from "../../../utils/utils";
 
+const TitleStyled = styled.div`
+  position: absolute;
+  font-family: "Bebas Neue";
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  color: #fae6c5;
+  z-index: 999;
+  padding: 20px;
+  font-weight: 800;
+  font-style: italic;
+`;
+
 export default function CardLayout(props) {
   const { cardList = [], urlRoot } = props; //Pendiente recibir si es entrevista por props
 
-  const TitleStyled = styled.div`
-    position: absolute;
-    font-family: "Bebas Neue";
-    width: 95%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-transform: uppercase;
-    color: #fae6c5;
-    z-index: 999;
-    padding: 20px;
-    font-weight: 800;
-    font-style: italic;
-  `;
   const isOneColumn = useMediaQuery("(max-width:1290px)");
   const isMobile = useMediaQuery(MOBILE_SMALL);
 

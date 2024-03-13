@@ -2,19 +2,18 @@ import React from "react";
 import ImageUploading from "react-images-uploading";
 import Button from "../button/Button";
 import { useTranslation } from "react-i18next";
-import ReplayIcon from "@material-ui/icons/Replay";
-import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import {
   StyledImageBox,
   StyledImageLabel,
   StyledImageLabelBox,
 } from "./ImageLoader.style";
+import Icon from "../ui/Icon";
 
 const ImageLoader = (props) => {
   const { maxNumber = 6, images = [], setImages, disabled = false } = props;
   const [t] = useTranslation("translation");
 
-  const onChange = (imageList, addUpdateIndex) => {
+  const onChange = (imageList) => {
     if (!disabled) setImages(imageList);
   };
   return (
@@ -45,18 +44,22 @@ const ImageLoader = (props) => {
                 {imageList.map((image, index) => (
                   <div key={index} className="image-item">
                     <img src={image.image} alt="" width="100" />
-                    <div className="image-item__btn-wrapper">
-                      <ReplayIcon
+                    <div className="btn-wrapper">
+                      <Icon
+                        icon="replay"
+                        type="hoverable-cream"
                         onClick={() => !disabled && onImageUpdate(index)}
                       />
-                      <DeleteOutlineIcon
+                      <Icon
+                        icon="trash"
+                        type="hoverable-cream"
                         onClick={() => !disabled && onImageRemove(index)}
                       />
                     </div>
                   </div>
                 ))}
               </div>
-              <div>
+              <div className="btn-wrapper">
                 <Button
                   variant="contained"
                   color="primary"

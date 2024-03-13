@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { SyledDisclaimer } from "./DisclaimerBox.style";
-import ClearIcon from "@material-ui/icons/Clear";
+import Icon from "../ui/Icon";
 
 const DisclaimerBox = (props) => {
   const { text = "", id = "", borderColor = "#eb5e3e" } = props;
@@ -9,7 +9,12 @@ const DisclaimerBox = (props) => {
     !hide && (
       <SyledDisclaimer id={id} borderColor={borderColor}>
         {text}
-        <ClearIcon className="close-icon" onClick={() => setHide(true)} />
+        <Icon
+          icon="clear"
+          onClick={() => setHide(true)}
+          type="hoverable-red"
+          className="close-icon"
+        />
       </SyledDisclaimer>
     )
   );

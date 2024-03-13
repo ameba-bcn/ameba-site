@@ -2,9 +2,9 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { substractToCart } from "../../redux/actions/cart";
-import DeleteIcon from "@material-ui/icons/Delete";
 import { ReviewTable } from "./Review.style";
 import { priceMayDiscount } from "../../utils/utils";
+import Icon from "../ui/Icon";
 
 export default function TableProducts() {
   const { cart_data = {} } = useSelector((state) => state.cart);
@@ -42,7 +42,7 @@ export default function TableProducts() {
                 className="deleteItem"
                 onClick={() => substractItem(item.id)}
               >
-                <DeleteIcon />
+                <Icon icon="trash" type="hoverable-cream" />
               </div>
             </td>
           </tr>

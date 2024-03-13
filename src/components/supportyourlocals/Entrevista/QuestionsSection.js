@@ -1,9 +1,20 @@
 import { useMediaQuery } from "@material-ui/core";
 import React, { useState } from "react";
 import TitleSection from "../TitleSection";
-import AddBoxIcon from "@material-ui/icons/AddBox";
-import IndeterminateCheckBoxIcon from "@material-ui/icons/IndeterminateCheckBox";
 import { MOBILE_NORMAL } from "../../../utils/constants";
+import Icon from "../../ui/Icon";
+import styled from "styled-components";
+
+const StyledPlusBox = styled.div`
+  display: flex;
+  background-color: var(--color-negro);
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  svg {
+    vertical-align: super;
+  }
+`;
 
 export default function QuestionsSection(props) {
   const { interview = {} } = props;
@@ -28,44 +39,78 @@ export default function QuestionsSection(props) {
             <div className="col1-preguntes">
               {interview.current_answers?.map((f, i) =>
                 i < 3 ? (
-                  <div
-                    className="pregunta"
-                    key={i}
-                    onClick={() => updateExpand(i)}
-                  >
-                    {f.question}
-                    {expand.p[i] ? (
-                      <IndeterminateCheckBoxIcon className="collapse-resp" />
-                    ) : (
-                      <AddBoxIcon className="expand-resp" />
-                    )}
+                  <>
+                    <div
+                      className="pregunta"
+                      key={i}
+                      onClick={() => updateExpand(i)}
+                    >
+                      <div>{f.question}</div>
+                      <StyledPlusBox>
+                        {expand.p[i] ? (
+                          <Icon
+                            icon="minus"
+                            type="yellow"
+                            height={28}
+                            width={28}
+                            strokeWidth={2}
+                          />
+                        ) : (
+                          <Icon
+                            icon="plus"
+                            type="yellow"
+                            height={28}
+                            width={28}
+                            strokeWidth={2}
+                          />
+                        )}
+                      </StyledPlusBox>
+                    </div>
                     {expand.p[i] ? (
                       <div className={"resposta"}>{f.answer}</div>
                     ) : null}
                     <hr className="hr-section" />
-                  </div>
+                  </>
                 ) : null
               )}
             </div>
             <div className="col2-preguntes">
               {interview.current_answers?.map((f, i) =>
                 i > 2 ? (
-                  <div
-                    className="pregunta"
-                    key={i}
-                    onClick={() => updateExpand(i)}
-                  >
-                    {f.question}
-                    {expand.p[i] ? (
-                      <IndeterminateCheckBoxIcon className="collapse-resp" />
-                    ) : (
-                      <AddBoxIcon className="expand-resp" />
-                    )}
+                  <>
+                    <div
+                      className="pregunta"
+                      key={i}
+                      onClick={() => updateExpand(i)}
+                    >
+                      <div>{f.question}</div>
+                      <StyledPlusBox>
+                        {expand.p[i] ? (
+                          <Icon
+                            icon="minus"
+                            type="yellow"
+                            height={28}
+                            width={28}
+                            strokeWidth={2}
+                          />
+                        ) : (
+                          <StyledPlusBox>
+                            <Icon
+                              icon="plus"
+                              type="yellow"
+                              height={28}
+                              width={28}
+                              strokeWidth={2}
+                            />
+                          </StyledPlusBox>
+                        )}
+                      </StyledPlusBox>
+                    </div>
                     {expand.p[i] ? (
                       <div className={"resposta"}>{f.answer}</div>
                     ) : null}
                     <hr className="hr-section" />
-                  </div>
+                  </>
                 ) : null
               )}
             </div>
@@ -74,12 +119,34 @@ export default function QuestionsSection(props) {
           <>
             {interview.current_answers?.map((f, i) => (
               <div className="pregunta" key={i} onClick={() => updateExpand(i)}>
-                {f.question}
-                {expand.p[i] ? (
-                  <IndeterminateCheckBoxIcon className="collapse-resp" />
-                ) : (
-                  <AddBoxIcon className="expand-resp" />
-                )}
+                <div
+                  className="pregunta"
+                  key={i}
+                  onClick={() => updateExpand(i)}
+                >
+                  <div>{f.question}</div>
+                  <StyledPlusBox>
+                    {expand.p[i] ? (
+                      <Icon
+                        icon="minus"
+                        type="yellow"
+                        height={28}
+                        width={28}
+                        strokeWidth={2}
+                      />
+                    ) : (
+                      <StyledPlusBox>
+                        <Icon
+                          icon="plus"
+                          type="yellow"
+                          height={28}
+                          width={28}
+                          strokeWidth={2}
+                        />
+                      </StyledPlusBox>
+                    )}
+                  </StyledPlusBox>
+                </div>
                 {expand.p[i] ? (
                   <div className={"resposta"}>{f.answer}</div>
                 ) : null}

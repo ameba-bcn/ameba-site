@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import Menu from "@material-ui/core/Menu";
 import DropdownCart from "./DropdownCart";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import Icon from "../ui/Icon";
 
 function Cart(props) {
   const {
@@ -46,8 +46,10 @@ function Cart(props) {
       <li>
         <div className="cart-icon-bubble-box">
           {cart_data ? <div className="bubbleCart">{count}</div> : null}
-          <ShoppingCartIcon
+          <Icon
+            icon="shoppingCart"
             className="cartIconMenu"
+            type="orange"
             onClick={(e) => handleOpenCart(e)}
           />
           {cartMenuOpen && (

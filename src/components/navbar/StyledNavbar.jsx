@@ -294,13 +294,6 @@ export const StyledNavbar = styled.div`
     vertical-align: middle;
   }
 
-  .menuIcon {
-    font-size: 2rem;
-    color: #fae6c5;
-    text-align: end;
-    cursor: pointer;
-  }
-
   .menu-mobile-session-box {
     background-color: #fae6c5;
     width: 100vh;

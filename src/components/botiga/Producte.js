@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import { addToCart } from "../../redux/actions/cart";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
 import FullscreenSpinner from "../spinner/FullscreenSpinner";
+import Icon from "../ui/Icon";
 
 export default function ProducteDialog(props) {
   const { onClose, selectedValue, open, dataRow, setProductData, loading } =
@@ -67,7 +67,7 @@ export default function ProducteDialog(props) {
       price={price_range}
       imgArr={images}
       buttonText={t("modal.afegir")}
-      buttonIcon={<ShoppingCartIcon />}
+      buttonIcon={<Icon icon="shoppingCart" type="hoverable-black" />}
       box1Title={t("modal.descripcio")}
       box1Text={description}
       type="PRODUCTE"

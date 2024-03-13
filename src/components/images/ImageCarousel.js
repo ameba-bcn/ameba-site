@@ -1,39 +1,38 @@
 import React, { useState } from "react";
 import { useTheme } from "@material-ui/core/styles";
 import MobileStepper from "@material-ui/core/MobileStepper";
-// import Button from "@material-ui/core/Button";
-import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import SwipeableViews from "react-swipeable-views";
 import styled from "styled-components";
 // import { autoPlay } from 'react-swipeable-views-utils';
 import "./ImageCarousel.css";
 import { MOBILE_NORMAL } from "../../utils/constants";
 import { useMediaQuery } from "@material-ui/core";
+import Icon from "../ui/Icon";
 
 // const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const StyledImgButtons = styled.div`
-  button, .arrow-img{
+  button,
+  .arrow-img {
     position: relative;
     top: -250px;
     padding: 20px 10px;
     border-radius: 20px;
   }
-  .arrow-empty{
+  .arrow-empty {
     width: 44px;
   }
-  .arrow-img:hover{
-      background-color:rgba(255,255,255, 0.2);
-      cursor:pointer;
+  .arrow-img:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
   }
-  .MuiMobileStepper-dots{
+  .MuiMobileStepper-dots {
     margin: 0 auto;
   }
   .MuiMobileStepper-root {
     height: 40px;
   }
-`
+`;
 
 function ImageCarousel(props) {
   const { imgList = [] } = props;
@@ -84,13 +83,22 @@ function ImageCarousel(props) {
             variant="dots"
             activeStep={activeStep}
             nextButton={
-              activeStep === maxSteps - 1 || isMobile ? <div className="arrow-empty"></div> : <div className="arrow-img">
-                <ArrowForwardIosIcon onClick={handleNext} />
-              </div>
+              activeStep === maxSteps - 1 || isMobile ? (
+                <div className="arrow-empty"></div>
+              ) : (
+                <div className="arrow-img">
+                  <Icon icon="arrowRight" onClick={handleNext} />
+                </div>
+              )
             }
-            backButton={activeStep === 0 || isMobile ? <div className="arrow-empty"></div> : <div className="arrow-img">
-              <ArrowBackIosIcon onClick={handleBack} />
-            </div>
+            backButton={
+              activeStep === 0 || isMobile ? (
+                <div className="arrow-empty"></div>
+              ) : (
+                <div className="arrow-img">
+                  <Icon icon="arrowLeft" onClick={handleBack} />
+                </div>
+              )
             }
           />
         </StyledImgButtons>

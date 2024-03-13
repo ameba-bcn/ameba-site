@@ -1,8 +1,5 @@
-import FacebookIcon from "@material-ui/icons/Facebook";
-import InstagramIcon from "@material-ui/icons/Instagram";
-import TwitterIcon from "@material-ui/icons/Twitter";
-import YouTubeIcon from "@material-ui/icons/YouTube";
 import React from "react";
+import Icon from "../ui/Icon";
 
 export default function MediaLinks(props) {
   const { fcbk, insta, twit, yout } = props;
@@ -14,7 +11,7 @@ export default function MediaLinks(props) {
           rel="noopener noreferrer"
           target="_blank"
         >
-          <FacebookIcon />
+          <Icon icon="facebook" type="hoverable-cream" />
         </a>
       ) : null}
       {insta ? (
@@ -23,7 +20,7 @@ export default function MediaLinks(props) {
           rel="noopener noreferrer"
           target="_blank"
         >
-          <InstagramIcon />
+          <Icon icon="instagram" type="hoverable-cream" />
         </a>
       ) : null}
       {twit ? (
@@ -32,7 +29,7 @@ export default function MediaLinks(props) {
           rel="noopener noreferrer"
           target="_blank"
         >
-          <TwitterIcon />
+          <Icon icon="twitter" className="twitter" type="hoverable-cream" />
         </a>
       ) : null}
       {yout ? (
@@ -41,7 +38,7 @@ export default function MediaLinks(props) {
           rel="noopener noreferrer"
           target="_blank"
         >
-          <YouTubeIcon />
+          <Icon icon="youtube" type="hoverable-cream" />
         </a>
       ) : null}
     </div>

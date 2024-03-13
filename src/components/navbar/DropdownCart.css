@@ -146,9 +146,11 @@
     background-color: #e9e9e9;
 }
 
-.addCart>svg:hover,
-.subsCart>svg:hover {
-    background-color: #e9e9e9;
+.addCart:hover,
+.subsCart:hover {
+    svg{
+        background-color: #e9e9e9;
+    }
 }
 
 .buttonCheckoutCart {

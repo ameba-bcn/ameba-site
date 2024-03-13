@@ -2,8 +2,6 @@ import React from "react";
 import { addToCart, substractToCart } from "../../redux/actions/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
 import Button from "../button/Button";
 import { toast } from "react-toastify";
 import "./DropdownCart.css";
@@ -14,6 +12,7 @@ import { priceMayDiscount, truncate } from "../../utils/utils";
 import { MOBILE_SMALL } from "../../utils/constants";
 import { useMediaQuery } from "@material-ui/core";
 import CartToast from "../toast/CartToast";
+import Icon from "../ui/Icon";
 
 export default function DropdownCart(props) {
   const dispatch = useDispatch();
@@ -90,13 +89,13 @@ export default function DropdownCart(props) {
                   <div className="rowCartProduct">
                     <div className="colCartProduct1">
                       <div className="addCart" onClick={() => addItem(el.id)}>
-                        <AddIcon />
+                        <Icon icon="plus" />
                       </div>
                       <div
                         className="subsCart"
                         onClick={() => substractItem(el.id)}
                       >
-                        <RemoveIcon />
+                        <Icon icon="minus" />
                       </div>
                     </div>
                     <div className="colCartProduct2">
@@ -174,13 +173,13 @@ export default function DropdownCart(props) {
                     </div>
                     <div className="colCartProduct2_mobile">
                       <div className="addCart" onClick={() => addItem(el.id)}>
-                        <AddIcon />
+                        <Icon icon="plus" />
                       </div>
                       <div
                         className="subsCart"
                         onClick={() => substractItem(el.id)}
                       >
-                        <RemoveIcon />
+                        <Icon icon="minus" />
                       </div>
                     </div>
                   </div>

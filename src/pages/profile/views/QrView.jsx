@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import { useTranslation } from "react-i18next";
 import ImageCarousel from "../../../components/images/ImageCarousel";
-import stateService from "./../../../redux/services/profile.services";
+// import stateService from "./../../../redux/services/profile.services";
 import { StyledQrBox } from "./QrView.style";
 
 const QrView = () => {
