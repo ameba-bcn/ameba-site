@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import InputField from "../../../components/forms/InputField/InputField";
 import { LogFormError } from "../../../components/forms/Log.style";
@@ -11,7 +11,7 @@ import { useTranslation } from "react-i18next";
 import ImageLoader from "../../../components/image-loader/ImageLoader";
 import MediaLinksForm from "./components/MediaLinksForm";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
-import { setUploadedImages } from "../../../redux/actions/profile";
+// import { setUploadedImages } from "../../../redux/actions/profile";
 import { validate } from "./MemberProjectValidate";
 import { ERROR } from "../../../utils/constants";
 import CheckBox from "../../../components/layout/CheckBox";
@@ -23,12 +23,12 @@ const MemberProject = () => {
   const [description, setDescription] = useState(
     initialProjectData.description || ""
   );
-  const [storedImages, setStoredImages] = useState([]);
+  // const [storedImages, setStoredImages] = useState([]);
   const [mediaLinks, setMediaLinks] = useState(
     initialProjectData.media_urls || []
   );
   const isActive = initialProjectData.isActive;
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const [t] = useTranslation("translation");
 

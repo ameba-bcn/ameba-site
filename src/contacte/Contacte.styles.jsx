@@ -1,19 +1,20 @@
-.bloqueContacto {
-    flex-shrink: 0;
-}
+import styled from "styled-components";
 
-.contenedorContacto {
+export const StyledContacte = styled.div`
+  flex-shrink: 0;
+
+  .contenedorContacto {
     width: 90%;
     margin: 0 auto;
     padding: 40px;
-}
+  }
 
-.inputGroupNews {
+  .inputGroupNews {
     margin-bottom: 2rem;
     padding: 0.5rem;
-}
+  }
 
-.contactNews {
+  .contactNews {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -21,48 +22,43 @@
     align-items: center;
     max-width: 900px;
     flex: 100%;
-}
+  }
 
-
-/* .formNewsGlobal :last-child {
-  width: 94%;
-} */
-
-.msg-new-password-sent {
+  .msg-new-password-sent {
     font-family: "Montserrat", sans-serif;
     font-size: 1.2rem;
     font-weight: bold;
     margin-top: 1.2rem;
     margin-bottom: 1.2rem;
-}
+  }
 
-.form-group-input {
+  .form-group-input {
     flex: 70%;
-}
+  }
 
-.form-group-input>input {
+  .form-group-input > input {
     border-radius: 0px;
-}
+  }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #fae6c5 inset !important;
-}
+  }
 
-.form-group-button {
+  .form-group-button {
     flex: 30%;
-}
+  }
 
-.formNewsGlobal {
+  .formNewsGlobal {
     display: flex;
     flex-grow: column;
     justify-content: center;
     flex-wrap: wrap;
-}
+  }
 
-.formControlNews {
+  .formControlNews {
     font-family: "Montserrat", sans-serif;
     font-size: 1.2rem;
     font-weight: bold;
@@ -72,116 +68,134 @@ input:-webkit-autofill:active {
     border: 2px solid #1d1d1b;
     width: 95%;
     height: auto;
-}
+  }
 
-.formControlNews:focus,
-.formControlNews:active {
+  .formControlNews:focus,
+  .formControlNews:active {
     background-color: #fae6c5;
     border: none;
     border-color: transparent;
-}
+  }
 
-.formControlNews::placeholder {
+  .formControlNews::placeholder {
     color: #1d1d1b;
     font-family: "Bebas Neue";
     font-size: 2em;
     font-weight: 400;
-    /* border: 2px solid #1D1D1B; */
     padding-left: 10px;
     text-transform: uppercase;
-}
+  }
 
-.formButton {
+  .formButton {
     font-family: "Bebas Neue";
     font-size: 2.5em;
     font-weight: 400;
     width: 15rem;
     color: #f2c571;
     background-color: #1d1d1b;
-}
+  }
 
-.iconsFooter {
+  .iconsFooter {
     padding: 3rem 0rem;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
 
-.iconsFooter a {
+  .iconsFooter a {
     text-decoration: none;
     color: inherit;
     margin-right: 10px;
-}
+  }
 
-.iconsFooter svg {
-    font-size: 3rem;
-}
+  .iconsFooter svg {
+    scale: 3;
+  }
 
-.iconsFooter svg:hover {
+  .twitter {
+    scale: 2.9 !important;
+  }
+
+  .iconsFooter svg:hover {
     color: #eb5e3e;
-}
+  }
 
-.rowNewsLine {
+  .rowNewsLine {
     margin: 0 auto;
-}
+  }
 
-.formLabelNews {
+  .formLabelNews {
     font-family: "Bebas Neue";
     font-size: 5em;
     font-weight: 400;
     flex: 100%;
-}
+  }
 
-.endingText {
+  .endingText {
     font-family: "Montserrat", sans-serif;
-}
+  }
 
-.linkEndingText{
+  .linkEndingText {
     text-decoration: none;
     color: black !important;
-}
+  }
 
-.colabText {
+  .colabText {
     font-family: "Montserrat", sans-serif;
     margin-bottom: 24px;
-}
+  }
 
-.AjuntamentBcnImg {
+  .AjuntamentBcnImg {
     width: 100px;
     margin-left: 20px;
-}
+  }
 
-.breakLine {
+  .breakLine {
     height: 0px;
     width: 0%;
-}
+  }
 
-@media screen and (max-width: 956px) {
+  @media screen and (max-width: 956px) {
     .formLabelNews {
-        font-size: 3em;
+      font-size: 3em;
     }
     .formControlNews {
-        font-size: 1rem;
-        margin: 5px 0px;
-        width: 100%;
+      font-size: 1rem;
+      margin: 5px 0px;
+      width: 100%;
     }
     .contactNews {
-        flex-wrap: wrap;
+      flex-wrap: wrap;
     }
-}
+  }
 
-@media screen and (max-width: 870px) {
+  @media screen and (max-width: 870px) {
     .form-group-button {
-        margin: 1rem 0rem;
+      margin: 1rem 0rem;
     }
-}
+  }
 
-@media screen and (max-width: 500px) {
+  @media screen and (max-width: 500px) {
     .breakLine {
-        height: 1em;
-        width: 100%;
+      height: 1em;
+      width: 100%;
     }
     .formControlNews {
-        margin: auto;
+      margin: auto;
     }
     .inputGroupNews {
-        margin: auto;
+      margin: auto;
     }
-}
+    .iconsFooter svg {
+      scale: 2;
+    }
+    .twitter {
+      scale: 1.9 !important;
+    }
+    .iconsFooter {
+      gap: 12px;
+    }
+  }
+`;

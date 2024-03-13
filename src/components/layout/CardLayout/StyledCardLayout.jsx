@@ -58,8 +58,6 @@ export const StyledCardLayout = styled.div`
 
   .cardSupportPlusBox {
     position: absolute;
-    width: 4rem;
-    height: 4rem;
     right: 5%;
     bottom: 5%;
   }

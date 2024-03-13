@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
 import { useMediaQuery } from "@material-ui/core";
-import ClearIcon from "@material-ui/icons/Clear";
+import Icon from "../components/ui/Icon";
 import { formatPrice, urlify } from "../utils/utils";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
-import LinkIcon from "@material-ui/icons/Link";
 import Button from "../components/button/Button";
 import ImageCarousel from "../components/images/ImageCarousel";
 import { MOBILE_NORMAL, productKinds } from "../utils/constants";
@@ -95,8 +93,20 @@ export default function ModalCard(props) {
             className={`modal-card__background modal-card__background_${colorMode}`}
           >
             <StyledCloseIcon colorMode={colorMode}>
-              <LinkIcon onClick={handleCopyLink} />
-              <ClearIcon onClick={handleClose} />
+              <Icon
+                icon="link"
+                onClick={handleCopyLink}
+                type={
+                  colorMode === "dark" ? "hoverable-dark" : "hoverable-cream"
+                }
+              />
+              <Icon
+                icon="clear"
+                onClick={handleClose}
+                type={
+                  colorMode === "dark" ? "hoverable-dark" : "hoverable-cream"
+                }
+              />
               {copied ? (
                 <div className="modal-card__copy">{t("modal.copiat")}</div>
               ) : null}
@@ -125,7 +135,10 @@ export default function ModalCard(props) {
               <div className="modal-card-location__row">
                 <div className="modal-card__column_thirtyfive">
                   <div className="modal-card___title_small">
-                    <LocationOnIcon />{" "}
+                    <Icon
+                      icon="place"
+                      type={colorMode === "dark" ? "cream" : ""}
+                    />{" "}
                     <div>{t("modal.localitzacio")} / &nbsp;</div>
                   </div>
                 </div>
@@ -167,6 +180,7 @@ export default function ModalCard(props) {
                 price={price}
                 discount={discount}
                 maps_url={maps_url}
+                colorMode={colorMode}
               />
               {!productSoldOut && (
                 <Button
@@ -218,8 +232,16 @@ export default function ModalCard(props) {
           className={`modal-card-mobile__background modal-card-mobile__background_${colorMode}`}
         >
           <div className="modal-card-mobile__close">
-            <LinkIcon onClick={handleCopyLink} />
-            <ClearIcon onClick={handleClose} />
+            <Icon
+              icon="link"
+              onClick={handleCopyLink}
+              type={colorMode === "dark" ? "hoverable-dark" : "hoverable-cream"}
+            />
+            <Icon
+              icon="clear"
+              onClick={handleClose}
+              type={colorMode === "dark" ? "hoverable-dark" : "hoverable-cream"}
+            />
             {copied ? (
               <div className="modal-card-mobile__copy">{t("modal.copiat")}</div>
             ) : null}
@@ -269,6 +291,7 @@ export default function ModalCard(props) {
                 handleAddClick={handleAddClick}
                 price={price}
                 maps_url={maps_url}
+                colorMode={colorMode}
               />
             </div>
             <div className="modal-card-mobile__button-wrapper">

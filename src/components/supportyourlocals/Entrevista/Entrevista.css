@@ -184,6 +184,9 @@
 .col1-preguntes,
 .col2-preguntes {
     max-width: 45%;
+    .hr-section{
+        width: 100%;
+    }
 }
 
 .pregunta {
@@ -193,11 +196,12 @@
     text-align: left;
     position: relative;
     min-width: 100%;
-    padding-right: 80px;
     overflow: hidden;
     height: auto;
     cursor: pointer;
     line-height: 1em;
+    display:flex;
+    justify-content: space-between;
 }
 
 .resposta {
@@ -209,6 +213,7 @@
     max-width: 100%;
     line-height: 1.5em;
     white-space: pre-wrap;
+    text-align: left;
 }
 
 @keyframes fade {
@@ -227,16 +232,6 @@
     100% {
         opacity: 1;
     }
-}
-
-.pregunta svg {
-    /* cursor: pointer; */
-    display: inline-block;
-    position: absolute;
-    top: 7px;
-    right: 0px;
-    width: 40px;
-    height: auto;
 }
 
 .pregunta hr {

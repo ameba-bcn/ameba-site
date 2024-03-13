@@ -4,10 +4,6 @@ import { ReactFitty } from "react-fitty";
 import { toast } from "react-toastify";
 import InteractiveModalBox from "../../modals/InteractiveModalBox";
 import ImageCarousel from "../images/ImageCarousel";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import ReceiptIcon from "@material-ui/icons/Receipt";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
-import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import { useTranslation } from "react-i18next";
 import Button from "../button/Button";
 import { useHistory } from "react-router-dom";
@@ -21,6 +17,7 @@ import {
 } from "./StyledExternalEvent";
 import { urlify } from "../../utils/utils";
 import CartToast from "../toast/CartToast";
+import Icon from "../ui/Icon";
 
 const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
   const {
@@ -63,7 +60,11 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
   const productSoldOut =
     modalStyle === "PRODUCTE" ? sizes.length === 0 : !has_stock;
   const buttonIcon =
-    modalStyle === "ACTIVITAT" ? <ReceiptIcon /> : <ShoppingCartIcon />;
+    modalStyle === "ACTIVITAT" ? (
+      <Icon icon="receipt" type="hoverable-black" />
+    ) : (
+      <Icon icon="shoppingCart" type="hoverable-black" />
+    );
   const buttonText =
     modalStyle === "ACTIVITAT" ? "RESERVA ENTRADA" : t("modal.afegir");
   const colorMode = "";
@@ -150,11 +151,13 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
             handleAddClick={handleAddClick}
             price={price_range}
             maps_url={maps_url}
+            colorMode={colorMode}
           />
           {modalStyle === "ACTIVITAT" && (
             <div className="modal-card-location__row">
               <div className="modal-card___title_small">
-                <LocationOnIcon /> <div>{t("modal.localitzacio")} / &nbsp;</div>
+                <Icon icon="place" />{" "}
+                <div>{t("modal.localitzacio")} / &nbsp;</div>
               </div>
               <div className="interactiveDataBox-activitat__text-loca-fullview">
                 <a
@@ -172,7 +175,7 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
           {modalStyle !== "ACTIVITAT" && (
             <div className="interactiveDataBox-activitat__row">
               <span className="modal-card___title_small">
-                <LocalAtmIcon /> <span>{t("modal.preu")} / &nbsp;</span>
+                <Icon icon="money" /> <span>{t("modal.preu")} / &nbsp;</span>
               </span>
               <span className="interactiveDataBox-activitat__text-data">
                 {price_range}

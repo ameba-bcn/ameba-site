@@ -1,6 +1,6 @@
 import React from "react";
-import AddIcon from '@material-ui/icons/Add';
 import { StyledPlusButton, StyledPlusButtonBox } from "./StyledPlusButton";
+import Icon from "../ui/Icon";
 
 const STYLES = ["plus--ligth", "plus--obscure", "plus--red"];
 const SIZES = ["plus--small", "plus--medium", "plus--big"];
@@ -12,11 +12,13 @@ export default function PlusButton(props) {
 
   return (
     <StyledPlusButtonBox>
-      <div onClick={onClick}>
-        <StyledPlusButton size={plusDefaultSize} colorStyle={plusDefaultStyle}>
-          <AddIcon />
-        </StyledPlusButton>
-      </div>
+      <StyledPlusButton
+        size={plusDefaultSize}
+        colorStyle={plusDefaultStyle}
+        onClick={onClick}
+      >
+        <Icon icon="plus" />
+      </StyledPlusButton>
     </StyledPlusButtonBox>
   );
 }

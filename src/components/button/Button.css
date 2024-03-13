@@ -14,7 +14,6 @@
     --rojo: #eb5e3e;
     --negro: #1d1d1b;
     --amarillo: #ffed00;
-    --crema: #fae6c5;
 }
 
 .boton {
@@ -23,11 +22,14 @@
     white-space: nowrap;
     font-weight: 400;
     cursor: pointer;
-    color: var(--crema);
+    color: var(--color-cream);
     outline: none;
     line-height: 1em;
     transition: transform 0.3s ease;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
 }
 
 .button-disabled {
@@ -52,7 +54,7 @@
 
 .boton--primary--solid {
     background-color: var(--negro);
-    color: var(--crema);
+    color: var(--color-cream);
     border: none;
 }
 
@@ -64,7 +66,7 @@
 
 .boton--primary--disabled {
     background-color: var(--negro);
-    color: var(--crema);
+    color: var(--color-cream);
     border: none;
     opacity: 0.6;
     pointer-events: none;
@@ -72,7 +74,7 @@
 
 .boton--orange--solid {
     background-color: var(--negro);
-    color: var(--crema);
+    color: var(--color-cream);
     border: none;
 }
 
@@ -83,16 +85,16 @@
 
 .bg-red.active {
     background-color: var(--rojo);
-    color: var(--crema);
+    color: var(--color-cream);
 }
 
 .bg-cream:hover {
-    background-color: var(--crema);
+    background-color: var(--color-cream);
     color: var(--negro);
 }
 
 .bg-cream.active {
-    background-color: var(--crema);
+    background-color: var(--color-cream);
     color: var(--negro);
 }
 
@@ -108,7 +110,7 @@
 
 .boton--back-orange--solid {
     background-color: var(--rojo);
-    color: var(--crema);
+    color: var(--color-cream);
     border: none;
 }
 

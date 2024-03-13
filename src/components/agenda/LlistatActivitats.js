@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/actions/cart";
 import { Redirect } from "react-router-dom";
 import MaterialTable from "material-table";
-import { TiTicket } from "react-icons/ti";
 import axiosInstance from "../../axios";
 import ActivitatDialog from "./Activitat";
 import {
@@ -14,6 +13,14 @@ import {
 import "./Agenda.css";
 import { useTranslation } from "react-i18next";
 import { API_URL } from "../../utils/constants";
+import Icon from "../ui/Icon";
+import styled from "styled-components";
+
+export const StyledTicket = styled.div`
+  svg {
+    scale: 2;
+  }
+`;
 
 export default function LlistatActivitats() {
   const dispatch = useDispatch();
@@ -172,10 +179,14 @@ export default function LlistatActivitats() {
           actions={[
             (rowdata) => ({
               icon: () => (
-                <TiTicket
-                  disabled={!rowdata?.has_stock}
-                  className="cardActivitat"
-                />
+                <StyledTicket>
+                  <Icon
+                    icon="ticket"
+                    className="cardActivitat"
+                    disabled={!rowdata?.has_stock}
+                    type="hoverable-cream"
+                  />
+                </StyledTicket>
               ),
               tooltip: rowdata.has_stock ? "Reserva" : t("agenda.inactiu"),
               onClick: (event, rowdata) => {

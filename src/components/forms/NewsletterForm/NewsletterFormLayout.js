@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "./../../../contacte/Contacte.css";
 import NewsletterForm from "./NewsletterForm";
 
 function NewsletterFormLayout() {

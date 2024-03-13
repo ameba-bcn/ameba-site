@@ -17,6 +17,10 @@ export const StyledImageBox = styled.div`
     flex-direction: row;
     justify-content: center;
   }
+  .btn-wrapper {
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export const StyledImageLabelBox = styled.div`

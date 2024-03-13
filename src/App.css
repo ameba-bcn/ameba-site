@@ -1,5 +1,12 @@
 /* COLOURS */
-
+:root {
+    --color-cream: #FAE6C5;
+    --color-naranja: #F2C571;
+    --color-rojo: #EB5E3E;
+    --color-negro: #1D1D1B;
+    --color-gris: #485461;
+    --color-amarillo: #FFED00;
+  }
 
 /*
 #FAE6C5 Crema
@@ -513,19 +520,12 @@ label {
     font-family: "Bebas Neue";
     font-size: 1.8rem;
     text-align: center;
-    /* margin-bottom: 1.8rem; */
     margin-top: 1.8rem;
     cursor: pointer;
-}
-
-.sociLogBannerPlus {
-    background-color: #1d1d1b;
-    color: #f2c571;
-    margin-left: 0.5rem;
-    /* padding: 2px; */
-    height: 10px;
-    width: 10px;
-    /* line-height: 10px;; */
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+    line-height: normal;
 }
 
 .succesful-login-modificar {

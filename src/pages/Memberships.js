@@ -5,7 +5,6 @@ import styled from "styled-components";
 import LettersMove from "../components/layout/LettersMove";
 import { MOBILE_NORMAL } from "../utils/constants";
 import { addToCart } from "../redux/actions/cart";
-import LocalAtmIcon from "@material-ui/icons/LocalAtm";
 import {
   StyledExternalButtonBox,
   StyledExternalEventBox,
@@ -23,6 +22,7 @@ import { isMemberCheckout, urlify } from "../utils/utils";
 import { NavLink } from "react-router-dom";
 import CartToast from "../components/toast/CartToast";
 import DisclaimerBox from "../components/disclaimerBox/DisclaimerBox";
+import Icon from "../components/ui/Icon";
 
 const SyledExternalBox = styled.div`
   height: 100%;
@@ -130,11 +130,13 @@ const Memberships = () => {
                   handleAddClick={handleAddClick}
                   price={price_range}
                   maps_url={maps_url}
+                  colorMode={colorMode}
                 />
 
                 <div className="interactiveDataBox-activitat__row">
                   <span className="modal-card___title_small">
-                    <LocalAtmIcon /> <span>{t("modal.preu")} / &nbsp;</span>
+                    <Icon icon="money" />{" "}
+                    <span>{t("modal.preu")} / &nbsp;</span>
                   </span>
                   <span className="interactiveDataBox-activitat__text-data">
                     {price_range}

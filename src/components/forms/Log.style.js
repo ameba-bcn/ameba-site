@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const LogFormBox = styled.div`
-  margin: 20px 10px;
+  margin: 20px 0px;
   & > form {
     .field-wrapper {
       margin-bottom: 20px;
@@ -9,6 +9,7 @@ export const LogFormBox = styled.div`
   }
   .submit {
     margin-top: 20px;
+    width: 100%;
   }
 `;
 

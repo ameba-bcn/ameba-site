@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/actions/cart";
 import { Redirect } from "react-router-dom";
-import ReceiptIcon from "@material-ui/icons/Receipt";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
 import FullscreenSpinner from "../spinner/FullscreenSpinner";
+import Icon from "../ui/Icon";
 
 export default function ActivitatDialog(props) {
   const { onClose, selectedValue, open, dataRow, setEventData, loading } =
@@ -64,13 +64,11 @@ export default function ActivitatDialog(props) {
       datetime={datetime}
       address={address}
       buttonText="RESERVA ENTRADA"
-      buttonIcon={<ReceiptIcon />}
+      buttonIcon={<Icon icon="receipt" type="hoverable-black" />}
       box1Title={t("modal.descripcio")}
       box1Text={description}
       header={header}
       discount={discount}
-      // box2Title={"ARTIST / LINE UP"}
-      // box2Text={artists}
       type="ACTIVITAT"
       colorMode="light"
       has_stock={has_stock}

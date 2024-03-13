@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/actions/cart";
 import { Redirect } from "react-router-dom";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
 import FullscreenSpinner from "../spinner/FullscreenSpinner";
+import Icon from "../ui/Icon";
 
 export default function SociDialog(props) {
   const { onClose, open, dataRow = [], setProductData, loading } = props;
@@ -64,7 +64,7 @@ export default function SociDialog(props) {
       price={price_range}
       imgArr={images}
       buttonText={t("modal.afegir")}
-      buttonIcon={<ShoppingCartIcon />}
+      buttonIcon={<Icon icon="shoppingCart" type="hoverable-black" />}
       box1Title={t("modal.descripcio")}
       box1Text={description}
       box2Title={t("modal.beneficis")}
