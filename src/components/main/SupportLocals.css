@@ -1,6 +1,5 @@
 .overlay {
     position: absolute;
-    bottom: 0;
     background: rgb(29, 29, 27);
     background: rgba(29, 29, 27, 0.5);
     width: 100%;
@@ -48,7 +47,6 @@
 
 .overlayMobile {
     position: absolute;
-    bottom: 0;
     background: rgb(29, 29, 27);
     background: rgba(29, 29, 27, 0.5);
     width: 100%;

@@ -35,7 +35,7 @@ const RegisterLayout = (props) => {
 
   return (
     <div className="cardForm">
-      <div className="card card-container card-login">
+      <div className="card card-form">
         <div className="logTitle">{t("login.registrat")}</div>
         {user_profile !== "LOGGED" && (
           <div className="sociLogBanner" onClick={handleClick}>

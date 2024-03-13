@@ -10,7 +10,7 @@ export default function SendEmailPasswordRecovery() {
   return (
     <div className="logViewRed">
       <div className="cardForm">
-        <div className="card card-container card-login">
+        <div className="card card-form">
           <div className="logTitle">{t("login.recupera-curt")}</div>
           {isSubmitted ? null : (
             <MailRecoveryForm

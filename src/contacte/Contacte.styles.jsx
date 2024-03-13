@@ -4,7 +4,6 @@ export const StyledContacte = styled.div`
   flex-shrink: 0;
 
   .contenedorContacto {
-    width: 90%;
     margin: 0 auto;
     padding: 40px;
   }

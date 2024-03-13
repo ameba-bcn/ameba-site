@@ -141,9 +141,11 @@ export const StyledNavbar = styled.div`
     margin-bottom: 0;
     padding-bottom: 1em;
     padding-left: 2em;
+    margin-block-start: 0px;
     div,
     li {
       justify-content: flex-start;
+      margin: 4px 0px;
       a.active {
         color: #eb5e3e;
       }

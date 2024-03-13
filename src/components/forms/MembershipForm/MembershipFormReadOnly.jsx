@@ -8,12 +8,7 @@ import { Redirect } from "react-router";
 import { useTranslation } from "react-i18next";
 import Button from "../../button/Button";
 import { usernameValidation } from "../../../utils/validations";
-import {
-  API_URL,
-  ERROR,
-  MOBILE_SMALL,
-  isMinMobile,
-} from "../../../utils/constants";
+import { API_URL, ERROR, MOBILE_SMALL } from "../../../utils/constants";
 import axiosInstance from "../../../axios";
 
 export default function MembershipFormReadOnly(props) {
@@ -38,7 +33,7 @@ export default function MembershipFormReadOnly(props) {
   const setNewUserName = () => {
     axiosInstance
       .patch(`${API_URL}users/current/`, { username: user })
-      .then((resp) => {})
+      .then(() => {})
       .catch((err) => {
         console.warn("ERROR: ", err);
       });
@@ -46,7 +41,7 @@ export default function MembershipFormReadOnly(props) {
 
   return (
     <div className="cardForm">
-      <div className="card card-container card-login">
+      <div className="card card-form">
         <LogFormBox>
           <form>
             <div className="field-wrapper">

@@ -482,7 +482,9 @@ label {
     margin-top: 10px;
 }
 
-.card-login {
+.card-form {
+    display: flex;
+    flex-direction: column;
     border-width: 0px !important;
     margin: 0 auto;
     max-width: 500px !important;
@@ -491,7 +493,7 @@ label {
 }
 
 @media screen and (max-width: 370px) {
-    .card-login {
+    .card-form {
         padding: 40px 10px;
     }
 }
