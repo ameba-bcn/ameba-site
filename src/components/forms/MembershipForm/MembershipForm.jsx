@@ -221,7 +221,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
           )}
         </div>
         {dataHasChanged && (
-          <div className="row">
+          <div className="row button-row">
             <div className="column">
               <Button
                 variant="contained"
@@ -239,6 +239,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
                 type="submit"
                 variant="contained"
                 color="primary"
+                className="submit"
                 buttonSize="boton--medium"
                 buttonStyle="boton--primary--solid"
               >

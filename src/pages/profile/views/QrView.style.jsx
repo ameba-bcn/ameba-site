@@ -13,6 +13,6 @@ export const StyledQrBox = styled.div`
     margin-bottom: 24px;
   }
   @media screen and (max-width: 610px) {
-    padding: 0px 20px;
+    padding: 0px 5px;
   }
 `;

@@ -20,10 +20,8 @@
     margin: auto !important;
 }
 
-.cardMediaPlus>div>div {
-    font-size: 5.8em;
-    width: auto;
-    line-height: 0.4;
+.cardMediaPlus{
+    margin-right: 8px;
 }
 
 @media screen and (max-width: 1872px) {
@@ -44,19 +42,11 @@
 }
 
 @media screen and (max-width: 1250px) {
-    /* .cardMedia {
-    min-height: 370px;
-  } */
     .cardMediaTitle {
         font-size: 3.8rem;
     }
     .cardMediaDate {
         font-size: 3.2em;
-    }
-    .cardMediaPlus>div>div {
-        font-size: 3.6em;
-        width: auto;
-        line-height: 0.5;
     }
 }
 
@@ -64,20 +54,14 @@
     .Card3GridPaper {
         max-width: 900px !important;
     }
-    /* .cardMedia {
-    min-width: 100%;
-    min-height: 640px;
-  } */
     .cardMediaTitle {
         font-size: 7rem;
     }
     .cardMediaDate {
         font-size: 7em;
     }
-    .cardMediaPlus>div>div {
-        font-size: 8em;
-        width: auto;
-        line-height: 0.5;
+    .cardMediaPlus {
+        scale: 1.8;
     }
     .Card3GridItem {
         width: 70%;
@@ -109,10 +93,8 @@
     .cardMediaDate {
         font-size: 5em;
     }
-    .cardMediaPlus>div>div {
-        font-size: 6.4rem;
-        width: auto;
-        line-height: 0.4;
+    .cardMediaPlus {
+        scale: 1.2;
     }
 }
 
@@ -129,17 +111,10 @@
     .cardMediaDate {
         font-size: 4.5em;
     }
-    .cardMediaPlus>div>div {
-        font-size: 6em;
-        width: auto;
-        line-height: 0.4;
-    }
 }
 
 @media screen and (max-width: 555px) {
-    /* .cardMedia {
-    min-height: 370px;
-  } */
+
     .cardMediaTitle {
         font-size: 3.5rem;
     }
@@ -151,21 +126,15 @@
     .cardMediaDate {
         font-size: 3.5em;
     }
-    .cardMediaPlus>div>div {
-        font-size: 5em;
-        width: auto;
-        line-height: 0.3;
+    .cardMediaPlus {
+        scale: 0.6;
+    }
+    .cardDateRow{
+        padding: 0px;
     }
 }
 
 @media screen and (max-width: 422px) {
-    /* .cardMedia {
-    min-height: 290px;
-  } */
-    /* 
-  .Card3GridItem {
-    padding-bottom: 5px;
-  } */
     .cardMediaTitle {
         font-size: 2.5em;
     }
@@ -177,17 +146,9 @@
     .cardMediaDate {
         font-size: 2.4em;
     }
-    .cardMediaPlus>div>div {
-        font-size: 3.6em;
-        width: auto;
-        line-height: 0.3;
-    }
 }
 
 @media screen and (max-width: 322px) {
-    /* .cardMedia {
-    min-height: 210px;
-  } */
     .cardMediaTitle {
         font-size: 2rem;
     }

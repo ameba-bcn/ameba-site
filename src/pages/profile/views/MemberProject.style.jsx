@@ -8,7 +8,6 @@ export const MemberProjectFrame = styled.div`
   max-width: 600px;
   margin: 0 auto;
   #project-disclaimer {
-    width: 100%;
     margin-top: 0px;
     margin-bottom: 20px;
   }
@@ -16,6 +15,7 @@ export const MemberProjectFrame = styled.div`
     width: 100%;
     @media screen and (max-width: 610px) {
       padding: 0px 20px;
+      width: auto;
     }
   }
 `;
@@ -26,6 +26,11 @@ export const MemberFormBox = styled.div`
   & > form {
     .field-wrapper {
       margin-bottom: 20px;
+    }
+  }
+  .button-box {
+    button {
+      width: 100%;
     }
   }
 `;

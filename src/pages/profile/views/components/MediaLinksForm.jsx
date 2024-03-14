@@ -28,7 +28,6 @@ export const SyledAddLink = styled.div`
   text-transform: uppercase;
   font-family: "Bebas Neue";
   font-size: 32px;
-  width: 100%;
   height: 100%;
   border: 4px solid #1d1d1b;
   border-radius: 0px;
@@ -41,7 +40,6 @@ export const SyledAddLink = styled.div`
 
 export const Textarea = styled.textarea`
   display: block;
-  width: 100%;
   height: 100%;
   min-height: 40px;
   padding: 12px 12px;

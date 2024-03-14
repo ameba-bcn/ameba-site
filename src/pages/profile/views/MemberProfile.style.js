@@ -19,7 +19,6 @@ export const MemberProfileBox = styled.div`
 
 export const MemberProfileBoxBorder = styled.div`
   width: 100%;
-  border: 4px solid black;
   margin-bottom: 40px;
   & button {
     margin: 20px 0px;
@@ -34,6 +33,7 @@ export const MemberProfileTitle = styled.div`
   text-align: left;
   width: 100%;
   margin-bottom: 0px;
+  text-align: center;
 `;
 
 export const MemberInfoRow = styled.div`

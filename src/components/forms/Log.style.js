@@ -5,11 +5,17 @@ export const LogFormBox = styled.div`
   & > form {
     .field-wrapper {
       margin-bottom: 20px;
+      @media screen and (max-width: 340px) {
+        margin: 0px 12px;
+      }
     }
   }
   .submit {
     margin-top: 20px;
     width: 100%;
+  }
+  .button-row {
+    gap: 12px;
   }
 `;
 

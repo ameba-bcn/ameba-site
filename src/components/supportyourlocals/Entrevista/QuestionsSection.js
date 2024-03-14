@@ -118,7 +118,7 @@ export default function QuestionsSection(props) {
         ) : (
           <>
             {interview.current_answers?.map((f, i) => (
-              <div className="pregunta" key={i} onClick={() => updateExpand(i)}>
+              <>
                 <div
                   className="pregunta"
                   key={i}
@@ -151,7 +151,7 @@ export default function QuestionsSection(props) {
                   <div className={"resposta"}>{f.answer}</div>
                 ) : null}
                 <hr className="hr-section" />
-              </div>
+              </>
             ))}
           </>
         )}
