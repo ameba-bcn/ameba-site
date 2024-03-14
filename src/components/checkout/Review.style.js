@@ -112,6 +112,12 @@ export const ReviewTable = styled.table`
             height: auto;
           }
         }
+
+        .deleteItem {
+          div {
+            justify-content: center;
+          }
+        }
         @media (max-width: 400px) {
           width: auto;
           & div {

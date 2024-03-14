@@ -130,7 +130,6 @@ export const priceMayDiscount = (price, discount, discountName) => {
   if (discount) {
     const numPrice = parseFloat(price);
     const currency = price.slice(-1);
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [t] = useTranslation("translation");
     return (
       <>

@@ -36,13 +36,13 @@ function Contacte() {
           })}
         </div>
         <div className="endingText">
-          AMEBA 2022©
-          <br />
-          <a className="linkEndingText" href="mailto:info@ameba.cat">
+          <span>AMEBA 2022©</span>
+          <a className="logTextosLink" href="mailto:info@ameba.cat">
             info@ameba.cat
           </a>
-          <br />
-          Associació de Música Electrònica de Barcelona - {t("footer.drets")}
+          <span>
+            Associació de Música Electrònica de Barcelona - {t("footer.drets")}
+          </span>
         </div>
       </div>
       <LettersMove

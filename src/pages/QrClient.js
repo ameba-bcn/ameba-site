@@ -24,7 +24,7 @@ export default function QrClient(props) {
   return (
     <div className="logViewRed">
       <div className="cardForm">
-        <div className="card card-form">
+        <div className="card-form">
           <div className="logTitle">data</div>
           {Object.keys(data).length > 0 ? (
             <>{JSON.parse(data)}</>

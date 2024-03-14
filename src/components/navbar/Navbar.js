@@ -16,6 +16,7 @@ export const StyledMenuIcon = styled.div`
   text-align: end;
   cursor: pointer;
   margin-right: 8px;
+  margin-top: 12px;
   svg {
     scale: 2;
   }

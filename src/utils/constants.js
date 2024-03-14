@@ -1,4 +1,4 @@
-import { useMediaQuery } from "@material-ui/core";
+/* eslint-disable no-undef */
 
 export const ERROR = {
   EMAIL: {

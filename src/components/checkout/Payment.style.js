@@ -29,14 +29,7 @@ export const PaymentSummaryBox = styled.div`
   display: flex;
   justify-content: center;
   border: 4px solid black;
-  margin: 20px 0px;
-  padding: 40px 80px;
-  @media (max-width: 480px) {
-    padding: 0px 40px;
-  }
-  @media (max-width: 350px) {
-    padding: 0px 10px;
-  }
+  margin: 20px 20px;
 `;
 
 export const PaymentReview = styled.div`
@@ -44,7 +37,7 @@ export const PaymentReview = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 20px 0px;
+  padding: 20px 40px;
 `;
 
 export const PayementTotalRow = styled.div`

@@ -37,14 +37,14 @@ export default function MailRecoveryForm({ setIsSubmitted }) {
     },
   });
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={formik.handleSubmit} className="recovery-form">
       <div className="form-group">
         <InputField
           id="emailMailRecover"
           name="email"
           type="email"
           placeholder="email"
-          className="form-control logForm logFormEmailPasswordRecovery"
+          className="form-button logForm logFormEmailPasswordRecovery"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.email}
@@ -68,6 +68,7 @@ export default function MailRecoveryForm({ setIsSubmitted }) {
           buttonStyle="boton--primary--solid"
           hoverStyle="bg-cream"
           disabled={loading}
+          className="form-button"
         >
           {loading ? (
             <span className="spinner-border"></span>

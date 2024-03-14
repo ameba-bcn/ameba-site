@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 export const StyledSvgElement = styled.div`
   // Default color: darker-blue-grey
+  display: flex;
   cursor: pointer;
   #hoverable-cream {
     path {

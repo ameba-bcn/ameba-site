@@ -40,7 +40,7 @@ export default function PasswordRecoveryForm(props) {
     },
   });
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={formik.handleSubmit} className="recovery-form">
       <div className="form-group">
         <InputField
           id="password"
@@ -71,6 +71,7 @@ export default function PasswordRecoveryForm(props) {
           buttonStyle="boton--primary--solid"
           disabled={loading}
           hoverStyle="bg-cream"
+          className="form-button"
         >
           {loading ? (
             <span className="spinner-border"></span>

@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LettersMove from "../../components/layout/LettersMove";
-import { isDevMode, isEmptyObject } from "../../utils/utils";
+import { isEmptyObject } from "../../utils/utils";
 import { useTranslation } from "react-i18next";
 import Breadcrums from "../../components/breadcrums/Breadcrums";
 import useBreadcrumsSteps from "../../components/breadcrums/use-breadcrums-steps";
@@ -14,8 +14,8 @@ export default function Profile() {
   const auth = useSelector((state) => state.auth);
   const { user_member_data, user_data } = useSelector((state) => state.auth);
   const { isLoggedIn = false } = auth;
-  const { username = "", member } = user_data;
-  const isMember = !isEmptyObject(user_member_data) && isDevMode();
+  const { username = "" } = user_data;
+  const isMember = !isEmptyObject(user_member_data);
   const [t] = useTranslation("translation");
   const { step, changeStep } = useBreadcrumsSteps();
 

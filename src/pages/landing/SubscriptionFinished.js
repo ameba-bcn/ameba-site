@@ -29,7 +29,10 @@ export default function SubscriptionFinished(props) {
           <div className="single-msg">
             {t("errors.general")}
             <br />
-            {t("errors.contacta")} {AMEBA_EMAIL}
+            {t("errors.contacta")}
+            <a className="logTextosLink" href="mailto:info@ameba.cat">
+              {AMEBA_EMAIL}
+            </a>
           </div>
         ) : (
           <div className="single-msg">{t("general.agraiment")}</div>

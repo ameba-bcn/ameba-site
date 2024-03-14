@@ -21,6 +21,7 @@ export const StyledContacte = styled.div`
     align-items: center;
     max-width: 900px;
     flex: 100%;
+    gap: 12px;
   }
 
   .msg-new-password-sent {
@@ -61,7 +62,7 @@ export const StyledContacte = styled.div`
     font-family: "Montserrat", sans-serif;
     font-size: 1.2rem;
     font-weight: bold;
-    padding-top: 15px;
+    padding: 12px 14px 12px 12px;
     background-color: transparent;
     color: #1d1d1b;
     border: 2px solid #1d1d1b;
@@ -72,8 +73,7 @@ export const StyledContacte = styled.div`
   .formControlNews:focus,
   .formControlNews:active {
     background-color: #fae6c5;
-    border: none;
-    border-color: transparent;
+    border-color: #fae6c5;
   }
 
   .formControlNews::placeholder {
@@ -81,7 +81,7 @@ export const StyledContacte = styled.div`
     font-family: "Bebas Neue";
     font-size: 2em;
     font-weight: 400;
-    padding-left: 10px;
+    transform: translateY(6px);
     text-transform: uppercase;
   }
 
@@ -134,11 +134,9 @@ export const StyledContacte = styled.div`
 
   .endingText {
     font-family: "Montserrat", sans-serif;
-  }
-
-  .linkEndingText {
-    text-decoration: none;
-    color: black !important;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .colabText {

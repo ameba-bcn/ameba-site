@@ -45,6 +45,7 @@ ${(props) =>
   &:focus {
     background-color: #fae6c5;
     border-color: #f2c571;
+    padding: 10px 14px 4px 12px;
   }
   &:touch {
     background-color: #fae6c5;

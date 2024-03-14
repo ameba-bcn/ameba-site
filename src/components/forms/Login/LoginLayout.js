@@ -32,7 +32,7 @@ const LoginLayout = (props) => {
 
   return (
     <div className="cardForm">
-      <div className="card card-form">
+      <div className="card-form">
         <div className="logTitle">login</div>
 
         <LoginForm setRedirect={setRedirect} />

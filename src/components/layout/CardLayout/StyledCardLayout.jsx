@@ -5,7 +5,6 @@ export const StyledCardLayout = styled.div`
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
-  width: 100%;
   padding: 20px;
   .cardSupportDeck > i {
     width: 570px;

@@ -17,6 +17,7 @@
 
 .payment-body>form>button {
     margin-top: 15px;
+    width: 100%;
 }
 
 #payment-form {

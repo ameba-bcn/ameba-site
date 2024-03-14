@@ -4,10 +4,10 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import SociDialog from "../../../components/botiga/Soci";
-import Button from "../../../components/button/Button";
+// import Button from "../../../components/button/Button";
 import MembershipFormLayout from "../../../components/forms/MembershipForm/MembershipFormLayout";
 import MembershipFormReadOnly from "../../../components/forms/MembershipForm/MembershipFormReadOnly";
-import { deleteUser } from "../../../redux/actions/auth";
+// import { deleteUser } from "../../../redux/actions/auth";
 import { RowSeparator } from "../../../styles/GlobalStyles.style";
 import {
   MemberInfoRow,
@@ -77,7 +77,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
                 text={
                   <MessageFormat>
                     {t("perfil.baixa-missatge")}
-                    <a className="linkEndingText" href="mailto:info@ameba.cat">
+                    <a className="logTextosLink" href="mailto:info@ameba.cat">
                       info@ameba.cat
                     </a>
                   </MessageFormat>

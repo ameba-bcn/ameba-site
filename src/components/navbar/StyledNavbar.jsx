@@ -145,11 +145,11 @@ export const StyledNavbar = styled.div`
     div,
     li {
       justify-content: flex-start;
-      margin: 4px 0px;
       a.active {
         color: #eb5e3e;
       }
       a {
+        margin: 4px 0px;
         display: inline-block;
         font-family: "Bebas Neue";
         font-weight: lighter;
@@ -260,13 +260,12 @@ export const StyledNavbar = styled.div`
     left: 25px;
     width: 18px;
     height: 18px;
-    padding: 2px 5px 2px 6px;
+    padding: 2px 1px 0px 1px;
     background-color: #f2c571;
     font-family: "Bebas Neue";
     font-weight: 600;
     font-size: 0.7em;
     border-radius: 50%;
-    box-shadow: 1px 1px 1px gray;
   }
 
   .bubbleCartMember {

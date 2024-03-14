@@ -21,7 +21,6 @@ export const CheckoutSubtitle = styled.div`
   font-family: "Bebas Neue";
   color: #1d1d1b;
   font-size: 3.3rem;
-  margin-top: -50px;
   margin-bottom: 30px;
   @media (max-width: 350px) {
     font-size: 2.5rem;

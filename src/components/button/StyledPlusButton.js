@@ -38,6 +38,5 @@ export const StyledPlusButton = styled.div`
     scale: 2;
     stroke: ${(props) =>
       props.colorStyle === "plus--ligth" ? "#1d1d1b" : "#fae6c5"};
-    margin-top: -12px;
   }
 `;

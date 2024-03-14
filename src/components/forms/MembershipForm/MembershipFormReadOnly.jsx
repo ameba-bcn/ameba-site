@@ -41,7 +41,7 @@ export default function MembershipFormReadOnly(props) {
 
   return (
     <div className="cardForm">
-      <div className="card card-form">
+      <div className="card-form">
         <LogFormBox>
           <form>
             <div className="field-wrapper">
