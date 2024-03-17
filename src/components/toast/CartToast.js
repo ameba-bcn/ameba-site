@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import {
   ToastBox,
   ToastLeftInBox,
@@ -18,6 +19,7 @@ export default function CartToast() {
   const [redirect, setRedirect] = useState(false);
   if (redirect) return <Redirect to={checkoutRedirect} />;
   const { item_variants = [] } = cart_data;
+  const [t] = useTranslation("translation");
 
   return (
     <ToastBox
@@ -26,12 +28,12 @@ export default function CartToast() {
       }}
     >
       <ToastLeftInBox>
-        tens{" "}
+        {t("checkout.toast1")}{" "}
         <span>
           {item_variants.length}{" "}
           {item_variants.length === 1 ? "producte" : "productes"}
         </span>{" "}
-        a la cistella
+        {t("checkout.toast2")}
       </ToastLeftInBox>
       <ToastRightInBox>{cart_data.total}</ToastRightInBox>
     </ToastBox>

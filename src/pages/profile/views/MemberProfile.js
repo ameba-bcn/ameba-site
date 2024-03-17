@@ -18,6 +18,7 @@ import {
   MessageFormat,
 } from "./MemberProfile.style";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
+import { StyledLink } from "../../../styles/GlobalStyles";
 
 export default function MemberProfile({ setButtonDisabled, isMember }) {
   const [t] = useTranslation("translation");
@@ -77,9 +78,9 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
                 text={
                   <MessageFormat>
                     {t("perfil.baixa-missatge")}
-                    <a className="logTextosLink" href="mailto:info@ameba.cat">
-                      info@ameba.cat
-                    </a>
+                    <StyledLink>
+                      <a href="mailto:info@ameba.cat">info@ameba.cat</a>
+                    </StyledLink>
                   </MessageFormat>
                 }
               />

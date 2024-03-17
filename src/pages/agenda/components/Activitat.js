@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../redux/actions/cart";
+import { addToCart } from "../../../redux/actions/cart";
 import { Redirect } from "react-router-dom";
-import ModalCard from "../../modals/ModalCard";
+import ModalCard from "../../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
-import FullscreenSpinner from "../spinner/FullscreenSpinner";
-import Icon from "../ui/Icon";
+import FullscreenSpinner from "../../../components/spinner/FullscreenSpinner";
+import Icon from "../../../components/ui/Icon";
 
 export default function ActivitatDialog(props) {
   const { onClose, selectedValue, open, dataRow, setEventData, loading } =

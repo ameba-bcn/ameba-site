@@ -1,5 +1,4 @@
 import React from "react";
-import { useMediaQuery } from "@material-ui/core";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import NavbarButtons from "./NavbarButtons";
@@ -9,6 +8,7 @@ import { StyledNavbar } from "./StyledNavbar";
 import { useMenuHandler } from "./use-menu-handler";
 import Icon from "../ui/Icon";
 import styled from "styled-components";
+import useMediaQuery from "../../hooks/use-media-query";
 
 export const StyledMenuIcon = styled.div`
   font-size: 2rem;

@@ -85,6 +85,8 @@ export const ERROR = {
 
 export const MOBILE_BIG = "(max-width:1500px)";
 
+export const MOBILE_SEMI_BIG = "(max-width:1200px)";
+
 export const MOBILE_NORMAL = "(max-width:760px)";
 
 export const MOBILE_SMALL = "(max-width:400px)";
@@ -101,7 +103,7 @@ export const productQueryKind = {
 };
 
 export const API_URL =
-  process.env.REACT_APP_API_HOST || "http://localhost/api/";
+  process.env.REACT_APP_API_HOST || "http://localhost:8000/api/";
 
 export const BASE_URL = API_URL.replace("/ameba-site/", "/");
 

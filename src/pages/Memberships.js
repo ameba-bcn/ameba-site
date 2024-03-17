@@ -16,13 +16,13 @@ import { ReactFitty } from "react-fitty";
 import ImageCarousel from "../components/images/ImageCarousel";
 import Button from "../components/button/Button";
 import InteractiveModalBox from "../modals/InteractiveModalBox";
-import { useMediaQuery } from "@material-ui/core";
 import { toast } from "react-toastify";
 import { isMemberCheckout, urlify } from "../utils/utils";
 import { NavLink } from "react-router-dom";
 import CartToast from "../components/toast/CartToast";
 import DisclaimerBox from "../components/disclaimerBox/DisclaimerBox";
 import Icon from "../components/ui/Icon";
+import useMediaQuery from "../hooks/use-media-query";
 
 const SyledExternalBox = styled.div`
   height: 100%;

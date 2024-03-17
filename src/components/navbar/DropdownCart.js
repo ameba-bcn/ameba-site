@@ -10,9 +10,9 @@ import { useTranslation } from "react-i18next";
 import { ReactFitty } from "react-fitty";
 import { priceMayDiscount, truncate } from "../../utils/utils";
 import { MOBILE_SMALL } from "../../utils/constants";
-import { useMediaQuery } from "@material-ui/core";
 import CartToast from "../toast/CartToast";
 import Icon from "../ui/Icon";
+import useMediaQuery from "../../hooks/use-media-query";
 
 export default function DropdownCart(props) {
   const dispatch = useDispatch();

@@ -5,6 +5,7 @@ import MediaLinks from "../components/layout/MediaLinks";
 import LettersMove from "./../components/layout/LettersMove";
 import { useTranslation } from "react-i18next";
 import { StyledContacte } from "./Contacte.styles.jsx";
+import { StyledLink } from "../styles/GlobalStyles.jsx";
 
 function Contacte() {
   const [t] = useTranslation("translation");
@@ -37,9 +38,9 @@ function Contacte() {
         </div>
         <div className="endingText">
           <span>AMEBA 2022©</span>
-          <a className="logTextosLink" href="mailto:info@ameba.cat">
-            info@ameba.cat
-          </a>
+          <StyledLink>
+            <a href="mailto:info@ameba.cat">info@ameba.cat</a>
+          </StyledLink>
           <span>
             Associació de Música Electrònica de Barcelona - {t("footer.drets")}
           </span>

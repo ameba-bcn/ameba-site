@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import CardNew from "./CardNew";
-import ActivitatDialog from "./../agenda/Activitat";
 import axiosInstance from "../../axios";
 import "./Card3grid.css";
 import { API_URL } from "../../utils/constants";
+import ActivitatDialog from "../../pages/agenda/components/Activitat";
 
 const Card3Grid = (props) => {
   const { activitats } = props;

@@ -2,11 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { ReactFitty } from "react-fitty";
 import styled from "styled-components";
-import { useMediaQuery } from "@material-ui/core";
 import { MOBILE_SMALL } from "../../../utils/constants";
 import { StyledCardLayout } from "./StyledCardLayout";
 import PlusButton from "../../button/PlusButton";
 import { createLastRowIterator, sortByProperty } from "../../../utils/utils";
+import useMediaQuery from "../../../hooks/use-media-query";
 
 const TitleStyled = styled.div`
   position: absolute;

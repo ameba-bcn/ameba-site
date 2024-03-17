@@ -5,12 +5,12 @@ import PowerTitle from "../components/layout/PowerTitle";
 import ProductBanner from "../components/botiga/ProductBanner";
 import SociDialog from "../components/botiga/Soci";
 import LettersMove from "./../components/layout/LettersMove";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import { API_URL } from "../utils/constants";
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
 import { deleteStringDecimals } from "../utils/utils";
 import axiosInstance from "../axios";
+import useMediaQuery from "../hooks/use-media-query";
 
 function Botiga() {
   const [open, setOpen] = useState(false);

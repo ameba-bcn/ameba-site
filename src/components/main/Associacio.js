@@ -1,10 +1,11 @@
+/* eslint-disable no-undef */
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { useSelector } from "react-redux";
 import LettersMove from "./../layout/LettersMove";
 import "./Associacio.css";
 import { MOBILE_NORMAL } from "../../utils/constants";
-import { useMediaQuery } from "@material-ui/core";
+import useMediaQuery from "../../hooks/use-media-query";
 
 const Associacio = () => {
   const isMobile = useMediaQuery(MOBILE_NORMAL);

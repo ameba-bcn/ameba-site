@@ -6,6 +6,7 @@ import RegisterForm from "./RegisterForm";
 import { useTranslation } from "react-i18next";
 import Icon from "../../ui/Icon";
 import styled from "styled-components";
+import { StyledLink } from "../../../styles/GlobalStyles";
 
 export const StyledAddBox = styled.div`
   margin-left: 0.5rem;
@@ -47,9 +48,9 @@ const RegisterLayout = (props) => {
         )}
         <RegisterForm setRedirect={setRedirect} />
 
-        <span className="logTextosLink" onClick={showLogin}>
+        <StyledLink onClick={showLogin}>
           {`- ${t("login.inicia")} -`}
-        </span>
+        </StyledLink>
         {open && <SociDialog open={open} onClose={handleClick} />}
       </div>
     </div>

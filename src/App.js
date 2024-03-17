@@ -12,7 +12,6 @@ import {
 } from "./redux/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 import Home from "./pages/Home";
-import Activitats from "./pages/Activitats";
 // import Botiga from "./pages/Botiga";
 import Entrevista from "./components/supportyourlocals/Entrevista/Entrevista";
 import SupportYourLocals from "./pages/SupportYourLocals";
@@ -54,6 +53,7 @@ import Profile from "./pages/profile/Profile";
 import PasswordRecovery from "./pages/PasswordRecovery";
 import Projects from "./pages/Projects";
 import QrClient from "./pages/QrClient";
+import Agenda from "./pages/agenda/Agenda";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -95,7 +95,7 @@ function App() {
       <UserContext.Provider value={value}>
         <ScrollTop showBelow={250} />
         <Switch>
-          <Route path="/activitats" component={Activitats} />
+          <Route path="/activitats" component={Agenda} />
           {/* <Route path="/botiga" component={Botiga} /> */}
           <Route exact path="/support/:id" component={Entrevista} />
           <Route path="/support" component={SupportYourLocals} />

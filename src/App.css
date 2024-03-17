@@ -512,23 +512,6 @@ label {
     }
 }
 
-.logTextosLink {
-    font-family: "Montserrat", sans-serif;
-    font-size: 1.2rem;
-    cursor: pointer;
-    color: #1d1d1b !important;
-    margin-top: 12px;
-}
-
-.logTextosLink a {
-    text-decoration: none;
-    color: #1d1d1b !important;
-}
-
-.logTextosLink:hover {
-    text-decoration: underline !important;
-}
-
 .sociLogBanner {
     background-color: #f2c571;
     color: #1d1d1b;

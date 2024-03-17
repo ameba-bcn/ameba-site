@@ -6,8 +6,8 @@ import styled from "styled-components";
 // import { autoPlay } from 'react-swipeable-views-utils';
 import "./ImageCarousel.css";
 import { MOBILE_NORMAL } from "../../utils/constants";
-import { useMediaQuery } from "@material-ui/core";
 import Icon from "../ui/Icon";
+import useMediaQuery from "../../hooks/use-media-query";
 
 // const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 

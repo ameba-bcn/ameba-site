@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import InputField from "../InputField/InputField";
-import { useMediaQuery } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { LogFormBox, LogFormError } from "../Log.style";
 import { Redirect } from "react-router";
@@ -10,6 +9,8 @@ import Button from "../../button/Button";
 import { usernameValidation } from "../../../utils/validations";
 import { API_URL, ERROR, MOBILE_SMALL } from "../../../utils/constants";
 import axiosInstance from "../../../axios";
+import { StyledLink } from "../../../styles/GlobalStyles";
+import useMediaQuery from "../../../hooks/use-media-query";
 
 export default function MembershipFormReadOnly(props) {
   const [t] = useTranslation("translation");
@@ -89,7 +90,7 @@ export default function MembershipFormReadOnly(props) {
           </form>
         </LogFormBox>
         {!isCheckout && (
-          <div className="logTextosLink">
+          <StyledLink>
             {user_data?.username !== user ? (
               <Button
                 variant="contained"
@@ -111,7 +112,7 @@ export default function MembershipFormReadOnly(props) {
                 {t("login.modifica")}
               </Button>
             )}
-          </div>
+          </StyledLink>
         )}
       </div>
     </div>

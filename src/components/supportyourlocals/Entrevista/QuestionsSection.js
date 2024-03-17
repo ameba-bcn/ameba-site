@@ -1,9 +1,9 @@
-import { useMediaQuery } from "@material-ui/core";
 import React, { useState } from "react";
 import TitleSection from "../TitleSection";
 import { MOBILE_NORMAL } from "../../../utils/constants";
 import Icon from "../../ui/Icon";
 import styled from "styled-components";
+import useMediaQuery from "../../../hooks/use-media-query";
 
 const StyledPlusBox = styled.div`
   display: flex;

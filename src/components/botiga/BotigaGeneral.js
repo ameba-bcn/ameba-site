@@ -7,8 +7,8 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { ReactFitty } from "react-fitty";
 import { useLocation } from "react-router-dom";
-import { useMediaQuery } from "@material-ui/core";
 import { API_URL } from "../../utils/constants";
+import useMediaQuery from "../../hooks/use-media-query";
 
 export const TitleStyled = styled.div`
   width: 75%;

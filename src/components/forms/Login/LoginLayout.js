@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import LoginForm from "./LoginForm";
+import { StyledLink } from "../../../styles/GlobalStyles";
 
 const LoginLayout = (props) => {
   const [t] = useTranslation("translation");
@@ -37,12 +38,12 @@ const LoginLayout = (props) => {
 
         <LoginForm setRedirect={setRedirect} />
 
-        <span className="logTextosLink" onClick={showRegistration}>
+        <StyledLink bold={1} onClick={showRegistration}>
           {`- ${t("login.registrat")} -`}
-        </span>
-        <span className="logTextosLink" onClick={showPasswordRecover}>
+        </StyledLink>
+        <StyledLink bold={1} onClick={showPasswordRecover}>
           {`- ${t("login.recupera-llarg")} -`}
-        </span>
+        </StyledLink>
       </div>
     </div>
   );

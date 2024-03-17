@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import LettersMove from "../../components/layout/LettersMove";
 import { subscribeNewsletter } from "../../redux/actions/profile";
 import { AMEBA_EMAIL } from "../../utils/constants";
+import { StyledLink } from "../../styles/GlobalStyles";
 
 export default function SubscriptionFinished(props) {
   const dispatch = useDispatch();
@@ -30,9 +31,9 @@ export default function SubscriptionFinished(props) {
             {t("errors.general")}
             <br />
             {t("errors.contacta")}
-            <a className="logTextosLink" href="mailto:info@ameba.cat">
-              {AMEBA_EMAIL}
-            </a>
+            <StyledLink>
+              <a href="mailto:info@ameba.cat">{AMEBA_EMAIL}</a>
+            </StyledLink>
           </div>
         ) : (
           <div className="single-msg">{t("general.agraiment")}</div>

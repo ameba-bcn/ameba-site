@@ -3,9 +3,9 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import { formatISODateToDate } from "./../../utils/utils";
 import PlusButton from "./../button/PlusButton";
-import { useMediaQuery } from "@material-ui/core";
 import { MOBILE_SMALL } from "../../utils/constants";
 import "./CardNew.css";
+import useMediaQuery from "../../hooks/use-media-query";
 
 const CardNew = (props) => {
   const processedText = (text) => {

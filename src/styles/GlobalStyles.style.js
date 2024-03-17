@@ -19,3 +19,10 @@ export const StyledHeightBlock = styled.div`
   width: 100%;
   height: ${(props) => (props.height ? `${props.height}px` : "24px")};
 `;
+
+export const StyledMainColumnView = styled.div`
+  margin: 0px 8rem 30px 8rem;
+  @media screen and (max-width: 980px) {
+    margin: 0px 4rem 30px 4rem;
+  }
+`;

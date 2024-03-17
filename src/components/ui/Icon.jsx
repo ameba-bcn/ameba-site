@@ -4,12 +4,14 @@ import styled from "styled-components";
 export const StyledSvgElement = styled.div`
   // Default color: darker-blue-grey
   display: flex;
-  cursor: pointer;
+  &:not([disabled]) {
+    cursor: pointer;
+  }
   #hoverable-cream {
     path {
       fill: var(--color-negro);
     }
-    &:hover {
+    &:hover:not([disabled]) {
       path {
         fill: var(--color-rojo);
       }
@@ -20,7 +22,7 @@ export const StyledSvgElement = styled.div`
     path {
       fill: var(--color-negro);
     }
-    &:hover {
+    &:hover:not([disabled]) {
       path {
         fill: var(--color-cream);
       }
@@ -30,7 +32,7 @@ export const StyledSvgElement = styled.div`
     path {
       fill: var(--color-cream);
     }
-    &:hover {
+    &:hover:not([disabled]) {
       path {
         fill: var(--color-negro);
       }
@@ -41,7 +43,7 @@ export const StyledSvgElement = styled.div`
     path {
       fill: var(--color-cream);
     }
-    &:hover {
+    &:hover:not([disabled]) {
       path {
         fill: var(--color-rojo);
       }
@@ -68,9 +70,9 @@ export const StyledSvgElement = styled.div`
 `;
 
 const AmebaSvgWrapper = (props) => {
-  const { children, width, height, stroke, type } = props;
+  const { children, width, height, stroke, type, disabled = false } = props;
   return (
-    <StyledSvgElement id={type}>
+    <StyledSvgElement id={type} disabled={disabled}>
       <svg
         viewBox="0 0 24 24"
         width={width}

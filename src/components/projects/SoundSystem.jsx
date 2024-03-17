@@ -1,8 +1,9 @@
-import { useMediaQuery } from "@material-ui/core";
 import React from "react";
 import styled from "styled-components";
 import { MOBILE_SMALL } from "../../utils/constants";
 import TitleSection from "../supportyourlocals/TitleSection";
+import { StyledLink } from "../../styles/GlobalStyles";
+import useMediaQuery from "../../hooks/use-media-query";
 
 const StyledMainSoundSystem = styled.div`
   display: flex;
@@ -209,18 +210,19 @@ const SoundSystem = () => {
         <div className="description">
           Si quieres conocer más acerca de este proyecto escríbenos al instagram
           de{" "}
-          <a
-            className="logTextosLink"
-            target="_blank"
-            rel="noreferrer"
-            href="https://www.instagram.com/claros.sonidos/"
-          >
-            Taller Claro
-          </a>{" "}
+          <StyledLink>
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://www.instagram.com/claros.sonidos/"
+            >
+              Taller Claro
+            </a>
+          </StyledLink>{" "}
           o por mail a{" "}
-          <a className="logTextosLink" href="mailto:info@ameba.cat">
-            info@ameba.cat
-          </a>
+          <StyledLink>
+            <a href="mailto:info@ameba.cat">info@ameba.cat</a>
+          </StyledLink>
         </div>
       </StyledRowSoundSystem>
 

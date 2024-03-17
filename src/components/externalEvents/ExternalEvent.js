@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useMediaQuery } from "@material-ui/core";
 import { ReactFitty } from "react-fitty";
 import { toast } from "react-toastify";
 import InteractiveModalBox from "../../modals/InteractiveModalBox";
@@ -18,6 +17,7 @@ import {
 import { urlify } from "../../utils/utils";
 import CartToast from "../toast/CartToast";
 import Icon from "../ui/Icon";
+import useMediaQuery from "../../hooks/use-media-query";
 
 const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
   const {

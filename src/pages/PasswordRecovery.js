@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import LettersMove from "../components/layout/LettersMove";
 import PasswordRecoveryForm from "./../components/forms/PasswordRecoveryForm/PasswordRecoveryForm";
+import { StyledLink } from "../styles/GlobalStyles";
 
 export default function PasswordRecovery(props) {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -27,11 +28,11 @@ export default function PasswordRecovery(props) {
                 setIsSubmitted={setIsSubmitted}
                 strToken={strToken}
               />
-              <span className="logTextosLink">
+              <StyledLink>
                 <NavLink to="/send-recovery">
                   - {t("login.link-recupera")} -
                 </NavLink>
-              </span>
+              </StyledLink>
             </>
           )}
         </div>

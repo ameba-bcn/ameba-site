@@ -1,9 +1,9 @@
 import React from "react";
-import { ImageList } from '@material-ui/core';
-import { ImageListItem } from '@material-ui/core';
-import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { ImageList } from "@material-ui/core";
+import { ImageListItem } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import "./MainSupportLocals.css";
+import useMediaQuery from "../../hooks/use-media-query";
 
 function MainSupportLocals() {
   const breakpoint = useMediaQuery("(max-width:950px)");

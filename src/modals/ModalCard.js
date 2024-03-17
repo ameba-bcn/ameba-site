@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Dialog from "@material-ui/core/Dialog";
-import { useMediaQuery } from "@material-ui/core";
 import Icon from "../components/ui/Icon";
 import { formatPrice, urlify } from "../utils/utils";
 import Button from "../components/button/Button";
@@ -14,6 +13,7 @@ import InteractiveModalBox from "./InteractiveModalBox";
 import "./Modals.css";
 import { StyledCloseIcon, StyledModalRow } from "./ModalCardStyled";
 import CartToast from "../components/toast/CartToast";
+import useMediaQuery from "../hooks/use-media-query";
 
 export default function ModalCard(props) {
   const {

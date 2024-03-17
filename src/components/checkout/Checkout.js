@@ -24,11 +24,11 @@ import {
   CheckoutTitle,
 } from "./Checkout.style";
 import Payment from "./Payment";
-import { useMediaQuery } from "@material-ui/core";
 import { MOBILE_NORMAL, MOBILE_SMALL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
 import { closeFullscreen } from "../../redux/actions/fullscreen";
 import CloseModal from "../../modals/CloseModal";
+import useMediaQuery from "../../hooks/use-media-query";
 
 function Checkout() {
   const dispatch = useDispatch();
