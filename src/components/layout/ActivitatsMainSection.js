@@ -1,12 +1,32 @@
 import React, { useState } from "react";
-import Grid from "@material-ui/core/Grid";
 import CardNew from "./CardNew";
 import axiosInstance from "../../axios";
-import "./Card3grid.css";
 import { API_URL } from "../../utils/constants";
 import ActivitatDialog from "../../pages/agenda/components/Activitat";
+import styled from "styled-components";
 
-const Card3Grid = (props) => {
+export const StyledActivitatsMain = styled.div`
+  display: flex;
+  flex-direction: row;
+  @media screen and (max-width: 999px) {
+    flex-direction: column;
+  }
+`;
+
+export const StyledActivitatsCardItem = styled.div`
+  box-sizing: border-box;
+  margin: auto !important;
+  width: 30.53%;
+  height: auto;
+  margin: 26px;
+  @media screen and (max-width: 999px) {
+    width: 70%;
+    height: auto;
+    padding-bottom: 25px;
+  }
+`;
+
+const ActivitatsMainSection = (props) => {
   const { activitats } = props;
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -51,10 +71,10 @@ const Card3Grid = (props) => {
   };
 
   return (
-    <Grid container justifyContent="center" className="Card3GridContainer">
+    <StyledActivitatsMain>
       {activitats &&
         activitats.map((data) => (
-          <Grid
+          <StyledActivitatsCardItem
             key={data.name}
             item
             className="Card3GridItem"
@@ -67,7 +87,7 @@ const Card3Grid = (props) => {
               data={data.datetime}
               tipo={data.type}
             />
-          </Grid>
+          </StyledActivitatsCardItem>
         ))}
       {open && (
         <ActivitatDialog
@@ -78,8 +98,8 @@ const Card3Grid = (props) => {
           loading={loading}
         />
       )}
-    </Grid>
+    </StyledActivitatsMain>
   );
 };
 
-export default React.memo(Card3Grid);
+export default React.memo(ActivitatsMainSection);

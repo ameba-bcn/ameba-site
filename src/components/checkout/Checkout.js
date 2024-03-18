@@ -27,7 +27,6 @@ import Payment from "./Payment";
 import { MOBILE_NORMAL, MOBILE_SMALL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
 import { closeFullscreen } from "../../redux/actions/fullscreen";
-import CloseModal from "../../modals/CloseModal";
 import useMediaQuery from "../../hooks/use-media-query";
 
 function Checkout() {
@@ -40,7 +39,6 @@ function Checkout() {
   const hasMembershipInCart = isMemberCheckout(item_variants); // sacar del carro cuando esté en back
   const [activeStep, setActiveStep] = useState(hasMembershipInCart ? 0 : 1);
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const userIsEditingData =
     buttonDisabled && activeStep === 0 && hasMembershipInCart;
@@ -104,16 +102,7 @@ function Checkout() {
     }
   };
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setOpen(false);
-  };
-
-  const handleExitFullscreen = () => {
-    setOpen(false);
+  const handleClose = () => {
     dispatch(closeFullscreen());
     dispatch(getCart());
   };
@@ -146,7 +135,7 @@ function Checkout() {
                 buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
                 buttonStyle="boton--primary--solid"
                 disabled={loading}
-                onClick={() => handleOpen()}
+                onClick={() => handleClose()}
               >
                 {t("modal.sortir")}
               </Button>
@@ -163,11 +152,6 @@ function Checkout() {
               {t("boto.seguent")}
             </Button>
           )}
-          <CloseModal
-            open={open}
-            handleClose={handleCloseModal}
-            handleExitFullscreen={handleExitFullscreen}
-          />
         </CheckoutButtons>
       </CheckoutBox>
     </CheckoutFrame>

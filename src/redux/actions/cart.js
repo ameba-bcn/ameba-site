@@ -30,8 +30,6 @@ export const addToCart = (id) => (dispatch) => {
         payload: response,
       });
 
-      notificationToast("pending text");
-
       return Promise.resolve();
     },
     (error) => {

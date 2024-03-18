@@ -1,15 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import Modal from "@material-ui/core/Modal";
 import Button from "../components/button/Button";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import ModalDialog from "../components/layout/ModalDialog";
 
 const StyledModalCloseBox = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   width: 100%;
   max-width: 400px;
   min-width: 280px;
@@ -40,11 +36,11 @@ const StyledModalButtonRow = styled.div`
 `;
 
 const CloseModal = (props) => {
-  const { open, handleClose, handleExitFullscreen } = props;
+  const { open = false, handleClose, handleExitFullscreen } = props;
   const [t] = useTranslation("translation");
 
-  return (
-    <Modal
+  return open ? (
+    <ModalDialog
       open={open}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
@@ -77,8 +73,8 @@ const CloseModal = (props) => {
           </NavLink>
         </StyledModalButtonRow>
       </StyledModalCloseBox>
-    </Modal>
-  );
+    </ModalDialog>
+  ) : null;
 };
 
 export default CloseModal;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Card3Grid from "../layout/Card3grid";
 import SectionTitle from "../layout/SectionTitle";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -9,6 +8,7 @@ import { sortByDate } from "../../utils/utils";
 import PlusButton from "../button/PlusButton";
 import { useTranslation } from "react-i18next";
 import { radioDublabLink } from "../../utils/constants";
+import ActivitatsMainSection from "../layout/ActivitatsMainSection";
 
 const Activitats = () => {
   const [activitats, setActivitats] = useState([]);
@@ -32,7 +32,10 @@ const Activitats = () => {
       <div className="activitats-box">
         <SectionTitle title={t("support.menu.activitats")} />
         {activitats.length > 0 && (
-          <Card3Grid className="Card3Block" activitats={activitats} />
+          <ActivitatsMainSection
+            className="Card3Block"
+            activitats={activitats}
+          />
         )}
         <div className="agendaLink">
           <NavLink

@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import Dialog from "@material-ui/core/Dialog";
+import React, { useState, useEffect } from "react";
 import Icon from "../components/ui/Icon";
 import { formatPrice, urlify } from "../utils/utils";
 import Button from "../components/button/Button";
@@ -14,6 +13,7 @@ import "./Modals.css";
 import { StyledCloseIcon, StyledModalRow } from "./ModalCardStyled";
 import CartToast from "../components/toast/CartToast";
 import useMediaQuery from "../hooks/use-media-query";
+import ModalDialog from "../components/layout/ModalDialog";
 
 export default function ModalCard(props) {
   const {
@@ -85,8 +85,15 @@ export default function ModalCard(props) {
     navigator.clipboard.writeText(copyUrl);
     setCopied(true);
   };
+
+  useEffect(() => {
+    () => {
+      handleClose();
+    };
+  }, []);
+
   return (
-    <Dialog onClose={handleClose} open={open}>
+    <ModalDialog onClose={handleClose} open={open}>
       {!isMobile && (
         <>
           <div
@@ -316,6 +323,6 @@ export default function ModalCard(props) {
           </div>
         </div>
       )}
-    </Dialog>
+    </ModalDialog>
   );
 }

@@ -1,11 +1,9 @@
 import React from "react";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import { formatISODateToDate } from "./../../utils/utils";
 import PlusButton from "./../button/PlusButton";
 import { MOBILE_SMALL } from "../../utils/constants";
-import "./CardNew.css";
 import useMediaQuery from "../../hooks/use-media-query";
+import { StyledCard, StyledCardAction } from "./CardNew.style";
 
 const CardNew = (props) => {
   const processedText = (text) => {
@@ -16,8 +14,8 @@ const CardNew = (props) => {
   const isMobile = useMediaQuery(MOBILE_SMALL);
 
   return (
-    <Card>
-      <CardActionArea className="cardFrame">
+    <StyledCard>
+      <StyledCardAction>
         <div className="cardMediaImgBox">
           <img
             className="cardMedia"
@@ -38,8 +36,8 @@ const CardNew = (props) => {
             <PlusButton plusSize={isMobile ? "plus--medium" : "plus--big"} />
           </div>
         </div>
-      </CardActionArea>
-    </Card>
+      </StyledCardAction>
+    </StyledCard>
   );
 };
 

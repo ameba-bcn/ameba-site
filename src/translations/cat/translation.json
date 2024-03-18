@@ -128,6 +128,7 @@
   "general": {
     "agraiment": "Petició rebuda. Gràcies!",
     "cerca": "Cerca",
-    "sense-resultats": "No hay resultados"
+    "sense-resultats": "No hay resultados",
+    "producte": "producte"
   }
 }

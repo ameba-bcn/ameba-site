@@ -48,7 +48,7 @@ const RegisterLayout = (props) => {
         )}
         <RegisterForm setRedirect={setRedirect} />
 
-        <StyledLink onClick={showLogin}>
+        <StyledLink bold={1} onClick={showLogin}>
           {`- ${t("login.inicia")} -`}
         </StyledLink>
         {open && <SociDialog open={open} onClose={handleClick} />}

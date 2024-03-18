@@ -20,7 +20,7 @@ export const StyledPopoverMenu = styled.div`
   z-index: 500;
 `;
 
-const Dropdown = ({ children, open = false, setIsOpen, ref }) => {
+const Dropdown = ({ children, open = false, setIsOpen, refer }) => {
   const dropdownRef = useRef(null);
 
   useOutsideClick(dropdownRef, () => {
@@ -28,7 +28,7 @@ const Dropdown = ({ children, open = false, setIsOpen, ref }) => {
   });
 
   return open ? (
-    <div ref={ref || dropdownRef}>
+    <div ref={refer || dropdownRef}>
       <StyledPopoverMenu>{children}</StyledPopoverMenu>
     </div>
   ) : null;

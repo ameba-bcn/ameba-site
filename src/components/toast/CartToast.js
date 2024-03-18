@@ -28,12 +28,14 @@ export default function CartToast() {
       }}
     >
       <ToastLeftInBox>
-        {t("checkout.toast1")}{" "}
+        {t("checkout.compra-toast1")}{" "}
         <span>
           {item_variants.length}{" "}
-          {item_variants.length === 1 ? "producte" : "productes"}
+          {item_variants.length === 1
+            ? t("general.producte")
+            : t("general.producte") + "s"}
         </span>{" "}
-        {t("checkout.toast2")}
+        {t("checkout.compra-toast2")}
       </ToastLeftInBox>
       <ToastRightInBox>{cart_data.total}</ToastRightInBox>
     </ToastBox>

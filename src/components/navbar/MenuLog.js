@@ -73,7 +73,7 @@ export default function MenuLog(props) {
       </a>
       {!isMobile ? (
         <Dropdown
-          ref={dropdownRef1}
+          refer={dropdownRef1}
           open={Boolean(anchorEl1)}
           setIsOpen={handleCloseSessio}
         >
