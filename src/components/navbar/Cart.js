@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Menu from "@material-ui/core/Menu";
 import DropdownCart from "./DropdownCart";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import Icon from "../ui/Icon";
+import Dropdown from "../dropdown/Dropdown";
 
 function Cart(props) {
   const {
@@ -15,15 +15,13 @@ function Cart(props) {
   } = props;
   const { cart_data = {} } = useSelector((state) => state.cart);
   const { item_variants = [], count = 0 } = cart_data;
-  const [anchorEl, setAnchorEl] = useState();
   const [cartMenuOpen, setCartMenuOpen] = useState(false);
   const [t] = useTranslation("translation");
   if (cart_data && item_variants.length < 1 && cartMenuOpen) {
     setCartMenuOpen(false);
   }
 
-  const handleOpenCart = (event) => {
-    setAnchorEl(event.currentTarget);
+  const handleOpenCart = () => {
     if (isMobile) {
       isCartMenuOpen ? closeCartMenu() : openCartMenu();
     } else {
@@ -32,7 +30,6 @@ function Cart(props) {
   };
 
   const handleCloseCart = () => {
-    setAnchorEl(null);
     if (isMobile) {
       closeCartMenu();
     } else {
@@ -52,26 +49,15 @@ function Cart(props) {
             type="orange"
             onClick={(e) => handleOpenCart(e)}
           />
-          {cartMenuOpen && (
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              className="menuDropdownCart"
-              disableAutoFocusItem
-              open={cartMenuOpen}
-              onClose={handleCloseCart}
-            >
-              <div>
-                <DropdownCart
-                  cartData={cart_data}
-                  closeDropDown={() => handleCloseCart()}
-                  isMobile={false}
-                  handleCloseMenu={closeMenu}
-                  setCartMenuOpen={setCartMenuOpen}
-                />
-              </div>
-            </Menu>
-          )}
+          <Dropdown open={cartMenuOpen} setIsOpen={handleCloseCart}>
+            <DropdownCart
+              cartData={cart_data}
+              closeDropDown={() => handleCloseCart()}
+              isMobile={false}
+              handleCloseMenu={closeMenu}
+              setCartMenuOpen={setCartMenuOpen}
+            />
+          </Dropdown>
         </div>
       </li>
     ) : (

@@ -11,19 +11,9 @@ import { API_URL } from "../../../utils/constants";
 import { StyledSociosMain } from "./StyledSociosDetailed";
 import LinkBox from "../../../components/link-box/LinkBox";
 
-const mockedLinks = [
-  `<iframe width=\"100%\" height=\"166\" scrolling=\"no\" frameborder=\"no\" allow=\"autoplay\" src=\"https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1246209739&color=%23191a18&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true\"></iframe><div style=\"font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;\"><a href=\"https://soundcloud.com/balearicensemble\" title=\"Balearic Ensemble\" target=\"_blank\" style=\"color: #cccccc; text-decoration: none;\">Balearic Ensemble</a> · <a href=\"https://soundcloud.com/balearicensemble/besso-live-at-macera-club-madrid-25-03-22-live-pa\" title=\"B.E.S.S.O. Live at Macera Club Madrid 25-03-22 (Live + PA)\" target=\"_blank\" style=\"color: #cccccc; text-decoration: none;\">B.E.S.S.O. Live at Macera Club Madrid 25-03-22 (Live + PA)</a></div>`,
-  "https://www.hipercor.es/",
-];
-
 const SociosDetailed = () => {
   const history = useHistory();
 
-  const dummyList = [
-    "/media/image/article-totebag-modular-500x500.jpg",
-    "/media/image/article-camiseta-ameba-vinil-469x469.png",
-    "/media/image/article-camiseta-ameba-new-469x469.png",
-  ];
   const [project, setProject] = useState({});
   let urlID = location.pathname.substr(location.pathname.lastIndexOf("/") + 1);
   const { member_projects = [] } = useSelector((state) => state.data);
@@ -54,16 +44,6 @@ const SociosDetailed = () => {
             {project_name}
           </div>
           <div className="ts-title">{project_name}</div>
-          {/* Tags para el futuro */}
-          {/* {project?.tags?.length > 0 && (
-            <div className="ts-tags">
-              {project?.tags.map((n) => (
-                <div className="tags-e" key={n}>
-                  {n}
-                </div>
-              ))}
-            </div>
-          )} */}
         </div>
         <div className="bio-gral">
           <TitleSection title={`by ${first_name}`} />

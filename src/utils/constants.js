@@ -83,7 +83,7 @@ export const ERROR = {
   },
 };
 
-export const MOBILE_BIG = "(max-width:1500px)";
+export const MOBILE_BIG = "(max-width:1519px)";
 
 export const MOBILE_SEMI_BIG = "(max-width:1200px)";
 

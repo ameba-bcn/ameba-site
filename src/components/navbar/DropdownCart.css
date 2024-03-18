@@ -1,11 +1,4 @@
-.menuDropdownCart .MuiPaper-root,
-.menuDropdownCart-profile .MuiPaper-root {
-    margin-top: 3rem;
-    padding-right: 20px !important;
-    padding-left: 20px !important;
-    width: auto;
-    min-width: 280px;
-}
+
 
 .menuItemCart {
     cursor: default !important;

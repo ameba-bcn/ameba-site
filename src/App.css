@@ -178,9 +178,10 @@ body {
 
 .Bloque {
     display: flex;
+    position: relative;
     border-color: white;
     border-radius: 2px;
-    /* min-height: 100vh; */
+    flex-direction: column;
     overflow-y: hidden;
 }
 
@@ -212,20 +213,6 @@ div>.nav-item {
     padding: 0px 10px 0px 10px;
 }
 
-#locals {
-    /* padding-top: 56px; */
-    position: relative;
-}
-
-
-/* .titleCoverCanvas {
-  height: 600px;
-  width: 1200px;
-  background-image: url("./images/PARKFEST.jpg");
-  background-position: center;
-  background-size: cover;
-  opacity: 0.8;
-} */
 
 .titleCoverImage {
     position: relative;
@@ -304,8 +291,7 @@ div>.nav-item {
     background-color: #fae6c5;
 }
 
-#contacte,
-#locals {
+#contacte {
     background-color: #f2c571;
 }
 

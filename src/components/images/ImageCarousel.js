@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { useTheme } from "@material-ui/core/styles";
-import MobileStepper from "@material-ui/core/MobileStepper";
 import SwipeableViews from "react-swipeable-views";
 import styled from "styled-components";
 // import { autoPlay } from 'react-swipeable-views-utils';
 import "./ImageCarousel.css";
 import { MOBILE_NORMAL } from "../../utils/constants";
-import Icon from "../ui/Icon";
 import useMediaQuery from "../../hooks/use-media-query";
+import StepperUI from "./StepperUI";
 
 // const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const StyledImgButtons = styled.div`
+  position: relative;
   button,
   .arrow-img {
     position: relative;
@@ -26,17 +25,10 @@ const StyledImgButtons = styled.div`
     background-color: rgba(255, 255, 255, 0.2);
     cursor: pointer;
   }
-  .MuiMobileStepper-dots {
-    margin: 0 auto;
-  }
-  .MuiMobileStepper-root {
-    height: 40px;
-  }
 `;
 
 function ImageCarousel(props) {
   const { imgList = [] } = props;
-  const theme = useTheme();
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = imgList.length;
   const [loaded, setLoaded] = useState(false);
@@ -55,7 +47,6 @@ function ImageCarousel(props) {
   return (
     <div className="image-carousel-root">
       <SwipeableViews
-        axis={theme.direction === "rtl" ? "x-reverse" : "x"}
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
@@ -70,6 +61,7 @@ function ImageCarousel(props) {
                   src={step}
                   style={loaded ? {} : { display: "none" }}
                   onLoad={() => setLoaded(true)}
+                  draggable={false}
                 />
               ) : null}
             </div>
@@ -77,29 +69,11 @@ function ImageCarousel(props) {
       </SwipeableViews>
       {maxSteps > 1 && (
         <StyledImgButtons isMobile={isMobile}>
-          <MobileStepper
+          <StepperUI
             steps={maxSteps}
-            position="static"
-            variant="dots"
             activeStep={activeStep}
-            nextButton={
-              activeStep === maxSteps - 1 || isMobile ? (
-                <div className="arrow-empty"></div>
-              ) : (
-                <div className="arrow-img">
-                  <Icon icon="arrowRight" onClick={handleNext} />
-                </div>
-              )
-            }
-            backButton={
-              activeStep === 0 || isMobile ? (
-                <div className="arrow-empty"></div>
-              ) : (
-                <div className="arrow-img">
-                  <Icon icon="arrowLeft" onClick={handleBack} />
-                </div>
-              )
-            }
+            handleNext={handleNext}
+            handleBack={handleBack}
           />
         </StyledImgButtons>
       )}

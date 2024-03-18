@@ -1,8 +1,28 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import Menu from "@material-ui/core/Menu";
 import { logout } from "../../redux/actions/auth";
+import Dropdown from "../dropdown/Dropdown";
+import styled from "styled-components";
+
+export const StyledMenuLog = styled.div`
+  position: relative;
+`;
+
+export const StyledMenuItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .item {
+    color: #1d1d1b;
+    font-family: "Bebas Neue";
+    font-size: 30px;
+    font-weight: 400;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+`;
 
 export default function MenuLog(props) {
   const {
@@ -40,8 +60,10 @@ export default function MenuLog(props) {
     }
     dispatch(logout());
   };
+  const dropdownRef1 = React.useRef(null);
+
   return (
-    <div>
+    <StyledMenuLog>
       <a
         className="sessio-menu-button"
         data-item={user_data.username === "" ? "SESSIÓ" : userNameShortened}
@@ -50,28 +72,24 @@ export default function MenuLog(props) {
         {user_data.username === "" ? "SESSIÓ" : userNameShortened}
       </a>
       {!isMobile ? (
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl1}
-          keepMounted
-          className="menuDropdownCart"
-          disableAutoFocusItem
+        <Dropdown
+          ref={dropdownRef1}
           open={Boolean(anchorEl1)}
-          onClose={handleCloseSessio}
+          setIsOpen={handleCloseSessio}
         >
-          <div>
+          <StyledMenuItem>
             <NavLink
               className="menuOptions"
               to="/profile"
               onClick={() => handleCloseSessio()}
             >
-              {isMember && <div className="dropdown-profile">Perfil</div>}
+              {isMember && <div className="dropdown-profile item">Perfil</div>}
             </NavLink>
-            <div className="dropdown-logout" onClick={() => logoutMenu()}>
+            <div className="dropdown-logout item" onClick={() => logoutMenu()}>
               Log out
             </div>
-          </div>
-        </Menu>
+          </StyledMenuItem>
+        </Dropdown>
       ) : (
         isProfileMenuOpen && (
           <div className="menu-mobile-session-box">
@@ -95,6 +113,6 @@ export default function MenuLog(props) {
           </div>
         )
       )}
-    </div>
+    </StyledMenuLog>
   );
 }
