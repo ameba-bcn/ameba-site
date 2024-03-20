@@ -39,7 +39,7 @@ export const isValidUrl = (urlString) => {
 export const iframesValidation = (value) => {
   if (!value) return false;
   return ("" + value).match(
-    /<iframe[^\>]+src=["'](https?:\/\/[^"']+)["'][^\>]*>.*<\/iframe>/
+    /<iframe[^\\>]+src=["'](https?:\/\/[^"']+)["'][^\\>]*>.*<\/iframe>/
   );
 };
 

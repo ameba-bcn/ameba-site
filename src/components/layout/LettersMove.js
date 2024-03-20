@@ -57,10 +57,10 @@ export default function LettersMove({
   if (isValidUrl(link))
     return (
       <StyledWrapperLetters>
-        <a href={link} target="_blank">
+        <a href={link} rel="noreferrer" target="_blank">
           <div className="substituto-marquee">
             <div className="marquee cursor-redirect" style={{ color: color }}>
-              {Array.from(Array(24).keys()).map((x) => `- ${sentence} `)}
+              {Array.from(Array(24).keys()).map(() => `- ${sentence} `)}
             </div>
           </div>
         </a>
@@ -78,7 +78,7 @@ export default function LettersMove({
         <StyledWrapperLetters>
           <div className="substituto-marquee">
             <div className="marquee cursor-redirect" style={{ color: color }}>
-              {Array.from(Array(24).keys()).map((x) => `- ${sentence} `)}
+              {Array.from(Array(24).keys()).map(() => `- ${sentence} `)}
             </div>
           </div>
         </StyledWrapperLetters>
@@ -89,7 +89,7 @@ export default function LettersMove({
     <StyledWrapperLetters>
       <div className="substituto-marquee">
         <div className="marquee" style={{ color: color }}>
-          {Array.from(Array(24).keys()).map((x) => `- ${sentence} `)}
+          {Array.from(Array(24).keys()).map(() => `- ${sentence} `)}
         </div>
       </div>
     </StyledWrapperLetters>

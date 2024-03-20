@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
+// import { useDispatch } from "react-redux";
 import stateService from "./../redux/services/profile.services";
 import LettersMove from "../components/layout/LettersMove";
-import PasswordRecoveryForm from "../components/forms/PasswordRecoveryForm/PasswordRecoveryForm";
 
 export default function QrClient(props) {
   const [data, setData] = useState({});
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  // eslint-disable-next-line no-undef
   const queryString = require("query-string");
   const parsed = queryString.parse(props.location.search);
   const [t] = useTranslation("translation");
@@ -16,7 +15,7 @@ export default function QrClient(props) {
   useEffect(() => {
     if (parsed["token"].length > 0) {
       stateService.getCarnet(parsed["token"])?.then((data) => {
-        setData(res);
+        setData(data);
       });
     }
   }, [parsed]);

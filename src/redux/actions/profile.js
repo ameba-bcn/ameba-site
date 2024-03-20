@@ -19,7 +19,7 @@ export const setMember = () => ({
   type: MEMBER_USER,
 });
 
-export const subscribeNewsletter = (email) => (dispatch) => {
+export const subscribeNewsletter = (email) => () => {
   return stateService.subscribeNewsletter(email).then(
     (response) => {
       const message = response?.data.detail;
@@ -44,19 +44,19 @@ export const setUploadedImages = (url) => (dispatch) => {
   return Promise.resolve();
 };
 
-export const getQrData = (token) => (dispatch) => {
-  return stateService.getCarnet(token).then(
-    (response) => {
-      dispatch({
-        type: GET_QR_DATA,
-        payload: response,
-      });
-      return Promise.resolve();
-    },
-    (error) => {
-      const message = error.response?.data.detail;
-      notificationToast(message, "error");
-      return Promise.reject();
-    }
-  );
-};
+// export const getQrData = (token) => (dispatch) => {
+//   return stateService.getCarnet(token).then(
+//     (response) => {
+//       dispatch({
+//         type: GET_QR_DATA,
+//         payload: response,
+//       });
+//       return Promise.resolve();
+//     },
+//     (error) => {
+//       const message = error.response?.data.detail;
+//       notificationToast(message, "error");
+//       return Promise.reject();
+//     }
+//   );
+// };

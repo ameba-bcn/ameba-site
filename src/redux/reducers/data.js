@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import {
   GET_ALL_SUPPORT_SUCCESS,
   GET_ALL_SUPPORT_FAIL,

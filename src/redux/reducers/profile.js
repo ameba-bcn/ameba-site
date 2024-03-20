@@ -7,7 +7,6 @@ import {
 
 const initialState = { user_profile: "", images: [] };
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = initialState, action) {
   const { type, payload } = action;
 
@@ -22,10 +21,9 @@ export default function (state = initialState, action) {
       return { ...state, user_profile: "MEMBER" };
 
     case STORE_UPLOADED_IMAGES:
-      const currentImages = [...state.images, payload];
       return {
         ...state,
-        images: currentImages,
+        images: [...state.images, payload],
       };
 
     default:

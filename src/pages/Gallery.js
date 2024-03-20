@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import Galeria from "../components/galeria/Galeria";
 import LettersMove from "../components/layout/LettersMove";
 import XMLParser from "react-xml-parser";
@@ -12,7 +11,6 @@ import {
 import PowerTitle from "../components/layout/PowerTitle";
 
 const Galery = () => {
-  const [t] = useTranslation("translation");
   const [galleryList, setGalleryList] = useState([]);
 
   const url = `https://www.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=${FLICKR_KEY}&photoset_id=${FLICKR_ALBUM_ID}&format=rest`;
