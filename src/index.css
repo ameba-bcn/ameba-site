@@ -1,0 +1,27 @@
+/* COLOURS */
+:root {
+    --color-cream: #FAE6C5;
+    --color-naranja: #F2C571;
+    --color-rojo: #EB5E3E;
+    --color-negro: #1D1D1B;
+    --color-gris: #485461;
+    --color-amarillo: #FFED00;
+  }
+  
+  html {
+      background-color: #1D1D1B;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+

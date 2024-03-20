@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import "./index.css";
 import WebFont from "webfontloader";
 import { BrowserRouter } from "react-router-dom";
 import ErrorBoundary from "./components/error-handler/ErrorHandler";

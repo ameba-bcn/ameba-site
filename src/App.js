@@ -1,5 +1,4 @@
 import React, { useState, useMemo, useEffect } from "react";
-import "./App.css";
 import {
   setGuestUser,
   setLoggedUser,
@@ -54,6 +53,7 @@ import PasswordRecovery from "./pages/PasswordRecovery";
 import Projects from "./pages/Projects";
 import QrClient from "./pages/QrClient";
 import Agenda from "./pages/agenda/Agenda";
+import { StyledApp } from "./App.style";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -89,7 +89,7 @@ function App() {
   }, [dispatch, isNewMember]);
 
   return (
-    <div className="App">
+    <StyledApp>
       {isOpen && <FullscreenCheckout />}
       <Menu />
       <UserContext.Provider value={value}>
@@ -123,7 +123,7 @@ function App() {
       </UserContext.Provider>
       <ToastContainer position="bottom-center" />
       <Contacte />
-    </div>
+    </StyledApp>
   );
 }
 
