@@ -25,7 +25,7 @@ export default function BotigaGeneral() {
   const [producteLoading, setProducteLoading] = useState(false);
   let location = useLocation();
   // eslint-disable-next-line no-undef
-  const queryString = require("query-string");
+  const queryString = require("querystring-es3");
   const value = queryString.parse(location.search);
   const externalId = value.id;
   const data = useSelector((state) => state.data);

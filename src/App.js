@@ -65,8 +65,8 @@ function App() {
 
   const isNewMember = deepComparision(user_member_data, {});
   useEffect(() => {
-    if (localStorage.getItem("refresh")) {
-      const refresh = localStorage.getItem("refresh");
+    const refresh = localStorage.getItem("refresh");
+    if (refresh) {
       dispatch(validateLocalToken(refresh))
         .then(() => {
           isNewMember ? dispatch(setLoggedUser()) : dispatch(setMember());

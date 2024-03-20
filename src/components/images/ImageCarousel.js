@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import SwipeableViews from "react-swipeable-views";
+// import SwipeableViews from "react-swipeable-views";
 import styled from "styled-components";
 // import { autoPlay } from 'react-swipeable-views-utils';
 import "./ImageCarousel.css";
@@ -31,7 +31,7 @@ function ImageCarousel(props) {
   const { imgList = [] } = props;
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = imgList.length;
-  const [loaded, setLoaded] = useState(false);
+  // const [loaded, setLoaded] = useState(false);
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -41,12 +41,12 @@ function ImageCarousel(props) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleStepChange = (step) => {
-    setActiveStep(step);
-  };
+  // const handleStepChange = (step) => {
+  //   setActiveStep(step);
+  // };
   return (
     <div className="image-carousel-root">
-      <SwipeableViews
+      {/* <SwipeableViews
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
@@ -66,7 +66,7 @@ function ImageCarousel(props) {
               ) : null}
             </div>
           ))}
-      </SwipeableViews>
+      </SwipeableViews> */}
       {maxSteps > 1 && (
         <StyledImgButtons isMobile={isMobile}>
           <StepperUI

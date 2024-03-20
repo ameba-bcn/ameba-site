@@ -7,8 +7,7 @@ import LettersMove from "../components/layout/LettersMove";
 export default function QrClient(props) {
   const [data, setData] = useState({});
   // const dispatch = useDispatch();
-  // eslint-disable-next-line no-undef
-  const queryString = require("query-string");
+  const queryString = require("querystring-es3");
   const parsed = queryString.parse(props.location.search);
   const [t] = useTranslation("translation");
 

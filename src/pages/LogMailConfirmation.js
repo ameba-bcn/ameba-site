@@ -10,8 +10,7 @@ export default function LogMailConfirmation(props) {
   const [hasQueryParams, setHasQueryParams] = useState(false);
   const [t] = useTranslation("translation");
 
-  // eslint-disable-next-line no-undef
-  const queryString = require("query-string");
+  const queryString = require("querystring-es3");
   const parsed = queryString.parse(props.location.search);
   const strToken = parsed.token;
 

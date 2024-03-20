@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import WebFont from "webfontloader";
@@ -16,17 +16,19 @@ WebFont.load({
     families: ["Montserrat:300,400,700,900", "sans-serif"],
   },
 });
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
 
-// eslint-disable-next-line react/no-deprecated
-ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={store}>
-      <I18nextProvider i18n={i18next}>
-        <ErrorBoundary>
-          <App />
-        </ErrorBoundary>
-      </I18nextProvider>
-    </Provider>
-  </BrowserRouter>,
-  document.getElementById("root")
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Provider store={store}>
+        <I18nextProvider i18n={i18next}>
+          <ErrorBoundary>
+            <App />
+          </ErrorBoundary>
+        </I18nextProvider>
+      </Provider>
+    </BrowserRouter>
+  </React.StrictMode>
 );
