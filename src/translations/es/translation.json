@@ -109,7 +109,8 @@
     "guarda": "guarda",
     "finalitza": "finaliza",
     "enrere": "atrás",
-    "seguent": "siguiente"
+    "seguent": "siguiente",
+    "recarrega": "recarga"
   },
   "errors": {
     "stripe": "Ha habido un error con el sistema de pago. Contacta con info@ameba.cat",

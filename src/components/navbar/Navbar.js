@@ -21,7 +21,7 @@ export const StyledMenuIcon = styled.div`
     scale: 2;
   }
 `;
-export default function Navbar() {
+export default function Navbar({ isErrored = false }) {
   const isMobile = useMediaQuery(MOBILE_BIG);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const [{ openMenu, closeMenu }, { isMenuOpen }] = useMenuHandler();
@@ -41,27 +41,32 @@ export default function Navbar() {
               AMEBA
             </NavLink>
           </div>
-          {isMobile ? (
-            <StyledMenuIcon>
-              {isMenuOpen ? (
-                <Icon
-                  icon="clear"
-                  className="menuIcon__cross"
-                  onClick={closeMenu}
-                  type="hoverable-dark"
-                />
-              ) : (
-                <Icon
-                  icon="menu"
-                  className="menuIcon__bars"
-                  onClick={openMenu}
-                  type="hoverable-dark"
+          {isMobile
+            ? !isErrored && (
+                <StyledMenuIcon>
+                  {isMenuOpen ? (
+                    <Icon
+                      icon="clear"
+                      className="menuIcon__cross"
+                      onClick={closeMenu}
+                      type="hoverable-dark"
+                    />
+                  ) : (
+                    <Icon
+                      icon="menu"
+                      className="menuIcon__bars"
+                      onClick={openMenu}
+                      type="hoverable-dark"
+                    />
+                  )}
+                </StyledMenuIcon>
+              )
+            : !isErrored && (
+                <NavbarButtons
+                  isLoggedIn={isLoggedIn}
+                  handleClick={closeMenu}
                 />
               )}
-            </StyledMenuIcon>
-          ) : (
-            <NavbarButtons isLoggedIn={isLoggedIn} handleClick={closeMenu} />
-          )}
         </div>
         {isMobile && isMenuOpen && (
           <NavbarButtonsMobile

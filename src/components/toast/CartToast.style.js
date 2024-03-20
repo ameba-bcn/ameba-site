@@ -7,18 +7,21 @@ import styled from "styled-components";
 // #FFED00 Amarillo
 
 export const ToastBox = styled.div`
-  width: 100%;
-  height: auto;
-  background-color: #1d1d1b;
-  color: #1d1d1b;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 22px;
-  font-family: "Bebas Neue";
-  text-transform: uppercase;
-  font-weight: 500;
+  a {
+    width: 100%;
+    height: auto;
+    background-color: #1d1d1b;
+    color: #1d1d1b;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 22px;
+    font-family: "Bebas Neue";
+    text-transform: uppercase;
+    font-weight: 500;
+    text-decoration: none;
+  }
 `;
 
 export const ToastLeftInBox = styled.div`

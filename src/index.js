@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
 import WebFont from "webfontloader";
 import { BrowserRouter } from "react-router-dom";
+import ErrorBoundary from "./components/error-handler/ErrorHandler";
 import { Provider } from "react-redux";
 import store from "./store";
 import i18next from "i18next";
@@ -16,11 +16,14 @@ WebFont.load({
   },
 });
 
+// eslint-disable-next-line react/no-deprecated
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
       <I18nextProvider i18n={i18next}>
-        <App />
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
       </I18nextProvider>
     </Provider>
   </BrowserRouter>,
