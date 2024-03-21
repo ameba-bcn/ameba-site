@@ -20,15 +20,13 @@ const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <I18nextProvider i18n={i18next}>
-          <ErrorBoundary>
-            <App />
-          </ErrorBoundary>
-        </I18nextProvider>
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+    <Provider store={store}>
+      <I18nextProvider i18n={i18next}>
+        <ErrorBoundary>
+          <App />
+        </ErrorBoundary>
+      </I18nextProvider>
+    </Provider>
+  </BrowserRouter>
 );

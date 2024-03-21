@@ -12,11 +12,11 @@ export default function NavbarButtonsMobile(props) {
   const [t, i18next] = useTranslation("translation");
   const [
     { openCartMenu, closeCartMenu, openProfileMenu, closeProfileMenu },
-    { isCartMenuOpen, isProfileMenuOpen },
+    { isCartMenuOpen, isProfileMenuOpen, isMenuOpen },
   ] = useMenuHandler();
 
   useOutsideClick(ref, () => {
-    closeMenu();
+    if (isMenuOpen) closeMenu();
   });
 
   const currentLang = localStorage.getItem("i18nextLng");

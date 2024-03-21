@@ -11,7 +11,7 @@ import InputField from "../InputField/InputField";
 import { validate } from "../Login/LoginValidate";
 import { LogFormBox, LogFormError } from "../Log.style";
 import Button from "../../button/Button";
-import notificationToast, { isEmptyObject } from "../../../utils/utils";
+import { isEmptyObject } from "../../../utils/utils";
 
 export default function LoginForm({ setRedirect }) {
   const dispatch = useDispatch();
@@ -30,7 +30,6 @@ export default function LoginForm({ setRedirect }) {
       })
       .catch(() => {
         setLoading(false);
-        notificationToast("", "error");
       });
   };
 
