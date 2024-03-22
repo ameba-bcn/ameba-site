@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import LettersMove from "./../layout/LettersMove";
+import LettersMove from "../../../../components/layout/LettersMove";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import "./Manifesto.css";
+import Spinner from "../../../../components/spinner/Spinner";
 
 const Manifesto = () => {
   const data = useSelector((state) => state.data);
-  const [scroll, setScroll] = useState(false);
+  const { isManifestoLoading } = useSelector((state) => state.loaders);
   const { about = {} } = data;
+  const [scroll, setScroll] = useState(false);
   const [t] = useTranslation("translation");
 
   useEffect(() => {
@@ -29,14 +31,19 @@ const Manifesto = () => {
     <div className="Bloque" id="manifesto">
       <div className="manifesto-box">
         <div className="manifesto-title">manifesto</div>
-        <div
-          className={
-            scroll ? "manifesto-text manifesto-text-fx" : "manifesto-text"
-          }
-        >
-          {about?.text}
-        </div>
+        {isManifestoLoading ? (
+          <Spinner height={400} />
+        ) : (
+          <div
+            className={
+              scroll ? "manifesto-text manifesto-text-fx" : "manifesto-text"
+            }
+          >
+            {about?.text}
+          </div>
+        )}
       </div>
+
       <LettersMove
         className="lettersMoveDiv"
         sentence={t("banners.soci-curt")}

@@ -6,10 +6,10 @@ import DOMPurify from "dompurify";
 import axiosInstance from "../../../axios";
 import ImageCarousel from "../../../components/images/ImageCarousel";
 import LettersMove from "../../../components/layout/LettersMove";
-import TitleSection from "../../../components/supportyourlocals/TitleSection";
 import { API_URL } from "../../../utils/constants";
 import { StyledSociosMain } from "./StyledSociosDetailed";
 import LinkBox from "../../../components/link-box/LinkBox";
+import TitleSection from "../../../components/layout/TitleSection";
 
 const SociosDetailed = () => {
   const history = useHistory();

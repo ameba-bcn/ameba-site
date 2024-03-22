@@ -15,7 +15,6 @@ const StyledWrapperLetters = styled.div`
   background: #1d1d1b;
   height: 34px;
   text-align: left;
-  overflow: hidden;
   z-index: 0;
   padding: 4px 0px;
   .substituto-marquee {

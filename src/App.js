@@ -10,10 +10,7 @@ import {
   getMemberProfile,
 } from "./redux/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
-import Home from "./pages/Home";
 // import Botiga from "./pages/Botiga";
-import Entrevista from "./components/supportyourlocals/Entrevista/Entrevista";
-import SupportYourLocals from "./pages/SupportYourLocals";
 import NotFound from "./pages/NotFound";
 import { Switch, Route } from "react-router-dom";
 import Contacte from "./contacte/Contacte";
@@ -54,6 +51,9 @@ import Projects from "./pages/Projects";
 import QrClient from "./pages/QrClient";
 import Agenda from "./pages/agenda/Agenda";
 import { StyledApp } from "./App.style";
+import LoadableHome from "./pages/home/LoadableHome";
+import SupportYourLocals from "./pages/support/SupportYourLocals";
+import Entrevista from "./pages/support/components/Entrevista/Entrevista";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -117,7 +117,7 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route path="/summary-checkout" component={CheckoutFinished} />
           <Route path="/subscribe" component={SubscriptionFinished} />
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={LoadableHome} />
           <Route component={NotFound} />
         </Switch>
       </UserContext.Provider>

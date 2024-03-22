@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Galeria from "../components/galeria/Galeria";
 import LettersMove from "../components/layout/LettersMove";
 import XMLParser from "react-xml-parser";
@@ -9,17 +10,28 @@ import {
   radioDublabLink,
 } from "../utils/constants";
 import PowerTitle from "../components/layout/PowerTitle";
+import { galeriaLoading } from "../redux/actions/loaders";
+import Spinner from "../components/spinner/Spinner";
 
 const Galery = () => {
   const [galleryList, setGalleryList] = useState([]);
+  const dispatch = useDispatch();
+  const { isGaleriaLoading } = useSelector((state) => state.loaders);
 
   const url = `https://www.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=${FLICKR_KEY}&photoset_id=${FLICKR_ALBUM_ID}&format=rest`;
 
   useEffect(() => {
-    axios.get(`${url}`, {}).then((s) => {
-      var xml = new XMLParser().parseFromString(s?.data);
-      setGalleryList(xml.children[0].children);
-    });
+    dispatch(galeriaLoading(true));
+    axios
+      .get(`${url}`, {})
+      .then((s) => {
+        var xml = new XMLParser().parseFromString(s?.data);
+        setGalleryList(xml.children[0].children);
+        dispatch(galeriaLoading(false));
+      })
+      .catch(() => {
+        dispatch(galeriaLoading(false));
+      });
   }, []);
 
   const imgArrayBuilder = galleryList.map((el) => {
@@ -35,7 +47,7 @@ const Galery = () => {
     <div className="SupportContent">
       <div>
         <PowerTitle title="PARKFEST 22" subtitle="* 21-05-22 *" />
-        <Galeria images={imgArrayBuilder} />
+        {isGaleriaLoading ? <Spinner /> : <Galeria images={imgArrayBuilder} />}
       </div>
       <LettersMove
         className="lettersMoveDiv"

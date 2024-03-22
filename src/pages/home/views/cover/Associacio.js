@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { useSelector } from "react-redux";
-import LettersMove from "./../layout/LettersMove";
+import LettersMove from "../../../../components/layout/LettersMove";
 import "./Associacio.css";
-import { MOBILE_NORMAL } from "../../utils/constants";
-import useMediaQuery from "../../hooks/use-media-query";
+import { MOBILE_NORMAL } from "../../../../utils/constants";
+import useMediaQuery from "../../../../hooks/use-media-query";
 
 const Associacio = () => {
   const isMobile = useMediaQuery(MOBILE_NORMAL);

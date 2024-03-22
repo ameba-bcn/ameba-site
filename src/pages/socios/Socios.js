@@ -9,10 +9,13 @@ import { StyledHeightBlock } from "../../styles/GlobalStyles.style";
 import SearchBox from "../../components/searchBox/SearchBox";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import { getMemberProjects } from "../../redux/actions/data";
+import Spinner from "../../components/spinner/Spinner";
 
 export const StyledSocios = styled.div`
   height: auto;
   background-color: #fae6c5;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Socios = () => {
@@ -21,6 +24,7 @@ const Socios = () => {
   useEffect(() => {
     dispatch(getMemberProjects());
   }, []);
+  const { isMemberProjectsLoading } = useSelector((state) => state.loaders);
 
   const [searchInput, setSearchInput] = useState("");
   const [t] = useTranslation("translation");
@@ -29,23 +33,29 @@ const Socios = () => {
   return (
     <StyledSocios>
       <PowerTitle title="soci@s" className="SupportTitle" />
-      <DisclaimerBox
-        text={
-          member_projects.length === 0
-            ? t("general.sense-resultats")
-            : t("soci.missatge-ppal")
-        }
-        id="project-disclaimer"
-        borderColor="black"
-      />
-      <StyledHeightBlock />
-      <SearchBox
-        searchText="Busca"
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-        hidden={true}
-      />
-      <CardLayout cardList={member_projects} urlRoot="socis" />
+      {isMemberProjectsLoading ? (
+        <Spinner />
+      ) : (
+        <>
+          <DisclaimerBox
+            text={
+              member_projects.length === 0
+                ? t("general.sense-resultats")
+                : t("soci.missatge-ppal")
+            }
+            id="project-disclaimer"
+            borderColor="black"
+          />
+          <StyledHeightBlock />
+          <SearchBox
+            searchText="Busca"
+            searchInput={searchInput}
+            setSearchInput={setSearchInput}
+            hidden={true}
+          />
+          <CardLayout cardList={member_projects} urlRoot="socis" />
+        </>
+      )}
       <LettersMove
         className="lettersMoveDiv"
         sentence={t("banners.soci-curt")}

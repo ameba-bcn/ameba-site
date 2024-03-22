@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const StyledContacte = styled.div`
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
 
   .contenedorContacto {
     margin: 0 auto;

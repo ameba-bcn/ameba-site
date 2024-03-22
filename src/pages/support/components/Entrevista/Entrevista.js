@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import TitleSection from "../TitleSection";
-import axiosInstance from "../../../axios";
-import LettersMove from "../../layout/LettersMove";
 import MediaSection from "./MediaSection";
 import QuestionsSection from "./QuestionsSection";
-import MainSection from "./MainSection";
 import EntrevistaMenu from "./EntrevistaMenu";
 import "./Entrevista.css";
-import { API_URL, radioDublabLink } from "../../../utils/constants";
+import TitleSection from "../../../../components/layout/TitleSection";
+import axiosInstance from "../../../../axios";
+import { API_URL, radioDublabLink } from "../../../../utils/constants";
+import LettersMove from "../../../../components/layout/LettersMove";
+import MainSection from "./MainSection";
 
 const Entrevista = () => {
   let history = useHistory();

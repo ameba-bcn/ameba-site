@@ -1,8 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import useMediaQuery from "../../hooks/use-media-query";
 import styled from "styled-components";
 import RowSupportLocals from "./RowSupportLocals";
+import useMediaQuery from "../../../hooks/use-media-query";
 
 const StyledBgGrid = styled.div`
   display: flex;

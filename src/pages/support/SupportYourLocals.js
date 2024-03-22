@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import PowerTitle from "../components/layout/PowerTitle";
-import "../components/supportyourlocals/SupportYourLocals.css";
-import LettersMove from "./../components/layout/LettersMove";
+import PowerTitle, {
+  StyledPowerTitleBox,
+} from "../../components/layout/PowerTitle";
+import LettersMove from "../../components/layout/LettersMove";
 import { useTranslation } from "react-i18next";
-import { radioDublabLink } from "../utils/constants";
-import CardLayout from "../components/layout/CardLayout/CardLayout";
-import SearchBox from "../components/searchBox/SearchBox";
+import { radioDublabLink } from "../../utils/constants";
+import CardLayout from "../../components/layout/CardLayout/CardLayout";
+import SearchBox from "../../components/searchBox/SearchBox";
+import Spinner from "../../components/spinner/Spinner";
 
 export default function SupportYourLocals() {
   const [t] = useTranslation("translation");
+  const { isArtistLoading } = useSelector((state) => state.loaders);
 
   const [searchInput, setSearchInput] = useState("");
   const { support } = useSelector((state) => state.data);
@@ -20,7 +23,7 @@ export default function SupportYourLocals() {
   );
 
   return (
-    <div className="SupportContent" id="SupportContent">
+    <StyledPowerTitleBox id="SupportContent">
       <PowerTitle
         title={"#SUPPORTYOURLOCALS"}
         className="SupportTitle"
@@ -32,13 +35,17 @@ export default function SupportYourLocals() {
         setSearchInput={setSearchInput}
         hidden={true}
       />
-      <CardLayout cardList={filteredArtists} urlRoot="support" />
+      {isArtistLoading ? (
+        <Spinner />
+      ) : (
+        <CardLayout cardList={filteredArtists} urlRoot="support" />
+      )}
       <LettersMove
         className="lettersMoveDiv"
         sentence="AMEBA RADIO @ dublab"
         link={radioDublabLink}
         color="#FAE6C5"
       />
-    </div>
+    </StyledPowerTitleBox>
   );
 }

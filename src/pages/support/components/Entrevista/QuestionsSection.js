@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import TitleSection from "../TitleSection";
-import { MOBILE_NORMAL } from "../../../utils/constants";
-import Icon from "../../ui/Icon";
+import TitleSection from "../../../../components/layout/TitleSection";
 import styled from "styled-components";
-import useMediaQuery from "../../../hooks/use-media-query";
+import useMediaQuery from "../../../../hooks/use-media-query";
+import Icon from "../../../../components/ui/Icon";
+import { MOBILE_NORMAL } from "../../../../utils/constants";
 
 const StyledPlusBox = styled.div`
   display: flex;

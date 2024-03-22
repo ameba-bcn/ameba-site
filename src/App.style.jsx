@@ -16,6 +16,9 @@ export const StyledApp = styled.div`
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .logViewRed {
     height: 100%;
@@ -220,11 +223,6 @@ export const StyledApp = styled.div`
 
   #colabo {
     position: flex;
-  }
-
-  .BGWrapper {
-    position: relative;
-    margin: auto;
   }
 
   .CenteredImage {

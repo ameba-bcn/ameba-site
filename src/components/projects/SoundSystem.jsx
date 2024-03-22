@@ -1,9 +1,9 @@
 import React from "react";
-import styled from "styled-components";
 import { MOBILE_SMALL } from "../../utils/constants";
-import TitleSection from "../supportyourlocals/TitleSection";
 import { StyledLink } from "../../styles/GlobalStyles";
 import useMediaQuery from "../../hooks/use-media-query";
+import TitleSection from "../layout/TitleSection";
+import styled from "styled-components";
 
 const StyledMainSoundSystem = styled.div`
   display: flex;

@@ -1,7 +1,7 @@
 import React from "react";
 // import ReactPlayer from "react-player";
 // import MediaLinks from "../../layout/MediaLinks";
-import TitleSection from "../TitleSection";
+import TitleSection from "../../../../components/layout/TitleSection";
 import styled from "styled-components";
 
 export default function MediaSection(props) {

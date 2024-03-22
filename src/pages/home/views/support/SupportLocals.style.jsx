@@ -8,6 +8,7 @@ export const StyledSupportLocals = styled.div`
   flex-direction: column;
   overflow-y: hidden;
   background-color: #f2c571;
+  height: 100%;
 `;
 
 export const StyledOverlay = styled.div`

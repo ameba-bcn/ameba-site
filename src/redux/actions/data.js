@@ -13,105 +13,152 @@ import {
   GET_MEMBER_PROJECTS,
 } from "./types";
 import DataService from "../services/data.service";
+import {
+  articlesLoading,
+  artistsLoading,
+  coversLoading,
+  eventsLoading,
+  manifestoLoading,
+  memberProjectsLoading,
+  subscriptionsLoading,
+} from "./loaders";
 
 export const supportYourLocalsAll = () => (dispatch) => {
-  return DataService.supportYourLocalsAll().then(
-    (response) => {
-      dispatch({
-        type: GET_ALL_SUPPORT_SUCCESS,
-        payload: response?.data,
-      });
+  dispatch(artistsLoading(true));
+  return DataService.supportYourLocalsAll()
+    .then(
+      (response) => {
+        dispatch(artistsLoading(false));
 
-      return Promise.resolve();
-    },
-    () => {
-      dispatch({
-        type: GET_ALL_SUPPORT_FAIL,
-      });
-    }
-  );
+        dispatch({
+          type: GET_ALL_SUPPORT_SUCCESS,
+          payload: response?.data,
+        });
+
+        return Promise.resolve();
+      },
+      () => {
+        dispatch({
+          type: GET_ALL_SUPPORT_FAIL,
+        });
+      }
+    )
+    .catch(() => {
+      dispatch(artistsLoading(false));
+    });
 };
 
 export const agendaAll = () => (dispatch) => {
-  return DataService.agendaAll().then(
-    (response) => {
-      dispatch({
-        type: GET_ALL_AGENDA_SUCCESS,
-        payload: response?.data,
-      });
+  dispatch(eventsLoading(true));
+  return DataService.agendaAll()
+    .then(
+      (response) => {
+        dispatch(eventsLoading(false));
+        dispatch({
+          type: GET_ALL_AGENDA_SUCCESS,
+          payload: response?.data,
+        });
 
-      return Promise.resolve();
-    },
-    () => {
-      dispatch({
-        type: GET_ALL_AGENDA_FAIL,
-      });
+        return Promise.resolve();
+      },
+      () => {
+        dispatch({
+          type: GET_ALL_AGENDA_FAIL,
+        });
 
-      return Promise.reject();
-    }
-  );
+        return Promise.reject();
+      }
+    )
+    .catch(() => {
+      dispatch(eventsLoading(false));
+    });
 };
 
 export const botigaAll = () => (dispatch) => {
-  return DataService.botigaAll().then(
-    (response) => {
-      dispatch({
-        type: GET_ALL_BOTIGA_SUCCESS,
-        payload: response?.data,
-      });
+  dispatch(articlesLoading(true));
+  return DataService.botigaAll()
+    .then(
+      (response) => {
+        dispatch(articlesLoading(false));
 
-      return Promise.resolve();
-    },
-    () => {
-      dispatch({
-        type: GET_ALL_BOTIGA_FAIL,
-      });
+        dispatch({
+          type: GET_ALL_BOTIGA_SUCCESS,
+          payload: response?.data,
+        });
 
-      return Promise.reject();
-    }
-  );
+        return Promise.resolve();
+      },
+      () => {
+        dispatch({
+          type: GET_ALL_BOTIGA_FAIL,
+        });
+
+        return Promise.reject();
+      }
+    )
+    .catch(() => {
+      dispatch(articlesLoading(false));
+    });
 };
 
 export const membershipAll = () => (dispatch) => {
-  return DataService.membershipAll().then(
-    (response) => {
+  dispatch(subscriptionsLoading(true));
+  return DataService.membershipAll()
+    .then(
+      (response) => {
+        dispatch(subscriptionsLoading(false));
+        dispatch({
+          type: GET_ALL_MEMBERSHIPS_SUCCESS,
+          payload: response?.data,
+        });
+
+        return Promise.resolve();
+      },
+      () => {
+        dispatch({
+          type: GET_ALL_MEMBERSHIPS_FAIL,
+        });
+
+        return Promise.reject();
+      }
+    )
+    .catch(() => {
+      dispatch(subscriptionsLoading(false));
+    });
+};
+
+export const getAbout = () => (dispatch) => {
+  dispatch(manifestoLoading(true));
+  return DataService.getAbout()
+    .then((response) => {
+      dispatch(manifestoLoading(false));
       dispatch({
-        type: GET_ALL_MEMBERSHIPS_SUCCESS,
+        type: GET_ABOUT,
         payload: response?.data,
       });
 
       return Promise.resolve();
-    },
-    () => {
-      dispatch({
-        type: GET_ALL_MEMBERSHIPS_FAIL,
-      });
-
-      return Promise.reject();
-    }
-  );
-};
-
-export const getAbout = () => (dispatch) => {
-  return DataService.getAbout().then((response) => {
-    dispatch({
-      type: GET_ABOUT,
-      payload: response?.data,
+    })
+    .catch(() => {
+      dispatch(manifestoLoading(false));
     });
-
-    return Promise.resolve();
-  });
 };
 
 export const getCover = () => (dispatch) => {
-  return DataService.getCover().then((response) => {
-    dispatch({
-      type: GET_COVER,
-      payload: response?.data,
-    });
+  dispatch(coversLoading(true));
+  return DataService.getCover()
+    .then((response) => {
+      dispatch(coversLoading(false));
+      dispatch({
+        type: GET_COVER,
+        payload: response?.data,
+      });
 
-    return Promise.resolve();
-  });
+      return Promise.resolve();
+    })
+    .catch(() => {
+      dispatch(coversLoading(false));
+    });
 };
 
 export const getCollaborators = () => (dispatch) => {
@@ -126,12 +173,20 @@ export const getCollaborators = () => (dispatch) => {
 };
 
 export const getMemberProjects = () => (dispatch) => {
-  return DataService.getMemberProjects().then((response) => {
-    dispatch({
-      type: GET_MEMBER_PROJECTS,
-      payload: response?.data,
-    });
+  dispatch(memberProjectsLoading(true));
 
-    return Promise.resolve();
-  });
+  return DataService.getMemberProjects()
+    .then((response) => {
+      dispatch(memberProjectsLoading(false));
+
+      dispatch({
+        type: GET_MEMBER_PROJECTS,
+        payload: response?.data,
+      });
+
+      return Promise.resolve();
+    })
+    .catch(() => {
+      dispatch(memberProjectsLoading(false));
+    });
 };

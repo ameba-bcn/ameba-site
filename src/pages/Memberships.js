@@ -24,9 +24,12 @@ import DisclaimerBox from "../components/disclaimerBox/DisclaimerBox";
 import Icon from "../components/ui/Icon";
 import useMediaQuery from "../hooks/use-media-query";
 
-const SyledExternalBox = styled.div`
+const SyledMembershipBox = styled.div`
   height: 100%;
   background-color: #fae6c5;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const Memberships = () => {
@@ -83,14 +86,14 @@ const Memberships = () => {
   const buttons = [membership[0]?.name];
 
   return (
-    <div>
-      <SyledExternalBox>
-        {membership.length > 0 && (
+    <SyledMembershipBox>
+      <>
+        {membership.length > 0 ? (
           <StyledExternalEventBox>
             <StyledTitleBox>
-              <ReactFitty maxSize={75}>
-                {`${t("banners.soci-curt")}!`}
-              </ReactFitty>
+              <ReactFitty maxSize={75}>{`${t(
+                "banners.soci-curt"
+              )}!`}</ReactFitty>
             </StyledTitleBox>
             <div className="rowExternal">
               <StyledExternalEventCol1>
@@ -171,15 +174,17 @@ const Memberships = () => {
               </StyledExternalEventCol2>
             </div>
           </StyledExternalEventBox>
+        ) : (
+          <DisclaimerBox text="No data available" />
         )}
-        <LettersMove
-          className="lettersMoveDiv"
-          sentence={t("banners.soci-curt")}
-          link="/memberships"
-          color="#EB5E3E"
-        />
-      </SyledExternalBox>
-    </div>
+      </>
+      <LettersMove
+        className="lettersMoveDiv"
+        sentence={t("banners.soci-curt")}
+        link="/memberships"
+        color="#EB5E3E"
+      />
+    </SyledMembershipBox>
   );
 };
 

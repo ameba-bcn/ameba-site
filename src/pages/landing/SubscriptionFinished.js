@@ -11,6 +11,7 @@ export default function SubscriptionFinished(props) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [t] = useTranslation("translation");
 
+  // eslint-disable-next-line no-undef
   const queryString = require("querystring-es3");
   const parsed = queryString.parse(props.location.search);
   let email = parsed?.email?.trim();

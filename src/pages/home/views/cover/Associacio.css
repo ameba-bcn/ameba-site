@@ -10,7 +10,6 @@
 
 .cover-box {
   display: flex;
-  /* min-height: 100vh; */
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -20,7 +19,6 @@
 }
 
 #associacio > .wrapper {
-  /* margin-top: 100vh; */
   margin-top: -6px;
 }
 

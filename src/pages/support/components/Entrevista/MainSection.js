@@ -1,6 +1,6 @@
 import React from "react";
-import { formatISODateToDate } from "../../../utils/utils";
-import TitleSection from "../TitleSection";
+import TitleSection from "../../../../components/layout/TitleSection";
+import { formatISODateToDate } from "../../../../utils/utils";
 
 export default function MainSection(props) {
   const { artist = {} } = props;
