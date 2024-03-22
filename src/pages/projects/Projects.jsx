@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
-import PowerTitle from "../components/layout/PowerTitle";
-import LettersMove from "../components/layout/LettersMove";
-import SoundSystem from "../components/projects/SoundSystem";
+import PowerTitle from "../../components/layout/PowerTitle";
+import LettersMove from "../../components/layout/LettersMove";
+import SoundSystem from "../../components/projects/SoundSystem";
 
 export const StyledProjects = styled.div`
   height: auto;

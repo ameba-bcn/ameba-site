@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { logout } from "../../redux/actions/auth";
+import { logout } from "../../store/actions/auth";
 import Dropdown from "../dropdown/Dropdown";
 import styled from "styled-components";
 

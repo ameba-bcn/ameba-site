@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import LettersMove from "../../components/layout/LettersMove";
-import { subscribeNewsletter } from "../../redux/actions/profile";
+import { subscribeNewsletter } from "../../store/actions/profile";
 import { AMEBA_EMAIL } from "../../utils/constants";
 import { StyledLink } from "../../styles/GlobalStyles";
 

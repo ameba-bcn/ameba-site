@@ -4,7 +4,7 @@ import InputField from "../InputField/InputField";
 import { useDispatch } from "react-redux";
 import { LogFormError } from "../Log.style";
 import { validate } from "./PasswordRecoveryFormValidate";
-import { passwordRecovery } from "../../../redux/actions/auth";
+import { passwordRecovery } from "../../../store/actions/auth";
 import { useFormik } from "formik";
 import { isEmptyObject } from "../../../utils/utils";
 import { useTranslation } from "react-i18next";

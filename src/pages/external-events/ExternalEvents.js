@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import LettersMove from "../components/layout/LettersMove";
-import ExternalEvent from "../components/externalEvents/ExternalEvent";
-import axiosInstance from "../axios";
-import { API_URL, productQueryKind } from "../utils/constants";
-import { addToCart } from "../redux/actions/cart";
+import LettersMove from "../../components/layout/LettersMove";
+import ExternalEvent from "../../components/externalEvents/ExternalEvent";
+import axiosInstance from "../../axios";
+import { API_URL, productQueryKind } from "../../utils/constants";
+import { addToCart } from "../../store/actions/cart";
 import { useLocation } from "react-router-dom";
 
 const SyledExternalBox = styled.div`
@@ -30,6 +30,7 @@ const ExternalEvents = () => {
   const [productData, setProductData] = useState({});
   const [producteLoading, setProducteLoading] = useState(false);
   let location = useLocation();
+  // eslint-disable-next-line no-undef
   const queryString = require("querystring-es3");
   const value = queryString.parse(location.search);
   const { id = "", kind = "" } = value;

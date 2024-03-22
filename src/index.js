@@ -6,10 +6,10 @@ import WebFont from "webfontloader";
 import { BrowserRouter } from "react-router-dom";
 import ErrorBoundary from "./components/error-handler/ErrorHandler";
 import { Provider } from "react-redux";
-import store from "./store";
 import i18next from "i18next";
 import { I18nextProvider } from "react-i18next";
 import "./i18next";
+import store from "./store/store";
 
 WebFont.load({
   google: {

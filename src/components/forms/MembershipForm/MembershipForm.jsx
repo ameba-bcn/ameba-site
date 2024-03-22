@@ -1,11 +1,10 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   createMemberProfile,
   updateMemberProfile,
-} from "../../../redux/actions/auth";
-import { useSelector } from "react-redux";
+} from "../../../store/actions/auth";
 import { deepComparision, isEmptyObject } from "../../../utils/utils";
 import Button from "../../button/Button";
 import InputField from "../InputField/InputField";

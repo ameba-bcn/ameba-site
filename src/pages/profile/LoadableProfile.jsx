@@ -1,15 +1,15 @@
 import React, { Suspense } from "react";
 import FullscreenSpinner from "../../components/spinner/FullscreenSpinner";
 
-const HomeView = React.lazy(() =>
-  import("./Home" /* webpackChunkName: "home" */)
+const ProfileView = React.lazy(() =>
+  import("./Profile" /* webpackChunkName: "Profile" */)
 );
 
-const LoadableHome = (props) => (
+const LoadableProfile = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>
-    <HomeView {...props} />
+    <ProfileView {...props} />
   </Suspense>
 );
 
 // eslint-disable-next-line react/display-name
-export default (props) => <LoadableHome {...props} />;
+export default (props) => <LoadableProfile {...props} />;

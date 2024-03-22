@@ -2,27 +2,27 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import LettersMove from "../components/layout/LettersMove";
-import { MOBILE_NORMAL } from "../utils/constants";
-import { addToCart } from "../redux/actions/cart";
+import LettersMove from "../../components/layout/LettersMove";
+import { MOBILE_NORMAL } from "../../utils/constants";
+import { addToCart } from "../../store/actions/cart";
 import {
   StyledExternalButtonBox,
   StyledExternalEventBox,
   StyledExternalEventCol1,
   StyledExternalEventCol2,
   StyledTitleBox,
-} from "../components/externalEvents/StyledExternalEvent";
+} from "../../components/externalEvents/StyledExternalEvent";
 import { ReactFitty } from "react-fitty";
-import ImageCarousel from "../components/images/ImageCarousel";
-import Button from "../components/button/Button";
-import InteractiveModalBox from "../modals/InteractiveModalBox";
+import ImageCarousel from "../../components/images/ImageCarousel";
+import Button from "../../components/button/Button";
+import InteractiveModalBox from "../../modals/InteractiveModalBox";
 import { toast } from "react-toastify";
-import { isMemberCheckout, urlify } from "../utils/utils";
+import { isMemberCheckout, urlify } from "../../utils/utils";
 import { NavLink } from "react-router-dom";
-import CartToast from "../components/toast/CartToast";
-import DisclaimerBox from "../components/disclaimerBox/DisclaimerBox";
-import Icon from "../components/ui/Icon";
-import useMediaQuery from "../hooks/use-media-query";
+import CartToast from "../../components/toast/CartToast";
+import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
+import Icon from "../../components/ui/Icon";
+import useMediaQuery from "../../hooks/use-media-query";
 
 const SyledMembershipBox = styled.div`
   height: 100%;

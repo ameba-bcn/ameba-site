@@ -1,14 +1,14 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, createContext } from "react";
 import {
   setGuestUser,
   setLoggedUser,
   setMember,
-} from "./redux/actions/profile";
+} from "./store/actions/profile";
 import {
   validateLocalToken,
   getUserData,
   getMemberProfile,
-} from "./redux/actions/auth";
+} from "./store/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
 // import Botiga from "./pages/Botiga";
 import NotFound from "./pages/NotFound";
@@ -23,7 +23,6 @@ import LogMailConfirmation from "./pages/LogMailConfirmation";
 import SendEmailPasswordRecovery from "./pages/SendEmailPasswordRecovery";
 import ValidateEmail from "./pages/ValidateEmail";
 import ScrollTop from "./components/layout/ScrollTop";
-import { UserContext } from "./UserContext";
 import {
   supportYourLocalsAll,
   agendaAll,
@@ -33,27 +32,29 @@ import {
   membershipAll,
   getCollaborators,
   getMemberProjects,
-} from "./redux/actions/data";
-import { getCart } from "./redux/actions/cart";
-import Booking from "./pages/Booking";
+} from "./store/actions/data";
+import { getCart } from "./store/actions/cart";
 import { deepComparision } from "./utils/utils";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
-import ExternalEvents from "./pages/ExternalEvents";
-import Memberships from "./pages/Memberships";
-import Gallery from "./pages/Gallery";
-import Socios from "./pages/socios/Socios";
-import SociosDetailed from "./pages/socios/components/SociosDetailed";
-import Profile from "./pages/profile/Profile";
 import PasswordRecovery from "./pages/PasswordRecovery";
-import Projects from "./pages/Projects";
 import QrClient from "./pages/QrClient";
 import Agenda from "./pages/agenda/Agenda";
 import { StyledApp } from "./App.style";
 import LoadableHome from "./pages/home/LoadableHome";
-import SupportYourLocals from "./pages/support/SupportYourLocals";
-import Entrevista from "./pages/support/components/Entrevista/Entrevista";
+import LoadableEntrevista from "./pages/support/components/Entrevista/LoadableEntrevista";
+import LoadableSupportYourLocals from "./pages/support/LoadableSupportYourLocals";
+import LoadableBooking from "./pages/booking/LoadableBooking";
+import LoadableProjects from "./pages/projects/LoadableProjects";
+import LoadableSociosDetailed from "./pages/socios/components/LoadableSociosDetailed";
+import LoadableSocios from "./pages/socios/LoadableSocios";
+import LoadableGallery from "./pages/gallery/LoadableGallery";
+import LoadableMemberships from "./pages/memberships/LoadableMemberships";
+import LoadableExternalEvents from "./pages/external-events/LoadableExternalEvents";
+import LoadableProfile from "./pages/profile/LoadableProfile";
+
+const UserContext = createContext(null);
 
 function App() {
   const [user, setUser] = useState(null);
@@ -97,24 +98,24 @@ function App() {
         <Switch>
           <Route path="/activitats" component={Agenda} />
           {/* <Route path="/botiga" component={Botiga} /> */}
-          <Route exact path="/support/:id" component={Entrevista} />
-          <Route path="/support" component={SupportYourLocals} />
-          <Route exact path="/booking/:id" component={Entrevista} />
-          <Route path="/booking" component={Booking} />
-          <Route path="/projects" component={Projects} />
-          <Route exact path="/socis/:id" component={SociosDetailed} />
-          <Route path="/socis" component={Socios} />
-          <Route path="/gallery" component={Gallery} />
+          <Route exact path="/support/:id" component={LoadableEntrevista} />
+          <Route path="/support" component={LoadableSupportYourLocals} />
+          <Route exact path="/booking/:id" component={LoadableEntrevista} />
+          <Route path="/booking" component={LoadableBooking} />
+          <Route path="/projects" component={LoadableProjects} />
+          <Route exact path="/socis/:id" component={LoadableSociosDetailed} />
+          <Route path="/socis" component={LoadableSocios} />
+          <Route path="/gallery" component={LoadableGallery} />
           <Route path="/login" component={LogSession} />
           <Route path="/recovery" component={PasswordRecovery} />
           <Route path="/checkout" component={CheckoutPage} />
-          <Route path="/memberships" component={Memberships} />
+          <Route path="/memberships" component={LoadableMemberships} />
           <Route path="/send-recovery" component={SendEmailPasswordRecovery} />
           <Route path="/member-card" component={QrClient} />
           <Route path="/validate-email" component={ValidateEmail} />
           <Route path="/activate" component={LogMailConfirmation} />
-          <Route path="/product" component={ExternalEvents} />
-          <Route path="/profile" component={Profile} />
+          <Route path="/product" component={LoadableExternalEvents} />
+          <Route path="/profile" component={LoadableProfile} />
           <Route path="/summary-checkout" component={CheckoutFinished} />
           <Route path="/subscribe" component={SubscriptionFinished} />
           <Route exact path="/" component={LoadableHome} />

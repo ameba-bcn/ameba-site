@@ -13,7 +13,7 @@ import {
   PaymentSummaryBox,
 } from "./Payment.style";
 import { ReviewRowSeparator } from "./Review.style";
-import { openFullscreen } from "../../redux/actions/fullscreen";
+import { openFullscreen } from "../../store/actions/fullscreen";
 
 export default function Payment() {
   const dispatch = useDispatch();

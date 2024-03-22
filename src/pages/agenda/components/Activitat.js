@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../../redux/actions/cart";
+import { addToCart } from "../../../store/actions/cart";
 import { Redirect } from "react-router-dom";
 import ModalCard from "../../../modals/ModalCard";
 import { useTranslation } from "react-i18next";

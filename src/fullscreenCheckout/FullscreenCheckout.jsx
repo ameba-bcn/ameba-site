@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import CloseModal from "../modals/CloseModal";
-import { closeFullscreen } from "../redux/actions/fullscreen";
+import { closeFullscreen } from "../store/actions/fullscreen";
 import { useTranslation } from "react-i18next";
-import { getCart } from "../redux/actions/cart";
+import { getCart } from "../store/actions/cart";
 
 const StyledMacroFullscreenView = styled.div`
   width: 100%;

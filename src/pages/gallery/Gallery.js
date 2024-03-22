@@ -1,19 +1,19 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Galeria from "../components/galeria/Galeria";
-import LettersMove from "../components/layout/LettersMove";
+import Galeria from "../../components/galeria/Galeria";
+import LettersMove from "../../components/layout/LettersMove";
 import XMLParser from "react-xml-parser";
 import {
   FLICKR_ALBUM_ID,
   FLICKR_KEY,
   radioDublabLink,
-} from "../utils/constants";
-import PowerTitle from "../components/layout/PowerTitle";
-import { galeriaLoading } from "../redux/actions/loaders";
-import Spinner from "../components/spinner/Spinner";
+} from "../../utils/constants";
+import PowerTitle from "../../components/layout/PowerTitle";
+import { galeriaLoading } from "../../store/actions/loaders";
+import Spinner from "../../components/spinner/Spinner";
 
-const Galery = () => {
+const Gallery = () => {
   const [galleryList, setGalleryList] = useState([]);
   const dispatch = useDispatch();
   const { isGaleriaLoading } = useSelector((state) => state.loaders);
@@ -59,4 +59,4 @@ const Galery = () => {
   );
 };
 
-export default Galery;
+export default Gallery;

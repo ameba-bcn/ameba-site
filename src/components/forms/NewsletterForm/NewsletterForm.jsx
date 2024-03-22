@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { subscribeNewsletter } from "../../../redux/actions/profile";
+import { subscribeNewsletter } from "../../../store/actions/profile";
 import notificationToast, { isEmptyObject } from "../../../utils/utils";
 import Button from "../../button/Button";
 import InputField from "../InputField/InputField";

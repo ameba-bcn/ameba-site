@@ -7,7 +7,7 @@ import { validate } from "./DiscountCodeValidate";
 import { useFormik } from "formik";
 import { DiscountRow } from "./DiscountCode.style";
 import { isEmptyObject } from "../../../utils/utils";
-import { applyDiscount } from "../../../redux/actions/cart";
+import { applyDiscount } from "../../../store/actions/cart";
 import { useTranslation } from "react-i18next";
 
 export default function DiscountCode() {

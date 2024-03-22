@@ -21,7 +21,7 @@ import {
 } from "./AgendaTable.styled";
 import axiosInstance from "../../../axios";
 import { API_URL, MOBILE_SEMI_BIG } from "../../../utils/constants";
-import { addToCart } from "../../../redux/actions/cart";
+import { addToCart } from "../../../store/actions/cart";
 import SearchBox from "../../../components/searchBox/SearchBox";
 import useMediaQuery from "../../../hooks/use-media-query";
 

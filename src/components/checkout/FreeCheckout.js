@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
-import { getMemberProfile } from "../../redux/actions/auth";
-import { checkoutPaymentCart, getCart } from "../../redux/actions/cart";
+import { getMemberProfile } from "../../store/actions/auth";
+import { checkoutPaymentCart, getCart } from "../../store/actions/cart";
 import Button from "../button/Button";
 import { useTranslation } from "react-i18next";
-import { closeFullscreen } from "../../redux/actions/fullscreen";
+import { closeFullscreen } from "../../store/actions/fullscreen";
 
 const StyledFreeCheckoutParagraph = styled.div`
   font-size: 24px;

@@ -5,8 +5,8 @@ import {
   login,
   getUserData,
   getMemberProfile,
-} from "../../../redux/actions/auth";
-import { getCart } from "../../../redux/actions/cart";
+} from "../../../store/actions/auth";
+import { getCart } from "../../../store/actions/cart";
 import InputField from "../InputField/InputField";
 import { validate } from "../Login/LoginValidate";
 import { LogFormBox, LogFormError } from "../Log.style";

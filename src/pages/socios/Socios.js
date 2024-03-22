@@ -8,7 +8,7 @@ import CardLayout from "../../components/layout/CardLayout/CardLayout";
 import { StyledHeightBlock } from "../../styles/GlobalStyles.style";
 import SearchBox from "../../components/searchBox/SearchBox";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
-import { getMemberProjects } from "../../redux/actions/data";
+import { getMemberProjects } from "../../store/actions/data";
 import Spinner from "../../components/spinner/Spinner";
 
 export const StyledSocios = styled.div`
@@ -24,8 +24,8 @@ const Socios = () => {
   useEffect(() => {
     dispatch(getMemberProjects());
   }, []);
-  const { isMemberProjectsLoading } = useSelector((state) => state.loaders);
 
+  const { isMemberProjectsLoading } = useSelector((state) => state.loaders);
   const [searchInput, setSearchInput] = useState("");
   const [t] = useTranslation("translation");
   const { member_projects } = useSelector((state) => state.data);

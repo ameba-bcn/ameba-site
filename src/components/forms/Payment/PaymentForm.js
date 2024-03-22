@@ -7,7 +7,7 @@ import {
 import { useDispatch } from "react-redux";
 import "./PaymentForm.css";
 import Button from "../../button/Button";
-import { closeFullscreen } from "../../../redux/actions/fullscreen";
+import { closeFullscreen } from "../../../store/actions/fullscreen";
 import notificationToast from "../../../utils/utils";
 
 function PaymentForm() {

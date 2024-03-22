@@ -5,7 +5,7 @@ import Button from "../../button/Button";
 import InputField from "../InputField/InputField";
 import { validate } from "../Register/RegisterValidate";
 import { LogFormBox, LogFormError } from "../Log.style";
-import { register } from "../../../redux/actions/auth";
+import { register } from "../../../store/actions/auth";
 import { isEmptyObject } from "../../../utils/utils";
 import { useTranslation } from "react-i18next";
 

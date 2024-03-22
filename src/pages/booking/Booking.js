@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import PowerTitle from "../components/layout/PowerTitle";
-import LettersMove from "../components/layout/LettersMove";
+import PowerTitle from "../../components/layout/PowerTitle";
+import LettersMove from "../../components/layout/LettersMove";
 import { useTranslation } from "react-i18next";
-import CardLayout from "../components/layout/CardLayout/CardLayout";
+import CardLayout from "../../components/layout/CardLayout/CardLayout";
 
 export default function Booking() {
   const [t] = useTranslation("translation");

@@ -1,11 +1,11 @@
 import React from "react";
-import { addToCart, substractToCart } from "../../redux/actions/cart";
+import { addToCart, substractToCart } from "../../store/actions/cart";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Button from "../button/Button";
 import { toast } from "react-toastify";
 import "./DropdownCart.css";
-import { setGuestUser, setLoggedUser } from "../../redux/actions/profile";
+import { setGuestUser, setLoggedUser } from "../../store/actions/profile";
 import { useTranslation } from "react-i18next";
 import { ReactFitty } from "react-fitty";
 import { priceMayDiscount, truncate } from "../../utils/utils";

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { substractToCart } from "../../redux/actions/cart";
+import { substractToCart } from "../../store/actions/cart";
 import { ReviewTable } from "./Review.style";
 import { priceMayDiscount } from "../../utils/utils";
 import Icon from "../ui/Icon";

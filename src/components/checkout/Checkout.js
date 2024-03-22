@@ -6,11 +6,11 @@ import {
   checkoutCart,
   checkoutPaymentCart,
   getCart,
-} from "../../redux/actions/cart";
+} from "../../store/actions/cart";
 import { isMemberCheckout } from "../../utils/utils";
 import "./Checkout.css";
 import Button from "../button/Button";
-import { getMemberProfile } from "../../redux/actions/auth";
+import { getMemberProfile } from "../../store/actions/auth";
 import { Redirect } from "react-router-dom";
 import MembershipFormReadOnly from "../forms/MembershipForm/MembershipFormReadOnly";
 import Stepper from "../stepper/Stepper";
@@ -26,7 +26,7 @@ import {
 import Payment from "./Payment";
 import { MOBILE_NORMAL, MOBILE_SMALL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
-import { closeFullscreen } from "../../redux/actions/fullscreen";
+import { closeFullscreen } from "../../store/actions/fullscreen";
 import useMediaQuery from "../../hooks/use-media-query";
 
 function Checkout() {
