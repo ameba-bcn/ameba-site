@@ -25,7 +25,7 @@ const SociosDetailed = () => {
   const ID = urlData?.id;
   useEffect(() => {
     axiosInstance
-      .get(`${API_URL}members/${ID}/`, {})
+      .get(`${API_URL}member_projects/${ID}/`, {})
       .then((resp) => {
         setProject(resp.data);
       })
