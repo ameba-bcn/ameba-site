@@ -95,6 +95,8 @@ export const AMEBA_EMAIL = "info@ameba.cat";
 
 export const MEMBER = "Suporter";
 
+export const ACTIVE_STATUS = "active";
+
 export const productKinds = ["producte", "soci", "activitat"];
 export const productQueryKind = {
   producte: "articles",

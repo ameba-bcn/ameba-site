@@ -60,9 +60,8 @@ function App() {
   const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
-  const auth = useSelector((state) => state.auth);
   const { isOpen } = useSelector((state) => state.fullscreen);
-  const { user_member_data = {} } = auth;
+  const { user_member_data = {} } = useSelector((state) => state.auth);
 
   const isNewMember = deepComparision(user_member_data, {});
   useEffect(() => {

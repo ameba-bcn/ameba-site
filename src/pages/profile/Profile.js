@@ -11,9 +11,11 @@ import QrView from "./views/QrView";
 import MemberProject from "./views/MemberProject";
 
 export default function Profile() {
-  const auth = useSelector((state) => state.auth);
-  const { user_member_data, user_data } = useSelector((state) => state.auth);
-  const { isLoggedIn = false } = auth;
+  const {
+    user_member_data,
+    user_data,
+    isLoggedIn = false,
+  } = useSelector((state) => state.auth);
   const { username = "" } = user_data;
   const isMember = !isEmptyObject(user_member_data);
   const [t] = useTranslation("translation");

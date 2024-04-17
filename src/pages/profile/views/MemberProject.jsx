@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import InputField from "../../../components/forms/InputField/InputField";
 import { LogFormError } from "../../../components/forms/Log.style";
@@ -13,7 +13,7 @@ import MediaLinksForm from "./components/MediaLinksForm";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 // import { setUploadedImages } from "../../../store/actions/profile";
 import { validate } from "./MemberProjectValidate";
-import { ERROR } from "../../../utils/constants";
+import { ACTIVE_STATUS, ERROR } from "../../../utils/constants";
 import CheckBox from "../../../components/layout/CheckBox";
 
 const MemberProject = () => {
@@ -88,16 +88,19 @@ const MemberProject = () => {
   });
 
   const isReadOnly = false;
-
+  const { user_member_data = {} } = useSelector((state) => state.auth);
+  const { status = "" } = user_member_data;
   return (
     <MemberProjectFrame>
       <MemberFormBox>
         <form className="formMembership" onSubmit={formik.handleSubmit}>
-          <DisclaimerBox
-            text={isActive ? t("soci.perfil-gral") : t("soci.no-soci-perfil")}
-            id="project-disclaimer"
-            borderColor="black"
-          />
+          {status !== ACTIVE_STATUS && (
+            <DisclaimerBox
+              text={isActive ? t("soci.perfil-gral") : t("soci.no-soci-perfil")}
+              id="project-disclaimer"
+              borderColor="black"
+            />
+          )}
           <div className="field-wrapper">
             <InputField
               id="project_name"

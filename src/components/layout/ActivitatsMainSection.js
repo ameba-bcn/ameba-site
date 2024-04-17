@@ -53,7 +53,7 @@ const ActivitatsMainSection = (props) => {
     axiosInstance
       .get(`${API_URL}events/${data.id}`, {})
       .then((res) => {
-        setEventData(res.data);
+        setEventData(res?.data);
         setLoading(false);
       })
       .then(handleClickOpen())

@@ -10,6 +10,7 @@ import SearchBox from "../../components/searchBox/SearchBox";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import { getMemberProjects } from "../../store/actions/data";
 import Spinner from "../../components/spinner/Spinner";
+import { ACTIVE_STATUS } from "../../utils/constants";
 
 export const StyledSocios = styled.div`
   height: auto;
@@ -29,6 +30,8 @@ const Socios = () => {
   const [searchInput, setSearchInput] = useState("");
   const [t] = useTranslation("translation");
   const { member_projects } = useSelector((state) => state.data);
+  const { user_member_data = {} } = useSelector((state) => state.auth);
+  const { status = "" } = user_member_data;
 
   return (
     <StyledSocios>
@@ -37,15 +40,17 @@ const Socios = () => {
         <Spinner />
       ) : (
         <>
-          <DisclaimerBox
-            text={
-              member_projects.length === 0
-                ? t("general.sense-resultats")
-                : t("soci.missatge-ppal")
-            }
-            id="project-disclaimer"
-            borderColor="black"
-          />
+          {status !== ACTIVE_STATUS && (
+            <DisclaimerBox
+              text={
+                member_projects.length === 0
+                  ? t("general.sense-resultats")
+                  : t("soci.missatge-ppal")
+              }
+              id="project-disclaimer"
+              borderColor="black"
+            />
+          )}
           <StyledHeightBlock />
           <SearchBox
             searchText="Busca"
