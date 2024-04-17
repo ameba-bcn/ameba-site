@@ -160,8 +160,12 @@ const AgendaTable = () => {
     [isSmallScreen]
   );
 
-  const filteredAgenda = sortByDate(agenda).filter((activity) =>
-    activity?.name?.toLowerCase()?.includes(searchInput?.toLowerCase())
+  const filteredAgenda = React.useMemo(
+    () =>
+      sortByDate(agenda).filter((activity) =>
+        activity?.name?.toLowerCase()?.includes(searchInput?.toLowerCase())
+      ),
+    [agenda]
   );
 
   const table = useReactTable({
