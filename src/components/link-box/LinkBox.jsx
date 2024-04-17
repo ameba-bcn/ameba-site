@@ -10,7 +10,6 @@ const StyledLinkBox = styled.div`
   padding: 24px;
   display: flex;
   flex-direction: column;
-  width: 100%;
   margin: 0 auto;
   .link-row {
     display: flex;

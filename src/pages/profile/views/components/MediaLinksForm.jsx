@@ -40,6 +40,7 @@ export const SyledAddLink = styled.div`
 
 export const Textarea = styled.textarea`
   display: block;
+  width: -webkit-fill-available;
   height: 100%;
   min-height: 40px;
   padding: 12px 12px;
