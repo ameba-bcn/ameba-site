@@ -19,6 +19,12 @@ export const LogFormBox = styled.div`
   }
 `;
 
+export const LogButtonBox = styled.div`
+  button {
+    width: 100%;
+  }
+`;
+
 export const LogFormError = styled.div`
   background-color: rgb(250, 230, 197, 0.5);
   width: 99%;

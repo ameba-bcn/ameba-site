@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import InputField from "../InputField/InputField";
 import { useSelector } from "react-redux";
-import { LogFormBox, LogFormError } from "../Log.style";
+import { LogFormBox, LogFormError, LogButtonBox } from "../Log.style";
 import { Redirect } from "react-router";
 import { useTranslation } from "react-i18next";
 import Button from "../../button/Button";
 import { usernameValidation } from "../../../utils/validations";
 import { API_URL, ERROR, MOBILE_SMALL } from "../../../utils/constants";
 import axiosInstance from "../../../axios";
-import { StyledLink } from "../../../styles/GlobalStyles";
 import useMediaQuery from "../../../hooks/use-media-query";
 
 export default function MembershipFormReadOnly(props) {
@@ -78,6 +77,18 @@ export default function MembershipFormReadOnly(props) {
             </div>
             <div className="field-wrapper">
               <InputField
+                id="memberNum"
+                name="memberNum"
+                type="text"
+                label={t("form.soci")}
+                value={user_data?.number}
+                slimLine={true}
+                valid={true}
+                disabled={true}
+              />
+            </div>
+            <div className="field-wrapper">
+              <InputField
                 id="emailMemberReadOnly"
                 name="email"
                 type="email"
@@ -90,7 +101,7 @@ export default function MembershipFormReadOnly(props) {
           </form>
         </LogFormBox>
         {!isCheckout && (
-          <StyledLink>
+          <LogButtonBox>
             {user_data?.username !== user ? (
               <Button
                 variant="contained"
@@ -112,7 +123,7 @@ export default function MembershipFormReadOnly(props) {
                 {t("login.modifica")}
               </Button>
             )}
-          </StyledLink>
+          </LogButtonBox>
         )}
       </div>
     </div>

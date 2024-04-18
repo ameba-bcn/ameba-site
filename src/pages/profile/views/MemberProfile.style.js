@@ -47,6 +47,9 @@ export const MemberInfoRow = styled.div`
   & span {
     font-weight: 600;
     cursor: pointer;
+    :hover {
+      color: var(--color-rojo);
+    }
   }
 `;
 

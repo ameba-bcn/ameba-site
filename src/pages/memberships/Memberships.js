@@ -87,97 +87,93 @@ const Memberships = () => {
 
   return (
     <SyledMembershipBox>
-      <>
-        {membership.length > 0 ? (
-          <StyledExternalEventBox>
-            <StyledTitleBox>
-              <ReactFitty maxSize={75}>{`${t(
-                "banners.soci-curt"
-              )}!`}</ReactFitty>
-            </StyledTitleBox>
-            <div className="rowExternal">
-              <StyledExternalEventCol1>
-                <ImageCarousel imgList={images} />
-                <StyledExternalButtonBox>
-                  {/* // eslint-disable-line */}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    buttonSize="boton--medium"
-                    disabled={productSoldOut}
-                    buttonStyle={
-                      colorMode && colorMode === "dark"
-                        ? "boton--back-orange--solid"
-                        : "boton--primary--solid"
-                    }
-                    onClick={() => {
-                      !productSoldOut && handleAddClick(id);
-                    }}
-                  >
-                    {buttonText}
-                  </Button>
-                </StyledExternalButtonBox>
-              </StyledExternalEventCol1>
-              <StyledExternalEventCol2>
-                <InteractiveModalBox
-                  modalStyle={modalStyle}
-                  isMobile={isMobile}
-                  productSoldOut={productSoldOut}
-                  sizes={[]}
-                  activeSize={activeSize}
-                  setActiveSize={setActiveSize}
-                  selectSizeError={selectSizeError}
-                  setSelectSizeError={setSelectSizeError}
-                  extraButtons={buttons}
-                  datetime={datetime}
-                  handleAddClick={handleAddClick}
-                  price={price_range}
-                  maps_url={maps_url}
-                  colorMode={colorMode}
-                />
+      {membership.length > 0 ? (
+        <StyledExternalEventBox>
+          <StyledTitleBox>
+            <ReactFitty maxSize={75}>{`${t("banners.soci-curt")}!`}</ReactFitty>
+          </StyledTitleBox>
+          <div className="rowExternal">
+            <StyledExternalEventCol1>
+              <ImageCarousel imgList={images} />
+              <StyledExternalButtonBox>
+                {/* // eslint-disable-line */}
+                <Button
+                  variant="contained"
+                  color="primary"
+                  buttonSize="boton--medium"
+                  disabled={productSoldOut}
+                  buttonStyle={
+                    colorMode && colorMode === "dark"
+                      ? "boton--back-orange--solid"
+                      : "boton--primary--solid"
+                  }
+                  onClick={() => {
+                    !productSoldOut && handleAddClick(id);
+                  }}
+                >
+                  {buttonText}
+                </Button>
+              </StyledExternalButtonBox>
+            </StyledExternalEventCol1>
+            <StyledExternalEventCol2>
+              <InteractiveModalBox
+                modalStyle={modalStyle}
+                isMobile={isMobile}
+                productSoldOut={productSoldOut}
+                sizes={[]}
+                activeSize={activeSize}
+                setActiveSize={setActiveSize}
+                selectSizeError={selectSizeError}
+                setSelectSizeError={setSelectSizeError}
+                extraButtons={buttons}
+                datetime={datetime}
+                handleAddClick={handleAddClick}
+                price={price_range}
+                maps_url={maps_url}
+                colorMode={colorMode}
+              />
 
-                <div className="interactiveDataBox-activitat__row">
-                  <span className="modal-card___title_small">
-                    <Icon icon="money" />{" "}
-                    <span>{t("modal.preu")} / &nbsp;</span>
-                  </span>
-                  <span className="interactiveDataBox-activitat__text-data">
-                    {price_range}
-                  </span>
-                </div>
-                <div className="modal-card__description-title-external">
-                  {box1Title}
-                </div>
-                <div className="modal-card__description-content">
-                  {urlify(description)}
-                </div>
-                {box2Title && (
-                  <>
-                    {benefits && (
-                      <>
-                        {" "}
-                        <div className="modal-card__description-title-external">
-                          {box2Title}
-                        </div>
-                        <div className="modal-card__description-content">
-                          {urlify(benefits)}
-                        </div>
-                      </>
-                    )}
-                  </>
-                )}
-                {hasMembershipInCart && (
-                  <NavLink to={checkoutRedirect}>
-                    <DisclaimerBox text={t("soci.disclaimer")} />
-                  </NavLink>
-                )}
-              </StyledExternalEventCol2>
-            </div>
-          </StyledExternalEventBox>
-        ) : (
-          <DisclaimerBox text="No data available" />
-        )}
-      </>
+              <div className="interactiveDataBox-activitat__row">
+                <span className="modal-card___title_small">
+                  <Icon icon="money" /> <span>{t("modal.preu")} / &nbsp;</span>
+                </span>
+                <span className="interactiveDataBox-activitat__text-data">
+                  {price_range}
+                </span>
+              </div>
+              <div className="modal-card__description-title-external">
+                {box1Title}
+              </div>
+              <div className="modal-card__description-content">
+                {urlify(description)}
+              </div>
+              {box2Title && (
+                <>
+                  {benefits && (
+                    <>
+                      {" "}
+                      <div className="modal-card__description-title-external">
+                        {box2Title}
+                      </div>
+                      <div className="modal-card__description-content">
+                        {urlify(benefits)}
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
+              {hasMembershipInCart && (
+                <NavLink to={checkoutRedirect}>
+                  <DisclaimerBox text={t("soci.disclaimer")} />
+                </NavLink>
+              )}
+            </StyledExternalEventCol2>
+          </div>
+        </StyledExternalEventBox>
+      ) : (
+        <DisclaimerBox text="No data available" />
+      )}
+
       <LettersMove
         className="lettersMoveDiv"
         sentence={t("banners.soci-curt")}

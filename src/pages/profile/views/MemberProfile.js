@@ -45,22 +45,24 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
             <MembershipFormReadOnly />
           )}
           <RowSeparator />
-          <MemberInfoRow>
-            {t("perfil.vols-soci")}?<br />
-            <NavLink
-              style={{ textDecoration: "none", color: "#1d1d1b" }}
-              to={{
-                pathname: "/memberships",
-              }}
-            >
-              <span
-                style={{ textDecoration: "none" }}
-                // onClick={() => setOpen(true)}
+          {!isMember && (
+            <MemberInfoRow>
+              {t("perfil.vols-soci")}?<br />
+              <NavLink
+                style={{ textDecoration: "none", color: "#1d1d1b" }}
+                to={{
+                  pathname: "/memberships",
+                }}
               >
-                {`< ${t("perfil.mes-info")} >`}
-              </span>
-            </NavLink>
-          </MemberInfoRow>
+                <span
+                  style={{ textDecoration: "none" }}
+                  // onClick={() => setOpen(true)}
+                >
+                  {`< ${t("perfil.mes-info")} >`}
+                </span>
+              </NavLink>
+            </MemberInfoRow>
+          )}
 
           {/* <Button
             variant="contained"
