@@ -44,24 +44,27 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
           ) : (
             <MembershipFormReadOnly />
           )}
-          <RowSeparator />
+
           {!isMember && (
-            <MemberInfoRow>
-              {t("perfil.vols-soci")}?<br />
-              <NavLink
-                style={{ textDecoration: "none", color: "#1d1d1b" }}
-                to={{
-                  pathname: "/memberships",
-                }}
-              >
-                <span
-                  style={{ textDecoration: "none" }}
-                  // onClick={() => setOpen(true)}
+            <>
+              <RowSeparator />
+              <MemberInfoRow>
+                {t("perfil.vols-soci")}?<br />
+                <NavLink
+                  style={{ textDecoration: "none", color: "#1d1d1b" }}
+                  to={{
+                    pathname: "/memberships",
+                  }}
                 >
-                  {`< ${t("perfil.mes-info")} >`}
-                </span>
-              </NavLink>
-            </MemberInfoRow>
+                  <span
+                    style={{ textDecoration: "none" }}
+                    // onClick={() => setOpen(true)}
+                  >
+                    {`< ${t("perfil.mes-info")} >`}
+                  </span>
+                </NavLink>
+              </MemberInfoRow>
+            </>
           )}
 
           {/* <Button
@@ -74,19 +77,16 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
             {t("perfil.baixa")}
           </Button> */}
           {memberships.length > 0 && (
-            <>
-              <RowSeparator />
-              <DisclaimerBox
-                text={
-                  <MessageFormat>
-                    {t("perfil.baixa-missatge")}
-                    <StyledLink>
-                      <a href="mailto:info@ameba.cat">info@ameba.cat</a>
-                    </StyledLink>
-                  </MessageFormat>
-                }
-              />
-            </>
+            <DisclaimerBox
+              text={
+                <MessageFormat>
+                  {t("perfil.baixa-missatge")}
+                  <StyledLink>
+                    <a href="mailto:info@ameba.cat">info@ameba.cat</a>
+                  </StyledLink>
+                </MessageFormat>
+              }
+            />
           )}
         </MemberProfileBoxBorder>
         {open && <SociDialog open={open} onClose={handleClick} />}

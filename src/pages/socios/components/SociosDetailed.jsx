@@ -10,6 +10,7 @@ import { API_URL } from "../../../utils/constants";
 import { StyledSociosMain } from "./StyledSociosDetailed";
 import LinkBox from "../../../components/link-box/LinkBox";
 import TitleSection from "../../../components/layout/TitleSection";
+import { StyledMainColumnView } from "../../../styles/GlobalStyles.style";
 
 const SociosDetailed = () => {
   const history = useHistory();
@@ -21,7 +22,7 @@ const SociosDetailed = () => {
     (x) => x?.project_name?.replace(/\s+/g, "-")?.toLowerCase() === urlID
   );
 
-  const { project_name, description, image, media_urls, first_name } = project;
+  const { project_name, description, images, media_urls, first_name } = project;
   const ID = urlData?.id;
   useEffect(() => {
     axiosInstance
@@ -36,7 +37,7 @@ const SociosDetailed = () => {
 
   return (
     <StyledSociosMain>
-      <div className="top-section-gral">
+      <StyledMainColumnView>
         <div className="top-section_entr">
           <div className="ts-breadcrumbs">
             <span onClick={() => history.push("/")}>AMEBA</span> /{" "}
@@ -54,21 +55,23 @@ const SociosDetailed = () => {
                 __html: DOMPurify.sanitize(description),
               }}
             />
-            {project.image && (
+            {images?.length > 0 && (
               <div className="bio-img">
-                <ImageCarousel imgList={Array(image)} />
+                <ImageCarousel imgList={images} />
               </div>
             )}
           </div>
         </div>
-        <div className="link-section">
-          <LinkBox mediaLinks={media_urls} label="links" thinLine={true} />
-        </div>
-        <LettersMove
-          sentence={"l'associació de música electrònica de barcelona"}
-          color={"#F2C571"}
-        />
-      </div>
+        {media_urls?.length > 0 && (
+          <div className="link-section">
+            <LinkBox mediaLinks={media_urls} label="links" thinLine={true} />
+          </div>
+        )}
+      </StyledMainColumnView>
+      <LettersMove
+        sentence={"l'associació de música electrònica de barcelona"}
+        color={"#F2C571"}
+      />
     </StyledSociosMain>
   );
 };

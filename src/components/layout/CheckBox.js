@@ -6,19 +6,22 @@ const StyledCheckBox = styled.div`
   justify-content: center;
   input {
     margin-top: -14px;
+    :not(.disabled) {
+      cursor: pointer;
+    }
   }
-  .checkbox-wrapper-40 {
+  .checkbox-wrapper {
     --borderColor: #000;
     --borderWidth: 0.125em;
   }
 
-  .checkbox-wrapper-40 label {
+  .checkbox-wrapper label {
     display: block;
     max-width: 100%;
     margin: 0 auto;
   }
 
-  .checkbox-wrapper-40 input[type="checkbox"] {
+  .checkbox-wrapper input[type="checkbox"] {
     -webkit-appearance: none;
     appearance: none;
     vertical-align: middle;
@@ -31,8 +34,8 @@ const StyledCheckBox = styled.div`
     height: 1em;
     position: relative;
   }
-  .checkbox-wrapper-40 input[type="checkbox"]:before,
-  .checkbox-wrapper-40 input[type="checkbox"]:after {
+  .checkbox-wrapper input[type="checkbox"]:before,
+  .checkbox-wrapper input[type="checkbox"]:after {
     content: "";
     position: absolute;
     background: var(--borderColor);
@@ -42,30 +45,30 @@ const StyledCheckBox = styled.div`
     left: 10%;
     transform-origin: left center;
   }
-  .checkbox-wrapper-40 input[type="checkbox"]:before {
+  .checkbox-wrapper input[type="checkbox"]:before {
     transform: rotate(45deg)
       translate(calc(var(--borderWidth) / -2), calc(var(--borderWidth) / -2))
       scaleX(0);
     transition: transform 200ms ease-in 200ms;
   }
-  .checkbox-wrapper-40 input[type="checkbox"]:after {
+  .checkbox-wrapper input[type="checkbox"]:after {
     width: calc(var(--borderWidth) * 5);
     transform: rotate(-45deg) translateY(calc(var(--borderWidth) * 2)) scaleX(0);
     transform-origin: left center;
     transition: transform 200ms ease-in;
   }
-  .checkbox-wrapper-40 input[type="checkbox"]:checked:before {
+  .checkbox-wrapper input[type="checkbox"]:checked:before {
     transform: rotate(45deg)
       translate(calc(var(--borderWidth) / -2), calc(var(--borderWidth) / -2))
       scaleX(1);
     transition: transform 200ms ease-in;
   }
-  .checkbox-wrapper-40 input[type="checkbox"]:checked:after {
+  .checkbox-wrapper input[type="checkbox"]:checked:after {
     width: calc(var(--borderWidth) * 5);
     transform: rotate(-45deg) translateY(calc(var(--borderWidth) * 2)) scaleX(1);
     transition: transform 200ms ease-out 200ms;
   }
-  .checkbox-wrapper-40 input[type="checkbox"]:focus {
+  .checkbox-wrapper input[type="checkbox"]:focus {
     outline: calc(var(--borderWidth) / 2) dotted rgba(0, 0, 0, 0.25);
   }
   span {
@@ -80,13 +83,14 @@ const StyledCheckBox = styled.div`
 
 const CheckBox = ({ label = "", checked, onChange, disabled = false }) => (
   <StyledCheckBox>
-    <div className="checkbox-wrapper-40">
+    <div className="checkbox-wrapper">
       <label>
         <input
           type="checkbox"
-          defaultChecked={checked}
+          checked={checked}
           onClick={() => onChange(checked)}
           disabled={disabled}
+          onChange={() => {}}
         />
         <span className="checkbox"></span>
         <span>{label}</span>

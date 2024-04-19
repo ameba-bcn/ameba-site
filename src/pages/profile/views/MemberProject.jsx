@@ -172,6 +172,7 @@ const MemberProject = () => {
               buttonSize="boton--medium"
               buttonStyle="boton--primary--solid"
               hoverStyle="bg-orange"
+              disabled={loading}
             >
               {loading ? (
                 <span className="spinner-border"></span>

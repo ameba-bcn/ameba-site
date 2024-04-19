@@ -15,7 +15,12 @@ export const LogFormBox = styled.div`
     width: 100%;
   }
   .button-row {
+    display: flex;
+    justify-content: <center></center>;
     gap: 12px;
+    .column {
+      width: 100%;
+    }
   }
 `;
 

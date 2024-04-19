@@ -31,7 +31,7 @@ function ImageCarousel(props) {
   const { imgList = [] } = props;
   const [activeStep, setActiveStep] = useState(0);
   const maxSteps = imgList.length;
-  // const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -50,23 +50,23 @@ function ImageCarousel(props) {
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
-      >
-        {imgList &&
-          imgList.map((step, index) => (
-            <div key={index} className="image-carousel-div">
-              {Math.abs(activeStep - index) <= 2 ? (
-                <img
-                  alt={index}
-                  className="image-carousel-img"
-                  src={step}
-                  style={loaded ? {} : { display: "none" }}
-                  onLoad={() => setLoaded(true)}
-                  draggable={false}
-                />
-              ) : null}
-            </div>
-          ))}
-      </SwipeableViews> */}
+      >*/}
+      {imgList &&
+        imgList.map((step, index) => (
+          <div key={index} className="image-carousel-div">
+            {Math.abs(activeStep - index) <= 2 ? (
+              <img
+                alt={index}
+                className="image-carousel-img"
+                src={step}
+                style={loaded ? {} : { display: "none" }}
+                onLoad={() => setLoaded(true)}
+                draggable={false}
+              />
+            ) : null}
+          </div>
+        ))}
+      {/* </SwipeableViews> */}
       {maxSteps > 1 && (
         <StyledImgButtons isMobile={isMobile}>
           <StepperUI

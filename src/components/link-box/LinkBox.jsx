@@ -48,7 +48,7 @@ const StyledLinkBox = styled.div`
 
 export const StyledLinkLabelBox = styled.div`
   text-align: left;
-  margin: 0px 0px -14px 13px !important;
+  margin: 0px 0px -8px 13px !important;
 `;
 
 export const StyledLinkLabel = styled.div`
