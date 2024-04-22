@@ -89,7 +89,11 @@ function App() {
     dispatch(getCart());
     dispatch(getMemberProjects());
   }, [dispatch, isNewMember]);
-
+  console.log(
+    "envs process.env, REACT_APP_BASE_URL",
+    process.env,
+    process.env.REACT_APP_BASE_URL
+  );
   return (
     <StyledApp>
       {isOpen && <FullscreenCheckout />}
