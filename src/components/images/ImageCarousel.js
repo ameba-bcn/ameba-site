@@ -6,6 +6,7 @@ import "./ImageCarousel.css";
 import { MOBILE_NORMAL } from "../../utils/constants";
 import useMediaQuery from "../../hooks/use-media-query";
 import StepperUI from "./StepperUI";
+import { SwipeableViews } from "../swipeable-views/SwipeableViews";
 
 // const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -41,32 +42,33 @@ function ImageCarousel(props) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  // const handleStepChange = (step) => {
-  //   setActiveStep(step);
-  // };
+  const handleStepChange = (step) => {
+    setActiveStep(step);
+  };
+
   return (
     <div className="image-carousel-root">
-      {/* <SwipeableViews
+      <SwipeableViews
         index={activeStep}
         onChangeIndex={handleStepChange}
         enableMouseEvents
-      >*/}
-      {imgList &&
-        imgList.map((step, index) => (
-          <div key={index} className="image-carousel-div">
-            {Math.abs(activeStep - index) <= 2 ? (
-              <img
-                alt={index}
-                className="image-carousel-img"
-                src={step}
-                style={loaded ? {} : { display: "none" }}
-                onLoad={() => setLoaded(true)}
-                draggable={false}
-              />
-            ) : null}
-          </div>
-        ))}
-      {/* </SwipeableViews> */}
+      >
+        {imgList &&
+          imgList.map((step, index) => (
+            <div key={index} className="image-carousel-div">
+              {Math.abs(activeStep - index) <= 2 ? (
+                <img
+                  alt={index}
+                  className="image-carousel-img"
+                  src={step}
+                  style={loaded ? {} : { display: "none" }}
+                  onLoad={() => setLoaded(true)}
+                  draggable={false}
+                />
+              ) : null}
+            </div>
+          ))}
+      </SwipeableViews>
       {maxSteps > 1 && (
         <StyledImgButtons isMobile={isMobile}>
           <StepperUI

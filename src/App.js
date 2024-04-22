@@ -54,6 +54,7 @@ import LoadableMemberships from "./pages/memberships/LoadableMemberships";
 import LoadableExternalEvents from "./pages/external-events/LoadableExternalEvents";
 import LoadableProfile from "./pages/profile/LoadableProfile";
 import LoadableLegal from "./pages/legal/LoadableLegal";
+import QrLanding from "./pages/qr-landing/QrLanding";
 
 const UserContext = createContext(null);
 
@@ -120,6 +121,7 @@ function App() {
           <Route path="/subscribe" component={SubscriptionFinished} />
           <Route path="/legal" component={LoadableLegal} />
           <Route exact path="/" component={LoadableHome} />
+          <Route path="/qr-view" component={QrLanding} />
           <Route component={NotFound} />
         </Switch>
       </UserContext.Provider>

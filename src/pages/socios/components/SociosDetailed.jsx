@@ -11,11 +11,13 @@ import { StyledSociosMain } from "./StyledSociosDetailed";
 import LinkBox from "../../../components/link-box/LinkBox";
 import TitleSection from "../../../components/layout/TitleSection";
 import { StyledMainColumnView } from "../../../styles/GlobalStyles.style";
+import Spinner from "../../../components/spinner/Spinner";
 
 const SociosDetailed = () => {
   const history = useHistory();
 
   const [project, setProject] = useState({});
+  const [loading, setLoading] = useState(false);
   let urlID = location.pathname.substr(location.pathname.lastIndexOf("/") + 1);
   const { member_projects = [] } = useSelector((state) => state.data);
   const [urlData] = member_projects.filter(
@@ -25,15 +27,30 @@ const SociosDetailed = () => {
   const { project_name, description, images, media_urls, first_name } = project;
   const ID = urlData?.id;
   useEffect(() => {
+    setLoading(true);
     axiosInstance
       .get(`${API_URL}member_projects/${ID}/`, {})
       .then((resp) => {
         setProject(resp.data);
+        setLoading(false);
       })
       .catch((err) => {
+        setLoading(false);
         console.warn("ERROR: something gone wrong", err);
       });
   }, [ID]);
+
+  if (loading) {
+    return (
+      <StyledSociosMain>
+        <Spinner height={400} />{" "}
+        <LettersMove
+          sentence={"l'associació de música electrònica de barcelona"}
+          color={"#F2C571"}
+        />
+      </StyledSociosMain>
+    );
+  }
 
   return (
     <StyledSociosMain>
