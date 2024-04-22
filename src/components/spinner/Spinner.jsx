@@ -54,22 +54,70 @@ const StyledSpinner = styled.div`
     -o-animation: spinner 150ms infinite linear;
     animation: spinner 150ms infinite linear;
     border-radius: 0.5em;
-    -webkit-box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0,
-      rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0,
-      rgba(255, 255, 255, 0.75) 0 1.5em 0 0,
-      rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0,
-      rgba(255, 255, 255, 0.75) -1.5em 0 0 0,
-      rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0,
-      rgba(255, 255, 255, 0.75) 0 -1.5em 0 0,
-      rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
-    box-shadow: rgba(255, 255, 255, 0.75) 1.5em 0 0 0,
-      rgba(255, 255, 255, 0.75) 1.1em 1.1em 0 0,
-      rgba(255, 255, 255, 0.75) 0 1.5em 0 0,
-      rgba(255, 255, 255, 0.75) -1.1em 1.1em 0 0,
-      rgba(255, 255, 255, 0.75) -1.5em 0 0 0,
-      rgba(255, 255, 255, 0.75) -1.1em -1.1em 0 0,
-      rgba(255, 255, 255, 0.75) 0 -1.5em 0 0,
-      rgba(255, 255, 255, 0.75) 1.1em -1.1em 0 0;
+    -webkit-box-shadow: ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) 1.5em 0 0 0"
+          : "var( --color-negro) 1.5em 0 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) 1.1em 1.1em 0 0"
+          : "var( --color-negro) 1.1em 1.1em 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) 0 1.5em 0 0"
+          : "var( --color-negro) 0 1.5em 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) -1.1em 1.1em 0 0"
+          : "var( --color-negro) -1.1em 1.1em 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) -1.5em 0 0 0"
+          : "var( --color-negro) -1.5em 0 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) -1.1em -1.1em 0 0"
+          : "var( --color-negro) -1.1em -1.1em 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) 0 -1.5em 0 0"
+          : "var( --color-negro) 0 -1.5em 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) 1.1em -1.1em 0 0"
+          : "var( --color-negro) 1.1em -1.1em 0 0"};
+    box-shadow: ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) 1.5em 0 0 0"
+          : "var( --color-negro) 1.5em 0 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) 1.1em 1.1em 0 0"
+          : "var( --color-negro) 1.1em 1.1em 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) 0 1.5em 0 0"
+          : "var( --color-negro) 0 1.5em 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) -1.1em 1.1em 0 0"
+          : "var( --color-negro) -1.1em 1.1em 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) -1.5em 0 0 0"
+          : "var( --color-negro) -1.5em 0 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) -1.1em -1.1em 0 0"
+          : "var( --color-negro) -1.1em -1.1em 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream) 0 -1.5em 0 0"
+          : "var( --color-negro) 0 -1.5em 0 0"},
+      ${(props) =>
+        props.color === "white"
+          ? "var( --color-cream)  1.1em -1.1em 0 0"
+          : "var( --color-negro)  1.1em -1.1em 0 0"};
   }
 
   /* Animation */
@@ -140,10 +188,12 @@ const StyledSpinner = styled.div`
   }
 `;
 
-const Spinner = ({ height }) => {
+const Spinner = ({ height, color = "white" }) => {
   return (
     <StyledSpinnerFrame height={height}>
-      <StyledSpinner className="loading">Loading</StyledSpinner>
+      <StyledSpinner className="loading" color={color}>
+        Loading
+      </StyledSpinner>
     </StyledSpinnerFrame>
   );
 };

@@ -15,9 +15,12 @@ import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import { validate } from "./MemberProjectValidate";
 import { ACTIVE_STATUS, ERROR } from "../../../utils/constants";
 import CheckBox from "../../../components/layout/CheckBox";
+import Spinner from "../../../components/spinner/Spinner";
+import notificationToast from "../../../utils/utils";
 
 const MemberProject = () => {
   const [initialProjectData, setInitialProjectData] = useState({});
+  const [t] = useTranslation("translation");
   const [images, setImages] = useState(initialProjectData.images || []);
   const [isPublic, setIsPublic] = useState(initialProjectData.public || false);
   const [description, setDescription] = useState(
@@ -30,9 +33,9 @@ const MemberProject = () => {
   const isActive = initialProjectData.isActive;
   // const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
-  const [t] = useTranslation("translation");
 
   useEffect(() => {
+    setLoading(true);
     authService
       .getMemberProject()
       .then((data) => {
@@ -40,6 +43,9 @@ const MemberProject = () => {
         setInitialProjectData(data);
         setIsPublic(data.public);
         setImages(data.images || []);
+      })
+      .then(() => {
+        setLoading(false);
       })
       .catch(() => setLoading(false));
   }, []);
@@ -52,13 +58,23 @@ const MemberProject = () => {
       setImages(null);
     } else {
       const upload_images = images.map((img) => img.image);
-      authService.updateMemberProject({
-        ...val,
-        description: description,
-        media_urls: mediaLinks,
-        upload_images,
-        public: isPublic || false,
-      });
+      setLoading(true);
+      authService
+        .updateMemberProject({
+          ...val,
+          description: description,
+          media_urls: mediaLinks,
+          upload_images,
+          public: isPublic || false,
+        })
+        .then(() => {
+          setLoading(false);
+          notificationToast(t("general.agraiment"), "success");
+        })
+        .catch(() => {
+          setLoading(false);
+          notificationToast(t("errors.general"), "error");
+        });
     }
   };
 
@@ -90,6 +106,7 @@ const MemberProject = () => {
   const isReadOnly = false;
   const { user_member_data = {} } = useSelector((state) => state.auth);
   const { status = "" } = user_member_data;
+
   return (
     <MemberProjectFrame>
       <MemberFormBox>
@@ -101,69 +118,75 @@ const MemberProject = () => {
               borderColor="black"
             />
           )}
-          <div className="field-wrapper">
-            <InputField
-              id="project_name"
-              name="project_name"
-              type="text"
-              label={t("form.titol")}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.project_name || ""}
-              slimLine={true}
-              valid={true}
-              disabled={isReadOnly}
-            />
-            {!!formik.errors.project_name && (
-              <LogFormError>
-                <div>{formik.errors.project_name}</div>
-              </LogFormError>
-            )}
-          </div>
-          <div className={description === null ? "" : "field-wrapper"}>
-            <TextArea
-              id="description"
-              name="description"
-              initText={initialProjectData.description || ""}
-              setText={setDescription}
-              label={t("modal.descripcio")}
-              disabled={isReadOnly}
-            />
-            {description === null && (
-              <LogFormError>
-                <div>{ERROR.GENERIC.REQUIRED}</div>
-              </LogFormError>
-            )}
-          </div>
-          <div className="field-wrapper">
-            <MediaLinksForm
-              label="link"
-              mediaLinks={mediaLinks}
-              setMediaLinks={setMediaLinks}
-              disabled={isReadOnly}
-            />
-          </div>
-          <div className="field-wrapper">
-            <ImageLoader
-              maxNumber={6}
-              images={images}
-              setImages={setImages}
-              disabled={isReadOnly}
-            />
-            {images === null && (
-              <LogFormError>
-                <div>{ERROR.GENERIC.REQUIRED}</div>
-              </LogFormError>
-            )}
-          </div>
-          <div className="field-wrapper">
-            <CheckBox
-              label={isPublic ? t("form.publicat") : t("form.no-publicat")}
-              checked={isPublic}
-              onChange={(e) => setIsPublic(!e)}
-              disabled={isReadOnly}
-            />
-          </div>
+          {loading ? (
+            <Spinner color="black" />
+          ) : (
+            <>
+              <div className="field-wrapper">
+                <InputField
+                  id="project_name"
+                  name="project_name"
+                  type="text"
+                  label={t("form.titol")}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                  value={formik.values.project_name || ""}
+                  slimLine={true}
+                  valid={true}
+                  disabled={isReadOnly}
+                />
+                {!!formik.errors.project_name && (
+                  <LogFormError>
+                    <div>{formik.errors.project_name}</div>
+                  </LogFormError>
+                )}
+              </div>
+              <div className={description === null ? "" : "field-wrapper"}>
+                <TextArea
+                  id="description"
+                  name="description"
+                  initText={initialProjectData.description || ""}
+                  setText={setDescription}
+                  label={t("modal.descripcio")}
+                  disabled={isReadOnly}
+                />
+                {description === null && (
+                  <LogFormError>
+                    <div>{ERROR.GENERIC.REQUIRED}</div>
+                  </LogFormError>
+                )}
+              </div>
+              <div className="field-wrapper">
+                <MediaLinksForm
+                  label="link"
+                  mediaLinks={mediaLinks}
+                  setMediaLinks={setMediaLinks}
+                  disabled={isReadOnly}
+                />
+              </div>
+              <div className="field-wrapper">
+                <ImageLoader
+                  maxNumber={6}
+                  images={images}
+                  setImages={setImages}
+                  disabled={isReadOnly}
+                />
+                {images === null && (
+                  <LogFormError>
+                    <div>{ERROR.GENERIC.REQUIRED}</div>
+                  </LogFormError>
+                )}
+              </div>
+              <div className="field-wrapper">
+                <CheckBox
+                  label={isPublic ? t("form.publicat") : t("form.no-publicat")}
+                  checked={isPublic}
+                  onChange={(e) => setIsPublic(!e)}
+                  disabled={isReadOnly}
+                />
+              </div>
+            </>
+          )}
           <div className="button-box">
             <Button
               type="submit"

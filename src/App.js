@@ -53,6 +53,7 @@ import LoadableGallery from "./pages/gallery/LoadableGallery";
 import LoadableMemberships from "./pages/memberships/LoadableMemberships";
 import LoadableExternalEvents from "./pages/external-events/LoadableExternalEvents";
 import LoadableProfile from "./pages/profile/LoadableProfile";
+import LoadableLegal from "./pages/legal/LoadableLegal";
 
 const UserContext = createContext(null);
 
@@ -117,6 +118,7 @@ function App() {
           <Route path="/profile" component={LoadableProfile} />
           <Route path="/summary-checkout" component={CheckoutFinished} />
           <Route path="/subscribe" component={SubscriptionFinished} />
+          <Route path="/legal" component={LoadableLegal} />
           <Route exact path="/" component={LoadableHome} />
           <Route component={NotFound} />
         </Switch>

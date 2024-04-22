@@ -20,7 +20,9 @@ const TextArea = (props) => {
         <Editor
           apiKey={TEXT_EDITOR_KEY}
           disabled={disabled}
-          onInit={(evt, editor) => (editorRef.current = editor)}
+          onInit={(evt, editor) => {
+            editorRef.current = editor;
+          }}
           initialValue={`<p>${initText}</p>`}
           onEditorChange={(newValue) => {
             setText(newValue);
