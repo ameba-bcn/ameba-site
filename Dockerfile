@@ -1,10 +1,7 @@
-FROM node:16
+FROM node:16-slim AS base
+RUN corepack enable
+COPY . /src
+RUN cd /src && yarn install && yarn run build
 
-COPY . /opt/src
-WORKDIR /opt/src
-
-
-RUN npm install
-RUN npm install nodemon -g --save
-
-CMD ["nodemon", "-L", "--exec", "npm", "start"]
+FROM alpine:latest
+COPY --from=base /src/build /build
