@@ -54,6 +54,7 @@ import LoadableMemberships from "./pages/memberships/LoadableMemberships";
 import LoadableExternalEvents from "./pages/external-events/LoadableExternalEvents";
 import LoadableProfile from "./pages/profile/LoadableProfile";
 import LoadableLegal from "./pages/legal/LoadableLegal";
+import QrLanding from "./pages/qr-landing/QrLanding";
 
 const UserContext = createContext(null);
 
@@ -88,7 +89,11 @@ function App() {
     dispatch(getCart());
     dispatch(getMemberProjects());
   }, [dispatch, isNewMember]);
-
+  console.log(
+    "envs process.env, REACT_APP_BASE_URL",
+    process.env,
+    process.env.REACT_APP_BASE_URL
+  );
   return (
     <StyledApp>
       {isOpen && <FullscreenCheckout />}
@@ -120,6 +125,7 @@ function App() {
           <Route path="/subscribe" component={SubscriptionFinished} />
           <Route path="/legal" component={LoadableLegal} />
           <Route exact path="/" component={LoadableHome} />
+          <Route path="/qr-view" component={QrLanding} />
           <Route component={NotFound} />
         </Switch>
       </UserContext.Provider>
