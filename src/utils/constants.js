@@ -104,8 +104,9 @@ export const productQueryKind = {
   activitat: "events",
 };
 
+
 export const API_URL =
-  process.env.REACT_APP_API_HOST || "http://localhost:8000/api/";
+  process.env.REACT_APP_API_HOST || `${window.location.protocol}//${window.location.hostname}${window.location.port ? ':' + window.location.port : ''}/api/`;
 
 export const BASE_URL = API_URL.replace("/ameba-site/", "/");
 
