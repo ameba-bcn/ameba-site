@@ -70,7 +70,14 @@ export const StyledSvgElement = styled.div`
 `;
 
 const AmebaSvgWrapper = (props) => {
-  const { children, width, height, stroke, type, disabled = false } = props;
+  const {
+    children,
+    width = "24",
+    height = "24",
+    stroke,
+    type,
+    disabled = false,
+  } = props;
   return (
     <StyledSvgElement id={type} disabled={disabled}>
       <svg
@@ -437,15 +444,5 @@ function Icon(props) {
       return null;
   }
 }
-
-Icon.defaultProps = {
-  width: "24",
-  height: "24",
-};
-
-AmebaSvgWrapper.defaultProps = {
-  width: "24",
-  height: "24",
-};
 
 export default Icon;
