@@ -55,6 +55,7 @@ export default function NewsletterForm({ setIsSubmitted }) {
             value={formik.values.email}
             valid={1}
             unstyled={true}
+            autoComplete="on"
           />
         </div>
         <div className="form-group-button">
