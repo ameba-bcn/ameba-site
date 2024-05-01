@@ -13,7 +13,7 @@ export default function LogMailConfirmation(props) {
   // eslint-disable-next-line no-undef
   const queryString = require("querystring-es3");
   const parsed = queryString.parse(props.location.search);
-  const strToken = parsed.token;
+  const strToken = parsed["?token"] || parsed["token"];
 
   useEffect(() => {
     if (strToken) {

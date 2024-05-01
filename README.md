@@ -509,3 +509,9 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/tr
 
 node 14.15.0
 npm install node-sass@4.14.0
+
+### Run local
+
+Run devops up all the containers
+ameba-site run local an acces to port 3000
+Port 8000 is reserved to backend conection

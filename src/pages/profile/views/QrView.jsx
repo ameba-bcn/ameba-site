@@ -2,18 +2,16 @@ import React, { useEffect } from "react";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import { useTranslation } from "react-i18next";
 import ImageCarousel from "../../../components/images/ImageCarousel";
-// import stateService from "./../../../redux/services/profile.services";
+import "react-image-gallery/styles/css/image-gallery.css";
 import { StyledQrBox } from "./QrView.style";
 
 const QrView = () => {
-  // Aqui vamos a recoger el nuevo EP y escribiremos una var tipo array
-  // [{url:'',description:''}]
   const [t] = useTranslation("translation");
 
   const dummyList = [
-    "/media/images/article-totebag-modular-500x500.jpg",
-    "/media/images/article-camiseta-ameba-vinil-469x469.png",
-    "/media/images/article-camiseta-ameba-new-469x469.png",
+    "http://localhost:8080/api/media/images/IMG-20240102-WA0038.jpg",
+    "http://localhost:8080/api/media/images/ameba-workshops-griffi1.jpg",
+    "http://localhost:8080/api/media/images/ameba-workshops-dinky.jpg",
   ];
 
   useEffect(() => {

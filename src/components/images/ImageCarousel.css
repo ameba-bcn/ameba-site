@@ -1,20 +1,11 @@
 .image-carousel-root {
-    /* max-width: 400px; */
     flex-grow: 1;
     margin: 0 auto;
+    margin-bottom: 24px;
 }
 
-.image-carousel-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    max-width: 457px;
-    max-height: 457px;
-    overflow: hidden;
-    object-fit: scale-down;
-}
-
-.image-carousel-div {
-    display: flex;
-    justify-content: center;
-}
+@media screen and (max-width: 500px) {
+    .image-carousel-root{
+        margin: 24px;
+    }
+  }
