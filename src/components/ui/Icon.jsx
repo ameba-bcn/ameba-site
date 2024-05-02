@@ -108,6 +108,34 @@ function Icon(props) {
     </AmebaSvgWrapper>
   );
 
+  const assist = (
+    <AmebaSvgWrapper {...props}>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M21 9H14.69L15.64 4.43L15.67 4.11C15.67 3.7 15.5 3.32 15.23 3.05L14.17 2L7.59 8.59C7.22 8.95 7 9.45 7 10V20C7 21.1 7.9 22 9 22H18C18.83 22 19.54 21.5 19.84 20.78L22.86 13.73C22.95 13.5 23 13.26 23 13V11C23 9.9 22.1 9 21 9ZM21 13L18 20H9V10L13.34 5.66L12.23 11H21V13ZM5 10H1V22H5V10Z"
+        fill="black"
+      />
+    </AmebaSvgWrapper>
+  );
+
+  const free = (
+    <AmebaSvgWrapper {...props}>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M21 9H14.69L15.64 4.43L15.67 4.11C15.67 3.7 15.5 3.32 15.23 3.05L14.17 2L7.59 8.59C7.22 8.95 7 9.45 7 10V20C7 21.1 7.9 22 9 22H18C18.83 22 19.54 21.5 19.84 20.78L22.86 13.73C22.95 13.5 23 13.26 23 13V11C23 9.9 22.1 9 21 9ZM21 13L18 20H9V10L13.34 5.66L12.23 11H21V13ZM5 10H1V22H5V10Z"
+        fill="black"
+      />
+    </AmebaSvgWrapper>
+  );
+
+  const cancelled = (
+    <AmebaSvgWrapper {...props}>
+      <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z" />{" "}
+    </AmebaSvgWrapper>
+  );
+
   const link = (
     <AmebaSvgWrapper {...props}>
       <path
@@ -440,6 +468,12 @@ function Icon(props) {
       return ticket;
     case "menu":
       return menu;
+    case "assist":
+      return assist;
+    case "free":
+      return free;
+    case "cancelled":
+      return cancelled;
     default:
       return null;
   }

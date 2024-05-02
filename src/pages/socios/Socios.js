@@ -36,30 +36,30 @@ const Socios = () => {
   return (
     <StyledSocios>
       <PowerTitle title="soci@s" className="SupportTitle" />
+      {!isMemberProjectsLoading &&
+        Object.keys(user_member_data).length > 0 &&
+        status !== ACTIVE_STATUS && (
+          <DisclaimerBox
+            text={
+              member_projects.length === 0
+                ? t("general.sense-resultats")
+                : t("soci.missatge-ppal")
+            }
+            id="project-disclaimer"
+            borderColor="black"
+          />
+        )}
+      <StyledHeightBlock />
+      <SearchBox
+        searchText="Busca"
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        hidden={true}
+      />
       {isMemberProjectsLoading ? (
         <Spinner />
       ) : (
-        <>
-          {status !== ACTIVE_STATUS && (
-            <DisclaimerBox
-              text={
-                member_projects.length === 0
-                  ? t("general.sense-resultats")
-                  : t("soci.missatge-ppal")
-              }
-              id="project-disclaimer"
-              borderColor="black"
-            />
-          )}
-          <StyledHeightBlock />
-          <SearchBox
-            searchText="Busca"
-            searchInput={searchInput}
-            setSearchInput={setSearchInput}
-            hidden={true}
-          />
-          <CardLayout cardList={member_projects} urlRoot="socis" />
-        </>
+        <CardLayout cardList={member_projects} urlRoot="socis" />
       )}
       <LettersMove
         className="lettersMoveDiv"
