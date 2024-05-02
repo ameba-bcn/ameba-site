@@ -117,6 +117,7 @@ function App() {
           <Route path="/activate" component={LogMailConfirmation} />
           <Route path="/product" component={LoadableExternalEvents} />
           <Route path="/profile" component={LoadableProfile} />
+          <Route exact path="/profile/:id" component={LoadableProfile} />
           <Route path="/summary-checkout" component={CheckoutFinished} />
           <Route path="/subscribe" component={SubscriptionFinished} />
           <Route path="/legal" component={LoadableLegal} />

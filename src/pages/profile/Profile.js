@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LettersMove from "../../components/layout/LettersMove";
 import { isEmptyObject } from "../../utils/utils";
@@ -19,7 +19,11 @@ export default function Profile() {
   const { username = "" } = user_data;
   const isMember = !isEmptyObject(user_member_data);
   const [t] = useTranslation("translation");
-  const { step, changeStep } = useBreadcrumsSteps();
+  const location = useLocation();
+  const section = location.pathname.split("/")?.at(-1);
+  const { step, changeStep } = useBreadcrumsSteps(
+    ["PROFILE", "PROJECT", "QR"].indexOf(section?.toUpperCase())
+  );
 
   if (!isLoggedIn) {
     return <Redirect to="/" />;

@@ -15,4 +15,9 @@ export const BreadcrumsStyled = styled.div`
   span.active {
     text-decoration: underline;
   }
+
+  a {
+    color: #000;
+    text-decoration: none;
+  }
 `;

@@ -51,6 +51,7 @@ const MemberProject = () => {
   }, []);
 
   const handleSubmit = (val) => {
+    setLoading(true);
     if (description.length === 0) {
       setDescription(null);
     }
@@ -58,7 +59,6 @@ const MemberProject = () => {
       setImages(null);
     } else {
       const upload_images = images.map((img) => img.image);
-      setLoading(true);
       authService
         .updateMemberProject({
           ...val,

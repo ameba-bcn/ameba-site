@@ -4,6 +4,10 @@
     margin-bottom: 24px;
 }
 
+.image-carousel-root img{
+    pointer-events: none;
+}
+
 @media screen and (max-width: 500px) {
     .image-carousel-root{
         margin: 24px;

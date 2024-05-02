@@ -162,7 +162,7 @@ export default function notificationToast(text = "", type = "success") {
 
   if (type === "success") {
     return toast.success(finalMessage, {
-      position: toast.POSITION.TOP_RIGHT,
+      position: "top-right",
       autoClose: 3000, //3 seconds
       hideProgressBar: false,
       closeOnClick: true,
@@ -173,7 +173,7 @@ export default function notificationToast(text = "", type = "success") {
   }
   if (type === "error") {
     return toast.error(finalMessage, {
-      position: toast.POSITION.TOP_RIGHT,
+      position: "top-right",
       autoClose: 3000, //3 seconds
       hideProgressBar: false,
       closeOnClick: true,
@@ -184,7 +184,7 @@ export default function notificationToast(text = "", type = "success") {
   }
   if (type === "warning") {
     return toast.warning(finalMessage, {
-      position: toast.POSITION.TOP_RIGHT,
+      position: "top-right",
       autoClose: 3000, //3 seconds
       hideProgressBar: false,
       closeOnClick: true,
@@ -194,7 +194,7 @@ export default function notificationToast(text = "", type = "success") {
     });
   }
   return toast.info(finalMessage, {
-    position: toast.POSITION.TOP_RIGHT,
+    position: "top-right",
     autoClose: 3000, //3 seconds
     hideProgressBar: false,
     closeOnClick: true,

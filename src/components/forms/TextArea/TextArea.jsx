@@ -65,7 +65,6 @@ const TextArea = (props) => {
             toolbar_location: "bottom",
           }}
         />
-        {/* <button onClick={log}>Log editor content</button> */}
       </TextAreaStyled>
     </>
   );

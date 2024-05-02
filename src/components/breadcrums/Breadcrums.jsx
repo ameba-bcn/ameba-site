@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { BreadcrumsStyled } from "./Breadcrums.style";
 
 const Breadcrums = (props) => {
@@ -7,7 +8,11 @@ const Breadcrums = (props) => {
   return (
     <BreadcrumsStyled>
       {steps.map((s, index) => (
-        <div key={s}>
+        <NavLink
+          key={s}
+          className="menuOptions"
+          to={`/profile/${s?.toLowerCase()}`}
+        >
           {index !== 0 ? " / " : ""}
           <span
             className={step === index ? "active" : ""}
@@ -15,7 +20,7 @@ const Breadcrums = (props) => {
           >
             {s}
           </span>{" "}
-        </div>
+        </NavLink>
       ))}
     </BreadcrumsStyled>
   );
