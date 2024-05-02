@@ -4,12 +4,10 @@
     margin-bottom: 24px;
 }
 
-.image-carousel-root {
-    max-width: 460px;
-  }
 
 .image-carousel-root img{
     pointer-events: none;
+    max-width: 460px;
 }
 
 @media screen and (max-width: 500px) {
