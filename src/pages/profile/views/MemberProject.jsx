@@ -32,7 +32,7 @@ const MemberProject = () => {
   );
   const isActive = initialProjectData.isActive;
   // const dispatch = useDispatch();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -59,12 +59,14 @@ const MemberProject = () => {
       setImages(null);
     } else {
       const upload_images = images.map((img) => img.image);
+      console.log("images", images, upload_images);
+      console.log("getBase64Image", upload_images[0]);
       authService
         .updateMemberProject({
           ...val,
           description: description,
           media_urls: mediaLinks,
-          upload_images,
+          upload_images: [upload_images[0]],
           public: isPublic || false,
         })
         .then(() => {
@@ -76,6 +78,7 @@ const MemberProject = () => {
           notificationToast(t("errors.general"), "error");
         });
     }
+    setLoading(false);
   };
 
   // const uploadImage = () => {
@@ -106,7 +109,7 @@ const MemberProject = () => {
   const isReadOnly = false;
   const { user_member_data = {} } = useSelector((state) => state.auth);
   const { status = "" } = user_member_data;
-
+  console.log("initialProjectData.description", initialProjectData.description);
   return (
     <MemberProjectFrame>
       <MemberFormBox>
@@ -145,7 +148,10 @@ const MemberProject = () => {
                 <TextArea
                   id="description"
                   name="description"
-                  initText={initialProjectData.description || ""}
+                  initText={
+                    initialProjectData.description?.replace(/<p[^>]*>/g, "") ||
+                    ""
+                  }
                   setText={setDescription}
                   label={t("modal.descripcio")}
                   disabled={isReadOnly}
