@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import {
   TextAreaLabel,
@@ -10,13 +10,15 @@ import { TEXT_EDITOR_KEY } from "../../../utils/constants.js";
 const TextArea = (props) => {
   const { initText = "", setText, label = "", disabled = false } = props;
   const editorRef = useRef(null);
+  const [focus, setFocus] = useState(false);
+  const [valid, setValid] = useState(true);
 
   return (
     <>
       <TextAreaLabelBox>
         <TextAreaLabel>{` ${label} `}</TextAreaLabel>
       </TextAreaLabelBox>
-      <TextAreaStyled>
+      <TextAreaStyled focus={focus} valid={valid}>
         <Editor
           apiKey={TEXT_EDITOR_KEY}
           disabled={disabled}
@@ -26,6 +28,8 @@ const TextArea = (props) => {
           initialValue={`<p>${initText}</p>`}
           onEditorChange={(newValue) => {
             setText(newValue);
+            if (newValue.length <= 0) setValid(false);
+            else setValid(true);
           }}
           init={{
             menubar: false,
@@ -63,6 +67,15 @@ const TextArea = (props) => {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:16px; }",
             statusbar: false,
             toolbar_location: "bottom",
+            forceNoPTags: true,
+            setup: (editor) => {
+              editor.on("focus", function () {
+                setFocus(true);
+              });
+              editor.on("blur", function () {
+                setFocus(false);
+              });
+            },
           }}
         />
       </TextAreaStyled>

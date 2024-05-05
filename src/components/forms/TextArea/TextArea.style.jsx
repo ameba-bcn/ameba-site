@@ -22,10 +22,16 @@ export const TextAreaLabel = styled.div`
 export const TextAreaStyled = styled.div`
   display: block;
   height: 100%;
-  border: 4px solid #1d1d1b;
+  border: ${(props) =>
+    props.focus
+      ? "4px solid #f2c571"
+      : props.valid
+      ? "4px solid #1d1d1b"
+      : "4px solid #EB5E3E"};
   border-radius: 0px;
-  .tox-tinymce {
-    border: none;
+  .tox-tinymce,
+  .tox-edit-area::before {
+    border: none !important;
   }
   iframe {
     background-color: transparent !important;

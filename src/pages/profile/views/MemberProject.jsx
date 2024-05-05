@@ -24,7 +24,9 @@ const MemberProject = () => {
   const [images, setImages] = useState(initialProjectData.images || []);
   const [isPublic, setIsPublic] = useState(initialProjectData.public || false);
   const [description, setDescription] = useState(
-    initialProjectData.description || ""
+    initialProjectData.description
+      ?.replace(/<p[^>]*>/g, "")
+      ?.replace(/<\/p>/g, "") || ""
   );
   // const [storedImages, setStoredImages] = useState([]);
   const [mediaLinks, setMediaLinks] = useState(
@@ -43,6 +45,7 @@ const MemberProject = () => {
         setInitialProjectData(data);
         setIsPublic(data.public);
         setImages(data.images || []);
+        setDescription(data.description);
       })
       .then(() => {
         setLoading(false);
@@ -52,15 +55,16 @@ const MemberProject = () => {
 
   const handleSubmit = (val) => {
     setLoading(true);
-    if (description.length === 0) {
+    if (
+      images?.length === 0 ||
+      description?.length === 0 ||
+      description === null
+    ) {
       setDescription(null);
-    }
-    if (images?.length === 0) {
       setImages(null);
+      setLoading(true);
     } else {
       const upload_images = images.map((img) => img.image);
-      console.log("images", images, upload_images);
-      console.log("getBase64Image", upload_images[0]);
       authService
         .updateMemberProject({
           ...val,
@@ -99,7 +103,7 @@ const MemberProject = () => {
     },
     enableReinitialize: true,
     validate,
-    validateOnChange: false,
+    validateOnChange: true,
     validateOnBlur: false,
     onSubmit: (values) => {
       handleSubmit(values);
@@ -109,7 +113,6 @@ const MemberProject = () => {
   const isReadOnly = false;
   const { user_member_data = {} } = useSelector((state) => state.auth);
   const { status = "" } = user_member_data;
-  console.log("initialProjectData.description", initialProjectData.description);
   return (
     <MemberProjectFrame>
       <MemberFormBox>
@@ -135,7 +138,7 @@ const MemberProject = () => {
                   onBlur={formik.handleBlur}
                   value={formik.values.project_name || ""}
                   slimLine={true}
-                  valid={true}
+                  valid={!formik.errors.project_name}
                   disabled={isReadOnly}
                 />
                 {!!formik.errors.project_name && (
@@ -148,10 +151,10 @@ const MemberProject = () => {
                 <TextArea
                   id="description"
                   name="description"
-                  initText={
-                    initialProjectData.description?.replace(/<p[^>]*>/g, "") ||
-                    ""
-                  }
+                  initText={initialProjectData.description
+                    ?.replace(/&nbsp;/g, " ")
+                    ?.replace(/<p[^>]*>/g, "")
+                    ?.replace(/<\/p>/g, "")}
                   setText={setDescription}
                   label={t("modal.descripcio")}
                   disabled={isReadOnly}
