@@ -25,8 +25,6 @@ const MemberProject = () => {
   const [isPublic, setIsPublic] = useState(initialProjectData.public || false);
   const [description, setDescription] = useState(
     initialProjectData.description
-      ?.replace(/<p[^>]*>/g, "")
-      ?.replace(/<\/p>/g, "") || ""
   );
   // const [storedImages, setStoredImages] = useState([]);
   const [mediaLinks, setMediaLinks] = useState(
@@ -151,10 +149,7 @@ const MemberProject = () => {
                 <TextArea
                   id="description"
                   name="description"
-                  initText={initialProjectData.description
-                    ?.replace(/&nbsp;/g, " ")
-                    ?.replace(/<p[^>]*>/g, "")
-                    ?.replace(/<\/p>/g, "")}
+                  initText={initialProjectData.description}
                   setText={setDescription}
                   label={t("modal.descripcio")}
                   disabled={isReadOnly}

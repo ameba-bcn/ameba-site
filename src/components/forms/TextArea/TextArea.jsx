@@ -6,6 +6,7 @@ import {
   TextAreaStyled,
 } from "./TextArea.style.jsx";
 import { TEXT_EDITOR_KEY } from "../../../utils/constants.js";
+import { tinymceTextAreaFormatter } from "../../../utils/utils.js";
 
 const TextArea = (props) => {
   const { initText = "", setText, label = "", disabled = false } = props;
@@ -27,7 +28,7 @@ const TextArea = (props) => {
           }}
           initialValue={`<p>${initText}</p>`}
           onEditorChange={(newValue) => {
-            setText(newValue);
+            setText(tinymceTextAreaFormatter(newValue));
             if (newValue.length <= 0) setValid(false);
             else setValid(true);
           }}

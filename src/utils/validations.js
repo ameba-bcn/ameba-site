@@ -38,12 +38,19 @@ export const isValidUrl = (urlString) => {
 
 export const iframesValidation = (value) => {
   if (!value) return false;
-  return ("" + value).match(
+  var res = ("" + value).match(
     /<iframe[^\\>]+src=["'](https?:\/\/[^"']+)["'][^\\>]*>.*<\/iframe>/
   );
+  if (res == null) return false;
+  else return true;
 };
 
 export const urlValidation = (value) => {
   if (!value) return false;
-  return ("" + value).match(/^(http|https):\/\/[^ "]+$/);
+  var res = ("" + value).match(
+    // eslint-disable-next-line no-useless-escape
+    /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+  );
+  if (res == null) return false;
+  else return true;
 };

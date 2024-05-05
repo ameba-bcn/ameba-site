@@ -155,7 +155,7 @@ const MediaLinksForm = (props) => {
             onChange={handleChange}
             value={currentLink}
             slimLine={true}
-            valid={true}
+            valid={!(currentLink.length > 0 && error?.length !== 0)}
             onKeyPress={(event) => {
               if (event.key === "Enter") {
                 handleAddLink(event);

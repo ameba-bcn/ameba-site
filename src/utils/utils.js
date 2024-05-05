@@ -212,3 +212,6 @@ export const imageListFormatter = (images = []) => {
     original: image,
   }));
 };
+
+export const tinymceTextAreaFormatter = (val) =>
+  val?.replaceAll(/&nbsp;/g, "")?.replaceAll("<p></p>", "");
