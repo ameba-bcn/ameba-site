@@ -59,6 +59,7 @@
     "esgotat": "Producte esgotat",
     "sortir": "sortir",
     "sortir-text": "Si surts la cistella s'eliminarà. Estàs segur que vols sortir?",
+    "sortir-text-gral": "Si surts sense guardar els canvis es perdràn. Estàs segur que vols sortir?",
     "continua": "continua",
     "copiat": "copiat!"
   },

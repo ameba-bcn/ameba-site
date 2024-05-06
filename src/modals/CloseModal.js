@@ -36,18 +36,23 @@ const StyledModalButtonRow = styled.div`
 `;
 
 const CloseModal = (props) => {
-  const { open = false, handleClose, handleExitFullscreen } = props;
+  const {
+    open = false,
+    handleClose,
+    handleExitFullscreen,
+    copyText = "",
+  } = props;
   const [t] = useTranslation("translation");
 
   return open ? (
     <ModalDialog
       open={open}
-      onClose={handleClose}
+      onClose={() => handleClose()}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
       <StyledModalCloseBox>
-        <StyledModalTextRow>{t("modal.sortir-text")}</StyledModalTextRow>
+        <StyledModalTextRow>{copyText}</StyledModalTextRow>
         <StyledModalButtonRow>
           <Button
             variant="contained"
@@ -55,7 +60,10 @@ const CloseModal = (props) => {
             buttonSize="boton--medium"
             buttonStyle="boton--primary--solid"
             hoverStyle="bg-orange"
-            onClick={() => handleClose()}
+            onClick={(e) => {
+              e.preventDefault();
+              handleClose();
+            }}
           >
             {t("modal.continua")}
           </Button>
@@ -66,7 +74,10 @@ const CloseModal = (props) => {
               buttonSize="boton--medium"
               buttonStyle="boton--back-orange--solid"
               hoverStyle="bg-red"
-              onClick={() => handleExitFullscreen()}
+              onClick={(e) => {
+                e.preventDefault();
+                handleExitFullscreen();
+              }}
             >
               {t("modal.sortir")}
             </Button>

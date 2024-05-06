@@ -59,6 +59,7 @@
     "esgotat": "Producto agotado",
     "sortir": "salir",
     "sortir-text": "Si sales ahora la cesta se eliminará. Estas seguro?",
+    "sortir-text-gral": "Si sales ahora sin guardar los cambios se perderan. Estas seguro de que quieres salir?",
     "continua": "continúa",
     "copiat": "copiado!"
   },

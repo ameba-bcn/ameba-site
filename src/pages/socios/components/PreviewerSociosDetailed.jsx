@@ -4,6 +4,11 @@ import TitleSection from "../../../components/layout/TitleSection";
 import ImageCarousel from "../../../components/images/ImageCarousel";
 import LinkBox from "../../../components/link-box/LinkBox";
 import { StyledMainColumnView } from "../../../styles/GlobalStyles.style";
+import styled from "styled-components";
+
+export const StyledPreviewerSociosDetailed = styled.div`
+  min-height: 400px;
+`;
 
 const PreviewerSociosDetailed = (props) => {
   const {
@@ -15,7 +20,7 @@ const PreviewerSociosDetailed = (props) => {
   } = props;
 
   return (
-    <div>
+    <StyledPreviewerSociosDetailed>
       <StyledMainColumnView>
         <div className="top-section_entr">
           <div className="ts-title">{project_name}</div>
@@ -42,7 +47,7 @@ const PreviewerSociosDetailed = (props) => {
           </div>
         )}
       </StyledMainColumnView>
-    </div>
+    </StyledPreviewerSociosDetailed>
   );
 };
 

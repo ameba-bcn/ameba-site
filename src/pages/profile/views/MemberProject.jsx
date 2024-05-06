@@ -18,11 +18,13 @@ import Spinner from "../../../components/spinner/Spinner";
 import notificationToast from "../../../utils/utils";
 import PreviewerSociosDetailed from "../../socios/components/PreviewerSociosDetailed";
 import ToogleButton from "../../../components/button/ToogleButton";
+// import CloseModal from "../../../modals/CloseModal";
 
 const MemberProject = () => {
   const [initialProjectData, setInitialProjectData] = useState({});
   const [t] = useTranslation("translation");
   const [editMode, setEditMode] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
   let disabled = false;
   const [images, setImages] = useState(initialProjectData.images || []);
   const [isPublic, setIsPublic] = useState(initialProjectData.public || false);
@@ -33,14 +35,13 @@ const MemberProject = () => {
     initialProjectData.media_urls || []
   );
   const isActive = initialProjectData.isActive;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
     authService
       .getMemberProject()
       .then((data) => {
-        setLoading(false);
         setInitialProjectData(data);
         setIsPublic(data.public);
         setImages(data.images || []);
@@ -116,6 +117,36 @@ const MemberProject = () => {
   const { user_member_data = {} } = useSelector((state) => state.auth);
   const { status = "" } = user_member_data;
 
+  // const handleModal = () => {
+  //   // setOpenModal(false);
+  //   // setOpenModal(true);
+  //   if (!openModal) setOpenModal(false);
+  // };
+
+  // const handleCloseModal = () => {
+  //   // setOpenModal(false);
+  //   // setOpenModal(true);
+  //   if (openModal) setOpenModal(false);
+  // };
+
+  // const handleExitModal = () => {
+  //   console.log("handleExitFullscreen");
+  //   setOpenModal(false);
+  //   setEditMode(false);
+  // };
+
+  // const firstActiveHandler = () => {
+  // if (editMode === true && disabled === false) {
+  // if (openModal) {
+  //   handleModal();
+  // } else
+  // setOpenModal(true);
+  //   return null;
+  // } else {
+  //   return setEditMode(e);
+  // }
+  // };
+
   return (
     <MemberProjectFrame>
       <MemberFormBox>
@@ -135,7 +166,7 @@ const MemberProject = () => {
             id="project-toogle-button"
           />
           {loading ? (
-            <Spinner color="black" />
+            <Spinner color="black" height={400} />
           ) : editMode ? (
             <>
               <div className="field-wrapper">
@@ -232,6 +263,14 @@ const MemberProject = () => {
           )}
         </form>
       </MemberFormBox>
+      {/* {openModal && (
+        <CloseModal
+          open={openModal}
+          handleClose={handleCloseModal}
+          copyText={t("modal.sortir-text")}
+          handleExitFullscreen={handleExitModal}
+        />
+      )} */}
     </MemberProjectFrame>
   );
 };

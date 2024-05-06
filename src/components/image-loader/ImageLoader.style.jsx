@@ -37,7 +37,7 @@ export const StyledImageLabel = styled.div`
   text-transform: uppercase;
   font-family: "Bebas Neue";
   font-size: 20px;
-  z-index: 10000;
+  z-index: 1000;
   line-height: 0.8;
   padding: 0px 4px !important;
 `;

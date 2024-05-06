@@ -68,6 +68,7 @@ const FullscreenCheckout = () => {
           open={open}
           handleClose={handleCloseModal}
           handleExitFullscreen={handleExitFullscreen}
+          copyText={t("modal.sortir-text")}
         />
       </StyledFullscreenView>
     </StyledMacroFullscreenView>
