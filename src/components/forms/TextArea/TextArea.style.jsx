@@ -17,6 +17,8 @@ export const TextAreaLabel = styled.div`
   z-index: 10000;
   line-height: 0.8;
   padding: 0px 4px !important;
+  position: relative;
+  top: -1px;
 `;
 
 export const TextAreaStyled = styled.div`

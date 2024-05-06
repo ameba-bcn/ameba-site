@@ -110,7 +110,9 @@
     "finalitza": "finaliza",
     "enrere": "atrás",
     "seguent": "siguiente",
-    "recarrega": "recarga"
+    "recarrega": "recarga",
+    "edit": "Modo edición",
+    "preview": "Modo previsualitzación"
   },
   "errors": {
     "stripe": "Ha habido un error con el sistema de pago. Contacta con info@ameba.cat",

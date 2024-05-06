@@ -11,27 +11,28 @@ import { useTranslation } from "react-i18next";
 import ImageLoader from "../../../components/image-loader/ImageLoader";
 import MediaLinksForm from "./components/MediaLinksForm";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
-// import { setUploadedImages } from "../../../store/actions/profile";
 import { validate } from "./MemberProjectValidate";
 import { ACTIVE_STATUS, ERROR } from "../../../utils/constants";
 import CheckBox from "../../../components/layout/CheckBox";
 import Spinner from "../../../components/spinner/Spinner";
 import notificationToast from "../../../utils/utils";
+import PreviewerSociosDetailed from "../../socios/components/PreviewerSociosDetailed";
+import ToogleButton from "../../../components/button/ToogleButton";
 
 const MemberProject = () => {
   const [initialProjectData, setInitialProjectData] = useState({});
   const [t] = useTranslation("translation");
+  const [editMode, setEditMode] = useState(false);
+  let disabled = false;
   const [images, setImages] = useState(initialProjectData.images || []);
   const [isPublic, setIsPublic] = useState(initialProjectData.public || false);
   const [description, setDescription] = useState(
-    initialProjectData.description
+    initialProjectData.description || ""
   );
-  // const [storedImages, setStoredImages] = useState([]);
   const [mediaLinks, setMediaLinks] = useState(
     initialProjectData.media_urls || []
   );
   const isActive = initialProjectData.isActive;
-  // const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -49,19 +50,18 @@ const MemberProject = () => {
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, []);
+  }, [editMode]);
 
   const handleSubmit = (val) => {
     setLoading(true);
-    if (
-      images?.length === 0 ||
-      description?.length === 0 ||
-      description === null
-    ) {
+    if (images?.length === 0) setImages(null);
+    if (description?.length === 0 || description === null) {
       setDescription(null);
-      setImages(null);
-      setLoading(true);
-    } else {
+    }
+    if (
+      !(images?.length === 0 || images === null) &&
+      !(description?.length === 0 || description === null)
+    ) {
       const upload_images = images.map((img) => img.image);
       authService
         .updateMemberProject({
@@ -74,6 +74,7 @@ const MemberProject = () => {
         .then(() => {
           setLoading(false);
           notificationToast(t("general.agraiment"), "success");
+          setEditMode(false);
         })
         .catch(() => {
           setLoading(false);
@@ -82,16 +83,6 @@ const MemberProject = () => {
     }
     setLoading(false);
   };
-
-  // const uploadImage = () => {
-  //   images.map((img) => {
-  //     authService.uploadImage(img).then((data) => {
-  //       const { image } = data;
-  //       // setStoredImages(storedImages.push(image));
-  //       dispatch(setUploadedImages(String(image)));
-  //     });
-  //   });
-  // };
 
   const formik = useFormik({
     initialValues: {
@@ -108,9 +99,23 @@ const MemberProject = () => {
     },
   });
 
-  const isReadOnly = false;
+  if (
+    initialProjectData?.description?.trim() === description?.trim() &&
+    initialProjectData?.project_name?.trim() === formik.values?.project_name &&
+    (initialProjectData?.media_urls?.length > 0 &&
+      initialProjectData?.media_urls[0]) ===
+      (mediaLinks?.length > 0 && mediaLinks[0]) &&
+    initialProjectData?.images == images &&
+    initialProjectData?.public === isPublic
+  ) {
+    disabled = true;
+  } else {
+    disabled = false;
+  }
+
   const { user_member_data = {} } = useSelector((state) => state.auth);
   const { status = "" } = user_member_data;
+
   return (
     <MemberProjectFrame>
       <MemberFormBox>
@@ -122,9 +127,16 @@ const MemberProject = () => {
               borderColor="black"
             />
           )}
+          <ToogleButton
+            text1={t("boto.edit")}
+            text2={t("boto.preview")}
+            firstActive={editMode}
+            setFirstActive={setEditMode}
+            id="project-toogle-button"
+          />
           {loading ? (
             <Spinner color="black" />
-          ) : (
+          ) : editMode ? (
             <>
               <div className="field-wrapper">
                 <InputField
@@ -137,7 +149,7 @@ const MemberProject = () => {
                   value={formik.values.project_name || ""}
                   slimLine={true}
                   valid={!formik.errors.project_name}
-                  disabled={isReadOnly}
+                  disabled={false}
                 />
                 {!!formik.errors.project_name && (
                   <LogFormError>
@@ -152,7 +164,7 @@ const MemberProject = () => {
                   initText={initialProjectData.description}
                   setText={setDescription}
                   label={t("modal.descripcio")}
-                  disabled={isReadOnly}
+                  disabled={false}
                 />
                 {description === null && (
                   <LogFormError>
@@ -165,7 +177,7 @@ const MemberProject = () => {
                   label="link"
                   mediaLinks={mediaLinks}
                   setMediaLinks={setMediaLinks}
-                  disabled={isReadOnly}
+                  disabled={false}
                 />
               </div>
               <div className="field-wrapper">
@@ -173,7 +185,7 @@ const MemberProject = () => {
                   maxNumber={6}
                   images={images}
                   setImages={setImages}
-                  disabled={isReadOnly}
+                  disabled={false}
                 />
                 {images === null && (
                   <LogFormError>
@@ -186,28 +198,38 @@ const MemberProject = () => {
                   label={isPublic ? t("form.publicat") : t("form.no-publicat")}
                   checked={isPublic}
                   onChange={(e) => setIsPublic(!e)}
-                  disabled={isReadOnly}
+                  disabled={false}
                 />
               </div>
+              <div className="button-box">
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  buttonSize="boton--medium"
+                  buttonStyle="boton--primary--solid"
+                  hoverStyle="bg-orange"
+                  disabled={loading || disabled}
+                >
+                  {loading ? (
+                    <span className="spinner-border"></span>
+                  ) : (
+                    <>{t("boto.guarda")}</>
+                  )}
+                </Button>
+              </div>
+            </>
+          ) : (
+            <>
+              <PreviewerSociosDetailed
+                project_name={initialProjectData.project_name}
+                description={initialProjectData.description}
+                images={initialProjectData.images}
+                media_urls={initialProjectData?.media_urls}
+                first_name={initialProjectData.username}
+              />
             </>
           )}
-          <div className="button-box">
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              buttonSize="boton--medium"
-              buttonStyle="boton--primary--solid"
-              hoverStyle="bg-orange"
-              disabled={loading}
-            >
-              {loading ? (
-                <span className="spinner-border"></span>
-              ) : (
-                <>{t("boto.guarda")}</>
-              )}
-            </Button>
-          </div>
         </form>
       </MemberFormBox>
     </MemberProjectFrame>

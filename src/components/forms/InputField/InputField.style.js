@@ -68,6 +68,10 @@ ${(props) =>
 export const InputLabelBox = styled.div`
   text-align: left;
   margin: 0px 0px -18px 13px;
+  #link-box {
+    position: relative;
+    top: -2px;
+  }
 `;
 
 export const InputLabel = styled.div`

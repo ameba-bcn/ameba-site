@@ -20,7 +20,7 @@ export default function InputField(props) {
     <>
       {label && (
         <InputLabelBox>
-          <InputLabel>{label}</InputLabel>
+          <InputLabel id="link-box">{label}</InputLabel>
         </InputLabelBox>
       )}
       {unstyled ? (

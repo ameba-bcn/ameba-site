@@ -20,6 +20,10 @@ const StyledLinkBox = styled.div`
       width: 100%;
       display: flex;
       flex-direction: column;
+      flex-wrap: wrap;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      word-break: break-word;
       align-items: center;
       justify-content: center;
       width: 100%;
@@ -62,6 +66,7 @@ export const StyledLinkLabel = styled.div`
   font-size: 20px;
   z-index: 10000;
   line-height: 0.8;
+  top: 4px;
   padding: 0px 4px !important;
 `;
 

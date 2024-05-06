@@ -143,7 +143,7 @@ const MediaLinksForm = (props) => {
       {editMode || disabled ? (
         <>
           <InputLabelBox>
-            <InputLabel>{label}</InputLabel>
+            <InputLabel id="link-box">{label}</InputLabel>
           </InputLabelBox>
 
           <Textarea
@@ -177,7 +177,7 @@ const MediaLinksForm = (props) => {
       ) : (
         <>
           <InputLabelBox>
-            <InputLabel>{label}</InputLabel>
+            <InputLabel id="link-box">{label}</InputLabel>
           </InputLabelBox>
           <SyledAddLink onClick={() => setEditMode(true)}>
             ++ add link ++

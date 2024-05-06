@@ -39,6 +39,7 @@ export default function Button(props) {
       } ${disabled ? "button-disabled" : ""} ${className}`}
       onClick={onClick}
       type={type}
+      disabled={disabled}
       {...rest}
     >
       {icon && (

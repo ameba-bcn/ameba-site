@@ -17,7 +17,7 @@ const TextArea = (props) => {
   return (
     <>
       <TextAreaLabelBox>
-        <TextAreaLabel>{` ${label} `}</TextAreaLabel>
+        <TextAreaLabel id="description-label">{` ${label} `}</TextAreaLabel>
       </TextAreaLabelBox>
       <TextAreaStyled focus={focus} valid={valid}>
         <Editor

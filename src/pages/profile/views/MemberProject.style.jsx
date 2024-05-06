@@ -33,4 +33,7 @@ export const MemberFormBox = styled.div`
       width: 100%;
     }
   }
+  #project-toogle-button {
+    margin-bottom: 20px;
+  }
 `;
