@@ -67,7 +67,7 @@ export default function ModalCard(props) {
             icon={buttonIcon}
             onClick={() => {}}
           >
-            {t("button.pago-sold")}
+            {t("events.button.pago-sold")}
           </Button>
         );
       }
@@ -90,7 +90,7 @@ export default function ModalCard(props) {
               !productSoldOut && handleAddToCard(id);
             }}
           >
-            {t("button.gratis-inscripcion")}
+            {t("events.button.gratis-inscripcion")}
           </Button>
         );
       }
@@ -111,7 +111,7 @@ export default function ModalCard(props) {
             icon={buttonIcon}
             onClick={() => {}}
           >
-            {t("button.gratis-aforo-completo")}
+            {t("events.button.gratis-aforo-completo")}
           </Button>
         );
       }
@@ -137,7 +137,7 @@ export default function ModalCard(props) {
             icon={buttonIcon}
             onClick={() => {}}
           >
-            {t("button.cancelado")}
+            {t("events.button.cancelado")}
           </Button>
         );
       }
@@ -165,7 +165,7 @@ export default function ModalCard(props) {
               !productSoldOut && handleAddToCard(id);
             }}
           >
-            {t("button.pago-taquilla")}
+            {t("events.button.pago-taquilla")}
           </Button>
         );
       }
@@ -187,7 +187,7 @@ export default function ModalCard(props) {
             !productSoldOut && handleAddToCard(id);
           }}
         >
-          {t("button.pago")}
+          {t("events.button.pago")}
         </Button>
       );
     }
@@ -235,7 +235,7 @@ export default function ModalCard(props) {
             icon={buttonIcon}
             onClick={() => {}}
           >
-            {t("button.pago-sold")} - {formatPrice(price)}
+            {t("events.button.pago-sold")} - {formatPrice(price)}
           </Button>
         );
       }
@@ -258,7 +258,7 @@ export default function ModalCard(props) {
               !productSoldOut && handleAddToCard(id);
             }}
           >
-            {t("button.gratis-inscripcion")} - {formatPrice(price)}
+            {t("events.button.gratis-inscripcion")} - {formatPrice(price)}
           </Button>
         );
       }
@@ -279,7 +279,7 @@ export default function ModalCard(props) {
             icon={buttonIcon}
             onClick={() => {}}
           >
-            {t("button.gratis-aforo-completo")} - {formatPrice(price)}
+            {t("events.button.gratis-aforo-completo")} - {formatPrice(price)}
           </Button>
         );
       }
@@ -305,7 +305,7 @@ export default function ModalCard(props) {
             icon={buttonIcon}
             onClick={() => {}}
           >
-            {t("button.cancelado")} - {formatPrice(price)}
+            {t("events.button.cancelado")} - {formatPrice(price)}
           </Button>
         );
       }
@@ -333,7 +333,7 @@ export default function ModalCard(props) {
               !productSoldOut && handleAddToCard(id);
             }}
           >
-            {t("button.pago-taquilla")} - {formatPrice(price)}
+            {t("events.button.pago-taquilla")} - {formatPrice(price)}
           </Button>
         );
       }
@@ -355,7 +355,7 @@ export default function ModalCard(props) {
             !productSoldOut && handleAddToCard(id);
           }}
         >
-          {t("button.pago")} - {formatPrice(price)}
+          {t("events.button.pago")} - {formatPrice(price)}
         </Button>
       );
     }

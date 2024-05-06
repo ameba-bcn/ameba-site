@@ -12,7 +12,6 @@ import Icon from "../ui/Icon";
 const ImageLoader = (props) => {
   const { maxNumber = 6, images = [], setImages, disabled = false } = props;
   const [t] = useTranslation("translation");
-
   const onChange = (imageList) => {
     if (!disabled) setImages(imageList);
   };

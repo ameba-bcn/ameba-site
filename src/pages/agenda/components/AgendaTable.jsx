@@ -49,7 +49,7 @@ const AgendaTable = () => {
           disabled={false}
           type="hoverable-cream"
           onClick={() => fetchEvent(data)}
-          tooltip={t("tooltip.cancelado")}
+          tooltip={t("events.tooltip.cancelado")}
         />
       );
 
@@ -62,7 +62,7 @@ const AgendaTable = () => {
           disabled={true}
           type="hoverable-cream"
           onClick={() => fetchEvent(data)}
-          tooltip={t("tooltip.caducado")}
+          tooltip={t("events.tooltip.caducado")}
         />
       );
 
@@ -75,7 +75,7 @@ const AgendaTable = () => {
           disabled={false}
           type="hoverable-cream"
           onClick={() => data?.has_stock && fetchAndAdd(data)}
-          tooltip={t("tooltip.gratis-inscripcion")}
+          tooltip={t("events.tooltip.gratis-inscripcion")}
         />
       );
 
@@ -88,7 +88,7 @@ const AgendaTable = () => {
           disabled={true}
           type="hoverable-cream"
           onClick={() => fetchEvent(data)}
-          tooltip={t("tooltip.gratis-aforo-completo")}
+          tooltip={t("events.tooltip.gratis-aforo-completo")}
         />
       );
 
@@ -101,7 +101,7 @@ const AgendaTable = () => {
           disabled={false}
           type="hoverable-cream"
           onClick={() => fetchEvent(data)}
-          tooltip={t("tooltip.gratis")}
+          tooltip={t("events.tooltip.gratis")}
         />
       );
 
@@ -114,7 +114,7 @@ const AgendaTable = () => {
           disabled={true}
           type="hoverable-cream"
           onClick={() => fetchEvent(data)}
-          tooltip={t("tooltip.pago-sold")}
+          tooltip={t("events.tooltip.pago-sold")}
         />
       );
 
@@ -127,7 +127,7 @@ const AgendaTable = () => {
           disabled={false}
           type="hoverable-cream"
           onClick={() => data?.has_stock && fetchAndAdd(data)}
-          tooltip={t("tooltip.pago-taquilla")}
+          tooltip={t("events.tooltip.pago-taquilla")}
         />
       );
 
@@ -139,7 +139,7 @@ const AgendaTable = () => {
         disabled={false}
         type="hoverable-cream"
         onClick={() => data?.has_stock && fetchAndAdd(data)}
-        tooltip={t("tooltip.pago")}
+        tooltip={t("events.tooltip.pago")}
       />
     );
   };

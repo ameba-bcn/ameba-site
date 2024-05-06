@@ -14,10 +14,11 @@ const PreviewerSociosDetailed = (props) => {
   const {
     project_name = "",
     description = "",
-    images = "",
+    images = [],
     media_urls = "",
     first_name = "",
   } = props;
+  const processedImages = images.map((img) => img.image);
 
   return (
     <StyledPreviewerSociosDetailed>
@@ -36,7 +37,7 @@ const PreviewerSociosDetailed = (props) => {
             />
             {images?.length > 0 && (
               <div className="bio-img">
-                <ImageCarousel imgList={images} />
+                <ImageCarousel imgList={processedImages} />
               </div>
             )}
           </div>
