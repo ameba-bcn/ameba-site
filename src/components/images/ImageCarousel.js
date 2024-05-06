@@ -11,7 +11,7 @@ function ImageCarousel(props) {
       <ImageGallery
         showFullscreenButton={false}
         showPlayButton={false}
-        showBullets={true}
+        showBullets={false}
         items={imageListFormatter(imgList)}
       />
     </div>

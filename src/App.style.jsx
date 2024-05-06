@@ -18,7 +18,15 @@ export const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
+  animation: fadein 300ms;
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   .logViewRed {
     height: 100%;
     min-height: min-content;
