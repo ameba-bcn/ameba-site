@@ -36,6 +36,113 @@ const AgendaTable = () => {
   const checkoutRedirect = user_profile === "GUEST" ? "/login" : "/checkout";
   const [t] = useTranslation("translation");
   const isSmallScreen = useMediaQuery(MOBILE_SEMI_BIG);
+  const today = new Date();
+  const todayIsoString = today.toISOString();
+
+  const eventIconMapper = (data, price, stock, eventDate, cancelled) => {
+    // Evento cancelado
+    if (cancelled)
+      return (
+        <Icon
+          icon="cancelled"
+          className="cardActivitat"
+          disabled={false}
+          type="hoverable-cream"
+          onClick={() => fetchEvent(data)}
+          tooltip={t("tooltip.cancelado")}
+        />
+      );
+
+    // Evento caducado
+    if (todayIsoString > eventDate)
+      return (
+        <Icon
+          icon="cancelled"
+          className="cardActivitat"
+          disabled={true}
+          type="hoverable-cream"
+          onClick={() => fetchEvent(data)}
+          tooltip={t("tooltip.caducado")}
+        />
+      );
+
+    // Evento gratuito con inscripción
+    if (price === 0 && stock != -1)
+      return (
+        <Icon
+          icon="assist"
+          className="cardActivitat"
+          disabled={false}
+          type="hoverable-cream"
+          onClick={() => data?.has_stock && fetchAndAdd(data)}
+          tooltip={t("tooltip.gratis-inscripcion")}
+        />
+      );
+
+    // Evento gratuito con inscripción aforo completo
+    if (price === 0 && stock === 0)
+      return (
+        <Icon
+          icon="assist"
+          className="cardActivitat"
+          disabled={true}
+          type="hoverable-cream"
+          onClick={() => fetchEvent(data)}
+          tooltip={t("tooltip.gratis-aforo-completo")}
+        />
+      );
+
+    // Evento gratuito
+    if (price === 0 && stock === -1)
+      return (
+        <Icon
+          icon="assist"
+          className="cardActivitat"
+          disabled={false}
+          type="hoverable-cream"
+          onClick={() => fetchEvent(data)}
+          tooltip={t("tooltip.gratis")}
+        />
+      );
+
+    // Evento de pago sold out
+    if (price !== 0 && stock === 0)
+      return (
+        <Icon
+          icon="ticket"
+          className="cardActivitat"
+          disabled={true}
+          type="hoverable-cream"
+          onClick={() => fetchEvent(data)}
+          tooltip={t("tooltip.pago-sold")}
+        />
+      );
+
+    // Evento de pago en taquilla
+    if (price !== 0 && stock === -1)
+      return (
+        <Icon
+          icon="ticket"
+          className="cardActivitat"
+          disabled={false}
+          type="hoverable-cream"
+          onClick={() => data?.has_stock && fetchAndAdd(data)}
+          tooltip={t("tooltip.pago-taquilla")}
+        />
+      );
+
+    // Evento de pago
+    return (
+      <Icon
+        icon="ticket"
+        className="cardActivitat"
+        disabled={false}
+        type="hoverable-cream"
+        onClick={() => data?.has_stock && fetchAndAdd(data)}
+        tooltip={t("tooltip.pago")}
+      />
+    );
+  };
 
   const [eventData, setEventData] = useState([
     {
@@ -135,16 +242,16 @@ const AgendaTable = () => {
             accessorKey: "reserva",
             header: () => <span>RESERVA</span>,
             cell: (info) => {
-              const { has_stock } = info.row.original;
+              const { price, stock, datetime } = info.row.original;
               return (
                 <StyledTicket>
-                  <Icon
-                    icon="ticket"
-                    className="cardActivitat"
-                    disabled={!has_stock}
-                    type="hoverable-cream"
-                    onClick={() => has_stock && fetchAndAdd(info.row.original)}
-                  />
+                  {eventIconMapper(
+                    info.row.original,
+                    price,
+                    stock,
+                    datetime,
+                    info.row.original.cancelled
+                  )}
                 </StyledTicket>
               );
             },

@@ -22,6 +22,8 @@ export default function ActivitatDialog(props) {
     header = "",
     has_stock,
     maps_url = null,
+    cancelled,
+    stock,
   } = dataRow;
 
   const [redirect, setRedirect] = useState(false);
@@ -73,6 +75,8 @@ export default function ActivitatDialog(props) {
       colorMode="light"
       has_stock={has_stock}
       maps_url={maps_url}
+      cancelled={cancelled}
+      stock={stock}
     />
   );
 }

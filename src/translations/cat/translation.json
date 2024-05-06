@@ -134,5 +134,27 @@
     "cerca": "Cerca",
     "sense-resultats": "No hay resultados",
     "producte": "producte"
+  },
+  "events": {
+    "button": {
+      "pago": "compra entrada",
+      "pago-sold": "agotat",
+      "gratis-inscripcion": "inscriute",
+      "gratis-aforo-completo": "complet",
+      "gratis": "gratis",
+      "cancelado": "cancelat",
+      "caducado": "caducat",
+      "pago-taquilla": "pagament en taquilla"
+    },
+    "tooltip": {
+      "pago": "Disponible",
+      "pago-sold": "Agotat",
+      "gratis-inscripcion": "Inscripció disponible",
+      "gratis-aforo-completo": "Aforament complet",
+      "gratis": "Gratis",
+      "cancelado": "Cancelat",
+      "caducado": "Caducat",
+      "pago-taquilla": "Pagament en taquilla disponible"
+    }
   }
 }

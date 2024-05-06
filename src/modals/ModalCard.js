@@ -42,7 +42,345 @@ export default function ModalCard(props) {
     has_stock,
     discount,
     maps_url = null,
+    cancelled = false,
+    stock,
   } = props;
+
+  const today = new Date();
+  const todayIsoString = today.toISOString();
+  const [t] = useTranslation("translation");
+  const buttonMapper = (type) => {
+    if (type === "ACTIVITAT") {
+      // Evento de pago sold out
+      if (price !== 0 && stock === 0) {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--medium"
+            disabled={true}
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            icon={buttonIcon}
+            onClick={() => {}}
+          >
+            {t("button.pago-sold")}
+          </Button>
+        );
+      }
+
+      // Evento gratuito con inscripcion
+      if (price === 0 && stock != -1) {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--medium"
+            disabled={false}
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            icon={buttonIcon}
+            onClick={() => {
+              !productSoldOut && handleAddToCard(id);
+            }}
+          >
+            {t("button.gratis-inscripcion")}
+          </Button>
+        );
+      }
+
+      // Evento gratuito con inscripcion aforo completo
+      if (price === 0 && stock === 0) {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--medium"
+            disabled={true}
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            icon={buttonIcon}
+            onClick={() => {}}
+          >
+            {t("button.gratis-aforo-completo")}
+          </Button>
+        );
+      }
+
+      // Evento gratuito sin inscripcion
+      if (price === 0 && stock === -1) {
+        return null;
+      }
+
+      // Evento cancelado
+      if (cancelled) {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--medium"
+            disabled={true}
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            icon={buttonIcon}
+            onClick={() => {}}
+          >
+            {t("button.cancelado")}
+          </Button>
+        );
+      }
+
+      // Evento caducado
+      if (todayIsoString > datetime) {
+        return null;
+      }
+
+      // Evento de pago en taquilla
+      if (price !== 0 && stock === -1) {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--medium"
+            disabled={true}
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            icon={buttonIcon}
+            onClick={() => {
+              !productSoldOut && handleAddToCard(id);
+            }}
+          >
+            {t("button.pago-taquilla")}
+          </Button>
+        );
+      }
+
+      // Evento de pago con stock
+      return (
+        <Button
+          variant="contained"
+          color="primary"
+          buttonSize="boton--medium"
+          disabled={false}
+          buttonStyle={
+            colorMode && colorMode === "dark"
+              ? "boton--back-orange--solid"
+              : "boton--primary--solid"
+          }
+          icon={buttonIcon}
+          onClick={() => {
+            !productSoldOut && handleAddToCard(id);
+          }}
+        >
+          {t("button.pago")}
+        </Button>
+      );
+    }
+
+    return (
+      !productSoldOut && (
+        <Button
+          variant="contained"
+          color="primary"
+          buttonSize="boton--medium"
+          disabled={productSoldOut}
+          buttonStyle={
+            colorMode && colorMode === "dark"
+              ? "boton--back-orange--solid"
+              : "boton--primary--solid"
+          }
+          icon={buttonIcon}
+          onClick={() => {
+            !productSoldOut && handleAddToCard(id);
+          }}
+        >
+          {buttonText}
+        </Button>
+      )
+    );
+  };
+
+  const buttonMobileMapper = (type) => {
+    if (type === "ACTIVITAT") {
+      // Evento de pago con stock
+
+      // Evento de pago sold out
+      if (price !== 0 && stock === 0) {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--megaxxl"
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            disabled={true}
+            icon={buttonIcon}
+            onClick={() => {}}
+          >
+            {t("button.pago-sold")} - {formatPrice(price)}
+          </Button>
+        );
+      }
+
+      // Evento gratuito con inscripcion
+      if (price === 0 && stock != -1) {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--megaxxl"
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            disabled={false}
+            icon={buttonIcon}
+            onClick={() => {
+              !productSoldOut && handleAddToCard(id);
+            }}
+          >
+            {t("button.gratis-inscripcion")} - {formatPrice(price)}
+          </Button>
+        );
+      }
+
+      // Evento gratuito con inscripcion aforo completo
+      if (price === 0 && stock === 0) {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--megaxxl"
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            disabled={true}
+            icon={buttonIcon}
+            onClick={() => {}}
+          >
+            {t("button.gratis-aforo-completo")} - {formatPrice(price)}
+          </Button>
+        );
+      }
+
+      // Evento gratuito sin inscripcion
+      if (price === 0 && stock === -1) {
+        return null;
+      }
+
+      // Evento cancelado
+      if (cancelled) {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--megaxxl"
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            disabled={true}
+            icon={buttonIcon}
+            onClick={() => {}}
+          >
+            {t("button.cancelado")} - {formatPrice(price)}
+          </Button>
+        );
+      }
+
+      // Evento caducado
+      if (todayIsoString > datetime) {
+        return null;
+      }
+
+      // Evento de pago en taquilla
+      if (price !== 0 && stock === -1) {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--megaxxl"
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            disabled={true}
+            icon={buttonIcon}
+            onClick={() => {
+              !productSoldOut && handleAddToCard(id);
+            }}
+          >
+            {t("button.pago-taquilla")} - {formatPrice(price)}
+          </Button>
+        );
+      }
+
+      // Evento de pago con stock
+      return (
+        <Button
+          variant="contained"
+          color="primary"
+          buttonSize="boton--megaxxl"
+          buttonStyle={
+            colorMode && colorMode === "dark"
+              ? "boton--back-orange--solid"
+              : "boton--primary--solid"
+          }
+          disabled={false}
+          icon={buttonIcon}
+          onClick={() => {
+            !productSoldOut && handleAddToCard(id);
+          }}
+        >
+          {t("button.pago")} - {formatPrice(price)}
+        </Button>
+      );
+    }
+
+    return (
+      <Button
+        variant="contained"
+        color="primary"
+        buttonSize="boton--megaxxl"
+        buttonStyle={
+          colorMode && colorMode === "dark"
+            ? "boton--back-orange--solid"
+            : "boton--primary--solid"
+        }
+        disabled={productSoldOut}
+        icon={buttonIcon}
+        onClick={() => {
+          !productSoldOut && handleAddToCard(id);
+        }}
+      >
+        {buttonText} - {formatPrice(price)}
+      </Button>
+    );
+  };
+
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const types = productKinds;
   const [activeSize, setActiveSize] = useState([]);
@@ -51,7 +389,7 @@ export default function ModalCard(props) {
   const modalStyle = types.includes(type.toLowerCase())
     ? type.toUpperCase()
     : types[0].toUpperCase();
-  const [t] = useTranslation("translation");
+
   const productSoldOut =
     !has_stock || (modalStyle === "PRODUCTE" && sizes.length === 0);
 
@@ -189,25 +527,7 @@ export default function ModalCard(props) {
                 maps_url={maps_url}
                 colorMode={colorMode}
               />
-              {!productSoldOut && (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  buttonSize="boton--medium"
-                  disabled={productSoldOut}
-                  buttonStyle={
-                    colorMode && colorMode === "dark"
-                      ? "boton--back-orange--solid"
-                      : "boton--primary--solid"
-                  }
-                  icon={buttonIcon}
-                  onClick={() => {
-                    !productSoldOut && handleAddToCard(id);
-                  }}
-                >
-                  {buttonText}
-                </Button>
-              )}
+              {buttonMapper(type)}
             </StyledModalRow>
             <hr
               className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
@@ -319,6 +639,7 @@ export default function ModalCard(props) {
               >
                 {buttonText} - {formatPrice(price)}
               </Button>
+              {buttonMobileMapper(type)}
             </div>
           </div>
         </div>

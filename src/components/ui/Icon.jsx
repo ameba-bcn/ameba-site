@@ -2,14 +2,59 @@ import React from "react";
 import styled from "styled-components";
 
 export const StyledSvgElement = styled.div`
-  // Default color: darker-blue-grey
   display: flex;
+  position: relative;
+  .tooltip {
+    display: none;
+  }
+
+  &:hover {
+    .tooltip {
+      display: block;
+    }
+  }
+
   &:not([disabled]) {
     cursor: pointer;
   }
+
+  .tooltip {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+
+  .tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+
+  &:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+  }
+
   #hoverable-cream {
     path {
-      fill: var(--color-negro);
+      fill: ${(props) =>
+        props.disabled ? "var(--color-gris-claro)" : "var(--color-negro)"};
     }
     &:hover:not([disabled]) {
       path {
@@ -20,7 +65,8 @@ export const StyledSvgElement = styled.div`
 
   #hoverable-red {
     path {
-      fill: var(--color-negro);
+      fill: ${(props) =>
+        props.disabled ? "var(--color-gris-claro)" : "var(--color-negro)"};
     }
     &:hover:not([disabled]) {
       path {
@@ -30,7 +76,8 @@ export const StyledSvgElement = styled.div`
   }
   #hoverable-black {
     path {
-      fill: var(--color-cream);
+      fill: ${(props) =>
+        props.disabled ? "var(--color-gris-claro)" : "var(--color-cream)"};
     }
     &:hover:not([disabled]) {
       path {
@@ -41,7 +88,8 @@ export const StyledSvgElement = styled.div`
 
   #hoverable-dark {
     path {
-      fill: var(--color-cream);
+      fill: ${(props) =>
+        props.disabled ? "var(--color-gris-claro)" : "var(--color-cream)"};
     }
     &:hover:not([disabled]) {
       path {
@@ -78,6 +126,7 @@ const AmebaSvgWrapper = (props) => {
     type,
     disabled = false,
   } = props;
+
   return (
     <StyledSvgElement id={type} disabled={disabled}>
       <svg
@@ -91,12 +140,17 @@ const AmebaSvgWrapper = (props) => {
       >
         {children}
       </svg>
+
+      {props?.tooltip?.length > 0 && (
+        <span className="tooltip">{props?.tooltip}</span>
+      )}
     </StyledSvgElement>
   );
 };
 
 function Icon(props) {
   const { icon } = props;
+
   const receipt = (
     <AmebaSvgWrapper {...props}>
       <path
