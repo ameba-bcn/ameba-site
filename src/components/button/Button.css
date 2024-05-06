@@ -24,12 +24,13 @@
     cursor: pointer;
     color: var(--color-cream);
     outline: none;
-    line-height: 1em;
     transition: transform 0.3s ease;
     text-align: center;
     display: flex;
     justify-content: center;
     gap: 8px;
+    display: flex;
+    align-items: center;
 }
 
 .button-disabled {
