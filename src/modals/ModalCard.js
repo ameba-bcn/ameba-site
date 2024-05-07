@@ -74,7 +74,7 @@ export default function ModalCard(props) {
       }
 
       // Evento gratuito con inscripcion
-      if (price === 0 && stock != -1) {
+      if (price === 0 && stock > 0) {
         return (
           <Button
             variant="contained"
@@ -220,8 +220,6 @@ export default function ModalCard(props) {
 
   const buttonMobileMapper = (type) => {
     if (type === "ACTIVITAT") {
-      // Evento de pago con stock
-
       // Evento de pago sold out
       if (price !== 0 && stock === 0) {
         return (
@@ -244,7 +242,7 @@ export default function ModalCard(props) {
       }
 
       // Evento gratuito con inscripcion
-      if (price === 0 && stock != -1) {
+      if (price === 0 && stock > 0) {
         return (
           <Button
             variant="contained"
@@ -342,25 +340,26 @@ export default function ModalCard(props) {
       }
 
       // Evento de pago con stock
-      return (
-        <Button
-          variant="contained"
-          color="primary"
-          buttonSize="boton--megaxxl"
-          buttonStyle={
-            colorMode && colorMode === "dark"
-              ? "boton--back-orange--solid"
-              : "boton--primary--solid"
-          }
-          disabled={false}
-          icon={buttonIcon}
-          onClick={() => {
-            !productSoldOut && handleAddToCard(id);
-          }}
-        >
-          {t("events.button.pago")} - {formatPrice(price)}
-        </Button>
-      );
+      if (price !== 0 && stock > 0)
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--megaxxl"
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            disabled={false}
+            icon={buttonIcon}
+            onClick={() => {
+              !productSoldOut && handleAddToCard(id);
+            }}
+          >
+            {t("events.button.pago")} - {formatPrice(price)}
+          </Button>
+        );
     }
 
     // return (
@@ -515,6 +514,9 @@ export default function ModalCard(props) {
                 isMobile={isMobile}
                 productSoldOut={productSoldOut}
                 sizes={sizes}
+                stock={stock}
+                price={price}
+                todayIsoString={todayIsoString}
                 isSubscriber={isSubscriber}
                 setIsSubscriber={setIsSubscriber}
                 activeSize={activeSize}
@@ -609,6 +611,9 @@ export default function ModalCard(props) {
                 isMobile={isMobile}
                 productSoldOut={productSoldOut}
                 sizes={sizes}
+                stock={stock}
+                price={price}
+                todayIsoString={todayIsoString}
                 isSubscriber={isSubscriber}
                 setIsSubscriber={setIsSubscriber}
                 activeSize={activeSize}

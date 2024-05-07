@@ -17,10 +17,27 @@ const InteractiveModalBox = (props) => {
     address,
     datetime,
     price_range,
+    price,
+    stock,
     discount,
     maps_url,
+    todayIsoString,
     colorMode = "",
   } = props;
+
+  const priceMapper = () => {
+    if (
+      modalStyle === "ACTIVITAT" &&
+      (todayIsoString > datetime ||
+        (price === 0 && stock === -1) ||
+        (price === 0 && stock > 0) ||
+        (price === 0 && stock === 0))
+    ) {
+      return t("events.button.gratis").toUpperCase();
+    }
+
+    return priceMayDiscount(price_range, discount);
+  };
 
   const [t] = useTranslation("translation");
   useEffect(() => {
@@ -133,7 +150,7 @@ const InteractiveModalBox = (props) => {
               <span>{t("modal.preu")} / &nbsp;</span>
             </span>
             <span className="interactiveDataBox-activitat__text-data">
-              {priceMayDiscount(price_range, discount)}
+              {priceMapper()}
             </span>
           </div>
         </>

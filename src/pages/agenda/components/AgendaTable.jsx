@@ -67,7 +67,7 @@ const AgendaTable = () => {
       );
 
     // Evento gratuito con inscripción
-    if (price === 0 && stock != -1)
+    if (price === 0 && stock > 0)
       return (
         <Icon
           icon="assist"
