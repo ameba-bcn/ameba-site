@@ -25,6 +25,7 @@ export default function SociDialog(props) {
     benefits = "",
     has_stock,
     discount = 0,
+    price,
   } = adaptedData;
 
   useEffect(() => {
@@ -61,7 +62,8 @@ export default function SociDialog(props) {
       handleAddClick={handleAddClick}
       id={id}
       title={`${t("banners.soci-curt")}!`}
-      price={price_range}
+      price={price}
+      price_range={price_range}
       imgArr={images}
       buttonText={t("modal.afegir")}
       buttonIcon={<Icon icon="shoppingCart" type="hoverable-black" />}

@@ -25,6 +25,7 @@ export default function ModalCard(props) {
     type,
     title,
     price,
+    price_range,
     imgArr,
     datetime,
     address,
@@ -171,48 +172,50 @@ export default function ModalCard(props) {
       }
 
       // Evento de pago con stock
-      return (
-        <Button
-          variant="contained"
-          color="primary"
-          buttonSize="boton--medium"
-          disabled={false}
-          buttonStyle={
-            colorMode && colorMode === "dark"
-              ? "boton--back-orange--solid"
-              : "boton--primary--solid"
-          }
-          icon={buttonIcon}
-          onClick={() => {
-            !productSoldOut && handleAddToCard(id);
-          }}
-        >
-          {t("events.button.pago")}
-        </Button>
-      );
+      if (price !== 0 && stock > 0) {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--medium"
+            disabled={false}
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            icon={buttonIcon}
+            onClick={() => {
+              handleAddToCard(id);
+            }}
+          >
+            {t("events.button.pago")}
+          </Button>
+        );
+      }
     }
 
-    return (
-      !productSoldOut && (
-        <Button
-          variant="contained"
-          color="primary"
-          buttonSize="boton--medium"
-          disabled={productSoldOut}
-          buttonStyle={
-            colorMode && colorMode === "dark"
-              ? "boton--back-orange--solid"
-              : "boton--primary--solid"
-          }
-          icon={buttonIcon}
-          onClick={() => {
-            !productSoldOut && handleAddToCard(id);
-          }}
-        >
-          {buttonText}
-        </Button>
-      )
-    );
+    // return (
+    //   !productSoldOut && (
+    //     <Button
+    //       variant="contained"
+    //       color="primary"
+    //       buttonSize="boton--medium"
+    //       disabled={productSoldOut}
+    //       buttonStyle={
+    //         colorMode && colorMode === "dark"
+    //           ? "boton--back-orange--solid"
+    //           : "boton--primary--solid"
+    //       }
+    //       icon={buttonIcon}
+    //       onClick={() => {
+    //         !productSoldOut && handleAddToCard(id);
+    //       }}
+    //     >
+    //       {buttonText}
+    //     </Button>
+    //   )
+    // );
   };
 
   const buttonMobileMapper = (type) => {
@@ -360,25 +363,25 @@ export default function ModalCard(props) {
       );
     }
 
-    return (
-      <Button
-        variant="contained"
-        color="primary"
-        buttonSize="boton--megaxxl"
-        buttonStyle={
-          colorMode && colorMode === "dark"
-            ? "boton--back-orange--solid"
-            : "boton--primary--solid"
-        }
-        disabled={productSoldOut}
-        icon={buttonIcon}
-        onClick={() => {
-          !productSoldOut && handleAddToCard(id);
-        }}
-      >
-        {buttonText} - {formatPrice(price)}
-      </Button>
-    );
+    // return (
+    //   <Button
+    //     variant="contained"
+    //     color="primary"
+    //     buttonSize="boton--megaxxl"
+    //     buttonStyle={
+    //       colorMode && colorMode === "dark"
+    //         ? "boton--back-orange--solid"
+    //         : "boton--primary--solid"
+    //     }
+    //     disabled={productSoldOut}
+    //     icon={buttonIcon}
+    //     onClick={() => {
+    //       !productSoldOut && handleAddToCard(id);
+    //     }}
+    //   >
+    //     {buttonText} - {formatPrice(price)}
+    //   </Button>
+    // );
   };
 
   const isMobile = useMediaQuery(MOBILE_NORMAL);
@@ -468,7 +471,7 @@ export default function ModalCard(props) {
                 <div
                   className={`modal-card__price modal-card__price_${colorMode}`}
                 >
-                  {formatPrice(price)}
+                  {formatPrice(price_range)}
                 </div>
               </div>
             </div>
@@ -522,7 +525,7 @@ export default function ModalCard(props) {
                 address={address}
                 datetime={datetime}
                 handleAddClick={handleAddClick}
-                price={price}
+                price_range={price_range}
                 discount={discount}
                 maps_url={maps_url}
                 colorMode={colorMode}
@@ -616,7 +619,7 @@ export default function ModalCard(props) {
                 address={address}
                 datetime={datetime}
                 handleAddClick={handleAddClick}
-                price={price}
+                price_range={price_range}
                 maps_url={maps_url}
                 colorMode={colorMode}
               />
@@ -637,7 +640,7 @@ export default function ModalCard(props) {
                   !productSoldOut && handleAddToCard(id);
                 }}
               >
-                {buttonText} - {formatPrice(price)}
+                {buttonText} - {formatPrice(price_range)}
               </Button>
               {buttonMobileMapper(type)}
             </div>

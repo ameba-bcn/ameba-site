@@ -132,14 +132,26 @@ const AgendaTable = () => {
       );
 
     // Evento de pago
+    if (price !== 0 && stock > 0)
+      return (
+        <Icon
+          icon="ticket"
+          className="cardActivitat"
+          disabled={false}
+          type="hoverable-cream"
+          onClick={() => data?.has_stock && fetchAndAdd(data)}
+          tooltip={t("events.tooltip.pago")}
+        />
+      );
+
     return (
       <Icon
-        icon="ticket"
+        icon="cancelled"
         className="cardActivitat"
-        disabled={false}
+        disabled={true}
         type="hoverable-cream"
-        onClick={() => data?.has_stock && fetchAndAdd(data)}
-        tooltip={t("events.tooltip.pago")}
+        onClick={() => fetchEvent(data)}
+        tooltip={t("events.tooltip.caducado")}
       />
     );
   };

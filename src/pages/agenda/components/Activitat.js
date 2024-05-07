@@ -24,6 +24,7 @@ export default function ActivitatDialog(props) {
     maps_url = null,
     cancelled,
     stock,
+    price,
   } = dataRow;
 
   const [redirect, setRedirect] = useState(false);
@@ -61,7 +62,8 @@ export default function ActivitatDialog(props) {
       handleAddClick={handleAddClick}
       id={id}
       title={name}
-      price={price_range}
+      price_range={price_range}
+      price={price}
       imgArr={images}
       datetime={datetime}
       address={address}

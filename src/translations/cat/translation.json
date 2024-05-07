@@ -138,7 +138,7 @@
   "events": {
     "button": {
       "pago": "compra entrada",
-      "pago-sold": "agotat",
+      "pago-sold": "esgotat",
       "gratis-inscripcion": "inscriute",
       "gratis-aforo-completo": "complet",
       "gratis": "gratis",
@@ -148,7 +148,7 @@
     },
     "tooltip": {
       "pago": "Disponible",
-      "pago-sold": "Agotat",
+      "pago-sold": "Esgotat",
       "gratis-inscripcion": "Inscripció disponible",
       "gratis-aforo-completo": "Aforament complet",
       "gratis": "Gratis",

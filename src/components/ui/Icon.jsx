@@ -14,10 +14,6 @@ export const StyledSvgElement = styled.div`
     }
   }
 
-  &:not([disabled]) {
-    cursor: pointer;
-  }
-
   .tooltip {
     visibility: hidden;
     width: 120px;
@@ -51,50 +47,30 @@ export const StyledSvgElement = styled.div`
     opacity: 1;
   }
 
-  #hoverable-cream {
+  #hoverable-cream-svg {
     path {
       fill: ${(props) =>
         props.disabled ? "var(--color-gris-claro)" : "var(--color-negro)"};
     }
-    &:hover:not([disabled]) {
-      path {
-        fill: var(--color-rojo);
-      }
-    }
   }
 
-  #hoverable-red {
+  #hoverable-red-svg {
     path {
       fill: ${(props) =>
         props.disabled ? "var(--color-gris-claro)" : "var(--color-negro)"};
     }
-    &:hover:not([disabled]) {
-      path {
-        fill: var(--color-cream);
-      }
-    }
   }
-  #hoverable-black {
+  #hoverable-black-svg {
     path {
       fill: ${(props) =>
         props.disabled ? "var(--color-gris-claro)" : "var(--color-cream)"};
-    }
-    &:hover:not([disabled]) {
-      path {
-        fill: var(--color-negro);
-      }
     }
   }
 
-  #hoverable-dark {
+  #hoverable-dark-svg {
     path {
       fill: ${(props) =>
         props.disabled ? "var(--color-gris-claro)" : "var(--color-cream)"};
-    }
-    &:hover:not([disabled]) {
-      path {
-        fill: var(--color-rojo);
-      }
     }
   }
 
@@ -135,7 +111,7 @@ const AmebaSvgWrapper = (props) => {
         height={height}
         stroke={stroke}
         fill="none"
-        id={type}
+        id={`${type}-svg`}
         {...props}
       >
         {children}

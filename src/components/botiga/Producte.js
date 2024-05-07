@@ -17,6 +17,7 @@ export default function ProducteDialog(props) {
     description,
     has_stock,
     discount = 0,
+    price,
   } = dataRow;
   const dispatch = useDispatch();
   const [sizes, setSizes] = useState([]);
@@ -64,7 +65,8 @@ export default function ProducteDialog(props) {
       handleAddClick={handleAddClick}
       id={id}
       title={name}
-      price={price_range}
+      price={price}
+      price_range={price_range}
       imgArr={images}
       buttonText={t("modal.afegir")}
       buttonIcon={<Icon icon="shoppingCart" type="hoverable-black" />}

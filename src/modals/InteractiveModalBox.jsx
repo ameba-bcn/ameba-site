@@ -16,7 +16,7 @@ const InteractiveModalBox = (props) => {
     setSelectSizeError,
     address,
     datetime,
-    price,
+    price_range,
     discount,
     maps_url,
     colorMode = "",
@@ -133,7 +133,7 @@ const InteractiveModalBox = (props) => {
               <span>{t("modal.preu")} / &nbsp;</span>
             </span>
             <span className="interactiveDataBox-activitat__text-data">
-              {priceMayDiscount(price, discount)}
+              {priceMayDiscount(price_range, discount)}
             </span>
           </div>
         </>

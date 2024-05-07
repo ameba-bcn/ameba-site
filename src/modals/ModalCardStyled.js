@@ -8,11 +8,11 @@ export const StyledModalRow = styled.div`
     width: 100%;
     margin: 0 auto;
     margin-top: 10px;
-    &:hover {
-      #hoverable-black {
-        svg > path {
-          fill: var(--color-negro);
-        }
+  }
+  button:hover:not([disabled]) {
+    #hoverable-black-svg {
+      path {
+        fill: var(--color-negro);
       }
     }
   }

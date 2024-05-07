@@ -29,12 +29,40 @@
     display: flex;
     justify-content: center;
     gap: 8px;
+    align-items: center;
+}
+
+.boton {
+    font-family: "Bebas Neue", sans-serif;
+    width: fit-content;
+    white-space: nowrap;
+    font-weight: 400;
+    cursor: pointer;
+    color: var(--color-cream);
+    outline: none;
+    transition: transform 0.3s ease;
+    text-align: center;
     display: flex;
+    justify-content: center;
+    gap: 8px;
     align-items: center;
 }
 
 .button-disabled {
     opacity: 0.6;
+    cursor: unset;
+}
+
+.button-disabled:hover {
+    pointer-events: none;
+    cursor: unset;
+    transform: translateY(0px) !important;
+}
+
+.button-disabled svg:hover {
+    pointer-events: none;
+    cursor: unset;
+    transform: translateY(0px) !important;
 }
 
 .button-disabled:hover {
@@ -46,7 +74,7 @@
     outline: none;
 }
 
-.boton:hover {
+.boton:hover:not([disabled]) {
     transform: translateY(-2px);
 }
 
@@ -79,17 +107,17 @@
     border: none;
 }
 
-.bg-red:hover {
+.bg-red:hover:not([disabled]) {
     background-color: var(--rojo);
     color: var(--negro);
 }
 
-.bg-red.active {
+.bg-red.active:not([disabled]) {
     background-color: var(--rojo);
     color: var(--color-cream);
 }
 
-.bg-cream:hover {
+.bg-cream:hover:not([disabled]) {
     background-color: var(--color-cream);
     color: var(--negro);
 }
@@ -99,7 +127,7 @@
     color: var(--negro);
 }
 
-.bg-orange:hover {
+.bg-orange:hover:not([disabled]) {
     background-color: var(--naranja);
     color: var(--negro);
 }

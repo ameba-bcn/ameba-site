@@ -51,13 +51,6 @@ export const StyledExternalButtonBox = styled.div`
   button {
     width: 100%;
     max-width: 457px;
-    &:hover {
-      #hoverable-black {
-        svg > path {
-          fill: var(--color-negro);
-        }
-      }
-    }
   }
 `;
 
