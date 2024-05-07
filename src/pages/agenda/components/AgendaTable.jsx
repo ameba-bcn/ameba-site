@@ -74,7 +74,7 @@ const AgendaTable = () => {
           className="cardActivitat"
           disabled={false}
           type="hoverable-cream"
-          onClick={() => data?.has_stock && fetchAndAdd(data)}
+          onClick={() => fetchAndAdd(data)}
           tooltip={t("events.tooltip.gratis-inscripcion")}
         />
       );
@@ -105,19 +105,6 @@ const AgendaTable = () => {
         />
       );
 
-    // Evento de pago sold out
-    if (price !== 0 && stock === 0)
-      return (
-        <Icon
-          icon="ticket"
-          className="cardActivitat"
-          disabled={true}
-          type="hoverable-cream"
-          onClick={() => fetchEvent(data)}
-          tooltip={t("events.tooltip.pago-sold")}
-        />
-      );
-
     // Evento de pago en taquilla
     if (price !== 0 && stock === -1)
       return (
@@ -126,7 +113,7 @@ const AgendaTable = () => {
           className="cardActivitat"
           disabled={false}
           type="hoverable-cream"
-          onClick={() => data?.has_stock && fetchAndAdd(data)}
+          onClick={() => fetchAndAdd(data)}
           tooltip={t("events.tooltip.pago-taquilla")}
         />
       );
@@ -139,8 +126,21 @@ const AgendaTable = () => {
           className="cardActivitat"
           disabled={false}
           type="hoverable-cream"
-          onClick={() => data?.has_stock && fetchAndAdd(data)}
+          onClick={() => fetchAndAdd(data)}
           tooltip={t("events.tooltip.pago")}
+        />
+      );
+
+    // Evento de pago sold out
+    if (price !== 0 && stock === 0)
+      return (
+        <Icon
+          icon="ticket"
+          className="cardActivitat"
+          disabled={true}
+          type="hoverable-cream"
+          onClick={() => fetchEvent(data)}
+          tooltip={t("events.tooltip.pago-sold")}
         />
       );
 

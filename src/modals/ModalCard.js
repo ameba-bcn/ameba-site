@@ -52,27 +52,6 @@ export default function ModalCard(props) {
   const [t] = useTranslation("translation");
   const buttonMapper = (type) => {
     if (type === "ACTIVITAT") {
-      // Evento de pago sold out
-      if (price !== 0 && stock === 0) {
-        return (
-          <Button
-            variant="contained"
-            color="primary"
-            buttonSize="boton--medium"
-            disabled={true}
-            buttonStyle={
-              colorMode && colorMode === "dark"
-                ? "boton--back-orange--solid"
-                : "boton--primary--solid"
-            }
-            icon={buttonIcon}
-            onClick={() => {}}
-          >
-            {t("events.button.pago-sold")}
-          </Button>
-        );
-      }
-
       // Evento gratuito con inscripcion
       if (price === 0 && stock > 0) {
         return (
@@ -88,7 +67,7 @@ export default function ModalCard(props) {
             }
             icon={buttonIcon}
             onClick={() => {
-              !productSoldOut && handleAddToCard(id);
+              handleAddToCard(id);
             }}
           >
             {t("events.button.gratis-inscripcion")}
@@ -163,7 +142,7 @@ export default function ModalCard(props) {
             }
             icon={buttonIcon}
             onClick={() => {
-              !productSoldOut && handleAddToCard(id);
+              handleAddToCard(id);
             }}
           >
             {t("events.button.pago-taquilla")}
@@ -195,6 +174,27 @@ export default function ModalCard(props) {
       }
     }
 
+    // Evento de pago sold out
+    if (price !== 0 && stock === 0) {
+      return (
+        <Button
+          variant="contained"
+          color="primary"
+          buttonSize="boton--medium"
+          disabled={true}
+          buttonStyle={
+            colorMode && colorMode === "dark"
+              ? "boton--back-orange--solid"
+              : "boton--primary--solid"
+          }
+          icon={buttonIcon}
+          onClick={() => {}}
+        >
+          {t("events.button.pago-sold")}
+        </Button>
+      );
+    }
+
     // return (
     //   !productSoldOut && (
     //     <Button
@@ -220,27 +220,6 @@ export default function ModalCard(props) {
 
   const buttonMobileMapper = (type) => {
     if (type === "ACTIVITAT") {
-      // Evento de pago sold out
-      if (price !== 0 && stock === 0) {
-        return (
-          <Button
-            variant="contained"
-            color="primary"
-            buttonSize="boton--megaxxl"
-            buttonStyle={
-              colorMode && colorMode === "dark"
-                ? "boton--back-orange--solid"
-                : "boton--primary--solid"
-            }
-            disabled={true}
-            icon={buttonIcon}
-            onClick={() => {}}
-          >
-            {t("events.button.pago-sold")} - {formatPrice(price)}
-          </Button>
-        );
-      }
-
       // Evento gratuito con inscripcion
       if (price === 0 && stock > 0) {
         return (
@@ -256,7 +235,7 @@ export default function ModalCard(props) {
             disabled={false}
             icon={buttonIcon}
             onClick={() => {
-              !productSoldOut && handleAddToCard(id);
+              handleAddToCard(id);
             }}
           >
             {t("events.button.gratis-inscripcion")} - {formatPrice(price)}
@@ -331,7 +310,7 @@ export default function ModalCard(props) {
             disabled={true}
             icon={buttonIcon}
             onClick={() => {
-              !productSoldOut && handleAddToCard(id);
+              handleAddToCard(id);
             }}
           >
             {t("events.button.pago-taquilla")} - {formatPrice(price)}
@@ -354,7 +333,7 @@ export default function ModalCard(props) {
             disabled={false}
             icon={buttonIcon}
             onClick={() => {
-              !productSoldOut && handleAddToCard(id);
+              handleAddToCard(id);
             }}
           >
             {t("events.button.pago")} - {formatPrice(price)}
@@ -362,6 +341,26 @@ export default function ModalCard(props) {
         );
     }
 
+    // Evento de pago sold out
+    if (price !== 0 && stock === 0) {
+      return (
+        <Button
+          variant="contained"
+          color="primary"
+          buttonSize="boton--megaxxl"
+          buttonStyle={
+            colorMode && colorMode === "dark"
+              ? "boton--back-orange--solid"
+              : "boton--primary--solid"
+          }
+          disabled={true}
+          icon={buttonIcon}
+          onClick={() => {}}
+        >
+          {t("events.button.pago-sold")} - {formatPrice(price)}
+        </Button>
+      );
+    }
     // return (
     //   <Button
     //     variant="contained"
@@ -375,7 +374,7 @@ export default function ModalCard(props) {
     //     disabled={productSoldOut}
     //     icon={buttonIcon}
     //     onClick={() => {
-    //       !productSoldOut && handleAddToCard(id);
+    //        && handleAddToCard(id);
     //     }}
     //   >
     //     {buttonText} - {formatPrice(price)}
@@ -642,7 +641,7 @@ export default function ModalCard(props) {
                 disabled={productSoldOut}
                 icon={buttonIcon}
                 onClick={() => {
-                  !productSoldOut && handleAddToCard(id);
+                  handleAddToCard(id);
                 }}
               >
                 {buttonText} - {formatPrice(price_range)}
