@@ -41,7 +41,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
     enableReinitialize: true,
     validate,
     validateOnChange: false,
-    validateOnBlur: false,
+    validateOnBlur: true,
     onSubmit: (values) => {
       handleSubmit(values);
     },
@@ -219,38 +219,41 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
             </LogFormError>
           )}
         </div>
-        {dataHasChanged && (
-          <div className="row button-row">
-            <div className="column">
-              <Button
-                variant="contained"
-                className="submit"
-                color="primary"
-                buttonSize="boton--medium"
-                buttonStyle="boton--primary--solid"
-                onClick={() => handleCancel(formik.setValues)}
-              >
-                {t("boto.cancela")}
-              </Button>
-            </div>
-            <div className="column">
-              <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                className="submit"
-                buttonSize="boton--medium"
-                buttonStyle="boton--primary--solid"
-              >
-                {loading ? (
-                  <span className="spinner-border"></span>
-                ) : (
-                  <>{t("boto.guarda")}</>
-                )}
-              </Button>
-            </div>
+        <div className="row button-row">
+          <div className="column">
+            <Button
+              variant="contained"
+              className="submit"
+              color="primary"
+              buttonSize="boton--medium"
+              buttonStyle="boton--primary--solid"
+              onClick={(e) => {
+                e.preventDefault();
+                handleCancel(formik.setValues);
+              }}
+              disabled={!dataHasChanged}
+            >
+              {t("boto.cancela")}
+            </Button>
           </div>
-        )}
+          <div className="column">
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className="submit"
+              buttonSize="boton--medium"
+              buttonStyle="boton--primary--solid"
+              disabled={!dataHasChanged || !isEmptyObject(formik.errors)}
+            >
+              {loading ? (
+                <span className="spinner-border"></span>
+              ) : (
+                <>{t("boto.guarda")}</>
+              )}
+            </Button>
+          </div>
+        </div>
       </form>
     </LogFormBox>
   );

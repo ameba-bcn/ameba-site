@@ -515,7 +515,6 @@ export default function ModalCard(props) {
                 sizes={sizes}
                 stock={stock}
                 price={price}
-                todayIsoString={todayIsoString}
                 isSubscriber={isSubscriber}
                 setIsSubscriber={setIsSubscriber}
                 activeSize={activeSize}
@@ -612,7 +611,6 @@ export default function ModalCard(props) {
                 sizes={sizes}
                 stock={stock}
                 price={price}
-                todayIsoString={todayIsoString}
                 isSubscriber={isSubscriber}
                 setIsSubscriber={setIsSubscriber}
                 activeSize={activeSize}

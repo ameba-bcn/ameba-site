@@ -21,15 +21,13 @@ const InteractiveModalBox = (props) => {
     stock,
     discount,
     maps_url,
-    todayIsoString,
     colorMode = "",
   } = props;
 
   const priceMapper = () => {
     if (
       modalStyle === "ACTIVITAT" &&
-      (todayIsoString > datetime ||
-        (price === 0 && stock === -1) ||
+      ((price === 0 && stock === -1) ||
         (price === 0 && stock > 0) ||
         (price === 0 && stock === 0))
     ) {
