@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import NewsletterFormLayout from "../components/forms/NewsletterForm/NewsletterFormLayout";
 import MediaLinks from "../components/layout/MediaLinks";
@@ -6,16 +6,11 @@ import LettersMove from "./../components/layout/LettersMove";
 import { useTranslation } from "react-i18next";
 import { StyledContacte } from "./Contacte.styles.jsx";
 import { StyledLink } from "../styles/GlobalStyles.jsx";
-import { Redirect } from "react-router";
+import { NavLink } from "react-router-dom";
 
 function Contacte() {
   const [t] = useTranslation("translation");
-  const [redirect, setRedirect] = useState(false);
   const { collaborators = [] } = useSelector((state) => state.data);
-
-  if (redirect) {
-    return redirect ? <Redirect to="/legal" /> : null;
-  }
 
   return (
     <StyledContacte id="contacte">
@@ -51,9 +46,9 @@ function Contacte() {
           <span>
             Associació de Música Electrònica de Barcelona - {t("footer.drets")}
             {" - "}
-            <span className="legal" onClick={() => setRedirect(true)}>
+            <NavLink className="legal" to="/legal">
               Legal
-            </span>
+            </NavLink>
           </span>
         </div>
       </div>

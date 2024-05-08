@@ -33,6 +33,10 @@ const getMemberProjects = () => {
   return axiosInstance.get(`${API_URL}member_projects/`, {});
 };
 
+const getLegal = () => {
+  return axiosInstance.get(`${API_URL}legal/`, {});
+};
+
 export default {
   supportYourLocalsAll,
   agendaAll,
@@ -42,4 +46,5 @@ export default {
   getCover,
   getCollaborators,
   getMemberProjects,
+  getLegal,
 };

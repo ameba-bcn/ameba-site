@@ -140,6 +140,11 @@ export const StyledContacte = styled.div`
     flex-direction: column;
     gap: 8px;
   }
+  .legal {
+    color: #000;
+    text-decoration: none;
+  }
+
   .legal:hover {
     text-decoration: underline;
     cursor: pointer;
