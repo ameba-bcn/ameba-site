@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const Paragraph1 = styled.div`
-  font-family: "Montserrat", sans-serif;
-  color: #1d1d1b;
-  font-size: 1.2rem;
+export const TitleInnerSection = styled.div`
+  font-size: 40px;
+  font-family: "Bebas Neue";
+  font-weight: 400;
 `;
 
 export const RowSeparator = styled.div`

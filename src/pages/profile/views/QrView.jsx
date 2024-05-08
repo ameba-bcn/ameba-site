@@ -1,23 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import { useTranslation } from "react-i18next";
 import ImageCarousel from "../../../components/images/ImageCarousel";
 import "react-image-gallery/styles/css/image-gallery.css";
 import { StyledQrBox } from "./QrView.style";
+import authService from "../../../store/services/auth.service";
+import Spinner from "../../../components/spinner/Spinner";
 
 const QrView = () => {
   const [t] = useTranslation("translation");
-
-  const dummyList = [
-    "http://localhost:8080/api/media/images/IMG-20240102-WA0038.jpg",
-    "http://localhost:8080/api/media/images/ameba-workshops-griffi1.jpg",
-    "http://localhost:8080/api/media/images/ameba-workshops-dinky.jpg",
-  ];
+  const [qrImg, setQrImg] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // stateService.getCarnet().then((data) => {
-    //   console.log(data);
-    // });
+    setLoading(true);
+    authService
+      .getMemberProject()
+      .then((data) => {
+        setQrImg(data?.qr);
+      })
+      .then(() => {
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
   }, []);
 
   return (
@@ -27,9 +32,13 @@ const QrView = () => {
         id="qr-disclaimer"
         borderColor="black"
       />
-      <div className="qr-img">
-        <ImageCarousel imgList={dummyList} />
-      </div>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div>
+          <ImageCarousel imgList={[qrImg]} />
+        </div>
+      )}
     </StyledQrBox>
   );
 };

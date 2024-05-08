@@ -156,5 +156,9 @@
       "caducado": "Caducat",
       "pago-taquilla": "Pagament en taquilla"
     }
+  },
+  "legal": {
+    "init-text": "En aquesta vista trobaràs els documents legas de la associació, així com alguns manuals que recomanem que consultis.",
+    "title": "Legal"
   }
 }

@@ -101,10 +101,11 @@ const AmebaSvgWrapper = (props) => {
     stroke,
     type,
     disabled = false,
+    className = "",
   } = props;
 
   return (
-    <StyledSvgElement id={type} disabled={disabled}>
+    <StyledSvgElement id={className} disabled={disabled}>
       <svg
         viewBox="0 0 24 24"
         width={width}
@@ -451,6 +452,26 @@ function Icon(props) {
     </AmebaSvgWrapper>
   );
 
+  const pdfFile = (
+    <AmebaSvgWrapper {...props}>
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M8 2H20C21.1 2 22 2.9 22 4V16C22 17.1 21.1 18 20 18H8C6.9 18 6 17.1 6 16V4C6 2.9 6.9 2 8 2ZM8 16H20V4H8V16ZM4 6H2V20C2 21.1 2.9 22 4 22H18V20H4V6ZM16 9V12C16 12.55 15.55 13 15 13H13V8H15C15.55 8 16 8.45 16 9ZM14 9H15V12H14V9ZM19 11H18V13H17V8H19V9H18V10H19V11ZM10 11H11C11.55 11 12 10.55 12 10V9C12 8.45 11.55 8 11 8H9V13H10V11ZM11 9H10V10H11V9Z"
+          fill="black"
+          fillOpacity="0.54"
+        />
+      </svg>
+    </AmebaSvgWrapper>
+  );
+
   switch (icon) {
     case "receipt":
       return receipt;
@@ -504,6 +525,8 @@ function Icon(props) {
       return free;
     case "cancelled":
       return cancelled;
+    case "pdf-file":
+      return pdfFile;
     default:
       return null;
   }

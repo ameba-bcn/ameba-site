@@ -17,9 +17,11 @@ export const SyledDisclaimer = styled.div`
   padding: 24px 26px 12px 26px;
   text-decoration: none !important;
   color: #1d1d1b !important;
-  .close-icon {
+  margin: 0 auto;
+  #close-icon {
     position: absolute;
     top: 4px;
     right: 8px;
+    cursor: pointer;
   }
 `;
