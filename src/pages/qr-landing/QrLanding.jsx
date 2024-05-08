@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import styled from "styled-components";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import LettersMove from "../../components/layout/LettersMove";
@@ -7,6 +6,7 @@ import { AMEBA_EMAIL, BASE_URL, radioDublabLink } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
 import Spinner from "../../components/spinner/Spinner";
 import { StyledLink } from "../../styles/GlobalStyles";
+import axiosInstance from "../../axios";
 
 export const StyledQr = styled.div`
   flex-shrink: 0;
@@ -18,8 +18,7 @@ export const StyledQr = styled.div`
 `;
 
 const QrLanding = (props) => {
-  const [qrImage, setQrImage] = useState("");
-
+  const [memberData, setMemberData] = useState("");
   // eslint-disable-next-line no-undef
   const queryString = require("querystring-es3");
   const [t] = useTranslation("translation");
@@ -28,40 +27,31 @@ const QrLanding = (props) => {
   useEffect(() => {
     const strToken = parsed["token"] || parsed["?token"];
     console.log("strToken", strToken);
-
-    const config = {
-      headers: {
-        Authorization: `Bearer ${strToken}`,
-        "Content-Type": "application/json",
-        Accept: "application/json, text/plain, */*",
-        "Accept-Language": "es-ES",
-      },
-    };
-    axios
-      .get(BASE_URL + "member_card/", {}, config)
+    axiosInstance
+      .get(BASE_URL + `member_card/?token=${strToken}`, {})
       .then((res) => {
-        setQrImage(res.data).catch(console.error("errors"));
+        setMemberData(JSON.stringify(res.data)).catch(console.error("errors"));
         setLoading(false);
       })
       .catch(() => {
         setLoading(false);
       });
   }, [parsed]);
-  console.log("qrImage", qrImage);
+  console.log("memberData", memberData);
   return (
     <div className="logViewYellow">
       {loading ? (
         <Spinner height={400} color="black" />
       ) : (
         <StyledQr>
-          {qrImage?.length > 0 ? (
+          {memberData?.length > 0 ? (
             <div>
               <DisclaimerBox
                 text={t("soci.carnet")}
                 hideCloseIcon={true}
                 bgColor={`var(--color-cream)`}
               />
-              {qrImage && <img src={qrImage} alt="qr" />}
+              {memberData}
             </div>
           ) : (
             <div className="single-msg">

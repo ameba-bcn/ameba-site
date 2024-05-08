@@ -81,7 +81,7 @@ export default function MembershipFormReadOnly(props) {
                 name="memberNum"
                 type="text"
                 label={t("form.soci")}
-                value={user_data?.number}
+                value={user_data?.number || "-"}
                 slimLine={true}
                 valid={true}
                 disabled={true}
