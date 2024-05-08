@@ -25,6 +25,7 @@ export const StyledCloseIcon = styled.div`
   flex-direction: row;
   margin-bottom: 20px;
   svg {
+    cursor: pointer;
     float: right;
     max-height: 24px;
     margin-top: -20px;

@@ -74,19 +74,19 @@ export const StyledSvgElement = styled.div`
     }
   }
 
-  #cream {
+  #cream-svg {
     path {
       fill: var(--color-cream);
     }
   }
 
-  #orange {
+  #orange-svg {
     path {
       fill: var(--color-naranja);
     }
   }
 
-  #yellow {
+  #yellow-svg {
     path {
       fill: var(--color-amarillo);
     }

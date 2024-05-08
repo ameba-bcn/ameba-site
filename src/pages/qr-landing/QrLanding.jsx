@@ -15,10 +15,29 @@ export const StyledQr = styled.div`
   height: 100%;
   min-height: 400px;
   justify-content: center;
+  .json-formatted-box {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 60px 0px;
+    width: 100%;
+  }
+  .json-formatted {
+    font-family: Montserrat, sans-serif;
+    font-size: 22px;
+    text-align: start;
+    word-wrap: break-word;
+  }
+  @media screen and (max-width: 600px) {
+    .json-formatted {
+      overflow: scroll;
+      font-size: 16px;
+    }
+  }
 `;
 
 const QrLanding = (props) => {
-  const [memberData, setMemberData] = useState("");
+  const [memberData, setMemberData] = useState({});
+
   // eslint-disable-next-line no-undef
   const queryString = require("querystring-es3");
   const [t] = useTranslation("translation");
@@ -37,21 +56,23 @@ const QrLanding = (props) => {
         setLoading(false);
       });
   }, [parsed]);
-  console.log("memberData", memberData);
+
   return (
     <div className="logViewYellow">
       {loading ? (
         <Spinner height={400} color="black" />
       ) : (
         <StyledQr>
-          {memberData?.length > 0 ? (
-            <div>
+          {memberData && Object.keys(memberData)?.length > 0 ? (
+            <div className="json-formatted-box">
               <DisclaimerBox
                 text={t("soci.carnet")}
                 hideCloseIcon={true}
                 bgColor={`var(--color-cream)`}
               />
-              {memberData}
+              <div className="json-formatted">
+                <pre>{JSON.stringify(memberData, null, 2)}</pre>
+              </div>
             </div>
           ) : (
             <div className="single-msg">

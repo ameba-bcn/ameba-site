@@ -9,8 +9,6 @@ export const StyledDialog = styled.div`
   margin: 0;
   -webkit-font-smoothing: antialiased;
   .backdrop-root {
-    opacity: 1;
-    transition: opacity 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     top: 0;
     left: 0;
     right: 0;
@@ -21,6 +19,15 @@ export const StyledDialog = styled.div`
     align-items: center;
     justify-content: center;
     background-color: rgba(0, 0, 0, 0.5);
+    animation: fadein 300ms;
+    @keyframes fadein {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
     -webkit-tap-highlight-color: transparent;
     .dialog-container {
       height: 100%;
