@@ -64,12 +64,13 @@ const MemberProject = () => {
       !(description?.length === 0 || description === null)
     ) {
       const upload_images = images.map((img) => img.image);
+
       authService
         .updateMemberProject({
           ...val,
           description: description,
-          media_urls: mediaLinks,
-          upload_images: [upload_images[0]],
+          upload_media_urls: mediaLinks,
+          upload_images: upload_images,
           public: isPublic || false,
         })
         .then(() => {

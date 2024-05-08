@@ -119,7 +119,7 @@ const LinkBox = (props) => {
               ) : null}
               <div className="content">
                 <a href={link} rel="noreferrer" target="_blank">
-                  {link?.split("www.").length > 1
+                  {typeof link === "string" && link?.split("www.").length > 1
                     ? link?.split("www.")[1]
                     : link}
                 </a>

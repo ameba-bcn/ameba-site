@@ -30,10 +30,11 @@ const QrView = () => {
       <DisclaimerBox
         text={t("soci.carnet")}
         id="qr-disclaimer"
-        borderColor="black"
+        hideCloseIcon={true}
+        bgColor={`var(--color-cream)`}
       />
       {loading ? (
-        <Spinner />
+        <Spinner height={400} color="black" />
       ) : (
         <div>
           <ImageCarousel imgList={[qrImg]} />

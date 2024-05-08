@@ -3,7 +3,10 @@ import axios from "axios";
 import styled from "styled-components";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import LettersMove from "../../components/layout/LettersMove";
-import { BASE_URL, radioDublabLink } from "../../utils/constants";
+import { AMEBA_EMAIL, BASE_URL, radioDublabLink } from "../../utils/constants";
+import { useTranslation } from "react-i18next";
+import Spinner from "../../components/spinner/Spinner";
+import { StyledLink } from "../../styles/GlobalStyles";
 
 export const StyledQr = styled.div`
   flex-shrink: 0;
@@ -15,15 +18,16 @@ export const StyledQr = styled.div`
 `;
 
 const QrLanding = (props) => {
-  let strToken = "";
   const [qrImage, setQrImage] = useState("");
 
   // eslint-disable-next-line no-undef
   const queryString = require("querystring-es3");
+  const [t] = useTranslation("translation");
   const parsed = queryString.parse(props.location.search);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    strToken = parsed["token"] || parsed["?token"];
+    const strToken = parsed["token"] || parsed["?token"];
+    console.log("strToken", strToken);
 
     const config = {
       headers: {
@@ -33,21 +37,44 @@ const QrLanding = (props) => {
         "Accept-Language": "es-ES",
       },
     };
-
-    const bodyParameters = {
-      key: "value",
-    };
     axios
-      .get(BASE_URL + "member_card/", bodyParameters, config)
-      .then((res) => setQrImage(res.data).catch(console.error("errors")));
-  }, [parsed, strToken]);
-
+      .get(BASE_URL + "member_card/", {}, config)
+      .then((res) => {
+        setQrImage(res.data).catch(console.error("errors"));
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  }, [parsed]);
+  console.log("qrImage", qrImage);
   return (
     <div className="logViewYellow">
-      <StyledQr>
-        <DisclaimerBox text={strToken} />
-        {qrImage && <img src={qrImage} alt="qr" />}
-      </StyledQr>
+      {loading ? (
+        <Spinner height={400} color="black" />
+      ) : (
+        <StyledQr>
+          {qrImage?.length > 0 ? (
+            <div>
+              <DisclaimerBox
+                text={t("soci.carnet")}
+                hideCloseIcon={true}
+                bgColor={`var(--color-cream)`}
+              />
+              {qrImage && <img src={qrImage} alt="qr" />}
+            </div>
+          ) : (
+            <div className="single-msg">
+              {t("errors.general")}
+              <br />
+              {t("errors.contacta")}
+              <StyledLink>
+                <a href="mailto:info@ameba.cat">{AMEBA_EMAIL}</a>
+              </StyledLink>
+            </div>
+          )}
+        </StyledQr>
+      )}
       <LettersMove
         className="lettersMoveDiv"
         sentence="AMEBA RADIO @ dublab"
