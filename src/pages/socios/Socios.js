@@ -33,6 +33,10 @@ const Socios = () => {
   const { user_member_data = {} } = useSelector((state) => state.auth);
   const { status = "" } = user_member_data;
 
+  const filteredSocios = member_projects.filter((project) =>
+    project.project_name?.toLowerCase()?.includes(searchInput?.toLowerCase())
+  );
+
   return (
     <StyledSocios>
       <PowerTitle title="soci@s" className="SupportTitle" />
@@ -59,7 +63,7 @@ const Socios = () => {
       {isMemberProjectsLoading ? (
         <Spinner />
       ) : (
-        <CardLayout cardList={member_projects} urlRoot="socis" />
+        <CardLayout cardList={filteredSocios} urlRoot="socis" />
       )}
       <LettersMove
         className="lettersMoveDiv"

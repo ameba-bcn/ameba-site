@@ -6,6 +6,15 @@ export const StyledCardLayout = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   padding: 20px;
+  animation: fadein 300ms;
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   .cardSupportDeck > i {
     width: 570px;
     min-width: 570px;

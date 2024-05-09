@@ -284,7 +284,7 @@ const AgendaTable = () => {
       sortByDate(agenda).filter((activity) =>
         activity?.name?.toLowerCase()?.includes(searchInput?.toLowerCase())
       ),
-    [agenda]
+    [agenda, searchInput]
   );
 
   const table = useReactTable({

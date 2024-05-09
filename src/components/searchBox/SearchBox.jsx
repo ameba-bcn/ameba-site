@@ -13,16 +13,20 @@ const SearchBox = ({
   const [toggleHidden, setToggleHidden] = useState(true);
   const [t] = useTranslation("translation");
 
-  const ref = useRef();
+  const ref = useRef("input-search-box");
 
   const handleChange = (e) => {
     e.preventDefault();
     setSearchInput(e.target.value);
   };
 
+  const hideInputBox = () => {
+    setToggleHidden(true);
+  };
+
   useOutsideClick(ref, () => {
-    if (!toggleHidden) {
-      setToggleHidden(true);
+    if (toggleHidden) {
+      hideInputBox();
     }
   });
 
@@ -34,7 +38,7 @@ const SearchBox = ({
             <Icon
               icon="search"
               type="hoverable-cream"
-              onClick={() => setToggleHidden(!toggleHidden)}
+              onClick={() => setToggleHidden(false)}
             />
           ) : (
             <StyledSearchBox
@@ -43,6 +47,7 @@ const SearchBox = ({
               placeholder={`${t("general.cerca")}...`}
               onChange={handleChange}
               value={searchInput}
+              onBlur={hideInputBox}
               autoFocus
             />
           )}
@@ -57,6 +62,7 @@ const SearchBox = ({
       placeholder={searchText}
       onChange={handleChange}
       value={searchInput}
+      ref={ref}
     />
   );
 };

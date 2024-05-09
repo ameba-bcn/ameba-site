@@ -4,6 +4,15 @@ export const StyledSociosMain = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  animation: fadein 300ms;
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   .link-section {
     padding-bottom: 30px;
   }
