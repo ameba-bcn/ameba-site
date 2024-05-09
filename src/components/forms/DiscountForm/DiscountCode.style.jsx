@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
 export const DiscountRow = styled.div`
-  /* padding: 20px 80px; */
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: row !important;
   justify-content: space-around;
   & input {
     width: 45%;
@@ -14,11 +12,11 @@ export const DiscountRow = styled.div`
   }
   @media (max-width: 350px) {
     & input {
-    width: 58%;
-  }
-  & button {
-    width: 40%;
-  }
+      width: 58%;
+    }
+    & button {
+      width: 40%;
+    }
   }
   @media (max-width: 490px) {
     & input::placeholder {

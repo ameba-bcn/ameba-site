@@ -46,6 +46,14 @@ export const StyledApp = styled.div`
     z-index: 0;
   }
 
+  img {
+    -khtml-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
   .checkoutViewYellow {
     background-color: #fae6c5;
     height: fit-content;

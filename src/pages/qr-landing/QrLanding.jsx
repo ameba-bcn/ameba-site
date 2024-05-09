@@ -45,7 +45,6 @@ const QrLanding = (props) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const strToken = parsed["token"] || parsed["?token"];
-    console.log("strToken", strToken);
     axiosInstance
       .get(BASE_URL + `member_card/?token=${strToken}`, {})
       .then((res) => {

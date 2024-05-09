@@ -54,12 +54,27 @@ export const StyledSvgElement = styled.div`
     }
   }
 
+  #hoverable-cream-svg:hover {
+    path {
+      fill: ${(props) =>
+        props.disabled ? "var(--color-gris-claro)" : "var(--color-rojo)"};
+    }
+  }
+
   #hoverable-red-svg {
     path {
       fill: ${(props) =>
         props.disabled ? "var(--color-gris-claro)" : "var(--color-negro)"};
     }
   }
+
+  #hoverable-red-svg:hover {
+    path {
+      fill: ${(props) =>
+        props.disabled ? "var(--color-gris-claro)" : "var(--color-cream)"};
+    }
+  }
+
   #hoverable-black-svg {
     path {
       fill: ${(props) =>
@@ -67,10 +82,24 @@ export const StyledSvgElement = styled.div`
     }
   }
 
+  #hoverable-black-svg:hover {
+    path {
+      fill: ${(props) =>
+        props.disabled ? "var(--color-gris-claro)" : "var(--color-rojo)"};
+    }
+  }
+
   #hoverable-dark-svg {
     path {
       fill: ${(props) =>
         props.disabled ? "var(--color-gris-claro)" : "var(--color-cream)"};
+    }
+  }
+
+  #hoverable-dark-svg:hover {
+    path {
+      fill: ${(props) =>
+        props.disabled ? "var(--color-gris-claro)" : "var(--color-rojo)"};
     }
   }
 

@@ -115,6 +115,7 @@ export const ReviewTable = styled.table`
 
         .deleteItem {
           div {
+            cursor: pointer;
             justify-content: center;
           }
         }

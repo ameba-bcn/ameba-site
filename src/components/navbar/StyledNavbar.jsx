@@ -299,6 +299,7 @@ export const StyledNavbar = styled.div`
     background-color: #fae6c5;
     width: 100vh;
     margin-left: -32px;
+    padding-right: 32px;
     animation: fade 0.5s 1;
     -webkit-animation: fade 0.5s 1;
   }

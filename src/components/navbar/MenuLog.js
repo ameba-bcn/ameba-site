@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { logout } from "../../store/actions/auth";
 import Dropdown from "../dropdown/Dropdown";
 import styled from "styled-components";
+import useOutsideClick from "../../hooks/use-outside-click";
 
 export const StyledMenuLog = styled.div`
   position: relative;
@@ -51,7 +52,7 @@ export default function MenuLog(props) {
 
   const handleOpenSessio = (event) => {
     setAnchorEl1(event.currentTarget);
-    isProfileMenuOpen ? handleCloseSessio() : openProfileMenu();
+    isProfileMenuOpen ? closeProfileMenu() : openProfileMenu();
   };
 
   const logoutMenu = () => {
@@ -60,7 +61,11 @@ export default function MenuLog(props) {
     }
     dispatch(logout());
   };
-  const dropdownRef1 = React.useRef(null);
+  const dropdownRef = React.useRef(null);
+
+  useOutsideClick(dropdownRef, () => {
+    if (anchorEl1 && !isMobile) handleCloseSessio();
+  });
 
   return (
     <StyledMenuLog>
@@ -71,48 +76,55 @@ export default function MenuLog(props) {
       >
         {user_data.username === "" ? "SESSIÓ" : userNameShortened}
       </a>
-      {!isMobile ? (
-        <Dropdown
-          refer={dropdownRef1}
-          open={Boolean(anchorEl1)}
-          setIsOpen={handleCloseSessio}
-        >
-          <StyledMenuItem>
-            <NavLink
-              className="menuOptions"
-              to="/profile"
-              onClick={() => handleCloseSessio()}
-            >
-              {isMember && <div className="dropdown-profile item">Perfil</div>}
-            </NavLink>
-            <div className="dropdown-logout item" onClick={() => logoutMenu()}>
-              Log out
-            </div>
-          </StyledMenuItem>
-        </Dropdown>
-      ) : (
-        isProfileMenuOpen && (
-          <div className="menu-mobile-session-box">
-            <div className="menu-mobile-session">
+      <div ref={dropdownRef}>
+        {!isMobile ? (
+          <Dropdown
+            open={Boolean(anchorEl1)}
+            setIsOpen={handleCloseSessio}
+            externalClickOutside={true}
+          >
+            <StyledMenuItem>
               <NavLink
                 className="menuOptions"
                 to="/profile"
                 onClick={() => handleCloseSessio()}
               >
                 {isMember && (
-                  <div className="dropdown-profile-mobile">Perfil</div>
+                  <div className="dropdown-profile item">Perfil</div>
                 )}
               </NavLink>
               <div
-                className="dropdown-logout-mobile"
+                className="dropdown-logout item"
                 onClick={() => logoutMenu()}
               >
                 Log out
               </div>
+            </StyledMenuItem>
+          </Dropdown>
+        ) : (
+          isProfileMenuOpen && (
+            <div className="menu-mobile-session-box">
+              <div className="menu-mobile-session">
+                <NavLink
+                  className="menuOptions"
+                  to="/profile"
+                  onClick={() => handleCloseSessio()}
+                >
+                  {isMember && (
+                    <div className="dropdown-profile-mobile">Perfil</div>
+                  )}
+                </NavLink>
+                <div
+                  className="dropdown-logout-mobile"
+                  onClick={() => logoutMenu()}
+                >
+                  Log out
+                </div>
+              </div>
             </div>
-          </div>
-        )
-      )}
+          )
+        )}
+      </div>
     </StyledMenuLog>
   );
 }

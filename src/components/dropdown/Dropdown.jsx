@@ -20,11 +20,17 @@ export const StyledPopoverMenu = styled.div`
   z-index: 500;
 `;
 
-const Dropdown = ({ children, open = false, setIsOpen, refer }) => {
+const Dropdown = ({
+  children,
+  open = false,
+  setIsOpen,
+  refer = useRef(null),
+  externalClickOutside = false,
+}) => {
   const dropdownRef = useRef(null);
 
-  useOutsideClick(dropdownRef, () => {
-    if (open) setIsOpen(false);
+  useOutsideClick(refer || dropdownRef, () => {
+    if (open && !externalClickOutside) setIsOpen(false);
   });
 
   return open ? (

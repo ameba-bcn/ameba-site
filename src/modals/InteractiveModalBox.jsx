@@ -34,7 +34,7 @@ const InteractiveModalBox = (props) => {
       return t("events.button.gratis").toUpperCase();
     }
 
-    return priceMayDiscount(price_range, discount);
+    return priceMayDiscount(price_range, discount, null, t("form.descompte"));
   };
 
   const [t] = useTranslation("translation");

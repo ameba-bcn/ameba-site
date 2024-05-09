@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import MenuLog from "./MenuLog";
-import Cart from "./Cart";
 import { useTranslation } from "react-i18next";
 import { useMenuHandler } from "./use-menu-handler";
 import useOutsideClick from "../../hooks/use-outside-click";
+import CartMobile from "./CartMobile";
 
 export default function NavbarButtonsMobile(props) {
   const ref = useRef();
@@ -89,7 +89,7 @@ export default function NavbarButtonsMobile(props) {
             </NavLink>
           ) : (
             <MenuLog
-              isMobile
+              isMobile={true}
               closeMenu={closeMenu}
               isProfileMenuOpen={isProfileMenuOpen}
               openProfileMenu={openProfileMenu}
@@ -121,8 +121,7 @@ export default function NavbarButtonsMobile(props) {
             </a>
           </li>
         </div>
-        <Cart
-          isMobile={true}
+        <CartMobile
           closeMenu={closeMenu}
           openCartMenu={openCartMenu}
           closeCartMenu={closeCartMenu}

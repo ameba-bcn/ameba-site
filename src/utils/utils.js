@@ -1,5 +1,4 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 
 export function getIDValuesFromArrayObj(ObjectArray = []) {
@@ -126,11 +125,15 @@ export const urlify = (text) => {
   });
 };
 
-export const priceMayDiscount = (price, discount, discountName) => {
+export const priceMayDiscount = (
+  price,
+  discount,
+  discountName,
+  descompteText
+) => {
   if (discount) {
     const numPrice = parseFloat(price);
     const currency = price.slice(-1);
-    const [t] = useTranslation("translation");
     return (
       <>
         <span style={{ textDecoration: "line-through" }}>{price}</span>{" "}
@@ -141,7 +144,7 @@ export const priceMayDiscount = (price, discount, discountName) => {
           {currency}
           {discountName
             ? ` ${discountName}`
-            : ` -> ${discount}% ${t("form.descompte")}`}
+            : ` -> ${discount}% ${descompteText}`}
         </span>
       </>
     );

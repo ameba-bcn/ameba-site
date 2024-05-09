@@ -34,7 +34,8 @@ export default function TableProducts() {
               {priceMayDiscount(
                 item?.price,
                 item?.discount_value,
-                item?.discount_name
+                item?.discount_name,
+                t("form.descompte")
               )}
             </td>
             <td className="reviewTable-col4">
