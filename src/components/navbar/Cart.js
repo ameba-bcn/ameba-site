@@ -50,7 +50,7 @@ function Cart() {
     setCartMenuOpen(false);
     handleCloseCart();
   };
-  const dropdownRef = React.useRef(null);
+  const dropdownRef = React.useRef("menulocart");
 
   useOutsideClick(dropdownRef, () => {
     if (cartMenuOpen) handleCloseCart();

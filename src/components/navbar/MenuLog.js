@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../store/actions/auth";
@@ -36,7 +36,6 @@ export default function MenuLog(props) {
   const { user_data } = useSelector((state) => state.auth);
   const { user_profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
-  const [anchorEl1, setAnchorEl1] = useState(null);
   const isMember = user_profile === "MEMBER" || "LOGGED";
   const userName = user_data.username.split(" ")[0];
   const userNameShortened =
@@ -46,12 +45,10 @@ export default function MenuLog(props) {
     if (isMobile) {
       closeMenu();
     }
-    closeProfileMenu();
-    setAnchorEl1(null);
+    if (!isMobile && isProfileMenuOpen) closeProfileMenu();
   };
 
-  const handleOpenSessio = (event) => {
-    setAnchorEl1(event.currentTarget);
+  const handleOpenSessio = (isProfileMenuOpen) => {
     isProfileMenuOpen ? closeProfileMenu() : openProfileMenu();
   };
 
@@ -61,25 +58,25 @@ export default function MenuLog(props) {
     }
     dispatch(logout());
   };
-  const dropdownRef = React.useRef(null);
+  const dropdownRef = React.useRef("menulogref");
 
   useOutsideClick(dropdownRef, () => {
-    if (anchorEl1 && !isMobile) handleCloseSessio();
+    if (!isMobile && isProfileMenuOpen) handleCloseSessio();
   });
 
   return (
-    <StyledMenuLog>
+    <StyledMenuLog ref={dropdownRef}>
       <a
         className="sessio-menu-button"
         data-item={user_data.username === "" ? "SESSIÓ" : userNameShortened}
-        onClick={(e) => handleOpenSessio(e)}
+        onClick={() => handleOpenSessio(isProfileMenuOpen)}
       >
         {user_data.username === "" ? "SESSIÓ" : userNameShortened}
       </a>
       <div ref={dropdownRef}>
         {!isMobile ? (
           <Dropdown
-            open={Boolean(anchorEl1)}
+            open={isProfileMenuOpen}
             setIsOpen={handleCloseSessio}
             externalClickOutside={true}
           >
