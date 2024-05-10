@@ -7,7 +7,7 @@ import useOutsideClick from "../../hooks/use-outside-click";
 import CartMobile from "./CartMobile";
 
 export default function NavbarButtonsMobile(props) {
-  const ref = useRef();
+  const ref = useRef("navbarButtonsMobileRef");
   const { isLoggedIn = false, handleClick: closeMenu } = props;
   const [t, i18next] = useTranslation("translation");
   const [

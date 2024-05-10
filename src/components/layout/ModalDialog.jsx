@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import useOutsideClick from "../../hooks/use-outside-click";
 
@@ -58,9 +58,11 @@ export const StyledDialog = styled.div`
 `;
 
 const ModalDialog = ({ children, onClose }) => {
-  const dialogRef = useRef(null);
+  const dialogRef = useRef("ModalDialog ");
+  const [firstClicked, setfirstClicked] = useState(false);
   useOutsideClick(dialogRef, () => {
-    onClose();
+    setfirstClicked(true);
+    firstClicked && onClose();
   });
   return (
     <StyledDialog>

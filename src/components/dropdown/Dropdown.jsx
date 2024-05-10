@@ -24,10 +24,10 @@ const Dropdown = ({
   children,
   open = false,
   setIsOpen,
-  refer = useRef(null),
+  refer = useRef("dropdown"),
   externalClickOutside = false,
 }) => {
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef("dropdown");
 
   useOutsideClick(refer || dropdownRef, () => {
     if (open && !externalClickOutside) setIsOpen(false);
