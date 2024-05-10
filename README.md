@@ -2,6 +2,10 @@
 
 ## Release changes
 
+Version 3.3.1
+
+- Fix manifest
+
 Version 3.3.0
 
 - New member_project section
