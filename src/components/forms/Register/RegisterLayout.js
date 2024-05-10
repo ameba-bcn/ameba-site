@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import Icon from "../../ui/Icon";
 import styled from "styled-components";
 import { StyledLink } from "../../../styles/GlobalStyles";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 export const StyledAddBox = styled.div`
   margin-left: 0.5rem;
@@ -39,12 +40,14 @@ const RegisterLayout = (props) => {
       <div className="card-form">
         <div className="logTitle">{t("login.registrat")}</div>
         {user_profile !== "LOGGED" && (
-          <div className="sociLogBanner" onClick={handleClick}>
-            <div>{t("login.encara")}</div>
-            <StyledAddBox>
-              <Icon icon="plus" type="orange" />
-            </StyledAddBox>
-          </div>
+          <NavLink to="/memberships">
+            <div className="sociLogBanner" onClick={handleClick}>
+              <div>{t("login.encara")}</div>
+              <StyledAddBox>
+                <Icon icon="plus" type="orange" />
+              </StyledAddBox>
+            </div>
+          </NavLink>
         )}
         <RegisterForm setRedirect={setRedirect} />
 

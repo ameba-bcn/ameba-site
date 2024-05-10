@@ -473,6 +473,9 @@ export const StyledApp = styled.div`
     max-width: 500px !important;
     background-color: transparent !important;
     padding: 40px 40px;
+    a {
+      text-decoration: none;
+    }
   }
 
   @media screen and (max-width: 370px) {

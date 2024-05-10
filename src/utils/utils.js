@@ -114,7 +114,7 @@ export const truncate = (string, length) => {
 
 export const urlify = (text) => {
   const urlRegex = /(https?:\/\/[^\s]+)/g;
-  return text.split(urlRegex).map((part) => {
+  return text?.split(urlRegex).map((part) => {
     if (part.match(urlRegex)) {
       return (
         // eslint-disable-next-line

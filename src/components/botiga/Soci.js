@@ -26,7 +26,7 @@ export default function SociDialog(props) {
     has_stock,
     discount = 0,
     price,
-  } = adaptedData;
+  } = adaptedData || {};
 
   useEffect(() => {
     // component unmount.
