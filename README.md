@@ -2,6 +2,11 @@
 
 ## Release changes
 
+Version 3.3.0
+
+- New member_project section
+- New image slider component
+
 Version 3.2.20
 
 - Material-icons: deletion
