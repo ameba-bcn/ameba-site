@@ -22,6 +22,9 @@ const TitleStyled = styled.div`
   padding: 20px;
   font-weight: 800;
   font-style: italic;
+  @media screen and (max-width: 600px) {
+    margin-left: -10px;
+  }
 `;
 
 export default function CardLayout(props) {

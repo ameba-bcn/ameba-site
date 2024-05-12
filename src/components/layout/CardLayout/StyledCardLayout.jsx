@@ -100,6 +100,7 @@ export const StyledCardLayout = styled.div`
     .fullcard {
       flex: 1 0 100%;
       min-width: 200px;
+      width: auto;
     }
   }
 `;
