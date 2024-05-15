@@ -21,8 +21,9 @@ export const StyledHeightBlock = styled.div`
 `;
 
 export const StyledMainColumnView = styled.div`
-  margin: 0px 8rem 30px 8rem;
+  padding: 0 60px;
+  margin-bottom: 60px;
   @media screen and (max-width: 980px) {
-    margin: 0px 4rem 30px 4rem;
+    padding: 0 20px;
   }
 `;
