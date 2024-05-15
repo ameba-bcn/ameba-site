@@ -8,6 +8,7 @@
 .image-carousel-root img{
     pointer-events: none;
     max-width: 460px;
+    width: 100%;
 }
 
 @media screen and (max-width: 500px) {

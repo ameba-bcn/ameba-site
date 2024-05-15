@@ -36,6 +36,7 @@ export const StyledDialog = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      width: auto;
       .dialog-paper {
         max-width: 600px;
         display: flex;
@@ -52,6 +53,9 @@ export const StyledDialog = styled.div`
         color: rgba(0, 0, 0, 0.87);
         transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
         background-color: #fff;
+        @media (max-width: 540px) {
+          width: 70%;
+        }
       }
     }
   }
