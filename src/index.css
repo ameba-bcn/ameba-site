@@ -30,4 +30,10 @@ iframe#webpack-dev-server-client-overlay {
     display: none;
   }
 
-
+  .pswp__img, .pswp__zoom-wrap {
+    width: 100% !important;
+    height: auto !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
