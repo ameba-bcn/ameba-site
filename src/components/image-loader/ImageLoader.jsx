@@ -8,9 +8,16 @@ import {
   StyledImageLabelBox,
 } from "./ImageLoader.style";
 import Icon from "../ui/Icon";
+import Tooltip from "../tooltip/Tooltip";
 
 const ImageLoader = (props) => {
-  const { maxNumber = 6, images = [], setImages, disabled = false } = props;
+  const {
+    maxNumber = 5,
+    images = [],
+    setImages,
+    disabled = false,
+    tooltip = "",
+  } = props;
   const [t] = useTranslation("translation");
   const onChange = (imageList) => {
     if (!disabled) setImages(imageList);
@@ -19,7 +26,16 @@ const ImageLoader = (props) => {
   return (
     <>
       <StyledImageLabelBox>
-        <StyledImageLabel>{` ${t("form.imatges")} `}</StyledImageLabel>
+        {tooltip.length > 0 ? (
+          <Tooltip tooltipContent={tooltip}>
+            <StyledImageLabel>
+              {` ${t("form.imatges")} `}
+              <Icon icon="tooltip" />
+            </StyledImageLabel>
+          </Tooltip>
+        ) : (
+          <StyledImageLabel>{` ${t("form.imatges")} `}</StyledImageLabel>
+        )}
       </StyledImageLabelBox>
       <StyledImageBox imageList={images}>
         <ImageUploading

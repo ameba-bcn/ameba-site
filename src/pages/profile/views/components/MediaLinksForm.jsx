@@ -10,6 +10,8 @@ import {
   urlValidation,
 } from "../../../../utils/validations";
 import { LogFormError } from "../../../../components/forms/Log.style";
+import Tooltip from "../../../../components/tooltip/Tooltip";
+import Icon from "../../../../components/ui/Icon";
 
 export const SyledLinkInput = styled.div`
   position: relative;
@@ -112,7 +114,13 @@ ${(props) =>
 // ];
 
 const MediaLinksForm = (props) => {
-  const { label = "", mediaLinks, setMediaLinks, disabled = false } = props;
+  const {
+    label = "",
+    mediaLinks,
+    setMediaLinks,
+    disabled = false,
+    tooltip = "",
+  } = props;
   const [currentLink, setCurrentLink] = useState("");
   const [error, setError] = useState("");
   const [editMode, setEditMode] = useState(false);
@@ -143,7 +151,16 @@ const MediaLinksForm = (props) => {
       {editMode || disabled ? (
         <>
           <InputLabelBox>
-            <InputLabel id="link-box">{label}</InputLabel>
+            {tooltip.length > 0 ? (
+              <Tooltip tooltipContent={tooltip}>
+                <InputLabel id="link-box">
+                  {label}
+                  <Icon icon="tooltip" />
+                </InputLabel>{" "}
+              </Tooltip>
+            ) : (
+              <InputLabel id="link-box">{label}</InputLabel>
+            )}
           </InputLabelBox>
 
           <Textarea

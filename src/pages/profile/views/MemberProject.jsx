@@ -159,6 +159,12 @@ const MemberProject = () => {
               borderColor="black"
             />
           )}
+          <DisclaimerBox
+            text={t("info.project")}
+            id="project-disclaimer"
+            borderColor="black"
+            bgColor={`var(--color-cream)`}
+          />
           <ToogleButton
             text1={t("boto.edit")}
             text2={t("boto.preview")}
@@ -176,6 +182,7 @@ const MemberProject = () => {
                   name="project_name"
                   type="text"
                   label={t("form.titol")}
+                  tooltip={t("tooltip.title")}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.project_name || ""}
@@ -197,6 +204,7 @@ const MemberProject = () => {
                   setText={setDescription}
                   label={t("modal.descripcio")}
                   disabled={false}
+                  tooltip={t("tooltip.description")}
                 />
                 {description === null && (
                   <LogFormError>
@@ -210,6 +218,7 @@ const MemberProject = () => {
                   mediaLinks={mediaLinks}
                   setMediaLinks={setMediaLinks}
                   disabled={false}
+                  tooltip={t("tooltip.link")}
                 />
               </div>
               <div className="field-wrapper">
@@ -218,6 +227,7 @@ const MemberProject = () => {
                   images={images}
                   setImages={setImages}
                   disabled={false}
+                  tooltip={t("tooltip.images")}
                 />
                 {images === null && (
                   <LogFormError>
@@ -227,7 +237,7 @@ const MemberProject = () => {
               </div>
               <div className="field-wrapper">
                 <CheckBox
-                  label={isPublic ? t("form.publicat") : t("form.no-publicat")}
+                  label={t("form.publicat")}
                   checked={isPublic}
                   onChange={(e) => setIsPublic(!e)}
                   disabled={false}

@@ -7,9 +7,17 @@ import {
 } from "./TextArea.style.jsx";
 import { TEXT_EDITOR_KEY } from "../../../utils/constants.js";
 import { tinymceTextAreaFormatter } from "../../../utils/utils.js";
+import Tooltip from "../../tooltip/Tooltip.jsx";
+import Icon from "../../ui/Icon.jsx";
 
 const TextArea = (props) => {
-  const { initText = "", setText, label = "", disabled = false } = props;
+  const {
+    initText = "",
+    setText,
+    label = "",
+    disabled = false,
+    tooltip = "",
+  } = props;
   const editorRef = useRef(null);
   const [focus, setFocus] = useState(false);
   const [valid, setValid] = useState(true);
@@ -17,7 +25,16 @@ const TextArea = (props) => {
   return (
     <>
       <TextAreaLabelBox>
-        <TextAreaLabel id="description-label">{` ${label} `}</TextAreaLabel>
+        {tooltip.length > 0 ? (
+          <Tooltip tooltipContent={tooltip}>
+            <TextAreaLabel id="description-label">
+              {` ${label} `}
+              <Icon icon="tooltip" />
+            </TextAreaLabel>
+          </Tooltip>
+        ) : (
+          <TextAreaLabel id="description-label">{` ${label} `}</TextAreaLabel>
+        )}
       </TextAreaLabelBox>
       <TextAreaStyled focus={focus} valid={valid}>
         <Editor

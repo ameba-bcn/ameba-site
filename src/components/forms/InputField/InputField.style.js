@@ -71,11 +71,13 @@ export const InputLabelBox = styled.div`
   #link-box {
     position: relative;
     top: -2px;
+    cursor: default;
   }
 `;
 
 export const InputLabel = styled.div`
-  display: inline-block;
+  display: flex;
+  align-items: center;
   background-color: #fae6c5;
   width: fit-content;
   color: #1d1d1b;
@@ -84,4 +86,10 @@ export const InputLabel = styled.div`
   font-size: 1.2rem;
   z-index: 1;
   padding: 0px 4px 0px 4px;
+  svg {
+    width: 20px;
+  }
+  > div {
+    top: -12px;
+  }
 `;

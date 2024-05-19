@@ -25,4 +25,9 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+/* Avoid error cover image on dev server */
+iframe#webpack-dev-server-client-overlay {
+    display: none;
+  }
+
 
