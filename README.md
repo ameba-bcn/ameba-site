@@ -2,6 +2,10 @@
 
 ## Release changes
 
+Version 3.3.2
+
+- Fix bug open detailed image
+
 Version 3.3.1
 
 - Fix manifest
