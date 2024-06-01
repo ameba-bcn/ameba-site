@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import PhotoSwipeLightbox from "photoswipe/lightbox";
+import React from "react";
 import styled from "styled-components";
-import "photoswipe/style.css";
+
 const StyledGallery = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -24,34 +23,16 @@ const StyledGallery = styled.div`
 
 const Galeria = (props) => {
   const { images = [] } = props;
-
-  const galleryID = "public-gallery";
-
-  useEffect(() => {
-    let lightbox = new PhotoSwipeLightbox({
-      gallery: "#" + galleryID,
-      children: "a",
-      //   initialZoomLevel: "fill",
-      pswpModule: () => import("photoswipe"),
-    });
-    lightbox.init();
-
-    return () => {
-      lightbox.destroy();
-      lightbox = null;
-    };
-  }, []);
-
-  console.log(images);
+  const galleryID = "parkfest22";
 
   return (
     <div>
       <StyledGallery>
-        <div className="pswp-gallery" id={galleryID}>
+        <div>
           {images.map((image, index) => (
             <a
               href={image}
-              key={props.galleryID + "-" + index}
+              key={galleryID + "-" + index}
               target="_blank"
               rel="noreferrer"
             >
