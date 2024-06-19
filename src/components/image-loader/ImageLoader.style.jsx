@@ -40,4 +40,10 @@ export const StyledImageLabel = styled.div`
   z-index: 1000;
   line-height: 0.8;
   padding: 0px 4px !important;
+  svg {
+    width: 20px;
+  }
+  > div {
+    top: -12px;
+  }
 `;

@@ -182,7 +182,7 @@ const MemberProject = () => {
                   name="project_name"
                   type="text"
                   label={t("form.titol")}
-                  tooltip={t("tooltip.title")}
+                  tooltip={t("events.tooltip.title")}
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   value={formik.values.project_name || ""}
@@ -204,7 +204,7 @@ const MemberProject = () => {
                   setText={setDescription}
                   label={t("modal.descripcio")}
                   disabled={false}
-                  tooltip={t("tooltip.description")}
+                  tooltip={t("events.tooltip.description")}
                 />
                 {description === null && (
                   <LogFormError>
@@ -218,7 +218,7 @@ const MemberProject = () => {
                   mediaLinks={mediaLinks}
                   setMediaLinks={setMediaLinks}
                   disabled={false}
-                  tooltip={t("tooltip.link")}
+                  tooltip={t("events.tooltip.link")}
                 />
               </div>
               <div className="field-wrapper">
@@ -227,7 +227,7 @@ const MemberProject = () => {
                   images={images}
                   setImages={setImages}
                   disabled={false}
-                  tooltip={t("tooltip.images")}
+                  tooltip={t("events.tooltip.images")}
                 />
                 {images === null && (
                   <LogFormError>

@@ -19,6 +19,12 @@ export const TextAreaLabel = styled.div`
   padding: 0px 4px !important;
   position: relative;
   top: -1px;
+  svg {
+    width: 20px;
+  }
+  > div {
+    top: -12px;
+  }
 `;
 
 export const TextAreaStyled = styled.div`

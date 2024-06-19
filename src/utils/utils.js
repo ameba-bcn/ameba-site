@@ -43,10 +43,16 @@ export function formatISODateToHour(sDate) {
 }
 
 export function formatDateToHour(datetime) {
-  if (datetime !== undefined)
-    return datetime
-      .substring(datetime.lastIndexOf("T") + 1, datetime.lastIndexOf("Z"))
-      .slice(0, -3);
+  if (datetime !== undefined) {
+    const myDate = new Date(datetime);
+    const hours = myDate.getHours();
+    const mins = myDate.getMinutes();
+    return (
+      (String(hours).length === 1 ? `0${hours}` : hours) +
+      ":" +
+      (String(mins).length === 1 ? `0${mins}` : mins)
+    );
+  }
   return "";
 }
 
