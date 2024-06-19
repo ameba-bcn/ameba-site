@@ -29,10 +29,10 @@ const ExternalEvents = () => {
   const dispatch = useDispatch();
   const [productData, setProductData] = useState({});
   const [producteLoading, setProducteLoading] = useState(false);
-  let location = useLocation();
+  const location = useLocation();
   // eslint-disable-next-line no-undef
   const queryString = require("querystring-es3");
-  const value = queryString.parse(location.search);
+  const value = queryString.parse(location.search.replace("?", ""));
   const { id = "", kind = "" } = value;
   const { variants } = productData || {};
   // eslint-disable-next-line no-prototype-builtins
@@ -95,4 +95,4 @@ const ExternalEvents = () => {
   );
 };
 
-export default ExternalEvents;
+export default React.memo(ExternalEvents);

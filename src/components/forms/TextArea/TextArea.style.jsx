@@ -6,7 +6,7 @@ export const TextAreaLabelBox = styled.div`
 `;
 
 export const TextAreaLabel = styled.div`
-  display: inline-block;
+  display: flex;
   position: relative;
   background-color: #fae6c5;
   width: min-content;

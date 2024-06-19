@@ -29,7 +29,7 @@ export const StyledImageLabelBox = styled.div`
 `;
 
 export const StyledImageLabel = styled.div`
-  display: inline-block;
+  display: flex;
   position: relative;
   background-color: #fae6c5;
   width: fit-content;
