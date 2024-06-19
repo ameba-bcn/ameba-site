@@ -19,6 +19,7 @@ const ImageLoader = (props) => {
     tooltip = "",
   } = props;
   const [t] = useTranslation("translation");
+
   const onChange = (imageList) => {
     if (!disabled) setImages(imageList);
   };

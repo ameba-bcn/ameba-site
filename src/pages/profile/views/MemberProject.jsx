@@ -18,13 +18,11 @@ import Spinner from "../../../components/spinner/Spinner";
 import notificationToast from "../../../utils/utils";
 import PreviewerSociosDetailed from "../../socios/components/PreviewerSociosDetailed";
 import ToogleButton from "../../../components/button/ToogleButton";
-// import CloseModal from "../../../modals/CloseModal";
 
 const MemberProject = () => {
   const [initialProjectData, setInitialProjectData] = useState({});
   const [t] = useTranslation("translation");
   const [editMode, setEditMode] = useState(false);
-  // const [openModal, setOpenModal] = useState(false);
   let disabled = false;
   const [images, setImages] = useState(initialProjectData.images || []);
   const [isPublic, setIsPublic] = useState(initialProjectData.public || false);
@@ -34,7 +32,7 @@ const MemberProject = () => {
   const [mediaLinks, setMediaLinks] = useState(
     initialProjectData.media_urls || []
   );
-  const isActive = initialProjectData.isActive;
+  const isProfileActive = initialProjectData.isActive;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -118,43 +116,17 @@ const MemberProject = () => {
   const { user_member_data = {} } = useSelector((state) => state.auth);
   const { status = "" } = user_member_data;
 
-  // const handleModal = () => {
-  //   // setOpenModal(false);
-  //   // setOpenModal(true);
-  //   if (!openModal) setOpenModal(false);
-  // };
-
-  // const handleCloseModal = () => {
-  //   // setOpenModal(false);
-  //   // setOpenModal(true);
-  //   if (openModal) setOpenModal(false);
-  // };
-
-  // const handleExitModal = () => {
-  //   console.log("handleExitFullscreen");
-  //   setOpenModal(false);
-  //   setEditMode(false);
-  // };
-
-  // const firstActiveHandler = () => {
-  // if (editMode === true && disabled === false) {
-  // if (openModal) {
-  //   handleModal();
-  // } else
-  // setOpenModal(true);
-  //   return null;
-  // } else {
-  //   return setEditMode(e);
-  // }
-  // };
-
   return (
     <MemberProjectFrame>
       <MemberFormBox>
         <form className="formMembership" onSubmit={formik.handleSubmit}>
           {status !== ACTIVE_STATUS && (
             <DisclaimerBox
-              text={isActive ? t("soci.perfil-gral") : t("soci.no-soci-perfil")}
+              text={
+                isProfileActive
+                  ? t("soci.perfil-gral")
+                  : t("soci.no-soci-perfil")
+              }
               id="project-disclaimer"
               borderColor="black"
             />
@@ -274,14 +246,6 @@ const MemberProject = () => {
           )}
         </form>
       </MemberFormBox>
-      {/* {openModal && (
-        <CloseModal
-          open={openModal}
-          handleClose={handleCloseModal}
-          copyText={t("modal.sortir-text")}
-          handleExitFullscreen={handleExitModal}
-        />
-      )} */}
     </MemberProjectFrame>
   );
 };
