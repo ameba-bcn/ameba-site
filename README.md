@@ -2,6 +2,10 @@
 
 ## Release changes
 
+Version 3.3.3
+
+- Member profile fixes
+
 Version 3.3.2
 
 - Fix bug open detailed image
