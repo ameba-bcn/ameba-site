@@ -71,7 +71,7 @@ export const StyledSvgElement = styled.div`
   #hoverable-red-svg:hover {
     path {
       fill: ${(props) =>
-        props.disabled ? "var(--color-gris-claro)" : "var(--color-cream)"};
+        props.disabled ? "var(--color-gris-claro)" : "var(--color-rojo)"};
     }
   }
 
