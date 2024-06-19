@@ -157,7 +157,7 @@
       "pago-taquilla": "Pagament en taquilla",
       "title": "Afegeix un títol al teu projecte",
       "description": "Afegeix una descripció al teu projecte, pots canviar el format del text ambn l'editor.",
-      "link": "Afegeix un link al teu projecte, de la teva web o dels teus perfils de media",
+      "link": "Afegeix un link al teu projecte, de la teva web o dels teus perfils de media en format www o iframe",
       "images": "Afegeix fins a cinc imatges al teu projecte, la primera es mostrarà de portada"
     }
   },

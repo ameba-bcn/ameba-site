@@ -157,7 +157,7 @@
       "pago-taquilla": "Pago en taquilla",
       "title": "Añade un título a tu proyecto",
       "description": "Añade una descripción a tu proyecto, puede cambiar el formato del texto con el editor.",
-      "link": "Añade un link a tu proyecto, de tu web o de tus perfiles de media",
+      "link": "Añade un link a tu proyecto, de tu web o de tus perfiles de media en formato www o iframe",
       "images": "Añade hasta cinco imágenes a tu proyecto, la primera se mostrará de portada"
     }
   },
