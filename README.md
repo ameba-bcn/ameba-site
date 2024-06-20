@@ -2,7 +2,7 @@
 
 ## Release changes
 
-Version 3.3.3 - 3.3.6
+Version 3.3.3 - 3.3.7
 
 - Member profile fixes
 
