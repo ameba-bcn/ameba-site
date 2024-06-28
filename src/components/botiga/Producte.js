@@ -68,7 +68,6 @@ export default function ProducteDialog(props) {
       price={price}
       price_range={price_range}
       imgArr={images}
-      buttonText={t("modal.afegir")}
       buttonIcon={<Icon icon="shoppingCart" type="hoverable-black" />}
       box1Title={t("modal.descripcio")}
       box1Text={description}

@@ -29,7 +29,6 @@ export default function ModalCard(props) {
     imgArr,
     datetime,
     address,
-    buttonText,
     buttonIcon,
     extraButtons = [],
     box1Title,
@@ -194,28 +193,6 @@ export default function ModalCard(props) {
         </Button>
       );
     }
-
-    // return (
-    //   !productSoldOut && (
-    //     <Button
-    //       variant="contained"
-    //       color="primary"
-    //       buttonSize="boton--medium"
-    //       disabled={productSoldOut}
-    //       buttonStyle={
-    //         colorMode && colorMode === "dark"
-    //           ? "boton--back-orange--solid"
-    //           : "boton--primary--solid"
-    //       }
-    //       icon={buttonIcon}
-    //       onClick={() => {
-    //         !productSoldOut && handleAddToCard(id);
-    //       }}
-    //     >
-    //       {buttonText}
-    //     </Button>
-    //   )
-    // );
   };
 
   const buttonMobileMapper = (type) => {
@@ -361,25 +338,6 @@ export default function ModalCard(props) {
         </Button>
       );
     }
-    // return (
-    //   <Button
-    //     variant="contained"
-    //     color="primary"
-    //     buttonSize="boton--megaxxl"
-    //     buttonStyle={
-    //       colorMode && colorMode === "dark"
-    //         ? "boton--back-orange--solid"
-    //         : "boton--primary--solid"
-    //     }
-    //     disabled={productSoldOut}
-    //     icon={buttonIcon}
-    //     onClick={() => {
-    //        && handleAddToCard(id);
-    //     }}
-    //   >
-    //     {buttonText} - {formatPrice(price)}
-    //   </Button>
-    // );
   };
 
   const isMobile = useMediaQuery(MOBILE_NORMAL);
@@ -627,23 +585,6 @@ export default function ModalCard(props) {
               />
             </div>
             <div className="modal-card-mobile__button-wrapper">
-              <Button
-                variant="contained"
-                color="primary"
-                buttonSize="boton--megaxxl"
-                buttonStyle={
-                  colorMode && colorMode === "dark"
-                    ? "boton--back-orange--solid"
-                    : "boton--primary--solid"
-                }
-                disabled={productSoldOut}
-                icon={buttonIcon}
-                onClick={() => {
-                  handleAddToCard(id);
-                }}
-              >
-                {buttonText} - {formatPrice(price_range)}
-              </Button>
               {buttonMobileMapper(type)}
             </div>
           </div>

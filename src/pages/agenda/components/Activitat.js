@@ -67,7 +67,6 @@ export default function ActivitatDialog(props) {
       imgArr={images}
       datetime={datetime}
       address={address}
-      buttonText="RESERVA ENTRADA"
       buttonIcon={<Icon icon="receipt" type="hoverable-black" />}
       box1Title={t("modal.descripcio")}
       box1Text={description}
