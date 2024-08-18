@@ -84,15 +84,9 @@ function PaymentForm() {
             buttonStyle="boton--primary--solid"
             id="submit"
             disabled={!stripe}
+            loading={processing}
           >
-            {" "}
-            <span id="button-text">
-              {processing ? (
-                <div className="spinner" id="spinner"></div>
-              ) : (
-                "Paga"
-              )}
-            </span>
+            <span id="button-text">Paga</span>
           </Button>
         </form>
       </div>

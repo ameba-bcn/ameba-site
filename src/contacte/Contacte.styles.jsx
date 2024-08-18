@@ -172,7 +172,6 @@ export const StyledContacte = styled.div`
     .formControlNews {
       font-size: 1rem;
       margin: 5px 0px;
-      width: 100%;
     }
     .contactNews {
       flex-wrap: wrap;

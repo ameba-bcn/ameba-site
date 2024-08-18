@@ -69,12 +69,9 @@ export default function MailRecoveryForm({ setIsSubmitted }) {
           hoverStyle="bg-cream"
           disabled={loading}
           className="form-button"
+          loading={loading}
         >
-          {loading ? (
-            <span className="spinner-border"></span>
-          ) : (
-            <span>Recupera</span>
-          )}
+          <span>Recupera</span>
         </Button>
       </div>
     </form>

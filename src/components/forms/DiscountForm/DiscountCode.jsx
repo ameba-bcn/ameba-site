@@ -63,12 +63,9 @@ export default function DiscountCode() {
           buttonStyle="boton--primary--solid"
           disabled={loading}
           hoverStyle="bg-red"
+          loading={loading}
         >
-          {loading ? (
-            <span className="spinner-border"></span>
-          ) : (
-            <span>Aplica</span>
-          )}
+          <span>Aplica</span>
         </Button>
         {!isEmptyObject(formik.errors) && (
           <LogFormError>

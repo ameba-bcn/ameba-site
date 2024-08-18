@@ -101,12 +101,9 @@ export default function RegisterForm({ setRedirect }) {
           buttonSize="boton--medium"
           buttonStyle="boton--primary--solid"
           hoverStyle="bg-cream"
+          loading={loading}
         >
-          {loading ? (
-            <span className="spinner-border"></span>
-          ) : (
-            <>{t("login.registrat")}</>
-          )}
+          <>{t("login.registrat")}</>
         </Button>
       </form>
     </LogFormBox>

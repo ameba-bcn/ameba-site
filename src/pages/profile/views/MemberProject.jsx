@@ -224,12 +224,9 @@ const MemberProject = () => {
                   buttonStyle="boton--primary--solid"
                   hoverStyle="bg-orange"
                   disabled={loading || disabled}
+                  loading={loading}
                 >
-                  {loading ? (
-                    <span className="spinner-border"></span>
-                  ) : (
-                    <>{t("boto.guarda")}</>
-                  )}
+                  <>{t("boto.guarda")}</>
                 </Button>
               </div>
             </>

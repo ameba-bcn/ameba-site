@@ -88,8 +88,9 @@ export default function LoginForm({ setRedirect }) {
           buttonSize="boton--medium"
           buttonStyle="boton--primary--solid"
           hoverStyle="bg-cream"
+          loading={loading}
         >
-          {loading ? <span className="spinner-border"></span> : <>login</>}
+          <>login</>
         </Button>
       </form>
     </LogFormBox>

@@ -8,6 +8,10 @@
     --color-amarillo: #FFED00;
     --color-gris-claro: #A9A9A9;
   }
+
+  #root{
+    height: 100vh;
+  }
   
   html {
       background-color: #1D1D1B;

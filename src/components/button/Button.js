@@ -24,6 +24,7 @@ export default function Button(props) {
     icon,
     disabled,
     className,
+    loading = false,
     ...rest
   } = props;
   const checkButtonStyle = STYLES.includes(buttonStyle)
@@ -42,12 +43,19 @@ export default function Button(props) {
       disabled={disabled}
       {...rest}
     >
-      {icon && (
+      {loading ? (
+        <div className="spinner" id="spinner" />
+      ) : (
         <>
-          {icon} {children}
+          {icon ? (
+            <>
+              {icon} {children}
+            </>
+          ) : (
+            <>{children}</>
+          )}
         </>
       )}
-      {!icon && <>{children}</>}
     </button>
   );
 }

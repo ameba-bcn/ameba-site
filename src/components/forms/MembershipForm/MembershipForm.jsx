@@ -244,13 +244,10 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
               className="submit"
               buttonSize="boton--medium"
               buttonStyle="boton--primary--solid"
+              loading={loading}
               disabled={!dataHasChanged || !isEmptyObject(formik.errors)}
             >
-              {loading ? (
-                <span className="spinner-border"></span>
-              ) : (
-                <>{t("boto.guarda")}</>
-              )}
+              {t("boto.guarda")}
             </Button>
           </div>
         </div>

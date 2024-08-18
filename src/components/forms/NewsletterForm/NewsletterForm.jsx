@@ -66,12 +66,9 @@ export default function NewsletterForm({ setIsSubmitted }) {
             buttonSize="boton--megaxxl"
             buttonStyle="boton--orange--solid"
             disabled={loading}
+            loading={loading}
           >
-            {loading ? (
-              <span className="spinner-border"></span>
-            ) : (
-              <>{t("newsletter.subscriute")}</>
-            )}
+            <>{t("newsletter.subscriute")}</>
           </Button>
         </div>
       </form>

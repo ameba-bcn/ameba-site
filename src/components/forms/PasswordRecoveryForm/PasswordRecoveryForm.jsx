@@ -72,12 +72,9 @@ export default function PasswordRecoveryForm(props) {
           disabled={loading}
           hoverStyle="bg-cream"
           className="form-button"
+          loading={loading}
         >
-          {loading ? (
-            <span className="spinner-border"></span>
-          ) : (
-            <span>Recupera</span>
-          )}
+          <span>Recupera</span>
         </Button>
       </div>
     </form>
