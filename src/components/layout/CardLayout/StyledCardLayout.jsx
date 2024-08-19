@@ -6,6 +6,7 @@ export const StyledCardLayout = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   padding: 20px;
+  min-height: ${(props) => (props.$emptyView ? "300px" : "inherit")};
   animation: fadein 300ms;
   @keyframes fadein {
     from {

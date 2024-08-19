@@ -8,7 +8,6 @@ import { useTranslation } from "react-i18next";
 import { radioDublabLink } from "../../utils/constants";
 import CardLayout from "../../components/layout/CardLayout/CardLayout";
 import SearchBox from "../../components/searchBox/SearchBox";
-import Spinner from "../../components/spinner/Spinner";
 
 export default function SupportYourLocals() {
   const [t] = useTranslation("translation");
@@ -35,11 +34,11 @@ export default function SupportYourLocals() {
         setSearchInput={setSearchInput}
         hidden={true}
       />
-      {isArtistLoading ? (
-        <Spinner />
-      ) : (
-        <CardLayout cardList={filteredArtists} urlRoot="support" />
-      )}
+      <CardLayout
+        cardList={filteredArtists}
+        urlRoot="support"
+        loading={isArtistLoading}
+      />
       <LettersMove
         className="lettersMoveDiv"
         sentence="AMEBA RADIO @ dublab"

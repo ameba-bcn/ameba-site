@@ -296,7 +296,7 @@ const AgendaTable = () => {
   if (redirect) return <Redirect to={checkoutRedirect} />;
 
   return (
-    <StyledAgendaTable>
+    <StyledAgendaTable $emptyView={agenda.length === 0}>
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (

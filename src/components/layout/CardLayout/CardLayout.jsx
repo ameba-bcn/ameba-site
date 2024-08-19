@@ -7,6 +7,7 @@ import { StyledCardLayout } from "./StyledCardLayout";
 import PlusButton from "../../button/PlusButton";
 import { createLastRowIterator, sortByProperty } from "../../../utils/utils";
 import useMediaQuery from "../../../hooks/use-media-query";
+import Spinner from "../../spinner/Spinner";
 
 const TitleStyled = styled.div`
   position: absolute;
@@ -28,7 +29,7 @@ const TitleStyled = styled.div`
 `;
 
 export default function CardLayout(props) {
-  const { cardList = [], urlRoot } = props; //Pendiente recibir si es entrevista por props
+  const { cardList = [], urlRoot, loading = false } = props; //Pendiente recibir si es entrevista por props
 
   const isOneColumn = useMediaQuery("(max-width:1290px)");
   const isMobile = useMediaQuery(MOBILE_SMALL);
@@ -80,13 +81,19 @@ export default function CardLayout(props) {
     });
 
   return (
-    <StyledCardLayout>
-      {cardList.length > 0 && cardGenerator}
-      {cardGenerator &&
-        !isOneColumn &&
-        createLastRowIterator(cardList, 627, 40).map((n, index) => (
-          <i aria-hidden={true} key={index}></i>
-        ))}
+    <StyledCardLayout $emptyView={!cardList.length > 0}>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          {cardList.length > 0 && cardGenerator}
+          {cardGenerator &&
+            !isOneColumn &&
+            createLastRowIterator(cardList, 627, 40).map((n, index) => (
+              <i aria-hidden={true} key={index}></i>
+            ))}
+        </>
+      )}
     </StyledCardLayout>
   );
 }

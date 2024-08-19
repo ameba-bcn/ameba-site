@@ -9,7 +9,6 @@ import { StyledHeightBlock } from "../../styles/GlobalStyles.style";
 import SearchBox from "../../components/searchBox/SearchBox";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import { getMemberProjects } from "../../store/actions/data";
-import Spinner from "../../components/spinner/Spinner";
 import { ACTIVE_STATUS } from "../../utils/constants";
 
 export const StyledSocios = styled.div`
@@ -60,11 +59,11 @@ const Socios = () => {
         setSearchInput={setSearchInput}
         hidden={true}
       />
-      {isMemberProjectsLoading ? (
-        <Spinner />
-      ) : (
-        <CardLayout cardList={filteredSocios} urlRoot="socis" />
-      )}
+      <CardLayout
+        cardList={filteredSocios}
+        urlRoot="socis"
+        loading={isMemberProjectsLoading}
+      />
       <LettersMove
         className="lettersMoveDiv"
         sentence={t("banners.soci-curt")}

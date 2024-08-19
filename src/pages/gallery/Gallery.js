@@ -45,7 +45,7 @@ const Gallery = () => {
 
   return (
     <div className="SupportContent">
-      <div>
+      <div className="logView">
         <PowerTitle title="PARKFEST 22" subtitle="* 21-05-22 *" />
         {isGaleriaLoading ? <Spinner /> : <Galeria images={imgArrayBuilder} />}
       </div>
