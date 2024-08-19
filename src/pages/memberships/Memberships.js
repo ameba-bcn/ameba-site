@@ -26,14 +26,13 @@ import useMediaQuery from "../../hooks/use-media-query";
 
 const SyledMembershipBox = styled.div`
   height: 100%;
-  min-height: ${(props) => (props.$emptyView ? "700px" : "inherit")};
+  min-height: ${(props) => (props.$emptyView ? "600px" : "inherit")};
   background-color: #fae6c5;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   .disclaimer-frame {
     height: 100%;
-    min-height: inherit;
     display: flex;
     justify-content: center;
     align-items: center;
