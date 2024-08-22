@@ -3,13 +3,10 @@ import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import MenuLog from "./MenuLog";
 import Cart from "./Cart";
-import { useMenuHandler } from "./use-menu-handler";
 
 export default function NavbarButtons(props) {
-  const { isLoggedIn = false, handleClick: closeMenu } = props;
+  const { isLoggedIn = false } = props;
   const [t, i18next] = useTranslation("translation");
-  const [{ openProfileMenu, closeProfileMenu }, { isProfileMenuOpen }] =
-    useMenuHandler();
   const currentLang = localStorage.getItem("i18nextLng");
   const handleChangeLanguage = (lang) => {
     if (currentLang !== lang) {
@@ -69,12 +66,7 @@ export default function NavbarButtons(props) {
               LOGIN
             </NavLink>
           ) : (
-            <MenuLog
-              closeMenu={closeMenu}
-              isProfileMenuOpen={isProfileMenuOpen}
-              openProfileMenu={openProfileMenu}
-              closeProfileMenu={closeProfileMenu}
-            />
+            <MenuLog />
           )}
         </div>
         <div className="menu-lang">

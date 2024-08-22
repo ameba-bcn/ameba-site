@@ -1,28 +1,35 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import DropdownCartMobile from "./DropdownCartMobile";
+import {
+  setCloseCartMenu,
+  setCloseMenu,
+  setOpenCartMenu,
+} from "../../store/actions/menu";
 
-function CartMobile(props) {
-  const { closeMenu, openCartMenu, closeCartMenu, isCartMenuOpen } = props;
+function CartMobile() {
   const { cart_data = {} } = useSelector((state) => state.cart);
+  const { isCartMenuOpen } = useSelector((state) => state.menu);
   const { item_variants = [] } = cart_data;
   const [cartMenuOpen, setCartMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+
   const [t] = useTranslation("translation");
   if (cart_data && item_variants.length < 1 && cartMenuOpen) {
     setCartMenuOpen(false);
   }
 
-  const handleOpenCartMobile = () => {
-    if (isCartMenuOpen) {
-      closeCartMenu();
-    } else {
-      openCartMenu();
-    }
+  const handleCloseCartMobile = () => {
+    dispatch(setCloseCartMenu());
   };
 
-  const handleCloseCartMobile = () => {
-    closeCartMenu();
+  const handleOpenCartMobile = () => {
+    if (isCartMenuOpen) {
+      handleCloseCartMobile();
+    } else {
+      dispatch(setOpenCartMenu());
+    }
   };
 
   return (
@@ -40,7 +47,7 @@ function CartMobile(props) {
               cartData={cart_data}
               closeDropDown={() => handleCloseCartMobile()}
               isMobile={true}
-              handleCloseMenu={closeMenu}
+              handleCloseMenu={() => dispatch(setCloseMenu())}
               setCartMenuOpen={setCartMenuOpen}
             />
           </div>

@@ -1,10 +1,15 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, useRef } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../store/actions/auth";
 import Dropdown from "../dropdown/Dropdown";
 import styled from "styled-components";
 import useOutsideClick from "../../hooks/use-outside-click";
+import {
+  setCloseMenu,
+  setCloseProfileMenu,
+  setOpenProfileMenu,
+} from "../../store/actions/menu";
 
 export const StyledMenuLog = styled.div`
   position: relative;
@@ -26,14 +31,9 @@ export const StyledMenuItem = styled.div`
 `;
 
 export default function MenuLog(props) {
-  const {
-    isMobile = false,
-    closeMenu = {},
-    isProfileMenuOpen = false,
-    openProfileMenu = {},
-    closeProfileMenu = {},
-  } = props;
+  const { isMobile = false } = props;
   const { user_data } = useSelector((state) => state.auth);
+  const { isProfileMenuOpen } = useSelector((state) => state.menu);
   const { user_profile } = useSelector((state) => state.profile);
   const dispatch = useDispatch();
   const isMember = user_profile === "MEMBER" || "LOGGED";
@@ -43,22 +43,24 @@ export default function MenuLog(props) {
 
   const handleCloseSessio = () => {
     if (isMobile) {
-      closeMenu();
+      dispatch(setCloseMenu());
     }
-    if (!isMobile && isProfileMenuOpen) closeProfileMenu();
+    if (!isMobile && isProfileMenuOpen) dispatch(setCloseProfileMenu());
   };
 
   const handleOpenSessio = (isProfileMenuOpen) => {
-    isProfileMenuOpen ? closeProfileMenu() : openProfileMenu();
+    isProfileMenuOpen
+      ? dispatch(setCloseProfileMenu())
+      : dispatch(setOpenProfileMenu());
   };
 
   const logoutMenu = () => {
     if (isMobile) {
-      closeMenu();
+      dispatch(setCloseMenu());
     }
     dispatch(logout());
   };
-  const dropdownRef = React.useRef("menulogref");
+  const dropdownRef = useRef("menulogprofile");
 
   useOutsideClick(dropdownRef, () => {
     if (!isMobile && isProfileMenuOpen) handleCloseSessio();

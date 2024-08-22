@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import NavbarButtons from "./NavbarButtons";
 import NavbarButtonsMobile from "./NavbarButtonsMobile";
 import { MOBILE_BIG } from "../../utils/constants";
 import { StyledNavbar } from "./StyledNavbar";
-import { useMenuHandler } from "./use-menu-handler";
 import Icon from "../ui/Icon";
 import styled from "styled-components";
 import useMediaQuery from "../../hooks/use-media-query";
+import { setCloseMenu, setOpenMenu } from "../../store/actions/menu";
 
 export const StyledMenuIcon = styled.div`
   font-size: 2rem;
@@ -24,7 +24,10 @@ export const StyledMenuIcon = styled.div`
 export default function Navbar({ isErrored = false }) {
   const isMobile = useMediaQuery(MOBILE_BIG);
   const { isLoggedIn } = useSelector((state) => state.auth);
-  const [{ openMenu, closeMenu }, { isMenuOpen }] = useMenuHandler();
+  const ref = useRef("navbarButtonsMobileRef");
+
+  const { isMenuOpen } = useSelector((state) => state.menu);
+  const dispatch = useDispatch();
 
   return (
     <StyledNavbar>
@@ -48,31 +51,23 @@ export default function Navbar({ isErrored = false }) {
                     <Icon
                       icon="clear"
                       className="menuIcon__cross"
-                      onClick={closeMenu}
+                      onClick={() => dispatch(setCloseMenu())}
                       type="hoverable-dark"
                     />
                   ) : (
                     <Icon
                       icon="menu"
                       className="menuIcon__bars"
-                      onClick={openMenu}
+                      onClick={() => dispatch(setOpenMenu())}
                       type="hoverable-dark"
                     />
                   )}
                 </StyledMenuIcon>
               )
-            : !isErrored && (
-                <NavbarButtons
-                  isLoggedIn={isLoggedIn}
-                  handleClick={closeMenu}
-                />
-              )}
+            : !isErrored && <NavbarButtons isLoggedIn={isLoggedIn} />}
         </div>
         {isMobile && isMenuOpen && (
-          <NavbarButtonsMobile
-            isLoggedIn={isLoggedIn}
-            handleClick={closeMenu}
-          />
+          <NavbarButtonsMobile isLoggedIn={isLoggedIn} refer={ref} />
         )}
       </div>
     </StyledNavbar>

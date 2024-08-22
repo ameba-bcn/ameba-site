@@ -5,6 +5,7 @@ import profile from "./profile";
 import data from "./data";
 import fullscreen from "./fullscreen";
 import loaders from "./loaders";
+import menu from "./menu";
 
 export default combineReducers({
   auth,
@@ -13,4 +14,5 @@ export default combineReducers({
   data,
   fullscreen,
   loaders,
+  menu,
 });
