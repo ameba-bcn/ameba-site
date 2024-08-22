@@ -47,7 +47,8 @@ const Gallery = () => {
     <div className="SupportContent">
       <div className="logView">
         <PowerTitle title="PARKFEST 22" subtitle="* 21-05-22 *" />
-        {isGaleriaLoading ? <Spinner /> : <Galeria images={imgArrayBuilder} />}
+        {isGaleriaLoading && <Spinner />}
+        <Galeria images={imgArrayBuilder} />
       </div>
       <LettersMove
         className="lettersMoveDiv"

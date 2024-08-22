@@ -55,6 +55,7 @@ export const StyledExternalButtonBox = styled.div`
 `;
 
 export const StyledTitleBox = styled.div`
+  display: flex;
   padding-top: 20px;
   max-width: 1060px;
   width: 80%;

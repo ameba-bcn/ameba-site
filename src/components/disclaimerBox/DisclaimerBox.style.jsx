@@ -20,6 +20,9 @@ export const SyledDisclaimer = styled.div`
   margin: 0 auto;
   word-wrap: break-word;
   width: auto;
+  a {
+    text-decoration: none;
+  }
   #close-icon {
     position: absolute;
     top: 4px;

@@ -26,9 +26,8 @@ import useMediaQuery from "../../hooks/use-media-query";
 
 const SyledMembershipBox = styled.div`
   height: 100%;
-  min-height: ${(props) => (props.$emptyView ? "600px" : "inherit")};
+  min-height: ${(props) => (props.$emptyView ? "600px" : "min-content")};
   background-color: #fae6c5;
-  display: flex;
   flex-direction: column;
   justify-content: space-between;
   .disclaimer-frame {
@@ -170,9 +169,13 @@ const Memberships = () => {
                 </>
               )}
               {hasMembershipInCart && (
-                <NavLink to={checkoutRedirect}>
-                  <DisclaimerBox text={t("soci.disclaimer")} />
-                </NavLink>
+                <DisclaimerBox
+                  text={
+                    <NavLink to={checkoutRedirect}>
+                      {t("soci.disclaimer")}
+                    </NavLink>
+                  }
+                />
               )}
             </StyledExternalEventCol2>
           </div>

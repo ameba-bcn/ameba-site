@@ -33,9 +33,6 @@ export const StyledApp = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    @media screen and (min-height: 1069px) {
-      min-height: 800px;
-    }
   }
 
   .logViewYellow {
@@ -46,16 +43,10 @@ export const StyledApp = styled.div`
     flex-direction: column;
     justify-content: space-between;
     z-index: 0;
-    @media screen and (min-height: 1069px) {
-      min-height: 800px;
-    }
   }
 
   .logView {
     height: 100%;
-    @media screen and (min-height: 1069px) {
-      min-height: 800px;
-    }
   }
 
   img {

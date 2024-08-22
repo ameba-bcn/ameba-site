@@ -1,18 +1,11 @@
 import styled from "styled-components";
 
 export const StyledSociosMain = styled.div`
-  display: flex;
+  display: block;
   flex-direction: column;
-  height: 100%;
-  animation: fadein 300ms;
-  @keyframes fadein {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+  background-color: #fae6c5;
+  min-height: min-content;
+
   .link-section {
     padding-bottom: 30px;
   }

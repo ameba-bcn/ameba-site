@@ -6,6 +6,7 @@ const StyledGallery = styled.div`
   flex-wrap: wrap;
   margin-top: 20px;
   width: 100%;
+  min-height: 200px;
   justify-content: space-evenly;
   .pswp__img {
     width: auto !important;

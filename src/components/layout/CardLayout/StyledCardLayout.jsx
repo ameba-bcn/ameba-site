@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const StyledCardLayout = styled.div`
-  display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
   padding: 20px;
-  min-height: ${(props) => (props.$emptyView ? "300px" : "inherit")};
+  min-height: ${(props) => (props.$emptyView ? "300px" : "min-content")};
   animation: fadein 300ms;
+  background-color: var(--color-cream);
   @keyframes fadein {
     from {
       opacity: 0;

@@ -37,6 +37,7 @@ import { getCart } from "./store/actions/cart";
 import { deepComparision } from "./utils/utils";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import "react-image-gallery/styles/css/image-gallery.css";
 import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
 import PasswordRecovery from "./pages/PasswordRecovery";
 import QrClient from "./pages/QrClient";
@@ -92,6 +93,7 @@ function App() {
 
   return (
     <StyledApp>
+      <ToastContainer position="bottom-center" />
       {isOpen && <FullscreenCheckout />}
       <Menu />
       <UserContext.Provider value={value}>
@@ -126,7 +128,6 @@ function App() {
           <Route component={NotFound} />
         </Switch>
       </UserContext.Provider>
-      <ToastContainer position="bottom-center" />
       <Contacte />
     </StyledApp>
   );

@@ -3,7 +3,7 @@ import { StyledMainColumnView } from "../../../styles/GlobalStyles.style";
 
 export const StyledAgendaTable = styled(StyledMainColumnView)`
   height: 100%;
-  min-height: ${(props) => (props.$emptyView ? "400px" : "inherit")};
+  min-height: ${(props) => (props.$emptyView ? "400px" : "unset")};
   table {
     width: 100%;
     margin: 0 auto;
