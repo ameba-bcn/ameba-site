@@ -16,11 +16,10 @@ const TitleStyled = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
   text-transform: uppercase;
   color: #fae6c5;
   z-index: 999;
-  padding: 20px;
+  margin: 20px;
   font-weight: 800;
   font-style: italic;
   @media screen and (max-width: 600px) {

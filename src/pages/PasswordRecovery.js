@@ -14,7 +14,7 @@ export default function PasswordRecovery(props) {
   const [t] = useTranslation("translation");
 
   useEffect(() => {
-    setStrToken(parsed["token"]);
+    setStrToken(parsed["token"] || parsed["?token"]);
   }, [parsed, strToken, setStrToken]);
 
   return (
