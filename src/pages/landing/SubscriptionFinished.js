@@ -14,7 +14,7 @@ export default function SubscriptionFinished(props) {
   // eslint-disable-next-line no-undef
   const queryString = require("querystring-es3");
   const parsed = queryString.parse(props.location.search);
-  let email = parsed?.email?.trim();
+  let email = parsed["email"]?.trim() || parsed["?email"]?.trim();
   // Un email con un '+' lo recupera como espaciado, hay que reconstruirlo
   if (email && email.indexOf(" ") > 0) email = email.replace(" ", "+");
 

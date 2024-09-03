@@ -14,9 +14,11 @@ export default function QrClient(props) {
 
   useEffect(() => {
     if (parsed["token"].length > 0) {
-      stateService.getCarnet(parsed["token"])?.then((data) => {
-        setData(data);
-      });
+      stateService
+        .getCarnet(parsed["token"] || parsed["?token"])
+        ?.then((data) => {
+          setData(data);
+        });
     }
   }, [parsed]);
 
