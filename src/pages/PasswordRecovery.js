@@ -3,10 +3,10 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import LettersMove from "../components/layout/LettersMove";
 import PasswordRecoveryForm from "./../components/forms/PasswordRecoveryForm/PasswordRecoveryForm";
-import { StyledLink } from "../styles/GlobalStyles";
+import { StyledHeightBlock, StyledLink } from "../styles/GlobalStyles";
 
 export default function PasswordRecovery(props) {
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(true);
   const [strToken, setStrToken] = useState("");
   // eslint-disable-next-line no-undef
   const queryString = require("querystring-es3");
@@ -22,7 +22,13 @@ export default function PasswordRecovery(props) {
       <div className="cardForm">
         <div className="card card-form">
           <div className="logTitle">{t("login.recupera-curt")}</div>
-          {isSubmitted ? null : (
+          {isSubmitted ? (
+            <div className="single-msg">
+              <StyledHeightBlock />
+              {t("login.contrasenya-canviada")}
+              <NavLink to="/login">LOGIN</NavLink>.
+            </div>
+          ) : (
             <>
               <PasswordRecoveryForm
                 setIsSubmitted={setIsSubmitted}

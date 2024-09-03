@@ -79,7 +79,8 @@
     "modifica": "Modifica la teva contrassenya",
     "recupera": "Hem enviat una contrassenya nova al teu correu electrònic. Verifícala per poder continuar.",
     "link-recupera": "No has rebut cap correu? Torna-ho a intentar",
-    "verifica": "Compte verificat: Benvingut!"
+    "verifica": "Compte verificat: Benvingut!",
+    "contrasenya-canviada": "Contrassenya canviada correctament. Pots iniciar sessió amb la teva nova contrassenya a la vista "
   },
   "form": {
     "nom": "nom",
