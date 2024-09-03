@@ -6,7 +6,7 @@ import PasswordRecoveryForm from "./../components/forms/PasswordRecoveryForm/Pas
 import { StyledHeightBlock, StyledLink } from "../styles/GlobalStyles";
 
 export default function PasswordRecovery(props) {
-  const [isSubmitted, setIsSubmitted] = useState(true);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [strToken, setStrToken] = useState("");
   // eslint-disable-next-line no-undef
   const queryString = require("querystring-es3");
