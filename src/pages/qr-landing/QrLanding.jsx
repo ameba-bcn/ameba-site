@@ -48,7 +48,7 @@ const QrLanding = (props) => {
     axiosInstance
       .get(BASE_URL + `member_card/?token=${strToken}`, {})
       .then((res) => {
-        setMemberData(JSON.stringify(res.data)).catch(console.error("errors"));
+        setMemberData(res?.data);
         setLoading(false);
       })
       .catch(() => {
