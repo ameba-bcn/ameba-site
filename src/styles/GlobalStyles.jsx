@@ -11,7 +11,7 @@ export const StyledLink = styled.div`
   font-size: 1.2rem;
   cursor: pointer;
   color: #1d1d1b !important;
-  margin-top: 12px;
+  margin-top: ${(props) => (props.$alignCenter ? "0px" : "12px")};
   font-weight: ${(props) => (props.bold ? 600 : 300)};
 
   a {
