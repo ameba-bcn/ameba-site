@@ -21,6 +21,11 @@ const StyledRowSoundSystem = styled.div`
   font-size: 22px;
   font-family: "Montserrat", sans-serif;
   margin: 24px 0px;
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
   @media (max-width: 430px) {
     .image-col {
       min-width: 150px !important;
@@ -152,7 +157,7 @@ const SoundSystem = () => {
         <div className="image-row column right">
           <img
             className="image-col"
-            src="https://ameba.cat/media/images/Pororoca2.png"
+            src="https://ameba.cat/api/media/images/Pororoca2.jpeg"
             alt=""
           />
         </div>
@@ -184,7 +189,7 @@ const SoundSystem = () => {
         <div className="image-row column right">
           <img
             className="image-col"
-            src="https://ameba.cat/media/images/Pororoca1.png"
+            src="https://ameba.cat/api/media/images/Pororoca1.jpeg"
             alt=""
           />
         </div>
@@ -199,7 +204,7 @@ const SoundSystem = () => {
           <StyledRowSoundSystem>
             <img
               className="image-wide"
-              src="https://ameba.cat/media/images/PororocaDiagrama.png"
+              src="https://ameba.cat/api/media/images/PororocaDiagrama.jpeg"
               alt=""
             />
           </StyledRowSoundSystem>
@@ -209,8 +214,8 @@ const SoundSystem = () => {
       <StyledRowSoundSystem>
         <div className="description">
           Si quieres conocer más acerca de este proyecto escríbenos al instagram
-          de{" "}
-          <StyledLink>
+          de&nbsp;
+          <StyledLink $alignCenter={true}>
             <a
               target="_blank"
               rel="noreferrer"
@@ -218,45 +223,46 @@ const SoundSystem = () => {
             >
               Taller Claro
             </a>
-          </StyledLink>{" "}
-          o por mail a{" "}
-          <StyledLink>
+            &nbsp;
+          </StyledLink>
+          o por mail a&nbsp;
+          <StyledLink $alignCenter={true}>
             <a href="mailto:info@ameba.cat">info@ameba.cat</a>
           </StyledLink>
         </div>
       </StyledRowSoundSystem>
 
       <StyledLogoBoxSoundSystem>
-        <a
+        {/* <a
           href="https://clarossonidos.wordpress.com/"
           rel="noreferrer"
           target="_blank"
         >
           <img
             className="logo"
-            src="https://ameba.cat/media/images/taller-claro.png"
+            src="https://ameba.cat/api/media/images/taller-claro.jpeg"
             alt=""
           />
         </a>
         <a href="https://ameba.cat/" rel="noreferrer" target="_blank">
           <img
             className="logo"
-            src="https://ameba.cat/media/images/ameba-logo-alpha.png"
+            src="https://ameba.cat/api/media/images/ameba-logo-alpha.jpeg"
             alt=""
           />
         </a>
         <a href="https://fleamarketbcn.com/" rel="noreferrer" target="_blank">
           <img
             className="logo"
-            src="https://ameba.cat/media/images/LogoFlea.png"
+            src="https://ameba.cat/api/media/images/LogoFlea.jpeg"
             alt=""
           />
-        </a>
-        <img
+        </a> */}
+        {/* <img
           className="logo ajuntament"
           src="/ameba-site/AjuntamentBcn.png"
           alt=""
-        />
+        /> */}
       </StyledLogoBoxSoundSystem>
     </StyledMainSoundSystem>
   );
