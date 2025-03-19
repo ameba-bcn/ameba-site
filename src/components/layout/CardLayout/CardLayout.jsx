@@ -45,13 +45,14 @@ export default function CardLayout(props) {
         project_name,
       } = data;
       const baseName = project_name ? project_name : name;
-      const urlName = baseName.replace(/\s+/g, "-")?.toLowerCase();
+
+      const path = `/${urlRoot}/${encodeURIComponent(baseName)}`;
       return (
         <div className="fullcard" key={id}>
           <NavLink
             style={{ textDecoration: "none" }}
             to={{
-              pathname: `/${urlRoot}/${urlName}`,
+              pathname: path,
               aboutProps: data,
             }}
           >
