@@ -21,11 +21,11 @@ const SociosDetailed = () => {
   let urlID = location.pathname.substr(location.pathname.lastIndexOf("/") + 1);
   const { member_projects = [] } = useSelector((state) => state.data);
   const [urlData] = member_projects.filter(
-    (x) => x?.project_name?.replace(/\s+/g, "-")?.toLowerCase() === urlID
+    (x) => x?.project_name === decodeURIComponent(urlID)
   );
-
   const { project_name, description, images, media_urls, first_name } = project;
   const ID = urlData?.id;
+
   useEffect(() => {
     setLoading(true);
     axiosInstance
