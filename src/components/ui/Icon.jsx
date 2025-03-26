@@ -8,12 +8,6 @@ export const StyledSvgElement = styled.div`
     display: none;
   }
 
-  &:hover {
-    .tooltip {
-      display: block;
-    }
-  }
-
   .tooltip {
     visibility: hidden;
     width: 120px;
@@ -45,6 +39,7 @@ export const StyledSvgElement = styled.div`
   &:hover .tooltip {
     visibility: visible;
     opacity: 1;
+    display: block;
   }
 
   #hoverable-cream-svg {
