@@ -48,7 +48,7 @@ const AgendaTable = () => {
           className="cardActivitat"
           disabled={false}
           type="hoverable-cream"
-          onClick={() => fetchEvent(data)}
+          onClick={() => {}}
           tooltip={t("events.tooltip.cancelado")}
         />
       );
@@ -61,7 +61,7 @@ const AgendaTable = () => {
           className="cardActivitat"
           disabled={true}
           type="hoverable-cream"
-          onClick={() => fetchEvent(data)}
+          onClick={() => {}}
           tooltip={t("events.tooltip.caducado")}
         />
       );
@@ -87,7 +87,7 @@ const AgendaTable = () => {
           className="cardActivitat"
           disabled={true}
           type="hoverable-cream"
-          onClick={() => fetchEvent(data)}
+          onClick={() => {}}
           tooltip={t("events.tooltip.gratis-aforo-completo")}
         />
       );
@@ -113,7 +113,7 @@ const AgendaTable = () => {
           className="cardActivitat"
           disabled={false}
           type="hoverable-cream"
-          onClick={() => fetchAndAdd(data)}
+          onClick={() => {}}
           tooltip={t("events.tooltip.pago-taquilla")}
         />
       );
@@ -139,7 +139,7 @@ const AgendaTable = () => {
           className="cardActivitat"
           disabled={true}
           type="hoverable-cream"
-          onClick={() => fetchEvent(data)}
+          onClick={() => {}}
           tooltip={t("events.tooltip.pago-sold")}
         />
       );
@@ -150,7 +150,7 @@ const AgendaTable = () => {
         className="cardActivitat"
         disabled={true}
         type="hoverable-cream"
-        onClick={() => fetchEvent(data)}
+        onClick={() => {}}
         tooltip={t("events.tooltip.caducado")}
       />
     );
