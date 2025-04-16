@@ -54,7 +54,7 @@ export default function NavbarButtonsMobile(props) {
               {t("menu.botiga")}
             </NavLink>
           </li> */}
-        <li>
+        {/* <li>
           <NavLink
             to="/support"
             data-item="#SUPPORTYOURLOCALS"
@@ -62,7 +62,7 @@ export default function NavbarButtonsMobile(props) {
           >
             #SUPPORTYOURLOCALS
           </NavLink>
-        </li>
+        </li> */}
         {/* <li>
             <NavLink to="/booking" data-item="BOOKING" onClick={() => dispatch(setCloseMenu())}>
               BOOKING

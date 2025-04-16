@@ -45,7 +45,7 @@ import Agenda from "./pages/agenda/Agenda";
 import { StyledApp } from "./App.style";
 import LoadableHome from "./pages/home/LoadableHome";
 import LoadableEntrevista from "./pages/support/components/Entrevista/LoadableEntrevista";
-import LoadableSupportYourLocals from "./pages/support/LoadableSupportYourLocals";
+// import LoadableSupportYourLocals from "./pages/support/LoadableSupportYourLocals";
 import LoadableBooking from "./pages/booking/LoadableBooking";
 import LoadableProjects from "./pages/projects/LoadableProjects";
 import LoadableSociosDetailed from "./pages/socios/components/LoadableSociosDetailed";
@@ -101,8 +101,8 @@ function App() {
         <Switch>
           <Route path="/activitats" component={Agenda} />
           {/* <Route path="/botiga" component={Botiga} /> */}
-          <Route exact path="/support/:id" component={LoadableEntrevista} />
-          <Route path="/support" component={LoadableSupportYourLocals} />
+          {/* <Route exact path="/support/:id" component={LoadableEntrevista} />
+          <Route path="/support" component={LoadableSupportYourLocals} /> */}
           <Route exact path="/booking/:id" component={LoadableEntrevista} />
           <Route path="/booking" component={LoadableBooking} />
           <Route path="/projects" component={LoadableProjects} />

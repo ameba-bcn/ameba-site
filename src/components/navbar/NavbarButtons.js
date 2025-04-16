@@ -34,11 +34,11 @@ export default function NavbarButtons(props) {
             {t("menu.botiga")}
           </NavLink>
         </li> */}
-        <li>
+        {/* <li>
           <NavLink to="/support" data-item="#SUPPORTYOURLOCALS">
             #SUPPORTYOURLOCALS
           </NavLink>
-        </li>
+        </li> */}
         {/* <li>
           <NavLink to="/booking" data-item="BOOKING">
             BOOKING
