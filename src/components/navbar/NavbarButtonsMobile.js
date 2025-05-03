@@ -49,11 +49,15 @@ export default function NavbarButtonsMobile(props) {
             AGENDA
           </NavLink>
         </li>
-        {/* <li>
-            <NavLink to="/botiga" data-item={t("menu.botiga")} onClick={() => dispatch(setCloseMenu())}>
-              {t("menu.botiga")}
-            </NavLink>
-          </li> */}
+        <li>
+          <NavLink
+            to="/botiga"
+            data-item={t("menu.botiga")}
+            onClick={() => dispatch(setCloseMenu())}
+          >
+            {t("menu.botiga")}
+          </NavLink>
+        </li>
         {/* <li>
           <NavLink
             to="/support"

@@ -10,7 +10,7 @@ import {
   getMemberProfile,
 } from "./store/actions/auth";
 import { useDispatch, useSelector } from "react-redux";
-// import Botiga from "./pages/Botiga";
+import Botiga from "./pages/Botiga";
 import NotFound from "./pages/NotFound";
 import { Switch, Route } from "react-router-dom";
 import Contacte from "./contacte/Contacte";
@@ -100,7 +100,7 @@ function App() {
         <ScrollTop showBelow={250} />
         <Switch>
           <Route path="/activitats" component={Agenda} />
-          {/* <Route path="/botiga" component={Botiga} /> */}
+          <Route path="/botiga" component={Botiga} />
           {/* <Route exact path="/support/:id" component={LoadableEntrevista} />
           <Route path="/support" component={LoadableSupportYourLocals} /> */}
           <Route exact path="/booking/:id" component={LoadableEntrevista} />

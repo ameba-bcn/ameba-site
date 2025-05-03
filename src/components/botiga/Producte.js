@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/actions/cart";
+import { addToCart } from "../../store/actions/cart";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
 import FullscreenSpinner from "../spinner/FullscreenSpinner";
@@ -18,6 +18,7 @@ export default function ProducteDialog(props) {
     has_stock,
     discount = 0,
     price,
+    stock,
   } = dataRow;
   const dispatch = useDispatch();
   const [sizes, setSizes] = useState([]);
@@ -75,6 +76,7 @@ export default function ProducteDialog(props) {
       colorMode="light"
       has_stock={has_stock}
       discount={discount}
+      stock={stock}
     />
   );
 }

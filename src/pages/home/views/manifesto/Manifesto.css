@@ -1,5 +1,5 @@
 #manifesto {
-    background-color: #eb5e3e;
+    background-color: var(--color-naranja);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
