@@ -39,7 +39,6 @@ export default function ModalCard(props) {
     setIsSubscriber,
     colorMode,
     header,
-    has_stock,
     discount,
     maps_url = null,
     cancelled = false,
@@ -171,25 +170,46 @@ export default function ModalCard(props) {
           </Button>
         );
       }
-    }
 
-    // Evento de pago sold out
-    if (price !== 0 && stock === 0) {
+      // Evento de pago sold out
+      if (price !== 0 && stock === 0) {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--medium"
+            disabled={true}
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            icon={buttonIcon}
+            onClick={() => {}}
+          >
+            {t("events.button.pago-sold")}
+          </Button>
+        );
+      }
+    }
+    if (type === "PRODUCTE") {
       return (
         <Button
           variant="contained"
           color="primary"
           buttonSize="boton--medium"
-          disabled={true}
+          disabled={productSoldOut || activeSize.length === 0}
           buttonStyle={
             colorMode && colorMode === "dark"
               ? "boton--back-orange--solid"
               : "boton--primary--solid"
           }
           icon={buttonIcon}
-          onClick={() => {}}
+          onClick={() => {
+            handleAddToCard(id);
+          }}
         >
-          {t("events.button.pago-sold")}
+          {t("modal.afegir")}
         </Button>
       );
     }
@@ -316,25 +336,46 @@ export default function ModalCard(props) {
             {t("events.button.pago")} - {formatPrice(price)}
           </Button>
         );
-    }
 
-    // Evento de pago sold out
-    if (price !== 0 && stock === 0) {
+      // Evento de pago sold out
+      if (price !== 0 && stock === 0) {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            buttonSize="boton--megaxxl"
+            buttonStyle={
+              colorMode && colorMode === "dark"
+                ? "boton--back-orange--solid"
+                : "boton--primary--solid"
+            }
+            disabled={true}
+            icon={buttonIcon}
+            onClick={() => {}}
+          >
+            {t("events.button.pago-sold")} - {formatPrice(price)}
+          </Button>
+        );
+      }
+    }
+    if (type === "PRODUCTE") {
       return (
         <Button
           variant="contained"
           color="primary"
           buttonSize="boton--megaxxl"
+          disabled={productSoldOut || activeSize.length === 0}
           buttonStyle={
             colorMode && colorMode === "dark"
               ? "boton--back-orange--solid"
               : "boton--primary--solid"
           }
-          disabled={true}
           icon={buttonIcon}
-          onClick={() => {}}
+          onClick={() => {
+            handleAddToCard(id);
+          }}
         >
-          {t("events.button.pago-sold")} - {formatPrice(price)}
+          {t("modal.afegir")}- {formatPrice(price)}
         </Button>
       );
     }
@@ -349,9 +390,7 @@ export default function ModalCard(props) {
     ? type.toUpperCase()
     : types[0].toUpperCase();
 
-  const productSoldOut =
-    !has_stock || (modalStyle === "PRODUCTE" && sizes.length === 0);
-
+  const productSoldOut = modalStyle === "PRODUCTE" && sizes.length === 0;
   const handleAddToCard = (id) => {
     if (activeSize.length === 0 && modalStyle === "PRODUCTE")
       setSelectSizeError(true);

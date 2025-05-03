@@ -60,12 +60,9 @@ const Legal = () => {
   const [t] = useTranslation("translation");
   const [files, setFiles] = useState([]);
   useEffect(() => {
-    dataService
-      .getLegal()
-      .then((res) => {
-        setFiles(res.data);
-      })
-      .catch(console.log("errors"));
+    dataService.getLegal().then((res) => {
+      setFiles(res.data);
+    });
   }, []);
 
   return (

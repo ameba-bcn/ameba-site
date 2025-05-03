@@ -29,11 +29,11 @@ export default function NavbarButtons(props) {
             AGENDA
           </NavLink>
         </li>
-        {/* <li>
+        <li>
           <NavLink to="/botiga" data-item={t("menu.botiga")}>
             {t("menu.botiga")}
           </NavLink>
-        </li> */}
+        </li>
         {/* <li>
           <NavLink to="/support" data-item="#SUPPORTYOURLOCALS">
             #SUPPORTYOURLOCALS
