@@ -120,7 +120,8 @@
     "general": "Algo no ha anat bé...",
     "contacta": "Contacta amb ",
     "linkBuit1": "La ruta no es correcte.",
-    "linkBuit2": "No podem mostrarte res 🤷‍♂️"
+    "linkBuit2": "No podem mostrarte res 🤷‍♂️",
+    "descompte": "El descompte no s'ha ha pogut aplicar. Si us plau, revisa el codi i torna a intentar-ho."
   },
   "soci": {
     "disclaimer": "Per a poder finalitzar el procediment accedeix a la cistella i realitza el pagament",
