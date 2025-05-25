@@ -6,7 +6,7 @@ import { LogFormError } from "../Log.style";
 import { validate } from "./DiscountCodeValidate";
 import { useFormik } from "formik";
 import { DiscountRow } from "./DiscountCode.style";
-import { isEmptyObject } from "../../../utils/utils";
+import notificationToast, { isEmptyObject } from "../../../utils/utils";
 import { applyDiscount } from "../../../store/actions/cart";
 import { useTranslation } from "react-i18next";
 
@@ -35,8 +35,10 @@ export default function DiscountCode() {
       .then(() => {
         setLoading(false);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.warn("ERROR: ", err);
         setLoading(false);
+        notificationToast("", err?.message || t("errors.descompte"), "error");
       });
   };
 

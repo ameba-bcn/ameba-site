@@ -121,7 +121,8 @@
     "general": "Algo no ha ido bien...",
     "contacta": "Contacta con ",
     "linkBuit1": "La ruta no es correcta.",
-    "linkBuit2": "No podemos mostrarte nada 🤷‍♂️"
+    "linkBuit2": "No podemos mostrarte nada 🤷‍♂️",
+    "descompte": "El descuento no se ha podido aplicar. Por favor, revisa el código e inténtalo de nuevo."
   },
   "soci": {
     "disclaimer": "Para poder finalizar el procedimiento accede a la cesta y realiza el pago",
