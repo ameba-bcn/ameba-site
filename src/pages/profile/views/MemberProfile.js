@@ -19,17 +19,18 @@ import {
 } from "./MemberProfile.style";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import { StyledLink } from "../../../styles/GlobalStyles";
+import { isDateExpired } from "../../../utils/utils";
 
 export default function MemberProfile({ setButtonDisabled, isMember }) {
   const [t] = useTranslation("translation");
   const { user_member_data } = useSelector((state) => state.auth);
-  const { memberships = [] } = user_member_data;
+  const { memberships = [], expires = "" } = user_member_data;
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
     setOpen(!open);
   };
-
+  const isMembershipExpired = isDateExpired(expires);
   // const unsubscribeUser = () => {
   //   dispatch(deleteUser());
   // };
@@ -39,7 +40,14 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
       <MemberProfileBox>
         <MemberProfileTitle>{t("perfil.dades")}</MemberProfileTitle>
         <MemberProfileBoxBorder>
-          {isMember ? (
+          {isMember && isMembershipExpired && (
+            <DisclaimerBox
+              text={<MessageFormat>{t("soci.no-soci-perfil")}</MessageFormat>}
+              hideCloseIcon={true}
+            />
+          )}
+
+          {isMember && !isMembershipExpired ? (
             <MembershipFormLayout setButtonDisabled={setButtonDisabled} />
           ) : (
             <MembershipFormReadOnly />
@@ -76,7 +84,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
           >
             {t("perfil.baixa")}
           </Button> */}
-          {memberships.length > 0 && (
+          {memberships.length > 0 && !isMembershipExpired && (
             <DisclaimerBox
               text={
                 <MessageFormat>

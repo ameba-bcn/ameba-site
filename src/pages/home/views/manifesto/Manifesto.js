@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import LettersMove from "../../../../components/layout/LettersMove";
-// import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import "./Manifesto.css";
 import Spinner from "../../../../components/spinner/Spinner";
@@ -10,7 +8,6 @@ const Manifesto = () => {
   const { isManifestoLoading } = useSelector((state) => state.loaders);
   const { about = {} } = data;
   const [scroll, setScroll] = useState(false);
-  // const [t] = useTranslation("translation");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,23 +31,9 @@ const Manifesto = () => {
         {isManifestoLoading ? (
           <Spinner height={400} />
         ) : (
-          <div
-            className="manifesto-text"
-            // className={
-            //   scroll ? "manifesto-text manifesto-text-fx" : "manifesto-text"
-            // }
-          >
-            {about?.text}
-          </div>
+          <div className="manifesto-text">{about?.text}</div>
         )}
       </div>
-
-      {/* <LettersMove
-        className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
-        color="#EB5E3E"
-      /> */}
     </div>
   );
 };

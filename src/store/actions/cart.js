@@ -16,13 +16,10 @@ import {
   DISCOUNT_CODE_APPLIED,
   DISCOUNT_CODE_FAIL,
 } from "./types";
-// import { useTranslation } from "react-i18next";
 import CartService from "../services/cart.services";
 import notificationToast from "../../utils/utils";
 
 export const addToCart = (id) => (dispatch) => {
-  // const [t] = useTranslation("translation");
-
   return CartService.addInCart(id).then(
     (response) => {
       dispatch({

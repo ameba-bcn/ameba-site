@@ -29,4 +29,7 @@ export const SyledDisclaimer = styled.div`
     right: 8px;
     cursor: pointer;
   }
+  @media screen and (max-width: 465px) {
+    margin: 0 24px;
+  }
 `;
