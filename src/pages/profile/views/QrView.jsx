@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import { useTranslation } from "react-i18next";
 import ImageCarousel from "../../../components/images/ImageCarousel";
@@ -6,11 +7,20 @@ import "react-image-gallery/styles/css/image-gallery.css";
 import { StyledQrBox } from "./QrView.style";
 import authService from "../../../store/services/auth.service";
 import Spinner from "../../../components/spinner/Spinner";
+import {
+  MemberProfileBox,
+  MemberProfileFrame,
+  MessageFormat,
+} from "./MemberProfile.style";
+import { isDateExpired } from "../../../utils/utils";
 
 const QrView = () => {
   const [t] = useTranslation("translation");
   const [qrImg, setQrImg] = useState("");
   const [loading, setLoading] = useState(true);
+  const { user_member_data } = useSelector((state) => state.auth);
+  const { expires = "" } = user_member_data;
+  const isMembershipExpired = isDateExpired(expires);
 
   useEffect(() => {
     setLoading(true);
@@ -24,6 +34,19 @@ const QrView = () => {
       })
       .catch(() => setLoading(false));
   }, []);
+
+  if (isMembershipExpired) {
+    return (
+      <MemberProfileFrame>
+        <MemberProfileBox>
+          <DisclaimerBox
+            text={<MessageFormat>{t("soci.no-soci-perfil")}</MessageFormat>}
+            hideCloseIcon={true}
+          />
+        </MemberProfileBox>
+      </MemberProfileFrame>
+    );
+  }
 
   return (
     <StyledQrBox>

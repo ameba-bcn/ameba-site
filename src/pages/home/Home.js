@@ -1,6 +1,5 @@
 import React from "react";
 import Associacio from "./views/cover/Associacio";
-// import SupportLocals from "./views/support/SupportLocals";
 import Activitats from "./views/agenda/Activitats";
 import Manifesto from "./views/manifesto/Manifesto";
 import LettersMove from "../../components/layout/LettersMove";
@@ -13,7 +12,6 @@ export default function Home() {
       <div className="HomeContent">
         <Associacio />
         <Manifesto />
-        {/* <SupportLocals /> */}
         <Activitats />
       </div>
       <LettersMove

@@ -31,8 +31,10 @@ const Socios = () => {
   const { member_projects } = useSelector((state) => state.data);
   const { user_member_data = {} } = useSelector((state) => state.auth);
   const { status = "" } = user_member_data;
-
-  const filteredSocios = member_projects.filter((project) =>
+  const member_projects_active = member_projects.filter(
+    (project) => !!project.is_active
+  );
+  const filteredSocios = member_projects_active.filter((project) =>
     project.project_name?.toLowerCase()?.includes(searchInput?.toLowerCase())
   );
 
@@ -44,7 +46,7 @@ const Socios = () => {
         status !== ACTIVE_STATUS && (
           <DisclaimerBox
             text={
-              member_projects.length === 0
+              member_projects_active.length === 0
                 ? t("general.sense-resultats")
                 : t("soci.missatge-ppal")
             }

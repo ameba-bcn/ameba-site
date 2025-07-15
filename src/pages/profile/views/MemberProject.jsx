@@ -15,7 +15,7 @@ import { validate } from "./MemberProjectValidate";
 import { ACTIVE_STATUS, ERROR } from "../../../utils/constants";
 import CheckBox from "../../../components/layout/CheckBox";
 import Spinner from "../../../components/spinner/Spinner";
-import notificationToast from "../../../utils/utils";
+import notificationToast, { isDateExpired } from "../../../utils/utils";
 import PreviewerSociosDetailed from "../../socios/components/PreviewerSociosDetailed";
 import ToogleButton from "../../../components/button/ToogleButton";
 
@@ -32,8 +32,10 @@ const MemberProject = () => {
   const [mediaLinks, setMediaLinks] = useState(
     initialProjectData.media_urls || []
   );
-  const isProfileActive = initialProjectData.isActive;
   const [loading, setLoading] = useState(true);
+  const { user_member_data = {} } = useSelector((state) => state.auth);
+  const { status = "", expires = "" } = user_member_data;
+  const isMembershipExpired = isDateExpired(expires);
 
   useEffect(() => {
     setLoading(true);
@@ -113,9 +115,6 @@ const MemberProject = () => {
     disabled = false;
   }
 
-  const { user_member_data = {} } = useSelector((state) => state.auth);
-  const { status = "" } = user_member_data;
-
   return (
     <MemberProjectFrame>
       <MemberFormBox>
@@ -123,7 +122,7 @@ const MemberProject = () => {
           {status !== ACTIVE_STATUS && (
             <DisclaimerBox
               text={
-                isProfileActive
+                !isMembershipExpired
                   ? t("soci.perfil-gral")
                   : t("soci.no-soci-perfil")
               }
@@ -131,22 +130,26 @@ const MemberProject = () => {
               borderColor="black"
             />
           )}
-          <DisclaimerBox
-            text={t("info.project")}
-            id="project-disclaimer"
-            borderColor="black"
-            bgColor={`var(--color-cream)`}
-          />
-          <ToogleButton
-            text1={t("boto.edit")}
-            text2={t("boto.preview")}
-            firstActive={editMode}
-            setFirstActive={setEditMode}
-            id="project-toogle-button"
-          />
+          {!isMembershipExpired && (
+            <DisclaimerBox
+              text={t("info.project")}
+              id="project-disclaimer"
+              borderColor="black"
+              bgColor={`var(--color-cream)`}
+            />
+          )}
+          {!isMembershipExpired && (
+            <ToogleButton
+              text1={t("boto.edit")}
+              text2={t("boto.preview")}
+              firstActive={editMode}
+              setFirstActive={setEditMode}
+              id="project-toogle-button"
+            />
+          )}
           {loading ? (
             <Spinner color="black" height={400} />
-          ) : editMode ? (
+          ) : editMode && !isMembershipExpired ? (
             <>
               <div className="field-wrapper">
                 <InputField

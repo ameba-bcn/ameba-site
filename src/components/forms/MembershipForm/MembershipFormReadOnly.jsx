@@ -15,10 +15,9 @@ export default function MembershipFormReadOnly(props) {
   const [t] = useTranslation("translation");
   const { isCheckout = false } = props;
   const auth = useSelector((state) => state.auth);
-  const { user_data = {} } = auth;
+  const { user_data = {}, user_member_data = {} } = auth;
   const [redirect, setRedirect] = useState(false);
   const [user, setUser] = useState(user_data?.username || "");
-
   const isMinMobile = useMediaQuery(MOBILE_SMALL);
 
   const showPasswordRecover = () => {
@@ -81,7 +80,7 @@ export default function MembershipFormReadOnly(props) {
                 name="memberNum"
                 type="text"
                 label={t("form.soci")}
-                value={user_data?.number || "-"}
+                value={user_data?.number || user_member_data?.number || "-"}
                 slimLine={true}
                 valid={true}
                 disabled={true}

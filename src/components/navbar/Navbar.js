@@ -15,17 +15,16 @@ export const StyledMenuIcon = styled.div`
   color: #fae6c5;
   text-align: end;
   cursor: pointer;
-  margin-right: 8px;
-  margin-top: 12px;
+  margin-top: 8px;
   svg {
-    scale: 2;
+    width: 40px;
+    height: 40px;
   }
 `;
 export default function Navbar({ isErrored = false }) {
   const isMobile = useMediaQuery(MOBILE_BIG);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const ref = useRef("navbarButtonsMobileRef");
-
   const { isMenuOpen } = useSelector((state) => state.menu);
   const dispatch = useDispatch();
 
