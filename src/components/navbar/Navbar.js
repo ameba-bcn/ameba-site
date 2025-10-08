@@ -15,10 +15,9 @@ export const StyledMenuIcon = styled.div`
   color: #fae6c5;
   text-align: end;
   cursor: pointer;
-  margin-top: 8px;
   svg {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
   }
 `;
 export default function Navbar({ isErrored = false }) {

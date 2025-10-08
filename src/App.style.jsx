@@ -553,7 +553,10 @@ export const StyledApp = styled.div`
     font-size: 1.4rem;
     font-weight: bold;
     width: 100%;
-    /* flex: 1 0 auto; */
+    min-height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .lettersMoveDiv {

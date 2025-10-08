@@ -67,6 +67,7 @@ function App() {
   const { user_member_data = {} } = useSelector((state) => state.auth);
 
   const isNewMember = deepComparision(user_member_data, {});
+
   useEffect(() => {
     const refresh = localStorage.getItem("refresh");
     if (refresh) {

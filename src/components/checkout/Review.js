@@ -16,6 +16,8 @@ function Review() {
   const { total, item_variants } = cart_data;
   const noAllSub = (element) => element.is_subscription === false;
   const hasNoSubscription = item_variants.some(noAllSub);
+  const hasArticle = (element) => element.item_type === "article";
+
   return (
     <ReviewContent>
       <ReviewTotalRow>
@@ -31,10 +33,21 @@ function Review() {
         {hasNoSubscription ? (
           <>
             {t("checkout.review-footer-1")} <br />
+            <br />
+            {hasArticle ? (
+              <>
+                {t("checkout.review-footer-5")} <br />
+                <br />
+              </>
+            ) : null}
             {t("checkout.review-footer-3")}{" "}
           </>
         ) : (
-          <>{t("checkout.review-footer-4")}</>
+          <>
+            {t("checkout.review-footer-1")} <br />
+            <br />
+            {t("checkout.review-footer-4")}
+          </>
         )}
       </ReviewFooter>
     </ReviewContent>

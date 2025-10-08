@@ -9,9 +9,10 @@
     "cistella": "cesta",
     "pagament": "pago",
     "pagament-gratis": "El procedimiento de compra no supone ningún cargo, por lo tanto no se realiza flujo de pago.",
-    "review-footer-1": "¡Gracias por tu compra! Con este gesto estás dando apoyo directo a AMEBA y ayudando a hacer crecer la cultura electrónica local. Para recoger tu compra, te enviaremos un mensaje indicándote cuándo y dónde hacerlo. Si tienes cualquier duda, puedes contactarnos en info@ameba.cat 💚",
+    "review-footer-1": "¡Gracias por tu compra! Con este gesto estás dando apoyo directo a AMEBA y ayudando a hacer crecer la cultura electrónica local.",
     "review-footer-3": "Si tienes alguna duda contáctanos en info@ameba.cat",
     "review-footer-4": "Te mandararemos un email con toda la información.",
+    "review-footer-5": "Para recoger tu compra, te enviaremos un mensaje indicándote cuándo y dónde hacerlo. Si tienes cualquier duda, puedes contactarnos en info@ameba.cat 💚",
     "compra-toast1": "tienes",
     "compra-toast2": "en la cesta",
     "compra-toast3": "Has añadido un item en la cesta"
