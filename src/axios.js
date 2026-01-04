@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "./utils/constants";
+import { authError, warn } from "./utils/logger";
 
 const storedLang = localStorage.getItem("i18nextLng") || "ca";
 
@@ -21,14 +22,12 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    console.warn("Axios, On nok", error);
+    warn("Axios interceptor: Request failed", error);
     const originalRequest = error.config;
 
     if (typeof error.response === "undefined") {
-      console.warn(
-        "A server/network error occurred. " +
-          "Sorry about this - we will get it fixed shortly."
-      );
+      warn("Network error occurred - server may be unreachable");
+      authError("network_error", error);
       return Promise.reject(error);
     }
 
@@ -51,7 +50,7 @@ axiosInstance.interceptors.response.use(
         const tokenParts = JSON.parse(atob(refreshToken.split(".")[1]));
         //La fecha esta en segundos, la reformateamos
         const now = Math.ceil(Date.now() / 1000);
-        console.warn(tokenParts.exp);
+        warn("Token refresh attempt - expires at:", tokenParts.exp);
 
         if (tokenParts.exp > now) {
           return axiosInstance
@@ -67,16 +66,19 @@ axiosInstance.interceptors.response.use(
               return axiosInstance(originalRequest);
             })
             .catch((err) => {
-              console.warn(err);
+              warn("Token refresh failed", err);
+              authError("token_refresh_failed", err);
             });
         } else {
-          console.warn("Refresh page token is expired", tokenParts.exp, now);
+          warn("Refresh token is expired", { exp: tokenParts.exp, now });
+          authError("token_expired", new Error("Refresh token expired"));
           if (typeof window !== "undefined") {
             window.location.href = "/login/";
           }
         }
       } else {
-        console.warn("Refresh token not available");
+        warn("Refresh token not available in localStorage");
+        authError("no_refresh_token", new Error("No refresh token available"));
         if (typeof window !== "undefined") {
           window.location.href = "/login/";
         }

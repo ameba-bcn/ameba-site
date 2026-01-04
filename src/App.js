@@ -17,7 +17,7 @@ import Contacte from "./contacte/Contacte";
 import Menu from "./components/navbar/Navbar";
 import LogSession from "./pages/LogSession";
 import CheckoutPage from "./pages/CheckoutPage";
-import CheckoutFinished from "./pages/landing/CheckoutFinished";
+import CheckoutFinishedWrapper from "./pages/landing/CheckoutFinishedWrapper";
 import SubscriptionFinished from "./pages/landing/SubscriptionFinished";
 import LogMailConfirmation from "./pages/LogMailConfirmation";
 import SendEmailPasswordRecovery from "./pages/SendEmailPasswordRecovery";
@@ -40,6 +40,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "react-image-gallery/styles/css/image-gallery.css";
 import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
 import PasswordRecovery from "./pages/PasswordRecovery";
+import { setSentryUser } from "./sentry";
 import QrClient from "./pages/QrClient";
 import Agenda from "./pages/agenda/Agenda";
 import { StyledApp } from "./App.style";
@@ -74,12 +75,23 @@ function App() {
       dispatch(validateLocalToken(refresh))
         .then(() => {
           isNewMember ? dispatch(setLoggedUser()) : dispatch(setMember());
-          dispatch(getUserData());
-          dispatch(getMemberProfile());
+          return dispatch(getUserData());
         })
-        .catch(dispatch(setGuestUser()));
+        .then((userData) => {
+          // Set Sentry user context for error tracking
+          if (userData) {
+            setSentryUser(userData);
+          }
+          return dispatch(getMemberProfile());
+        })
+        .catch(() => {
+          dispatch(setGuestUser());
+          // Clear Sentry user on failed auth
+          setSentryUser(null);
+        });
     } else {
       dispatch(setGuestUser());
+      setSentryUser(null);
     }
     dispatch(supportYourLocalsAll());
     dispatch(agendaAll());
@@ -121,7 +133,7 @@ function App() {
           <Route path="/product" component={LoadableExternalEvents} />
           <Route path="/profile" component={LoadableProfile} />
           <Route exact path="/profile/:id" component={LoadableProfile} />
-          <Route path="/summary-checkout" component={CheckoutFinished} />
+          <Route path="/summary-checkout" component={CheckoutFinishedWrapper} />
           <Route path="/subscribe" component={SubscriptionFinished} />
           <Route path="/legal" component={LoadableLegal} />
           <Route exact path="/" component={LoadableHome} />

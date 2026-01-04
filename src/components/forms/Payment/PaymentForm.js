@@ -35,7 +35,8 @@ function PaymentForm() {
     },
   };
 
-  const currentURL = window.location.href.replace("checkout", "");
+  // Construct return URL properly using window.location parts
+  const returnURL = `${window.location.protocol}//${window.location.host}/summary-checkout`;
 
   const handleSubmit = async (event) => {
     // We don't want to let default form submission happen here,
@@ -52,7 +53,7 @@ function PaymentForm() {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: `${currentURL}summary-checkout`,
+        return_url: returnURL,
       },
     });
 

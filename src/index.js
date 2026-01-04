@@ -10,6 +10,10 @@ import i18next from "i18next";
 import { I18nextProvider } from "react-i18next";
 import "./i18next";
 import store from "./store/store";
+import { initSentry } from "./sentry";
+
+// Initialize Sentry for error tracking
+initSentry();
 
 WebFont.load({
   google: {

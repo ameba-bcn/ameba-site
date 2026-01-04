@@ -18,8 +18,13 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.env.example
 .eslintcache
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 package-lock.json
+CLAUDE.md
+SECURITY_AUDIT.md
+CODE_QUALITY_AUDIT.md
+SENTRY_SETUP.md
