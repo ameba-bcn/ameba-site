@@ -1,0 +1,92 @@
+# Ejemplo de configuración de docker-compose.yml usando imágenes de GHCR
+# Este archivo muestra cómo actualizar el servicio ameba-frontend
+
+version: "3.3"
+
+volumes:
+  ameba_node_modules:
+  ameba_postgres_data:
+  ameba_caddy_data:
+  ameba_caddy_config:
+  frontend_dist:
+  ameba_media:
+  ameba_static:
+
+services:
+
+  ameba-backend:
+    build:
+      context: ./src/ameba-backend
+      dockerfile: Dockerfile
+    image: ameba-backend
+    container_name: ameba-backend
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - .env
+    volumes:
+      - ./src/ameba-backend:/home/ameba/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - ameba-postgres
+
+  ameba-background-tasks:
+    image: ameba-backend
+    command: python manage.py process_tasks --duration 1 --sleep ${BGTASK_SLEEP_TIME}
+    container_name: ameba-background-tasks
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./src/ameba-backend:/home/ameba/app
+
+  # OPCIÓN 1: Usar imagen de GHCR (recomendado para producción)
+  ameba-frontend:
+    image: ghcr.io/ameba-bcn/ameba-frontend:latest
+    command: ["sh", "-c", "rm -rf /_build/* && cp -a /build/. /_build"]
+    container_name: ameba-frontend
+    restart: always
+    volumes:
+      - frontend_dist:/_build
+
+  # OPCIÓN 2: Build local (mantener para desarrollo)
+  # ameba-frontend:
+  #   build:
+  #     context: ./src/ameba-site
+  #     dockerfile: Dockerfile
+  #   command: ["sh", "-c", "rm -rf /_build/* && cp -a /build/. /_build"]
+  #   container_name: ameba-frontend
+  #   volumes:
+  #     - frontend_dist:/_build
+
+  ameba-proxy:
+    image: caddy:alpine
+    container_name: ameba-proxy
+    restart: always
+    command: ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+    environment:
+      - SITE_ADDRESS=http://localhost:8080
+    volumes:
+      - ./caddy:/etc/caddy
+      - ./src/ameba-backend/static:/backend/api/static
+      - ./src/ameba-backend/media:/backend/api/media
+      - frontend_dist:/frontend/ameba-site
+      - ameba_caddy_data:/data
+      - ameba_caddy_config:/config
+    ports:
+      - "8080:8080"
+    depends_on:
+      ameba-backend:
+        condition: service_started
+
+  ameba-postgres:
+    image: postgres:12.2-alpine
+    container_name: ameba-postgres
+    restart: always
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ameba_postgres_data:/var/lib/postgresql/data

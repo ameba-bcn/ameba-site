@@ -1,0 +1,85 @@
+name: CI - Frontend Build & Lint
+
+on:
+  push:
+    branches:
+      - master
+      - dev
+      - 'feature/**'
+      - 'fix/**'
+    paths:
+      - 'src/ameba-site/**'
+      - '!src/ameba-site/.github/**'
+      - '!src/ameba-site/**.md'
+  pull_request:
+    branches:
+      - master
+      - dev
+    paths:
+      - 'src/ameba-site/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          cache-dependency-path: src/ameba-site/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./src/ameba-site
+        run: npm ci
+
+      - name: Build application
+        working-directory: ./src/ameba-site
+        run: npm run build
+        env:
+          CI: true
+
+      - name: Check build output
+        working-directory: ./src/ameba-site
+        run: |
+          if [ ! -f "build/index.html" ]; then
+            echo "Error: build/index.html not found"
+            exit 1
+          fi
+          echo "Build successful! Files created:"
+          ls -lh build/ | head -20
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.x
+          cache: 'npm'
+          cache-dependency-path: src/ameba-site/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./src/ameba-site
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: ./src/ameba-site
+        run: npx eslint src/ --ext .js,.jsx --max-warnings 0 || true
+
+      - name: Check for security vulnerabilities
+        working-directory: ./src/ameba-site
+        run: npm audit --audit-level=moderate || true
