@@ -23,3 +23,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 package-lock.json
+
+# Claude Code
+.claude/
+
+# Documentation files
+CLAUDE.md
+CODE_QUALITY_AUDIT.md
+SECURITY_AUDIT.md
+SENTRY_SETUP.md
+.env.example
