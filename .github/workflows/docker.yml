@@ -39,8 +39,9 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
+            # Genera el tag con el nombre de la rama (ej: :dev)
             type=ref,event=branch
-            type=sha,prefix={{branch}}-
+            # Genera el tag :latest solo si es la rama por defecto (master/main)
             type=raw,value=latest,enable={{is_default_branch}}
 
       - name: Build and push Docker image
