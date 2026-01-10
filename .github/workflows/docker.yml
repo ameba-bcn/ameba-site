@@ -38,11 +38,14 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          # Desactiva comportamiento auto de latest para control manual abajo
+          flavor: |
+            latest=false
           tags: |
-            # Genera el tag con el nombre de la rama (ej: :dev)
-            type=ref,event=branch
-            # Genera el tag :latest solo si es la rama por defecto (master/main)
+            # Regla 1: Si es rama default (main/master) -> tag :latest
             type=raw,value=latest,enable={{is_default_branch}}
+            # Regla 2: Si NO es default -> tag :nombre-rama (ej: :dev)
+            type=ref,event=branch,enable=${{ !contains(fromJson('["master", "main"]'), github.ref_name) }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
@@ -58,9 +61,12 @@ jobs:
 
       - name: Image summary
         run: |
+          # Formatear tags para visualización limpia (reemplaza saltos de línea por comas)
+          TAGS="${{ steps.meta.outputs.tags }}"
+          CLEAN_TAGS="${TAGS//$'\n'/, }"
+          
           echo "### 🐳 Docker Image Published" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Registry**: \`${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "**Tags**: \`${{ steps.meta.outputs.tags }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Full Image Name**: \`$CLEAN_TAGS\`" >> $GITHUB_STEP_SUMMARY
           echo "**Branch**: \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
           echo "**Commit**: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
