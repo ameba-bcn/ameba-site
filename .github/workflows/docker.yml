@@ -54,7 +54,9 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          # Se ha eliminado la línea: platforms: linux/amd64
+          # CLAVE: provenance: false elimina metadatos complejos que confunden al cliente Docker en Mac
+          # al intentar hacer fallback a emulación AMD64.
+          provenance: false
 
       - name: Image summary
         run: |
