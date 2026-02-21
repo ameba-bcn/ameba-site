@@ -6,7 +6,7 @@ import {
   TextAreaStyled,
 } from "./TextArea.style.jsx";
 import { TEXT_EDITOR_KEY } from "../../../utils/constants.js";
-import { tinymceTextAreaFormatter } from "../../../utils/utils.js";
+import { tinymceTextAreaFormatter } from "../../../utils/utils";
 import Tooltip from "../../tooltip/Tooltip.jsx";
 import Icon from "../../ui/Icon.jsx";
 
