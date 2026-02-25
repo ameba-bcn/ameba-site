@@ -26,6 +26,8 @@ package-lock.json
 
 # Claude Code
 .claude/
+.agents/
+MIGRATION.md
 
 # Documentation files
 CLAUDE.md
