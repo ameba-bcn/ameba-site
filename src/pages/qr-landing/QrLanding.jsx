@@ -38,10 +38,8 @@ export const StyledQr = styled.div`
 const QrLanding = (props) => {
   const [memberData, setMemberData] = useState({});
 
-  // eslint-disable-next-line no-undef
-  const queryString = require("querystring-es3");
   const [t] = useTranslation("translation");
-  const parsed = queryString.parse(props.location.search);
+  const parsed = Object.fromEntries(new URLSearchParams(props.location.search));
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const strToken = parsed["token"] || parsed["?token"];

@@ -19,9 +19,7 @@ function Botiga() {
   const data = useSelector((state) => state.data);
   const { membership = [] } = data;
   let location = useLocation();
-  // eslint-disable-next-line no-undef
-  const queryString = require("querystring-es3");
-  const value = queryString.parse(location.search);
+  const value = Object.fromEntries(new URLSearchParams(location.search));
   const externalId = value?.id;
   const id_soci = membership.map((x) => x.id);
 

@@ -8,9 +8,7 @@ import { StyledHeightBlock, StyledLink } from "../styles/GlobalStyles";
 export default function PasswordRecovery(props) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [strToken, setStrToken] = useState("");
-  // eslint-disable-next-line no-undef
-  const queryString = require("querystring-es3");
-  const parsed = queryString.parse(props.location.search);
+  const parsed = Object.fromEntries(new URLSearchParams(props.location.search));
   const [t] = useTranslation("translation");
 
   useEffect(() => {
