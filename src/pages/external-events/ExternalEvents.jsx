@@ -30,9 +30,7 @@ const ExternalEvents = () => {
   const [productData, setProductData] = useState({});
   const [producteLoading, setProducteLoading] = useState(false);
   const location = useLocation();
-  // eslint-disable-next-line no-undef
-  const queryString = require("querystring-es3");
-  const value = queryString.parse(location.search.replace("?", ""));
+  const value = Object.fromEntries(new URLSearchParams(location.search));
   const { id = "", kind = "" } = value;
   const { variants } = productData || {};
   // eslint-disable-next-line no-prototype-builtins
