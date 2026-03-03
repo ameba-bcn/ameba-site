@@ -49,6 +49,35 @@ export const StyledAgendaTable = styled(StyledMainColumnView)`
       }
     }
   }
+
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    font-family: "Bebas Neue";
+    font-size: 1.4rem;
+
+    button {
+      background: none;
+      border: 1px solid var(--color-cream);
+      color: var(--color-cream);
+      font-size: 1.4rem;
+      padding: 4px 12px;
+      cursor: pointer;
+      border-radius: 4px;
+
+      &:disabled {
+        opacity: 0.3;
+        cursor: default;
+      }
+
+      &:hover:not(:disabled) {
+        background-color: rgba(250, 230, 197, 0.1);
+      }
+    }
+  }
 `;
 
 export const StyledImageTableBox = styled.div`
