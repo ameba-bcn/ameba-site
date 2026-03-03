@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import {
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
 import { Redirect } from "react-router-dom";
@@ -291,6 +292,10 @@ const AgendaTable = () => {
     data: filteredAgenda,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: { pageSize: 20 },
+    },
   });
 
   if (redirect) return <Redirect to={checkoutRedirect} />;
@@ -347,6 +352,25 @@ const AgendaTable = () => {
           })}
         </tbody>
       </table>
+      {table.getPageCount() > 1 && (
+        <div className="pagination-controls">
+          <button
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            ←
+          </button>
+          <span>
+            {table.getState().pagination.pageIndex + 1} / {table.getPageCount()}
+          </span>
+          <button
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+            →
+          </button>
+        </div>
+      )}
       {open && (
         <ActivitatDialog
           open={open}

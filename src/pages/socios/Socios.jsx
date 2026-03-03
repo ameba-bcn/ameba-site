@@ -18,6 +18,8 @@ export const StyledSocios = styled.div`
   flex-direction: column;
 `;
 
+const PAGE_SIZE = 20;
+
 const Socios = () => {
   const dispatch = useDispatch();
 
@@ -27,6 +29,7 @@ const Socios = () => {
 
   const { isMemberProjectsLoading } = useSelector((state) => state.loaders);
   const [searchInput, setSearchInput] = useState("");
+  const [page, setPage] = useState(0);
   const [t] = useTranslation("translation");
   const { member_projects } = useSelector((state) => state.data);
   const { user_member_data = {} } = useSelector((state) => state.auth);
@@ -36,6 +39,11 @@ const Socios = () => {
   );
   const filteredSocios = member_projects_active.filter((project) =>
     project.project_name?.toLowerCase()?.includes(searchInput?.toLowerCase())
+  );
+  const totalPages = Math.ceil(filteredSocios.length / PAGE_SIZE);
+  const paginatedSocios = filteredSocios.slice(
+    page * PAGE_SIZE,
+    (page + 1) * PAGE_SIZE
   );
 
   return (
@@ -58,14 +66,60 @@ const Socios = () => {
       <SearchBox
         searchText="Busca"
         searchInput={searchInput}
-        setSearchInput={setSearchInput}
+        setSearchInput={(val) => {
+          setSearchInput(val);
+          setPage(0);
+        }}
         hidden={true}
       />
       <CardLayout
-        cardList={filteredSocios}
+        cardList={paginatedSocios}
         urlRoot="socis"
         loading={isMemberProjectsLoading}
       />
+      {totalPages > 1 && (
+        <div className="pagination-controls" style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "16px",
+          padding: "16px 0",
+          fontFamily: "Bebas Neue",
+          fontSize: "1.4rem",
+        }}>
+          <button
+            onClick={() => setPage((p) => p - 1)}
+            disabled={page === 0}
+            style={{
+              background: "none",
+              border: "1px solid black",
+              fontSize: "1.4rem",
+              padding: "4px 12px",
+              cursor: page === 0 ? "default" : "pointer",
+              borderRadius: "4px",
+              opacity: page === 0 ? 0.3 : 1,
+            }}
+          >
+            ←
+          </button>
+          <span>{page + 1} / {totalPages}</span>
+          <button
+            onClick={() => setPage((p) => p + 1)}
+            disabled={page >= totalPages - 1}
+            style={{
+              background: "none",
+              border: "1px solid black",
+              fontSize: "1.4rem",
+              padding: "4px 12px",
+              cursor: page >= totalPages - 1 ? "default" : "pointer",
+              borderRadius: "4px",
+              opacity: page >= totalPages - 1 ? 0.3 : 1,
+            }}
+          >
+            →
+          </button>
+        </div>
+      )}
       <LettersMove
         className="lettersMoveDiv"
         sentence={t("banners.soci-curt")}
