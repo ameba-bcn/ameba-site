@@ -47,7 +47,6 @@ import LoadableHome from "./pages/home/LoadableHome";
 import LoadableEntrevista from "./pages/support/components/Entrevista/LoadableEntrevista";
 // import LoadableSupportYourLocals from "./pages/support/LoadableSupportYourLocals";
 import LoadableBooking from "./pages/booking/LoadableBooking";
-import LoadableProjects from "./pages/projects/LoadableProjects";
 import LoadableSociosDetailed from "./pages/socios/components/LoadableSociosDetailed";
 import LoadableSocios from "./pages/socios/LoadableSocios";
 import LoadableGallery from "./pages/gallery/LoadableGallery";
@@ -106,7 +105,6 @@ function App() {
           <Route path="/support" component={LoadableSupportYourLocals} /> */}
           <Route exact path="/booking/:id" component={LoadableEntrevista} />
           <Route path="/booking" component={LoadableBooking} />
-          <Route path="/projects" component={LoadableProjects} />
           <Route exact path="/socis/:id" component={LoadableSociosDetailed} />
           <Route path="/socis" component={LoadableSocios} />
           <Route path="/gallery" component={LoadableGallery} />
