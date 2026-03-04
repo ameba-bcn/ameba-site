@@ -10,12 +10,6 @@ export const StyledPowerTitleBox = styled.div`
   align-items: center;
   width: 100%;
 
-  &:hover {
-    animation-name: TitleHovered;
-    animation-duration: 1s;
-    animation-iteration-count: infinite;
-  }
-
   .SupportSubtitle {
     margin: -20px;
     text-transform: uppercase;

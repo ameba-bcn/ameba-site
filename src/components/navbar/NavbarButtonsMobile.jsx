@@ -83,15 +83,6 @@ export default function NavbarButtonsMobile(props) {
         </li>
         <li>
           <NavLink
-            to="/projects"
-            data-item={t("menu.projectes")}
-            onClick={() => dispatch(setCloseMenu())}
-          >
-            {t("menu.projectes")}
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
             to="/gallery"
             data-item="GALERIA"
             onClick={() => dispatch(setCloseMenu())}
