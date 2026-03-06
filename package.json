@@ -10,7 +10,7 @@
     "@tanstack/react-table": "^8.13.2",
     "@tinymce/tinymce-react": "^5.1.1",
     "axios": "^1.7.4",
-    "dompurify": "^3.0.6",
+    "dompurify": "^3.3.2",
     "formik": "^2.2.9",
     "i18next": "^21.2.4",
     "i18next-browser-languagedetector": "^6.1.2",
