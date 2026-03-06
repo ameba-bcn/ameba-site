@@ -25,7 +25,7 @@ const Associacio = () => {
         {/* Loading a image meanwhile is loading video */}
         {!isReady && (
           <img
-            src={process.env.PUBLIC_URL + staticImg}
+            src={staticImg}
             className="portadaFallback"
             alt=""
           />

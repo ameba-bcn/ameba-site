@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as Sentry from "@sentry/react";
 import { BASE_URL } from "./utils/constants";
 
 const storedLang = localStorage.getItem("i18nextLng") || "ca";
@@ -29,6 +30,7 @@ axiosInstance.interceptors.response.use(
         "A server/network error occurred. " +
           "Sorry about this - we will get it fixed shortly."
       );
+      Sentry.captureException(error);
       return Promise.reject(error);
     }
 

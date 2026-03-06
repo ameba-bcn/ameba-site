@@ -1,0 +1,116 @@
+import axios from "axios";
+import React, { useEffect, useRef, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import Galeria from "../../components/galeria/Galeria";
+import LettersMove from "../../components/layout/LettersMove";
+import XMLParser from "react-xml-parser";
+import {
+  FLICKR_ALBUM_ID,
+  FLICKR_KEY,
+  radioDublabLink,
+} from "../../utils/constants";
+import PowerTitle from "../../components/layout/PowerTitle";
+import { galeriaLoading } from "../../store/actions/loaders";
+import Spinner from "../../components/spinner/Spinner";
+
+const PAGE_SIZE = 20;
+
+const Gallery = () => {
+  const [galleryList, setGalleryList] = useState([]);
+  const [page, setPage] = useState(0);
+  const galleryTopRef = useRef(null);
+
+  const changePage = (newPage) => {
+    setPage(newPage);
+    galleryTopRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+  const dispatch = useDispatch();
+  const { isGaleriaLoading } = useSelector((state) => state.loaders);
+
+  const url = `https://www.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=${FLICKR_KEY}&photoset_id=${FLICKR_ALBUM_ID}&format=rest`;
+
+  useEffect(() => {
+    dispatch(galeriaLoading(true));
+    axios
+      .get(`${url}`, {})
+      .then((s) => {
+        var xml = new XMLParser().parseFromString(s?.data);
+        setGalleryList(xml.children[0].children);
+        dispatch(galeriaLoading(false));
+      })
+      .catch(() => {
+        dispatch(galeriaLoading(false));
+      });
+  }, []);
+
+  const imgArrayBuilder = galleryList.map((el) => {
+    const { attributes } = el;
+    const SERVER_ID = attributes.server;
+    const ID = attributes.id;
+    const SECRET = attributes.secret;
+    const photoUrl = `https://live.staticflickr.com/${SERVER_ID}/${ID}_${SECRET}_b.jpg`;
+    return photoUrl;
+  });
+
+  return (
+    <div className="SupportContent">
+      <div className="logView">
+        <PowerTitle title="PARKFEST 22" subtitle="* 21-05-22 *" />
+        {isGaleriaLoading && <Spinner />}
+        <div ref={galleryTopRef} />
+        <Galeria images={imgArrayBuilder.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)} />
+        {Math.ceil(imgArrayBuilder.length / PAGE_SIZE) > 1 && (
+          <div style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "16px",
+            padding: "16px 0",
+            fontFamily: "Bebas Neue",
+            fontSize: "1.4rem",
+          }}>
+            <button
+              onClick={() => changePage(page - 1)}
+              disabled={page === 0}
+              style={{
+                background: "none",
+                border: "1px solid black",
+                fontSize: "1.4rem",
+                padding: "4px 12px",
+                cursor: page === 0 ? "default" : "pointer",
+                borderRadius: "4px",
+                opacity: page === 0 ? 0.3 : 1,
+              }}
+            >
+              ←
+            </button>
+            <span>{page + 1} / {Math.ceil(imgArrayBuilder.length / PAGE_SIZE)}</span>
+            <button
+              onClick={() => changePage(page + 1)}
+              disabled={page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1}
+              style={{
+                background: "none",
+                border: "1px solid black",
+                fontSize: "1.4rem",
+                padding: "4px 12px",
+                cursor: page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1 ? "default" : "pointer",
+                borderRadius: "4px",
+                opacity: page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1 ? 0.3 : 1,
+              }}
+            >
+              →
+            </button>
+          </div>
+        )}
+      </div>
+      <LettersMove
+        className="lettersMoveDiv"
+        sentence="AMEBA RADIO @ dublab"
+        link={radioDublabLink}
+        color="#EB5E3E"
+      />
+    </div>
+  );
+};
+
+export default Gallery;

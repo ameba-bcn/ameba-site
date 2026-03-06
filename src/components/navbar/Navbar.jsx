@@ -33,8 +33,7 @@ export default function Navbar({ isErrored = false }) {
         <div className="menuSuperior">
           <div className="menu-logo-box">
             <img
-              // eslint-disable-next-line no-undef
-              src={process.env.PUBLIC_URL + "/AmebaLogo.png"}
+              src="/AmebaLogo.png"
               className="menuAmebalogo"
               alt="Ameba Logo"
             />
