@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import InputField from "../InputField/InputField";
 import { useSelector } from "react-redux";
 import { LogFormBox, LogFormError, LogButtonBox } from "../Log.style";
-import { Redirect } from "react-router";
 import { useTranslation } from "react-i18next";
 import Button from "../../button/Button";
 import { usernameValidation } from "../../../utils/validations";
@@ -19,13 +18,13 @@ export default function MembershipFormReadOnly(props) {
   const [redirect, setRedirect] = useState(false);
   const [user, setUser] = useState(user_data?.username || "");
   const isMinMobile = useMediaQuery(MOBILE_SMALL);
+  const location = useLocation();
+  const section = location.pathname;
 
   const showPasswordRecover = () => {
     setRedirect(true);
   };
-  if (redirect) return <Redirect to="/send-recovery" />;
-  let location = useLocation();
-  let section = location.pathname;
+  if (redirect) return <Navigate to="/send-recovery" replace />;
   const inProfileView = section.includes("profile");
   const errors = usernameValidation(user) || user.length === 0;
 

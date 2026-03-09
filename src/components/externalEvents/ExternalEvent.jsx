@@ -5,7 +5,7 @@ import InteractiveModalBox from "../../modals/InteractiveModalBox";
 import ImageCarousel from "../images/ImageCarousel";
 import { useTranslation } from "react-i18next";
 import Button from "../button/Button";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MOBILE_NORMAL, productKinds } from "../../utils/constants";
 import {
   StyledExternalButtonBox,
@@ -46,7 +46,7 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
     setSizes(arr);
   }, [variants]);
 
-  let history = useHistory();
+  const navigate = useNavigate();
   const [activeSize, setActiveSize] = useState([]);
   const [selectSizeError, setSelectSizeError] = useState(false);
   const [isSubscriber, setIsSubscriber] = useState(id === 14);
@@ -74,9 +74,9 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
   useEffect(() => {
     if (modalStyle === "SOCI") {
       if (isSubscriber) {
-        history.push("/product?id=14&kind=soci");
+        navigate("/product?id=14&kind=soci");
       } else {
-        history.push("/product?id=15&kind=soci");
+        navigate("/product?id=15&kind=soci");
       }
     }
   }, [isSubscriber]);

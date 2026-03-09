@@ -12,7 +12,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Botiga from "./pages/Botiga";
 import NotFound from "./pages/NotFound";
-import { Switch, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Contacte from "./contacte/Contacte";
 import Menu from "./components/navbar/Navbar";
 import LogSession from "./pages/LogSession";
@@ -97,32 +97,32 @@ function App() {
       <Menu />
       <UserContext.Provider value={value}>
         <ScrollTop showBelow={250} />
-        <Switch>
-          <Route path="/activitats" component={Agenda} />
-          <Route path="/botiga" component={Botiga} />
-          <Route exact path="/booking/:id" component={LoadableEntrevista} />
-          <Route path="/booking" component={LoadableBooking} />
-          <Route exact path="/socis/:id" component={LoadableSociosDetailed} />
-          <Route path="/socis" component={LoadableSocios} />
-          <Route path="/gallery" component={LoadableGallery} />
-          <Route path="/login" component={LogSession} />
-          <Route path="/recovery" component={PasswordRecovery} />
-          <Route path="/checkout" component={CheckoutPage} />
-          <Route path="/memberships" component={LoadableMemberships} />
-          <Route path="/send-recovery" component={SendEmailPasswordRecovery} />
-          <Route path="/member-card" component={QrClient} />
-          <Route path="/validate-email" component={ValidateEmail} />
-          <Route path="/activate" component={LogMailConfirmation} />
-          <Route path="/product" component={LoadableExternalEvents} />
-          <Route path="/profile" component={LoadableProfile} />
-          <Route exact path="/profile/:id" component={LoadableProfile} />
-          <Route path="/summary-checkout" component={CheckoutFinished} />
-          <Route path="/subscribe" component={SubscriptionFinished} />
-          <Route path="/legal" component={LoadableLegal} />
-          <Route exact path="/" component={LoadableHome} />
-          <Route path="/qr-view" component={QrLanding} />
-          <Route component={NotFound} />
-        </Switch>
+        <Routes>
+          <Route path="/activitats" element={<Agenda />} />
+          <Route path="/botiga" element={<Botiga />} />
+          <Route path="/booking/:id" element={<LoadableEntrevista />} />
+          <Route path="/booking" element={<LoadableBooking />} />
+          <Route path="/socis/:id" element={<LoadableSociosDetailed />} />
+          <Route path="/socis" element={<LoadableSocios />} />
+          <Route path="/gallery" element={<LoadableGallery />} />
+          <Route path="/login" element={<LogSession />} />
+          <Route path="/recovery" element={<PasswordRecovery />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/memberships" element={<LoadableMemberships />} />
+          <Route path="/send-recovery" element={<SendEmailPasswordRecovery />} />
+          <Route path="/member-card" element={<QrClient />} />
+          <Route path="/validate-email" element={<ValidateEmail />} />
+          <Route path="/activate" element={<LogMailConfirmation />} />
+          <Route path="/product" element={<LoadableExternalEvents />} />
+          <Route path="/profile/:id" element={<LoadableProfile />} />
+          <Route path="/profile" element={<LoadableProfile />} />
+          <Route path="/summary-checkout" element={<CheckoutFinished />} />
+          <Route path="/subscribe" element={<SubscriptionFinished />} />
+          <Route path="/legal" element={<LoadableLegal />} />
+          <Route path="/" element={<LoadableHome />} />
+          <Route path="/qr-view" element={<QrLanding />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </UserContext.Provider>
       <Contacte />
     </StyledApp>

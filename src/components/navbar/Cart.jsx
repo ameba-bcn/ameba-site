@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "../ui/Icon";
 import Dropdown from "../dropdown/Dropdown";
-import { NavLink } from "react-router-dom/cjs/react-router-dom";
+import { NavLink } from "react-router-dom";
 import Button from "../button/Button";
 import { ReactFitty } from "react-fitty";
 import { addToCart, substractToCart } from "../../store/actions/cart";

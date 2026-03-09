@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./ScrollTop.css";
-import { useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Icon from "../ui/Icon";
 import styled from "styled-components";
 
@@ -17,16 +17,11 @@ export const StyledScrollTop = styled.div`
 
 const ScrollTop = ({ showBelow }) => {
   const [show, setShow] = useState(showBelow ? false : true);
-  let history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
-    const unlisten = history.listen(() => {
-      window.scrollTo(0, 0);
-    });
-    return () => {
-      unlisten();
-    };
-  }, [history]);
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
 
   const handleScroll = () => {
     if (window.pageYOffset > showBelow) {
