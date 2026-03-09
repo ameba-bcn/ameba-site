@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../store/actions/cart";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import ModalCard from "../../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
 import FullscreenSpinner from "../../../components/spinner/FullscreenSpinner";
@@ -51,7 +51,7 @@ export default function ActivitatDialog(props) {
   };
   const checkoutRedirect = user_profile === "LOGGED" ? "/checkout" : "/login";
 
-  if (redirect) return <Redirect to={checkoutRedirect} />;
+  if (redirect) return <Navigate to={checkoutRedirect} replace />;
 
   return loading ? (
     <FullscreenSpinner />

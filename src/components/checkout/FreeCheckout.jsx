@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router";
+import { Navigate } from "react-router-dom";
 import { getMemberProfile } from "../../store/actions/auth";
 import { checkoutPaymentCart, getCart } from "../../store/actions/cart";
 import Button from "../button/Button";
@@ -39,7 +39,7 @@ export default function FreeCheckout() {
     setRedirect(true);
   };
 
-  if (redirect) return <Redirect to="/summary-checkout" />;
+  if (redirect) return <Navigate to="/summary-checkout" replace />;
 
   return (
     <StyledFreeCheckout>

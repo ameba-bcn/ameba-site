@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect, useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LettersMove from "../../components/layout/LettersMove";
 import { isEmptyObject } from "../../utils/utils";
@@ -26,7 +26,7 @@ export default function Profile() {
   );
 
   if (!isLoggedIn) {
-    return <Redirect to="/" />;
+    return <Navigate to="/" replace />;
   }
 
   const arrView = isMember

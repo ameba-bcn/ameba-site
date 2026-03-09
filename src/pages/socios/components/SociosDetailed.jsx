@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import axiosInstance from "../../../axios";
 import ImageCarousel from "../../../components/images/ImageCarousel";
@@ -14,7 +14,7 @@ import { StyledMainColumnView } from "../../../styles/GlobalStyles.style";
 import Spinner from "../../../components/spinner/Spinner";
 
 const SociosDetailed = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [project, setProject] = useState({});
   const [loading, setLoading] = useState(false);
@@ -57,8 +57,8 @@ const SociosDetailed = () => {
       <StyledMainColumnView>
         <div className="top-section_entr">
           <div className="ts-breadcrumbs">
-            <span onClick={() => history.push("/")}>AMEBA</span> /{" "}
-            <span onClick={() => history.push("/socis")}>#SOCI@S</span> /{" "}
+            <span onClick={() => navigate("/")}>AMEBA</span> /{" "}
+            <span onClick={() => navigate("/socis")}>#SOCI@S</span> /{" "}
             {project_name}
           </div>
           <div className="ts-title">{project_name}</div>

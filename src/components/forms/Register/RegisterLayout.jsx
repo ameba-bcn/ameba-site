@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import SociDialog from "../../botiga/Soci";
 import RegisterForm from "./RegisterForm";
 import { useTranslation } from "react-i18next";
 import Icon from "../../ui/Icon";
 import styled from "styled-components";
 import { StyledLink } from "../../../styles/GlobalStyles";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 export const StyledAddBox = styled.div`
   margin-left: 0.5rem;
@@ -33,7 +32,7 @@ const RegisterLayout = (props) => {
     props.setViewState("login");
   };
 
-  if (redirect) return <Redirect to="/validate-email" />;
+  if (redirect) return <Navigate to="/validate-email" replace />;
 
   return (
     <div className="cardForm">

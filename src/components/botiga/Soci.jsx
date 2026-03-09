@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../store/actions/cart";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
 import FullscreenSpinner from "../spinner/FullscreenSpinner";
@@ -50,7 +50,7 @@ export default function SociDialog(props) {
   };
 
   if (redirect) {
-    return isLoggedIn ? null : <Redirect to="/login" />;
+    return isLoggedIn ? null : <Navigate to="/login" replace />;
   }
 
   return loading ? (

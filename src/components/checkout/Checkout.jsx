@@ -11,7 +11,7 @@ import { isMemberCheckout } from "../../utils/utils";
 import "./Checkout.css";
 import Button from "../button/Button";
 import { getMemberProfile } from "../../store/actions/auth";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import MembershipFormReadOnly from "../forms/MembershipForm/MembershipFormReadOnly";
 import Stepper from "../stepper/Stepper";
 import {
@@ -52,7 +52,7 @@ function Checkout() {
   useEffect(() => {
     dispatch(getMemberProfile());
   }, [dispatch]);
-  if (!item_variants.length || !isLoggedIn) return <Redirect to="/" />;
+  if (!item_variants.length || !isLoggedIn) return <Navigate to="/" replace />;
 
   const handleNext = () => {
     if (activeStep === 1) {

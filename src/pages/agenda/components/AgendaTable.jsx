@@ -7,7 +7,7 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import {
   formatDateToHour,
   formatISODateToDate,
@@ -298,7 +298,7 @@ const AgendaTable = () => {
     },
   });
 
-  if (redirect) return <Redirect to={checkoutRedirect} />;
+  if (redirect) return <Navigate to={checkoutRedirect} replace />;
 
   return (
     <StyledAgendaTable $emptyView={agenda.length === 0}>
