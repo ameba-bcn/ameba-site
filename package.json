@@ -44,7 +44,7 @@
     "deploy": "gh-pages -d build"
   },
   "devDependencies": {
-    "@redux-devtools/extension": "^3.3.0",
+    "@redux-devtools/extension": "^4.0.0",
     "@sentry/vite-plugin": "^5.1.1",
     "@vitejs/plugin-react": "^5.1.4",
     "eslint-plugin-react": "^7.34.0",
