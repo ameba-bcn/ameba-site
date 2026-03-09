@@ -1,8 +1,7 @@
 import React from 'react';
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import CountdownTimer from '../components/countdown/CountdownTimer';
-import { closeSiteUnavailable } from '../redux/actions/fullscreen';
+import useUIStore from '../stores/useUIStore';
 
 const StyledBoxCounter = styled.div`
     display: flex;
@@ -58,13 +57,13 @@ const StyledBoxCounter = styled.div`
 `
 
 const SiteNotAvailable = () => {
-    const dispatch = useDispatch();
+    const closeSiteUnavailable = useUIStore((state) => state.closeSiteUnavailable);
     const releaseDate = Date.parse("Apr 3, 2022");
 
     return (
         <StyledBoxCounter>
             <div className="countdown-texto">
-                Estem treballant en una nova <span onClick={() => dispatch(closeSiteUnavailable())}>web</span>, tornem en:
+                Estem treballant en una nova <span onClick={() => closeSiteUnavailable()}>web</span>, tornem en:
             </div>
             <CountdownTimer targetDate={releaseDate} />
         </StyledBoxCounter>

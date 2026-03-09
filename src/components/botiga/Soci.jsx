@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../store/actions/cart";
+import useAuthStore from "../../stores/useAuthStore";
+import useDataStore from "../../stores/useDataStore";
+import useCartStore from "../../stores/useCartStore";
 import { Navigate } from "react-router-dom";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
@@ -9,9 +10,9 @@ import Icon from "../ui/Icon";
 
 export default function SociDialog(props) {
   const { onClose, open, dataRow = [], setProductData, loading } = props;
-  const { isLoggedIn } = useSelector((state) => state.auth);
-  const { membership = [] } = useSelector((state) => state.data);
-  const dispatch = useDispatch();
+  const { isLoggedIn } = useAuthStore();
+  const { membership = [] } = useDataStore();
+  const { addToCart } = useCartStore();
   const [isSubscriber, setIsSubscriber] = useState(true);
   const [redirect, setRedirect] = useState(false);
   const [t] = useTranslation("translation");
@@ -44,7 +45,7 @@ export default function SociDialog(props) {
       membership.filter(function (soci) {
         return soci.id === id;
       })[0]?.variants[0] || {};
-    dispatch(addToCart(selectedMembershipId));
+    addToCart(selectedMembershipId);
     onClose();
     setRedirect(true);
   };

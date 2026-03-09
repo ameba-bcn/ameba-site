@@ -1,12 +1,12 @@
 import React from "react";
-import { addToCart, substractToCart } from "../../store/actions/cart";
-import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Button from "../button/Button";
 import { toast } from "react-toastify";
 import "./DropdownCart.css";
-import { setGuestUser, setLoggedUser } from "../../store/actions/profile";
 import { useTranslation } from "react-i18next";
+import useProfileStore from "../../stores/useProfileStore";
+import useAuthStore from "../../stores/useAuthStore";
+import useCartStore from "../../stores/useCartStore";
 import { ReactFitty } from "react-fitty";
 import { priceMayDiscount, truncate } from "../../utils/utils";
 import { MOBILE_SMALL } from "../../utils/constants";
@@ -15,10 +15,12 @@ import Icon from "../ui/Icon";
 import useMediaQuery from "../../hooks/use-media-query";
 
 export default function DropdownCartMobile(props) {
-  const dispatch = useDispatch();
+  const { addToCart, substractToCart } = useCartStore();
   const { setCartMenuOpen = {} } = props;
   const { item_variants = [], total = 0 } = props.cartData;
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useAuthStore();
+  const setGuestUser = useProfileStore((state) => state.setGuestUser);
+  const setLoggedUser = useProfileStore((state) => state.setLoggedUser);
   const isMinMobile = useMediaQuery(MOBILE_SMALL);
   const arrMono = [];
   const [t] = useTranslation("translation");
@@ -35,7 +37,7 @@ export default function DropdownCartMobile(props) {
   const checkoutRedirect = isLoggedIn ? "/checkout" : "/login";
 
   const addItem = (id) => {
-    dispatch(addToCart(id));
+    addToCart(id);
     toast(<CartToast />, {
       position: "bottom-center",
       autoClose: 3000,
@@ -50,9 +52,9 @@ export default function DropdownCartMobile(props) {
 
   const substractItem = (id) => {
     if (isMemberProduct(id)) {
-      isLoggedIn ? dispatch(setLoggedUser()) : dispatch(setGuestUser());
+      isLoggedIn ? setLoggedUser() : setGuestUser();
     }
-    dispatch(substractToCart(id));
+    substractToCart(id);
     toast(<CartToast />, {
       position: "top-right",
       autoClose: 3000,
@@ -66,7 +68,7 @@ export default function DropdownCartMobile(props) {
   };
 
   const checkoutToCart = () => {
-    isLoggedIn ? dispatch(setLoggedUser()) : dispatch(setGuestUser());
+    isLoggedIn ? setLoggedUser() : setGuestUser();
     setCartMenuOpen(false);
     props.handleCloseMenu();
     props.closeDropDown();

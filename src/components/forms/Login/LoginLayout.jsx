@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import { StyledLink } from "../../../styles/GlobalStyles";
+import useCartStore from "../../../stores/useCartStore";
 
 const LoginLayout = (props) => {
   const [t] = useTranslation("translation");
-  const cart = useSelector((state) => state.cart);
-  const { cart_data = {} } = cart;
+  const { cart_data = {} } = useCartStore();
   const { item_variant_ids = [] } = cart_data;
   const [redirect, setRedirect] = useState(false);
   const [recover, setRecover] = useState(false);

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SectionTitle from "../../../../components/layout/SectionTitle";
 import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
 import LettersMove from "../../../../components/layout/LettersMove";
 import "./Activitats.css";
 import { sortByDate } from "../../../../utils/utils";
@@ -10,13 +9,12 @@ import { useTranslation } from "react-i18next";
 import { radioDublabLink } from "../../../../utils/constants";
 import ActivitatsMainSection from "../../../../components/layout/ActivitatsMainSection";
 import Spinner from "../../../../components/spinner/Spinner";
+import useDataStore from "../../../../stores/useDataStore";
 
 const Activitats = () => {
   const [activitats, setActivitats] = useState([]);
-  const data = useSelector((state) => state.data);
-  const { agenda = [] } = data;
+  const { agenda = [], isEventsLoading } = useDataStore();
   const [t] = useTranslation("translation");
-  const { isEventsLoading } = useSelector((state) => state.loaders);
 
   useEffect(() => {
     const sortedAgenda = sortByDate(agenda);

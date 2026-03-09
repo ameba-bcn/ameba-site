@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-// import { useDispatch } from "react-redux";
 import stateService from "./../store/services/profile.services";
 import LettersMove from "../components/layout/LettersMove";
 
 export default function QrClient(props) {
   const [data, setData] = useState({});
-  // const dispatch = useDispatch();
   const parsed = Object.fromEntries(new URLSearchParams(props.location.search));
   const [t] = useTranslation("translation");
 

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { Navigate, NavLink } from "react-router-dom";
 import SociDialog from "../../botiga/Soci";
 import RegisterForm from "./RegisterForm";
@@ -7,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import Icon from "../../ui/Icon";
 import styled from "styled-components";
 import { StyledLink } from "../../../styles/GlobalStyles";
+import useProfileStore from "../../../stores/useProfileStore";
 
 export const StyledAddBox = styled.div`
   margin-left: 0.5rem;
@@ -19,8 +19,7 @@ export const StyledAddBox = styled.div`
 
 const RegisterLayout = (props) => {
   const [t] = useTranslation("translation");
-  const profile = useSelector((state) => state.profile);
-  const { user_profile = "" } = profile;
+  const { user_profile = "" } = useProfileStore();
   const [redirect, setRedirect] = useState(false);
   const [open, setOpen] = React.useState(false);
 

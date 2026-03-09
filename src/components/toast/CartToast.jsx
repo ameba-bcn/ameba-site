@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import {
@@ -7,11 +6,12 @@ import {
   ToastLeftInBox,
   ToastRightInBox,
 } from "./CartToast.style.js";
+import useProfileStore from "../../stores/useProfileStore";
+import useCartStore from "../../stores/useCartStore";
 
 export default function CartToast() {
-  const { cart_data = {} } = useSelector((state) => state.cart);
-  const profile = useSelector((state) => state.profile);
-  const { user_profile = "" } = profile;
+  const { cart_data = {} } = useCartStore();
+  const { user_profile = "" } = useProfileStore();
   const checkoutRedirect =
     user_profile === "LOGGED" || user_profile === "MEMBER"
       ? "/checkout"

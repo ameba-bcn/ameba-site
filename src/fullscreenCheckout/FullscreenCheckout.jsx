@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import CloseModal from "../modals/CloseModal";
-import { closeFullscreen } from "../store/actions/fullscreen";
 import { useTranslation } from "react-i18next";
-import { getCart } from "../store/actions/cart";
+import useUIStore from "../stores/useUIStore";
+import useCartStore from "../stores/useCartStore";
 
 const StyledMacroFullscreenView = styled.div`
   width: 100%;
@@ -40,7 +39,8 @@ const StyledFullscreenNav = styled.div`
   }
 `;
 const FullscreenCheckout = () => {
-  const dispatch = useDispatch();
+  const closeFullscreen = useUIStore((state) => state.closeFullscreen);
+  const getCart = useCartStore((state) => state.getCart);
   const [open, setOpen] = useState(false);
   const [t] = useTranslation("translation");
 
@@ -54,8 +54,8 @@ const FullscreenCheckout = () => {
 
   const handleExitFullscreen = () => {
     setOpen(false);
-    dispatch(closeFullscreen());
-    dispatch(getCart());
+    closeFullscreen();
+    getCart();
   };
 
   return (

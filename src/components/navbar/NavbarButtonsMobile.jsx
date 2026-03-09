@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import MenuLog from "./MenuLog";
 import CartMobile from "./CartMobile";
-import { setCloseMenu } from "../../store/actions/menu";
 import useOutsideClick from "../../hooks/use-outside-click";
+import useUIStore from "../../stores/useUIStore";
 
 export default function NavbarButtonsMobile(props) {
   const { isLoggedIn = false, refer } = props;
   const [t, i18next] = useTranslation("translation");
-  const dispatch = useDispatch();
+  const closeMenu = useUIStore((state) => state.closeMenu);
   const currentLang = localStorage.getItem("i18nextLng");
   const [rendered, setRendered] = useState(false);
   const handleChangeLanguage = (lang) => {
@@ -25,7 +24,7 @@ export default function NavbarButtonsMobile(props) {
   }, []);
 
   useOutsideClick(refer, () => {
-    if (rendered) dispatch(setCloseMenu());
+    if (rendered) closeMenu();
   });
 
   return (
@@ -35,7 +34,7 @@ export default function NavbarButtonsMobile(props) {
           <NavLink
             to="/memberships"
             data-item={t("menu.soci-menu")}
-            onClick={() => dispatch(setCloseMenu())}
+            onClick={() => closeMenu()}
           >
             {t("menu.soci-menu")}
           </NavLink>
@@ -44,7 +43,7 @@ export default function NavbarButtonsMobile(props) {
           <NavLink
             to="/activitats"
             data-item="AGENDA"
-            onClick={() => dispatch(setCloseMenu())}
+            onClick={() => closeMenu()}
           >
             AGENDA
           </NavLink>
@@ -53,7 +52,7 @@ export default function NavbarButtonsMobile(props) {
           <NavLink
             to="/botiga"
             data-item={t("menu.botiga")}
-            onClick={() => dispatch(setCloseMenu())}
+            onClick={() => closeMenu()}
           >
             {t("menu.botiga")}
           </NavLink>
@@ -62,13 +61,13 @@ export default function NavbarButtonsMobile(props) {
           <NavLink
             to="/support"
             data-item="#SUPPORTYOURLOCALS"
-            onClick={() => dispatch(setCloseMenu())}
+            onClick={() => closeMenu()}
           >
             #SUPPORTYOURLOCALS
           </NavLink>
         </li> */}
         {/* <li>
-            <NavLink to="/booking" data-item="BOOKING" onClick={() => dispatch(setCloseMenu())}>
+            <NavLink to="/booking" data-item="BOOKING" onClick={() => closeMenu()}>
               BOOKING
             </NavLink>
           </li> */}
@@ -76,7 +75,7 @@ export default function NavbarButtonsMobile(props) {
           <NavLink
             to="/socis"
             data-item="SOCI@S"
-            onClick={() => dispatch(setCloseMenu())}
+            onClick={() => closeMenu()}
           >
             SOCI@S
           </NavLink>
@@ -85,7 +84,7 @@ export default function NavbarButtonsMobile(props) {
           <NavLink
             to="/gallery"
             data-item="GALERIA"
-            onClick={() => dispatch(setCloseMenu())}
+            onClick={() => closeMenu()}
           >
             GALERIA
           </NavLink>
@@ -95,7 +94,7 @@ export default function NavbarButtonsMobile(props) {
             <NavLink
               to="/login"
               data-item="LOGIN"
-              onClick={() => dispatch(setCloseMenu())}
+              onClick={() => closeMenu()}
             >
               LOGIN
             </NavLink>

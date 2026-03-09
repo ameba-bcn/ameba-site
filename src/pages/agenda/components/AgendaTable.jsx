@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import useProfileStore from "../../../stores/useProfileStore";
+import useDataStore from "../../../stores/useDataStore";
+import useCartStore from "../../../stores/useCartStore";
 import {
   flexRender,
   getCoreRowModel,
@@ -22,14 +24,13 @@ import {
 } from "./AgendaTable.styled";
 import axiosInstance from "../../../axios";
 import { API_URL, MOBILE_SEMI_BIG } from "../../../utils/constants";
-import { addToCart } from "../../../store/actions/cart";
 import SearchBox from "../../../components/searchBox/SearchBox";
 import useMediaQuery from "../../../hooks/use-media-query";
 
 const AgendaTable = () => {
-  const { agenda } = useSelector((state) => state.data);
-  const { user_profile = "" } = useSelector((state) => state.profile);
-  const dispatch = useDispatch();
+  const { agenda } = useDataStore();
+  const { user_profile = "" } = useProfileStore();
+  const { addToCart } = useCartStore();
   const [redirect, setRedirect] = useState(false);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -180,7 +181,7 @@ const AgendaTable = () => {
       .get(`${API_URL}events/${rowData.id}`, {})
       .then((res) => {
         const { variants } = res.data;
-        dispatch(addToCart(variants[0]?.id));
+        addToCart(variants[0]?.id);
       })
       .then(setRedirect(true))
       .catch((error) => {

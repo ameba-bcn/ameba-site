@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
 import LettersMove from "../../components/layout/LettersMove";
-import { subscribeNewsletter } from "../../store/actions/profile";
 import { AMEBA_EMAIL } from "../../utils/constants";
 import { StyledLink } from "../../styles/GlobalStyles";
+import useProfileStore from "../../stores/useProfileStore";
 
 export default function SubscriptionFinished(props) {
-  const dispatch = useDispatch();
+  const subscribeNewsletter = useProfileStore((state) => state.subscribeNewsletter);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [t] = useTranslation("translation");
 
@@ -18,8 +17,8 @@ export default function SubscriptionFinished(props) {
 
   useEffect(() => {
     if (email && email.length > 0)
-      dispatch(subscribeNewsletter(email)).then(setIsSubmitted(true));
-  }, [email, dispatch]);
+      subscribeNewsletter(email).then(setIsSubmitted(true));
+  }, [email, subscribeNewsletter]);
 
   return (
     <>

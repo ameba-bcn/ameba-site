@@ -1,11 +1,7 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  createMemberProfile,
-  updateMemberProfile,
-} from "../../../store/actions/auth";
 import { deepComparision, isEmptyObject } from "../../../utils/utils";
+import useAuthStore from "../../../stores/useAuthStore";
 import Button from "../../button/Button";
 import InputField from "../InputField/InputField";
 import { LogFormBox, LogFormError } from "../Log.style";
@@ -13,11 +9,11 @@ import { validate } from "../MembershipForm/MembershipValidate";
 import { useTranslation } from "react-i18next";
 
 export default function MembershipForm({ handleNext, setButtonDisabled }) {
-  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [dataHasChanged, setDataHasChanged] = useState(false);
-  const auth = useSelector((state) => state.auth);
-  const { user_member_data = {} } = auth;
+  const { user_member_data = {} } = useAuthStore();
+  const updateMemberProfile = useAuthStore((state) => state.updateMemberProfile);
+  const createMemberProfile = useAuthStore((state) => state.createMemberProfile);
   const initialMemberValues = {
     username: user_member_data.username,
     first_name: user_member_data.first_name,
@@ -73,14 +69,12 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
     } = values;
     setLoading(true);
     if (!isNewMember) {
-      dispatch(
-        updateMemberProfile(
-          identity_card,
-          first_name,
-          last_name,
-          phone_number,
-          username
-        )
+      updateMemberProfile(
+        identity_card,
+        first_name,
+        last_name,
+        phone_number,
+        username
       )
         .then(() => {
           setLoading(false);
@@ -92,14 +86,12 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
           setLoading(false);
         });
     } else {
-      dispatch(
-        createMemberProfile(
-          identity_card,
-          first_name,
-          last_name,
-          phone_number,
-          username
-        )
+      createMemberProfile(
+        identity_card,
+        first_name,
+        last_name,
+        phone_number,
+        username
       )
         .then(() => {
           setLoading(false);

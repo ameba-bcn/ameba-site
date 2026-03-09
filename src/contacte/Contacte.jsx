@@ -1,5 +1,4 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import NewsletterFormLayout from "../components/forms/NewsletterForm/NewsletterFormLayout";
 import MediaLinks from "../components/layout/MediaLinks";
 import LettersMove from "./../components/layout/LettersMove";
@@ -7,10 +6,11 @@ import { useTranslation } from "react-i18next";
 import { StyledContacte } from "./Contacte.styles.jsx";
 import { StyledLink } from "../styles/GlobalStyles.jsx";
 import { NavLink } from "react-router-dom";
+import useDataStore from "../stores/useDataStore";
 
 function Contacte() {
   const [t] = useTranslation("translation");
-  const { collaborators = [] } = useSelector((state) => state.data);
+  const { collaborators = [] } = useDataStore();
 
   return (
     <StyledContacte id="contacte">

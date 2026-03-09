@@ -1,15 +1,9 @@
 import React, { useState, useMemo, useEffect, createContext } from "react";
-import {
-  setGuestUser,
-  setLoggedUser,
-  setMember,
-} from "./store/actions/profile";
-import {
-  validateLocalToken,
-  getUserData,
-  getMemberProfile,
-} from "./store/actions/auth";
-import { useDispatch, useSelector } from "react-redux";
+import useUIStore from "./stores/useUIStore";
+import useProfileStore from "./stores/useProfileStore";
+import useAuthStore from "./stores/useAuthStore";
+import useDataStore from "./stores/useDataStore";
+import useCartStore from "./stores/useCartStore";
 import Botiga from "./pages/Botiga";
 import NotFound from "./pages/NotFound";
 import { Routes, Route } from "react-router-dom";
@@ -23,17 +17,6 @@ import LogMailConfirmation from "./pages/LogMailConfirmation";
 import SendEmailPasswordRecovery from "./pages/SendEmailPasswordRecovery";
 import ValidateEmail from "./pages/ValidateEmail";
 import ScrollTop from "./components/layout/ScrollTop";
-import {
-  supportYourLocalsAll,
-  agendaAll,
-  botigaAll,
-  getAbout,
-  getCover,
-  membershipAll,
-  getCollaborators,
-  getMemberProjects,
-} from "./store/actions/data";
-import { getCart } from "./store/actions/cart";
 import { deepComparision } from "./utils/utils";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -59,41 +42,55 @@ const UserContext = createContext(null);
 
 function App() {
   const [user, setUser] = useState(null);
-  const dispatch = useDispatch();
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
-  const { isOpen } = useSelector((state) => state.fullscreen);
-  const { user_member_data = {} } = useSelector((state) => state.auth);
+  const isFullscreenOpen = useUIStore((state) => state.isFullscreenOpen);
+  const { user_member_data = {} } = useAuthStore();
+  const validateLocalToken = useAuthStore((state) => state.validateLocalToken);
+  const getUserData = useAuthStore((state) => state.getUserData);
+  const getMemberProfile = useAuthStore((state) => state.getMemberProfile);
+  const setGuestUser = useProfileStore((state) => state.setGuestUser);
+  const setLoggedUser = useProfileStore((state) => state.setLoggedUser);
+  const setMember = useProfileStore((state) => state.setMember);
+  const fetchSupport = useDataStore((state) => state.fetchSupport);
+  const fetchAgenda = useDataStore((state) => state.fetchAgenda);
+  const fetchBotiga = useDataStore((state) => state.fetchBotiga);
+  const fetchMemberships = useDataStore((state) => state.fetchMemberships);
+  const fetchAbout = useDataStore((state) => state.fetchAbout);
+  const fetchCover = useDataStore((state) => state.fetchCover);
+  const fetchCollaborators = useDataStore((state) => state.fetchCollaborators);
+  const fetchMemberProjects = useDataStore((state) => state.fetchMemberProjects);
+  const getCart = useCartStore((state) => state.getCart);
 
   const isNewMember = deepComparision(user_member_data, {});
 
   useEffect(() => {
     const refresh = localStorage.getItem("refresh");
     if (refresh) {
-      dispatch(validateLocalToken(refresh))
+      validateLocalToken(refresh)
         .then(() => {
-          isNewMember ? dispatch(setLoggedUser()) : dispatch(setMember());
-          dispatch(getUserData());
-          dispatch(getMemberProfile());
+          isNewMember ? setLoggedUser() : setMember();
+          getUserData();
+          getMemberProfile();
         })
-        .catch(dispatch(setGuestUser()));
+        .catch(setGuestUser());
     } else {
-      dispatch(setGuestUser());
+      setGuestUser();
     }
-    dispatch(supportYourLocalsAll());
-    dispatch(agendaAll());
-    dispatch(botigaAll());
-    dispatch(membershipAll());
-    dispatch(getAbout());
-    dispatch(getCover());
-    dispatch(getCollaborators());
-    dispatch(getCart());
-    dispatch(getMemberProjects());
-  }, [dispatch, isNewMember]);
+    fetchSupport();
+    fetchAgenda();
+    fetchBotiga();
+    fetchMemberships();
+    fetchAbout();
+    fetchCover();
+    fetchCollaborators();
+    getCart();
+    fetchMemberProjects();
+  }, [isNewMember]);
 
   return (
     <StyledApp>
       <ToastContainer position="bottom-center" />
-      {isOpen && <FullscreenCheckout />}
+      {isFullscreenOpen && <FullscreenCheckout />}
       <Menu />
       <UserContext.Provider value={value}>
         <ScrollTop showBelow={250} />

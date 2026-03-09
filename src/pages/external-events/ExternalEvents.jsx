@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import LettersMove from "../../components/layout/LettersMove";
 import ExternalEvent from "../../components/externalEvents/ExternalEvent";
 import axiosInstance from "../../axios";
 import { API_URL, productQueryKind } from "../../utils/constants";
-import { addToCart } from "../../store/actions/cart";
+import useCartStore from "../../stores/useCartStore";
 import { useLocation } from "react-router-dom";
 
 const SyledExternalBox = styled.div`
@@ -26,7 +25,7 @@ const SyledExternalError = styled.div`
 
 const ExternalEvents = () => {
   const [t] = useTranslation("translation");
-  const dispatch = useDispatch();
+  const { addToCart } = useCartStore();
   const [productData, setProductData] = useState({});
   const [producteLoading, setProducteLoading] = useState(false);
   const location = useLocation();
@@ -55,7 +54,7 @@ const ExternalEvents = () => {
   }, [id, kind]);
 
   const handleAddClick = () => {
-    dispatch(addToCart(variants[0].id));
+    addToCart(variants[0].id);
   };
 
   return (

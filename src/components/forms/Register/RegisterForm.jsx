@@ -1,19 +1,19 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Button from "../../button/Button";
 import InputField from "../InputField/InputField";
 import { validate } from "../Register/RegisterValidate";
 import { LogFormBox, LogFormError } from "../Log.style";
-import { register } from "../../../store/actions/auth";
+import useAuthStore from "../../../stores/useAuthStore";
 import { isEmptyObject } from "../../../utils/utils";
 import { useTranslation } from "react-i18next";
+import useCartStore from "../../../stores/useCartStore";
 
 export default function RegisterForm({ setRedirect }) {
   const [t] = useTranslation("translation");
-  const { cart_data = {} } = useSelector((state) => state.cart);
+  const { cart_data = {} } = useCartStore();
   const { id = null } = cart_data;
-  const dispatch = useDispatch();
+  const register = useAuthStore((state) => state.register);
   const [loading, setLoading] = useState(false);
 
   const handleRegister = (values) => {
@@ -23,7 +23,7 @@ export default function RegisterForm({ setRedirect }) {
     const registerData = cart_data
       ? { username, email, password, id }
       : { username, email, password };
-    dispatch(register(registerData))
+    register(registerData)
       .then(() => {
         setLoading(false);
         setRedirect(true);

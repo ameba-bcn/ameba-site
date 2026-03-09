@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import useAuthStore from "../../stores/useAuthStore";
+import useDataStore from "../../stores/useDataStore";
 import LettersMove from "../../components/layout/LettersMove";
 import { MOBILE_NORMAL } from "../../utils/constants";
-import { addToCart } from "../../store/actions/cart";
+import useCartStore from "../../stores/useCartStore";
 import {
   StyledExternalButtonBox,
   StyledExternalEventBox,
@@ -40,11 +41,10 @@ const SyledMembershipBox = styled.div`
 
 const Memberships = () => {
   const [t] = useTranslation("translation");
-  const dispatch = useDispatch();
-  const { membership = [] } = useSelector((state) => state.data);
+  const { membership = [] } = useDataStore();
   const [productData, setProductData] = useState(membership[0]);
   const isMobile = useMediaQuery(MOBILE_NORMAL);
-  const { cart_data = {} } = useSelector((state) => state.cart);
+  const { cart_data = {}, addToCart } = useCartStore();
   const { item_variants = [] } = cart_data;
   const hasMembershipInCart = isMemberCheckout(item_variants);
 
@@ -63,7 +63,7 @@ const Memberships = () => {
   const colorMode = "";
   const [activeSize, setActiveSize] = useState([]);
   const [selectSizeError, setSelectSizeError] = useState(false);
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useAuthStore();
   const modalStyle = "SOCI";
   const productSoldOut = !has_stock;
   const buttonText = t("modal.afegir");
@@ -76,7 +76,7 @@ const Memberships = () => {
   }, [membership]);
 
   const handleAddClick = () => {
-    dispatch(addToCart(variants[0]));
+    addToCart(variants[0]);
     toast(<CartToast />, {
       position: "bottom-center",
       autoClose: 3000,

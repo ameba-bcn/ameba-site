@@ -1,15 +1,11 @@
 import React, { useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { logout } from "../../store/actions/auth";
 import Dropdown from "../dropdown/Dropdown";
 import styled from "styled-components";
 import useOutsideClick from "../../hooks/use-outside-click";
-import {
-  setCloseMenu,
-  setCloseProfileMenu,
-  setOpenProfileMenu,
-} from "../../store/actions/menu";
+import useUIStore from "../../stores/useUIStore";
+import useProfileStore from "../../stores/useProfileStore";
+import useAuthStore from "../../stores/useAuthStore";
 
 export const StyledMenuLog = styled.div`
   position: relative;
@@ -32,10 +28,10 @@ export const StyledMenuItem = styled.div`
 
 export default function MenuLog(props) {
   const { isMobile = false } = props;
-  const { user_data } = useSelector((state) => state.auth);
-  const { isProfileMenuOpen } = useSelector((state) => state.menu);
-  const { user_profile } = useSelector((state) => state.profile);
-  const dispatch = useDispatch();
+  const { user_data } = useAuthStore();
+  const logout = useAuthStore((state) => state.logout);
+  const { isProfileMenuOpen, openProfileMenu, closeProfileMenu, closeMenu } = useUIStore();
+  const { user_profile } = useProfileStore();
   const isMember = user_profile === "MEMBER" || "LOGGED";
   const userName = user_data.username.split(" ")[0];
   const userNameShortened =
@@ -43,22 +39,22 @@ export default function MenuLog(props) {
 
   const handleCloseSessio = () => {
     if (isMobile) {
-      dispatch(setCloseMenu());
+      closeMenu();
     }
-    if (!isMobile && isProfileMenuOpen) dispatch(setCloseProfileMenu());
+    if (!isMobile && isProfileMenuOpen) closeProfileMenu();
   };
 
   const handleOpenSessio = (isProfileMenuOpen) => {
     isProfileMenuOpen
-      ? dispatch(setCloseProfileMenu())
-      : dispatch(setOpenProfileMenu());
+      ? closeProfileMenu()
+      : openProfileMenu();
   };
 
   const logoutMenu = () => {
     if (isMobile) {
-      dispatch(setCloseMenu());
+      closeMenu();
     }
-    dispatch(logout());
+    logout();
   };
   const dropdownRef = useRef("menulogprofile");
 

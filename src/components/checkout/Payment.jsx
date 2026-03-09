@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import PaymentForm from "../forms/Payment/PaymentForm";
@@ -13,11 +12,12 @@ import {
   PaymentSummaryBox,
 } from "./Payment.style";
 import { ReviewRowSeparator } from "./Review.style";
-import { openFullscreen } from "../../store/actions/fullscreen";
+import useUIStore from "../../stores/useUIStore";
+import useCartStore from "../../stores/useCartStore";
 
 export default function Payment() {
-  const dispatch = useDispatch();
-  const { cart_data = {}, checkout = {} } = useSelector((state) => state.cart);
+  const openFullscreen = useUIStore((state) => state.openFullscreen);
+  const { cart_data = {}, checkout = {} } = useCartStore();
   const { checkout_stripe = {}, amount } = checkout;
   const isPaymentFree = amount === 0;
   const { client_secret = "", stripe_public = "" } = checkout_stripe;
@@ -39,7 +39,7 @@ export default function Payment() {
   const isStripeReady = !!(stripe_public && client_secret && stripePromise);
 
   useEffect(() => {
-    dispatch(openFullscreen());
+    openFullscreen();
   }, []);
 
   return (

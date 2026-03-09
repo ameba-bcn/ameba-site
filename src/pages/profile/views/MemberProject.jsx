@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useFormik } from "formik";
+import useAuthStore from "../../../stores/useAuthStore";
 import InputField from "../../../components/forms/InputField/InputField";
 import { LogFormError } from "../../../components/forms/Log.style";
 import { MemberFormBox, MemberProjectFrame } from "./MemberProject.style";
@@ -33,7 +33,7 @@ const MemberProject = () => {
     initialProjectData.media_urls || []
   );
   const [loading, setLoading] = useState(true);
-  const { user_member_data = {} } = useSelector((state) => state.auth);
+  const { user_member_data = {} } = useAuthStore();
   const { status = "", expires = "" } = user_member_data;
   const isMembershipExpired = isDateExpired(expires);
 
