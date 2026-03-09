@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap');
+
 /* COLOURS */
 :root {
     --color-cream: #FAE6C5;
@@ -7,6 +9,19 @@
     --color-gris: #485461;
     --color-amarillo: #FFED00;
     --color-gris-claro: #A9A9A9;
+    --color-white: #fdfdfd;
+    --color-success: #75fa83;
+
+    /* Aliases for Button.css compatibility */
+    --primary: var(--color-naranja);
+    --warning: var(--color-amarillo);
+    --danger: var(--color-rojo);
+    --success: var(--color-success);
+    --white: var(--color-white);
+    --naranja: var(--color-naranja);
+    --rojo: var(--color-rojo);
+    --negro: var(--color-negro);
+    --amarillo: var(--color-amarillo);
   }
 
   #root{
@@ -15,6 +30,7 @@
   
   html {
       background-color: #1D1D1B;
+      scroll-behavior: smooth;
   }
 
   body {

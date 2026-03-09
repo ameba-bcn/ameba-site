@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Galeria from "../../components/galeria/Galeria";
 import LettersMove from "../../components/layout/LettersMove";
-import XMLParser from "react-xml-parser";
 import {
   FLICKR_ALBUM_ID,
   FLICKR_KEY,
@@ -34,8 +33,10 @@ const Gallery = () => {
     axios
       .get(`${url}`, {})
       .then((s) => {
-        var xml = new XMLParser().parseFromString(s?.data);
-        setGalleryList(xml.children[0].children);
+        var parser = new DOMParser();
+        var xmlDoc = parser.parseFromString(s?.data, "text/xml");
+        var photos = xmlDoc.querySelectorAll("photo");
+        setGalleryList(Array.from(photos));
         dispatch(galeriaLoading(false));
       })
       .catch(() => {
@@ -44,12 +45,10 @@ const Gallery = () => {
   }, []);
 
   const imgArrayBuilder = galleryList.map((el) => {
-    const { attributes } = el;
-    const SERVER_ID = attributes.server;
-    const ID = attributes.id;
-    const SECRET = attributes.secret;
-    const photoUrl = `https://live.staticflickr.com/${SERVER_ID}/${ID}_${SECRET}_b.jpg`;
-    return photoUrl;
+    const SERVER_ID = el.getAttribute("server");
+    const ID = el.getAttribute("id");
+    const SECRET = el.getAttribute("secret");
+    return `https://live.staticflickr.com/${SERVER_ID}/${ID}_${SECRET}_b.jpg`;
   });
 
   return (

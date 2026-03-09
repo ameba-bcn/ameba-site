@@ -1,6 +1,5 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-scroll";
 
 export default function EntrevistaMenu(props) {
   const {
@@ -12,51 +11,27 @@ export default function EntrevistaMenu(props) {
 
   return (
     <div className="menu-entrevista">
-      <Link
-        activeClass="active"
-        to="bio-gral"
-        spy={true}
-        smooth={true}
-        duration={500}
-      >
+      <a href="#bio-gral">
         <div className="menu-e menu-bio">{t("support.menu.bio")}</div>
-      </Link>
+      </a>
       {hasInterviews && (
-        <Link
-          activeClass="active"
-          to="entrevista-gral"
-          spy={true}
-          smooth={true}
-          duration={500}
-        >
+        <a href="#entrevista-gral">
           <div className="menu-e menu-entrev">
             {t("support.menu.entrevista")}
           </div>
-        </Link>
+        </a>
       )}
       {hasMediaSection && (
-        <Link
-          activeClass="active"
-          to="media-gral"
-          spy={true}
-          smooth={true}
-          duration={500}
-        >
+        <a href="#media-gral">
           <div className={`menu-e ${hasActivitiesSection?`menu-media`:`menu-activit`}`}>{t("support.menu.media")}</div>
-        </Link>
+        </a>
       )}
       {hasActivitiesSection && (
-        <Link
-          activeClass="active"
-          to="activitats-gral"
-          spy={true}
-          smooth={true}
-          duration={500}
-        >
+        <a href="#activitats-gral">
           <div className="menu-e menu-activit">
             {t("support.menu.activitats")}
           </div>
-        </Link>
+        </a>
       )}
     </div>
   );
