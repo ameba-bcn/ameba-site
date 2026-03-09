@@ -37,7 +37,7 @@ import { getCart } from "./store/actions/cart";
 import { deepComparision } from "./utils/utils";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "react-image-gallery/styles/css/image-gallery.css";
+import "react-image-gallery/styles/image-gallery.css";
 import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
 import PasswordRecovery from "./pages/PasswordRecovery";
 import QrClient from "./pages/QrClient";

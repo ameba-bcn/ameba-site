@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import { useTranslation } from "react-i18next";
 import ImageCarousel from "../../../components/images/ImageCarousel";
-import "react-image-gallery/styles/css/image-gallery.css";
+import "react-image-gallery/styles/image-gallery.css";
 import { StyledQrBox } from "./QrView.style";
 import authService from "../../../store/services/auth.service";
 import Spinner from "../../../components/spinner/Spinner";
