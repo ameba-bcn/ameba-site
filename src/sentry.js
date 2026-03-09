@@ -1,11 +1,12 @@
 import * as Sentry from "@sentry/react";
 
 const dsn = import.meta.env.VITE_SENTRY_DSN;
+const environment = import.meta.env.VITE_SENTRY_ENVIRONMENT || "production";
 
-if (dsn) {
+if (dsn && environment === "production") {
   Sentry.init({
     dsn,
-    environment: import.meta.env.VITE_SENTRY_ENVIRONMENT || "production",
+    environment,
     release: import.meta.env.VITE_VERSION,
     integrations: [
       Sentry.browserTracingIntegration(),
