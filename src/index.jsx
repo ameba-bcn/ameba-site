@@ -3,7 +3,6 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App";
 import "./index.css";
-import WebFont from "webfontloader";
 import { BrowserRouter } from "react-router-dom";
 import ErrorBoundary from "./components/error-handler/ErrorHandler";
 import { Provider } from "react-redux";
@@ -12,11 +11,6 @@ import { I18nextProvider } from "react-i18next";
 import "./i18next";
 import store from "./store/store";
 
-WebFont.load({
-  google: {
-    families: ["Montserrat:300,400,700,900", "sans-serif"],
-  },
-});
 const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 

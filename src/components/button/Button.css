@@ -1,21 +1,3 @@
-/* #FAE6C5 Crema
-#F2C571 Naranja
-#EB5E3E Rojo
-#1D1D1B Negro
-#FFED00 Amarillo */
-
-:root {
-    --primary: #f2c571;
-    --warning: #ffed00;
-    --danger: #eb5e3e;
-    --success: #75fa83;
-    --white: #fdfdfd;
-    --naranja: #f2c571;
-    --rojo: #eb5e3e;
-    --negro: #1d1d1b;
-    --amarillo: #ffed00;
-}
-
 .boton {
     font-family: "Bebas Neue", sans-serif;
     width: fit-content;

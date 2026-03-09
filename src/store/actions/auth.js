@@ -154,10 +154,6 @@ export const validateEmail = (token) => (dispatch) => {
         type: VALIDATE_SUCCESS,
       });
 
-      // dispatch({
-      //   type: CLEAR_MESSAGE,
-      // });
-
       return Promise.resolve();
     },
     (error) => {
@@ -315,9 +311,6 @@ export const logout = () => (dispatch) => {
       dispatch({
         type: GUEST_USER,
       });
-      // dispatch({
-      //   type: CLEAR_MESSAGE,
-      // });
     },
     (error) => {
       const message = error.response?.data;

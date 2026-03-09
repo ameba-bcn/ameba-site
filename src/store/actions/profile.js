@@ -43,20 +43,3 @@ export const setUploadedImages = (url) => (dispatch) => {
 
   return Promise.resolve();
 };
-
-// export const getQrData = (token) => (dispatch) => {
-//   return stateService.getCarnet(token).then(
-//     (response) => {
-//       dispatch({
-//         type: GET_QR_DATA,
-//         payload: response,
-//       });
-//       return Promise.resolve();
-//     },
-//     (error) => {
-//       const message = error.response?.data.detail;
-//       notificationToast(message, "error");
-//       return Promise.reject();
-//     }
-//   );
-// };
