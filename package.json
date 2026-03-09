@@ -2,6 +2,7 @@
   "name": "ameba-site",
   "version": "3.3.18",
   "private": true,
+  "packageManager": "yarn@1.22.22",
   "homepage": "/",
   "dependencies": {
     "@sentry/react": "^10.42.0",
