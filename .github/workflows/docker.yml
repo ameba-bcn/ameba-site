@@ -35,6 +35,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get package version
+        id: pkg
+        run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
+
       - name: Extract metadata (tags, labels)
         id: meta
         uses: docker/metadata-action@v5
@@ -62,7 +66,7 @@ jobs:
           build-args: |
             VITE_SENTRY_DSN=${{ secrets.SENTRY_DSN }}
             VITE_SENTRY_ENVIRONMENT=${{ github.ref_name == 'master' && 'production' || 'development' }}
-            VITE_VERSION=${{ github.sha }}
+            VITE_VERSION=${{ steps.pkg.outputs.version }}
             SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
             SENTRY_ORG=${{ secrets.SENTRY_ORG }}
             SENTRY_PROJECT=${{ secrets.SENTRY_PROJECT }}
