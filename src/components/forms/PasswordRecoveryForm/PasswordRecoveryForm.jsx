@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Button from "../../button/Button";
 import InputField from "../InputField/InputField";
-import { LogFormError } from "../Log.style";
+import "../Log.style.css";
 import { validate } from "./PasswordRecoveryFormValidate";
 import useAuthStore from "../../../stores/useAuthStore";
 import { useFormik } from "formik";
@@ -55,11 +55,11 @@ export default function PasswordRecoveryForm(props) {
         />
       </div>
       {!isEmptyObject(formik.errors) && (
-        <LogFormError>
+        <div className="log-form-error">
           {Object.values(formik.errors).map((x) => {
             return <div key={x}>{x}</div>;
           })}
-        </LogFormError>
+        </div>
       )}
       <div className="form-group">
         <Button

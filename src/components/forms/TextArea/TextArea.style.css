@@ -1,0 +1,57 @@
+.text-area__label-box {
+  text-align: left;
+  margin: 0px 0px -14px 13px !important;
+}
+
+.text-area__label {
+  display: flex;
+  position: relative;
+  background-color: #fae6c5;
+  width: min-content;
+  color: #1d1d1b;
+  text-transform: uppercase;
+  font-family: "Bebas Neue";
+  font-size: 20px;
+  z-index: 1000;
+  line-height: 0.8;
+  padding: 0px 4px !important;
+  top: -1px;
+}
+
+.text-area__label svg {
+  width: 20px;
+}
+
+.text-area__label > div {
+  top: -12px;
+}
+
+.text-area__styled {
+  display: block;
+  height: 100%;
+  border: 4px solid #1d1d1b;
+  border-radius: 0px;
+}
+
+.text-area__styled--focus {
+  border-color: #f2c571;
+}
+
+.text-area__styled--invalid {
+  border-color: #eb5e3e;
+}
+
+.text-area__styled .tox-tinymce,
+.text-area__styled .tox-edit-area::before {
+  border: none !important;
+}
+
+.text-area__styled iframe {
+  background-color: transparent !important;
+}
+
+.text-area__styled .tox-editor-header,
+.text-area__styled .tox-toolbar__primary {
+  background-color: #f2c571 !important;
+  border-radius: 0px;
+}

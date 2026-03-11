@@ -1,39 +1,12 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import LettersMove from "../../components/layout/LettersMove";
 import { AMEBA_EMAIL, BASE_URL, radioDublabLink } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
 import Spinner from "../../components/spinner/Spinner";
-import { StyledLink } from "../../styles/GlobalStyles";
+import "../../styles/GlobalStyles.css";
+import "./QrLanding.css";
 import axiosInstance from "../../axios";
-
-export const StyledQr = styled.div`
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 400px;
-  justify-content: center;
-  .json-formatted-box {
-    max-width: 480px;
-    margin: 0 auto;
-    padding: 60px 0px;
-    width: 100%;
-  }
-  .json-formatted {
-    font-family: Montserrat, sans-serif;
-    font-size: 22px;
-    text-align: start;
-    word-wrap: break-word;
-  }
-  @media screen and (max-width: 600px) {
-    .json-formatted {
-      overflow: scroll;
-      font-size: 16px;
-    }
-  }
-`;
 
 const QrLanding = (props) => {
   const [memberData, setMemberData] = useState({});
@@ -59,7 +32,7 @@ const QrLanding = (props) => {
       {loading ? (
         <Spinner height={400} color="black" />
       ) : (
-        <StyledQr>
+        <div className="qr-landing">
           {memberData && Object.keys(memberData)?.length > 0 ? (
             <div className="json-formatted-box">
               <DisclaimerBox
@@ -76,12 +49,12 @@ const QrLanding = (props) => {
               {t("errors.general")}
               <br />
               {t("errors.contacta")}
-              <StyledLink>
+              <div className="styled-link">
                 <a href="mailto:info@ameba.cat">{AMEBA_EMAIL}</a>
-              </StyledLink>
+              </div>
             </div>
           )}
-        </StyledQr>
+        </div>
       )}
       <LettersMove
         className="lettersMoveDiv"

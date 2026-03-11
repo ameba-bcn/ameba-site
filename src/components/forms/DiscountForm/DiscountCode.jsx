@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Button from "../../button/Button";
 import InputField from "../InputField/InputField";
-import { LogFormError } from "../Log.style";
+import "../Log.style.css";
 import { validate } from "./DiscountCodeValidate";
 import { useFormik } from "formik";
-import { DiscountRow } from "./DiscountCode.style";
+import "./DiscountCode.style.css";
 import notificationToast, { isEmptyObject } from "../../../utils/utils";
 import { useTranslation } from "react-i18next";
 import useCartStore from "../../../stores/useCartStore";
@@ -42,7 +42,7 @@ export default function DiscountCode() {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <DiscountRow>
+      <div className="discount-code__row">
         <InputField
           id="code"
           name="code"
@@ -68,13 +68,13 @@ export default function DiscountCode() {
           <span>Aplica</span>
         </Button>
         {!isEmptyObject(formik.errors) && (
-          <LogFormError>
+          <div className="log-form-error">
             {Object.values(formik.errors).map((x) => {
               return <div key={x}>{x}</div>;
             })}
-          </LogFormError>
+          </div>
         )}
-      </DiscountRow>
+      </div>
     </form>
   );
 }

@@ -4,14 +4,10 @@ import useAuthStore from "../../../stores/useAuthStore";
 import { useTranslation } from "react-i18next";
 import ImageCarousel from "../../../components/images/ImageCarousel";
 import "react-image-gallery/styles/image-gallery.css";
-import { StyledQrBox } from "./QrView.style";
+import "./QrView.style.css";
 import authService from "../../../store/services/auth.service";
 import Spinner from "../../../components/spinner/Spinner";
-import {
-  MemberProfileBox,
-  MemberProfileFrame,
-  MessageFormat,
-} from "./MemberProfile.style";
+import "./MemberProfile.style.css";
 import { isDateExpired } from "../../../utils/utils";
 
 const QrView = () => {
@@ -37,19 +33,19 @@ const QrView = () => {
 
   if (isMembershipExpired) {
     return (
-      <MemberProfileFrame>
-        <MemberProfileBox>
+      <div className="member-profile-frame">
+        <div className="member-profile-box">
           <DisclaimerBox
-            text={<MessageFormat>{t("soci.no-soci-perfil")}</MessageFormat>}
+            text={<div className="message-format">{t("soci.no-soci-perfil")}</div>}
             hideCloseIcon={true}
           />
-        </MemberProfileBox>
-      </MemberProfileFrame>
+        </div>
+      </div>
     );
   }
 
   return (
-    <StyledQrBox>
+    <div className="qr-box">
       <DisclaimerBox
         text={t("soci.carnet")}
         id="qr-disclaimer"
@@ -63,7 +59,7 @@ const QrView = () => {
           <ImageCarousel imgList={[qrImg]} />
         </div>
       )}
-    </StyledQrBox>
+    </div>
   );
 };
 

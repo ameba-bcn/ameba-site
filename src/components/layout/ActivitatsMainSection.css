@@ -1,0 +1,26 @@
+.activitats-main {
+  display: flex;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 999px) {
+  .activitats-main {
+    flex-direction: column;
+  }
+}
+
+.activitats-main__card-item {
+  box-sizing: border-box;
+  margin: auto !important;
+  width: 30.53%;
+  height: auto;
+  margin: 26px;
+}
+
+@media screen and (max-width: 999px) {
+  .activitats-main__card-item {
+    width: 70%;
+    height: auto;
+    padding-bottom: 25px;
+  }
+}

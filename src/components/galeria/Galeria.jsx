@@ -1,26 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-
-const StyledGallery = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 20px;
-  width: 100%;
-  min-height: 200px;
-  justify-content: space-evenly;
-  .pswp__img {
-    width: auto !important;
-  }
-  img {
-    width: auto;
-    height: 333px;
-    margin: 20px;
-    @media (max-width: 768px) {
-      width: 280px;
-      height: auto;
-    }
-  }
-`;
+import "./Galeria.css";
 
 const Galeria = (props) => {
   const { images = [] } = props;
@@ -28,7 +7,7 @@ const Galeria = (props) => {
 
   return (
     <div>
-      <StyledGallery>
+      <div className="galeria">
         <div>
           {images.map((image, index) => (
             <a
@@ -41,7 +20,7 @@ const Galeria = (props) => {
             </a>
           ))}
         </div>
-      </StyledGallery>
+      </div>
     </div>
   );
 };

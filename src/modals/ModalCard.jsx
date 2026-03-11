@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 import { ReactFitty } from "react-fitty";
 import InteractiveModalBox from "./InteractiveModalBox";
 import "./Modals.css";
-import { StyledCloseIcon, StyledModalRow } from "./ModalCardStyled";
+import "./ModalCardStyled.css";
 import CartToast from "../components/toast/CartToast";
 import useMediaQuery from "../hooks/use-media-query";
 import ModalDialog from "../components/layout/ModalDialog";
@@ -435,7 +435,7 @@ export default function ModalCard(props) {
           <div
             className={`modal-card__background modal-card__background_${colorMode}`}
           >
-            <StyledCloseIcon colorMode={colorMode}>
+            <div className="modal-close-icon">
               <Icon
                 icon="link"
                 onClick={handleCopyLink}
@@ -453,7 +453,7 @@ export default function ModalCard(props) {
               {copied ? (
                 <div className="modal-card__copy">{t("modal.copiat")}</div>
               ) : null}
-            </StyledCloseIcon>
+            </div>
             <div className="modal-card__row">
               <div className="modal-card__column_eighty">
                 <div className="modal-card__title">
@@ -504,7 +504,7 @@ export default function ModalCard(props) {
             <hr
               className={`modal-card__hr_solid modal-card__hr_solid-${colorMode}`}
             />
-            <StyledModalRow>
+            <div className="modal-row">
               <InteractiveModalBox
                 modalStyle={modalStyle}
                 isMobile={isMobile}
@@ -528,7 +528,7 @@ export default function ModalCard(props) {
                 colorMode={colorMode}
               />
               {buttonMapper(type)}
-            </StyledModalRow>
+            </div>
             <hr
               className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
             />

@@ -1,0 +1,207 @@
+.contacte {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.contacte .contenedorContacto {
+  margin: 0 auto;
+  padding: 40px;
+}
+
+.contacte .inputGroupNews {
+  margin-bottom: 2rem;
+  padding: 0.5rem;
+}
+
+.contacte .contactNews {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  flex: 100%;
+  gap: 12px;
+}
+
+.contacte .msg-new-password-sent {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.contacte .form-group-input {
+  flex: 70%;
+}
+
+.contacte .form-group-input > input {
+  border-radius: 0px;
+}
+
+.contacte input:-webkit-autofill,
+.contacte input:-webkit-autofill:hover,
+.contacte input:-webkit-autofill:focus,
+.contacte input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #fae6c5 inset !important;
+}
+
+.contacte .form-group-button {
+  flex: 30%;
+}
+
+.contacte .formNewsGlobal {
+  display: flex;
+  flex-grow: column;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.contacte .formControlNews {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 14px 12px 12px;
+  background-color: transparent;
+  color: #1d1d1b;
+  border: 2px solid #1d1d1b;
+  width: 95%;
+  height: auto;
+}
+
+.contacte .formControlNews:focus,
+.contacte .formControlNews:active {
+  background-color: #fae6c5;
+  border-color: #fae6c5;
+}
+
+.contacte .formControlNews::placeholder {
+  color: #1d1d1b;
+  font-family: "Bebas Neue";
+  font-size: 2em;
+  font-weight: 400;
+  transform: translateY(6px);
+  text-transform: uppercase;
+}
+
+.contacte .formButton {
+  font-family: "Bebas Neue";
+  font-size: 2.5em;
+  font-weight: 400;
+  width: 15rem;
+  color: #f2c571;
+  background-color: #1d1d1b;
+}
+
+.contacte .iconsFooter {
+  padding: 3rem 0rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.contacte .iconsFooter a {
+  text-decoration: none;
+  color: inherit;
+  margin-right: 10px;
+}
+
+.contacte .iconsFooter svg {
+  scale: 3;
+}
+
+.contacte .twitter {
+  scale: 2.9 !important;
+}
+
+.contacte .iconsFooter svg:hover {
+  color: #eb5e3e;
+}
+
+.contacte .rowNewsLine {
+  margin: 0 auto;
+}
+
+.contacte .formLabelNews {
+  font-family: "Bebas Neue";
+  font-size: 5em;
+  font-weight: 400;
+  flex: 100%;
+}
+
+.contacte .endingText {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contacte .legal {
+  color: #000;
+  text-decoration: none;
+}
+
+.contacte .legal:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.contacte .colabText {
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 24px;
+}
+
+.contacte .AjuntamentBcnImg {
+  width: 100px;
+  margin-left: 20px;
+}
+
+.contacte .breakLine {
+  height: 0px;
+  width: 0%;
+}
+
+@media screen and (max-width: 956px) {
+  .contacte .formLabelNews {
+    font-size: 3em;
+  }
+  .contacte .formControlNews {
+    font-size: 1rem;
+    margin: 5px 0px;
+  }
+  .contacte .contactNews {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 870px) {
+  .contacte .form-group-button {
+    margin: 1rem 0rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .contacte .breakLine {
+    height: 1em;
+    width: 100%;
+  }
+  .contacte .formControlNews {
+    margin: auto;
+  }
+  .contacte .inputGroupNews {
+    margin: auto;
+  }
+  .contacte .iconsFooter svg {
+    scale: 2;
+  }
+  .contacte .twitter {
+    scale: 1.9 !important;
+  }
+  .contacte .iconsFooter {
+    gap: 12px;
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { StyledIconSearchBox, StyledSearchBox } from "./SearchBox.style";
+import "./SearchBox.style.css";
 import useOutsideClick from "../../hooks/use-outside-click";
 import Icon from "../ui/Icon";
 
@@ -32,7 +32,7 @@ const SearchBox = ({
 
   if (hidden) {
     return (
-      <StyledIconSearchBox>
+      <div className="search-box__icon">
         <div ref={ref}>
           {toggleHidden ? (
             <Icon
@@ -41,7 +41,8 @@ const SearchBox = ({
               onClick={() => setToggleHidden(false)}
             />
           ) : (
-            <StyledSearchBox
+            <input
+              className="search-box__input"
               type="search"
               name="search"
               placeholder={`${t("general.cerca")}...`}
@@ -52,12 +53,13 @@ const SearchBox = ({
             />
           )}
         </div>
-      </StyledIconSearchBox>
+      </div>
     );
   }
 
   return (
-    <StyledSearchBox
+    <input
+      className="search-box__input"
       type="search"
       placeholder={searchText}
       onChange={handleChange}

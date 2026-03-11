@@ -1,30 +1,11 @@
 import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import Dropdown from "../dropdown/Dropdown";
-import styled from "styled-components";
+import "./MenuLog.css";
 import useOutsideClick from "../../hooks/use-outside-click";
 import useUIStore from "../../stores/useUIStore";
 import useProfileStore from "../../stores/useProfileStore";
 import useAuthStore from "../../stores/useAuthStore";
-
-export const StyledMenuLog = styled.div`
-  position: relative;
-`;
-
-export const StyledMenuItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  .item {
-    color: #1d1d1b;
-    font-family: "Bebas Neue";
-    font-size: 30px;
-    font-weight: 400;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-`;
 
 export default function MenuLog(props) {
   const { isMobile = false } = props;
@@ -63,7 +44,7 @@ export default function MenuLog(props) {
   });
 
   return (
-    <StyledMenuLog ref={dropdownRef}>
+    <div className="menu-log" ref={dropdownRef}>
       <a
         className="sessio-menu-button"
         data-item={user_data.username === "" ? "SESSIÓ" : userNameShortened}
@@ -78,7 +59,7 @@ export default function MenuLog(props) {
             setIsOpen={handleCloseSessio}
             externalClickOutside={true}
           >
-            <StyledMenuItem>
+            <div className="menu-log__item">
               <NavLink
                 className="menuOptions"
                 to="/profile"
@@ -94,7 +75,7 @@ export default function MenuLog(props) {
               >
                 Log out
               </div>
-            </StyledMenuItem>
+            </div>
           </Dropdown>
         ) : (
           isProfileMenuOpen && (
@@ -120,6 +101,6 @@ export default function MenuLog(props) {
           )
         )}
       </div>
-    </StyledMenuLog>
+    </div>
   );
 }

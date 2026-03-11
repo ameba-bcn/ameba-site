@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
 import useAuthStore from "../../stores/useAuthStore";
 import useDataStore from "../../stores/useDataStore";
 import LettersMove from "../../components/layout/LettersMove";
 import { MOBILE_NORMAL } from "../../utils/constants";
 import useCartStore from "../../stores/useCartStore";
-import {
-  StyledExternalButtonBox,
-  StyledExternalEventBox,
-  StyledExternalEventCol1,
-  StyledExternalEventCol2,
-  StyledTitleBox,
-} from "../../components/externalEvents/StyledExternalEvent";
+import "../../components/externalEvents/ExternalEvent.css";
+import "./Memberships.css";
 import { ReactFitty } from "react-fitty";
 import ImageCarousel from "../../components/images/ImageCarousel";
 import Button from "../../components/button/Button";
@@ -24,20 +18,6 @@ import CartToast from "../../components/toast/CartToast";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import Icon from "../../components/ui/Icon";
 import useMediaQuery from "../../hooks/use-media-query";
-
-const SyledMembershipBox = styled.div`
-  height: 100%;
-  min-height: ${(props) => (props.$emptyView ? "600px" : "min-content")};
-  background-color: #fae6c5;
-  flex-direction: column;
-  justify-content: space-between;
-  .disclaimer-frame {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
 
 const Memberships = () => {
   const [t] = useTranslation("translation");
@@ -92,16 +72,16 @@ const Memberships = () => {
   const buttons = [membership[0]?.name];
 
   return (
-    <SyledMembershipBox $emptyView={membership.length === 0}>
+    <div className={`membership-box${membership.length === 0 ? " membership-box--empty" : ""}`}>
       {membership.length > 0 ? (
-        <StyledExternalEventBox>
-          <StyledTitleBox>
+        <div className="external-event-box">
+          <div className="external-event__title-box">
             <ReactFitty maxSize={75}>{`${t("banners.soci-curt")}!`}</ReactFitty>
-          </StyledTitleBox>
+          </div>
           <div className="rowExternal">
-            <StyledExternalEventCol1>
+            <div className="external-event__col1">
               <ImageCarousel imgList={images} />
-              <StyledExternalButtonBox>
+              <div className="external-event__button-box">
                 {/* // eslint-disable-line */}
                 <Button
                   variant="contained"
@@ -119,9 +99,9 @@ const Memberships = () => {
                 >
                   {buttonText}
                 </Button>
-              </StyledExternalButtonBox>
-            </StyledExternalEventCol1>
-            <StyledExternalEventCol2>
+              </div>
+            </div>
+            <div className="external-event__col2">
               <InteractiveModalBox
                 modalStyle={modalStyle}
                 isMobile={isMobile}
@@ -177,9 +157,9 @@ const Memberships = () => {
                   }
                 />
               )}
-            </StyledExternalEventCol2>
+            </div>
           </div>
-        </StyledExternalEventBox>
+        </div>
       ) : (
         <div className="disclaimer-frame">
           <DisclaimerBox text="No data available" />
@@ -192,7 +172,7 @@ const Memberships = () => {
         link="/memberships"
         color="#EB5E3E"
       />
-    </SyledMembershipBox>
+    </div>
   );
 };
 

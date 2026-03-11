@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SyledDisclaimer } from "./DisclaimerBox.style";
+import "./DisclaimerBox.style.css";
 import Icon from "../ui/Icon";
 
 const DisclaimerBox = (props) => {
@@ -12,13 +12,17 @@ const DisclaimerBox = (props) => {
     hideCloseIcon = false,
   } = props;
   const [hide, setHide] = useState(false);
+
+  const dynamicStyle = {};
+  if (borderColor) dynamicStyle.borderColor = borderColor;
+  if (bgColor) dynamicStyle.backgroundColor = bgColor;
+
   return (
     !hide && (
-      <SyledDisclaimer
-        className={className}
-        bgColor={bgColor}
+      <div
+        className={`disclaimer-box ${className || ""}`}
+        style={dynamicStyle}
         id={id}
-        borderColor={borderColor}
       >
         {text}
         {!hideCloseIcon && (
@@ -29,7 +33,7 @@ const DisclaimerBox = (props) => {
             className="close-icon"
           />
         )}
-      </SyledDisclaimer>
+      </div>
     )
   );
 };

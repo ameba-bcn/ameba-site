@@ -1,0 +1,85 @@
+.plus-button-box {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.plus-button {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Size variants */
+.plus-button--small {
+  line-height: 26px;
+  width: 32px;
+  height: 32px;
+}
+
+.plus-button--medium {
+  line-height: 26px;
+  width: 64px;
+  height: 64px;
+}
+
+.plus-button--big {
+  line-height: 76.8px;
+  width: 64px;
+  height: 64px;
+}
+
+/* Color variants */
+.plus-button--light {
+  background-color: #fae6c5;
+  color: #1d1d1b;
+}
+
+.plus-button--obscure {
+  background-color: #1d1d1b;
+  color: #fae6c5;
+}
+
+.plus-button--red {
+  background-color: #eb5e3e;
+  color: #fae6c5;
+}
+
+/* SVG icon sizes */
+.plus-button--small svg {
+  stroke-width: 3;
+  font-size: 24px;
+  width: 100%;
+  height: auto;
+  scale: 2;
+}
+
+.plus-button--medium svg {
+  stroke-width: 3;
+  font-size: 40px;
+  width: 100%;
+  height: auto;
+  scale: 2;
+}
+
+.plus-button--big svg {
+  stroke-width: 3;
+  font-size: 60px;
+  width: 100%;
+  height: auto;
+  scale: 2;
+}
+
+/* SVG stroke colors */
+.plus-button--light svg {
+  stroke: #1d1d1b;
+}
+
+.plus-button--obscure svg,
+.plus-button--red svg {
+  stroke: #fae6c5;
+}

@@ -1,0 +1,34 @@
+.fullscreen-checkout__macro-view {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.fullscreen-checkout__view {
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  position: absolute;
+}
+
+.fullscreen-checkout__nav {
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 90px;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+
+.fullscreen-checkout__nav div {
+  font-size: 40px;
+  font-family: "Bebas Neue";
+  color: #fae6c5;
+  cursor: pointer;
+  margin-right: 12px;
+}

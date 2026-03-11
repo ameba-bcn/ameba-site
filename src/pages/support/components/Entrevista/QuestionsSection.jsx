@@ -1,20 +1,9 @@
 import React, { useState } from "react";
 import TitleSection from "../../../../components/layout/TitleSection";
-import styled from "styled-components";
+import "./QuestionsSection.css";
 import useMediaQuery from "../../../../hooks/use-media-query";
 import Icon from "../../../../components/ui/Icon";
 import { MOBILE_NORMAL } from "../../../../utils/constants";
-
-const StyledPlusBox = styled.div`
-  display: flex;
-  background-color: var(--color-negro);
-  width: 28px;
-  height: 28px;
-  border-radius: 4px;
-  svg {
-    vertical-align: super;
-  }
-`;
 
 export default function QuestionsSection(props) {
   const { interview = {} } = props;
@@ -46,7 +35,7 @@ export default function QuestionsSection(props) {
                       onClick={() => updateExpand(i)}
                     >
                       <div>{f.question}</div>
-                      <StyledPlusBox>
+                      <div className="questions-section__plus-box">
                         {expand.p[i] ? (
                           <Icon
                             icon="minus"
@@ -64,7 +53,7 @@ export default function QuestionsSection(props) {
                             strokeWidth={2}
                           />
                         )}
-                      </StyledPlusBox>
+                      </div>
                     </div>
                     {expand.p[i] ? (
                       <div className={"resposta"}>{f.answer}</div>
@@ -84,7 +73,7 @@ export default function QuestionsSection(props) {
                       onClick={() => updateExpand(i)}
                     >
                       <div>{f.question}</div>
-                      <StyledPlusBox>
+                      <div className="questions-section__plus-box">
                         {expand.p[i] ? (
                           <Icon
                             icon="minus"
@@ -94,7 +83,7 @@ export default function QuestionsSection(props) {
                             strokeWidth={2}
                           />
                         ) : (
-                          <StyledPlusBox>
+                          <div className="questions-section__plus-box">
                             <Icon
                               icon="plus"
                               type="yellow"
@@ -102,9 +91,9 @@ export default function QuestionsSection(props) {
                               width={28}
                               strokeWidth={2}
                             />
-                          </StyledPlusBox>
+                          </div>
                         )}
-                      </StyledPlusBox>
+                      </div>
                     </div>
                     {expand.p[i] ? (
                       <div className={"resposta"}>{f.answer}</div>
@@ -125,7 +114,7 @@ export default function QuestionsSection(props) {
                   onClick={() => updateExpand(i)}
                 >
                   <div>{f.question}</div>
-                  <StyledPlusBox>
+                  <div className="questions-section__plus-box">
                     {expand.p[i] ? (
                       <Icon
                         icon="minus"
@@ -135,7 +124,7 @@ export default function QuestionsSection(props) {
                         strokeWidth={2}
                       />
                     ) : (
-                      <StyledPlusBox>
+                      <div className="questions-section__plus-box">
                         <Icon
                           icon="plus"
                           type="yellow"
@@ -143,9 +132,9 @@ export default function QuestionsSection(props) {
                           width={28}
                           strokeWidth={2}
                         />
-                      </StyledPlusBox>
+                      </div>
                     )}
-                  </StyledPlusBox>
+                  </div>
                 </div>
                 {expand.p[i] ? (
                   <div className={"resposta"}>{f.answer}</div>

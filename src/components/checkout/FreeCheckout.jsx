@@ -1,27 +1,11 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import "./FreeCheckout.css";
 import { Navigate } from "react-router-dom";
 import useAuthStore from "../../stores/useAuthStore";
 import Button from "../button/Button";
 import { useTranslation } from "react-i18next";
 import useUIStore from "../../stores/useUIStore";
 import useCartStore from "../../stores/useCartStore";
-
-const StyledFreeCheckoutParagraph = styled.div`
-  font-size: 24px;
-`;
-
-const StyledFreeCheckout = styled.div`
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  button {
-    padding: 10px 50px;
-  }
-`;
 
 export default function FreeCheckout() {
   const closeFullscreen = useUIStore((state) => state.closeFullscreen);
@@ -42,10 +26,10 @@ export default function FreeCheckout() {
   if (redirect) return <Navigate to="/summary-checkout" replace />;
 
   return (
-    <StyledFreeCheckout>
-      <StyledFreeCheckoutParagraph>
+    <div className="free-checkout">
+      <div className="free-checkout__paragraph">
         {t("checkout.pagament-gratis")}
-      </StyledFreeCheckoutParagraph>
+      </div>
       <Button
         variant="contained"
         color="primary"
@@ -55,6 +39,6 @@ export default function FreeCheckout() {
       >
         {t("boto.finalitza")}
       </Button>
-    </StyledFreeCheckout>
+    </div>
   );
 }

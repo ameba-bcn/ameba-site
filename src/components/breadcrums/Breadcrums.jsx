@@ -1,12 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { BreadcrumsStyled } from "./Breadcrums.style";
+import "./Breadcrums.style.css";
 
 const Breadcrums = (props) => {
   const { steps, step, changeStep } = props;
 
   return (
-    <BreadcrumsStyled>
+    <div className="breadcrums">
       {steps.map((s, index) => (
         <NavLink
           key={s}
@@ -22,7 +22,7 @@ const Breadcrums = (props) => {
           </span>{" "}
         </NavLink>
       ))}
-    </BreadcrumsStyled>
+    </div>
   );
 };
 

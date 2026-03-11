@@ -4,7 +4,7 @@ import useAuthStore from "../../../stores/useAuthStore";
 import useCartStore from "../../../stores/useCartStore";
 import InputField from "../InputField/InputField";
 import { validate } from "../Login/LoginValidate";
-import { LogFormBox, LogFormError } from "../Log.style";
+import "../Log.style.css";
 import Button from "../../button/Button";
 import { isEmptyObject } from "../../../utils/utils";
 
@@ -45,7 +45,7 @@ export default function LoginForm({ setRedirect }) {
   });
 
   return (
-    <LogFormBox>
+    <div className="log-form-box">
       <form onSubmit={formik.handleSubmit}>
         <div className="field-wrapper">
           <InputField
@@ -72,11 +72,11 @@ export default function LoginForm({ setRedirect }) {
           />
         </div>
         {!isEmptyObject(formik.errors) && (
-          <LogFormError>
+          <div className="log-form-error">
             {Object.values(formik.errors).map((x) => {
               return <div key={x}>{x}</div>;
             })}
-          </LogFormError>
+          </div>
         )}
         <Button
           type="submit"
@@ -91,6 +91,6 @@ export default function LoginForm({ setRedirect }) {
           <>login</>
         </Button>
       </form>
-    </LogFormBox>
+    </div>
   );
 }

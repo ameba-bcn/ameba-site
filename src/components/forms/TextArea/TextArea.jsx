@@ -1,10 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import {
-  TextAreaLabel,
-  TextAreaLabelBox,
-  TextAreaStyled,
-} from "./TextArea.style.jsx";
+import "./TextArea.style.css";
 import { TEXT_EDITOR_KEY } from "../../../utils/constants.js";
 import { tinymceTextAreaFormatter } from "../../../utils/utils";
 import Tooltip from "../../tooltip/Tooltip.jsx";
@@ -22,21 +18,29 @@ const TextArea = (props) => {
   const [focus, setFocus] = useState(false);
   const [valid, setValid] = useState(true);
 
+  const styledClassName = [
+    "text-area__styled",
+    focus ? "text-area__styled--focus" : "",
+    !valid ? "text-area__styled--invalid" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <>
-      <TextAreaLabelBox>
+      <div className="text-area__label-box">
         {tooltip.length > 0 ? (
           <Tooltip tooltipContent={tooltip}>
-            <TextAreaLabel id="description-label">
+            <div className="text-area__label" id="description-label">
               {` ${label} `}
               <Icon icon="tooltip" />
-            </TextAreaLabel>
+            </div>
           </Tooltip>
         ) : (
-          <TextAreaLabel id="description-label">{` ${label} `}</TextAreaLabel>
+          <div className="text-area__label" id="description-label">{` ${label} `}</div>
         )}
-      </TextAreaLabelBox>
-      <TextAreaStyled focus={focus} valid={valid}>
+      </div>
+      <div className={styledClassName}>
         <Editor
           apiKey={TEXT_EDITOR_KEY}
           disabled={disabled}
@@ -96,7 +100,7 @@ const TextArea = (props) => {
             },
           }}
         />
-      </TextAreaStyled>
+      </div>
     </>
   );
 };

@@ -8,15 +8,7 @@ import { Navigate } from "react-router-dom";
 import useAuthStore from "../../stores/useAuthStore";
 import MembershipFormReadOnly from "../forms/MembershipForm/MembershipFormReadOnly";
 import Stepper from "../stepper/Stepper";
-import {
-  CheckoutBox,
-  CheckoutButtons,
-  CheckoutContent,
-  CheckoutFrame,
-  CheckoutMemberFrame,
-  CheckoutSubtitle,
-  CheckoutTitle,
-} from "./Checkout.style";
+import "./Checkout.style.css";
 import Payment from "./Payment";
 import { MOBILE_NORMAL, MOBILE_SMALL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
@@ -77,13 +69,13 @@ function Checkout() {
     switch (step) {
       case 0:
         return (
-          <CheckoutMemberFrame>
+          <div className="checkout-member-frame">
             {hasMembershipInCart ? (
               <MembershipFormLayout setButtonDisabled={setButtonDisabled} />
             ) : (
               <MembershipFormReadOnly isCheckout={true} />
             )}
-          </CheckoutMemberFrame>
+          </div>
         );
       case 1:
         return (
@@ -104,14 +96,14 @@ function Checkout() {
   };
 
   return (
-    <CheckoutFrame>
-      <CheckoutBox>
-        <CheckoutTitle>{t("checkout.pagament")}</CheckoutTitle>
-        <CheckoutSubtitle>{steps[activeStep]}</CheckoutSubtitle>
+    <div className="checkout-frame">
+      <div className="checkout-box">
+        <div className="checkout-title">{t("checkout.pagament")}</div>
+        <div className="checkout-subtitle">{steps[activeStep]}</div>
         <Stepper arraySteps={steps} activeStep={activeStep} />
-        <CheckoutContent>{getStepContent(activeStep)}</CheckoutContent>
+        <div className="checkout-content">{getStepContent(activeStep)}</div>
         {loading && <span className="spinner-border"></span>}
-        <CheckoutButtons>
+        <div className="checkout-buttons">
           {activeStep !== 0 &&
             (activeStep < 2 ? (
               <Button
@@ -148,9 +140,9 @@ function Checkout() {
               {t("boto.seguent")}
             </Button>
           )}
-        </CheckoutButtons>
-      </CheckoutBox>
-    </CheckoutFrame>
+        </div>
+      </div>
+    </div>
   );
 }
 

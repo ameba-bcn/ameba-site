@@ -1,0 +1,61 @@
+.member-profile-frame {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.member-profile-box {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  margin-top: 30px;
+}
+
+.member-profile-box-border {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.member-profile-box-border button {
+  margin: 20px 0px;
+}
+
+.member-profile-title {
+  text-transform: uppercase;
+  font-family: "Bebas Neue";
+  color: #1d1d1b;
+  font-size: 3.3rem;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 0px;
+}
+
+.member-info-row {
+  text-transform: uppercase;
+  font-family: "Bebas Neue";
+  color: #1d1d1b;
+  font-size: calc(12px + 1.3vw);
+  margin: 0 auto;
+  font-weight: 300;
+  width: 85%;
+}
+
+.member-info-row span {
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.member-info-row span:hover {
+  color: var(--color-rojo);
+}
+
+.message-format {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

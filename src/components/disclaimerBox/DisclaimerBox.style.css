@@ -1,0 +1,37 @@
+.disclaimer-box {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: "Bebas Neue";
+  font-size: 30px;
+  border-style: solid;
+  line-height: 30px;
+  border-color: #1d1d1b;
+  border-width: 8px;
+  background-color: #eb5e3e;
+  padding: 24px 26px 12px 26px;
+  text-decoration: none !important;
+  color: #1d1d1b !important;
+  margin: 0 auto;
+  word-wrap: break-word;
+  width: auto;
+}
+
+.disclaimer-box a {
+  text-decoration: none;
+}
+
+.disclaimer-box #close-icon {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 465px) {
+  .disclaimer-box {
+    margin: 0 24px;
+  }
+}

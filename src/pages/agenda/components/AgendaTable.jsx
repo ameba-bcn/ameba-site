@@ -17,11 +17,8 @@ import {
 } from "../../../utils/utils";
 import Icon from "../../../components/ui/Icon";
 import ActivitatDialog from "./Activitat";
-import {
-  StyledAgendaTable,
-  StyledImageTableBox,
-  StyledTicket,
-} from "./AgendaTable.styled";
+import "./AgendaTable.styled.css";
+import "../../../styles/GlobalStyles.style.css";
 import axiosInstance from "../../../axios";
 import { API_URL, MOBILE_SEMI_BIG } from "../../../utils/constants";
 import SearchBox from "../../../components/searchBox/SearchBox";
@@ -216,14 +213,14 @@ const AgendaTable = () => {
             cell: (info) => {
               const { name, images } = info.row.original;
               return (
-                <StyledImageTableBox>
+                <div className="image-table-box">
                   <div className="image-side">
                     <img src={images} className="imgMiniActivitat" alt="" />
                   </div>
                   <div className="title-side">
                     <h1>{name?.toUpperCase()}</h1>
                   </div>
-                </StyledImageTableBox>
+                </div>
               );
             },
             size: 200,
@@ -258,7 +255,7 @@ const AgendaTable = () => {
             cell: (info) => {
               const { price, stock, datetime } = info.row.original;
               return (
-                <StyledTicket>
+                <div className="styled-ticket">
                   {eventIconMapper(
                     info.row.original,
                     price,
@@ -266,7 +263,7 @@ const AgendaTable = () => {
                     datetime,
                     info.row.original.cancelled
                   )}
-                </StyledTicket>
+                </div>
               );
             },
           },
@@ -302,7 +299,7 @@ const AgendaTable = () => {
   if (redirect) return <Navigate to={checkoutRedirect} replace />;
 
   return (
-    <StyledAgendaTable $emptyView={agenda.length === 0}>
+    <div className={`styled-main-column-view agenda-table${agenda.length === 0 ? " agenda-table--empty" : ""}`}>
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -381,7 +378,7 @@ const AgendaTable = () => {
           loading={loading}
         />
       )}
-    </StyledAgendaTable>
+    </div>
   );
 };
 

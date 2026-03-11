@@ -1,27 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
+import "./ExternalEvents.css";
 import LettersMove from "../../components/layout/LettersMove";
 import ExternalEvent from "../../components/externalEvents/ExternalEvent";
 import axiosInstance from "../../axios";
 import { API_URL, productQueryKind } from "../../utils/constants";
 import useCartStore from "../../stores/useCartStore";
 import { useLocation } from "react-router-dom";
-
-const SyledExternalBox = styled.div`
-  height: 100%;
-  background-color: #fae6c5;
-`;
-
-const SyledExternalError = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  font-family: "Bebas Neue";
-  font-size: 30px;
-`;
 
 const ExternalEvents = () => {
   const [t] = useTranslation("translation");
@@ -59,13 +44,13 @@ const ExternalEvents = () => {
 
   return (
     <div>
-      <SyledExternalBox>
+      <div className="external-events__box">
         {producteLoading ? (
-          <SyledExternalError>
+          <div className="external-events__error">
             <span className="spinner-border" />{" "}
-          </SyledExternalError>
+          </div>
         ) : noProductData ? (
-          <SyledExternalError>
+          <div className="external-events__error">
             <br />
             {t("errors.linkBuit1")}
             <br />
@@ -73,7 +58,7 @@ const ExternalEvents = () => {
             {t("errors.linkBuit2")}
             <br />
             <br />
-          </SyledExternalError>
+          </div>
         ) : (
           <ExternalEvent
             productData={productData}
@@ -81,7 +66,7 @@ const ExternalEvents = () => {
             kind={kind}
           />
         )}
-      </SyledExternalBox>
+      </div>
       <LettersMove
         className="lettersMoveDiv"
         sentence={t("banners.soci-curt")}

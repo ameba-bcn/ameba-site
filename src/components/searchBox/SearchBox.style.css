@@ -1,0 +1,88 @@
+@keyframes search-box-wide-expand {
+  0% {
+    width: 0px;
+    opacity: 0.6;
+  }
+  100% {
+    width: 250px;
+    opacity: 1;
+  }
+}
+
+@keyframes search-box-wide-collapse {
+  0% {
+    font-size: 28px;
+    opacity: 0.8;
+  }
+  100% {
+    font-size: 30px;
+    opacity: 1;
+  }
+}
+
+.search-box__input {
+  display: block;
+  width: 100%;
+  max-width: 250px;
+  height: 38px;
+  padding: 6px 12px 8px 12px;
+  line-height: 28px;
+  background-clip: padding-box;
+  background-color: transparent;
+  border: 2px solid #1d1d1b;
+  border-radius: 0rem;
+  font-family: "Montserrat", sans-serif;
+  color: #1d1d1b;
+  font-size: 28px;
+  animation-name: search-box-wide-expand;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in;
+}
+
+.search-box__input::placeholder {
+  font-family: "Bebas Neue";
+  color: #1d1d1b;
+  font-size: 22px;
+  font-weight: 300;
+}
+
+.search-box__input:focus {
+  background-color: #fae6c5;
+  border-color: #f2c571;
+  font-size: 22px;
+  padding-bottom: 1px;
+}
+
+.search-box__input:touch {
+  background-color: #fae6c5;
+}
+
+.search-box__input:disabled {
+  border-top: solid transparent 4px !important;
+  border-right: solid transparent 4px !important;
+  border-left: solid transparent 4px !important;
+}
+
+.search-box__input:-webkit-autofill,
+.search-box__input:-webkit-autofill:hover,
+.search-box__input:-webkit-autofill:focus,
+.search-box__input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #fae6c5 inset !important;
+}
+
+.search-box__icon {
+  height: 38px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-box__icon div {
+  cursor: pointer;
+}
+
+.search-box__icon svg {
+  font-size: 30px;
+  animation-name: search-box-wide-collapse;
+  animation-duration: 0.2s;
+  animation-timing-function: ease-in;
+}

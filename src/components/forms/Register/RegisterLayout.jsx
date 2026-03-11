@@ -4,18 +4,9 @@ import SociDialog from "../../botiga/Soci";
 import RegisterForm from "./RegisterForm";
 import { useTranslation } from "react-i18next";
 import Icon from "../../ui/Icon";
-import styled from "styled-components";
-import { StyledLink } from "../../../styles/GlobalStyles";
+import "../../../styles/GlobalStyles.css";
+import "./RegisterLayout.css";
 import useProfileStore from "../../../stores/useProfileStore";
-
-export const StyledAddBox = styled.div`
-  margin-left: 0.5rem;
-  display: flex;
-  svg {
-    background-color: #1d1d1b;
-    scale: 1;
-  }
-`;
 
 const RegisterLayout = (props) => {
   const [t] = useTranslation("translation");
@@ -41,17 +32,17 @@ const RegisterLayout = (props) => {
           <NavLink to="/memberships">
             <div className="sociLogBanner" onClick={handleClick}>
               <div>{t("login.encara")}</div>
-              <StyledAddBox>
+              <div className="register-add-box">
                 <Icon icon="plus" type="orange" />
-              </StyledAddBox>
+              </div>
             </div>
           </NavLink>
         )}
         <RegisterForm setRedirect={setRedirect} />
 
-        <StyledLink bold={1} onClick={showLogin}>
+        <div className="styled-link styled-link--bold" onClick={showLogin}>
           {`- ${t("login.inicia")} -`}
-        </StyledLink>
+        </div>
         {open && <SociDialog open={open} onClose={handleClick} />}
       </div>
     </div>

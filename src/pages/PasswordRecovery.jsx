@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import LettersMove from "../components/layout/LettersMove";
 import PasswordRecoveryForm from "./../components/forms/PasswordRecoveryForm/PasswordRecoveryForm";
-import { StyledHeightBlock, StyledLink } from "../styles/GlobalStyles";
+import "../styles/GlobalStyles.css";
 
 export default function PasswordRecovery(props) {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -22,7 +22,7 @@ export default function PasswordRecovery(props) {
           <div className="logTitle">{t("login.recupera-curt")}</div>
           {isSubmitted ? (
             <div className="single-msg">
-              <StyledHeightBlock />
+              <div className="height-block" />
               {t("login.contrasenya-canviada")}
               <NavLink to="/login">LOGIN</NavLink>.
             </div>
@@ -32,11 +32,11 @@ export default function PasswordRecovery(props) {
                 setIsSubmitted={setIsSubmitted}
                 strToken={strToken}
               />
-              <StyledLink>
+              <div className="styled-link">
                 <NavLink to="/send-recovery">
                   - {t("login.link-recupera")} -
                 </NavLink>
-              </StyledLink>
+              </div>
             </>
           )}
         </div>

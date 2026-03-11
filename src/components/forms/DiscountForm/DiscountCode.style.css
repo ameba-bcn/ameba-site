@@ -1,0 +1,29 @@
+.discount-code__row {
+  display: flex;
+  flex-direction: row !important;
+  justify-content: space-around;
+}
+
+.discount-code__row input {
+  width: 45%;
+}
+
+.discount-code__row button {
+  width: 45%;
+}
+
+@media (max-width: 350px) {
+  .discount-code__row input {
+    width: 58%;
+  }
+
+  .discount-code__row button {
+    width: 40%;
+  }
+}
+
+@media (max-width: 490px) {
+  .discount-code__row input::placeholder {
+    font-size: 1.5rem;
+  }
+}

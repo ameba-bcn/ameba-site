@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Button from "../../button/Button";
 import InputField from "../InputField/InputField";
 import { validate } from "../Register/RegisterValidate";
-import { LogFormBox, LogFormError } from "../Log.style";
+import "../Log.style.css";
 import useAuthStore from "../../../stores/useAuthStore";
 import { isEmptyObject } from "../../../utils/utils";
 import { useTranslation } from "react-i18next";
@@ -48,7 +48,7 @@ export default function RegisterForm({ setRedirect }) {
   });
 
   return (
-    <LogFormBox>
+    <div className="log-form-box">
       <form onSubmit={formik.handleSubmit}>
         <div className="field-wrapper">
           <InputField
@@ -87,11 +87,11 @@ export default function RegisterForm({ setRedirect }) {
           />
         </div>
         {!isEmptyObject(formik.errors) && (
-          <LogFormError>
+          <div className="log-form-error">
             {Object.values(formik.errors).map((x) => {
               return <div key={x}>{x}</div>;
             })}
-          </LogFormError>
+          </div>
         )}
         <Button
           type="submit"
@@ -106,6 +106,6 @@ export default function RegisterForm({ setRedirect }) {
           <>{t("login.registrat")}</>
         </Button>
       </form>
-    </LogFormBox>
+    </div>
   );
 }

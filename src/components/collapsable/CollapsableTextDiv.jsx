@@ -1,12 +1,6 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import "./CollapsableTextDiv.css";
 import PlusButton from "../button/PlusButton";
-
-export const PlusBox = styled.div`
-  & > div {
-    margin: 10px 0px;
-  }
-`;
 
 export default function CollapsableTextDiv(props) {
   const { text = "" } = props;
@@ -18,13 +12,13 @@ export default function CollapsableTextDiv(props) {
   return open || !isLargeText ? (
     <>{text}</>
   ) : (
-    <PlusBox>
+    <div className="collapsable-text-div__plus-box">
       {minimizedText}
       <PlusButton
         plusStyle="plus--ligth"
         plusSize="plus--small"
         onClick={() => setOpen(true)}
       />
-    </PlusBox>
+    </div>
   );
 }

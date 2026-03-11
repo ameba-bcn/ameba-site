@@ -3,28 +3,7 @@ import CardNew from "./CardNew";
 import axiosInstance from "../../axios";
 import { API_URL } from "../../utils/constants";
 import ActivitatDialog from "../../pages/agenda/components/Activitat";
-import styled from "styled-components";
-
-export const StyledActivitatsMain = styled.div`
-  display: flex;
-  flex-direction: row;
-  @media screen and (max-width: 999px) {
-    flex-direction: column;
-  }
-`;
-
-export const StyledActivitatsCardItem = styled.div`
-  box-sizing: border-box;
-  margin: auto !important;
-  width: 30.53%;
-  height: auto;
-  margin: 26px;
-  @media screen and (max-width: 999px) {
-    width: 70%;
-    height: auto;
-    padding-bottom: 25px;
-  }
-`;
+import "./ActivitatsMainSection.css";
 
 const ActivitatsMainSection = (props) => {
   const { activitats } = props;
@@ -71,13 +50,12 @@ const ActivitatsMainSection = (props) => {
   };
 
   return (
-    <StyledActivitatsMain>
+    <div className="activitats-main">
       {activitats &&
         activitats.map((data) => (
-          <StyledActivitatsCardItem
+          <div
             key={data.name}
-            item
-            className="Card3GridItem"
+            className="activitats-main__card-item Card3GridItem"
             onClick={() => fetchEvent(data)}
           >
             <CardNew
@@ -87,7 +65,7 @@ const ActivitatsMainSection = (props) => {
               data={data.datetime}
               tipo={data.type}
             />
-          </StyledActivitatsCardItem>
+          </div>
         ))}
       {open && (
         <ActivitatDialog
@@ -98,7 +76,7 @@ const ActivitatsMainSection = (props) => {
           loading={loading}
         />
       )}
-    </StyledActivitatsMain>
+    </div>
   );
 };
 

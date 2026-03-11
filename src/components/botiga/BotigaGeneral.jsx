@@ -3,22 +3,11 @@ import "./BotigaGeneral.css";
 import ProducteDialog from "./Producte";
 import axiosInstance from "../../axios";
 import { createLastRowIterator, formatPrice } from "./../../utils/utils";
-import styled from "styled-components";
 import { ReactFitty } from "react-fitty";
 import { useLocation } from "react-router-dom";
 import { API_URL } from "../../utils/constants";
 import useMediaQuery from "../../hooks/use-media-query";
 import useDataStore from "../../stores/useDataStore";
-
-export const TitleStyled = styled.div`
-  width: 75%;
-  font-family: "Bebas Neue";
-  font-weight: 300;
-  font-style: italic;
-  text-transform: uppercase;
-  color: #fae6c5;
-  text-align: left;
-`;
 
 export default function BotigaGeneral() {
   const [open, setOpen] = useState(false);
@@ -93,9 +82,9 @@ export default function BotigaGeneral() {
                   />
                 </div>
                 <div className="productCardBody">
-                  <TitleStyled>
+                  <div className="botiga-general__title">
                     <ReactFitty maxSize={50}>{data.name}</ReactFitty>
-                  </TitleStyled>
+                  </div>
                   <div className="productCardPrice">
                     {formatPrice(data.price_range)}
                   </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import InputField from "../InputField/InputField";
-import { LogFormBox, LogFormError, LogButtonBox } from "../Log.style";
+import "../Log.style.css";
 import useAuthStore from "../../../stores/useAuthStore";
 import { useTranslation } from "react-i18next";
 import Button from "../../button/Button";
@@ -39,7 +39,7 @@ export default function MembershipFormReadOnly(props) {
   return (
     <div className="cardForm">
       <div className="card-form">
-        <LogFormBox>
+        <div className="log-form-box">
           <form>
             <div className="field-wrapper">
               {inProfileView ? (
@@ -55,9 +55,9 @@ export default function MembershipFormReadOnly(props) {
                     valid={!usernameValidation(user)}
                   />
                   {errors && (
-                    <LogFormError>
+                    <div className="log-form-error">
                       <div>{ERROR.USERNAME.FORMAT}</div>
-                    </LogFormError>
+                    </div>
                   )}
                 </>
               ) : (
@@ -96,9 +96,9 @@ export default function MembershipFormReadOnly(props) {
               />
             </div>
           </form>
-        </LogFormBox>
+        </div>
         {!isCheckout && (
-          <LogButtonBox>
+          <div className="log-button-box">
             {user_data?.username !== user ? (
               <Button
                 variant="contained"
@@ -120,7 +120,7 @@ export default function MembershipFormReadOnly(props) {
                 {t("login.modifica")}
               </Button>
             )}
-          </LogButtonBox>
+          </div>
         )}
       </div>
     </div>

@@ -1,60 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import styled from "styled-components";
 import { radioDublabLink } from "../../utils/constants";
 import LettersMove from "../../components/layout/LettersMove";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import dataService from "../../store/services/data.service";
-import { TitleInnerSection } from "../../styles/GlobalStyles.style";
-import { StyledHeightBlock } from "../../styles/GlobalStyles";
+import "../../styles/GlobalStyles.style.css";
+import "../../styles/GlobalStyles.css";
+import "./Legal.css";
 import Icon from "../../components/ui/Icon";
-
-export const StyledLegal = styled.div`
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  min-height: 400px;
-  justify-content: center;
-  align-items: flex-start;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 600px;
-  font-size: 24px;
-  font-family: "Bebas Neue";
-  .file-description-wrapper {
-    position: relative;
-    span {
-      margin-left: 12px;
-    }
-  }
-  #file-description {
-    display: none;
-    font-family: "Montserrat", sans-serif;
-    position: absolute;
-    min-width: 400px;
-  }
-  ul {
-    list-style-type: square;
-    text-align: left;
-  }
-  li:hover {
-    #file-description {
-      display: flex;
-    }
-  }
-  a {
-    white-space: nowrap;
-    margin-left: 10px;
-  }
-
-  li {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 24px;
-  }
-  padding: 24px 26px 12px 26px;
-`;
 
 const Legal = () => {
   const [t] = useTranslation("translation");
@@ -67,9 +20,9 @@ const Legal = () => {
 
   return (
     <div className="logViewYellow">
-      <StyledHeightBlock />
-      <TitleInnerSection>{t("legal.title")}</TitleInnerSection>
-      <StyledLegal>
+      <div className="height-block" />
+      <div className="title-inner-section">{t("legal.title")}</div>
+      <div className="legal">
         <DisclaimerBox
           bgColor={`var(--color-cream)`}
           className="disclaimerBox"
@@ -89,7 +42,7 @@ const Legal = () => {
             </li>
           ))}
         </ul>
-      </StyledLegal>
+      </div>
       <LettersMove
         className="lettersMoveDiv"
         sentence="AMEBA RADIO @ dublab"

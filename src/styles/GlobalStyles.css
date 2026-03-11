@@ -1,0 +1,31 @@
+.height-block {
+  display: flex;
+  width: 100%;
+  height: var(--height-block-h, 24px);
+}
+
+.styled-link {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #1d1d1b !important;
+  margin-top: 12px;
+  font-weight: 300;
+}
+
+.styled-link--center {
+  margin-top: 0px;
+}
+
+.styled-link--bold {
+  font-weight: 600;
+}
+
+.styled-link a {
+  text-decoration: none;
+  color: #1d1d1b !important;
+}
+
+.styled-link:hover {
+  text-decoration: underline !important;
+}
