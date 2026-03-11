@@ -1,6 +1,13 @@
 import { defineConfig } from 'vite';
+import { readFileSync } from 'fs';
 import react from '@vitejs/plugin-react';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
+
+const pkg = JSON.parse(readFileSync('./package.json', 'utf8'));
+const appVersion = process.env.VITE_VERSION || pkg.version;
+
+// Ensure VITE_VERSION is always available to client code via import.meta.env
+process.env.VITE_VERSION = appVersion;
 
 export default defineConfig({
   plugins: [
@@ -11,7 +18,10 @@ export default defineConfig({
         project: process.env.SENTRY_PROJECT,
         authToken: process.env.SENTRY_AUTH_TOKEN,
         release: {
-          name: process.env.VITE_VERSION,
+          name: appVersion,
+        },
+        sourcemaps: {
+          filesToDeleteAfterUpload: '**/*.map',
         },
       }),
   ].filter(Boolean),
