@@ -33,8 +33,8 @@ const MemberProject = () => {
     initialProjectData.media_urls || []
   );
   const [loading, setLoading] = useState(true);
-  const { user_member_data = {} } = useAuthStore();
-  const { status = "", expires = "" } = user_member_data;
+  const { user_member_data } = useAuthStore();
+  const { status = "", expires = "" } = user_member_data || {};
   const isMembershipExpired = isDateExpired(expires);
 
   useEffect(() => {

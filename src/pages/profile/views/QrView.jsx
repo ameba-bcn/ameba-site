@@ -15,7 +15,7 @@ const QrView = () => {
   const [qrImg, setQrImg] = useState("");
   const [loading, setLoading] = useState(true);
   const { user_member_data } = useAuthStore();
-  const { expires = "" } = user_member_data;
+  const { expires = "" } = user_member_data || {};
   const isMembershipExpired = isDateExpired(expires);
 
   useEffect(() => {

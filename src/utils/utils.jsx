@@ -225,7 +225,8 @@ export const imageListFormatter = (images = []) => {
 export const tinymceTextAreaFormatter = (val) =>
   val?.replaceAll(/&nbsp;/g, "")?.replaceAll("<p></p>", "");
 
-export function isDateExpired(expiringMembershipDate = "") {
+export function isDateExpired(expiringMembershipDate) {
+  if (!expiringMembershipDate) return false;
   const [day, month, year] = expiringMembershipDate.split("/").map(Number);
 
   const expiringDate = new Date(year, month - 1, day);
