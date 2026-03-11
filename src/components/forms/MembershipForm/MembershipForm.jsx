@@ -4,7 +4,7 @@ import { deepComparision, isEmptyObject } from "../../../utils/utils";
 import useAuthStore from "../../../stores/useAuthStore";
 import Button from "../../button/Button";
 import InputField from "../InputField/InputField";
-import { LogFormBox, LogFormError } from "../Log.style";
+import "../Log.style.css";
 import { validate } from "../MembershipForm/MembershipValidate";
 import { useTranslation } from "react-i18next";
 
@@ -106,7 +106,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
   };
 
   return (
-    <LogFormBox>
+    <div className="log-form-box">
       <form onSubmit={formik.handleSubmit}>
         {!isNewMember && (
           <div className="field-wrapper">
@@ -204,11 +204,11 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
         </div>
         <div>
           {!isEmptyObject(formik.errors) && (
-            <LogFormError>
+            <div className="log-form-error">
               {Object.values(formik.errors).map((x) => {
                 return <div key={x}>{x}</div>;
               })}
-            </LogFormError>
+            </div>
           )}
         </div>
         <div className="row button-row">
@@ -244,6 +244,6 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
           </div>
         </div>
       </form>
-    </LogFormBox>
+    </div>
   );
 }

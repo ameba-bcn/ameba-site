@@ -1,31 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { ReactFitty } from "react-fitty";
-import styled from "styled-components";
 import { MOBILE_SMALL } from "../../../utils/constants";
-import { StyledCardLayout } from "./StyledCardLayout";
+import "./CardLayout.css";
 import PlusButton from "../../button/PlusButton";
 import { createLastRowIterator, sortByProperty } from "../../../utils/utils";
 import useMediaQuery from "../../../hooks/use-media-query";
 import Spinner from "../../spinner/Spinner";
-
-const TitleStyled = styled.div`
-  position: absolute;
-  font-family: "Bebas Neue";
-  width: 95%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  text-transform: uppercase;
-  color: #fae6c5;
-  z-index: 999;
-  margin: 20px;
-  font-weight: 800;
-  font-style: italic;
-  @media screen and (max-width: 600px) {
-    margin-left: -10px;
-  }
-`;
 
 export default function CardLayout(props) {
   const { cardList = [], urlRoot, loading = false } = props; //Pendiente recibir si es entrevista por props
@@ -57,11 +38,11 @@ export default function CardLayout(props) {
             }}
           >
             <div className="cardSupport">
-              <TitleStyled>
+              <div className="card-layout__title">
                 <ReactFitty maxSize={200}>
                   {project_name ? project_name : name}
                 </ReactFitty>
-              </TitleStyled>
+              </div>
               <img
                 src={image ? image : images[0]}
                 alt={name}
@@ -81,7 +62,7 @@ export default function CardLayout(props) {
     });
 
   return (
-    <StyledCardLayout $emptyView={!cardList.length > 0}>
+    <div className={`card-layout${!cardList.length > 0 ? " card-layout--empty" : ""}`}>
       {loading ? (
         <Spinner />
       ) : (
@@ -94,6 +75,6 @@ export default function CardLayout(props) {
             ))}
         </>
       )}
-    </StyledCardLayout>
+    </div>
   );
 }

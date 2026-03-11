@@ -3,12 +3,7 @@ import DOMPurify from "dompurify";
 import TitleSection from "../../../components/layout/TitleSection";
 import ImageCarousel from "../../../components/images/ImageCarousel";
 import LinkBox from "../../../components/link-box/LinkBox";
-import { StyledMainColumnView } from "../../../styles/GlobalStyles.style";
-import styled from "styled-components";
-
-export const StyledPreviewerSociosDetailed = styled.div`
-  min-height: 400px;
-`;
+import "../../../styles/GlobalStyles.style.css";
 
 const PreviewerSociosDetailed = (props) => {
   const {
@@ -21,8 +16,8 @@ const PreviewerSociosDetailed = (props) => {
   const processedImages = images.map((img) => img.image);
 
   return (
-    <StyledPreviewerSociosDetailed>
-      <StyledMainColumnView>
+    <div style={{ minHeight: "400px" }}>
+      <div className="styled-main-column-view">
         <div className="top-section_entr">
           <div className="ts-title">{project_name}</div>
         </div>
@@ -47,8 +42,8 @@ const PreviewerSociosDetailed = (props) => {
             <LinkBox mediaLinks={media_urls} label="links" thinLine={true} />
           </div>
         )}
-      </StyledMainColumnView>
-    </StyledPreviewerSociosDetailed>
+      </div>
+    </div>
   );
 };
 

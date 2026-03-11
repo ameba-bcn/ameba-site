@@ -14,3 +14,54 @@
     text-decoration: none;
     color: #1D1D1B;
 }
+
+@keyframes marqueee {
+    0% { transform: translateX(0%); }
+    50% { transform: translateX(-50%); }
+    100% { transform: translateX(0%); }
+}
+
+.letters-move__wrapper {
+    width: 100%;
+    background: #1d1d1b;
+    height: 34px;
+    text-align: left;
+    z-index: 0;
+    padding: 4px 0px;
+}
+
+.letters-move__wrapper .substituto-marquee {
+    overflow: hidden;
+    position: relative;
+    background: #1d1d1b;
+}
+
+.letters-move__wrapper .marquee {
+    animation: marqueee 20s linear infinite;
+    display: block;
+    min-width: 100%;
+    left: 0;
+    top: 0;
+    white-space: nowrap;
+    z-index: 3;
+    font-size: 30px;
+    font-family: "Bebas Neue";
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: default;
+}
+
+@media (max-width: 700px) {
+    .letters-move__wrapper .marquee {
+        animation: marqueee 7s linear infinite;
+    }
+}
+
+.letters-move__wrapper a,
+.letters-move__wrapper u {
+    text-decoration: none;
+}
+
+.letters-move__wrapper .cursor-redirect {
+    cursor: pointer;
+}

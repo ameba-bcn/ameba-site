@@ -2,11 +2,7 @@ import React from "react";
 import ImageUploading from "react-images-uploading";
 import Button from "../button/Button";
 import { useTranslation } from "react-i18next";
-import {
-  StyledImageBox,
-  StyledImageLabel,
-  StyledImageLabelBox,
-} from "./ImageLoader.style";
+import "./ImageLoader.style.css";
 import Icon from "../ui/Icon";
 import Tooltip from "../tooltip/Tooltip";
 
@@ -26,19 +22,19 @@ const ImageLoader = (props) => {
 
   return (
     <>
-      <StyledImageLabelBox>
+      <div className="image-label-box">
         {tooltip.length > 0 ? (
           <Tooltip tooltipContent={tooltip}>
-            <StyledImageLabel>
+            <div className="image-label">
               {` ${t("form.imatges")} `}
               <Icon icon="tooltip" />
-            </StyledImageLabel>
+            </div>
           </Tooltip>
         ) : (
-          <StyledImageLabel>{` ${t("form.imatges")} `}</StyledImageLabel>
+          <div className="image-label">{` ${t("form.imatges")} `}</div>
         )}
-      </StyledImageLabelBox>
-      <StyledImageBox imageList={images}>
+      </div>
+      <div className={`image-box ${images?.length > 0 ? "image-box--has-images" : "image-box--no-images"}`}>
         <ImageUploading
           multiple
           value={images}
@@ -117,7 +113,7 @@ const ImageLoader = (props) => {
             </>
           )}
         </ImageUploading>
-      </StyledImageBox>
+      </div>
     </>
   );
 };

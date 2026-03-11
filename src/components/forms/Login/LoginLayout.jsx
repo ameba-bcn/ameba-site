@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
-import { StyledLink } from "../../../styles/GlobalStyles";
+import "../../../styles/GlobalStyles.css";
 import useCartStore from "../../../stores/useCartStore";
 
 const LoginLayout = (props) => {
@@ -37,12 +37,12 @@ const LoginLayout = (props) => {
 
         <LoginForm setRedirect={setRedirect} />
 
-        <StyledLink bold={1} onClick={showRegistration}>
+        <div className="styled-link styled-link--bold" onClick={showRegistration}>
           {`- ${t("login.registrat")} -`}
-        </StyledLink>
-        <StyledLink bold={1} onClick={showPasswordRecover}>
+        </div>
+        <div className="styled-link styled-link--bold" onClick={showPasswordRecover}>
           {`- ${t("login.recupera-llarg")} -`}
-        </StyledLink>
+        </div>
       </div>
     </div>
   );

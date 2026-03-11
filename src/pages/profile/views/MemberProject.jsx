@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import useAuthStore from "../../../stores/useAuthStore";
 import InputField from "../../../components/forms/InputField/InputField";
-import { LogFormError } from "../../../components/forms/Log.style";
-import { MemberFormBox, MemberProjectFrame } from "./MemberProject.style";
+import "../../../components/forms/Log.style.css";
+import "./MemberProject.style.css";
 import Button from "../../../components/button/Button";
 import TextArea from "../../../components/forms/TextArea/TextArea";
 import authService from "../../../store/services/auth.service";
@@ -116,8 +116,8 @@ const MemberProject = () => {
   }
 
   return (
-    <MemberProjectFrame>
-      <MemberFormBox>
+    <div className="member-project-frame">
+      <div className="member-form-box">
         <form className="formMembership" onSubmit={formik.handleSubmit}>
           {status !== ACTIVE_STATUS && (
             <DisclaimerBox
@@ -166,9 +166,9 @@ const MemberProject = () => {
                   disabled={false}
                 />
                 {!!formik.errors.project_name && (
-                  <LogFormError>
+                  <div className="log-form-error">
                     <div>{formik.errors.project_name}</div>
-                  </LogFormError>
+                  </div>
                 )}
               </div>
               <div className={description === null ? "" : "field-wrapper"}>
@@ -182,9 +182,9 @@ const MemberProject = () => {
                   tooltip={t("events.tooltip.description")}
                 />
                 {description === null && (
-                  <LogFormError>
+                  <div className="log-form-error">
                     <div>{ERROR.GENERIC.REQUIRED}</div>
-                  </LogFormError>
+                  </div>
                 )}
               </div>
               <div className="field-wrapper">
@@ -205,9 +205,9 @@ const MemberProject = () => {
                   tooltip={t("events.tooltip.images")}
                 />
                 {images === null && (
-                  <LogFormError>
+                  <div className="log-form-error">
                     <div>{ERROR.GENERIC.REQUIRED}</div>
-                  </LogFormError>
+                  </div>
                 )}
               </div>
               <div className="field-wrapper">
@@ -245,8 +245,8 @@ const MemberProject = () => {
             </>
           )}
         </form>
-      </MemberFormBox>
-    </MemberProjectFrame>
+      </div>
+    </div>
   );
 };
 

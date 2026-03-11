@@ -1,13 +1,13 @@
 import React from "react";
-import { CardContainer } from "../Log.style";
+import "../Log.style.css";
 import MembershipForm from "./MembershipForm";
 
 const MembershipFormLayout = ({ setButtonDisabled }) => {
   return (
     <div className="cardForm">
-      <CardContainer>
+      <div className="log-card-container">
         <MembershipForm setButtonDisabled={setButtonDisabled} />
-      </CardContainer>
+      </div>
     </div>
   );
 };

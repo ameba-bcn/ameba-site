@@ -2,12 +2,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import DiscountCode from "../forms/DiscountForm/DiscountCode";
 import useCartStore from "../../stores/useCartStore";
-import {
-  ReviewContent,
-  ReviewFooter,
-  ReviewRowSeparator,
-  ReviewTotalRow,
-} from "./Review.style";
+import "./Review.style.css";
 import TableProducts from "./TableProducts";
 
 function Review() {
@@ -19,17 +14,17 @@ function Review() {
   const hasArticle = (element) => element.item_type === "article";
 
   return (
-    <ReviewContent>
-      <ReviewTotalRow>
+    <div className="review-content">
+      <div className="review-total-row">
         <div> Total</div>
         <div> {total}</div>
-      </ReviewTotalRow>
-      <ReviewRowSeparator isBig={true} />
+      </div>
+      <div className="review-row-separator review-row-separator--big" />
       <TableProducts />
-      <ReviewRowSeparator isBig={true} />
+      <div className="review-row-separator review-row-separator--big" />
       <DiscountCode />
-      <ReviewRowSeparator isBig={true} />
-      <ReviewFooter>
+      <div className="review-row-separator review-row-separator--big" />
+      <div className="review-footer">
         {hasNoSubscription ? (
           <>
             {t("checkout.review-footer-1")} <br />
@@ -49,8 +44,8 @@ function Review() {
             {t("checkout.review-footer-4")}
           </>
         )}
-      </ReviewFooter>
-    </ReviewContent>
+      </div>
+    </div>
   );
 }
 

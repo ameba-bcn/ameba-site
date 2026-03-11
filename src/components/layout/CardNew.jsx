@@ -3,7 +3,7 @@ import { formatISODateToDate } from "./../../utils/utils";
 import PlusButton from "./../button/PlusButton";
 import { MOBILE_SMALL } from "../../utils/constants";
 import useMediaQuery from "../../hooks/use-media-query";
-import { StyledCard, StyledCardAction } from "./CardNew.style";
+import "./CardNew.css";
 
 const CardNew = (props) => {
   const processedText = (text) => {
@@ -14,8 +14,8 @@ const CardNew = (props) => {
   const isMobile = useMediaQuery(MOBILE_SMALL);
 
   return (
-    <StyledCard>
-      <StyledCardAction>
+    <div className="card-new">
+      <button className="card-new__action">
         <div className="cardMediaImgBox">
           <img
             className="cardMedia"
@@ -36,8 +36,8 @@ const CardNew = (props) => {
             <PlusButton plusSize={isMobile ? "plus--medium" : "plus--big"} />
           </div>
         </div>
-      </StyledCardAction>
-    </StyledCard>
+      </button>
+    </div>
   );
 };
 

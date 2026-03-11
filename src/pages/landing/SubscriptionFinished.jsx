@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import LettersMove from "../../components/layout/LettersMove";
 import { AMEBA_EMAIL } from "../../utils/constants";
-import { StyledLink } from "../../styles/GlobalStyles";
+import "../../styles/GlobalStyles.css";
 import useProfileStore from "../../stores/useProfileStore";
 
 export default function SubscriptionFinished(props) {
@@ -28,9 +28,9 @@ export default function SubscriptionFinished(props) {
             {t("errors.general")}
             <br />
             {t("errors.contacta")}
-            <StyledLink>
+            <div className="styled-link">
               <a href="mailto:info@ameba.cat">{AMEBA_EMAIL}</a>
-            </StyledLink>
+            </div>
           </div>
         ) : (
           <div className="single-msg">{t("general.agraiment")}</div>

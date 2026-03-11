@@ -6,10 +6,10 @@ import axiosInstance from "../../../axios";
 import ImageCarousel from "../../../components/images/ImageCarousel";
 import LettersMove from "../../../components/layout/LettersMove";
 import { API_URL } from "../../../utils/constants";
-import { StyledSociosMain } from "./StyledSociosDetailed";
+import "./SociosDetailed.css";
+import "../../../styles/GlobalStyles.style.css";
 import LinkBox from "../../../components/link-box/LinkBox";
 import TitleSection from "../../../components/layout/TitleSection";
-import { StyledMainColumnView } from "../../../styles/GlobalStyles.style";
 import Spinner from "../../../components/spinner/Spinner";
 import useDataStore from "../../../stores/useDataStore";
 
@@ -42,19 +42,19 @@ const SociosDetailed = () => {
 
   if (loading) {
     return (
-      <StyledSociosMain>
+      <div className="socios-main">
         <Spinner height={400} />{" "}
         <LettersMove
           sentence={"l'associació de música electrònica de barcelona"}
           color={"#F2C571"}
         />
-      </StyledSociosMain>
+      </div>
     );
   }
 
   return (
-    <StyledSociosMain>
-      <StyledMainColumnView>
+    <div className="socios-main">
+      <div className="styled-main-column-view">
         <div className="top-section_entr">
           <div className="ts-breadcrumbs">
             <span onClick={() => navigate("/")}>AMEBA</span> /{" "}
@@ -84,12 +84,12 @@ const SociosDetailed = () => {
             <LinkBox mediaLinks={media_urls} label="links" thinLine={true} />
           </div>
         )}
-      </StyledMainColumnView>
+      </div>
       <LettersMove
         sentence={"l'associació de música electrònica de barcelona"}
         color={"#F2C571"}
       />
-    </StyledSociosMain>
+    </div>
   );
 };
 

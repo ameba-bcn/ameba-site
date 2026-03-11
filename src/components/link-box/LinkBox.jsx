@@ -1,74 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import "./LinkBox.css";
 import { iframesValidation } from "../../utils/validations";
 import Icon from "../ui/Icon";
-
-const StyledLinkBox = styled.div`
-  border: ${(props) =>
-    props.thinLine ? "1px solid #1d1d1b" : "4px solid #1d1d1b"};
-  border-radius: 0px;
-  padding: 24px;
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  .link-row {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    margin: 6px 0px;
-    .content {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      word-wrap: break-word;
-      white-space: pre-wrap;
-      word-break: break-word;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      font-size: 30px;
-      font-family: "Bebas Neue";
-      font-weight: 800;
-      line-height: 1em;
-      color: #212529;
-      text-decoration: none;
-      text-overflow: ellipsis;
-      @media (max-width: 500px) {
-        font-size: 24px;
-      }
-    }
-  }
-  .delete-link-icon {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    padding: 18px;
-    svg {
-      cursor: pointer;
-    }
-  }
-`;
-
-export const StyledLinkLabelBox = styled.div`
-  text-align: left;
-  margin: 0px 0px -8px 13px !important;
-`;
-
-export const StyledLinkLabel = styled.div`
-  display: inline-block;
-  position: relative;
-  background-color: #fae6c5;
-  width: fit-content;
-  color: #1d1d1b;
-  text-transform: uppercase;
-  font-family: "Bebas Neue";
-  font-size: 20px;
-  z-index: 10000;
-  line-height: 0.8;
-  top: 4px;
-  padding: 0px 4px !important;
-`;
 
 const LinkBox = (props) => {
   const {
@@ -81,10 +14,10 @@ const LinkBox = (props) => {
 
   return (
     <div style={{ marginTop: "-14px" }}>
-      <StyledLinkLabelBox>
-        <StyledLinkLabel>{label}</StyledLinkLabel>
-      </StyledLinkLabelBox>
-      <StyledLinkBox thinLine={thinLine}>
+      <div className="link-label-box">
+        <div className="link-label">{label}</div>
+      </div>
+      <div className={thinLine ? "link-box link-box--thin" : "link-box"}>
         {mediaLinks.map((link) =>
           iframesValidation(link) ? (
             <div className="link-row" key={link}>
@@ -127,7 +60,7 @@ const LinkBox = (props) => {
             </div>
           )
         )}
-      </StyledLinkBox>
+      </div>
     </div>
   );
 };

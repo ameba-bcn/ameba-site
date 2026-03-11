@@ -8,17 +8,10 @@ import SociDialog from "../../../components/botiga/Soci";
 import MembershipFormLayout from "../../../components/forms/MembershipForm/MembershipFormLayout";
 import MembershipFormReadOnly from "../../../components/forms/MembershipForm/MembershipFormReadOnly";
 // import { deleteUser } from "../../../redux/actions/auth";
-import { RowSeparator } from "../../../styles/GlobalStyles.style";
-import {
-  MemberInfoRow,
-  MemberProfileBox,
-  MemberProfileBoxBorder,
-  MemberProfileFrame,
-  MemberProfileTitle,
-  MessageFormat,
-} from "./MemberProfile.style";
+import "../../../styles/GlobalStyles.style.css";
+import "../../../styles/GlobalStyles.css";
+import "./MemberProfile.style.css";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
-import { StyledLink } from "../../../styles/GlobalStyles";
 import { isDateExpired } from "../../../utils/utils";
 
 export default function MemberProfile({ setButtonDisabled, isMember }) {
@@ -36,13 +29,13 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
   // };
 
   return (
-    <MemberProfileFrame>
-      <MemberProfileBox>
-        <MemberProfileTitle>{t("perfil.dades")}</MemberProfileTitle>
-        <MemberProfileBoxBorder>
+    <div className="member-profile-frame">
+      <div className="member-profile-box">
+        <div className="member-profile-title">{t("perfil.dades")}</div>
+        <div className="member-profile-box-border">
           {isMember && isMembershipExpired && (
             <DisclaimerBox
-              text={<MessageFormat>{t("soci.no-soci-perfil")}</MessageFormat>}
+              text={<div className="message-format">{t("soci.no-soci-perfil")}</div>}
               hideCloseIcon={true}
             />
           )}
@@ -55,8 +48,8 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
 
           {!isMember && (
             <>
-              <RowSeparator />
-              <MemberInfoRow>
+              <div className="row-separator" />
+              <div className="member-info-row">
                 {t("perfil.vols-soci")}?<br />
                 <NavLink
                   style={{ textDecoration: "none", color: "#1d1d1b" }}
@@ -71,7 +64,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
                     {`< ${t("perfil.mes-info")} >`}
                   </span>
                 </NavLink>
-              </MemberInfoRow>
+              </div>
             </>
           )}
 
@@ -87,18 +80,18 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
           {memberships.length > 0 && !isMembershipExpired && (
             <DisclaimerBox
               text={
-                <MessageFormat>
+                <div className="message-format">
                   {t("perfil.baixa-missatge")}
-                  <StyledLink>
+                  <div className="styled-link">
                     <a href="mailto:info@ameba.cat">info@ameba.cat</a>
-                  </StyledLink>
-                </MessageFormat>
+                  </div>
+                </div>
               }
             />
           )}
-        </MemberProfileBoxBorder>
+        </div>
         {open && <SociDialog open={open} onClose={handleClick} />}
-      </MemberProfileBox>
-    </MemberProfileFrame>
+      </div>
+    </div>
   );
 }

@@ -4,14 +4,8 @@ import { loadStripe } from "@stripe/stripe-js";
 import PaymentForm from "../forms/Payment/PaymentForm";
 import FreeCheckout from "./FreeCheckout";
 import MiniTableProducts from "./MiniTableProducts";
-import {
-  PayementTotalRow,
-  PaymentBox,
-  PaymentContent,
-  PaymentReview,
-  PaymentSummaryBox,
-} from "./Payment.style";
-import { ReviewRowSeparator } from "./Review.style";
+import "./Payment.style.css";
+import "./Review.style.css";
 import useUIStore from "../../stores/useUIStore";
 import useCartStore from "../../stores/useCartStore";
 
@@ -43,20 +37,20 @@ export default function Payment() {
   }, []);
 
   return (
-    <PaymentContent>
-      <PaymentSummaryBox>
-        <PaymentReview>
-          <PayementTotalRow>
+    <div className="payment-content">
+      <div className="payment-summary-box">
+        <div className="payment-review">
+          <div className="payment-total-row">
             <div> Total:</div>
             <div> {total}</div>
-          </PayementTotalRow>
-          <ReviewRowSeparator isBig={false} />
+          </div>
+          <div className="review-row-separator review-row-separator--small" />
           <MiniTableProducts />
-          <ReviewRowSeparator isBig={false} />
-        </PaymentReview>
-      </PaymentSummaryBox>
+          <div className="review-row-separator review-row-separator--small" />
+        </div>
+      </div>
 
-      <PaymentBox>
+      <div className="payment-box">
         {isPaymentFree ? (
           <FreeCheckout />
         ) : isStripeReady ? (
@@ -66,7 +60,7 @@ export default function Payment() {
         ) : (
           <span className="spinner-border"></span>
         )}
-      </PaymentBox>
-    </PaymentContent>
+      </div>
+    </div>
   );
 }

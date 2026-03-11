@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { MiniTableContent } from "./MiniTableProducts.style";
+import "./MiniTableProducts.style.css";
 import useCartStore from "../../stores/useCartStore";
 
 export default function MiniTableProducts() {
@@ -9,7 +9,7 @@ export default function MiniTableProducts() {
   const [t] = useTranslation("translation");
 
   return (
-    <MiniTableContent>
+    <table className="mini-table-content">
       <tbody>
         {item_variants?.map((item, i) => (
           <tr key={i}>
@@ -23,6 +23,6 @@ export default function MiniTableProducts() {
           </tr>
         ))}
       </tbody>
-    </MiniTableContent>
+    </table>
   );
 }

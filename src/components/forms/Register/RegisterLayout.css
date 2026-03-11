@@ -1,0 +1,9 @@
+.register-add-box {
+  margin-left: 0.5rem;
+  display: flex;
+}
+
+.register-add-box svg {
+  background-color: #1d1d1b;
+  scale: 1;
+}

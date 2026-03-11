@@ -1,0 +1,6 @@
+.socios {
+  height: auto;
+  background-color: #fae6c5;
+  display: flex;
+  flex-direction: column;
+}

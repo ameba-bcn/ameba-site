@@ -25,7 +25,7 @@ import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
 import PasswordRecovery from "./pages/PasswordRecovery";
 import QrClient from "./pages/QrClient";
 import Agenda from "./pages/agenda/Agenda";
-import { StyledApp } from "./App.style";
+import "./App.css";
 import LoadableHome from "./pages/home/LoadableHome";
 import LoadableEntrevista from "./pages/support/components/Entrevista/LoadableEntrevista";
 import LoadableBooking from "./pages/booking/LoadableBooking";
@@ -88,7 +88,7 @@ function App() {
   }, [isNewMember]);
 
   return (
-    <StyledApp>
+    <div className="app">
       <ToastContainer position="bottom-center" />
       {isFullscreenOpen && <FullscreenCheckout />}
       <Menu />
@@ -122,7 +122,7 @@ function App() {
         </Routes>
       </UserContext.Provider>
       <Contacte />
-    </StyledApp>
+    </div>
   );
 }
 

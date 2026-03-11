@@ -1,0 +1,132 @@
+.agenda-table {
+  height: 100%;
+}
+
+.agenda-table--empty {
+  min-height: 400px;
+}
+
+.agenda-table table {
+  width: 100%;
+  margin: 0 auto;
+  background-color: var(--color-cream);
+  padding: 12px;
+  border-radius: 4px;
+}
+
+.agenda-table table .search-row {
+  float: right;
+}
+
+.agenda-table table th {
+  height: 60px;
+  padding: 2px 4px;
+}
+
+.agenda-table table tbody tr {
+  height: 150px;
+}
+
+.agenda-table table tbody tr h1 {
+  text-align: left;
+  font-family: "Bebas Neue";
+  font-weight: 400;
+  font-size: 2.5rem;
+  line-height: 0.8em;
+}
+
+@media screen and (max-width: 1460px) {
+  .agenda-table table tbody tr h1 {
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 1230px) {
+  .agenda-table table tbody tr h1 {
+    font-size: 1.6rem;
+  }
+}
+
+.agenda-table table tbody tr .horaDataActivitat {
+  text-align: center;
+  justify-content: center;
+  max-width: 160px;
+  width: max-content;
+  display: inline-block;
+}
+
+.agenda-table table tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+}
+
+.agenda-table .pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  font-family: "Bebas Neue";
+  font-size: 1.4rem;
+}
+
+.agenda-table .pagination-controls button {
+  background: none;
+  border: 1px solid var(--color-cream);
+  color: var(--color-cream);
+  font-size: 1.4rem;
+  padding: 4px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.agenda-table .pagination-controls button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.agenda-table .pagination-controls button:hover:not(:disabled) {
+  background-color: rgba(250, 230, 197, 0.1);
+}
+
+.image-table-box {
+  display: flex;
+}
+
+.image-table-box .image-side {
+  text-align: right;
+  width: 40%;
+  height: auto;
+  float: left;
+}
+
+.image-table-box .image-side img {
+  width: 90%;
+  height: auto;
+  max-height: 120px;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+.image-table-box .title-side {
+  margin-left: 1em;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  float: left;
+}
+
+.image-table-box::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.styled-ticket {
+  display: flex;
+  justify-content: center;
+}
+
+.styled-ticket svg {
+  scale: 2;
+}

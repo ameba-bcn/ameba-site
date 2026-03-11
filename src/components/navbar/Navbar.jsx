@@ -3,23 +3,11 @@ import { NavLink } from "react-router-dom";
 import NavbarButtons from "./NavbarButtons";
 import NavbarButtonsMobile from "./NavbarButtonsMobile";
 import { MOBILE_BIG } from "../../utils/constants";
-import { StyledNavbar } from "./StyledNavbar";
+import "./Navbar.style.css";
 import Icon from "../ui/Icon";
-import styled from "styled-components";
 import useMediaQuery from "../../hooks/use-media-query";
 import useUIStore from "../../stores/useUIStore";
 import useAuthStore from "../../stores/useAuthStore";
-
-export const StyledMenuIcon = styled.div`
-  font-size: 2rem;
-  color: #fae6c5;
-  text-align: end;
-  cursor: pointer;
-  svg {
-    width: 32px;
-    height: 32px;
-  }
-`;
 export default function Navbar({ isErrored = false }) {
   const isMobile = useMediaQuery(MOBILE_BIG);
   const { isLoggedIn } = useAuthStore();
@@ -27,7 +15,7 @@ export default function Navbar({ isErrored = false }) {
   const { isMenuOpen, openMenu, closeMenu } = useUIStore();
 
   return (
-    <StyledNavbar>
+    <div className="navbar">
       <div className="menuContainer">
         <div className="menuSuperior">
           <div className="menu-logo-box">
@@ -42,7 +30,7 @@ export default function Navbar({ isErrored = false }) {
           </div>
           {isMobile
             ? !isErrored && (
-                <StyledMenuIcon>
+                <div className="menu-icon">
                   {isMenuOpen ? (
                     <Icon
                       icon="clear"
@@ -58,7 +46,7 @@ export default function Navbar({ isErrored = false }) {
                       type="hoverable-dark"
                     />
                   )}
-                </StyledMenuIcon>
+                </div>
               )
             : !isErrored && <NavbarButtons isLoggedIn={isLoggedIn} />}
         </div>
@@ -66,6 +54,6 @@ export default function Navbar({ isErrored = false }) {
           <NavbarButtonsMobile isLoggedIn={isLoggedIn} refer={ref} />
         )}
       </div>
-    </StyledNavbar>
+    </div>
   );
 }

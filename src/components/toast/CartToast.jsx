@@ -1,11 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import {
-  ToastBox,
-  ToastLeftInBox,
-  ToastRightInBox,
-} from "./CartToast.style.js";
+import "./CartToast.style.css";
 import useProfileStore from "../../stores/useProfileStore";
 import useCartStore from "../../stores/useCartStore";
 
@@ -20,9 +16,9 @@ export default function CartToast() {
   const [t] = useTranslation("translation");
 
   return (
-    <ToastBox>
+    <div className="toast-box">
       <NavLink to={checkoutRedirect}>
-        <ToastLeftInBox>
+        <div className="toast-left-in-box">
           {t("checkout.compra-toast1")}{" "}
           <span>
             {item_variants.length}{" "}
@@ -31,9 +27,9 @@ export default function CartToast() {
               : t("general.producte") + "s"}
           </span>{" "}
           {t("checkout.compra-toast2")}
-        </ToastLeftInBox>
-        <ToastRightInBox>{cart_data.total}</ToastRightInBox>
+        </div>
+        <div className="toast-right-in-box">{cart_data.total}</div>
       </NavLink>
-    </ToastBox>
+    </div>
   );
 }

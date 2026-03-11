@@ -1,121 +1,5 @@
 import React from "react";
-import styled from "styled-components";
-
-export const StyledSvgElement = styled.div`
-  display: flex;
-  position: relative;
-  .tooltip {
-    display: none;
-  }
-
-  .tooltip {
-    visibility: hidden;
-    width: 120px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 150%;
-    left: 50%;
-    margin-left: -60px;
-    opacity: 0;
-    transition: opacity 0.5s;
-  }
-
-  .tooltip::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-  }
-
-  &:hover .tooltip {
-    visibility: visible;
-    opacity: 1;
-    display: block;
-  }
-
-  #hoverable-cream-svg {
-    path {
-      fill: ${(props) =>
-        props.disabled ? "var(--color-gris-claro)" : "var(--color-negro)"};
-    }
-  }
-
-  #hoverable-cream-svg:hover {
-    path {
-      fill: ${(props) =>
-        props.disabled ? "var(--color-gris-claro)" : "var(--color-rojo)"};
-    }
-  }
-
-  #hoverable-red-svg {
-    path {
-      fill: ${(props) =>
-        props.disabled ? "var(--color-gris-claro)" : "var(--color-negro)"};
-    }
-  }
-
-  #hoverable-red-svg:hover {
-    path {
-      fill: ${(props) =>
-        props.disabled ? "var(--color-gris-claro)" : "var(--color-rojo)"};
-    }
-  }
-
-  #hoverable-black-svg {
-    path {
-      fill: ${(props) =>
-        props.disabled ? "var(--color-gris-claro)" : "var(--color-cream)"};
-    }
-  }
-
-  #hoverable-black-svg:hover {
-    path {
-      fill: ${(props) =>
-        props.disabled ? "var(--color-gris-claro)" : "var(--color-rojo)"};
-    }
-  }
-
-  #hoverable-dark-svg {
-    path {
-      fill: ${(props) =>
-        props.disabled ? "var(--color-gris-claro)" : "var(--color-cream)"};
-    }
-  }
-
-  #hoverable-dark-svg:hover {
-    path {
-      fill: ${(props) =>
-        props.disabled ? "var(--color-gris-claro)" : "var(--color-rojo)"};
-    }
-  }
-
-  #cream-svg {
-    path {
-      fill: var(--color-cream);
-    }
-  }
-
-  #orange-svg {
-    path {
-      fill: var(--color-naranja);
-    }
-  }
-
-  #yellow-svg {
-    path {
-      fill: var(--color-amarillo);
-    }
-  }
-`;
+import "./Icon.css";
 
 const AmebaSvgWrapper = (props) => {
   const {
@@ -129,7 +13,7 @@ const AmebaSvgWrapper = (props) => {
   } = props;
 
   return (
-    <StyledSvgElement id={className} disabled={disabled}>
+    <div id={className} className={disabled ? "icon--disabled" : "icon"}>
       <svg
         viewBox="0 0 24 24"
         width={width}
@@ -145,7 +29,7 @@ const AmebaSvgWrapper = (props) => {
       {props?.tooltip?.length > 0 && (
         <span className="tooltip">{props?.tooltip}</span>
       )}
-    </StyledSvgElement>
+    </div>
   );
 };
 

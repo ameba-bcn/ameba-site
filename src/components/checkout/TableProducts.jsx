@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { ReviewTable } from "./Review.style";
+import "./Review.style.css";
 import { priceMayDiscount } from "../../utils/utils";
 import Icon from "../ui/Icon";
 import useCartStore from "../../stores/useCartStore";
@@ -14,7 +14,7 @@ export default function TableProducts() {
     substractToCart(id);
   };
   return (
-    <ReviewTable>
+    <table className="review-table">
       <tbody>
         {item_variants?.map((item, i) => (
           <tr key={i}>
@@ -47,6 +47,6 @@ export default function TableProducts() {
           </tr>
         ))}
       </tbody>
-    </ReviewTable>
+    </table>
   );
 }
