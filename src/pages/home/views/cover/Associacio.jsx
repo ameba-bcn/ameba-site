@@ -1,17 +1,16 @@
 /* eslint-disable no-undef */
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
-import { useSelector } from "react-redux";
 import LettersMove from "../../../../components/layout/LettersMove";
 import "./Associacio.css";
 import { MOBILE_NORMAL } from "../../../../utils/constants";
 import useMediaQuery from "../../../../hooks/use-media-query";
+import useDataStore from "../../../../stores/useDataStore";
 
 const Associacio = () => {
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const [isReady, setIsready] = useState(false);
-  const data = useSelector((state) => state.data);
-  const { cover = [] } = data;
+  const { cover = [] } = useDataStore();
   const mediaIndex = isMobile ? 1 : 0;
   const { file = "" } = cover[mediaIndex] || {};
   const urlMedia = file;

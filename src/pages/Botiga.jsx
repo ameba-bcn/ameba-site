@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import BotigaGeneral from "../components/botiga/BotigaGeneral";
+import useDataStore from "../stores/useDataStore";
 import PowerTitle from "../components/layout/PowerTitle";
 import ProductBanner from "../components/botiga/ProductBanner";
 import SociDialog from "../components/botiga/Soci";
@@ -16,8 +16,7 @@ function Botiga() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [productData, setProductData] = useState([]);
-  const data = useSelector((state) => state.data);
-  const { membership = [] } = data;
+  const { membership = [] } = useDataStore();
   let location = useLocation();
   const value = Object.fromEntries(new URLSearchParams(location.search));
   const externalId = value?.id;

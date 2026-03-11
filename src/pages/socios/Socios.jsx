@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
+import useAuthStore from "../../stores/useAuthStore";
+import useDataStore from "../../stores/useDataStore";
 import { useTranslation } from "react-i18next";
 import LettersMove from "../../components/layout/LettersMove";
 import PowerTitle from "../../components/layout/PowerTitle";
@@ -8,7 +9,6 @@ import CardLayout from "../../components/layout/CardLayout/CardLayout";
 import { StyledHeightBlock } from "../../styles/GlobalStyles.style";
 import SearchBox from "../../components/searchBox/SearchBox";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
-import { getMemberProjects } from "../../store/actions/data";
 import { ACTIVE_STATUS } from "../../utils/constants";
 
 export const StyledSocios = styled.div`
@@ -21,18 +21,16 @@ export const StyledSocios = styled.div`
 const PAGE_SIZE = 20;
 
 const Socios = () => {
-  const dispatch = useDispatch();
+  const { member_projects, isMemberProjectsLoading, fetchMemberProjects } = useDataStore();
 
   useEffect(() => {
-    dispatch(getMemberProjects());
+    fetchMemberProjects();
   }, []);
 
-  const { isMemberProjectsLoading } = useSelector((state) => state.loaders);
   const [searchInput, setSearchInput] = useState("");
   const [page, setPage] = useState(0);
   const [t] = useTranslation("translation");
-  const { member_projects } = useSelector((state) => state.data);
-  const { user_member_data = {} } = useSelector((state) => state.auth);
+  const { user_member_data = {} } = useAuthStore();
   const { status = "" } = user_member_data;
   const member_projects_active = member_projects.filter(
     (project) => !!project.is_active

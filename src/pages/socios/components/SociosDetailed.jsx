@@ -1,6 +1,5 @@
 /* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import axiosInstance from "../../../axios";
@@ -12,6 +11,7 @@ import LinkBox from "../../../components/link-box/LinkBox";
 import TitleSection from "../../../components/layout/TitleSection";
 import { StyledMainColumnView } from "../../../styles/GlobalStyles.style";
 import Spinner from "../../../components/spinner/Spinner";
+import useDataStore from "../../../stores/useDataStore";
 
 const SociosDetailed = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ const SociosDetailed = () => {
   const [project, setProject] = useState({});
   const [loading, setLoading] = useState(false);
   let urlID = location.pathname.substr(location.pathname.lastIndexOf("/") + 1);
-  const { member_projects = [] } = useSelector((state) => state.data);
+  const { member_projects = [] } = useDataStore();
   const [urlData] = member_projects.filter(
     (x) => x?.project_name === decodeURIComponent(urlID)
   );

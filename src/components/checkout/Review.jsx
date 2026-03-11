@@ -1,7 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import DiscountCode from "../forms/DiscountForm/DiscountCode";
+import useCartStore from "../../stores/useCartStore";
 import {
   ReviewContent,
   ReviewFooter,
@@ -12,7 +12,7 @@ import TableProducts from "./TableProducts";
 
 function Review() {
   const [t] = useTranslation("translation");
-  const { cart_data = {} } = useSelector((state) => state.cart);
+  const { cart_data = {} } = useCartStore();
   const { total, item_variants } = cart_data;
   const noAllSub = (element) => element.is_subscription === false;
   const hasNoSubscription = item_variants.some(noAllSub);

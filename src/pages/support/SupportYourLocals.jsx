@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import PowerTitle, {
   StyledPowerTitleBox,
 } from "../../components/layout/PowerTitle";
@@ -8,13 +7,13 @@ import { useTranslation } from "react-i18next";
 import { radioDublabLink } from "../../utils/constants";
 import CardLayout from "../../components/layout/CardLayout/CardLayout";
 import SearchBox from "../../components/searchBox/SearchBox";
+import useDataStore from "../../stores/useDataStore";
 
 export default function SupportYourLocals() {
   const [t] = useTranslation("translation");
-  const { isArtistLoading } = useSelector((state) => state.loaders);
+  const { support, isArtistLoading } = useDataStore();
 
   const [searchInput, setSearchInput] = useState("");
-  const { support } = useSelector((state) => state.data);
   const filteredArtists = support.filter(
     (artist) =>
       artist?.is_ameba_dj === false &&

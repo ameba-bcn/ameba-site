@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import useAuthStore from "../../../stores/useAuthStore";
 import SociDialog from "../../../components/botiga/Soci";
 // import Button from "../../../components/button/Button";
 import MembershipFormLayout from "../../../components/forms/MembershipForm/MembershipFormLayout";
@@ -23,7 +23,7 @@ import { isDateExpired } from "../../../utils/utils";
 
 export default function MemberProfile({ setButtonDisabled, isMember }) {
   const [t] = useTranslation("translation");
-  const { user_member_data } = useSelector((state) => state.auth);
+  const { user_member_data } = useAuthStore();
   const { memberships = [], expires = "" } = user_member_data;
   const [open, setOpen] = useState(false);
 

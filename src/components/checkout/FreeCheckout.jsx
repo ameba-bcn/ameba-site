@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { getMemberProfile } from "../../store/actions/auth";
-import { checkoutPaymentCart, getCart } from "../../store/actions/cart";
+import useAuthStore from "../../stores/useAuthStore";
 import Button from "../button/Button";
 import { useTranslation } from "react-i18next";
-import { closeFullscreen } from "../../store/actions/fullscreen";
+import useUIStore from "../../stores/useUIStore";
+import useCartStore from "../../stores/useCartStore";
 
 const StyledFreeCheckoutParagraph = styled.div`
   font-size: 24px;
@@ -25,16 +24,17 @@ const StyledFreeCheckout = styled.div`
 `;
 
 export default function FreeCheckout() {
-  const dispatch = useDispatch();
+  const closeFullscreen = useUIStore((state) => state.closeFullscreen);
   const [t] = useTranslation("translation");
-  const { cart_data = {} } = useSelector((state) => state.cart);
+  const { cart_data = {}, checkoutPaymentCart, getCart } = useCartStore();
   const { id = "" } = cart_data;
   const [redirect, setRedirect] = useState(false);
+  const getMemberProfile = useAuthStore((state) => state.getMemberProfile);
   const handleFinishPayment = () => {
-    dispatch(checkoutPaymentCart(id)).then(() => {
-      dispatch(getMemberProfile());
-      dispatch(getCart());
-      dispatch(closeFullscreen());
+    checkoutPaymentCart(id).then(() => {
+      getMemberProfile();
+      getCart();
+      closeFullscreen();
     });
     setRedirect(true);
   };

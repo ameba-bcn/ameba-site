@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Button from "../../button/Button";
 import InputField from "../InputField/InputField";
-import { useDispatch } from "react-redux";
 import { LogFormError } from "../Log.style";
 import { validate } from "./PasswordRecoveryFormValidate";
-import { passwordRecovery } from "../../../store/actions/auth";
+import useAuthStore from "../../../stores/useAuthStore";
 import { useFormik } from "formik";
 import { isEmptyObject } from "../../../utils/utils";
 import { useTranslation } from "react-i18next";
@@ -12,12 +11,12 @@ import { useTranslation } from "react-i18next";
 export default function PasswordRecoveryForm(props) {
   const { strToken, setIsSubmitted } = props;
   const [t] = useTranslation("translation");
-  const dispatch = useDispatch();
+  const passwordRecovery = useAuthStore((state) => state.passwordRecovery);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (value) => {
     setLoading(true);
-    dispatch(passwordRecovery(strToken, value.password))
+    passwordRecovery(strToken, value.password)
       .then(() => {
         setIsSubmitted(true);
         setLoading(false);

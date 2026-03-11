@@ -3,12 +3,12 @@ import "./BotigaGeneral.css";
 import ProducteDialog from "./Producte";
 import axiosInstance from "../../axios";
 import { createLastRowIterator, formatPrice } from "./../../utils/utils";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { ReactFitty } from "react-fitty";
 import { useLocation } from "react-router-dom";
 import { API_URL } from "../../utils/constants";
 import useMediaQuery from "../../hooks/use-media-query";
+import useDataStore from "../../stores/useDataStore";
 
 export const TitleStyled = styled.div`
   width: 75%;
@@ -26,8 +26,7 @@ export default function BotigaGeneral() {
   let location = useLocation();
   const value = Object.fromEntries(new URLSearchParams(location.search));
   const externalId = value.id;
-  const data = useSelector((state) => state.data);
-  const { botiga = [] } = data;
+  const { botiga = [] } = useDataStore();
   const [productData, setProductData] = useState([
     {
       id: 0,

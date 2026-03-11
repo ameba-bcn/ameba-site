@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
+import useAuthStore from "../../../stores/useAuthStore";
 import { useTranslation } from "react-i18next";
 import ImageCarousel from "../../../components/images/ImageCarousel";
 import "react-image-gallery/styles/image-gallery.css";
@@ -18,7 +18,7 @@ const QrView = () => {
   const [t] = useTranslation("translation");
   const [qrImg, setQrImg] = useState("");
   const [loading, setLoading] = useState(true);
-  const { user_member_data } = useSelector((state) => state.auth);
+  const { user_member_data } = useAuthStore();
   const { expires = "" } = user_member_data;
   const isMembershipExpired = isDateExpired(expires);
 

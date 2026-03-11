@@ -1,10 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { MiniTableContent } from "./MiniTableProducts.style";
+import useCartStore from "../../stores/useCartStore";
 
 export default function MiniTableProducts() {
-  const { cart_data = {} } = useSelector((state) => state.cart);
+  const { cart_data = {} } = useCartStore();
   const { item_variants = [] } = cart_data;
   const [t] = useTranslation("translation");
 

@@ -1,14 +1,14 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import LettersMove from "../../components/layout/LettersMove";
 import PowerTitle from "../../components/layout/PowerTitle";
 import AgendaTable from "./components/AgendaTable";
 import Spinner from "../../components/spinner/Spinner";
+import useDataStore from "../../stores/useDataStore";
 
 export default function Agenda() {
   const [t] = useTranslation("translation");
-  const { isEventsLoading } = useSelector((state) => state.loaders);
+  const { isEventsLoading } = useDataStore();
 
   return (
     <div className="Articles">

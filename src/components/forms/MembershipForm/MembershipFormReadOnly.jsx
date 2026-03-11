@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import InputField from "../InputField/InputField";
-import { useSelector } from "react-redux";
 import { LogFormBox, LogFormError, LogButtonBox } from "../Log.style";
+import useAuthStore from "../../../stores/useAuthStore";
 import { useTranslation } from "react-i18next";
 import Button from "../../button/Button";
 import { usernameValidation } from "../../../utils/validations";
@@ -13,8 +13,7 @@ import useMediaQuery from "../../../hooks/use-media-query";
 export default function MembershipFormReadOnly(props) {
   const [t] = useTranslation("translation");
   const { isCheckout = false } = props;
-  const auth = useSelector((state) => state.auth);
-  const { user_data = {}, user_member_data = {} } = auth;
+  const { user_data = {}, user_member_data = {} } = useAuthStore();
   const [redirect, setRedirect] = useState(false);
   const [user, setUser] = useState(user_data?.username || "");
   const isMinMobile = useMediaQuery(MOBILE_SMALL);

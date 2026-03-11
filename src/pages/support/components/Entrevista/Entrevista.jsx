@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import MediaSection from "./MediaSection";
 import QuestionsSection from "./QuestionsSection";
@@ -10,6 +9,7 @@ import axiosInstance from "../../../../axios";
 import { API_URL, radioDublabLink } from "../../../../utils/constants";
 import LettersMove from "../../../../components/layout/LettersMove";
 import MainSection from "./MainSection";
+import useDataStore from "../../../../stores/useDataStore";
 
 const Entrevista = () => {
   const navigate = useNavigate();
@@ -25,8 +25,7 @@ const Entrevista = () => {
       current_answers: [{ answer: "", question: "" }],
     },
   ]);
-  const data = useSelector((state) => state.data);
-  const { support = [] } = data;
+  const { support = [] } = useDataStore();
   const [urlData] = support.filter(
     (x) => x?.name?.replace(/\s+/g, "-")?.toLowerCase() === urlID
   );

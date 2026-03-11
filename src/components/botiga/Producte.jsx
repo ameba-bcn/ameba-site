@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../store/actions/cart";
+import useCartStore from "../../stores/useCartStore";
 import ModalCard from "../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
 import FullscreenSpinner from "../spinner/FullscreenSpinner";
@@ -20,7 +19,7 @@ export default function ProducteDialog(props) {
     price,
     stock,
   } = dataRow;
-  const dispatch = useDispatch();
+  const { addToCart } = useCartStore();
   const [sizes, setSizes] = useState([]);
   const [t] = useTranslation("translation");
 
@@ -33,7 +32,7 @@ export default function ProducteDialog(props) {
       (x) => x.attributes[0]?.value?.toLowerCase() === size.toLowerCase()
     )[0]?.id;
     const variant_id = variantsObj || "";
-    dispatch(addToCart(variant_id));
+    addToCart(variant_id);
     handleClose();
   };
 
