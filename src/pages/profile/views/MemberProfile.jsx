@@ -17,7 +17,7 @@ import { isDateExpired } from "../../../utils/utils";
 export default function MemberProfile({ setButtonDisabled, isMember }) {
   const [t] = useTranslation("translation");
   const { user_member_data } = useAuthStore();
-  const { memberships = [], expires = "" } = user_member_data;
+  const { memberships = [], expires = "" } = user_member_data || {};
   const [open, setOpen] = useState(false);
 
   const handleClick = () => {
