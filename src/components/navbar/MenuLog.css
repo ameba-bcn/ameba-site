@@ -1,0 +1,19 @@
+.menu-log {
+  position: relative;
+}
+
+.menu-log__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-log__item .item {
+  color: #1d1d1b;
+  font-family: "Bebas Neue";
+  font-size: 30px;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+}

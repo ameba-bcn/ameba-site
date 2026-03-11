@@ -1,51 +1,35 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router";
-import { getMemberProfile } from "../../store/actions/auth";
-import { checkoutPaymentCart, getCart } from "../../store/actions/cart";
+import "./FreeCheckout.css";
+import { Navigate } from "react-router-dom";
+import useAuthStore from "../../stores/useAuthStore";
 import Button from "../button/Button";
 import { useTranslation } from "react-i18next";
-import { closeFullscreen } from "../../store/actions/fullscreen";
-
-const StyledFreeCheckoutParagraph = styled.div`
-  font-size: 24px;
-`;
-
-const StyledFreeCheckout = styled.div`
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
-  button {
-    padding: 10px 50px;
-  }
-`;
+import useUIStore from "../../stores/useUIStore";
+import useCartStore from "../../stores/useCartStore";
 
 export default function FreeCheckout() {
-  const dispatch = useDispatch();
+  const closeFullscreen = useUIStore((state) => state.closeFullscreen);
   const [t] = useTranslation("translation");
-  const { cart_data = {} } = useSelector((state) => state.cart);
+  const { cart_data = {}, checkoutPaymentCart, getCart } = useCartStore();
   const { id = "" } = cart_data;
   const [redirect, setRedirect] = useState(false);
+  const getMemberProfile = useAuthStore((state) => state.getMemberProfile);
   const handleFinishPayment = () => {
-    dispatch(checkoutPaymentCart(id)).then(() => {
-      dispatch(getMemberProfile());
-      dispatch(getCart());
-      dispatch(closeFullscreen());
+    checkoutPaymentCart(id).then(() => {
+      getMemberProfile();
+      getCart();
+      closeFullscreen();
     });
     setRedirect(true);
   };
 
-  if (redirect) return <Redirect to="/summary-checkout" />;
+  if (redirect) return <Navigate to="/summary-checkout" replace />;
 
   return (
-    <StyledFreeCheckout>
-      <StyledFreeCheckoutParagraph>
+    <div className="free-checkout">
+      <div className="free-checkout__paragraph">
         {t("checkout.pagament-gratis")}
-      </StyledFreeCheckoutParagraph>
+      </div>
       <Button
         variant="contained"
         color="primary"
@@ -55,6 +39,6 @@ export default function FreeCheckout() {
       >
         {t("boto.finalitza")}
       </Button>
-    </StyledFreeCheckout>
+    </div>
   );
 }

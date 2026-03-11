@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import "./Manifesto.css";
 import Spinner from "../../../../components/spinner/Spinner";
+import useDataStore from "../../../../stores/useDataStore";
 
 const Manifesto = () => {
-  const data = useSelector((state) => state.data);
-  const { isManifestoLoading } = useSelector((state) => state.loaders);
-  const { about = {} } = data;
+  const { about = {}, isManifestoLoading } = useDataStore();
   const [scroll, setScroll] = useState(false);
 
   useEffect(() => {

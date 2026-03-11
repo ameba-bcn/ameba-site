@@ -1,0 +1,72 @@
+/* Checkout styles */
+
+.checkout-title {
+  text-transform: uppercase;
+  font-family: "Bebas Neue";
+  color: #1d1d1b;
+  font-size: 6.5rem;
+}
+
+@media (max-width: 400px) {
+  .checkout-title {
+    font-size: 4.5rem;
+  }
+}
+
+.checkout-subtitle {
+  text-transform: uppercase;
+  font-family: "Bebas Neue";
+  color: #1d1d1b;
+  font-size: 3.3rem;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 350px) {
+  .checkout-subtitle {
+    font-size: 2.5rem;
+    margin-top: -30px;
+  }
+}
+
+.checkout-frame {
+  max-width: 600px;
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.checkout-box {
+  padding: 24px;
+  margin-bottom: 48px;
+}
+
+.checkout-content {
+  display: flex;
+  margin: 40px 0;
+}
+
+.checkout-buttons {
+  display: flex;
+  justify-content: space-around;
+}
+
+.checkout-buttons button {
+  padding-left: 50px;
+  padding-right: 50px;
+  width: 48%;
+}
+
+@media (max-width: 460px) {
+  .checkout-buttons button {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.checkout-member-frame {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border: 4px solid black;
+}

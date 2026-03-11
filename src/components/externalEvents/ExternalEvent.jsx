@@ -5,15 +5,9 @@ import InteractiveModalBox from "../../modals/InteractiveModalBox";
 import ImageCarousel from "../images/ImageCarousel";
 import { useTranslation } from "react-i18next";
 import Button from "../button/Button";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MOBILE_NORMAL, productKinds } from "../../utils/constants";
-import {
-  StyledExternalButtonBox,
-  StyledExternalEventBox,
-  StyledExternalEventCol1,
-  StyledExternalEventCol2,
-  StyledTitleBox,
-} from "./StyledExternalEvent";
+import "./ExternalEvent.css";
 import { urlify } from "../../utils/utils";
 import CartToast from "../toast/CartToast";
 import Icon from "../ui/Icon";
@@ -46,7 +40,7 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
     setSizes(arr);
   }, [variants]);
 
-  let history = useHistory();
+  const navigate = useNavigate();
   const [activeSize, setActiveSize] = useState([]);
   const [selectSizeError, setSelectSizeError] = useState(false);
   const [isSubscriber, setIsSubscriber] = useState(id === 14);
@@ -74,9 +68,9 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
   useEffect(() => {
     if (modalStyle === "SOCI") {
       if (isSubscriber) {
-        history.push("/product?id=14&kind=soci");
+        navigate("/product?id=14&kind=soci");
       } else {
-        history.push("/product?id=15&kind=soci");
+        navigate("/product?id=15&kind=soci");
       }
     }
   }, [isSubscriber]);
@@ -104,16 +98,16 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
     }
   };
   return (
-    <StyledExternalEventBox>
-      <StyledTitleBox>
+    <div className="external-event-box">
+      <div className="external-event__title-box">
         <ReactFitty maxSize={75}>
           {modalStyle === "SOCI" ? `${t("banners.soci-curt")}!` : name}
         </ReactFitty>
-      </StyledTitleBox>
+      </div>
       <div className="rowExternal">
-        <StyledExternalEventCol1>
+        <div className="external-event__col1">
           <ImageCarousel imgList={images} />
-          <StyledExternalButtonBox>
+          <div className="external-event__button-box">
             {!productSoldOut && (
               <Button
                 variant="contained"
@@ -133,9 +127,9 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
                 {buttonText}
               </Button>
             )}
-          </StyledExternalButtonBox>
-        </StyledExternalEventCol1>
-        <StyledExternalEventCol2>
+          </div>
+        </div>
+        <div className="external-event__col2">
           <InteractiveModalBox
             modalStyle={modalStyle}
             isMobile={isMobile}
@@ -203,9 +197,9 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
               )}
             </>
           )}
-        </StyledExternalEventCol2>
+        </div>
       </div>
-    </StyledExternalEventBox>
+    </div>
   );
 };
 

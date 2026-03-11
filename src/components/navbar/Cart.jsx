@@ -1,21 +1,22 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import Icon from "../ui/Icon";
 import Dropdown from "../dropdown/Dropdown";
-import { NavLink } from "react-router-dom/cjs/react-router-dom";
+import { NavLink } from "react-router-dom";
 import Button from "../button/Button";
 import { ReactFitty } from "react-fitty";
-import { addToCart, substractToCart } from "../../store/actions/cart";
-import { setGuestUser, setLoggedUser } from "../../store/actions/profile";
 import { truncate, priceMayDiscount } from "../../utils/utils";
 import { useTranslation } from "react-i18next";
 import useOutsideClick from "../../hooks/use-outside-click";
+import useProfileStore from "../../stores/useProfileStore";
+import useAuthStore from "../../stores/useAuthStore";
+import useCartStore from "../../stores/useCartStore";
 import "./DropdownCart.css";
 
 function Cart() {
-  const dispatch = useDispatch();
-  const { cart_data = {} } = useSelector((state) => state.cart);
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { cart_data = {}, addToCart, substractToCart } = useCartStore();
+  const { isLoggedIn } = useAuthStore();
+  const setGuestUser = useProfileStore((state) => state.setGuestUser);
+  const setLoggedUser = useProfileStore((state) => state.setLoggedUser);
   const { item_variants = [], count = 0, total = 0 } = cart_data;
   const [cartMenuOpen, setCartMenuOpen] = useState(false);
   const [t] = useTranslation("translation");
@@ -31,7 +32,7 @@ function Cart() {
   };
 
   const addItem = (id) => {
-    dispatch(addToCart(id));
+    addToCart(id);
   };
 
   const isMemberProduct = (id) => {
@@ -40,13 +41,13 @@ function Cart() {
 
   const substractItem = (id) => {
     if (isMemberProduct(id)) {
-      isLoggedIn ? dispatch(setLoggedUser()) : dispatch(setGuestUser());
+      isLoggedIn ? setLoggedUser() : setGuestUser();
     }
-    dispatch(substractToCart(id));
+    substractToCart(id);
   };
 
   const checkoutToCart = () => {
-    isLoggedIn ? dispatch(setLoggedUser()) : dispatch(setGuestUser());
+    isLoggedIn ? setLoggedUser() : setGuestUser();
     setCartMenuOpen(false);
     handleCloseCart();
   };

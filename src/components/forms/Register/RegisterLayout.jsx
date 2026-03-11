@@ -1,27 +1,16 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 import SociDialog from "../../botiga/Soci";
 import RegisterForm from "./RegisterForm";
 import { useTranslation } from "react-i18next";
 import Icon from "../../ui/Icon";
-import styled from "styled-components";
-import { StyledLink } from "../../../styles/GlobalStyles";
-import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
-
-export const StyledAddBox = styled.div`
-  margin-left: 0.5rem;
-  display: flex;
-  svg {
-    background-color: #1d1d1b;
-    scale: 1;
-  }
-`;
+import "../../../styles/GlobalStyles.css";
+import "./RegisterLayout.css";
+import useProfileStore from "../../../stores/useProfileStore";
 
 const RegisterLayout = (props) => {
   const [t] = useTranslation("translation");
-  const profile = useSelector((state) => state.profile);
-  const { user_profile = "" } = profile;
+  const { user_profile = "" } = useProfileStore();
   const [redirect, setRedirect] = useState(false);
   const [open, setOpen] = React.useState(false);
 
@@ -33,7 +22,7 @@ const RegisterLayout = (props) => {
     props.setViewState("login");
   };
 
-  if (redirect) return <Redirect to="/validate-email" />;
+  if (redirect) return <Navigate to="/validate-email" replace />;
 
   return (
     <div className="cardForm">
@@ -43,17 +32,17 @@ const RegisterLayout = (props) => {
           <NavLink to="/memberships">
             <div className="sociLogBanner" onClick={handleClick}>
               <div>{t("login.encara")}</div>
-              <StyledAddBox>
+              <div className="register-add-box">
                 <Icon icon="plus" type="orange" />
-              </StyledAddBox>
+              </div>
             </div>
           </NavLink>
         )}
         <RegisterForm setRedirect={setRedirect} />
 
-        <StyledLink bold={1} onClick={showLogin}>
+        <div className="styled-link styled-link--bold" onClick={showLogin}>
           {`- ${t("login.inicia")} -`}
-        </StyledLink>
+        </div>
         {open && <SociDialog open={open} onClose={handleClick} />}
       </div>
     </div>

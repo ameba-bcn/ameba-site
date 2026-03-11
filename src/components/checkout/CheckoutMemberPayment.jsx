@@ -1,20 +1,15 @@
 import React from 'react';
-import { connect } from "react-redux";
 import PaymentForm from './../forms/PaymentForm';
+import useCartStore from "../../stores/useCartStore";
 
-const mapStateToProps = state => {
-    return {
-      cart: state.cart.cart_data
-    };
-  };
-
-function CheckoutMemberPayment(props) {
-    const { item_variants, total} = props.cart;
+function CheckoutMemberPayment() {
+    const { cart_data = {} } = useCartStore();
+    const { item_variants = [], total } = cart_data;
     return (
         <div>
             <div className="checkout-payment-summary row">
                 <div className="column">
-                    {item_variants[0].name}
+                    {item_variants[0]?.name}
                 </div>
                 <div className="column">
                     Price: {total}
@@ -25,4 +20,4 @@ function CheckoutMemberPayment(props) {
     )
 }
 
-export default connect(mapStateToProps)(CheckoutMemberPayment);
+export default CheckoutMemberPayment;

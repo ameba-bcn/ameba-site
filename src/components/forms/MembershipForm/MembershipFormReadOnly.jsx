@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import InputField from "../InputField/InputField";
-import { useSelector } from "react-redux";
-import { LogFormBox, LogFormError, LogButtonBox } from "../Log.style";
-import { Redirect } from "react-router";
+import "../Log.style.css";
+import useAuthStore from "../../../stores/useAuthStore";
 import { useTranslation } from "react-i18next";
 import Button from "../../button/Button";
 import { usernameValidation } from "../../../utils/validations";
@@ -14,18 +13,17 @@ import useMediaQuery from "../../../hooks/use-media-query";
 export default function MembershipFormReadOnly(props) {
   const [t] = useTranslation("translation");
   const { isCheckout = false } = props;
-  const auth = useSelector((state) => state.auth);
-  const { user_data = {}, user_member_data = {} } = auth;
+  const { user_data = {}, user_member_data = {} } = useAuthStore();
   const [redirect, setRedirect] = useState(false);
   const [user, setUser] = useState(user_data?.username || "");
   const isMinMobile = useMediaQuery(MOBILE_SMALL);
+  const location = useLocation();
+  const section = location.pathname;
 
   const showPasswordRecover = () => {
     setRedirect(true);
   };
-  if (redirect) return <Redirect to="/send-recovery" />;
-  let location = useLocation();
-  let section = location.pathname;
+  if (redirect) return <Navigate to="/send-recovery" replace />;
   const inProfileView = section.includes("profile");
   const errors = usernameValidation(user) || user.length === 0;
 
@@ -41,7 +39,7 @@ export default function MembershipFormReadOnly(props) {
   return (
     <div className="cardForm">
       <div className="card-form">
-        <LogFormBox>
+        <div className="log-form-box">
           <form>
             <div className="field-wrapper">
               {inProfileView ? (
@@ -57,9 +55,9 @@ export default function MembershipFormReadOnly(props) {
                     valid={!usernameValidation(user)}
                   />
                   {errors && (
-                    <LogFormError>
+                    <div className="log-form-error">
                       <div>{ERROR.USERNAME.FORMAT}</div>
-                    </LogFormError>
+                    </div>
                   )}
                 </>
               ) : (
@@ -98,9 +96,9 @@ export default function MembershipFormReadOnly(props) {
               />
             </div>
           </form>
-        </LogFormBox>
+        </div>
         {!isCheckout && (
-          <LogButtonBox>
+          <div className="log-button-box">
             {user_data?.username !== user ? (
               <Button
                 variant="contained"
@@ -122,7 +120,7 @@ export default function MembershipFormReadOnly(props) {
                 {t("login.modifica")}
               </Button>
             )}
-          </LogButtonBox>
+          </div>
         )}
       </div>
     </div>

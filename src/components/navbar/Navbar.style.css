@@ -1,0 +1,342 @@
+.navbar .menuSuperior {
+  background-color: #1d1d1b !important;
+  display: flex;
+  flex-wrap: wrap;
+  flex-flow: row;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.navbar .menuButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .menuButton_mobile {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.navbar .menu-logo-box {
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+
+.navbar .menuAmebalogo {
+  width: 50px;
+  height: 50px;
+}
+
+.navbar .cart-cistella {
+  cursor: pointer;
+}
+
+.navbar .cart-cistella a {
+  color: #fae6c5 !important;
+}
+
+.navbar .menu-logo-box a {
+  font-family: "Bebas Neue";
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2.5rem;
+  font-weight: 400;
+  display: inline-block;
+  color: #fae6c5;
+  position: relative;
+  transition: all 0.5s ease-in-out;
+}
+
+.navbar .cartIconMenu,
+.navbar .sessio-menu-button {
+  font-family: "Bebas Neue";
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 2.5rem;
+  font-weight: 400;
+  display: inline-block;
+  color: #fae6c5;
+  position: relative;
+  transition: all 0.5s ease-in-out;
+}
+
+.navbar .cartIconMenu::before,
+.navbar .sessio-menu-button::before {
+  content: attr(data-item);
+  transition: 0.5s;
+  color: #f2c571;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.navbar .cartIconMenu:hover::before,
+.navbar .sessio-menu-button:hover::before {
+  width: 100%;
+  transition: all 0.5s ease-in-out;
+}
+
+.navbar .nav-ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  margin: 0;
+}
+
+.navbar .nav-ul li {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.navbar .nav-ul div a,
+.navbar .nav-ul li a {
+  display: inline-block;
+  font-family: "Bebas Neue";
+  font-size: 2.5rem;
+  margin-right: 20px;
+  font-weight: 400;
+  text-decoration: none;
+  color: #fae6c5;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.navbar .nav-ul div a::before,
+.navbar .nav-ul li a::before {
+  content: attr(data-item);
+  transition: 0.5s;
+  color: #f2c571;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 10;
+  width: 0;
+  overflow: hidden;
+}
+
+.navbar .nav-ul div a:hover::before,
+.navbar .nav-ul li a:hover::before {
+  width: 100%;
+  transition: all 0.5s ease-in-out;
+}
+
+.navbar .nav-ul div a.active,
+.navbar .nav-ul li a.active {
+  color: #eb5e3e;
+}
+
+.navbar .logname-li {
+  width: fit-content;
+  display: flex;
+  vertical-align: middle;
+  padding-right: 0px;
+  margin-right: 0px;
+}
+
+.navbar .logname-li-mobile {
+  width: 100%;
+  display: flex;
+  vertical-align: middle;
+  padding-right: 0px;
+  margin-right: 0px;
+}
+
+.navbar .logname-li-mobile div {
+  width: 100%;
+}
+
+.navbar .menuButtons {
+  justify-content: flex-end;
+}
+
+.navbar .nav-ul_box-mobile {
+  flex: 1;
+  flex-shrink: 0;
+  width: 100%;
+  animation: fade 0.3s 1;
+  -webkit-animation: fade 0.3s 1;
+}
+
+.navbar .nav-ul_mobile {
+  background-color: #1d1d1b;
+  list-style-type: none;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  margin-bottom: 0;
+  padding-bottom: 1em;
+  padding-left: 2em;
+  margin-block-start: 0px;
+}
+
+.navbar .nav-ul_mobile div,
+.navbar .nav-ul_mobile li {
+  justify-content: flex-start;
+}
+
+.navbar .nav-ul_mobile div a.active,
+.navbar .nav-ul_mobile li a.active {
+  color: #eb5e3e;
+}
+
+.navbar .nav-ul_mobile div a,
+.navbar .nav-ul_mobile li a {
+  margin: 4px 0px;
+  display: inline-block;
+  font-family: "Bebas Neue";
+  font-size: 2.5rem;
+  margin-right: 20px;
+  font-weight: 400;
+  text-decoration: none;
+  color: #fae6c5;
+  transition: all 0.5s ease-in-out;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.navbar .nav-ul_mobile div a::before,
+.navbar .nav-ul_mobile li a::before {
+  content: attr(data-item);
+  transition: 0.5s;
+  color: #f2c571;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 10;
+  width: 0;
+  overflow: hidden;
+}
+
+.navbar .nav-ul_mobile div a:hover::before,
+.navbar .nav-ul_mobile li a:hover::before {
+  width: 100%;
+  transition: all 0.5s ease-in-out;
+}
+
+.navbar .menu-lang li {
+  cursor: pointer;
+}
+
+.navbar .menu-lang li a {
+  color: #fae6c5 !important;
+}
+
+.navbar .menu-lang li a:last-child {
+  margin-left: -20px;
+}
+
+.navbar .menu-lang li > a.active {
+  color: #ffed00 !important;
+}
+
+.navbar .cartIconMenu {
+  width: 2.2rem !important;
+  height: auto !important;
+  margin-left: 0px;
+  margin-right: 5px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+
+.navbar .cart-icon-bubble-box {
+  margin-top: -18px;
+}
+
+.navbar .bubbleCart {
+  color: #1d1d1b;
+  position: relative;
+  top: 5px;
+  left: 25px;
+  width: 18px;
+  height: 18px;
+  padding: 2px 1px 0px 1px;
+  background-color: #f2c571;
+  font-family: "Bebas Neue";
+  font-weight: 600;
+  font-size: 0.7em;
+  border-radius: 50%;
+}
+
+.navbar .bubbleCartMember {
+  color: #1d1d1b;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 18px;
+  height: 18px;
+  padding: 2px 5px 2px 6px;
+  background-color: #f2c571;
+  font-family: "Bebas Neue";
+  font-weight: 600;
+  font-size: 0.3em;
+  border-radius: 50%;
+  box-shadow: 1px 1px 1px gray;
+}
+
+.navbar .cart-mobile__box {
+  background-color: #fae6c5;
+  margin-left: -2em;
+  animation: fade 0.5s 1;
+  -webkit-animation: fade 0.5s 1;
+}
+
+.navbar .logBox {
+  vertical-align: middle;
+}
+
+.navbar .menu-mobile-session-box {
+  background-color: #fae6c5;
+  width: 100vh;
+  margin-left: -32px;
+  padding-right: 32px;
+  animation: fade 0.5s 1;
+  -webkit-animation: fade 0.5s 1;
+}
+
+.navbar .menu-mobile-session {
+  margin-left: 32px;
+}
+
+.navbar .dropdown-profile-mobile,
+.navbar .dropdown-logout-mobile {
+  color: #1d1d1b;
+  font-family: "Bebas Neue";
+  font-size: 2.5rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.menu-icon {
+  font-size: 2rem;
+  color: #fae6c5;
+  text-align: end;
+  cursor: pointer;
+}
+
+.menu-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+@media screen and (max-width: 350px) {
+  .navbar .nav-ul_mobile {
+    padding-left: 1.5em;
+  }
+}

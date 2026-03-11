@@ -1,25 +1,25 @@
 /* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DOMPurify from "dompurify";
 import axiosInstance from "../../../axios";
 import ImageCarousel from "../../../components/images/ImageCarousel";
 import LettersMove from "../../../components/layout/LettersMove";
 import { API_URL } from "../../../utils/constants";
-import { StyledSociosMain } from "./StyledSociosDetailed";
+import "./SociosDetailed.css";
+import "../../../styles/GlobalStyles.style.css";
 import LinkBox from "../../../components/link-box/LinkBox";
 import TitleSection from "../../../components/layout/TitleSection";
-import { StyledMainColumnView } from "../../../styles/GlobalStyles.style";
 import Spinner from "../../../components/spinner/Spinner";
+import useDataStore from "../../../stores/useDataStore";
 
 const SociosDetailed = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [project, setProject] = useState({});
   const [loading, setLoading] = useState(false);
   let urlID = location.pathname.substr(location.pathname.lastIndexOf("/") + 1);
-  const { member_projects = [] } = useSelector((state) => state.data);
+  const { member_projects = [] } = useDataStore();
   const [urlData] = member_projects.filter(
     (x) => x?.project_name === decodeURIComponent(urlID)
   );
@@ -42,23 +42,23 @@ const SociosDetailed = () => {
 
   if (loading) {
     return (
-      <StyledSociosMain>
+      <div className="socios-main">
         <Spinner height={400} />{" "}
         <LettersMove
           sentence={"l'associació de música electrònica de barcelona"}
           color={"#F2C571"}
         />
-      </StyledSociosMain>
+      </div>
     );
   }
 
   return (
-    <StyledSociosMain>
-      <StyledMainColumnView>
+    <div className="socios-main">
+      <div className="styled-main-column-view">
         <div className="top-section_entr">
           <div className="ts-breadcrumbs">
-            <span onClick={() => history.push("/")}>AMEBA</span> /{" "}
-            <span onClick={() => history.push("/socis")}>#SOCI@S</span> /{" "}
+            <span onClick={() => navigate("/")}>AMEBA</span> /{" "}
+            <span onClick={() => navigate("/socis")}>#SOCI@S</span> /{" "}
             {project_name}
           </div>
           <div className="ts-title">{project_name}</div>
@@ -84,12 +84,12 @@ const SociosDetailed = () => {
             <LinkBox mediaLinks={media_urls} label="links" thinLine={true} />
           </div>
         )}
-      </StyledMainColumnView>
+      </div>
       <LettersMove
         sentence={"l'associació de música electrònica de barcelona"}
         color={"#F2C571"}
       />
-    </StyledSociosMain>
+    </div>
   );
 };
 

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import useProfileStore from "../../../stores/useProfileStore";
+import useDataStore from "../../../stores/useDataStore";
+import useCartStore from "../../../stores/useCartStore";
 import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import {
   formatDateToHour,
   formatISODateToDate,
@@ -15,21 +17,17 @@ import {
 } from "../../../utils/utils";
 import Icon from "../../../components/ui/Icon";
 import ActivitatDialog from "./Activitat";
-import {
-  StyledAgendaTable,
-  StyledImageTableBox,
-  StyledTicket,
-} from "./AgendaTable.styled";
+import "./AgendaTable.styled.css";
+import "../../../styles/GlobalStyles.style.css";
 import axiosInstance from "../../../axios";
 import { API_URL, MOBILE_SEMI_BIG } from "../../../utils/constants";
-import { addToCart } from "../../../store/actions/cart";
 import SearchBox from "../../../components/searchBox/SearchBox";
 import useMediaQuery from "../../../hooks/use-media-query";
 
 const AgendaTable = () => {
-  const { agenda } = useSelector((state) => state.data);
-  const { user_profile = "" } = useSelector((state) => state.profile);
-  const dispatch = useDispatch();
+  const { agenda } = useDataStore();
+  const { user_profile = "" } = useProfileStore();
+  const { addToCart } = useCartStore();
   const [redirect, setRedirect] = useState(false);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -180,7 +178,7 @@ const AgendaTable = () => {
       .get(`${API_URL}events/${rowData.id}`, {})
       .then((res) => {
         const { variants } = res.data;
-        dispatch(addToCart(variants[0]?.id));
+        addToCart(variants[0]?.id);
       })
       .then(setRedirect(true))
       .catch((error) => {
@@ -215,14 +213,14 @@ const AgendaTable = () => {
             cell: (info) => {
               const { name, images } = info.row.original;
               return (
-                <StyledImageTableBox>
+                <div className="image-table-box">
                   <div className="image-side">
                     <img src={images} className="imgMiniActivitat" alt="" />
                   </div>
                   <div className="title-side">
                     <h1>{name?.toUpperCase()}</h1>
                   </div>
-                </StyledImageTableBox>
+                </div>
               );
             },
             size: 200,
@@ -257,7 +255,7 @@ const AgendaTable = () => {
             cell: (info) => {
               const { price, stock, datetime } = info.row.original;
               return (
-                <StyledTicket>
+                <div className="styled-ticket">
                   {eventIconMapper(
                     info.row.original,
                     price,
@@ -265,7 +263,7 @@ const AgendaTable = () => {
                     datetime,
                     info.row.original.cancelled
                   )}
-                </StyledTicket>
+                </div>
               );
             },
           },
@@ -298,10 +296,10 @@ const AgendaTable = () => {
     },
   });
 
-  if (redirect) return <Redirect to={checkoutRedirect} />;
+  if (redirect) return <Navigate to={checkoutRedirect} replace />;
 
   return (
-    <StyledAgendaTable $emptyView={agenda.length === 0}>
+    <div className={`styled-main-column-view agenda-table${agenda.length === 0 ? " agenda-table--empty" : ""}`}>
       <table>
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -380,7 +378,7 @@ const AgendaTable = () => {
           loading={loading}
         />
       )}
-    </StyledAgendaTable>
+    </div>
   );
 };
 

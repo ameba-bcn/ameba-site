@@ -1,15 +1,15 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { MiniTableContent } from "./MiniTableProducts.style";
+import "./MiniTableProducts.style.css";
+import useCartStore from "../../stores/useCartStore";
 
 export default function MiniTableProducts() {
-  const { cart_data = {} } = useSelector((state) => state.cart);
+  const { cart_data = {} } = useCartStore();
   const { item_variants = [] } = cart_data;
   const [t] = useTranslation("translation");
 
   return (
-    <MiniTableContent>
+    <table className="mini-table-content">
       <tbody>
         {item_variants?.map((item, i) => (
           <tr key={i}>
@@ -23,6 +23,6 @@ export default function MiniTableProducts() {
           </tr>
         ))}
       </tbody>
-    </MiniTableContent>
+    </table>
   );
 }

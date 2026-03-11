@@ -1,17 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import {
-  ToastBox,
-  ToastLeftInBox,
-  ToastRightInBox,
-} from "./CartToast.style.js";
+import "./CartToast.style.css";
+import useProfileStore from "../../stores/useProfileStore";
+import useCartStore from "../../stores/useCartStore";
 
 export default function CartToast() {
-  const { cart_data = {} } = useSelector((state) => state.cart);
-  const profile = useSelector((state) => state.profile);
-  const { user_profile = "" } = profile;
+  const { cart_data = {} } = useCartStore();
+  const { user_profile = "" } = useProfileStore();
   const checkoutRedirect =
     user_profile === "LOGGED" || user_profile === "MEMBER"
       ? "/checkout"
@@ -20,9 +16,9 @@ export default function CartToast() {
   const [t] = useTranslation("translation");
 
   return (
-    <ToastBox>
+    <div className="toast-box">
       <NavLink to={checkoutRedirect}>
-        <ToastLeftInBox>
+        <div className="toast-left-in-box">
           {t("checkout.compra-toast1")}{" "}
           <span>
             {item_variants.length}{" "}
@@ -31,9 +27,9 @@ export default function CartToast() {
               : t("general.producte") + "s"}
           </span>{" "}
           {t("checkout.compra-toast2")}
-        </ToastLeftInBox>
-        <ToastRightInBox>{cart_data.total}</ToastRightInBox>
+        </div>
+        <div className="toast-right-in-box">{cart_data.total}</div>
       </NavLink>
-    </ToastBox>
+    </div>
   );
 }

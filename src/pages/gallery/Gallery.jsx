@@ -1,17 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import Galeria from "../../components/galeria/Galeria";
 import LettersMove from "../../components/layout/LettersMove";
-import XMLParser from "react-xml-parser";
 import {
   FLICKR_ALBUM_ID,
   FLICKR_KEY,
   radioDublabLink,
 } from "../../utils/constants";
 import PowerTitle from "../../components/layout/PowerTitle";
-import { galeriaLoading } from "../../store/actions/loaders";
 import Spinner from "../../components/spinner/Spinner";
+import useDataStore from "../../stores/useDataStore";
 
 const PAGE_SIZE = 20;
 
@@ -24,32 +22,31 @@ const Gallery = () => {
     setPage(newPage);
     galleryTopRef.current?.scrollIntoView({ behavior: "smooth" });
   };
-  const dispatch = useDispatch();
-  const { isGaleriaLoading } = useSelector((state) => state.loaders);
+  const { isGaleriaLoading, setGaleriaLoading } = useDataStore();
 
   const url = `https://www.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=${FLICKR_KEY}&photoset_id=${FLICKR_ALBUM_ID}&format=rest`;
 
   useEffect(() => {
-    dispatch(galeriaLoading(true));
+    setGaleriaLoading(true);
     axios
       .get(`${url}`, {})
       .then((s) => {
-        var xml = new XMLParser().parseFromString(s?.data);
-        setGalleryList(xml.children[0].children);
-        dispatch(galeriaLoading(false));
+        var parser = new DOMParser();
+        var xmlDoc = parser.parseFromString(s?.data, "text/xml");
+        var photos = xmlDoc.querySelectorAll("photo");
+        setGalleryList(Array.from(photos));
+        setGaleriaLoading(false);
       })
       .catch(() => {
-        dispatch(galeriaLoading(false));
+        setGaleriaLoading(false);
       });
   }, []);
 
   const imgArrayBuilder = galleryList.map((el) => {
-    const { attributes } = el;
-    const SERVER_ID = attributes.server;
-    const ID = attributes.id;
-    const SECRET = attributes.secret;
-    const photoUrl = `https://live.staticflickr.com/${SERVER_ID}/${ID}_${SECRET}_b.jpg`;
-    return photoUrl;
+    const SERVER_ID = el.getAttribute("server");
+    const ID = el.getAttribute("id");
+    const SECRET = el.getAttribute("secret");
+    return `https://live.staticflickr.com/${SERVER_ID}/${ID}_${SECRET}_b.jpg`;
   });
 
   return (

@@ -2,70 +2,22 @@ import React from "react";
 // import ReactPlayer from "react-player";
 // import MediaLinks from "../../layout/MediaLinks";
 import TitleSection from "../../../../components/layout/TitleSection";
-import styled from "styled-components";
+import "./MediaSection.css";
 
 export default function MediaSection(props) {
   const { mediaUrls = {}, bgColor } = props;
 
-  const StyledMediaGral = styled.div`
-    height: auto;
-    width: 100%;
-    background-color: ${(props) => (props.bgColor ? props.bgColor : "#f2c571")};
-    padding: 20px 0px 40px 0px;
-  `;
+  const gralStyle = {
+    backgroundColor: bgColor ? bgColor : "#f2c571",
+  };
 
-  const StyledMediaLinks = styled.div`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-direction: column;
-    div {
-      position: relative;
-      margin-top: 20px;
-      a {
-        width: 100%;
-        font-size: 34px;
-        font-family: "Bebas Neue";
-        font-weight: 900;
-        line-height: 1em;
-        color: #212529;
-        text-decoration: none;
-        text-overflow: ellipsis;
-        @media (max-width: 500px) {
-          font-size: 24px;
-        }
-      }
-      a:before {
-        position: absolute;
-        margin: 0 auto;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        height: 2px;
-        background-color: #000;
-        content: "";
-        opacity: 0.3;
-        -webkit-transform: scaleX(0.9);
-        transition-property: opacity, -webkit-transform;
-        transition-duration: 0.3s;
-      }
-      a:hover:before {
-        opacity: 1;
-        -webkit-transform: scaleX(1);
-      }
-    }
-  `;
-
-  const StyledMediaPlayer = styled.div`
-    width: 90%;
-  `;
   return (
-    <StyledMediaGral bgColor={bgColor} className="media-gral">
+    <div className="media-section__gral media-gral" style={gralStyle}>
       <TitleSection title="Media" />
-      <StyledMediaLinks>
+      <div className="media-section__links">
         {mediaUrls.map((n) => {
           return (
-            <StyledMediaPlayer key={n}>
+            <div className="media-section__player" key={n}>
               {/* <ReactPlayer url={n} height="100px" /> */}
               <div
                 className="content"
@@ -76,13 +28,13 @@ export default function MediaSection(props) {
                {n.split("www.").length > 1 ? n.split("www.")[1] : n}
              </a>
            </div> */}
-            </StyledMediaPlayer>
+            </div>
           );
         })}
-      </StyledMediaLinks>
+      </div>
       {/* <div className="xarxes-artista">
         <MediaLinks fcbk="#" insta="#" twit="#" yout="#" />
       </div> */}
-    </StyledMediaGral>
+    </div>
   );
 }

@@ -1,0 +1,18 @@
+.membership-box {
+  height: 100%;
+  min-height: min-content;
+  background-color: #fae6c5;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.membership-box--empty {
+  min-height: 600px;
+}
+
+.membership-box .disclaimer-frame {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

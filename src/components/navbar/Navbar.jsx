@@ -1,34 +1,21 @@
 import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
 import NavbarButtons from "./NavbarButtons";
 import NavbarButtonsMobile from "./NavbarButtonsMobile";
 import { MOBILE_BIG } from "../../utils/constants";
-import { StyledNavbar } from "./StyledNavbar";
+import "./Navbar.style.css";
 import Icon from "../ui/Icon";
-import styled from "styled-components";
 import useMediaQuery from "../../hooks/use-media-query";
-import { setCloseMenu, setOpenMenu } from "../../store/actions/menu";
-
-export const StyledMenuIcon = styled.div`
-  font-size: 2rem;
-  color: #fae6c5;
-  text-align: end;
-  cursor: pointer;
-  svg {
-    width: 32px;
-    height: 32px;
-  }
-`;
+import useUIStore from "../../stores/useUIStore";
+import useAuthStore from "../../stores/useAuthStore";
 export default function Navbar({ isErrored = false }) {
   const isMobile = useMediaQuery(MOBILE_BIG);
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useAuthStore();
   const ref = useRef("navbarButtonsMobileRef");
-  const { isMenuOpen } = useSelector((state) => state.menu);
-  const dispatch = useDispatch();
+  const { isMenuOpen, openMenu, closeMenu } = useUIStore();
 
   return (
-    <StyledNavbar>
+    <div className="navbar">
       <div className="menuContainer">
         <div className="menuSuperior">
           <div className="menu-logo-box">
@@ -43,23 +30,23 @@ export default function Navbar({ isErrored = false }) {
           </div>
           {isMobile
             ? !isErrored && (
-                <StyledMenuIcon>
+                <div className="menu-icon">
                   {isMenuOpen ? (
                     <Icon
                       icon="clear"
                       className="menuIcon__cross"
-                      onClick={() => dispatch(setCloseMenu())}
+                      onClick={() => closeMenu()}
                       type="hoverable-dark"
                     />
                   ) : (
                     <Icon
                       icon="menu"
                       className="menuIcon__bars"
-                      onClick={() => dispatch(setOpenMenu())}
+                      onClick={() => openMenu()}
                       type="hoverable-dark"
                     />
                   )}
-                </StyledMenuIcon>
+                </div>
               )
             : !isErrored && <NavbarButtons isLoggedIn={isLoggedIn} />}
         </div>
@@ -67,6 +54,6 @@ export default function Navbar({ isErrored = false }) {
           <NavbarButtonsMobile isLoggedIn={isLoggedIn} refer={ref} />
         )}
       </div>
-    </StyledNavbar>
+    </div>
   );
 }

@@ -1,33 +1,20 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import styled from "styled-components";
+import "./MainSupportLocals.css";
 import RowSupportLocals from "./RowSupportLocals";
 import useMediaQuery from "../../../hooks/use-media-query";
-
-const StyledBgGrid = styled.div`
-  display: flex;
-  width: 100%;
-`;
-
-const StyledImageList = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-  width: 100%;
-`;
+import useDataStore from "../../../stores/useDataStore";
 
 function MainSupportLocals() {
   const breakpoint = useMediaQuery("(max-width:950px)");
-  const data = useSelector((state) => state.data);
-  const { support = [] } = data;
+  const { support = [] } = useDataStore();
 
   const block1 = support.slice(0, 3);
   const block2 = support.slice(3, 6);
   const block3 = support.slice(6, 9);
   return (
-    <StyledBgGrid>
+    <div className="main-support-locals__bg-grid">
       {support.length > 0 && (
-        <StyledImageList>
+        <div className="main-support-locals__image-list">
           <div>
             <RowSupportLocals breakpoint={breakpoint} itemsList={block1} />
           </div>
@@ -37,9 +24,9 @@ function MainSupportLocals() {
           <div>
             <RowSupportLocals breakpoint={breakpoint} itemsList={block3} />
           </div>
-        </StyledImageList>
+        </div>
       )}
-    </StyledBgGrid>
+    </div>
   );
 }
 

@@ -1,19 +1,19 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import NewsletterFormLayout from "../components/forms/NewsletterForm/NewsletterFormLayout";
 import MediaLinks from "../components/layout/MediaLinks";
 import LettersMove from "./../components/layout/LettersMove";
 import { useTranslation } from "react-i18next";
-import { StyledContacte } from "./Contacte.styles.jsx";
-import { StyledLink } from "../styles/GlobalStyles.jsx";
+import "./Contacte.styles.css";
+import "../styles/GlobalStyles.css";
 import { NavLink } from "react-router-dom";
+import useDataStore from "../stores/useDataStore";
 
 function Contacte() {
   const [t] = useTranslation("translation");
-  const { collaborators = [] } = useSelector((state) => state.data);
+  const { collaborators = [] } = useDataStore();
 
   return (
-    <StyledContacte id="contacte">
+    <div className="contacte" id="contacte">
       <div className="contenedorContacto">
         <div className="newletterForm">
           <NewsletterFormLayout />
@@ -40,9 +40,9 @@ function Contacte() {
         </div>
         <div className="endingText">
           <span>AMEBA 2022©</span>
-          <StyledLink>
+          <div className="styled-link">
             <a href="mailto:info@ameba.cat">info@ameba.cat</a>
-          </StyledLink>
+          </div>
           <span>
             Associació de Música Electrònica de Barcelona - {t("footer.drets")}
             {" - "}
@@ -57,7 +57,7 @@ function Contacte() {
         sentence="L'ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA "
         color="#F2C571"
       />
-    </StyledContacte>
+    </div>
   );
 }
 

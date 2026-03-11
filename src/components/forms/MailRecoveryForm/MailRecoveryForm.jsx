@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import Button from "../../button/Button";
 import InputField from "../InputField/InputField";
-import { useDispatch } from "react-redux";
-import { LogFormError } from "../Log.style";
+import "../Log.style.css";
 import { validate } from "./../NewsletterForm/NewletterFormValidate";
-import { sendEmailPasswordRecovery } from "../../../store/actions/auth";
+import useAuthStore from "../../../stores/useAuthStore";
 import { useFormik } from "formik";
 import { isEmptyObject } from "../../../utils/utils";
 
 export default function MailRecoveryForm({ setIsSubmitted }) {
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
+  const sendEmailPasswordRecovery = useAuthStore((state) => state.sendEmailPasswordRecovery);
 
   const handleSubmit = (e) => {
     setLoading(true);
-    dispatch(sendEmailPasswordRecovery(e.email))
+    sendEmailPasswordRecovery(e.email)
       .then(() => {
         setIsSubmitted(true);
         setLoading(false);
@@ -53,11 +52,11 @@ export default function MailRecoveryForm({ setIsSubmitted }) {
         />
       </div>
       {!isEmptyObject(formik.errors) && (
-        <LogFormError>
+        <div className="log-form-error">
           {Object.values(formik.errors).map((x) => {
             return <div key={x}>{x}</div>;
           })}
-        </LogFormError>
+        </div>
       )}
       <div className="form-group">
         <Button

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../../../store/actions/cart";
-import { Redirect } from "react-router-dom";
+import useProfileStore from "../../../stores/useProfileStore";
+import useCartStore from "../../../stores/useCartStore";
+import { Navigate } from "react-router-dom";
 import ModalCard from "../../../modals/ModalCard";
 import { useTranslation } from "react-i18next";
 import FullscreenSpinner from "../../../components/spinner/FullscreenSpinner";
@@ -28,9 +28,8 @@ export default function ActivitatDialog(props) {
   } = dataRow;
 
   const [redirect, setRedirect] = useState(false);
-  const dispatch = useDispatch();
-  const profile = useSelector((state) => state.profile);
-  const { user_profile = "" } = profile;
+  const { addToCart } = useCartStore();
+  const { user_profile = "" } = useProfileStore();
   const [t] = useTranslation("translation");
 
   const handleClose = () => {
@@ -45,13 +44,13 @@ export default function ActivitatDialog(props) {
 
   const handleAddClick = () => {
     const { variants = [] } = dataRow;
-    dispatch(addToCart(variants[0].id));
+    addToCart(variants[0].id);
     handleClose();
     setRedirect(true);
   };
   const checkoutRedirect = user_profile === "LOGGED" ? "/checkout" : "/login";
 
-  if (redirect) return <Redirect to={checkoutRedirect} />;
+  if (redirect) return <Navigate to={checkoutRedirect} replace />;
 
   return loading ? (
     <FullscreenSpinner />

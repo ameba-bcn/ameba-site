@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { validateEmail } from "./../store/actions/auth";
+import { Navigate, useLocation } from "react-router-dom";
+import useAuthStore from "../stores/useAuthStore";
 import LettersMove from "./../components/layout/LettersMove";
 import { useTranslation } from "react-i18next";
 
-export default function LogMailConfirmation(props) {
-  const dispatch = useDispatch();
+export default function LogMailConfirmation() {
+  const validateEmail = useAuthStore((state) => state.validateEmail);
   const [hasQueryParams, setHasQueryParams] = useState(false);
   const [t] = useTranslation("translation");
+  const location = useLocation();
 
-  const parsed = Object.fromEntries(new URLSearchParams(props.location.search));
+  const parsed = Object.fromEntries(new URLSearchParams(location.search));
   const strToken = parsed["?token"] || parsed["token"];
 
   useEffect(() => {
     if (strToken) {
-      dispatch(validateEmail(strToken)).then(setHasQueryParams(true));
+      validateEmail(strToken).then(setHasQueryParams(true));
     }
-  }, [strToken, dispatch]);
+  }, [strToken, validateEmail]);
 
   if (localStorage.getItem("view") === "new_member" && setHasQueryParams) {
-    return <Redirect to="/checkout" />;
+    return <Navigate to="/checkout" replace />;
   }
 
   return (

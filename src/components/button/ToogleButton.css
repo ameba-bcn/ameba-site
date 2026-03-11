@@ -1,0 +1,18 @@
+.toogle-button {
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.toogle-button button {
+  border-radius: 0px 25px 25px 0px;
+}
+
+.toogle-button button:first-of-type {
+  border-radius: 25px 0px 0px 25px;
+}
+
+.toogle-button button:hover {
+  transform: translateY(0px) !important;
+}

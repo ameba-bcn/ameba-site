@@ -1,41 +1,18 @@
 import React, { useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { logout } from "../../store/actions/auth";
 import Dropdown from "../dropdown/Dropdown";
-import styled from "styled-components";
+import "./MenuLog.css";
 import useOutsideClick from "../../hooks/use-outside-click";
-import {
-  setCloseMenu,
-  setCloseProfileMenu,
-  setOpenProfileMenu,
-} from "../../store/actions/menu";
-
-export const StyledMenuLog = styled.div`
-  position: relative;
-`;
-
-export const StyledMenuItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  .item {
-    color: #1d1d1b;
-    font-family: "Bebas Neue";
-    font-size: 30px;
-    font-weight: 400;
-    text-transform: uppercase;
-    cursor: pointer;
-  }
-`;
+import useUIStore from "../../stores/useUIStore";
+import useProfileStore from "../../stores/useProfileStore";
+import useAuthStore from "../../stores/useAuthStore";
 
 export default function MenuLog(props) {
   const { isMobile = false } = props;
-  const { user_data } = useSelector((state) => state.auth);
-  const { isProfileMenuOpen } = useSelector((state) => state.menu);
-  const { user_profile } = useSelector((state) => state.profile);
-  const dispatch = useDispatch();
+  const { user_data } = useAuthStore();
+  const logout = useAuthStore((state) => state.logout);
+  const { isProfileMenuOpen, openProfileMenu, closeProfileMenu, closeMenu } = useUIStore();
+  const { user_profile } = useProfileStore();
   const isMember = user_profile === "MEMBER" || "LOGGED";
   const userName = user_data.username.split(" ")[0];
   const userNameShortened =
@@ -43,22 +20,22 @@ export default function MenuLog(props) {
 
   const handleCloseSessio = () => {
     if (isMobile) {
-      dispatch(setCloseMenu());
+      closeMenu();
     }
-    if (!isMobile && isProfileMenuOpen) dispatch(setCloseProfileMenu());
+    if (!isMobile && isProfileMenuOpen) closeProfileMenu();
   };
 
   const handleOpenSessio = (isProfileMenuOpen) => {
     isProfileMenuOpen
-      ? dispatch(setCloseProfileMenu())
-      : dispatch(setOpenProfileMenu());
+      ? closeProfileMenu()
+      : openProfileMenu();
   };
 
   const logoutMenu = () => {
     if (isMobile) {
-      dispatch(setCloseMenu());
+      closeMenu();
     }
-    dispatch(logout());
+    logout();
   };
   const dropdownRef = useRef("menulogprofile");
 
@@ -67,7 +44,7 @@ export default function MenuLog(props) {
   });
 
   return (
-    <StyledMenuLog ref={dropdownRef}>
+    <div className="menu-log" ref={dropdownRef}>
       <a
         className="sessio-menu-button"
         data-item={user_data.username === "" ? "SESSIÓ" : userNameShortened}
@@ -82,7 +59,7 @@ export default function MenuLog(props) {
             setIsOpen={handleCloseSessio}
             externalClickOutside={true}
           >
-            <StyledMenuItem>
+            <div className="menu-log__item">
               <NavLink
                 className="menuOptions"
                 to="/profile"
@@ -98,7 +75,7 @@ export default function MenuLog(props) {
               >
                 Log out
               </div>
-            </StyledMenuItem>
+            </div>
           </Dropdown>
         ) : (
           isProfileMenuOpen && (
@@ -124,6 +101,6 @@ export default function MenuLog(props) {
           )
         )}
       </div>
-    </StyledMenuLog>
+    </div>
   );
 }

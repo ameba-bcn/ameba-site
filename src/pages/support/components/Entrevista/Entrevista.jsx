@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useHistory, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import MediaSection from "./MediaSection";
 import QuestionsSection from "./QuestionsSection";
 import EntrevistaMenu from "./EntrevistaMenu";
@@ -10,9 +9,10 @@ import axiosInstance from "../../../../axios";
 import { API_URL, radioDublabLink } from "../../../../utils/constants";
 import LettersMove from "../../../../components/layout/LettersMove";
 import MainSection from "./MainSection";
+import useDataStore from "../../../../stores/useDataStore";
 
 const Entrevista = () => {
-  let history = useHistory();
+  const navigate = useNavigate();
   let location = useLocation();
   let urlID = location.pathname.substr(location.pathname.lastIndexOf("/") + 1);
   const [interview, setInterview] = useState([
@@ -25,8 +25,7 @@ const Entrevista = () => {
       current_answers: [{ answer: "", question: "" }],
     },
   ]);
-  const data = useSelector((state) => state.data);
-  const { support = [] } = data;
+  const { support = [] } = useDataStore();
   const [urlData] = support.filter(
     (x) => x?.name?.replace(/\s+/g, "-")?.toLowerCase() === urlID
   );
@@ -75,8 +74,8 @@ const Entrevista = () => {
       <div className="top-section-gral">
         <div className="top-section_entr">
           <div className="ts-breadcrumbs">
-            <span onClick={() => history.push("/")}>AMEBA</span> /{" "}
-            <span onClick={() => history.goBack()}>
+            <span onClick={() => navigate("/")}>AMEBA</span> /{" "}
+            <span onClick={() => navigate(-1)}>
               {is_ameba_dj ? "BOOKING" : "#SUPPORTYOURLOCALS"}
             </span>{" "}
             / {artist.name}

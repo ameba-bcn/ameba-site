@@ -1,22 +1,21 @@
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { subscribeNewsletter } from "../../../store/actions/profile";
 import notificationToast, { isEmptyObject } from "../../../utils/utils";
 import Button from "../../button/Button";
 import InputField from "../InputField/InputField";
-import { LogFormError } from "../Log.style";
+import "../Log.style.css";
 import { validate } from "../NewsletterForm/NewletterFormValidate";
+import useProfileStore from "../../../stores/useProfileStore";
 
 export default function NewsletterForm({ setIsSubmitted }) {
   const [t] = useTranslation("translation");
   const [loading, setLoading] = useState(false);
+  const subscribeNewsletter = useProfileStore((state) => state.subscribeNewsletter);
 
-  const dispatch = useDispatch();
   const handleSubmit = (value) => {
     setLoading(true);
-    dispatch(subscribeNewsletter(value.email))
+    subscribeNewsletter(value.email)
       .then(() => {
         setLoading(false);
         setIsSubmitted(true);
@@ -73,11 +72,11 @@ export default function NewsletterForm({ setIsSubmitted }) {
         </div>
       </form>
       {!isEmptyObject(formik.errors) && (
-        <LogFormError>
+        <div className="log-form-error">
           {Object.values(formik.errors).map((x) => {
             return <div key={x}>{x}</div>;
           })}
-        </LogFormError>
+        </div>
       )}
     </>
   );

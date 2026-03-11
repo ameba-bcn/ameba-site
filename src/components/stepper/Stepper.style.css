@@ -1,0 +1,59 @@
+/* Stepper styles */
+
+.stepper-box {
+  min-width: 100%;
+  display: inline-block;
+  position: relative;
+  z-index: 0;
+}
+
+.stepper-box::before {
+  content: "";
+  width: 100%;
+  height: 4px;
+  left: 0;
+  position: absolute;
+}
+
+.stepper-box--step-0::before {
+  background: linear-gradient(to right, #1d1d1b 50%, #1d1d1b 50%);
+}
+
+.stepper-box--step-1::before {
+  background: linear-gradient(to right, #eb5e3e 50%, #1d1d1b 50%);
+}
+
+.stepper-box--step-2::before {
+  background: linear-gradient(to right, #eb5e3e 50%, #eb5e3e 50%);
+}
+
+.stepper-dots-box {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: -10px;
+  z-index: 9;
+}
+
+.stepper-dot {
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  display: inline-block;
+  z-index: 9;
+  background-color: #1d1d1b;
+}
+
+.stepper-dot--active {
+  background-color: #eb5e3e;
+  animation: appearFromCenter 0.1s;
+}
+
+@keyframes appearFromCenter {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}

@@ -1,16 +1,28 @@
 import React from "react";
-import { StepperBox, Dot, DotsBox } from "./Stepper.style";
+import "./Stepper.style.css";
 
 export default function Stepper(props) {
   const { arraySteps = [], activeStep } = props;
 
+  const stepClass =
+    activeStep === 0
+      ? "stepper-box--step-0"
+      : activeStep === 1
+      ? "stepper-box--step-1"
+      : "stepper-box--step-2";
+
   return (
-    <StepperBox activeStep={activeStep}>
-      <DotsBox>
+    <h1 className={`stepper-box ${stepClass}`}>
+      <div className="stepper-dots-box">
         {arraySteps.map((x, index) => {
-          return <Dot key={x} activeStep={activeStep} index={index} />;
+          return (
+            <span
+              key={x}
+              className={`stepper-dot${index <= activeStep ? " stepper-dot--active" : ""}`}
+            />
+          );
         })}
-      </DotsBox>
-    </StepperBox>
+      </div>
+    </h1>
   );
 }

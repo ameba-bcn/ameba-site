@@ -1,0 +1,41 @@
+.member-project-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.member-project-frame #project-disclaimer {
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
+.member-project-frame .formMembership {
+  width: 100%;
+}
+
+@media screen and (max-width: 610px) {
+  .member-project-frame .formMembership {
+    padding: 0px 20px;
+    width: auto;
+  }
+}
+
+.member-form-box {
+  margin: 20px 10px;
+  width: 100%;
+}
+
+.member-form-box > form .field-wrapper {
+  margin-bottom: 20px;
+}
+
+.member-form-box .button-box button {
+  width: 100%;
+}
+
+.member-form-box #project-toogle-button {
+  margin-bottom: 20px;
+}

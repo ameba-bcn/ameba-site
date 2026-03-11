@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, InputLabel, InputLabelBox } from "./InputField.style.js";
+import "./InputField.style.css";
 import Tooltip from "../../tooltip/Tooltip.jsx";
 import Icon from "../../ui/Icon.jsx";
 
@@ -16,51 +16,51 @@ export default function InputField(props) {
     label,
     unstyled = false,
     slimLines = false,
+    valid,
+    slimLine,
     tooltip = "",
     ...rest
   } = props;
+
+  const inputClassName = unstyled
+    ? className
+    : [
+        "input-field__input",
+        valid === false || valid === 0 ? "input-field__input--invalid" : "",
+        value ? "input-field__input--has-value" : "",
+        slimLine === false ? "input-field__input--slim-line" : "",
+        className || "",
+      ]
+        .filter(Boolean)
+        .join(" ");
+
   return (
     <>
       {label && (
-        <InputLabelBox>
+        <div className="input-field__label-box">
           {tooltip.length > 0 ? (
             <Tooltip tooltipContent={tooltip}>
-              <InputLabel id="link-box">
+              <div className="input-field__label" id="link-box">
                 {label}
                 <Icon icon="tooltip" />
-              </InputLabel>
+              </div>
             </Tooltip>
           ) : (
-            <InputLabel id="link-box">{label}</InputLabel>
+            <div className="input-field__label" id="link-box">{label}</div>
           )}
-        </InputLabelBox>
+        </div>
       )}
-      {unstyled ? (
-        <input
-          id={id}
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          className={className}
-          onChange={onChange}
-          onBlur={onBlur}
-          value={value}
-          {...rest}
-        ></input>
-      ) : (
-        <Input
-          id={id}
-          name={name}
-          type={type}
-          placeholder={placeholder}
-          className={className}
-          onChange={onChange}
-          onBlur={onBlur}
-          value={value}
-          slimLines={slimLines}
-          {...rest}
-        ></Input>
-      )}
+      <input
+        id={id}
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        className={inputClassName}
+        onChange={onChange}
+        onBlur={onBlur}
+        value={value}
+        {...rest}
+      />
     </>
   );
 }

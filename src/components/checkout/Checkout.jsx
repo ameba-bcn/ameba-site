@@ -1,39 +1,27 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
 import Review from "./Review";
-import {
-  checkoutCart,
-  checkoutPaymentCart,
-  getCart,
-} from "../../store/actions/cart";
 import { isMemberCheckout } from "../../utils/utils";
 import "./Checkout.css";
 import Button from "../button/Button";
-import { getMemberProfile } from "../../store/actions/auth";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import useAuthStore from "../../stores/useAuthStore";
 import MembershipFormReadOnly from "../forms/MembershipForm/MembershipFormReadOnly";
 import Stepper from "../stepper/Stepper";
-import {
-  CheckoutBox,
-  CheckoutButtons,
-  CheckoutContent,
-  CheckoutFrame,
-  CheckoutMemberFrame,
-  CheckoutSubtitle,
-  CheckoutTitle,
-} from "./Checkout.style";
+import "./Checkout.style.css";
 import Payment from "./Payment";
 import { MOBILE_NORMAL, MOBILE_SMALL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
-import { closeFullscreen } from "../../store/actions/fullscreen";
+import useUIStore from "../../stores/useUIStore";
+import useCartStore from "../../stores/useCartStore";
 import useMediaQuery from "../../hooks/use-media-query";
 
 function Checkout() {
-  const dispatch = useDispatch();
+  const closeFullscreen = useUIStore((state) => state.closeFullscreen);
   const [t] = useTranslation("translation");
-  const { cart_data = {} } = useSelector((state) => state.cart);
-  const { isLoggedIn = false } = useSelector((state) => state.auth);
+  const { cart_data = {}, checkoutCart, checkoutPaymentCart, getCart } = useCartStore();
+  const { isLoggedIn = false } = useAuthStore();
+  const getMemberProfile = useAuthStore((state) => state.getMemberProfile);
   const { total = "", item_variants = [], id = "" } = cart_data;
   const isPaymentFree = total === "0.00 €";
   const hasMembershipInCart = isMemberCheckout(item_variants); // sacar del carro cuando esté en back
@@ -50,15 +38,15 @@ function Checkout() {
   const isMinMobile = useMediaQuery(MOBILE_SMALL);
 
   useEffect(() => {
-    dispatch(getMemberProfile());
-  }, [dispatch]);
-  if (!item_variants.length || !isLoggedIn) return <Redirect to="/" />;
+    getMemberProfile();
+  }, [getMemberProfile]);
+  if (!item_variants.length || !isLoggedIn) return <Navigate to="/" replace />;
 
   const handleNext = () => {
     if (activeStep === 1) {
       setLoading(true);
-      dispatch(checkoutCart())
-        .then(() => !isPaymentFree && dispatch(checkoutPaymentCart(id)))
+      checkoutCart()
+        .then(() => !isPaymentFree && checkoutPaymentCart(id))
         .then(() => {
           setActiveStep(activeStep + 1);
           setLoading(false);
@@ -81,13 +69,13 @@ function Checkout() {
     switch (step) {
       case 0:
         return (
-          <CheckoutMemberFrame>
+          <div className="checkout-member-frame">
             {hasMembershipInCart ? (
               <MembershipFormLayout setButtonDisabled={setButtonDisabled} />
             ) : (
               <MembershipFormReadOnly isCheckout={true} />
             )}
-          </CheckoutMemberFrame>
+          </div>
         );
       case 1:
         return (
@@ -103,19 +91,19 @@ function Checkout() {
   };
 
   const handleClose = () => {
-    dispatch(closeFullscreen());
-    dispatch(getCart());
+    closeFullscreen();
+    getCart();
   };
 
   return (
-    <CheckoutFrame>
-      <CheckoutBox>
-        <CheckoutTitle>{t("checkout.pagament")}</CheckoutTitle>
-        <CheckoutSubtitle>{steps[activeStep]}</CheckoutSubtitle>
+    <div className="checkout-frame">
+      <div className="checkout-box">
+        <div className="checkout-title">{t("checkout.pagament")}</div>
+        <div className="checkout-subtitle">{steps[activeStep]}</div>
         <Stepper arraySteps={steps} activeStep={activeStep} />
-        <CheckoutContent>{getStepContent(activeStep)}</CheckoutContent>
+        <div className="checkout-content">{getStepContent(activeStep)}</div>
         {loading && <span className="spinner-border"></span>}
-        <CheckoutButtons>
+        <div className="checkout-buttons">
           {activeStep !== 0 &&
             (activeStep < 2 ? (
               <Button
@@ -152,9 +140,9 @@ function Checkout() {
               {t("boto.seguent")}
             </Button>
           )}
-        </CheckoutButtons>
-      </CheckoutBox>
-    </CheckoutFrame>
+        </div>
+      </div>
+    </div>
   );
 }
 

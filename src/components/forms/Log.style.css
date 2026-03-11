@@ -1,0 +1,53 @@
+.log-form-box {
+  margin: 20px 0px;
+}
+
+.log-form-box > form .field-wrapper {
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 340px) {
+  .log-form-box > form .field-wrapper {
+    margin: 0px 12px;
+  }
+}
+
+.log-form-box .submit {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.log-form-box .button-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.log-form-box .button-row .column {
+  width: 100%;
+}
+
+.log-button-box button {
+  width: 100%;
+}
+
+.log-form-error {
+  background-color: rgba(250, 230, 197, 0.5);
+  width: 99%;
+  margin: 0 auto;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color: #eb5e3e;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.log-card-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  margin: 0 auto;
+  max-width: 500px !important;
+}

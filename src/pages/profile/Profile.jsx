@@ -1,7 +1,7 @@
 import React from "react";
-import { Redirect, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Navigate, useLocation } from "react-router-dom";
 import LettersMove from "../../components/layout/LettersMove";
+import useAuthStore from "../../stores/useAuthStore";
 import { isEmptyObject } from "../../utils/utils";
 import { useTranslation } from "react-i18next";
 import Breadcrums from "../../components/breadcrums/Breadcrums";
@@ -15,7 +15,7 @@ export default function Profile() {
     user_member_data,
     user_data,
     isLoggedIn = false,
-  } = useSelector((state) => state.auth);
+  } = useAuthStore();
   const { username = "" } = user_data;
   const isMember = !isEmptyObject(user_member_data);
   const [t] = useTranslation("translation");
@@ -26,7 +26,7 @@ export default function Profile() {
   );
 
   if (!isLoggedIn) {
-    return <Redirect to="/" />;
+    return <Navigate to="/" replace />;
   }
 
   const arrView = isMember

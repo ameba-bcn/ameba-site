@@ -1,35 +1,30 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
 import DiscountCode from "../forms/DiscountForm/DiscountCode";
-import {
-  ReviewContent,
-  ReviewFooter,
-  ReviewRowSeparator,
-  ReviewTotalRow,
-} from "./Review.style";
+import useCartStore from "../../stores/useCartStore";
+import "./Review.style.css";
 import TableProducts from "./TableProducts";
 
 function Review() {
   const [t] = useTranslation("translation");
-  const { cart_data = {} } = useSelector((state) => state.cart);
+  const { cart_data = {} } = useCartStore();
   const { total, item_variants } = cart_data;
   const noAllSub = (element) => element.is_subscription === false;
   const hasNoSubscription = item_variants.some(noAllSub);
   const hasArticle = (element) => element.item_type === "article";
 
   return (
-    <ReviewContent>
-      <ReviewTotalRow>
+    <div className="review-content">
+      <div className="review-total-row">
         <div> Total</div>
         <div> {total}</div>
-      </ReviewTotalRow>
-      <ReviewRowSeparator isBig={true} />
+      </div>
+      <div className="review-row-separator review-row-separator--big" />
       <TableProducts />
-      <ReviewRowSeparator isBig={true} />
+      <div className="review-row-separator review-row-separator--big" />
       <DiscountCode />
-      <ReviewRowSeparator isBig={true} />
-      <ReviewFooter>
+      <div className="review-row-separator review-row-separator--big" />
+      <div className="review-footer">
         {hasNoSubscription ? (
           <>
             {t("checkout.review-footer-1")} <br />
@@ -49,8 +44,8 @@ function Review() {
             {t("checkout.review-footer-4")}
           </>
         )}
-      </ReviewFooter>
-    </ReviewContent>
+      </div>
+    </div>
   );
 }
 

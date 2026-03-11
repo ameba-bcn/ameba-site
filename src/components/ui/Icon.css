@@ -1,0 +1,131 @@
+.icon {
+  display: flex;
+  position: relative;
+}
+
+.icon .tooltip {
+  display: none;
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.icon .tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.icon:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+/* Non-disabled states */
+.icon #hoverable-cream-svg path {
+  fill: var(--color-negro);
+}
+
+.icon #hoverable-cream-svg:hover path {
+  fill: var(--color-rojo);
+}
+
+.icon #hoverable-red-svg path {
+  fill: var(--color-negro);
+}
+
+.icon #hoverable-red-svg:hover path {
+  fill: var(--color-rojo);
+}
+
+.icon #hoverable-black-svg path {
+  fill: var(--color-cream);
+}
+
+.icon #hoverable-black-svg:hover path {
+  fill: var(--color-rojo);
+}
+
+.icon #hoverable-dark-svg path {
+  fill: var(--color-cream);
+}
+
+.icon #hoverable-dark-svg:hover path {
+  fill: var(--color-rojo);
+}
+
+/* Disabled states */
+.icon--disabled #hoverable-cream-svg path {
+  fill: var(--color-gris-claro);
+}
+
+.icon--disabled #hoverable-cream-svg:hover path {
+  fill: var(--color-gris-claro);
+}
+
+.icon--disabled #hoverable-red-svg path {
+  fill: var(--color-gris-claro);
+}
+
+.icon--disabled #hoverable-red-svg:hover path {
+  fill: var(--color-gris-claro);
+}
+
+.icon--disabled #hoverable-black-svg path {
+  fill: var(--color-gris-claro);
+}
+
+.icon--disabled #hoverable-black-svg:hover path {
+  fill: var(--color-gris-claro);
+}
+
+.icon--disabled #hoverable-dark-svg path {
+  fill: var(--color-gris-claro);
+}
+
+.icon--disabled #hoverable-dark-svg:hover path {
+  fill: var(--color-gris-claro);
+}
+
+/* Static color variants */
+.icon #cream-svg path {
+  fill: var(--color-cream);
+}
+
+.icon #orange-svg path {
+  fill: var(--color-naranja);
+}
+
+.icon #yellow-svg path {
+  fill: var(--color-amarillo);
+}
+
+/* Also apply static colors for disabled state */
+.icon--disabled #cream-svg path {
+  fill: var(--color-cream);
+}
+
+.icon--disabled #orange-svg path {
+  fill: var(--color-naranja);
+}
+
+.icon--disabled #yellow-svg path {
+  fill: var(--color-amarillo);
+}

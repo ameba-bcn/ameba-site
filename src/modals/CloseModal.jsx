@@ -1,39 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import "./CloseModal.css";
 import Button from "../components/button/Button";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import ModalDialog from "../components/layout/ModalDialog";
-
-const StyledModalCloseBox = styled.div`
-  width: 100%;
-  max-width: 400px;
-  min-width: 280px;
-  background-color: #fae6c5;
-  border: 2px solid #000;
-  padding: 20px;
-  box-shadow: 24;
-  z-index: 2010;
-`;
-
-const StyledModalTextRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  text-align: center;
-  font-weight: bold;
-`;
-
-const StyledModalButtonRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 100%;
-  margin-top: 20px;
-  a {
-    text-decoration: none;
-  }
-`;
 
 const CloseModal = (props) => {
   const {
@@ -51,9 +21,9 @@ const CloseModal = (props) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <StyledModalCloseBox>
-        <StyledModalTextRow>{copyText}</StyledModalTextRow>
-        <StyledModalButtonRow>
+      <div className="close-modal-box">
+        <div className="close-modal-text-row">{copyText}</div>
+        <div className="close-modal-button-row">
           <Button
             variant="contained"
             color="primary"
@@ -82,8 +52,8 @@ const CloseModal = (props) => {
               {t("modal.sortir")}
             </Button>
           </NavLink>
-        </StyledModalButtonRow>
-      </StyledModalCloseBox>
+        </div>
+      </div>
     </ModalDialog>
   ) : null;
 };

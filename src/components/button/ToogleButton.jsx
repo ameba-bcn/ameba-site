@@ -1,22 +1,6 @@
 import React from "react";
-import styled from "styled-components";
+import "./ToogleButton.css";
 import Button from "./Button";
-
-export const StyledToogleButton = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin: 0 auto;
-  justify-content: center;
-  button {
-    border-radius: 0px 25px 25px 0px;
-    &:first-of-type {
-      border-radius: 25px 0px 0px 25px;
-    }
-  }
-  button:hover {
-    transform: translateY(0px) !important;
-  }
-`;
 
 const ToogleButton = (props) => {
   const {
@@ -29,7 +13,7 @@ const ToogleButton = (props) => {
   } = props;
 
   return (
-    <StyledToogleButton id={id}>
+    <div className="toogle-button" id={id}>
       <Button
         variant="contained"
         color="primary"
@@ -60,7 +44,7 @@ const ToogleButton = (props) => {
       >
         {text2}
       </Button>
-    </StyledToogleButton>
+    </div>
   );
 };
 

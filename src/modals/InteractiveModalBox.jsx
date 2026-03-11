@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { StyledCenterLabel, StyledSizesRow } from "./ModalCardStyled";
+import "./ModalCardStyled.css";
 import { formatDateToHour, priceMayDiscount } from "../utils/utils";
 import Icon from "../components/ui/Icon";
 
@@ -47,7 +47,7 @@ const InteractiveModalBox = (props) => {
   return (
     <>
       {modalStyle === "PRODUCTE" && (
-        <StyledSizesRow>
+        <div className="modal-sizes-row">
           <div className="modal-card___title_small ">
             <Icon icon="people" type={colorMode === "dark" ? "cream" : ""} />{" "}
             <span>
@@ -60,7 +60,7 @@ const InteractiveModalBox = (props) => {
             </span>
           </div>
           {sizes && sizes[0] === "UNIQUE" ? (
-            <StyledCenterLabel>Talla única</StyledCenterLabel>
+            <div className="modal-center-label">Talla única</div>
           ) : (
             <>
               {sizes?.map((el) => {
@@ -87,7 +87,7 @@ const InteractiveModalBox = (props) => {
               )}
             </>
           )}
-        </StyledSizesRow>
+        </div>
       )}
       {modalStyle === "SOCI" && (
         <div className="interactiveDataBox-soci__row">

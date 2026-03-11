@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
-import { StyledLink } from "../../../styles/GlobalStyles";
+import "../../../styles/GlobalStyles.css";
+import useCartStore from "../../../stores/useCartStore";
 
 const LoginLayout = (props) => {
   const [t] = useTranslation("translation");
-  const cart = useSelector((state) => state.cart);
-  const { cart_data = {} } = cart;
+  const { cart_data = {} } = useCartStore();
   const { item_variant_ids = [] } = cart_data;
   const [redirect, setRedirect] = useState(false);
   const [recover, setRecover] = useState(false);
@@ -23,13 +22,13 @@ const LoginLayout = (props) => {
 
   if (redirect) {
     if (item_variant_ids.length > 0) {
-      return <Redirect to="/checkout" />;
+      return <Navigate to="/checkout" replace />;
     } else {
-      return <Redirect to="/" />;
+      return <Navigate to="/" replace />;
     }
   }
 
-  if (recover) return <Redirect to="/send-recovery" />;
+  if (recover) return <Navigate to="/send-recovery" replace />;
 
   return (
     <div className="cardForm">
@@ -38,12 +37,12 @@ const LoginLayout = (props) => {
 
         <LoginForm setRedirect={setRedirect} />
 
-        <StyledLink bold={1} onClick={showRegistration}>
+        <div className="styled-link styled-link--bold" onClick={showRegistration}>
           {`- ${t("login.registrat")} -`}
-        </StyledLink>
-        <StyledLink bold={1} onClick={showPasswordRecover}>
+        </div>
+        <div className="styled-link styled-link--bold" onClick={showPasswordRecover}>
           {`- ${t("login.recupera-llarg")} -`}
-        </StyledLink>
+        </div>
       </div>
     </div>
   );

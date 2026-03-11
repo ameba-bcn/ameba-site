@@ -1,0 +1,17 @@
+.qr-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.qr-box #qr-disclaimer {
+  max-width: 460px;
+  margin-bottom: 24px;
+}
+
+@media screen and (max-width: 610px) {
+  .qr-box {
+    padding: 0px 5px;
+  }
+}

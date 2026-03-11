@@ -1,29 +1,27 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { useDispatch } from "react-redux";
-import {
-  login,
-  getUserData,
-  getMemberProfile,
-} from "../../../store/actions/auth";
-import { getCart } from "../../../store/actions/cart";
+import useAuthStore from "../../../stores/useAuthStore";
+import useCartStore from "../../../stores/useCartStore";
 import InputField from "../InputField/InputField";
 import { validate } from "../Login/LoginValidate";
-import { LogFormBox, LogFormError } from "../Log.style";
+import "../Log.style.css";
 import Button from "../../button/Button";
 import { isEmptyObject } from "../../../utils/utils";
 
 export default function LoginForm({ setRedirect }) {
-  const dispatch = useDispatch();
+  const login = useAuthStore((state) => state.login);
+  const getCart = useCartStore((state) => state.getCart);
+  const getUserData = useAuthStore((state) => state.getUserData);
+  const getMemberProfile = useAuthStore((state) => state.getMemberProfile);
   const [loading, setLoading] = useState(false);
 
   const handleSubmitLogin = (values) => {
     setLoading(true);
-    dispatch(login(values.email, values.password))
+    login(values.email, values.password)
       .then(() => {
-        dispatch(getUserData());
-        dispatch(getMemberProfile());
-        dispatch(getCart()).then(() => {
+        getUserData();
+        getMemberProfile();
+        getCart().then(() => {
           setRedirect(true);
         });
         setLoading(false);
@@ -47,7 +45,7 @@ export default function LoginForm({ setRedirect }) {
   });
 
   return (
-    <LogFormBox>
+    <div className="log-form-box">
       <form onSubmit={formik.handleSubmit}>
         <div className="field-wrapper">
           <InputField
@@ -74,11 +72,11 @@ export default function LoginForm({ setRedirect }) {
           />
         </div>
         {!isEmptyObject(formik.errors) && (
-          <LogFormError>
+          <div className="log-form-error">
             {Object.values(formik.errors).map((x) => {
               return <div key={x}>{x}</div>;
             })}
-          </LogFormError>
+          </div>
         )}
         <Button
           type="submit"
@@ -93,6 +91,6 @@ export default function LoginForm({ setRedirect }) {
           <>login</>
         </Button>
       </form>
-    </LogFormBox>
+    </div>
   );
 }

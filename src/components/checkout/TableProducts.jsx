@@ -1,22 +1,20 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { substractToCart } from "../../store/actions/cart";
-import { ReviewTable } from "./Review.style";
+import "./Review.style.css";
 import { priceMayDiscount } from "../../utils/utils";
 import Icon from "../ui/Icon";
+import useCartStore from "../../stores/useCartStore";
 
 export default function TableProducts() {
-  const { cart_data = {} } = useSelector((state) => state.cart);
+  const { cart_data = {}, substractToCart } = useCartStore();
   const { item_variants = [] } = cart_data;
-  const dispatch = useDispatch();
   const [t] = useTranslation("translation");
 
   const substractItem = (id) => {
-    dispatch(substractToCart(id));
+    substractToCart(id);
   };
   return (
-    <ReviewTable>
+    <table className="review-table">
       <tbody>
         {item_variants?.map((item, i) => (
           <tr key={i}>
@@ -49,6 +47,6 @@ export default function TableProducts() {
           </tr>
         ))}
       </tbody>
-    </ReviewTable>
+    </table>
   );
 }
