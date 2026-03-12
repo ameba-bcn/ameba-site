@@ -33,7 +33,8 @@ export default function TableProducts() {
                 item?.price,
                 item?.discount_value,
                 item?.discount_name,
-                t("form.descompte")
+                t("form.descompte"),
+                item?.subtotal
               )}
             </td>
             <td className="reviewTable-col4">

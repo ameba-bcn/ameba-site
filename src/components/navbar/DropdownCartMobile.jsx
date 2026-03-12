@@ -98,7 +98,8 @@ export default function DropdownCartMobile(props) {
                           el?.price,
                           el?.discount_value,
                           el?.discount_name,
-                          t("form.descompte")
+                          t("form.descompte"),
+                          el?.subtotal
                         )}
                       </div>
                       <div className="quantitySizeProduct">

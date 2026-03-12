@@ -1,5 +1,5 @@
 import React from "react";
-import DOMPurify from "dompurify";
+import { sanitizeHTML } from "../../../utils/sanitize";
 import TitleSection from "../../../components/layout/TitleSection";
 import ImageCarousel from "../../../components/images/ImageCarousel";
 import LinkBox from "../../../components/link-box/LinkBox";
@@ -27,7 +27,7 @@ const PreviewerSociosDetailed = (props) => {
             <div
               className="bio-text"
               dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(description),
+                __html: sanitizeHTML(description),
               }}
             />
             {images?.length > 0 && (

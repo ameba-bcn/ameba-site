@@ -99,11 +99,11 @@ export const sortByDate = (array) => {
 export const sortByProperty = (array, property, asc = true) => {
   if (asc) {
     return array.sort((a, b) =>
-      a[property] > b[property] ? 1 : b[property] > a[property] ? -1 : 0
+      a[property] > b[property] ? 1 : b[property] > a[property] ? -1 : 0,
     );
   } else {
     return array.sort((a, b) =>
-      a[property] > b[property] ? -1 : b[property] > a[property] ? 1 : 0
+      a[property] > b[property] ? -1 : b[property] > a[property] ? 1 : 0,
     );
   }
 };
@@ -135,19 +135,16 @@ export const priceMayDiscount = (
   price,
   discount,
   discountName,
-  descompteText
+  descompteText,
+  subtotal = "",
 ) => {
   if (discount) {
-    const numPrice = parseFloat(price);
-    const currency = price.slice(-1);
     return (
       <>
         <span style={{ textDecoration: "line-through" }}>{price}</span>{" "}
         <span>
           {` `}
-          {numPrice - numPrice * (discount / 100)}
-          {` `}
-          {currency}
+          {subtotal}
           {discountName
             ? ` ${discountName}`
             : ` -> ${discount}% ${descompteText}`}
