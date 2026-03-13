@@ -17,6 +17,20 @@ const axiosInstance = axios.create({
   },
 });
 
+// Protección contra race conditions: si múltiples requests fallan con 401
+// simultáneamente, solo una debe hacer el refresh y las demás esperan.
+let isRefreshing = false;
+let refreshSubscribers = [];
+
+function onRefreshed(newAccessToken) {
+  refreshSubscribers.forEach((callback) => callback(newAccessToken));
+  refreshSubscribers = [];
+}
+
+function addRefreshSubscriber(callback) {
+  refreshSubscribers.push(callback);
+}
+
 axiosInstance.interceptors.response.use(
   (response) => {
     return response;
@@ -38,6 +52,8 @@ axiosInstance.interceptors.response.use(
       error.response.status === 401 &&
       originalRequest.url === BASE_URL + "token/refresh/"
     ) {
+      isRefreshing = false;
+      refreshSubscribers = [];
       window.location.href = "/login/";
       return Promise.reject(error);
     }
@@ -45,44 +61,67 @@ axiosInstance.interceptors.response.use(
     if (
       error.response.data.code === "token_not_valid" &&
       error.response.status === 401 &&
-      error.response.statusText === "Unauthorized"
+      !originalRequest._retry
     ) {
+      originalRequest._retry = true;
       const refreshToken = localStorage.getItem("refresh");
 
-      if (refreshToken) {
-        const tokenParts = JSON.parse(atob(refreshToken.split(".")[1]));
-        //La fecha esta en segundos, la reformateamos
-        const now = Math.ceil(Date.now() / 1000);
-        console.warn(tokenParts.exp);
-
-        if (tokenParts.exp > now) {
-          return axiosInstance
-            .post("/token/refresh/", { refresh: refreshToken })
-            .then((response) => {
-              localStorage.setItem("access", response?.data.access);
-              localStorage.setItem("refresh", response?.data.refresh);
-
-              axiosInstance.defaults.headers["Authorization"] =
-                response?.data.access;
-              axiosInstance.headers["Authorization"] = response?.data.access;
-
-              return axiosInstance(originalRequest);
-            })
-            .catch((err) => {
-              console.warn(err);
-            });
-        } else {
-          console.warn("Refresh page token is expired", tokenParts.exp, now);
-          if (typeof window !== "undefined") {
-            window.location.href = "/login/";
-          }
-        }
-      } else {
+      if (!refreshToken) {
         console.warn("Refresh token not available");
-        if (typeof window !== "undefined") {
-          window.location.href = "/login/";
-        }
+        window.location.href = "/login/";
+        return Promise.reject(error);
       }
+
+      // Si ya hay un refresh en curso, encolar esta request
+      if (isRefreshing) {
+        return new Promise((resolve) => {
+          addRefreshSubscriber((newAccessToken) => {
+            originalRequest.headers["Authorization"] =
+              `Bearer ${newAccessToken}`;
+            resolve(axiosInstance(originalRequest));
+          });
+        });
+      }
+
+      const tokenParts = JSON.parse(atob(refreshToken.split(".")[1]));
+      const now = Math.ceil(Date.now() / 1000);
+
+      if (tokenParts.exp <= now) {
+        console.warn("Refresh token is expired", tokenParts.exp, now);
+        window.location.href = "/login/";
+        return Promise.reject(error);
+      }
+
+      isRefreshing = true;
+
+      return axiosInstance
+        .post("/token/refresh/", { refresh: refreshToken })
+        .then((response) => {
+          const newAccessToken = response?.data.access;
+          const newRefreshToken = response?.data.refresh;
+
+          localStorage.setItem("access", newAccessToken);
+          if (newRefreshToken) {
+            localStorage.setItem("refresh", newRefreshToken);
+          }
+
+          axiosInstance.defaults.headers["Authorization"] =
+            `Bearer ${newAccessToken}`;
+
+          originalRequest.headers["Authorization"] =
+            `Bearer ${newAccessToken}`;
+
+          isRefreshing = false;
+          onRefreshed(newAccessToken);
+
+          return axiosInstance(originalRequest);
+        })
+        .catch((err) => {
+          isRefreshing = false;
+          refreshSubscribers = [];
+          console.warn("Token refresh failed", err);
+          return Promise.reject(err);
+        });
     }
     return Promise.reject(error);
   }

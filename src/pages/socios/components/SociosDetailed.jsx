@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import DOMPurify from "dompurify";
+import { sanitizeHTML } from "../../../utils/sanitize";
 import axiosInstance from "../../../axios";
 import ImageCarousel from "../../../components/images/ImageCarousel";
 import LettersMove from "../../../components/layout/LettersMove";
@@ -69,7 +69,7 @@ const SociosDetailed = () => {
             <div
               className="bio-text"
               dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(description),
+                __html: sanitizeHTML(description),
               }}
             />
             {images?.length > 0 && (
