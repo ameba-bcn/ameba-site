@@ -15,7 +15,7 @@ import Icon from "../ui/Icon";
 import useMediaQuery from "../../hooks/use-media-query";
 
 export default function DropdownCartMobile(props) {
-  const { addToCart, substractToCart } = useCartStore();
+  const { addToCart, substractToCart, cartBusy } = useCartStore();
   const { setCartMenuOpen = {} } = props;
   const { item_variants = [], total = 0 } = props.cartData;
   const { isLoggedIn } = useAuthStore();
@@ -112,12 +112,15 @@ export default function DropdownCartMobile(props) {
                     </div>
                   </div>
                   <div className="colCartProduct2_mobile">
-                    <div className="addCart" onClick={() => addItem(el.id)}>
+                    <div
+                      className={`addCart${cartBusy ? " disabled" : ""}`}
+                      onClick={() => !cartBusy && addItem(el.id)}
+                    >
                       <Icon icon="plus" />
                     </div>
                     <div
-                      className="subsCart"
-                      onClick={() => substractItem(el.id)}
+                      className={`subsCart${cartBusy ? " disabled" : ""}`}
+                      onClick={() => !cartBusy && substractItem(el.id)}
                     >
                       <Icon icon="minus" />
                     </div>

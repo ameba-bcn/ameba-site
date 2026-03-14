@@ -71,9 +71,7 @@ export function isMemberCheckout(input) {
 }
 
 export function mergeCartIds(arr1, arr2) {
-  if (arr1.length < 1 || arr2.length < 1) return arr1.length ? arr1 : arr2;
-  if (arr1.sort().join(",") === arr2.sort().join(",")) return arr1;
-  else return arr1.concat(arr2);
+  return [...new Set([...arr1, ...arr2])];
 }
 
 // Funcion que calcula cuantas celdas vacias hay en ultima fila y permite alinear el ultimo elemento
