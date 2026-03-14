@@ -13,7 +13,8 @@ import useCartStore from "../../stores/useCartStore";
 import "./DropdownCart.css";
 
 function Cart() {
-  const { cart_data = {}, addToCart, substractToCart } = useCartStore();
+  const { cart_data = {}, addToCart, substractToCart, cartBusy } =
+    useCartStore();
   const { isLoggedIn } = useAuthStore();
   const setGuestUser = useProfileStore((state) => state.setGuestUser);
   const setLoggedUser = useProfileStore((state) => state.setLoggedUser);
@@ -88,14 +89,14 @@ function Cart() {
                         <div className="rowCartProduct">
                           <div className="colCartProduct1">
                             <div
-                              className="addCart"
-                              onClick={() => addItem(el.id)}
+                              className={`addCart${cartBusy ? " disabled" : ""}`}
+                              onClick={() => !cartBusy && addItem(el.id)}
                             >
                               <Icon icon="plus" />
                             </div>
                             <div
-                              className="subsCart"
-                              onClick={() => substractItem(el.id)}
+                              className={`subsCart${cartBusy ? " disabled" : ""}`}
+                              onClick={() => !cartBusy && substractItem(el.id)}
                             >
                               <Icon icon="minus" />
                             </div>

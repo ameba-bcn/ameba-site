@@ -2,17 +2,21 @@ import { create } from "zustand";
 import CartService from "../store/services/cart.services";
 import notificationToast from "../utils/utils";
 
-const useCartStore = create((set) => ({
+const useCartStore = create((set, get) => ({
   cart_data: {},
   checkout: {},
   stripe: false,
+  cartBusy: false,
 
   addToCart: (id) => {
+    if (get().cartBusy) return Promise.resolve();
+    set({ cartBusy: true });
     return CartService.addInCart(id).then(
       (response) => {
-        set({ cart_data: response });
+        set({ cart_data: response, cartBusy: false });
       },
       (error) => {
+        set({ cartBusy: false });
         const message = error.response?.data?.detail;
         notificationToast(message, "error");
         return Promise.reject();
@@ -21,11 +25,14 @@ const useCartStore = create((set) => ({
   },
 
   substractToCart: (id) => {
+    if (get().cartBusy) return Promise.resolve();
+    set({ cartBusy: true });
     return CartService.removeItemCart(id).then(
       (response) => {
-        set({ cart_data: response });
+        set({ cart_data: response, cartBusy: false });
       },
       (error) => {
+        set({ cartBusy: false });
         const message = error.response?.data?.detail;
         notificationToast(message, "error");
         return Promise.reject();
