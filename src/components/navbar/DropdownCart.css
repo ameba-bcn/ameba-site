@@ -148,6 +148,13 @@
     }
 }
 
+.addCart.disabled,
+.subsCart.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 .buttonCheckoutCart {
     background-color: #1d1d1b;
     font-size: 20px;
