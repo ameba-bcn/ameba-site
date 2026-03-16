@@ -17,7 +17,6 @@ import LogMailConfirmation from "./pages/LogMailConfirmation";
 import SendEmailPasswordRecovery from "./pages/SendEmailPasswordRecovery";
 import ValidateEmail from "./pages/ValidateEmail";
 import ScrollTop from "./components/layout/ScrollTop";
-import { deepComparision } from "./utils/utils";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-image-gallery/styles/image-gallery.css";
@@ -44,13 +43,11 @@ function App() {
   const [user, setUser] = useState(null);
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
   const isFullscreenOpen = useUIStore((state) => state.isFullscreenOpen);
-  const { user_member_data = {} } = useAuthStore();
   const validateLocalToken = useAuthStore((state) => state.validateLocalToken);
   const getUserData = useAuthStore((state) => state.getUserData);
   const getMemberProfile = useAuthStore((state) => state.getMemberProfile);
   const setGuestUser = useProfileStore((state) => state.setGuestUser);
   const setLoggedUser = useProfileStore((state) => state.setLoggedUser);
-  const setMember = useProfileStore((state) => state.setMember);
   const fetchSupport = useDataStore((state) => state.fetchSupport);
   const fetchAgenda = useDataStore((state) => state.fetchAgenda);
   const fetchBotiga = useDataStore((state) => state.fetchBotiga);
@@ -61,16 +58,17 @@ function App() {
   const fetchMemberProjects = useDataStore((state) => state.fetchMemberProjects);
   const getCart = useCartStore((state) => state.getCart);
 
-  const isNewMember = deepComparision(user_member_data, {});
-
   useEffect(() => {
     const refresh = localStorage.getItem("refresh");
     if (refresh) {
       validateLocalToken(refresh)
         .then(() => {
-          isNewMember ? setLoggedUser() : setMember();
-          getUserData();
-          getMemberProfile();
+          setLoggedUser();
+          getUserData().then((data) => {
+            if (data?.member) {
+              getMemberProfile();
+            }
+          });
         })
         .catch(setGuestUser());
     } else {
@@ -85,7 +83,7 @@ function App() {
     fetchCollaborators();
     getCart();
     fetchMemberProjects();
-  }, [isNewMember]);
+  }, []);
 
   return (
     <div className="app">

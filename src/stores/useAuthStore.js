@@ -81,6 +81,7 @@ const useAuthStore = create((set) => ({
     return AuthService.getUserData().then(
       (data) => {
         set({ user_data: data });
+        return data;
       },
       (error) => {
         const message = error.response?.data?.detail;
@@ -153,7 +154,12 @@ const useAuthStore = create((set) => ({
 
   validateEmail: (token) => {
     return AuthService.validateEmail(token).then(
-      () => {},
+      (data) => {
+        if (data?.access) {
+          set({ isLoggedIn: true, user: data });
+          useProfileStore.getState().setLoggedUser();
+        }
+      },
       (error) => {
         const message = error.response?.data?.detail;
         notificationToast(JSON.stringify(message), "error");

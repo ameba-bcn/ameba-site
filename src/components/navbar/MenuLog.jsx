@@ -13,7 +13,7 @@ export default function MenuLog(props) {
   const logout = useAuthStore((state) => state.logout);
   const { isProfileMenuOpen, openProfileMenu, closeProfileMenu, closeMenu } = useUIStore();
   const { user_profile } = useProfileStore();
-  const isMember = user_profile === "MEMBER" || "LOGGED";
+  const isMember = user_profile === "MEMBER" || user_profile === "LOGGED";
   const userName = user_data.username.split(" ")[0];
   const userNameShortened =
     userName.length > 7 ? userName.slice(0, 7) + "..." : userName;
