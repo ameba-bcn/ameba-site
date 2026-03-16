@@ -24,6 +24,10 @@ const validateEmail = (token) => {
       token: token,
     })
     .then((response) => {
+      if (response?.data?.access) {
+        localStorage.setItem("access", response.data.access);
+        localStorage.setItem("refresh", response.data.refresh);
+      }
       return response?.data;
     });
 };

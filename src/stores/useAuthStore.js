@@ -2,6 +2,7 @@ import { create } from "zustand";
 import AuthService from "../store/services/auth.service";
 import notificationToast from "../utils/utils";
 import useProfileStore from "./useProfileStore";
+import useCartStore from "./useCartStore";
 
 const access = localStorage.getItem("access");
 const refresh = localStorage.getItem("refresh");
@@ -40,7 +41,7 @@ const useAuthStore = create((set) => ({
         set({ isLoggedIn: false });
         notificationToast(message, "error");
         return Promise.reject();
-      }
+      },
     );
   },
 
@@ -56,7 +57,7 @@ const useAuthStore = create((set) => ({
         useProfileStore.getState().setGuestUser();
         notificationToast(message, "error");
         return Promise.reject();
-      }
+      },
     );
   },
 
@@ -72,7 +73,7 @@ const useAuthStore = create((set) => ({
         localStorage.removeItem("cart_id");
         set({ isLoggedIn: false, user: null });
         return Promise.reject(message);
-      }
+      },
     );
   },
 
@@ -80,13 +81,14 @@ const useAuthStore = create((set) => ({
     return AuthService.getUserData().then(
       (data) => {
         set({ user_data: data });
+        return data;
       },
       (error) => {
         const message = error.response?.data?.detail;
         set({ user_data: { ...defaultUserData } });
         notificationToast(message, "error");
         return Promise.reject();
-      }
+      },
     );
   },
 
@@ -102,13 +104,23 @@ const useAuthStore = create((set) => ({
         const message = error.response?.data.detail;
         set({ user_member_data: {} });
         return Promise.reject(message);
-      }
+      },
     );
   },
 
-  updateMemberProfile: (identity_card, first_name, last_name, phone_number, username) => {
+  updateMemberProfile: (
+    identity_card,
+    first_name,
+    last_name,
+    phone_number,
+    username,
+  ) => {
     return AuthService.updateMemberProfile(
-      identity_card, first_name, last_name, phone_number, username
+      identity_card,
+      first_name,
+      last_name,
+      phone_number,
+      username,
     ).then(
       (response) => {
         set({ user_member_data: response });
@@ -118,13 +130,16 @@ const useAuthStore = create((set) => ({
         const message = error.response?.data.detail;
         notificationToast(message, "error");
         return Promise.reject();
-      }
+      },
     );
   },
 
   createMemberProfile: (identity_card, first_name, last_name, phone_number) => {
     return AuthService.createMemberProfile(
-      identity_card, first_name, last_name, phone_number
+      identity_card,
+      first_name,
+      last_name,
+      phone_number,
     ).then(
       (response) => {
         set({ user_member_data: response });
@@ -133,18 +148,23 @@ const useAuthStore = create((set) => ({
         const message = error.response?.data;
         notificationToast(JSON.stringify(message), "error");
         return Promise.reject();
-      }
+      },
     );
   },
 
   validateEmail: (token) => {
     return AuthService.validateEmail(token).then(
-      () => {},
+      (data) => {
+        if (data?.access) {
+          set({ isLoggedIn: true, user: data });
+          useProfileStore.getState().setLoggedUser();
+        }
+      },
       (error) => {
         const message = error.response?.data?.detail;
         notificationToast(JSON.stringify(message), "error");
         return Promise.reject();
-      }
+      },
     );
   },
 
@@ -158,7 +178,7 @@ const useAuthStore = create((set) => ({
         const message = error.response?.data?.detail;
         notificationToast(message, "error");
         return Promise.reject();
-      }
+      },
     );
   },
 
@@ -172,25 +192,32 @@ const useAuthStore = create((set) => ({
         const message = error.response?.data?.detail;
         notificationToast(message, "error");
         return Promise.reject();
-      }
+      },
     );
   },
 
   logout: () => {
-    const useCartStore = require("./useCartStore").default;
     AuthService.logout().then(
       () => {
-        set({ isLoggedIn: false, user: null, user_data: { ...defaultUserData } });
+        set({
+          isLoggedIn: false,
+          user: null,
+          user_data: { ...defaultUserData },
+        });
         useCartStore.getState().clearCart();
         useProfileStore.getState().setGuestUser();
       },
       (error) => {
         const message = error.response?.data;
-        set({ isLoggedIn: false, user: null, user_data: { ...defaultUserData } });
+        set({
+          isLoggedIn: false,
+          user: null,
+          user_data: { ...defaultUserData },
+        });
         useCartStore.getState().clearCart();
         useProfileStore.getState().setGuestUser();
         notificationToast(message, "error");
-      }
+      },
     );
   },
 
@@ -200,7 +227,7 @@ const useAuthStore = create((set) => ({
       (error) => {
         const message = error.response?.data?.detail;
         return Promise.reject(message);
-      }
+      },
     );
   },
 }));
