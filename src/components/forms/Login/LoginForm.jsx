@@ -19,8 +19,11 @@ export default function LoginForm({ setRedirect }) {
     setLoading(true);
     login(values.email, values.password)
       .then(() => {
-        getUserData();
-        getMemberProfile();
+        getUserData().then((data) => {
+          if (data?.member) {
+            getMemberProfile();
+          }
+        });
         getCart().then(() => {
           setRedirect(true);
         });
