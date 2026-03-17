@@ -99,7 +99,7 @@ jobs:
           script: |
             cd ~/ameba-devops
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:dev
-            export ENVIRONMENT dev
+            export ENVIRONMENT=dev
             docker compose --profile dev up -d --force-recreate
             docker image prune -f
 
