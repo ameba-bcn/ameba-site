@@ -59,6 +59,10 @@ function App() {
   const getCart = useCartStore((state) => state.getCart);
 
   useEffect(() => {
+    const version = import.meta.env.VITE_VERSION || 'dev';
+    const commit = import.meta.env.VITE_COMMIT_SHA || 'local';
+    console.log(`%c Ameba v${version} | commit: ${commit} `, 'background:#222;color:#bada55;font-weight:bold;');
+
     const refresh = localStorage.getItem("refresh");
     if (refresh) {
       validateLocalToken(refresh)
