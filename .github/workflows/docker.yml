@@ -98,7 +98,8 @@ jobs:
           script: |
             cd ~/ameba-devops
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:dev
-            docker compose up -d --force-recreate
+            export ENVIRONMENT dev
+            docker compose --profile dev up -d --force-recreate
             docker image prune -f
 
       - name: Deployment summary
@@ -126,7 +127,8 @@ jobs:
           script: |
             cd ~/ameba-devops
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
-            docker compose up -d --force-recreate
+            export ENVIRONMENT=prod
+            docker compose --profile prod up -d --force-recreate
             docker image prune -f
 
       - name: Deployment summary
