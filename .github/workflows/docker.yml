@@ -67,6 +67,7 @@ jobs:
             VITE_SENTRY_DSN=${{ secrets.SENTRY_DSN }}
             VITE_SENTRY_ENVIRONMENT=${{ github.ref_name == 'master' && 'production' || 'development' }}
             VITE_VERSION=${{ steps.pkg.outputs.version }}
+            VITE_COMMIT_SHA=${{ github.sha }}
             SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
             SENTRY_ORG=${{ secrets.SENTRY_ORG }}
             SENTRY_PROJECT=${{ secrets.SENTRY_PROJECT }}
@@ -98,7 +99,7 @@ jobs:
           script: |
             cd ~/ameba-devops
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:dev
-            export ENVIRONMENT dev
+            export ENVIRONMENT=dev
             docker compose --profile dev up -d --force-recreate
             docker image prune -f
 
