@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -28,13 +28,16 @@
       rel="stylesheet"
     />
     <title>AMEBA</title>
-    <script
-      id="Cookiebot"
-      src="https://consent.cookiebot.com/uc.js"
-      data-cbid="fe7226bd-585a-4f0f-bdc8-a57275109561"
-      data-blockingmode="auto"
-      type="text/javascript"
-    ></script>
+    <script>
+      if (location.hostname === "ameba.cat" || location.hostname === "www.ameba.cat") {
+        var s = document.createElement("script");
+        s.id = "Cookiebot";
+        s.src = "https://consent.cookiebot.com/uc.js";
+        s.setAttribute("data-cbid", "99daf3b1-dde6-4eb5-b207-b5ffc7eb6695");
+        s.setAttribute("data-blockingmode", "auto");
+        document.head.appendChild(s);
+      }
+    </script>
   </head>
 
   <body>
