@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import MenuLog from "./MenuLog";
@@ -7,11 +7,10 @@ import useOutsideClick from "../../hooks/use-outside-click";
 import useUIStore from "../../stores/useUIStore";
 
 export default function NavbarButtonsMobile(props) {
-  const { isLoggedIn = false, refer } = props;
+  const { isLoggedIn = false, refer, toggleRef, isOpen = false } = props;
   const [t, i18next] = useTranslation("translation");
   const closeMenu = useUIStore((state) => state.closeMenu);
   const currentLang = localStorage.getItem("i18nextLng");
-  const [rendered, setRendered] = useState(false);
   const handleChangeLanguage = (lang) => {
     if (currentLang !== lang) {
       i18next.changeLanguage(lang);
@@ -19,16 +18,12 @@ export default function NavbarButtonsMobile(props) {
     }
   };
 
-  useEffect(() => {
-    setRendered(true);
-  }, []);
-
-  useOutsideClick(refer, () => {
-    if (rendered) closeMenu();
+  useOutsideClick(refer, (e) => {
+    if (isOpen && !toggleRef?.current?.contains(e.target)) closeMenu();
   });
 
   return (
-    <div className="nav-ul_box-mobile">
+    <div className={`nav-ul_box-mobile${isOpen ? " nav-ul_box-mobile--open" : ""}`}>
       <ul className="nav-ul_mobile" ref={refer}>
         <li>
           <NavLink

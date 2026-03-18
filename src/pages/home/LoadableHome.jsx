@@ -1,9 +1,8 @@
 import React, { Suspense } from "react";
 import FullscreenSpinner from "../../components/spinner/FullscreenSpinner";
+import lazyWithRetry from "../../utils/lazyWithRetry";
 
-const HomeView = React.lazy(() =>
-  import("./Home" /* webpackChunkName: "home" */)
-);
+const HomeView = lazyWithRetry(() => import("./Home"));
 
 const LoadableHome = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>

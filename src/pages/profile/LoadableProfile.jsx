@@ -1,9 +1,8 @@
 import React, { Suspense } from "react";
 import FullscreenSpinner from "../../components/spinner/FullscreenSpinner";
+import lazyWithRetry from "../../utils/lazyWithRetry";
 
-const ProfileView = React.lazy(() =>
-  import("./Profile" /* webpackChunkName: "Profile" */)
-);
+const ProfileView = lazyWithRetry(() => import("./Profile"));
 
 const LoadableProfile = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>

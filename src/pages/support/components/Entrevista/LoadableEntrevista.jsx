@@ -1,9 +1,8 @@
 import React, { Suspense } from "react";
 import FullscreenSpinner from "../../../../components/spinner/FullscreenSpinner";
+import lazyWithRetry from "../../../../utils/lazyWithRetry";
 
-const EntrevistaView = React.lazy(() =>
-  import("./Entrevista" /* webpackChunkName: "entrevista" */)
-);
+const EntrevistaView = lazyWithRetry(() => import("./Entrevista"));
 
 const LoadableEntrevista = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>

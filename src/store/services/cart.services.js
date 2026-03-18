@@ -196,6 +196,7 @@ const getCart = () => {
         }
       });
   } else {
+    if (!cart_uuid) return Promise.resolve({});
     return axiosInstance
       .get(`${API_URL}carts/${cart_uuid}/`)
       .then((response) => {
@@ -203,8 +204,7 @@ const getCart = () => {
         return response?.data;
       })
       .catch(() => {
-        const cart_uuid = localStorage.getItem("cart_id");
-        if (cart_uuid) localStorage.removeItem("cart_id");
+        localStorage.removeItem("cart_id");
       });
   }
 };
