@@ -13,7 +13,7 @@ const rootElement = document.getElementById("root");
 const root = createRoot(rootElement);
 
 root.render(
-  <BrowserRouter>
+  <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
     <I18nextProvider i18n={i18next}>
       <ErrorBoundary>
         <App />

@@ -1,9 +1,8 @@
 import React, { Suspense } from "react";
 import FullscreenSpinner from "../../../components/spinner/FullscreenSpinner";
+import lazyWithRetry from "../../../utils/lazyWithRetry";
 
-const SociosDetailedView = React.lazy(() =>
-  import("./SociosDetailed" /* webpackChunkName: "sociosDetailed" */)
-);
+const SociosDetailedView = lazyWithRetry(() => import("./SociosDetailed"));
 
 const LoadableSociosDetailed = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>

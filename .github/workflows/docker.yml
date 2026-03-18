@@ -100,6 +100,8 @@ jobs:
             cd ~/ameba-devops
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:dev
             export ENVIRONMENT=dev
+            export IMAGE_TAG=dev
+            export MEDIA_VOLUME=ameba_media
             docker compose --profile dev up -d --force-recreate
             docker image prune -f
 
@@ -129,6 +131,8 @@ jobs:
             cd ~/ameba-devops
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
             export ENVIRONMENT=prod
+            export IMAGE_TAG=latest
+            export MEDIA_VOLUME=/mnt/media
             docker compose --profile prod up -d --force-recreate
             docker image prune -f
 
