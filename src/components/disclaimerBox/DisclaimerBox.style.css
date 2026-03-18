@@ -30,6 +30,15 @@
   cursor: pointer;
 }
 
+.disclaimer-box--light {
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  background-color: #fae6c5;
+}
+
 @media screen and (max-width: 465px) {
   .disclaimer-box {
     margin: 0 24px;

@@ -155,6 +155,7 @@ const Memberships = () => {
                       {t("soci.disclaimer")}
                     </NavLink>
                   }
+                  closable
                 />
               )}
             </div>
@@ -162,7 +163,7 @@ const Memberships = () => {
         </div>
       ) : (
         <div className="disclaimer-frame">
-          <DisclaimerBox text="No data available" />
+          <DisclaimerBox text="No data available" closable />
         </div>
       )}
 

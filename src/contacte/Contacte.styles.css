@@ -67,8 +67,9 @@
   background-color: transparent;
   color: #1d1d1b;
   border: 2px solid #1d1d1b;
-  width: 95%;
+  width: 100%;
   height: auto;
+  box-sizing: border-box;
 }
 
 .contacte .formControlNews:focus,
@@ -143,6 +144,7 @@
 .contacte .legal {
   color: #000;
   text-decoration: none;
+  display: inline;
 }
 
 .contacte .legal:hover {
@@ -172,9 +174,14 @@
   .contacte .formControlNews {
     font-size: 1rem;
     margin: 5px 0px;
+    width: 100%;
   }
   .contacte .contactNews {
     flex-wrap: wrap;
+  }
+  .contacte .form-group-input,
+  .contacte .form-group-button {
+    flex: 100%;
   }
 }
 

@@ -10,6 +10,7 @@ const AmebaSvgWrapper = (props) => {
     type,
     disabled = false,
     className = "",
+    tooltip = "",
   } = props;
 
   return (
@@ -26,9 +27,7 @@ const AmebaSvgWrapper = (props) => {
         {children}
       </svg>
 
-      {props?.tooltip?.length > 0 && (
-        <span className="tooltip">{props?.tooltip}</span>
-      )}
+      {tooltip?.length > 0 && <span className="tooltip">{tooltip}</span>}
     </div>
   );
 };

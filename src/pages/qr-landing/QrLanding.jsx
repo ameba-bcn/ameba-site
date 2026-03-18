@@ -35,11 +35,7 @@ const QrLanding = (props) => {
         <div className="qr-landing">
           {memberData && Object.keys(memberData)?.length > 0 ? (
             <div className="json-formatted-box">
-              <DisclaimerBox
-                text={t("soci.carnet")}
-                hideCloseIcon={true}
-                bgColor={`var(--color-cream)`}
-              />
+              <DisclaimerBox text={t("soci.carnet")} style="light" />
               <div className="json-formatted">
                 <pre>{JSON.stringify(memberData, null, 2)}</pre>
               </div>

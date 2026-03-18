@@ -50,7 +50,7 @@ const Socios = () => {
                 : t("soci.missatge-ppal")
             }
             id="project-disclaimer"
-            borderColor="black"
+            closable
           />
         )}
       <div className="height-block" />

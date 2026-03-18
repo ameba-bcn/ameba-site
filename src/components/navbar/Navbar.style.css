@@ -316,7 +316,7 @@
 
 .navbar .menu-mobile-session-box {
   background-color: #fae6c5;
-  width: 100vh;
+  width: calc(100% + 32px);
   margin-left: -32px;
   padding-right: 32px;
   animation: fade 0.5s 1;

@@ -27,7 +27,6 @@
     height: 34px;
     text-align: left;
     z-index: 0;
-    padding: 4px 0px;
 }
 
 .letters-move__wrapper .substituto-marquee {
@@ -45,6 +44,7 @@
     white-space: nowrap;
     z-index: 3;
     font-size: 30px;
+    line-height: 34px;
     font-family: "Bebas Neue";
     font-weight: 500;
     text-transform: uppercase;

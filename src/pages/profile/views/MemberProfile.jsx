@@ -35,8 +35,10 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
         <div className="member-profile-box-border">
           {isMember && isMembershipExpired && (
             <DisclaimerBox
-              text={<div className="message-format">{t("soci.no-soci-perfil")}</div>}
-              hideCloseIcon={true}
+              text={
+                <div className="message-format">{t("soci.no-soci-perfil")}</div>
+              }
+              style="none"
             />
           )}
 
@@ -87,6 +89,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
                   </div>
                 </div>
               }
+              closable
             />
           )}
         </div>
