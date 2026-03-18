@@ -1,9 +1,8 @@
 import React, { Suspense } from "react";
 import FullscreenSpinner from "../../components/spinner/FullscreenSpinner";
+import lazyWithRetry from "../../utils/lazyWithRetry";
 
-const SupportYourLocalsView = React.lazy(() =>
-  import("./SupportYourLocals" /* webpackChunkName: "supportYourLocals" */)
-);
+const SupportYourLocalsView = lazyWithRetry(() => import("./SupportYourLocals"));
 
 const LoadableSupportYourLocals = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>

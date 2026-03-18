@@ -1,9 +1,8 @@
 import React, { Suspense } from "react";
 import FullscreenSpinner from "../../components/spinner/FullscreenSpinner";
+import lazyWithRetry from "../../utils/lazyWithRetry";
 
-const GalleryView = React.lazy(() =>
-  import("./Gallery" /* webpackChunkName: "Gallery" */)
-);
+const GalleryView = lazyWithRetry(() => import("./Gallery"));
 
 const LoadableGallery = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>
