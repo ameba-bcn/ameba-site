@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { ReactFitty } from "react-fitty";
 import { toast } from "react-toastify";
 import InteractiveModalBox from "../../modals/InteractiveModalBox";
 import ImageCarousel from "../images/ImageCarousel";
@@ -12,6 +11,7 @@ import { urlify } from "../../utils/utils";
 import CartToast from "../toast/CartToast";
 import Icon from "../ui/Icon";
 import useMediaQuery from "../../hooks/use-media-query";
+import PowerTitle from "../layout/PowerTitle";
 
 const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
   const {
@@ -100,9 +100,10 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
   return (
     <div className="external-event-box">
       <div className="external-event__title-box">
-        <ReactFitty maxSize={75}>
-          {modalStyle === "SOCI" ? `${t("banners.soci-curt")}!` : name}
-        </ReactFitty>
+        <PowerTitle
+          title={modalStyle === "SOCI" ? `${t("banners.soci-curt")}!` : name}
+          className="external-event__title"
+        />
       </div>
       <div className="rowExternal">
         <div className="external-event__col1">

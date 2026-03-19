@@ -144,13 +144,12 @@
 }
 
 .modal-card__title {
-    font-size: 3.75rem;
     font-weight: 600;
     line-height: 1em;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
     padding-top: 3px;
+    .ameba-card-title{
+        padding-right: 0px;
+    }
 }
 
 .modal-card-mobile__title {

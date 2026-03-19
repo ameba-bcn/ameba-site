@@ -5,11 +5,11 @@ import { useTranslation } from "react-i18next";
 import LettersMove from "../../components/layout/LettersMove";
 import PowerTitle from "../../components/layout/PowerTitle";
 import CardLayout from "../../components/layout/CardLayout/CardLayout";
-import "../../styles/GlobalStyles.css";
-import "./Socios.css";
 import SearchBox from "../../components/searchBox/SearchBox";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import { ACTIVE_STATUS } from "../../utils/constants";
+import "../../styles/GlobalStyles.css";
+import "./Socios.css";
 
 const PAGE_SIZE = 20;
 
@@ -40,20 +40,19 @@ const Socios = () => {
 
   return (
     <div className="socios">
-      <PowerTitle title="soci@s" className="SupportTitle" />
-      {!isMemberProjectsLoading &&
-        Object.keys(user_member_data).length > 0 &&
-        status !== ACTIVE_STATUS && (
-          <DisclaimerBox
-            text={
-              member_projects_active.length === 0
-                ? t("general.sense-resultats")
-                : t("soci.missatge-ppal")
-            }
-            id="project-disclaimer"
-            style="light"
-          />
-        )}
+      <PowerTitle
+        title="soci@s"
+        className="SupportTitle"
+        subtitle={
+          !isMemberProjectsLoading &&
+          Object.keys(user_member_data).length > 0 &&
+          status !== ACTIVE_STATUS
+            ? member_projects_active.length === 0
+              ? t("general.sense-resultats")
+              : t("soci.missatge-ppal")
+            : ""
+        }
+      />
       <div className="height-block" />
       <SearchBox
         searchText="Busca"

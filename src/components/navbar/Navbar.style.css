@@ -175,6 +175,10 @@
   max-height: 500px;
 }
 
+.navbar .nav-ul_box-mobile--open.nav-ul_box-mobile--has-cart {
+  max-height: fit-content;
+}
+
 .navbar .nav-ul_box-mobile .nav-ul_mobile {
   opacity: 0;
   transition: opacity 0.25s ease;

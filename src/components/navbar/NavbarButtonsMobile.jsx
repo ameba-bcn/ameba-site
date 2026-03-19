@@ -5,11 +5,14 @@ import MenuLog from "./MenuLog";
 import CartMobile from "./CartMobile";
 import useOutsideClick from "../../hooks/use-outside-click";
 import useUIStore from "../../stores/useUIStore";
+import useCartStore from "../../stores/useCartStore";
 
 export default function NavbarButtonsMobile(props) {
   const { isLoggedIn = false, refer, toggleRef, isOpen = false } = props;
   const [t, i18next] = useTranslation("translation");
   const closeMenu = useUIStore((state) => state.closeMenu);
+  const { cart_data = {} } = useCartStore();
+  const hasCartItems = (cart_data?.item_variants || []).length > 0;
   const currentLang = localStorage.getItem("i18nextLng");
   const handleChangeLanguage = (lang) => {
     if (currentLang !== lang) {
@@ -23,7 +26,7 @@ export default function NavbarButtonsMobile(props) {
   });
 
   return (
-    <div className={`nav-ul_box-mobile${isOpen ? " nav-ul_box-mobile--open" : ""}`}>
+    <div className={`nav-ul_box-mobile${isOpen ? " nav-ul_box-mobile--open" : ""}${hasCartItems ? " nav-ul_box-mobile--has-cart" : ""}`}>
       <ul className="nav-ul_mobile" ref={refer}>
         <li>
           <NavLink

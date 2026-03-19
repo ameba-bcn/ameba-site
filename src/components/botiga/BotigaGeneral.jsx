@@ -3,11 +3,11 @@ import "./BotigaGeneral.css";
 import ProducteDialog from "./Producte";
 import axiosInstance from "../../axios";
 import { createLastRowIterator, formatPrice } from "./../../utils/utils";
-import { ReactFitty } from "react-fitty";
 import { useLocation } from "react-router-dom";
-import { API_URL } from "../../utils/constants";
+import { API_URL, MOBILE_NORMAL, MOBILE_SMALL } from "../../utils/constants";
 import useMediaQuery from "../../hooks/use-media-query";
 import useDataStore from "../../stores/useDataStore";
+import AmebaCardTitle from "../ui/AmebaCardTitle";
 
 export default function BotigaGeneral() {
   const [open, setOpen] = useState(false);
@@ -31,6 +31,14 @@ export default function BotigaGeneral() {
   ]);
 
   const isOneColumn = useMediaQuery("(max-width:1178px)");
+  const isMobileNormal = useMediaQuery(MOBILE_NORMAL);
+  const isMobileSmall = useMediaQuery(MOBILE_SMALL);
+
+  const getTitleMaxSize = () => {
+    if (isMobileSmall) return 24;
+    if (isMobileNormal) return 32;
+    return 50;
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -83,7 +91,13 @@ export default function BotigaGeneral() {
                 </div>
                 <div className="productCardBody">
                   <div className="botiga-general__title">
-                    <ReactFitty maxSize={50}>{data.name}</ReactFitty>
+                    <AmebaCardTitle
+                      maxSize={getTitleMaxSize()}
+                      singleLine
+                      padding="0"
+                    >
+                      {data.name}
+                    </AmebaCardTitle>
                   </div>
                   <div className="productCardPrice">
                     {formatPrice(data.price_range)}
