@@ -14,6 +14,7 @@ function PowerTitle(props) {
           fontStyle={fontStyle}
           autoGrow={autoScale}
           singleLine
+          className={autoScale ? "ameba-card-title--no-pad" : ""}
         >
           {props.title}
         </AmebaCardTitle>

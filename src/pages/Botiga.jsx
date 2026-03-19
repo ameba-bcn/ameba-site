@@ -63,7 +63,7 @@ function Botiga() {
 
   return (
     <div className="Botiga">
-      <PowerTitle title={t("menu.botiga")} className="SupportTitle" />
+      <PowerTitle title={t("menu.botiga")} className="SupportTitle" autoScale />
       <div className="clickBanner">
         <NavLink
           style={{ textDecoration: "none" }}
@@ -76,7 +76,7 @@ function Botiga() {
               isMobile
                 ? t("banners.soci-curt")
                 : `${t("banners.soci-llarg-pt1")}${deleteStringDecimals(
-                    sociPreu
+                    sociPreu,
                   )}${t("banners.soci-llarg-pt2")}`
             }
             // handleClick={handleOpen}

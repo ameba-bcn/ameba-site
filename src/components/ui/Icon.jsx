@@ -70,7 +70,19 @@ function Icon(props) {
 
   const cancelled = (
     <AmebaSvgWrapper {...props}>
-      <path d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z" />{" "}
+      <g
+        className="stroke-icon"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M15 5v2" />
+        <path d="M15 17v2" />
+        <path d="M9 5h10a2 2 0 0 1 2 2v3a2 2 0 1 0 0 4v3m-2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 1 0 0 -4v-3a2 2 0 0 1 2 -2" />
+        <path d="M3 3l18 18" />
+      </g>
     </AmebaSvgWrapper>
   );
 
@@ -238,7 +250,13 @@ function Icon(props) {
 
   const facebook = (
     <AmebaSvgWrapper {...props}>
-      <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
       </g>
     </AmebaSvgWrapper>
@@ -246,7 +264,13 @@ function Icon(props) {
 
   const twitter = (
     <AmebaSvgWrapper {...props}>
-      <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M4 4l11.733 16h4.267l-11.733 -16l-4.267 0" />
         <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
       </g>
@@ -255,7 +279,13 @@ function Icon(props) {
 
   const instagram = (
     <AmebaSvgWrapper {...props}>
-      <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
         <path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4l0 -8" />
         <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
         <path d="M16.5 7.5v.01" />
@@ -276,12 +306,19 @@ function Icon(props) {
 
   const ticket = (
     <AmebaSvgWrapper {...props}>
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M22 10V6C22 4.9 21.1 4 20 4H4C2.9 4 2.01 4.9 2.01 6V10C3.11 10 4 10.9 4 12C4 13.1 3.11 14 2 14V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V14C20.9 14 20 13.1 20 12C20 10.9 20.9 10 22 10ZM20 8.54C18.81 9.23 18 10.53 18 12C18 13.47 18.81 14.77 20 15.46V18H4V15.46C5.19 14.77 6 13.47 6 12C6 10.52 5.2 9.23 4.01 8.54L4 6H20V8.54ZM12 14.12L9.07 16L9.95 12.63L7.26 10.43L10.73 10.22L12 7L13.26 10.23L16.73 10.44L14.04 12.64L14.93 16L12 14.12Z"
-        fill="black"
-      />
+      <g
+        className="stroke-icon"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M15 5l0 2" />
+        <path d="M15 11l0 2" />
+        <path d="M15 17l0 2" />
+        <path d="M5 5h14a2 2 0 0 1 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-3a2 2 0 0 0 0 -4v-3a2 2 0 0 1 2 -2" />
+      </g>
     </AmebaSvgWrapper>
   );
 

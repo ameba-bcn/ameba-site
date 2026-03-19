@@ -52,20 +52,27 @@ const Gallery = () => {
   return (
     <div className="SupportContent">
       <div className="logView">
-        <PowerTitle title="PARKFEST 22" subtitle="* 21-05-22 *" />
+        <PowerTitle title="PARKFEST 22" subtitle="* 21-05-22 *" autoScale />
         {isGaleriaLoading && <Spinner />}
         <div ref={galleryTopRef} />
-        <Galeria images={imgArrayBuilder.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)} />
+        <Galeria
+          images={imgArrayBuilder.slice(
+            page * PAGE_SIZE,
+            (page + 1) * PAGE_SIZE,
+          )}
+        />
         {Math.ceil(imgArrayBuilder.length / PAGE_SIZE) > 1 && (
-          <div style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "16px",
-            padding: "16px 0",
-            fontFamily: "Bebas Neue",
-            fontSize: "1.4rem",
-          }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "16px",
+              padding: "16px 0",
+              fontFamily: "Bebas Neue",
+              fontSize: "1.4rem",
+            }}
+          >
             <button
               onClick={() => changePage(page - 1)}
               disabled={page === 0}
@@ -81,18 +88,28 @@ const Gallery = () => {
             >
               ←
             </button>
-            <span>{page + 1} / {Math.ceil(imgArrayBuilder.length / PAGE_SIZE)}</span>
+            <span>
+              {page + 1} / {Math.ceil(imgArrayBuilder.length / PAGE_SIZE)}
+            </span>
             <button
               onClick={() => changePage(page + 1)}
-              disabled={page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1}
+              disabled={
+                page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1
+              }
               style={{
                 background: "none",
                 border: "1px solid black",
                 fontSize: "1.4rem",
                 padding: "4px 12px",
-                cursor: page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1 ? "default" : "pointer",
+                cursor:
+                  page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1
+                    ? "default"
+                    : "pointer",
                 borderRadius: "4px",
-                opacity: page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1 ? 0.3 : 1,
+                opacity:
+                  page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1
+                    ? 0.3
+                    : 1,
               }}
             >
               →

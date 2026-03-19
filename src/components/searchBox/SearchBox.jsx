@@ -65,6 +65,7 @@ const SearchBox = ({
       onChange={handleChange}
       value={searchInput}
       ref={ref}
+      id="search-box-input"
     />
   );
 };

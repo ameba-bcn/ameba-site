@@ -25,7 +25,7 @@ export default function LettersMove({
   if (link.length > 0)
     return (
       <NavLink
-        style={{ textDecoration: "none" }}
+        style={{ textDecoration: "none", display: "block" }}
         to={{
           pathname: link,
         }}

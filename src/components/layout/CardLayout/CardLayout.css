@@ -112,6 +112,6 @@
   .card-layout .fullcard { flex: 1 0 50%; }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 640px) {
   .card-layout .fullcard { display: block; min-width: 0; width: auto; max-width: 100%; }
 }

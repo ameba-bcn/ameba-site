@@ -12,6 +12,10 @@
   white-space: nowrap;
 }
 
+.ameba-card-title--no-pad {
+  padding-right: 0px;
+}
+
 .ameba-card-title__container {
   font-family: "Bebas Neue";
   width: -webkit-fill-available;
