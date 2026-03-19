@@ -52,6 +52,7 @@ const Socios = () => {
               : t("soci.missatge-ppal")
             : ""
         }
+        autoScale
       />
       <div className="height-block" />
       <SearchBox
