@@ -1,46 +1,29 @@
 import React from "react";
 import Icon from "../ui/Icon";
 
+const LINKS = [
+  { key: "insta", url: "https://www.instagram.com/", icon: "instagram" },
+  { key: "soundcloud", url: "https://soundcloud.com/", icon: "soundcloud" },
+  { key: "fcbk", url: "https://www.facebook.com/", icon: "facebook" },
+  { key: "yout", url: "https://www.youtube.com/", icon: "youtube" },
+  { key: "twit", url: "https://twitter.com/", icon: "twitter" },
+];
+
 export default function MediaLinks(props) {
-  const { fcbk, insta, twit, yout } = props;
   return (
     <div className="iconsFooter">
-      {fcbk ? (
-        <a
-          href={`https://www.facebook.com/${fcbk}`}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <Icon icon="facebook" type="hoverable-cream" />
-        </a>
-      ) : null}
-      {insta ? (
-        <a
-          href={`https://www.instagram.com/${insta}`}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <Icon icon="instagram" type="hoverable-cream" />
-        </a>
-      ) : null}
-      {twit ? (
-        <a
-          href={`https://twitter.com/${twit}`}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <Icon icon="twitter" className="twitter" type="hoverable-cream" />
-        </a>
-      ) : null}
-      {yout ? (
-        <a
-          href={`https://www.youtube.com/${yout}`}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <Icon icon="youtube" type="hoverable-cream" />
-        </a>
-      ) : null}
+      {LINKS.map(({ key, url, icon }) =>
+        props[key] ? (
+          <a
+            key={key}
+            href={`${url}${props[key]}`}
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            <Icon icon={icon} />
+          </a>
+        ) : null,
+      )}
     </div>
   );
 }

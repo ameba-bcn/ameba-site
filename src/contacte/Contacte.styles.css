@@ -107,16 +107,12 @@
 
 .contacte .iconsFooter a {
   text-decoration: none;
-  color: inherit;
+  color: #1d1d1b;
   margin-right: 10px;
 }
 
 .contacte .iconsFooter svg {
-  scale: 3;
-}
-
-.contacte .twitter {
-  scale: 2.9 !important;
+  scale: 2.3;
 }
 
 .contacte .iconsFooter svg:hover {
@@ -203,10 +199,7 @@
     margin: auto;
   }
   .contacte .iconsFooter svg {
-    scale: 2;
-  }
-  .contacte .twitter {
-    scale: 1.9 !important;
+    scale: 1.6;
   }
   .contacte .iconsFooter {
     gap: 12px;

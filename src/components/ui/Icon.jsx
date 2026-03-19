@@ -217,104 +217,49 @@ function Icon(props) {
     </AmebaSvgWrapper>
   );
 
+  // SOCIAL MEDIA ICONS
+  const soundcloud = (
+    <AmebaSvgWrapper {...props}>
+      <path
+        d="M11.56,8.87V17H20.32C22.17,16.87 24,15.42 24,13.42C24,11.45 22.34,9.86 20.26,9.86C19.66,9.86 19.09,10 18.59,10.25C18.09,6.88 15.26,4 11.56,4V8.87M8.74,9.44V17H10.22V9.22C9.75,9.06 9.25,8.99 8.74,9V9.44M6.18,10.75V17H7.66V10.03C7.16,10.13 6.67,10.3 6.18,10.5V10.75M3.63,13.5V17H5.11V12.59C4.56,12.81 4.08,13.12 3.63,13.5M1.06,14.44V17H2.54V14.44C2.1,14.26 1.61,14.26 1.06,14.44Z"
+        fill="currentColor"
+      />
+    </AmebaSvgWrapper>
+  );
+
   const youtube = (
     <AmebaSvgWrapper {...props}>
-      <path d="M15.812.017H4.145C1.855.017 0 1.852 0 4.116v5.768c0 2.264 1.856 4.1 4.145 4.1h11.667c2.29 0 4.145-1.836 4.145-4.1V4.116c0-2.264-1.856-4.1-4.145-4.1zM13.009 7.28L7.552 9.855a.219.219 0 0 1-.314-.196V4.35c0-.161.173-.266.318-.193l5.458 2.735a.216.216 0 0 1-.005.389z" />
+      <path
+        d="M18 3a5 5 0 0 1 5 5v8a5 5 0 0 1 -5 5h-12a5 5 0 0 1 -5 -5v-8a5 5 0 0 1 5 -5zm-9 6v6a1 1 0 0 0 1.514 .857l5 -3a1 1 0 0 0 0 -1.714l-5 -3a1 1 0 0 0 -1.514 .857z"
+        fill="currentColor"
+      />
     </AmebaSvgWrapper>
   );
 
   const facebook = (
     <AmebaSvgWrapper {...props}>
-      <g clipPath="url(#clip0_2469_9895)">
-        <path
-          d="M15.9993 8.0493C15.9993 3.6034 12.4178 0 7.99967 0C3.58148 0 0 3.6034 0 8.0493C0 12.0659 2.92545 15.3956 6.74961 15.9993V10.3756H4.71886V8.04863H6.74961V6.27577C6.74961 4.25808 7.94433 3.14392 9.77107 3.14392C10.6464 3.14392 11.5618 3.30088 11.5618 3.30088V5.28168H10.5538C9.5604 5.28168 9.25039 5.90215 9.25039 6.53872V8.0493H11.4691L11.1145 10.3762H9.25039V16C13.0745 15.3963 16 12.0666 16 8.0493H15.9993Z"
-          fill="#1877F2"
-        />
+      <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
       </g>
-      <defs>
-        <clipPath id="clip0_2469_9895">
-          <rect width="16" height="16" fill="white" />
-        </clipPath>
-      </defs>
     </AmebaSvgWrapper>
   );
 
   const twitter = (
     <AmebaSvgWrapper {...props}>
-      <g clipPath="url(#clip0_2469_9935)">
-        <path
-          d="M9.46986 6.77491L15.2857 0H13.9075L8.85764 5.88256L4.82432 0H0.172363L6.27154 8.89547L0.172363 16H1.5506L6.8834 9.78782L11.1429 16H15.7948L9.46952 6.77491H9.46986ZM7.58217 8.97384L6.9642 8.08805L2.0472 1.03974H4.1641L8.13217 6.72795L8.75015 7.61374L13.9082 15.0075H11.7913L7.58217 8.97418V8.97384Z"
-          fill="black"
-        />
+      <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 4l11.733 16h4.267l-11.733 -16l-4.267 0" />
+        <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
       </g>
-      <defs>
-        <clipPath id="clip0_2469_9935">
-          <rect width="24" height="24" fill="white" />
-        </clipPath>
-      </defs>
     </AmebaSvgWrapper>
   );
 
   const instagram = (
     <AmebaSvgWrapper {...props}>
-      <g clipPath="url(#clip0_2469_9897)">
-        <path
-          d="M11.2335 0H4.76649C2.13823 0 0 2.13823 0 4.76649V11.2335C0 13.8618 2.13823 16 4.76649 16H11.2335C13.8618 16 16 13.8618 16 11.2335V4.76649C16 2.13823 13.8617 0 11.2335 0ZM14.3904 11.2335C14.3904 12.977 12.977 14.3904 11.2335 14.3904H4.76649C3.023 14.3904 1.6096 12.977 1.6096 11.2335V4.76649C1.6096 3.02297 3.023 1.6096 4.76649 1.6096H11.2335C12.977 1.6096 14.3904 3.02297 14.3904 4.76649V11.2335Z"
-          fill="url(#paint0_linear_2469_9897)"
-        />
-        <path
-          d="M7.99999 3.86182C5.7182 3.86182 3.86182 5.7182 3.86182 7.99996C3.86182 10.2817 5.7182 12.1381 7.99999 12.1381C10.2818 12.1381 12.1382 10.2817 12.1382 7.99996C12.1382 5.71817 10.2818 3.86182 7.99999 3.86182ZM7.99999 10.5286C6.60348 10.5286 5.47142 9.39649 5.47142 7.99999C5.47142 6.60348 6.60351 5.47142 7.99999 5.47142C9.39649 5.47142 10.5286 6.60348 10.5286 7.99999C10.5286 9.39646 9.39646 10.5286 7.99999 10.5286Z"
-          fill="url(#paint1_linear_2469_9897)"
-        />
-        <path
-          d="M12.1461 4.88455C12.6938 4.88455 13.1377 4.4406 13.1377 3.89296C13.1377 3.34532 12.6938 2.90137 12.1461 2.90137C11.5985 2.90137 11.1545 3.34532 11.1545 3.89296C11.1545 4.4406 11.5985 4.88455 12.1461 4.88455Z"
-          fill="url(#paint2_linear_2469_9897)"
-        />
+      <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 8a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4l0 -8" />
+        <path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+        <path d="M16.5 7.5v.01" />
       </g>
-      <defs>
-        <linearGradient
-          id="paint0_linear_2469_9897"
-          x1="8"
-          y1="15.9534"
-          x2="8"
-          y2="0.124275"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#E09B3D" />
-          <stop offset="0.3" stopColor="#C74C4D" />
-          <stop offset="0.6" stopColor="#C21975" />
-          <stop offset="1" stopColor="#7024C4" />
-        </linearGradient>
-        <linearGradient
-          id="paint1_linear_2469_9897"
-          x1="7.99999"
-          y1="15.9534"
-          x2="7.99999"
-          y2="0.124261"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#E09B3D" />
-          <stop offset="0.3" stopColor="#C74C4D" />
-          <stop offset="0.6" stopColor="#C21975" />
-          <stop offset="1" stopColor="#7024C4" />
-        </linearGradient>
-        <linearGradient
-          id="paint2_linear_2469_9897"
-          x1="12.1461"
-          y1="15.9535"
-          x2="12.1461"
-          y2="0.124334"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop stopColor="#E09B3D" />
-          <stop offset="0.3" stopColor="#C74C4D" />
-          <stop offset="0.6" stopColor="#C21975" />
-          <stop offset="1" stopColor="#7024C4" />
-        </linearGradient>
-        <clipPath id="clip0_2469_9897">
-          <rect width="16" height="16" fill="white" />
-        </clipPath>
-      </defs>
     </AmebaSvgWrapper>
   );
 
@@ -442,6 +387,8 @@ function Icon(props) {
       return twitter;
     case "instagram":
       return instagram;
+    case "soundcloud":
+      return soundcloud;
     case "ticket":
       return ticket;
     case "menu":
