@@ -14,7 +14,8 @@ import { ACTIVE_STATUS } from "../../utils/constants";
 const PAGE_SIZE = 20;
 
 const Socios = () => {
-  const { member_projects, isMemberProjectsLoading, fetchMemberProjects } = useDataStore();
+  const { member_projects, isMemberProjectsLoading, fetchMemberProjects } =
+    useDataStore();
 
   useEffect(() => {
     fetchMemberProjects();
@@ -26,15 +27,15 @@ const Socios = () => {
   const { user_member_data = {} } = useAuthStore();
   const { status = "" } = user_member_data;
   const member_projects_active = member_projects.filter(
-    (project) => !!project.is_active
+    (project) => !!project.is_active,
   );
   const filteredSocios = member_projects_active.filter((project) =>
-    project.project_name?.toLowerCase()?.includes(searchInput?.toLowerCase())
+    project.project_name?.toLowerCase()?.includes(searchInput?.toLowerCase()),
   );
   const totalPages = Math.ceil(filteredSocios.length / PAGE_SIZE);
   const paginatedSocios = filteredSocios.slice(
     page * PAGE_SIZE,
-    (page + 1) * PAGE_SIZE
+    (page + 1) * PAGE_SIZE,
   );
 
   return (
@@ -50,7 +51,7 @@ const Socios = () => {
                 : t("soci.missatge-ppal")
             }
             id="project-disclaimer"
-            closable
+            style="light"
           />
         )}
       <div className="height-block" />
@@ -69,15 +70,18 @@ const Socios = () => {
         loading={isMemberProjectsLoading}
       />
       {totalPages > 1 && (
-        <div className="pagination-controls" style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "16px",
-          padding: "16px 0",
-          fontFamily: "Bebas Neue",
-          fontSize: "1.4rem",
-        }}>
+        <div
+          className="pagination-controls"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "16px",
+            padding: "16px 0",
+            fontFamily: "Bebas Neue",
+            fontSize: "1.4rem",
+          }}
+        >
           <button
             onClick={() => setPage((p) => p - 1)}
             disabled={page === 0}
@@ -93,7 +97,9 @@ const Socios = () => {
           >
             ←
           </button>
-          <span>{page + 1} / {totalPages}</span>
+          <span>
+            {page + 1} / {totalPages}
+          </span>
           <button
             onClick={() => setPage((p) => p + 1)}
             disabled={page >= totalPages - 1}

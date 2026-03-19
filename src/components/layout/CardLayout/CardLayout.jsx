@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { ReactFitty } from "react-fitty";
 import { MOBILE_SMALL } from "../../../utils/constants";
 import "./CardLayout.css";
+import AmebaCardTitle from "../../ui/AmebaCardTitle";
 import PlusButton from "../../button/PlusButton";
 import { createLastRowIterator, sortByProperty } from "../../../utils/utils";
 import useMediaQuery from "../../../hooks/use-media-query";
@@ -38,11 +38,9 @@ export default function CardLayout(props) {
             }}
           >
             <div className="cardSupport">
-              <div className="card-layout__title">
-                <ReactFitty maxSize={200}>
-                  {project_name ? project_name : name}
-                </ReactFitty>
-              </div>
+              <AmebaCardTitle>
+                {project_name ? project_name : name}
+              </AmebaCardTitle>
               <img
                 src={image ? image : images[0]}
                 alt={name}
@@ -62,7 +60,9 @@ export default function CardLayout(props) {
     });
 
   return (
-    <div className={`card-layout${!cardList.length > 0 ? " card-layout--empty" : ""}`}>
+    <div
+      className={`card-layout${!cardList.length > 0 ? " card-layout--empty" : ""}`}
+    >
       {loading ? (
         <Spinner />
       ) : (
