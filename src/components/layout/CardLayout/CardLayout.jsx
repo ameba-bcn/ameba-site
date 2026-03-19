@@ -38,7 +38,12 @@ export default function CardLayout(props) {
             }}
           >
             <div className="cardSupport">
-              <AmebaCardTitle>
+              <AmebaCardTitle
+                autoGrow={true}
+                className="cardSupportTitle"
+                maxSize={400}
+                overflow="inherit"
+              >
                 {project_name ? project_name : name}
               </AmebaCardTitle>
               <img

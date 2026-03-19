@@ -2,10 +2,9 @@
   display: block;
   font-size: clamp(1rem, 14cqi, var(--max-title-size, 200px));
   line-height: 1;
-  overflow: hidden;
+  overflow: var(--title-overflow);
   text-overflow: ellipsis;
   width: 100%;
-  padding-right: 6px;
 }
 
 .ameba-card-title--single-line {

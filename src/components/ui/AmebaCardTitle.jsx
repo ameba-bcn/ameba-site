@@ -8,6 +8,7 @@ export default function AmebaCardTitle({
   fontStyle,
   autoGrow = false,
   singleLine = false,
+  overflow = "hidden",
   padding = "20px",
   className = "",
 }) {
@@ -58,7 +59,7 @@ export default function AmebaCardTitle({
     <div
       className="ameba-card-title__container"
       ref={containerRef}
-      style={{ "--title-color": color, "--title-font-style": fontStyle, "--title-padding": padding }}
+      style={{ "--title-color": color, "--title-font-style": fontStyle, "--title-padding": padding, "--title-overflow": overflow }}
     >
       <span
         ref={textRef}

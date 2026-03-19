@@ -297,7 +297,10 @@ const AgendaTable = () => {
     table.getPageCount() > 1 && (
       <div className="pagination-controls">
         <button
-          onClick={() => table.previousPage()}
+          onClick={() => {
+            table.previousPage();
+            setTimeout(() => document.querySelector(".app")?.scrollTo({ top: 0, behavior: "smooth" }), 0);
+          }}
           disabled={!table.getCanPreviousPage()}
         >
           ←
@@ -306,7 +309,10 @@ const AgendaTable = () => {
           {table.getState().pagination.pageIndex + 1} / {table.getPageCount()}
         </span>
         <button
-          onClick={() => table.nextPage()}
+          onClick={() => {
+            table.nextPage();
+            setTimeout(() => document.querySelector(".app")?.scrollTo({ top: 0, behavior: "smooth" }), 0);
+          }}
           disabled={!table.getCanNextPage()}
         >
           →
@@ -337,7 +343,11 @@ const AgendaTable = () => {
             {table.getRowModel().rows.map((row) => {
               const { name, images, datetime } = row.original;
               return (
-                <tr key={row.id} className="agenda-mobile-row" onClick={() => fetchEvent(row.original)}>
+                <tr
+                  key={row.id}
+                  className="agenda-mobile-row"
+                  onClick={() => fetchEvent(row.original)}
+                >
                   <td>
                     <div className="agenda-mobile-card">
                       <div className="agenda-mobile-card__image">

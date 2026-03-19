@@ -83,7 +83,7 @@ const Socios = () => {
           }}
         >
           <button
-            onClick={() => setPage((p) => p - 1)}
+            onClick={() => { setPage((p) => p - 1); setTimeout(() => document.querySelector(".app")?.scrollTo({ top: 0, behavior: "smooth" }), 0); }}
             disabled={page === 0}
             style={{
               background: "none",
@@ -101,7 +101,7 @@ const Socios = () => {
             {page + 1} / {totalPages}
           </span>
           <button
-            onClick={() => setPage((p) => p + 1)}
+            onClick={() => { setPage((p) => p + 1); setTimeout(() => document.querySelector(".app")?.scrollTo({ top: 0, behavior: "smooth" }), 0); }}
             disabled={page >= totalPages - 1}
             style={{
               background: "none",

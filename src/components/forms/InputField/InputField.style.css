@@ -1,7 +1,7 @@
 .input-field__input {
   display: block;
   width: -webkit-fill-available;
-  padding: 12px 14px 2px 12px;
+  padding: 7px 14px 7px 12px;
   line-height: 1.5;
   background-clip: padding-box;
   background-color: transparent;
@@ -29,16 +29,22 @@
 
 .input-field__input::placeholder {
   text-transform: uppercase;
-  padding-top: 2px;
   font-family: "Bebas Neue";
   color: #1d1d1b;
   font-size: 2rem;
 }
 
+.input-field__input:placeholder-shown {
+  padding: 13px 14px 1px 12px;
+}
+
 .input-field__input:focus {
   background-color: #fae6c5;
   border-color: #f2c571;
-  padding: 10px 14px 4px 12px;
+}
+
+.input-field__input:focus:placeholder-shown {
+  padding: 13px 14px 1px 12px;
 }
 
 .input-field__input:touch {
