@@ -27,10 +27,10 @@ const MemberProject = () => {
   const [images, setImages] = useState(initialProjectData.images || []);
   const [isPublic, setIsPublic] = useState(initialProjectData.public || false);
   const [description, setDescription] = useState(
-    initialProjectData.description || ""
+    initialProjectData.description || "",
   );
   const [mediaLinks, setMediaLinks] = useState(
-    initialProjectData.media_urls || []
+    initialProjectData.media_urls || [],
   );
   const [loading, setLoading] = useState(true);
   const { user_member_data } = useAuthStore();
@@ -127,15 +127,15 @@ const MemberProject = () => {
                   : t("soci.no-soci-perfil")
               }
               id="project-disclaimer"
-              borderColor="black"
+              closable
             />
           )}
           {!isMembershipExpired && (
             <DisclaimerBox
               text={t("info.project")}
               id="project-disclaimer"
-              borderColor="black"
-              bgColor={`var(--color-cream)`}
+              closable
+              style="light"
             />
           )}
           {!isMembershipExpired && (

@@ -175,6 +175,10 @@
   max-height: 500px;
 }
 
+.navbar .nav-ul_box-mobile--open.nav-ul_box-mobile--has-cart {
+  max-height: fit-content;
+}
+
 .navbar .nav-ul_box-mobile .nav-ul_mobile {
   opacity: 0;
   transition: opacity 0.25s ease;
@@ -316,7 +320,7 @@
 
 .navbar .menu-mobile-session-box {
   background-color: #fae6c5;
-  width: 100vh;
+  width: calc(100% + 32px);
   margin-left: -32px;
   padding-right: 32px;
   animation: fade 0.5s 1;

@@ -7,7 +7,6 @@ import { MOBILE_NORMAL } from "../../utils/constants";
 import useCartStore from "../../stores/useCartStore";
 import "../../components/externalEvents/ExternalEvent.css";
 import "./Memberships.css";
-import { ReactFitty } from "react-fitty";
 import ImageCarousel from "../../components/images/ImageCarousel";
 import Button from "../../components/button/Button";
 import InteractiveModalBox from "../../modals/InteractiveModalBox";
@@ -18,6 +17,7 @@ import CartToast from "../../components/toast/CartToast";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import Icon from "../../components/ui/Icon";
 import useMediaQuery from "../../hooks/use-media-query";
+import PowerTitle from "../../components/layout/PowerTitle";
 
 const Memberships = () => {
   const [t] = useTranslation("translation");
@@ -72,11 +72,13 @@ const Memberships = () => {
   const buttons = [membership[0]?.name];
 
   return (
-    <div className={`membership-box${membership.length === 0 ? " membership-box--empty" : ""}`}>
+    <div
+      className={`membership-box${membership.length === 0 ? " membership-box--empty" : ""}`}
+    >
       {membership.length > 0 ? (
         <div className="external-event-box">
           <div className="external-event__title-box">
-            <ReactFitty maxSize={75}>{`${t("banners.soci-curt")}!`}</ReactFitty>
+            <PowerTitle title={`${t("banners.soci-curt")}!`} maxSize={100} />
           </div>
           <div className="rowExternal">
             <div className="external-event__col1">
@@ -155,6 +157,7 @@ const Memberships = () => {
                       {t("soci.disclaimer")}
                     </NavLink>
                   }
+                  closable
                 />
               )}
             </div>
@@ -162,7 +165,7 @@ const Memberships = () => {
         </div>
       ) : (
         <div className="disclaimer-frame">
-          <DisclaimerBox text="No data available" />
+          <DisclaimerBox text="No data available" closable />
         </div>
       )}
 

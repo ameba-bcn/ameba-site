@@ -122,19 +122,19 @@
     "contacta": "Contacta amb ",
     "linkBuit1": "La ruta no es correcte.",
     "linkBuit2": "No podem mostrarte res 🤷‍♂️",
-    "descompte": "El descompte no s'ha ha pogut aplicar. Si us plau, revisa el codi i torna a intentar-ho."
+    "descompte": "El descompte no s'ha pogut aplicar. Si us plau, revisa el codi i torna a intentar-ho."
   },
   "soci": {
     "disclaimer": "Per a poder finalitzar el procediment accedeix a la cistella i realitza el pagament",
-    "missatge-ppal": "En aquesta vista podras conèixer els projectes dels nostres soci@s. Si vols que els teus projectes apareguin aquí, fes-te soci@.",
-    "perfil-gral": "En aquesta vista pots editar el teu projecte personal. Un cop guardats els canvis podràs visualitzar-ho a la vista de /soci@s",
+    "missatge-ppal": "Conèix els projectes dels nostres soci@s. Si vols que els teus apareguin aquí, fes-te soci@.",
+    "perfil-gral": "Edita el teu projecte personal. Un cop guardats els canvis podràs visualitzar-ho a la vista de /soci@s",
     "no-soci-perfil": "Sembla que la teva membresia ha expirat. Per a poder editar el teu projecte personal, has de renovar la teva membresia.",
     "carnet": "Aquest es el teu carnet de soci, amb ell podràs accedir a tots els descomptes, events i promocions que t'oferim."
   },
   "general": {
     "agraiment": "Petició rebuda. Gràcies!",
     "cerca": "Cerca",
-    "sense-resultats": "No hay resultados",
+    "sense-resultats": "Sense resultats",
     "producte": "producte"
   },
   "events": {
@@ -158,7 +158,7 @@
       "caducado": "Caducat",
       "pago-taquilla": "Pagament en taquilla",
       "title": "Afegeix un títol al teu projecte",
-      "description": "Afegeix una descripció al teu projecte, pots canviar el format del text ambn l'editor.",
+      "description": "Afegeix una descripció al teu projecte, pots canviar el format del text amb l'editor.",
       "link": "Afegeix un link al teu projecte, de la teva web o dels teus perfils de media en format www o iframe",
       "images": "Afegeix fins a cinc imatges al teu projecte, la primera imatge es mostrarà de portada"
     }

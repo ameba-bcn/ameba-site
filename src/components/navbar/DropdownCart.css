@@ -69,7 +69,8 @@
     width: 80%;
     font-family: "Montserrat", sans-serif;
     text-align: right;
-    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2px;
 }
 
 .colCartProduct2_mobile {
@@ -93,36 +94,42 @@
 
 .titleCartProduct {
     width: 100%;
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 600;
-    word-break: normal;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .rowDetailedCart {
-    display: block;
+    display: flex;
     flex-direction: row;
-    font-size: 16px;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    font-size: 14px;
+    gap: 4px 8px;
     width: 100%;
+    color: #555;
 }
 
 .cartPriceProduct {
-    width: 40%;
+    white-space: nowrap;
 }
 
 .cartPriceProduct_mobile {
-    width: 40%;
+    white-space: nowrap;
     margin-right: 30px;
 }
 
 .quantityPriceProduct {
-    width: 60%;
+    white-space: nowrap;
 }
 
 .quantitySizeProduct {
-    width: 60%;
     text-transform: uppercase;
     font-weight: bold;
+    white-space: nowrap;
 }
 
 .addCart,
