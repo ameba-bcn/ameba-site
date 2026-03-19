@@ -17,7 +17,7 @@ export default function SupportYourLocals() {
   const filteredArtists = support.filter(
     (artist) =>
       artist?.is_ameba_dj === false &&
-      artist?.name?.toLowerCase()?.includes(searchInput?.toLowerCase())
+      artist?.name?.toLowerCase()?.includes(searchInput?.toLowerCase()),
   );
 
   return (
@@ -26,6 +26,7 @@ export default function SupportYourLocals() {
         title={"#SUPPORTYOURLOCALS"}
         className="SupportTitle"
         subtitle={t("support.title.subtitle")}
+        autoScale
       />
       <SearchBox
         searchText="Busca"

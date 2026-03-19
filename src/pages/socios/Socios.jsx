@@ -5,16 +5,17 @@ import { useTranslation } from "react-i18next";
 import LettersMove from "../../components/layout/LettersMove";
 import PowerTitle from "../../components/layout/PowerTitle";
 import CardLayout from "../../components/layout/CardLayout/CardLayout";
-import "../../styles/GlobalStyles.css";
-import "./Socios.css";
 import SearchBox from "../../components/searchBox/SearchBox";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import { ACTIVE_STATUS } from "../../utils/constants";
+import "../../styles/GlobalStyles.css";
+import "./Socios.css";
 
 const PAGE_SIZE = 20;
 
 const Socios = () => {
-  const { member_projects, isMemberProjectsLoading, fetchMemberProjects } = useDataStore();
+  const { member_projects, isMemberProjectsLoading, fetchMemberProjects } =
+    useDataStore();
 
   useEffect(() => {
     fetchMemberProjects();
@@ -26,33 +27,33 @@ const Socios = () => {
   const { user_member_data = {} } = useAuthStore();
   const { status = "" } = user_member_data;
   const member_projects_active = member_projects.filter(
-    (project) => !!project.is_active
+    (project) => !!project.is_active,
   );
   const filteredSocios = member_projects_active.filter((project) =>
-    project.project_name?.toLowerCase()?.includes(searchInput?.toLowerCase())
+    project.project_name?.toLowerCase()?.includes(searchInput?.toLowerCase()),
   );
   const totalPages = Math.ceil(filteredSocios.length / PAGE_SIZE);
   const paginatedSocios = filteredSocios.slice(
     page * PAGE_SIZE,
-    (page + 1) * PAGE_SIZE
+    (page + 1) * PAGE_SIZE,
   );
 
   return (
     <div className="socios">
-      <PowerTitle title="soci@s" className="SupportTitle" />
-      {!isMemberProjectsLoading &&
-        Object.keys(user_member_data).length > 0 &&
-        status !== ACTIVE_STATUS && (
-          <DisclaimerBox
-            text={
-              member_projects_active.length === 0
-                ? t("general.sense-resultats")
-                : t("soci.missatge-ppal")
-            }
-            id="project-disclaimer"
-            borderColor="black"
-          />
-        )}
+      <PowerTitle
+        title="soci@s"
+        className="SupportTitle"
+        subtitle={
+          !isMemberProjectsLoading &&
+          Object.keys(user_member_data).length > 0 &&
+          status !== ACTIVE_STATUS
+            ? member_projects_active.length === 0
+              ? t("general.sense-resultats")
+              : t("soci.missatge-ppal")
+            : ""
+        }
+        autoScale
+      />
       <div className="height-block" />
       <SearchBox
         searchText="Busca"
@@ -69,15 +70,18 @@ const Socios = () => {
         loading={isMemberProjectsLoading}
       />
       {totalPages > 1 && (
-        <div className="pagination-controls" style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "16px",
-          padding: "16px 0",
-          fontFamily: "Bebas Neue",
-          fontSize: "1.4rem",
-        }}>
+        <div
+          className="pagination-controls"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "16px",
+            padding: "16px 0",
+            fontFamily: "Bebas Neue",
+            fontSize: "1.4rem",
+          }}
+        >
           <button
             onClick={() => setPage((p) => p - 1)}
             disabled={page === 0}
@@ -93,7 +97,9 @@ const Socios = () => {
           >
             ←
           </button>
-          <span>{page + 1} / {totalPages}</span>
+          <span>
+            {page + 1} / {totalPages}
+          </span>
           <button
             onClick={() => setPage((p) => p + 1)}
             disabled={page >= totalPages - 1}

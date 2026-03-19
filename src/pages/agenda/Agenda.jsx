@@ -12,10 +12,8 @@ export default function Agenda() {
 
   return (
     <div className="Articles">
-      <div className="ArticlesContent">
-        <PowerTitle title="AGENDA" />
-        {isEventsLoading ? <Spinner /> : <AgendaTable />}
-      </div>
+      <PowerTitle title="AGENDA" autoScale />
+      {isEventsLoading ? <Spinner /> : <AgendaTable />}
       <LettersMove
         className="lettersMoveDiv"
         sentence={t("banners.soci-curt")}

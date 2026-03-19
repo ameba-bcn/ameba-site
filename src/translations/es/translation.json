@@ -11,7 +11,7 @@
     "pagament-gratis": "El procedimiento de compra no supone ningún cargo, por lo tanto no se realiza flujo de pago.",
     "review-footer-1": "¡Gracias por tu compra! Con este gesto estás dando apoyo directo a AMEBA y ayudando a hacer crecer la cultura electrónica local.",
     "review-footer-3": "Si tienes alguna duda contáctanos en info@ameba.cat",
-    "review-footer-4": "Te mandararemos un email con toda la información.",
+    "review-footer-4": "Te mandaremos un email con toda la información.",
     "review-footer-5": "Para recoger tu compra, te enviaremos un mensaje indicándote cuándo y dónde hacerlo. Si tienes cualquier duda, puedes contactarnos en info@ameba.cat 💚",
     "compra-toast1": "tienes",
     "compra-toast2": "en la cesta",
@@ -58,8 +58,8 @@
     "sizesError": "Para poder avanzar selecciona una talla",
     "esgotat": "Producto agotado",
     "sortir": "salir",
-    "sortir-text": "Si sales ahora la cesta se eliminará. Estas seguro?",
-    "sortir-text-gral": "Si sales ahora sin guardar los cambios se perderan. Estas seguro de que quieres salir?",
+    "sortir-text": "Si sales ahora la cesta se eliminará. ¿Estás seguro?",
+    "sortir-text-gral": "Si sales ahora sin guardar los cambios se perderán. ¿Estás seguro de que quieres salir?",
     "continua": "continúa",
     "copiat": "copiado!"
   },
@@ -74,18 +74,18 @@
     "registrat": "Regístrate",
     "recupera-curt": "Recupera contraseña",
     "recupera-llarg": "Recupera tu contraseña",
-    "inicia": "Ya estas registrado? Inicia sesión",
-    "encara": "Aún no eres socio/a? Informate aquí!",
+    "inicia": "¿Ya estás registrado? Inicia sesión",
+    "encara": "¿Aún no eres socio/a? Infórmate aquí!",
     "modifica": "Modifica tu contraseña",
     "recupera": "Hemos enviado una contraseña nueva a tu correo electrónico. Verifícala para poder continuar.",
-    "link-recupera": "No has rebut cap correu? Torna-ho a intentar",
-    "verifica": "Cuenta verificada. Bienvenido!",
+    "link-recupera": "¿No has recibido ningún correo? Inténtalo de nuevo",
+    "verifica": "Cuenta verificada. ¡Bienvenido!",
     "contrasenya-canviada": "Contraseña cambiada correctamente. Puedes iniciar sesión con tu nueva contraseña en la vista "
   },
   "form": {
     "nom": "nombre",
     "cognom": "apellidos",
-    "telefon": "telefono",
+    "telefon": "teléfono",
     "soci": "nºsocio",
     "descompte": "descuento",
     "usuari": "usuario",
@@ -96,15 +96,15 @@
     "carrega-imatges": "Abre para subir nuevas imágenes",
     "actualitza": "actualiza",
     "elimina": "elimina",
-    "publicat": "publicat",
-    "no-publicat": "no publicat"
+    "publicat": "publicado",
+    "no-publicat": "no publicado"
   },
   "perfil": {
     "dades": "datos personales",
     "vols-soci": "¿Quieres ser socio",
-    "mes-info": "mas info aquí",
+    "mes-info": "más info aquí",
     "baixa": "Darse de baja",
-    "baixa-missatge": "Para darte de baja y cancelar tu subscripción automática escribe un correo a"
+    "baixa-missatge": "Para darte de baja y cancelar tu suscripción automática escribe un correo a"
   },
   "boto": {
     "cancela": "cancela",
@@ -114,7 +114,7 @@
     "seguent": "siguiente",
     "recarrega": "recarga",
     "edit": "Modo edición",
-    "preview": "Modo previsualitzación"
+    "preview": "Modo previsualización"
   },
   "errors": {
     "stripe": "Ha habido un error con el sistema de pago. Contacta con info@ameba.cat",
@@ -126,13 +126,13 @@
   },
   "soci": {
     "disclaimer": "Para poder finalizar el procedimiento accede a la cesta y realiza el pago",
-    "missatge-ppal": "En esta vista podras conocer los proyectos de nuestros soci@s. Si quieres que tu proyecto aparezca aquí, hazte soci@",
-    "perfil-gral": "En esta vista puedes editar tu proyecto personal. Una vez guardados los cambios podras visualizar tu proyecto en la vista de /soci@s",
-    "no-soci-perfil": "Parece que tu membresía a caducado. Para poder editar tu proyecto personal debes renovar tu membresía",
+    "missatge-ppal": "Conoce los proyectos de nuestros soci@s. Si quieres que tu proyecto aparezca aquí, hazte soci@",
+    "perfil-gral": "Edita tu proyecto personal. Una vez guardados los cambios podrás visualizar tu proyecto en la vista de /soci@s",
+    "no-soci-perfil": "Parece que tu membresía ha caducado. Para poder editar tu proyecto personal debes renovar tu membresía",
     "carnet": "Este es tu carnet de socio, con él puedes acceder a todos los descuentos, eventos y promociones que ofrecemos"
   },
   "general": {
-    "agraiment": "Petición recibida. Gracias!",
+    "agraiment": "Petición recibida. ¡Gracias!",
     "cerca": "Busca",
     "sense-resultats": "No hay resultados",
     "producte": "producto"
@@ -141,7 +141,7 @@
     "button": {
       "pago": "compra entrada",
       "pago-sold": "agotado",
-      "gratis-inscripcion": "inscribete",
+      "gratis-inscripcion": "inscríbete",
       "gratis-aforo-completo": "completo",
       "gratis": "gratis",
       "cancelado": "cancelado",
@@ -158,16 +158,16 @@
       "caducado": "Caducado",
       "pago-taquilla": "Pago en taquilla",
       "title": "Añade un título a tu proyecto",
-      "description": "Añade una descripción a tu proyecto, puede cambiar el formato del texto con el editor.",
+      "description": "Añade una descripción a tu proyecto, puedes cambiar el formato del texto con el editor.",
       "link": "Añade un link a tu proyecto, de tu web o de tus perfiles de media en formato www o iframe",
       "images": "Añade hasta cinco imágenes a tu proyecto, la primera se mostrará de portada"
     }
   },
   "legal": {
-    "init-text": "En esta vista encontrarás los documentos legales de la asociación, así como algunos manuales que recomendamos que consultes.",
+    "init-text": "Aquí encontrarás los documentos legales de la asociación, así como algunos manuales que recomendamos que consultes.",
     "title": "Legal"
   },
   "info": {
-    "project": "En esta vista puedes editar tu proyecto personal. Una vez guardados los cambios y marcada la casilla 'publicado' podras visualizar tu proyecto en la vista de /soci@s"
+    "project": "Edita tu proyecto personal. Una vez guardados los cambios y marcada la casilla 'publicado' podrás visualizar tu proyecto en la vista de /soci@s"
   }
 }

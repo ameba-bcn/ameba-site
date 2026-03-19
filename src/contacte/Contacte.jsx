@@ -3,10 +3,10 @@ import NewsletterFormLayout from "../components/forms/NewsletterForm/NewsletterF
 import MediaLinks from "../components/layout/MediaLinks";
 import LettersMove from "./../components/layout/LettersMove";
 import { useTranslation } from "react-i18next";
-import "./Contacte.styles.css";
-import "../styles/GlobalStyles.css";
 import { NavLink } from "react-router-dom";
 import useDataStore from "../stores/useDataStore";
+import "./Contacte.styles.css";
+import "../styles/GlobalStyles.css";
 
 function Contacte() {
   const [t] = useTranslation("translation");
@@ -23,6 +23,7 @@ function Contacte() {
           insta="ameba_bcn"
           twit="ameba_bcn"
           yout="channel/UCH5ssfBCmgJ1IDM-pSn2cEg"
+          soundcloud="ameba-barcelona"
         />
         <div className="colabText">
           {t("footer.colab")}

@@ -7,13 +7,14 @@ import { MOBILE_NORMAL, productKinds } from "../utils/constants";
 import CollapsableTextDiv from "../components/collapsable/CollapsableTextDiv";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
-import { ReactFitty } from "react-fitty";
 import InteractiveModalBox from "./InteractiveModalBox";
-import "./Modals.css";
-import "./ModalCardStyled.css";
 import CartToast from "../components/toast/CartToast";
 import useMediaQuery from "../hooks/use-media-query";
 import ModalDialog from "../components/layout/ModalDialog";
+import AmebaCardTitle from "../components/ui/AmebaCardTitle";
+import PowerTitle from "../components/layout/PowerTitle";
+import "./Modals.css";
+import "./ModalCardStyled.css";
 
 export default function ModalCard(props) {
   const {
@@ -457,9 +458,10 @@ export default function ModalCard(props) {
             <div className="modal-card__row">
               <div className="modal-card__column_eighty">
                 <div className="modal-card__title">
-                  <ReactFitty maxSize={75}>
-                    {modalStyle === "ACTIVITAT" ? header : title}
-                  </ReactFitty>
+                  <PowerTitle
+                    title={modalStyle === "ACTIVITAT" ? header : title}
+                    autoScale={true}
+                  />
                 </div>
               </div>
               <div className="modal-card__column_twenty">

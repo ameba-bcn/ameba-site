@@ -2,30 +2,23 @@ import React, { useState } from "react";
 import "./DisclaimerBox.style.css";
 import Icon from "../ui/Icon";
 
-const DisclaimerBox = (props) => {
-  const {
-    text = "",
-    id = "",
-    borderColor,
-    bgColor,
-    className,
-    hideCloseIcon = false,
-  } = props;
+const DisclaimerBox = ({
+  text = "",
+  id,
+  closable = false,
+  style = "light",
+}) => {
   const [hide, setHide] = useState(false);
 
-  const dynamicStyle = {};
-  if (borderColor) dynamicStyle.borderColor = borderColor;
-  if (bgColor) dynamicStyle.backgroundColor = bgColor;
+  const classNames = ["disclaimer-box"];
+  if (style === "light") classNames.push("disclaimer-box--light");
+  if (closable) classNames.push("disclaimer-box--closable");
 
   return (
     !hide && (
-      <div
-        className={`disclaimer-box ${className || ""}`}
-        style={dynamicStyle}
-        id={id}
-      >
+      <div className={classNames.join(" ")} id={id}>
         {text}
-        {!hideCloseIcon && (
+        {closable && (
           <Icon
             icon="clear"
             onClick={() => setHide(true)}

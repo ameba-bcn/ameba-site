@@ -1,0 +1,32 @@
+.ameba-card-title {
+  display: block;
+  font-size: clamp(1rem, 14cqi, var(--max-title-size, 200px));
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  padding-right: 6px;
+}
+
+.ameba-card-title--single-line {
+  white-space: nowrap;
+}
+
+.ameba-card-title--no-pad {
+  padding-right: 0px;
+}
+
+.ameba-card-title__container {
+  font-family: "Bebas Neue";
+  width: -webkit-fill-available;
+  height: -webkit-fill-available;
+  display: flex;
+  align-items: center;
+  text-transform: uppercase;
+  color: var(--title-color, #fae6c5);
+  z-index: 999;
+  padding: var(--title-padding, 20px);
+  font-weight: 800;
+  font-style: var(--title-font-style, italic);
+}
+

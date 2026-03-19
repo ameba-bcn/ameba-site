@@ -20,7 +20,7 @@ import ActivitatDialog from "./Activitat";
 import "./AgendaTable.styled.css";
 import "../../../styles/GlobalStyles.style.css";
 import axiosInstance from "../../../axios";
-import { API_URL, MOBILE_SEMI_BIG } from "../../../utils/constants";
+import { API_URL } from "../../../utils/constants";
 import SearchBox from "../../../components/searchBox/SearchBox";
 import useMediaQuery from "../../../hooks/use-media-query";
 
@@ -34,7 +34,7 @@ const AgendaTable = () => {
   const [searchInput, setSearchInput] = useState("");
   const checkoutRedirect = user_profile === "GUEST" ? "/login" : "/checkout";
   const [t] = useTranslation("translation");
-  const isSmallScreen = useMediaQuery(MOBILE_SEMI_BIG);
+  const isMobile = useMediaQuery("(max-width:1000px)");
   const today = new Date();
   const todayIsoString = today.toISOString();
 
@@ -261,29 +261,24 @@ const AgendaTable = () => {
                     price,
                     stock,
                     datetime,
-                    info.row.original.cancelled
+                    info.row.original.cancelled,
                   )}
                 </div>
               );
             },
           },
-        ].filter((column) =>
-          isSmallScreen
-            ? column.accessorKey !== "reserva" &&
-              column.accessorKey !== "datetimehour"
-            : column
-        ),
+        ],
       },
     ],
-    [isSmallScreen]
+    [],
   );
 
   const filteredAgenda = React.useMemo(
     () =>
       sortByDate(agenda).filter((activity) =>
-        activity?.name?.toLowerCase()?.includes(searchInput?.toLowerCase())
+        activity?.name?.toLowerCase()?.includes(searchInput?.toLowerCase()),
       ),
-    [agenda, searchInput]
+    [agenda, searchInput],
   );
 
   const table = useReactTable({
@@ -298,77 +293,129 @@ const AgendaTable = () => {
 
   if (redirect) return <Navigate to={checkoutRedirect} replace />;
 
+  const renderPagination = () =>
+    table.getPageCount() > 1 && (
+      <div className="pagination-controls">
+        <button
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          ←
+        </button>
+        <span>
+          {table.getState().pagination.pageIndex + 1} / {table.getPageCount()}
+        </span>
+        <button
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          →
+        </button>
+      </div>
+    );
+
   return (
-    <div className={`styled-main-column-view agenda-table${agenda.length === 0 ? " agenda-table--empty" : ""}`}>
-      <table>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id} colSpan={header.colSpan}>
-                  {header.id.includes("search-box") ? (
-                    <div className="search-row">
-                      <SearchBox
-                        searchText="Busca"
-                        searchInput={searchInput}
-                        setSearchInput={setSearchInput}
-                      />
-                    </div>
-                  ) : null}
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
+    <div
+      className={`styled-main-column-view agenda-table${agenda.length === 0 ? " agenda-table--empty" : ""}`}
+    >
+      {isMobile ? (
+        <table>
+          <thead>
+            <tr>
+              <th>
+                <div className="search-row">
+                  <SearchBox
+                    searchText="Busca"
+                    searchInput={searchInput}
+                    setSearchInput={setSearchInput}
+                  />
+                </div>
+              </th>
             </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => {
-            return (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => {
-                  return (
-                    <td
-                      key={cell.id}
-                      onClick={() =>
-                        cell.column.id !== "reserva" && fetchEvent(row.original)
-                      }
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  );
-                })}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => {
+              const { name, images, datetime } = row.original;
+              return (
+                <tr key={row.id} className="agenda-mobile-row" onClick={() => fetchEvent(row.original)}>
+                  <td>
+                    <div className="agenda-mobile-card">
+                      <div className="agenda-mobile-card__image">
+                        <img src={images} alt="" />
+                      </div>
+                      <div className="agenda-mobile-card__info">
+                        <div className="agenda-mobile-card__date">
+                          {formatISODateToDate(datetime)}
+                        </div>
+                        <hr />
+                        <div className="agenda-mobile-card__title">
+                          {name?.toUpperCase()}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      ) : (
+        <table>
+          <thead>
+            {table.getHeaderGroups().map((headerGroup, groupIndex) => (
+              <tr
+                key={headerGroup.id}
+                className={groupIndex > 0 ? "agenda-header-row" : ""}
+              >
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id} colSpan={header.colSpan}>
+                    {header.id.includes("search-box") ? (
+                      <div className="search-row">
+                        <SearchBox
+                          searchText="Busca"
+                          searchInput={searchInput}
+                          setSearchInput={setSearchInput}
+                        />
+                      </div>
+                    ) : null}
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                  </th>
+                ))}
               </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      {table.getPageCount() > 1 && (
-        <div className="pagination-controls">
-          <button
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            ←
-          </button>
-          <span>
-            {table.getState().pagination.pageIndex + 1} / {table.getPageCount()}
-          </span>
-          <button
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            →
-          </button>
-        </div>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => {
+              return (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => {
+                    return (
+                      <td
+                        key={cell.id}
+                        onClick={() =>
+                          cell.column.id !== "reserva" &&
+                          fetchEvent(row.original)
+                        }
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       )}
+      {renderPagination()}
       {open && (
         <ActivitatDialog
           open={open}

@@ -10,7 +10,7 @@ export default function Booking() {
   const { support } = useDataStore();
 
   const filteredAmebaRoster = support.filter(
-    (artist) => artist.is_ameba_dj === true
+    (artist) => artist.is_ameba_dj === true,
   );
 
   return (
@@ -19,6 +19,7 @@ export default function Booking() {
         title={"BOOKING"}
         className="SupportTitle"
         subtitle="AMEBA Roster"
+        autoScale
       />
       <CardLayout cardList={filteredAmebaRoster} urlRoot="booking" />
       <LettersMove

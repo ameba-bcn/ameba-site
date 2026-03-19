@@ -9,6 +9,7 @@
   flex-direction: column;
   justify-content: space-between;
   animation: fadein 300ms;
+  overflow-x: hidden;
 }
 
 @keyframes fadein {
@@ -73,6 +74,7 @@
   font-weight: 400;
   white-space: nowrap;
   text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 500px) {
@@ -90,6 +92,7 @@
 
 @media screen and (max-width: 640px) {
   .app .cardForm {
+    width: auto;
     margin-left: 20px;
     margin-right: 20px;
   }
@@ -313,6 +316,14 @@
   color: #1d1d1b;
   font-size: 4.5rem;
   line-height: 4rem;
+  word-break: break-word;
+}
+
+@media screen and (max-width: 465px) {
+  .app .logTitle {
+    font-size: 2.8rem;
+    line-height: 2.6rem;
+  }
 }
 
 .app .logTitleSmall {
@@ -411,8 +422,8 @@
 
 .app .card-form a { text-decoration: none; }
 
-@media screen and (max-width: 370px) {
-  .app .card-form { padding: 40px 10px; }
+@media screen and (max-width: 640px) {
+  .app .card-form { padding: 40px 20px; }
 }
 
 .app .sociLogBanner {

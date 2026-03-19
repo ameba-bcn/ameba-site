@@ -67,8 +67,9 @@
   background-color: transparent;
   color: #1d1d1b;
   border: 2px solid #1d1d1b;
-  width: 95%;
+  width: 100%;
   height: auto;
+  box-sizing: border-box;
 }
 
 .contacte .formControlNews:focus,
@@ -106,16 +107,12 @@
 
 .contacte .iconsFooter a {
   text-decoration: none;
-  color: inherit;
+  color: #1d1d1b;
   margin-right: 10px;
 }
 
 .contacte .iconsFooter svg {
-  scale: 3;
-}
-
-.contacte .twitter {
-  scale: 2.9 !important;
+  scale: 2.3;
 }
 
 .contacte .iconsFooter svg:hover {
@@ -143,6 +140,7 @@
 .contacte .legal {
   color: #000;
   text-decoration: none;
+  display: inline;
 }
 
 .contacte .legal:hover {
@@ -172,9 +170,14 @@
   .contacte .formControlNews {
     font-size: 1rem;
     margin: 5px 0px;
+    width: 100%;
   }
   .contacte .contactNews {
     flex-wrap: wrap;
+  }
+  .contacte .form-group-input,
+  .contacte .form-group-button {
+    flex: 100%;
   }
 }
 
@@ -196,10 +199,7 @@
     margin: auto;
   }
   .contacte .iconsFooter svg {
-    scale: 2;
-  }
-  .contacte .twitter {
-    scale: 1.9 !important;
+    scale: 1.6;
   }
   .contacte .iconsFooter {
     gap: 12px;

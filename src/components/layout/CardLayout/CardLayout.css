@@ -28,11 +28,11 @@
   margin: 0px 24px 48px 24px;
   overflow: hidden;
   width: 570px;
-  height: 340px;
   max-width: 570px;
   display: inline-block;
   justify-content: center;
   min-width: 570px;
+  aspect-ratio: 570 / 340;
 }
 
 .card-layout .cardSupport {
@@ -42,6 +42,7 @@
   position: relative;
   display: inline-block;
   background-color: black;
+  container-type: inline-size;
 }
 
 .card-layout .cardSupportImgTop {
@@ -70,6 +71,19 @@
   position: absolute;
   right: 5%;
   bottom: 5%;
+  transform-origin: bottom right;
+}
+
+@container (max-width: 450px) {
+  .card-layout .cardSupportPlusBox {
+    transform: scale(0.75);
+  }
+}
+
+@container (max-width: 300px) {
+  .card-layout .cardSupportPlusBox {
+    transform: scale(0.5);
+  }
 }
 
 .card-layout .cardSupportPlusBox > div > div {
@@ -92,26 +106,12 @@
   top: 5%;
 }
 
-.card-layout__title {
-  position: absolute;
-  font-family: "Bebas Neue";
-  width: 95%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  text-transform: uppercase;
-  color: #fae6c5;
-  z-index: 999;
-  margin: 20px;
-  font-weight: 800;
-  font-style: italic;
-}
+
 
 @media screen and (max-width: 1500px) {
   .card-layout .fullcard { flex: 1 0 50%; }
 }
 
-@media screen and (max-width: 600px) {
-  .card-layout .fullcard { flex: 1 0 100%; min-width: 200px; width: auto; }
-  .card-layout__title { margin-left: -10px; }
+@media screen and (max-width: 640px) {
+  .card-layout .fullcard { display: block; min-width: 0; width: auto; max-width: 100%; }
 }

@@ -1,5 +1,5 @@
 .agenda-table {
-  height: 100%;
+  min-height: 0;
 }
 
 .agenda-table--empty {
@@ -12,6 +12,8 @@
   background-color: var(--color-cream);
   padding: 12px;
   border-radius: 4px;
+  box-sizing: border-box;
+  table-layout: auto;
 }
 
 .agenda-table table .search-row {
@@ -41,11 +43,16 @@
   }
 }
 
-@media screen and (max-width: 1230px) {
-  .agenda-table table tbody tr h1 {
+@media screen and (max-width: 640px) {
+  .agenda-mobile-card__info, .agenda-mobile-card__date {
     font-size: 1.6rem;
+    line-height: normal;
   }
-}
+    .agenda-mobile-card__info, .agenda-mobile-card__title {
+    font-size: 1.5rem;
+    line-height: normal;
+  }
+} 
 
 .agenda-table table tbody tr .horaDataActivitat {
   text-align: center;
@@ -129,4 +136,69 @@
 
 .styled-ticket svg {
   scale: 2;
+}
+
+/* Mobile table rows */
+.agenda-table table tbody tr.agenda-mobile-row {
+  display: block;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.agenda-table table tbody tr.agenda-mobile-row:last-child {
+  border-bottom: none;
+}
+
+/* Mobile card layout */
+.agenda-mobile-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 0 12px;
+  align-items: center;
+}
+
+.agenda-mobile-card__image {
+  grid-column: 1;
+  grid-row: 1 / 3;
+}
+
+.agenda-mobile-card__image img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+.agenda-mobile-card__title {
+  text-align: left;
+}
+
+.agenda-mobile-card__info{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+  font-family: "Bebas Neue";
+  font-weight: 400;
+  font-size: 2.5rem;
+  line-height: 0.8em;
+  hr{
+    width: 100%;
+    min-width: 100%;
+    border: none;
+    border-top: 1px solid #808080;
+    margin: 8px 0px;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+.agenda-table table .search-row{
+  float: unset;
+  width: 100%;
+    input{
+        max-width: unset;
+    }
+  }
 }

@@ -36,8 +36,10 @@ const QrView = () => {
       <div className="member-profile-frame">
         <div className="member-profile-box">
           <DisclaimerBox
-            text={<div className="message-format">{t("soci.no-soci-perfil")}</div>}
-            hideCloseIcon={true}
+            text={
+              <div className="message-format">{t("soci.no-soci-perfil")}</div>
+            }
+            style="none"
           />
         </div>
       </div>
@@ -46,12 +48,7 @@ const QrView = () => {
 
   return (
     <div className="qr-box">
-      <DisclaimerBox
-        text={t("soci.carnet")}
-        id="qr-disclaimer"
-        hideCloseIcon={true}
-        bgColor={`var(--color-cream)`}
-      />
+      <DisclaimerBox text={t("soci.carnet")} id="qr-disclaimer" />
       {loading ? (
         <Spinner height={400} color="black" />
       ) : (

@@ -3,7 +3,6 @@ import Icon from "../ui/Icon";
 import Dropdown from "../dropdown/Dropdown";
 import { NavLink } from "react-router-dom";
 import Button from "../button/Button";
-import { ReactFitty } from "react-fitty";
 import { truncate, priceMayDiscount } from "../../utils/utils";
 import { useTranslation } from "react-i18next";
 import useOutsideClick from "../../hooks/use-outside-click";
@@ -13,8 +12,12 @@ import useCartStore from "../../stores/useCartStore";
 import "./DropdownCart.css";
 
 function Cart() {
-  const { cart_data = {}, addToCart, substractToCart, cartBusy } =
-    useCartStore();
+  const {
+    cart_data = {},
+    addToCart,
+    substractToCart,
+    cartBusy,
+  } = useCartStore();
   const { isLoggedIn } = useAuthStore();
   const setGuestUser = useProfileStore((state) => state.setGuestUser);
   const setLoggedUser = useProfileStore((state) => state.setLoggedUser);
@@ -103,9 +106,7 @@ function Cart() {
                           </div>
                           <div className="colCartProduct2">
                             <div className="titleCartProduct">
-                              <ReactFitty maxSize={22}>
-                                {truncate(el.item_name, 25)}
-                              </ReactFitty>
+                              {truncate(el.item_name, 25)}
                             </div>
                             <div className="rowDetailedCart">
                               <div className="cartPriceProduct">
@@ -114,7 +115,7 @@ function Cart() {
                                   el?.discount_value,
                                   el?.discount_name,
                                   t("form.descompte"),
-                                  el?.subtotal
+                                  el?.subtotal,
                                 )}
                               </div>
                               <div className="quantitySizeProduct">
@@ -128,7 +129,7 @@ function Cart() {
                           </div>
                         </div>
                       </div>
-                    )
+                    ),
                   )}
                   <hr className="separadorCartDrop" />
                   <NavLink className="menuOptions" to={checkoutRedirect}>

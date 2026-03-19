@@ -2,17 +2,16 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import Button from "../button/Button";
 import { toast } from "react-toastify";
-import "./DropdownCart.css";
 import { useTranslation } from "react-i18next";
 import useProfileStore from "../../stores/useProfileStore";
 import useAuthStore from "../../stores/useAuthStore";
 import useCartStore from "../../stores/useCartStore";
-import { ReactFitty } from "react-fitty";
 import { priceMayDiscount, truncate } from "../../utils/utils";
 import { MOBILE_SMALL } from "../../utils/constants";
 import CartToast from "../toast/CartToast";
 import Icon from "../ui/Icon";
 import useMediaQuery from "../../hooks/use-media-query";
+import "./DropdownCart.css";
 
 export default function DropdownCartMobile(props) {
   const { addToCart, substractToCart, cartBusy } = useCartStore();
@@ -88,9 +87,7 @@ export default function DropdownCartMobile(props) {
                 <div className="rowCartProduct">
                   <div className="colCartProduct1_mobile">
                     <div className="titleCartProduct">
-                      <ReactFitty maxSize={22}>
-                        {truncate(el.item_name, isMinMobile ? 25 : 40)}
-                      </ReactFitty>
+                      {truncate(el.item_name, isMinMobile ? 25 : 40)}
                     </div>
                     <div className="rowDetailedCart">
                       <div className="cartPriceProduct_mobile">
@@ -99,7 +96,7 @@ export default function DropdownCartMobile(props) {
                           el?.discount_value,
                           el?.discount_name,
                           t("form.descompte"),
-                          el?.subtotal
+                          el?.subtotal,
                         )}
                       </div>
                       <div className="quantitySizeProduct">
@@ -127,7 +124,7 @@ export default function DropdownCartMobile(props) {
                   </div>
                 </div>
               </div>
-            )
+            ),
           )}
           <hr className="separadorCartDrop" />
           <NavLink

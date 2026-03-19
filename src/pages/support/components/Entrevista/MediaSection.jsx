@@ -32,9 +32,6 @@ export default function MediaSection(props) {
           );
         })}
       </div>
-      {/* <div className="xarxes-artista">
-        <MediaLinks fcbk="#" insta="#" twit="#" yout="#" />
-      </div> */}
     </div>
   );
 }

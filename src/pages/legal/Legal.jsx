@@ -19,32 +19,32 @@ const Legal = () => {
   }, []);
 
   return (
-    <div className="logViewYellow">
-      <div className="height-block" />
-      <div className="title-inner-section">{t("legal.title")}</div>
-      <div className="legal">
-        <DisclaimerBox
-          bgColor={`var(--color-cream)`}
-          className="disclaimerBox"
-          hideCloseIcon={true}
-          text={t("legal.init-text")}
-        />
-        <ul>
-          {files?.map((file) => (
-            <li key={file.title}>
-              <Icon icon="pdf-file" className="menuIcon__bars" />
-              <a href={file.file} target="_blank" rel="noreferrer">
-                {file.title}
-              </a>
-              <div className="file-description-wrapper">
-                <span id="file-description">- {file.description}</span>
-              </div>
-            </li>
-          ))}
-        </ul>
+    <div className="logViewYellow legal-page">
+      <div className="legal-page__content">
+        <div className="height-block" />
+        <div className="legal-page__title">{t("legal.title")}</div>
+        <div className="legal">
+          <DisclaimerBox text={t("legal.init-text")} style="light" />
+          <ul>
+            {files?.map((file) => (
+              <li key={file.title}>
+                <Icon icon="pdf-file" />
+                <div className="legal__file-info">
+                  <a href={file.file} target="_blank" rel="noreferrer">
+                    {file.title}
+                  </a>
+                  {file.description && (
+                    <span className="legal__file-description">
+                      {file.description}
+                    </span>
+                  )}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
       <LettersMove
-        className="lettersMoveDiv"
         sentence="AMEBA RADIO @ dublab"
         link={radioDublabLink}
         color="#FAE6C5"
