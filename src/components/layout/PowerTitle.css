@@ -7,12 +7,11 @@
 }
 
 .power-title__box .SupportSubtitle {
-  margin: -20px;
+  margin: -20px 30px 1rem;
   text-transform: uppercase;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-family: "Bebas Neue";
   font-weight: 100;
-  margin-bottom: 1rem;
   width: 100%;
 }
 

@@ -27,6 +27,7 @@
     height: 34px;
     text-align: left;
     z-index: 0;
+    overflow: hidden;
 }
 
 .letters-move__wrapper .substituto-marquee {
