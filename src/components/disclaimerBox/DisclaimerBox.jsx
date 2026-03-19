@@ -12,6 +12,7 @@ const DisclaimerBox = ({
 
   const classNames = ["disclaimer-box"];
   if (style === "light") classNames.push("disclaimer-box--light");
+  if (closable) classNames.push("disclaimer-box--closable");
 
   return (
     !hide && (
