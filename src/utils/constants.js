@@ -104,8 +104,8 @@ export const productQueryKind = {
   activitat: "events",
 };
 
-// export const API_URL =
-process.env.REACT_APP_API_HOST ||
+export const API_URL =
+  process.env.REACT_APP_API_HOST ||
   `${window.location.protocol}//${window.location.hostname}${
     window.location.port ? ":" + window.location.port : ""
   }/api/`;
