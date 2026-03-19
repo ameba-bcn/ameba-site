@@ -1,9 +1,11 @@
-.icon {
+.icon,
+.icon--disabled {
   display: flex;
   position: relative;
 }
 
-.icon .tooltip {
+.icon .tooltip,
+.icon--disabled .tooltip {
   display: none;
   visibility: hidden;
   width: 120px;
@@ -21,7 +23,8 @@
   transition: opacity 0.5s;
 }
 
-.icon .tooltip::after {
+.icon .tooltip::after,
+.icon--disabled .tooltip::after {
   content: "";
   position: absolute;
   top: 100%;
@@ -32,7 +35,8 @@
   border-color: #555 transparent transparent transparent;
 }
 
-.icon:hover .tooltip {
+.icon:hover .tooltip,
+.icon--disabled:hover .tooltip {
   visibility: visible;
   opacity: 1;
   display: block;
@@ -102,6 +106,44 @@
 
 .icon--disabled #hoverable-dark-svg:hover path {
   fill: var(--color-gris-claro);
+}
+
+/* Stroke-based icons: override fill rules, use stroke for coloring */
+.icon #hoverable-cream-svg .stroke-icon path,
+.icon #hoverable-red-svg .stroke-icon path,
+.icon #hoverable-black-svg .stroke-icon path,
+.icon #hoverable-dark-svg .stroke-icon path {
+  fill: none;
+  stroke: var(--color-negro);
+}
+
+.icon #hoverable-black-svg .stroke-icon path,
+.icon #hoverable-dark-svg .stroke-icon path {
+  stroke: var(--color-cream);
+}
+
+.icon #hoverable-cream-svg:hover .stroke-icon path,
+.icon #hoverable-red-svg:hover .stroke-icon path,
+.icon #hoverable-black-svg:hover .stroke-icon path,
+.icon #hoverable-dark-svg:hover .stroke-icon path {
+  fill: none;
+  stroke: var(--color-rojo);
+}
+
+.icon--disabled #hoverable-cream-svg .stroke-icon path,
+.icon--disabled #hoverable-red-svg .stroke-icon path,
+.icon--disabled #hoverable-black-svg .stroke-icon path,
+.icon--disabled #hoverable-dark-svg .stroke-icon path {
+  fill: none;
+  stroke: var(--color-gris-claro);
+}
+
+.icon--disabled #hoverable-cream-svg:hover .stroke-icon path,
+.icon--disabled #hoverable-red-svg:hover .stroke-icon path,
+.icon--disabled #hoverable-black-svg:hover .stroke-icon path,
+.icon--disabled #hoverable-dark-svg:hover .stroke-icon path {
+  fill: none;
+  stroke: var(--color-gris-claro);
 }
 
 /* Static color variants */

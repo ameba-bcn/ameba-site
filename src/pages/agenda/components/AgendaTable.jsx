@@ -261,7 +261,7 @@ const AgendaTable = () => {
                     price,
                     stock,
                     datetime,
-                    info.row.original.cancelled
+                    info.row.original.cancelled,
                   )}
                 </div>
               );
@@ -271,19 +271,19 @@ const AgendaTable = () => {
           isSmallScreen
             ? column.accessorKey !== "reserva" &&
               column.accessorKey !== "datetimehour"
-            : column
+            : column,
         ),
       },
     ],
-    [isSmallScreen]
+    [isSmallScreen],
   );
 
   const filteredAgenda = React.useMemo(
     () =>
       sortByDate(agenda).filter((activity) =>
-        activity?.name?.toLowerCase()?.includes(searchInput?.toLowerCase())
+        activity?.name?.toLowerCase()?.includes(searchInput?.toLowerCase()),
       ),
-    [agenda, searchInput]
+    [agenda, searchInput],
   );
 
   const table = useReactTable({
@@ -299,11 +299,16 @@ const AgendaTable = () => {
   if (redirect) return <Navigate to={checkoutRedirect} replace />;
 
   return (
-    <div className={`styled-main-column-view agenda-table${agenda.length === 0 ? " agenda-table--empty" : ""}`}>
+    <div
+      className={`styled-main-column-view agenda-table${agenda.length === 0 ? " agenda-table--empty" : ""}`}
+    >
       <table>
         <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
+          {table.getHeaderGroups().map((headerGroup, groupIndex) => (
+            <tr
+              key={headerGroup.id}
+              className={groupIndex > 0 ? "agenda-header-row" : ""}
+            >
               {headerGroup.headers.map((header) => (
                 <th key={header.id} colSpan={header.colSpan}>
                   {header.id.includes("search-box") ? (
@@ -319,7 +324,7 @@ const AgendaTable = () => {
                     ? null
                     : flexRender(
                         header.column.columnDef.header,
-                        header.getContext()
+                        header.getContext(),
                       )}
                 </th>
               ))}
@@ -340,7 +345,7 @@ const AgendaTable = () => {
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
-                        cell.getContext()
+                        cell.getContext(),
                       )}
                     </td>
                   );
