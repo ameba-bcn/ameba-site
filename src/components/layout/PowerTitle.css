@@ -29,6 +29,18 @@
 }
 
 
+.power-title__box--mt-sm {
+  margin-top: 1rem;
+}
+
+.power-title__box--mt-md {
+  margin-top: 2rem;
+}
+
+.power-title__box--mt-lg {
+  margin-top: 3rem;
+}
+
 .power-title__title {
   position: relative;
   width: 95%;
