@@ -2,11 +2,9 @@ import React, { useState, useEffect } from "react";
 import useAuthStore from "../../stores/useAuthStore";
 import useDataStore from "../../stores/useDataStore";
 import { useTranslation } from "react-i18next";
-import LettersMove from "../../components/layout/LettersMove";
-import PowerTitle from "../../components/layout/PowerTitle";
+import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import CardLayout from "../../components/layout/CardLayout/CardLayout";
 import SearchBox from "../../components/searchBox/SearchBox";
-import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import { ACTIVE_STATUS } from "../../utils/constants";
 import "../../styles/GlobalStyles.css";
 import "./Socios.css";
@@ -39,21 +37,24 @@ const Socios = () => {
   );
 
   return (
-    <div className="socios">
-      <PowerTitle
-        title="soci@s"
-        className="SupportTitle"
-        subtitle={
+    <PageLayout
+      className="socios"
+      title="soci@s"
+      titleProps={{
+        subtitle:
           !isMemberProjectsLoading &&
           Object.keys(user_member_data).length > 0 &&
           status !== ACTIVE_STATUS
             ? member_projects_active.length === 0
               ? t("general.sense-resultats")
               : t("soci.missatge-ppal")
-            : ""
-        }
-        autoScale
-      />
+            : "",
+      }}
+      banner={{
+        sentence: t("banners.soci-curt"),
+        color: "var(--color-rojo)",
+      }}
+    >
       <div className="height-block" />
       <SearchBox
         searchText="Busca"
@@ -83,7 +84,7 @@ const Socios = () => {
           }}
         >
           <button
-            onClick={() => setPage((p) => p - 1)}
+            onClick={() => { setPage((p) => p - 1); setTimeout(() => document.querySelector(".app")?.scrollTo({ top: 0, behavior: "smooth" }), 0); }}
             disabled={page === 0}
             style={{
               background: "none",
@@ -101,7 +102,7 @@ const Socios = () => {
             {page + 1} / {totalPages}
           </span>
           <button
-            onClick={() => setPage((p) => p + 1)}
+            onClick={() => { setPage((p) => p + 1); setTimeout(() => document.querySelector(".app")?.scrollTo({ top: 0, behavior: "smooth" }), 0); }}
             disabled={page >= totalPages - 1}
             style={{
               background: "none",
@@ -117,12 +118,7 @@ const Socios = () => {
           </button>
         </div>
       )}
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        color="#EB5E3E"
-      />
-    </div>
+    </PageLayout>
   );
 };
 

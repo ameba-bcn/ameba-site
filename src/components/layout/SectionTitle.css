@@ -14,7 +14,7 @@
     text-align: center;
     text-transform: uppercase;
     line-height: 1em;
-    color: #1D1D1B;
+    color: var(--color-negro);
     width: auto;
 }
 

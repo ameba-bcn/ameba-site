@@ -114,7 +114,7 @@ export default function BotigaGeneral() {
       {cardGenerator}
       {cardGenerator &&
         !isOneColumn &&
-        createLastRowIterator(botiga, 518).map((n, index) => (
+        createLastRowIterator(botiga, 470).map((n, index) => (
           <i aria-hidden={true} key={index}></i>
         ))}
       {open && (

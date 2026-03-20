@@ -6,11 +6,10 @@ import AmebaCardTitle from "../../ui/AmebaCardTitle";
 import PlusButton from "../../button/PlusButton";
 import { createLastRowIterator, sortByProperty } from "../../../utils/utils";
 import useMediaQuery from "../../../hooks/use-media-query";
-import Spinner from "../../spinner/Spinner";
+import EmbeddedSpinner from "../../spinner/EmbeddedSpinner";
 
 export default function CardLayout(props) {
   const { cardList = [], urlRoot, loading = false } = props; //Pendiente recibir si es entrevista por props
-
   const isOneColumn = useMediaQuery("(max-width:1290px)");
   const isMobile = useMediaQuery(MOBILE_SMALL);
 
@@ -38,7 +37,12 @@ export default function CardLayout(props) {
             }}
           >
             <div className="cardSupport">
-              <AmebaCardTitle>
+              <AmebaCardTitle
+                autoGrow={true}
+                className="cardSupportTitle"
+                maxSize={400}
+                overflow="inherit"
+              >
                 {project_name ? project_name : name}
               </AmebaCardTitle>
               <img
@@ -64,7 +68,7 @@ export default function CardLayout(props) {
       className={`card-layout${!cardList.length > 0 ? " card-layout--empty" : ""}`}
     >
       {loading ? (
-        <Spinner />
+        <EmbeddedSpinner />
       ) : (
         <>
           {cardList.length > 0 && cardGenerator}

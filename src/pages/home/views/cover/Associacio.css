@@ -1,5 +1,5 @@
 #associacio {
-  background-color: #eb5e3e;
+  background-color: var(--color-rojo);
   display: flex;
   flex-direction: column;
   justify-content: space-between;

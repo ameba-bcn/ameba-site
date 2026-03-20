@@ -54,7 +54,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
               <div className="member-info-row">
                 {t("perfil.vols-soci")}?<br />
                 <NavLink
-                  style={{ textDecoration: "none", color: "#1d1d1b" }}
+                  style={{ textDecoration: "none", color: "var(--color-negro)" }}
                   to={{
                     pathname: "/memberships",
                   }}

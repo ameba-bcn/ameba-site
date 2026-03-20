@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
 import useCartStore from "../stores/useCartStore";
-import LettersMove from "./../components/layout/LettersMove";
+import PageLayout from "../components/layout/PageLayout/PageLayout";
 import { useTranslation } from "react-i18next";
 
 export default function LogMailConfirmation() {
@@ -46,22 +46,22 @@ export default function LogMailConfirmation() {
   }
 
   return (
-    <>
-      <div className="full-height-msg">
-        {hasQueryParams ? (
-          <div className="single-msg">{t("login.verifica")}</div>
-        ) : (
-          <div className="single-msg">
-            T&apos;hem enviat un mail de confirmació, confirma l&apos;enllaç
-          </div>
-        )}
-      </div>
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
-        color="#FAE6C5"
-      />
-    </>
+    <PageLayout
+      className="full-height-msg"
+      centered
+      banner={{
+        sentence: t("banners.soci-curt"),
+        link: "/memberships",
+        color: "var(--color-cream)",
+      }}
+    >
+      {hasQueryParams ? (
+        <div className="single-msg">{t("login.verifica")}</div>
+      ) : (
+        <div className="single-msg">
+          T&apos;hem enviat un mail de confirmació, confirma l&apos;enllaç
+        </div>
+      )}
+    </PageLayout>
   );
 }

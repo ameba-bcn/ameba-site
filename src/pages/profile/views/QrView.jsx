@@ -6,9 +6,9 @@ import ImageCarousel from "../../../components/images/ImageCarousel";
 import "react-image-gallery/styles/image-gallery.css";
 import "./QrView.style.css";
 import authService from "../../../store/services/auth.service";
-import Spinner from "../../../components/spinner/Spinner";
 import "./MemberProfile.style.css";
 import { isDateExpired } from "../../../utils/utils";
+import EmbeddedSpinner from "../../../components/spinner/EmbeddedSpinner";
 
 const QrView = () => {
   const [t] = useTranslation("translation");
@@ -50,7 +50,7 @@ const QrView = () => {
     <div className="qr-box">
       <DisclaimerBox text={t("soci.carnet")} id="qr-disclaimer" />
       {loading ? (
-        <Spinner height={400} color="black" />
+        <EmbeddedSpinner alone />
       ) : (
         <div>
           <ImageCarousel imgList={[qrImg]} />

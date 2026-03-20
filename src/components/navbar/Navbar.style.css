@@ -1,5 +1,5 @@
 .navbar .menuSuperior {
-  background-color: #1d1d1b !important;
+  background-color: var(--color-negro) !important;
   display: flex;
   flex-wrap: wrap;
   flex-flow: row;
@@ -37,7 +37,7 @@
 }
 
 .navbar .cart-cistella a {
-  color: #fae6c5 !important;
+  color: var(--color-cream) !important;
 }
 
 .navbar .menu-logo-box a {
@@ -47,7 +47,7 @@
   font-size: 2.5rem;
   font-weight: 400;
   display: inline-block;
-  color: #fae6c5;
+  color: var(--color-cream);
   position: relative;
   transition: all 0.5s ease-in-out;
 }
@@ -60,7 +60,7 @@
   font-size: 2.5rem;
   font-weight: 400;
   display: inline-block;
-  color: #fae6c5;
+  color: var(--color-cream);
   position: relative;
   transition: all 0.5s ease-in-out;
 }
@@ -69,7 +69,7 @@
 .navbar .sessio-menu-button::before {
   content: attr(data-item);
   transition: 0.5s;
-  color: #f2c571;
+  color: var(--color-naranja);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -108,7 +108,7 @@
   margin-right: 20px;
   font-weight: 400;
   text-decoration: none;
-  color: #fae6c5;
+  color: var(--color-cream);
   transition: all 0.5s ease-in-out;
   position: relative;
   text-transform: uppercase;
@@ -118,7 +118,7 @@
 .navbar .nav-ul li a::before {
   content: attr(data-item);
   transition: 0.5s;
-  color: #f2c571;
+  color: var(--color-naranja);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -136,7 +136,7 @@
 
 .navbar .nav-ul div a.active,
 .navbar .nav-ul li a.active {
-  color: #eb5e3e;
+  color: var(--color-rojo);
 }
 
 .navbar .logname-li {
@@ -167,7 +167,7 @@
   width: 100%;
   overflow: hidden;
   max-height: 0;
-  background-color: #1d1d1b;
+  background-color: var(--color-negro);
   transition: max-height 0.35s ease;
 }
 
@@ -190,7 +190,7 @@
 }
 
 .navbar .nav-ul_mobile {
-  background-color: #1d1d1b;
+  background-color: var(--color-negro);
   list-style-type: none;
   list-style: none;
   display: flex;
@@ -209,7 +209,7 @@
 
 .navbar .nav-ul_mobile div a.active,
 .navbar .nav-ul_mobile li a.active {
-  color: #eb5e3e;
+  color: var(--color-rojo);
 }
 
 .navbar .nav-ul_mobile div a,
@@ -221,7 +221,7 @@
   margin-right: 20px;
   font-weight: 400;
   text-decoration: none;
-  color: #fae6c5;
+  color: var(--color-cream);
   transition: all 0.5s ease-in-out;
   position: relative;
   text-transform: uppercase;
@@ -231,7 +231,7 @@
 .navbar .nav-ul_mobile li a::before {
   content: attr(data-item);
   transition: 0.5s;
-  color: #f2c571;
+  color: var(--color-naranja);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -252,7 +252,7 @@
 }
 
 .navbar .menu-lang li a {
-  color: #fae6c5 !important;
+  color: var(--color-cream) !important;
 }
 
 .navbar .menu-lang li a:last-child {
@@ -260,7 +260,7 @@
 }
 
 .navbar .menu-lang li > a.active {
-  color: #ffed00 !important;
+  color: var(--color-amarillo) !important;
 }
 
 .navbar .cartIconMenu {
@@ -277,14 +277,14 @@
 }
 
 .navbar .bubbleCart {
-  color: #1d1d1b;
+  color: var(--color-negro);
   position: relative;
   top: 5px;
   left: 25px;
   width: 18px;
   height: 18px;
   padding: 2px 1px 0px 1px;
-  background-color: #f2c571;
+  background-color: var(--color-naranja);
   font-family: "Bebas Neue";
   font-weight: 600;
   font-size: 0.7em;
@@ -292,14 +292,14 @@
 }
 
 .navbar .bubbleCartMember {
-  color: #1d1d1b;
+  color: var(--color-negro);
   position: absolute;
   top: 0px;
   right: 0px;
   width: 18px;
   height: 18px;
   padding: 2px 5px 2px 6px;
-  background-color: #f2c571;
+  background-color: var(--color-naranja);
   font-family: "Bebas Neue";
   font-weight: 600;
   font-size: 0.3em;
@@ -308,7 +308,7 @@
 }
 
 .navbar .cart-mobile__box {
-  background-color: #fae6c5;
+  background-color: var(--color-cream);
   margin-left: -2em;
   animation: fade 0.5s 1;
   -webkit-animation: fade 0.5s 1;
@@ -319,7 +319,7 @@
 }
 
 .navbar .menu-mobile-session-box {
-  background-color: #fae6c5;
+  background-color: var(--color-cream);
   width: calc(100% + 32px);
   margin-left: -32px;
   padding-right: 32px;
@@ -333,7 +333,7 @@
 
 .navbar .dropdown-profile-mobile,
 .navbar .dropdown-logout-mobile {
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-family: "Bebas Neue";
   font-size: 2.5rem;
   font-weight: 400;
@@ -359,7 +359,7 @@
   display: block;
   width: 28px;
   height: 3px;
-  background-color: #fae6c5;
+  background-color: var(--color-cream);
   border-radius: 2px;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
@@ -377,7 +377,7 @@
 }
 
 .menu-icon:hover .menu-icon__bar {
-  background-color: #eb5e3e;
+  background-color: var(--color-rojo);
 }
 
 @media screen and (max-width: 350px) {

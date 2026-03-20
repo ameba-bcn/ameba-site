@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
-import LettersMove from "../components/layout/LettersMove";
+import PageLayout from "../components/layout/PageLayout/PageLayout";
 import PasswordRecoveryForm from "./../components/forms/PasswordRecoveryForm/PasswordRecoveryForm";
 import "../styles/GlobalStyles.css";
 
@@ -16,7 +16,14 @@ export default function PasswordRecovery(props) {
   }, [parsed, strToken, setStrToken]);
 
   return (
-    <div className="logViewRed">
+    <PageLayout
+      className="logViewRed"
+      banner={{
+        sentence: t("banners.soci-curt"),
+        link: "/memberships",
+        color: "var(--color-cream)",
+      }}
+    >
       <div className="cardForm">
         <div className="card card-form">
           <div className="logTitle">{t("login.recupera-curt")}</div>
@@ -41,12 +48,6 @@ export default function PasswordRecovery(props) {
           )}
         </div>
       </div>
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
-        color="#FAE6C5"
-      />
-    </div>
+    </PageLayout>
   );
 }

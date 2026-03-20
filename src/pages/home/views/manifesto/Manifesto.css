@@ -8,7 +8,7 @@
 .manifesto-title {
     text-transform: uppercase;
     font-family: "Bebas Neue";
-    color: #1d1d1b;
+    color: var(--color-negro);
     width: 100%;
     font-size: 160px;
     line-height: 120px;
@@ -24,7 +24,7 @@
 .manifesto-text {
     text-transform: uppercase;
     font-family: "Bebas Neue";
-    color: #1d1d1b;
+    color: var(--color-negro);
     font-size: 38px;
     margin: 0 auto;
     align-items: center;
@@ -45,13 +45,13 @@
         -webkit-text-stroke-color: transparent;
     }
     60% {
-        -webkit-text-stroke-color: #f2c571;
+        -webkit-text-stroke-color: var(--color-naranja);
     }
     65% {
         -webkit-text-stroke-color: transparent;
     }
     95% {
-        -webkit-text-stroke-color: #f2c571;
+        -webkit-text-stroke-color: var(--color-naranja);
     }
     100% {
         -webkit-text-stroke-color: transparent;

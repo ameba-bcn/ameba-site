@@ -29,10 +29,10 @@
   line-height: 28px;
   background-clip: padding-box;
   background-color: transparent;
-  border: 2px solid #1d1d1b;
+  border: 2px solid var(--color-negro);
   border-radius: 0rem;
   font-family: "Montserrat", sans-serif;
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-size: 28px;
   animation-name: search-box-wide-expand;
   animation-duration: 0.5s;
@@ -41,20 +41,20 @@
 
 .search-box__input::placeholder {
   font-family: "Bebas Neue";
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-size: 22px;
   font-weight: 300;
 }
 
 .search-box__input:focus {
-  background-color: #fae6c5;
-  border-color: #f2c571;
+  background-color: var(--color-cream);
+  border-color: var(--color-naranja);
   font-size: 22px;
   padding-bottom: 1px;
 }
 
 .search-box__input:touch {
-  background-color: #fae6c5;
+  background-color: var(--color-cream);
 }
 
 .search-box__input:disabled {
@@ -67,7 +67,7 @@
 .search-box__input:-webkit-autofill:hover,
 .search-box__input:-webkit-autofill:focus,
 .search-box__input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #fae6c5 inset !important;
+  -webkit-box-shadow: 0 0 0 30px var(--color-cream) inset !important;
 }
 
 .search-box__icon {

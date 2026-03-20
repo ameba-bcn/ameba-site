@@ -15,7 +15,7 @@
   font-family: "Bebas Neue";
   font-weight: 400;
   font-size: 60px;
-  color: #1d1d1b;
+  color: var(--color-negro);
   margin-bottom: 32px;
 }
 
@@ -42,13 +42,13 @@
   align-items: center;
   padding: 16px 20px;
   margin-bottom: 12px;
-  border: 3px solid #1d1d1b;
+  border: 3px solid var(--color-negro);
   transition: background-color 0.2s ease, transform 0.2s ease;
   cursor: pointer;
 }
 
 .legal li:hover {
-  background-color: #f2c571;
+  background-color: var(--color-naranja);
   transform: translateX(4px);
 }
 
@@ -65,7 +65,7 @@
 .legal a {
   font-size: 24px;
   font-family: "Bebas Neue";
-  color: #1d1d1b;
+  color: var(--color-negro);
   text-decoration: none;
   white-space: nowrap;
   text-align: left;
@@ -79,7 +79,7 @@
   font-family: "Montserrat", sans-serif;
   font-size: 13px;
   font-weight: 400;
-  color: #1d1d1b;
+  color: var(--color-negro);
   opacity: 0.7;
   margin-top: 2px;
 }

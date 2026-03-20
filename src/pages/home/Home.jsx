@@ -15,10 +15,9 @@ export default function Home() {
         <Activitats />
       </div>
       <LettersMove
-        className="lettersMoveDiv"
         sentence={t("banners.soci-curt")}
         link="/memberships"
-        color="#EB5E3E"
+        color="var(--color-rojo)"
       />
     </div>
   );

@@ -163,10 +163,10 @@
 }
 
 .buttonCheckoutCart {
-    background-color: #1d1d1b;
+    background-color: var(--color-negro);
     font-size: 20px;
     font-family: "Bebas Neue";
-    color: #fae6c5;
+    color: var(--color-cream);
     margin: 0 auto;
     width: 100%;
     text-align: center;

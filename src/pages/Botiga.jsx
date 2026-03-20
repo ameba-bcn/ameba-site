@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import BotigaGeneral from "../components/botiga/BotigaGeneral";
 import useDataStore from "../stores/useDataStore";
-import PowerTitle from "../components/layout/PowerTitle";
 import ProductBanner from "../components/botiga/ProductBanner";
 import SociDialog from "../components/botiga/Soci";
-import LettersMove from "./../components/layout/LettersMove";
+import PageLayout from "../components/layout/PageLayout/PageLayout";
 import { API_URL } from "../utils/constants";
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
@@ -62,8 +61,15 @@ function Botiga() {
   }, []);
 
   return (
-    <div className="Botiga">
-      <PowerTitle title={t("menu.botiga")} className="SupportTitle" autoScale />
+    <PageLayout
+      className="Botiga"
+      title={t("menu.botiga")}
+      banner={{
+        sentence: t("banners.soci-curt"),
+        link: "/memberships",
+        color: "var(--color-rojo)",
+      }}
+    >
       <div className="clickBanner">
         <NavLink
           style={{ textDecoration: "none" }}
@@ -79,7 +85,6 @@ function Botiga() {
                     sociPreu,
                   )}${t("banners.soci-llarg-pt2")}`
             }
-            // handleClick={handleOpen}
           />
         </NavLink>
       </div>
@@ -95,13 +100,7 @@ function Botiga() {
       <div className="BotigaContent">
         <BotigaGeneral />
       </div>
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
-        color="#EB5E3E"
-      />
-    </div>
+    </PageLayout>
   );
 }
 
