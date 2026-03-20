@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import DataService from "../store/services/data.service";
+import CloudinaryService from "../store/services/cloudinary.service";
 
 const useDataStore = create((set) => ({
   // Data
@@ -22,6 +23,9 @@ const useDataStore = create((set) => ({
   isCoversLoading: false,
   isArtistsLoading: false,
   isGaleriaLoading: false,
+  galleryImages: [],
+  isGalleryAlbumLoading: false,
+  galleryCovers: {},
 
   // Actions
   fetchSupport: () => {
@@ -108,6 +112,36 @@ const useDataStore = create((set) => ({
   },
 
   setGaleriaLoading: (value) => set({ isGaleriaLoading: value }),
+
+  fetchGalleryCover: (tag) => {
+    return CloudinaryService.fetchImagesByTag(tag)
+      .then((response) => {
+        const first = response?.data?.resources?.[0];
+        if (first) {
+          set((state) => ({
+            galleryCovers: {
+              ...state.galleryCovers,
+              [tag]: `${first.public_id}.${first.format}`,
+            },
+          }));
+        }
+      })
+      .catch(() => {});
+  },
+
+  fetchGalleryImages: (tag) => {
+    set({ isGalleryAlbumLoading: true, galleryImages: [] });
+    return CloudinaryService.fetchImagesByTag(tag)
+      .then((response) => {
+        set({
+          galleryImages: response?.data?.resources || [],
+          isGalleryAlbumLoading: false,
+        });
+      })
+      .catch(() => {
+        set({ isGalleryAlbumLoading: false });
+      });
+  },
 }));
 
 export default useDataStore;

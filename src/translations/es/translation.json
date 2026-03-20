@@ -2,7 +2,8 @@
   "menu": {
     "botiga": "tienda",
     "soci-menu": "HAZTE SOCIO",
-    "projectes": "PROYECTOS"
+    "projectes": "PROYECTOS",
+    "arxiu": "archivo"
   },
   "checkout": {
     "finalitzarCompra": "finalizar compra",
@@ -169,5 +170,11 @@
   },
   "info": {
     "project": "Edita tu proyecto personal. Una vez guardados los cambios y marcada la casilla 'publicado' podrás visualizar tu proyecto en la vista de /soci@s"
+  },
+  "gallery": {
+    "tot": "todo",
+    "buida": "No hay galerías disponibles",
+    "no-trobada": "Galería no encontrada",
+    "tornar": "Volver a la galería"
   }
 }

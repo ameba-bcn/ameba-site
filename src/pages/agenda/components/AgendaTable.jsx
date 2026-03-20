@@ -22,6 +22,7 @@ import "../../../styles/GlobalStyles.style.css";
 import axiosInstance from "../../../axios";
 import { API_URL } from "../../../utils/constants";
 import SearchBox from "../../../components/searchBox/SearchBox";
+import Pagination from "../../../components/pagination/Pagination";
 import useMediaQuery from "../../../hooks/use-media-query";
 
 const AgendaTable = () => {
@@ -293,32 +294,14 @@ const AgendaTable = () => {
 
   if (redirect) return <Navigate to={checkoutRedirect} replace />;
 
-  const renderPagination = () =>
-    table.getPageCount() > 1 && (
-      <div className="pagination-controls">
-        <button
-          onClick={() => {
-            table.previousPage();
-            setTimeout(() => document.querySelector(".app")?.scrollTo({ top: 0, behavior: "smooth" }), 0);
-          }}
-          disabled={!table.getCanPreviousPage()}
-        >
-          ←
-        </button>
-        <span>
-          {table.getState().pagination.pageIndex + 1} / {table.getPageCount()}
-        </span>
-        <button
-          onClick={() => {
-            table.nextPage();
-            setTimeout(() => document.querySelector(".app")?.scrollTo({ top: 0, behavior: "smooth" }), 0);
-          }}
-          disabled={!table.getCanNextPage()}
-        >
-          →
-        </button>
-      </div>
-    );
+  const renderPagination = () => (
+    <Pagination
+      page={table.getState().pagination.pageIndex}
+      totalPages={table.getPageCount()}
+      onPageChange={(p) => table.setPageIndex(p)}
+      className="pagination--dark"
+    />
+  );
 
   return (
     <div

@@ -3,10 +3,17 @@ import AmebaCardTitle from "../ui/AmebaCardTitle";
 import "./PowerTitle.css";
 
 function PowerTitle(props) {
-  const { subtitle, color = "var(--color-negro)", fontStyle = "normal", maxSize = 220, autoScale = false } = props;
+  const {
+    subtitle,
+    color = "var(--color-negro)",
+    fontStyle = "normal",
+    maxSize = 220,
+    autoScale = false,
+    marginTop,
+  } = props;
 
   return (
-    <div className="power-title__box">
+    <div className={`power-title__box${marginTop ? ` power-title__box--mt-${marginTop}` : ""}`}>
       <div className="power-title__title">
         <AmebaCardTitle
           maxSize={maxSize}

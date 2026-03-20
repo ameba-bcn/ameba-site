@@ -1,124 +1,101 @@
-import axios from "axios";
-import React, { useEffect, useRef, useState } from "react";
-import Galeria from "../../components/galeria/Galeria";
+import React, { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
-import {
-  FLICKR_ALBUM_ID,
-  FLICKR_KEY,
-  radioDublabLink,
-} from "../../utils/constants";
+import { galleries } from "../../config/galleryConfig";
+import { cloudinaryCover, radioDublabLink } from "../../utils/constants";
 import useDataStore from "../../stores/useDataStore";
-
-const PAGE_SIZE = 20;
+import "./Gallery.css";
 
 const Gallery = () => {
-  const [galleryList, setGalleryList] = useState([]);
-  const [page, setPage] = useState(0);
-  const galleryTopRef = useRef(null);
+  const [t] = useTranslation("translation");
+  const navigate = useNavigate();
+  const { galleryCovers, fetchGalleryCover } = useDataStore();
+  const [activeYear, setActiveYear] = useState(null);
 
-  const changePage = (newPage) => {
-    setPage(newPage);
-    galleryTopRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-  const { isGaleriaLoading, setGaleriaLoading } = useDataStore();
+  const years = useMemo(
+    () => [...new Set(galleries.map((g) => g.year))].sort((a, b) => b - a),
+    [],
+  );
 
-  const url = `https://www.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=${FLICKR_KEY}&photoset_id=${FLICKR_ALBUM_ID}&format=rest`;
+  const filtered = (activeYear
+    ? galleries.filter((g) => g.year === activeYear)
+    : galleries
+  ).toSorted((a, b) => b.year - a.year);
 
   useEffect(() => {
-    setGaleriaLoading(true);
-    axios
-      .get(`${url}`, {})
-      .then((s) => {
-        var parser = new DOMParser();
-        var xmlDoc = parser.parseFromString(s?.data, "text/xml");
-        var photos = xmlDoc.querySelectorAll("photo");
-        setGalleryList(Array.from(photos));
-        setGaleriaLoading(false);
-      })
-      .catch(() => {
-        setGaleriaLoading(false);
-      });
+    galleries.forEach((gallery) => {
+      if (!galleryCovers[gallery.tag]) {
+        fetchGalleryCover(gallery.tag);
+      }
+    });
   }, []);
 
-  const imgArrayBuilder = galleryList.map((el) => {
-    const SERVER_ID = el.getAttribute("server");
-    const ID = el.getAttribute("id");
-    const SECRET = el.getAttribute("secret");
-    return `https://live.staticflickr.com/${SERVER_ID}/${ID}_${SECRET}_b.jpg`;
-  });
+  const handleAlbumClick = (gallery) => {
+    navigate(`/gallery/${gallery.slug}/${gallery.year}`);
+  };
 
   return (
     <PageLayout
       className="SupportContent"
-      title="PARKFEST 22"
-      titleProps={{ subtitle: "* 21-05-22 *" }}
-      loading={isGaleriaLoading}
+      title={t("menu.arxiu")}
       banner={{
         sentence: "AMEBA RADIO @ dublab",
         link: radioDublabLink,
         color: "var(--color-rojo)",
       }}
     >
-      <div ref={galleryTopRef} />
-      <Galeria
-        images={imgArrayBuilder.slice(
-          page * PAGE_SIZE,
-          (page + 1) * PAGE_SIZE,
-        )}
-      />
-      {Math.ceil(imgArrayBuilder.length / PAGE_SIZE) > 1 && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "16px",
-            padding: "16px 0",
-            fontFamily: "Bebas Neue",
-            fontSize: "1.4rem",
-          }}
+      <div className="gallery-filter">
+        <button
+          className={`gallery-filter__btn ${activeYear === null ? "gallery-filter__btn--active" : ""}`}
+          onClick={() => setActiveYear(null)}
         >
+          {t("gallery.tot")}
+        </button>
+        {years.map((year) => (
           <button
-            onClick={() => changePage(page - 1)}
-            disabled={page === 0}
-            style={{
-              background: "none",
-              border: "1px solid black",
-              fontSize: "1.4rem",
-              padding: "4px 12px",
-              cursor: page === 0 ? "default" : "pointer",
-              borderRadius: "4px",
-              opacity: page === 0 ? 0.3 : 1,
-            }}
+            key={year}
+            className={`gallery-filter__btn ${activeYear === year ? "gallery-filter__btn--active" : ""}`}
+            onClick={() => setActiveYear(year)}
           >
-            ←
+            {year}
           </button>
-          <span>
-            {page + 1} / {Math.ceil(imgArrayBuilder.length / PAGE_SIZE)}
-          </span>
-          <button
-            onClick={() => changePage(page + 1)}
-            disabled={
-              page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1
-            }
-            style={{
-              background: "none",
-              border: "1px solid black",
-              fontSize: "1.4rem",
-              padding: "4px 12px",
-              cursor:
-                page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1
-                  ? "default"
-                  : "pointer",
-              borderRadius: "4px",
-              opacity:
-                page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1
-                  ? 0.3
-                  : 1,
-            }}
-          >
-            →
-          </button>
+        ))}
+      </div>
+
+      <div className="gallery-grid">
+        {filtered.map((gallery) => {
+          const coverPublicId = galleryCovers[gallery.tag];
+          return (
+            <button
+              key={`${gallery.slug}-${gallery.year}`}
+              className="gallery-card"
+              onClick={() => handleAlbumClick(gallery)}
+            >
+              <div className="gallery-card__img-box">
+                {coverPublicId && (
+                  <img
+                    className="gallery-card__img"
+                    src={cloudinaryCover(coverPublicId)}
+                    alt={gallery.title}
+                    loading="lazy"
+                  />
+                )}
+              </div>
+              <div className="gallery-card__title-box">
+                <span className="gallery-card__title">{gallery.title}</span>
+              </div>
+              <div className="gallery-card__footer">
+                <span className="gallery-card__date">{gallery.date}</span>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {filtered.length === 0 && (
+        <div className="gallery-empty">
+          <p>{t("gallery.buida")}</p>
         </div>
       )}
     </PageLayout>

@@ -5,8 +5,6 @@ import useDataStore from "../../stores/useDataStore";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import { MOBILE_NORMAL } from "../../utils/constants";
 import useCartStore from "../../stores/useCartStore";
-import "../../components/externalEvents/ExternalEvent.css";
-import "./Memberships.css";
 import ImageCarousel from "../../components/images/ImageCarousel";
 import Button from "../../components/button/Button";
 import InteractiveModalBox from "../../modals/InteractiveModalBox";
@@ -17,6 +15,8 @@ import CartToast from "../../components/toast/CartToast";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import Icon from "../../components/ui/Icon";
 import useMediaQuery from "../../hooks/use-media-query";
+import "../../components/externalEvents/ExternalEvent.css";
+import "./Memberships.css";
 
 const Memberships = () => {
   const [t] = useTranslation("translation");
@@ -74,7 +74,7 @@ const Memberships = () => {
     <PageLayout
       className={`membership-box${membership.length === 0 ? " membership-box--empty" : ""}`}
       title={`${t("banners.soci-curt")}!`}
-      titleProps={{ autoScale: false, maxSize: 100 }}
+      titleProps={{ autoScale: false, maxSize: 160, marginTop: "sm" }}
       banner={{
         sentence: t("banners.soci-curt"),
         link: "/memberships",
