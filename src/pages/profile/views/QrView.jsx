@@ -3,7 +3,6 @@ import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import useAuthStore from "../../../stores/useAuthStore";
 import { useTranslation } from "react-i18next";
 import ImageCarousel from "../../../components/images/ImageCarousel";
-import "react-image-gallery/styles/image-gallery.css";
 import "./QrView.style.css";
 import authService from "../../../store/services/auth.service";
 import "./MemberProfile.style.css";

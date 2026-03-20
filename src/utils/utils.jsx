@@ -211,12 +211,6 @@ export default function notificationToast(text = "", type = "success") {
 
 export const isDevMode = () => localStorage.getItem("dev") === "true";
 
-export const imageListFormatter = (images = []) => {
-  return images.map((image) => ({
-    original: image,
-  }));
-};
-
 export const tinymceTextAreaFormatter = (val) =>
   val?.replaceAll(/&nbsp;/g, "")?.replaceAll("<p></p>", "");
 
