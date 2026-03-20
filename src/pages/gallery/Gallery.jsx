@@ -18,9 +18,10 @@ const Gallery = () => {
     [],
   );
 
-  const filtered = activeYear
+  const filtered = (activeYear
     ? galleries.filter((g) => g.year === activeYear)
-    : galleries;
+    : galleries
+  ).toSorted((a, b) => b.year - a.year);
 
   useEffect(() => {
     galleries.forEach((gallery) => {
