@@ -1,0 +1,51 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.4rem;
+}
+
+.pagination__btn {
+  background: none;
+  border: 2px solid var(--color-negro);
+  color: var(--color-negro);
+  font-size: 1.2rem;
+  padding: 4px 14px;
+  cursor: pointer;
+  font-family: "Bebas Neue", sans-serif;
+  transition: all 0.2s ease;
+  border-radius: 0;
+}
+
+.pagination__btn:hover:not(:disabled) {
+  background: var(--color-negro);
+  color: var(--color-cream);
+}
+
+.pagination__btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.pagination__info {
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+}
+
+/* Dark variant (for dark backgrounds like agenda) */
+.pagination--dark .pagination__btn {
+  border-color: var(--color-cream);
+  color: var(--color-cream);
+}
+
+.pagination--dark .pagination__btn:hover:not(:disabled) {
+  background: rgba(250, 230, 197, 0.1);
+  color: var(--color-cream);
+}
+
+.pagination--dark .pagination__info {
+  color: var(--color-cream);
+}

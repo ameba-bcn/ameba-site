@@ -10,7 +10,6 @@ import Menu from "./components/navbar/Navbar";
 import ScrollTop from "./components/layout/ScrollTop";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import "react-image-gallery/styles/image-gallery.css";
 import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
 import FullscreenSpinner from "./components/spinner/FullscreenSpinner";
 import lazyWithRetry from "./utils/lazyWithRetry";
@@ -22,6 +21,7 @@ const Botiga = lazyWithRetry(() => import("./pages/Botiga"));
 const SociosDetailed = lazyWithRetry(() => import("./pages/socios/components/SociosDetailed"));
 const Socios = lazyWithRetry(() => import("./pages/socios/Socios"));
 const Gallery = lazyWithRetry(() => import("./pages/gallery/Gallery"));
+const GalleryAlbum = lazyWithRetry(() => import("./pages/gallery/GalleryAlbum"));
 const LogSession = lazyWithRetry(() => import("./pages/LogSession"));
 const PasswordRecovery = lazyWithRetry(() => import("./pages/PasswordRecovery"));
 const CheckoutPage = lazyWithRetry(() => import("./pages/CheckoutPage"));
@@ -109,6 +109,7 @@ function App() {
               <Route path="/botiga" element={<Botiga />} />
               <Route path="/socis/:id" element={<SociosDetailed />} />
               <Route path="/socis" element={<Socios />} />
+              <Route path="/gallery/:slug/:year" element={<GalleryAlbum />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/login" element={<LogSession />} />
               <Route path="/recovery" element={<PasswordRecovery />} />

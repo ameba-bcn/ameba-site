@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import CardLayout from "../../components/layout/CardLayout/CardLayout";
 import SearchBox from "../../components/searchBox/SearchBox";
+import Pagination from "../../components/pagination/Pagination";
 import { ACTIVE_STATUS } from "../../utils/constants";
 import "../../styles/GlobalStyles.css";
 import "./Socios.css";
@@ -70,54 +71,11 @@ const Socios = () => {
         urlRoot="socis"
         loading={isMemberProjectsLoading}
       />
-      {totalPages > 1 && (
-        <div
-          className="pagination-controls"
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "16px",
-            padding: "16px 0",
-            fontFamily: "Bebas Neue",
-            fontSize: "1.4rem",
-          }}
-        >
-          <button
-            onClick={() => { setPage((p) => p - 1); setTimeout(() => document.querySelector(".app")?.scrollTo({ top: 0, behavior: "smooth" }), 0); }}
-            disabled={page === 0}
-            style={{
-              background: "none",
-              border: "1px solid black",
-              fontSize: "1.4rem",
-              padding: "4px 12px",
-              cursor: page === 0 ? "default" : "pointer",
-              borderRadius: "4px",
-              opacity: page === 0 ? 0.3 : 1,
-            }}
-          >
-            ←
-          </button>
-          <span>
-            {page + 1} / {totalPages}
-          </span>
-          <button
-            onClick={() => { setPage((p) => p + 1); setTimeout(() => document.querySelector(".app")?.scrollTo({ top: 0, behavior: "smooth" }), 0); }}
-            disabled={page >= totalPages - 1}
-            style={{
-              background: "none",
-              border: "1px solid black",
-              fontSize: "1.4rem",
-              padding: "4px 12px",
-              cursor: page >= totalPages - 1 ? "default" : "pointer",
-              borderRadius: "4px",
-              opacity: page >= totalPages - 1 ? 0.3 : 1,
-            }}
-          >
-            →
-          </button>
-        </div>
-      )}
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        onPageChange={setPage}
+      />
     </PageLayout>
   );
 };
