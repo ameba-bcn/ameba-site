@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import { galleries } from "../../config/galleryConfig";
@@ -7,8 +8,19 @@ import useDataStore from "../../stores/useDataStore";
 import "./Gallery.css";
 
 const Gallery = () => {
+  const [t] = useTranslation("translation");
   const navigate = useNavigate();
   const { galleryCovers, fetchGalleryCover } = useDataStore();
+  const [activeYear, setActiveYear] = useState(null);
+
+  const years = useMemo(
+    () => [...new Set(galleries.map((g) => g.year))].sort((a, b) => b - a),
+    [],
+  );
+
+  const filtered = activeYear
+    ? galleries.filter((g) => g.year === activeYear)
+    : galleries;
 
   useEffect(() => {
     galleries.forEach((gallery) => {
@@ -25,15 +37,33 @@ const Gallery = () => {
   return (
     <PageLayout
       className="SupportContent"
-      title="GALERIA"
+      title={t("menu.arxiu")}
       banner={{
         sentence: "AMEBA RADIO @ dublab",
         link: radioDublabLink,
         color: "var(--color-rojo)",
       }}
     >
+      <div className="gallery-filter">
+        <button
+          className={`gallery-filter__btn ${activeYear === null ? "gallery-filter__btn--active" : ""}`}
+          onClick={() => setActiveYear(null)}
+        >
+          {t("gallery.tot")}
+        </button>
+        {years.map((year) => (
+          <button
+            key={year}
+            className={`gallery-filter__btn ${activeYear === year ? "gallery-filter__btn--active" : ""}`}
+            onClick={() => setActiveYear(year)}
+          >
+            {year}
+          </button>
+        ))}
+      </div>
+
       <div className="gallery-grid">
-        {galleries.map((gallery) => {
+        {filtered.map((gallery) => {
           const coverPublicId = galleryCovers[gallery.tag];
           return (
             <button
@@ -62,9 +92,9 @@ const Gallery = () => {
         })}
       </div>
 
-      {galleries.length === 0 && (
+      {filtered.length === 0 && (
         <div className="gallery-empty">
-          <p>No hi ha galeries disponibles</p>
+          <p>{t("gallery.buida")}</p>
         </div>
       )}
     </PageLayout>

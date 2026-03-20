@@ -26,7 +26,9 @@ export default function NavbarButtonsMobile(props) {
   });
 
   return (
-    <div className={`nav-ul_box-mobile${isOpen ? " nav-ul_box-mobile--open" : ""}${hasCartItems ? " nav-ul_box-mobile--has-cart" : ""}`}>
+    <div
+      className={`nav-ul_box-mobile${isOpen ? " nav-ul_box-mobile--open" : ""}${hasCartItems ? " nav-ul_box-mobile--has-cart" : ""}`}
+    >
       <ul className="nav-ul_mobile" ref={refer}>
         <li>
           <NavLink
@@ -70,30 +72,22 @@ export default function NavbarButtonsMobile(props) {
             </NavLink>
           </li> */}
         <li>
-          <NavLink
-            to="/socis"
-            data-item="SOCI@S"
-            onClick={() => closeMenu()}
-          >
+          <NavLink to="/socis" data-item="SOCI@S" onClick={() => closeMenu()}>
             SOCI@S
           </NavLink>
         </li>
         <li>
           <NavLink
             to="/gallery"
-            data-item="GALERIA"
+            data-item={t("menu.arxiu")}
             onClick={() => closeMenu()}
           >
-            GALERIA
+            {t("menu.arxiu")}
           </NavLink>
         </li>
         <div className="liMenuOptions logname-li-mobile">
           {!isLoggedIn ? (
-            <NavLink
-              to="/login"
-              data-item="LOGIN"
-              onClick={() => closeMenu()}
-            >
+            <NavLink to="/login" data-item="LOGIN" onClick={() => closeMenu()}>
               LOGIN
             </NavLink>
           ) : (

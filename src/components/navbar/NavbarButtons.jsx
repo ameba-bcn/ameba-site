@@ -50,8 +50,8 @@ export default function NavbarButtons(props) {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/gallery" data-item="GALERIA">
-            GALERIA
+          <NavLink to="/gallery" data-item={t("menu.arxiu")}>
+            {t("menu.arxiu")}
           </NavLink>
         </li>
 

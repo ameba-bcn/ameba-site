@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useParams, useNavigate } from "react-router-dom";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import ImageLightbox from "../../components/images/ImageLightbox";
 import Pagination from "../../components/pagination/Pagination";
 import { getGalleryBySlug } from "../../config/galleryConfig";
-import { cloudinaryUrl, cloudinaryThumb, radioDublabLink } from "../../utils/constants";
+import {
+  cloudinaryUrl,
+  cloudinaryThumb,
+  radioDublabLink,
+} from "../../utils/constants";
 import useDataStore from "../../stores/useDataStore";
 import "./GalleryAlbum.css";
 
 const PAGE_SIZE = 20;
 
 const GalleryAlbum = () => {
+  const [t] = useTranslation("translation");
   const { slug, year } = useParams();
   const navigate = useNavigate();
   const gallery = getGalleryBySlug(slug, year);
@@ -31,11 +37,14 @@ const GalleryAlbum = () => {
 
   if (!gallery) {
     return (
-      <PageLayout className="SupportContent" title="GALERIA">
+      <PageLayout className="SupportContent" title={t("menu.arxiu")}>
         <div className="gallery-album-empty">
-          <p>Galeria no trobada</p>
-          <button className="gallery-album-back" onClick={() => navigate("/gallery")}>
-            &#8592; Tornar a la galeria
+          <p>{t("gallery.no-trobada")}</p>
+          <button
+            className="gallery-album-back"
+            onClick={() => navigate("/gallery")}
+          >
+            &#8592; {t("gallery.tornar")}
           </button>
         </div>
       </PageLayout>
@@ -60,7 +69,7 @@ const GalleryAlbum = () => {
     <PageLayout
       className="SupportContent"
       title={gallery.title}
-      titleProps={{ subtitle: `* ${gallery.date} *` }}
+      titleProps={{ subtitle: `${gallery.date}` }}
       loading={isGalleryAlbumLoading}
       banner={{
         sentence: "AMEBA RADIO @ dublab",
@@ -68,8 +77,11 @@ const GalleryAlbum = () => {
         color: "var(--color-rojo)",
       }}
     >
-      <button className="gallery-album-back" onClick={() => navigate("/gallery")}>
-        &#8592; Tornar a la galeria
+      <button
+        className="gallery-album-back"
+        onClick={() => navigate("/gallery")}
+      >
+        &#8592; {t("gallery.tornar")}
       </button>
 
       <div className="gallery-album-grid">
@@ -88,7 +100,11 @@ const GalleryAlbum = () => {
         ))}
       </div>
 
-      <Pagination page={page} totalPages={totalPages} onPageChange={changePage} />
+      <Pagination
+        page={page}
+        totalPages={totalPages}
+        onPageChange={changePage}
+      />
 
       {lightboxIndex !== null && (
         <ImageLightbox
