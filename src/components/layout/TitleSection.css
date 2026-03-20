@@ -13,7 +13,7 @@
 
 .hr-section {
   width: 90%;
-  border-top: 1px solid #1d1d1b;
+  border-top: 1px solid var(--color-negro);
   opacity: 40%;
   margin-top: 20px;
   margin-bottom: 20px;

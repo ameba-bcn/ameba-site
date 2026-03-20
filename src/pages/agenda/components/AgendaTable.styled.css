@@ -54,6 +54,13 @@
   }
 } 
 
+@media screen and (max-width: 400px) {
+    .agenda-mobile-card__info, .agenda-mobile-card__title {
+    font-size: 1.2rem;
+    line-height: 1.2em;
+  }
+} 
+
 .agenda-table table tbody tr .horaDataActivitat {
   text-align: center;
   justify-content: center;
@@ -172,6 +179,12 @@
 
 .agenda-mobile-card__title {
   text-align: left;
+  max-height: 200px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
 
 .agenda-mobile-card__info{
@@ -182,6 +195,7 @@
   height: 100%;
   font-family: "Bebas Neue";
   font-weight: 400;
+  max-height: 200px;
   font-size: 2.5rem;
   line-height: 0.8em;
   hr{

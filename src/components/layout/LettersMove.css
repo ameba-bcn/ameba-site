@@ -12,7 +12,7 @@
 
 .agendaLink a {
     text-decoration: none;
-    color: #1D1D1B;
+    color: var(--color-negro);
 }
 
 @keyframes marqueee {
@@ -23,7 +23,7 @@
 
 .letters-move__wrapper {
     width: 100%;
-    background: #1d1d1b;
+    background: var(--color-negro);
     height: 34px;
     text-align: left;
     z-index: 0;
@@ -33,7 +33,7 @@
 .letters-move__wrapper .substituto-marquee {
     overflow: hidden;
     position: relative;
-    background: #1d1d1b;
+    background: var(--color-negro);
 }
 
 .letters-move__wrapper .marquee {

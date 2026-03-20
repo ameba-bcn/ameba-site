@@ -1,41 +1,42 @@
-import React, { useState, useMemo, useEffect, createContext } from "react";
+import React, { Suspense, useState, useMemo, useEffect, createContext } from "react";
 import useUIStore from "./stores/useUIStore";
 import useProfileStore from "./stores/useProfileStore";
 import useAuthStore from "./stores/useAuthStore";
 import useDataStore from "./stores/useDataStore";
 import useCartStore from "./stores/useCartStore";
-import Botiga from "./pages/Botiga";
-import NotFound from "./pages/NotFound";
 import { Routes, Route } from "react-router-dom";
 import Contacte from "./contacte/Contacte";
 import Menu from "./components/navbar/Navbar";
-import LogSession from "./pages/LogSession";
-import CheckoutPage from "./pages/CheckoutPage";
-import CheckoutFinished from "./pages/landing/CheckoutFinished";
-import SubscriptionFinished from "./pages/landing/SubscriptionFinished";
-import LogMailConfirmation from "./pages/LogMailConfirmation";
-import SendEmailPasswordRecovery from "./pages/SendEmailPasswordRecovery";
-import ValidateEmail from "./pages/ValidateEmail";
 import ScrollTop from "./components/layout/ScrollTop";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-image-gallery/styles/image-gallery.css";
 import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
-import PasswordRecovery from "./pages/PasswordRecovery";
-import QrClient from "./pages/QrClient";
-import Agenda from "./pages/agenda/Agenda";
+import FullscreenSpinner from "./components/spinner/FullscreenSpinner";
+import lazyWithRetry from "./utils/lazyWithRetry";
 import "./App.css";
-import LoadableHome from "./pages/home/LoadableHome";
-import LoadableEntrevista from "./pages/support/components/Entrevista/LoadableEntrevista";
-import LoadableBooking from "./pages/booking/LoadableBooking";
-import LoadableSociosDetailed from "./pages/socios/components/LoadableSociosDetailed";
-import LoadableSocios from "./pages/socios/LoadableSocios";
-import LoadableGallery from "./pages/gallery/LoadableGallery";
-import LoadableMemberships from "./pages/memberships/LoadableMemberships";
-import LoadableExternalEvents from "./pages/external-events/LoadableExternalEvents";
-import LoadableProfile from "./pages/profile/LoadableProfile";
-import LoadableLegal from "./pages/legal/LoadableLegal";
-import QrLanding from "./pages/qr-landing/QrLanding";
+
+const Home = lazyWithRetry(() => import("./pages/home/Home"));
+const Agenda = lazyWithRetry(() => import("./pages/agenda/Agenda"));
+const Botiga = lazyWithRetry(() => import("./pages/Botiga"));
+const SociosDetailed = lazyWithRetry(() => import("./pages/socios/components/SociosDetailed"));
+const Socios = lazyWithRetry(() => import("./pages/socios/Socios"));
+const Gallery = lazyWithRetry(() => import("./pages/gallery/Gallery"));
+const LogSession = lazyWithRetry(() => import("./pages/LogSession"));
+const PasswordRecovery = lazyWithRetry(() => import("./pages/PasswordRecovery"));
+const CheckoutPage = lazyWithRetry(() => import("./pages/CheckoutPage"));
+const Memberships = lazyWithRetry(() => import("./pages/memberships/Memberships"));
+const SendEmailPasswordRecovery = lazyWithRetry(() => import("./pages/SendEmailPasswordRecovery"));
+const QrClient = lazyWithRetry(() => import("./pages/QrClient"));
+const ValidateEmail = lazyWithRetry(() => import("./pages/ValidateEmail"));
+const LogMailConfirmation = lazyWithRetry(() => import("./pages/LogMailConfirmation"));
+const ExternalEvents = lazyWithRetry(() => import("./pages/external-events/ExternalEvents"));
+const Profile = lazyWithRetry(() => import("./pages/profile/Profile"));
+const CheckoutFinished = lazyWithRetry(() => import("./pages/landing/CheckoutFinished"));
+const SubscriptionFinished = lazyWithRetry(() => import("./pages/landing/SubscriptionFinished"));
+const Legal = lazyWithRetry(() => import("./pages/legal/Legal"));
+const QrLanding = lazyWithRetry(() => import("./pages/qr-landing/QrLanding"));
+const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
 const UserContext = createContext(null);
 
@@ -55,13 +56,18 @@ function App() {
   const fetchAbout = useDataStore((state) => state.fetchAbout);
   const fetchCover = useDataStore((state) => state.fetchCover);
   const fetchCollaborators = useDataStore((state) => state.fetchCollaborators);
-  const fetchMemberProjects = useDataStore((state) => state.fetchMemberProjects);
+  const fetchMemberProjects = useDataStore(
+    (state) => state.fetchMemberProjects,
+  );
   const getCart = useCartStore((state) => state.getCart);
 
   useEffect(() => {
-    const version = import.meta.env.VITE_VERSION || 'dev';
-    const commit = import.meta.env.VITE_COMMIT_SHA || 'local';
-    console.log(`%c Ameba v${version} | commit: ${commit} `, 'background:#222;color:#bada55;font-weight:bold;');
+    const version = import.meta.env.VITE_VERSION || "dev";
+    const commit = import.meta.env.VITE_COMMIT_SHA || "local";
+    console.log(
+      `%c Ameba v${version} | commit: ${commit} `,
+      "background:#222;color:#bada55;font-weight:bold;",
+    );
 
     const refresh = localStorage.getItem("refresh");
     if (refresh) {
@@ -95,33 +101,44 @@ function App() {
       {isFullscreenOpen && <FullscreenCheckout />}
       <Menu />
       <UserContext.Provider value={value}>
-        <ScrollTop showBelow={250} />
-        <Routes>
-          <Route path="/activitats" element={<Agenda />} />
-          <Route path="/botiga" element={<Botiga />} />
-          <Route path="/booking/:id" element={<LoadableEntrevista />} />
-          <Route path="/booking" element={<LoadableBooking />} />
-          <Route path="/socis/:id" element={<LoadableSociosDetailed />} />
-          <Route path="/socis" element={<LoadableSocios />} />
-          <Route path="/gallery" element={<LoadableGallery />} />
-          <Route path="/login" element={<LogSession />} />
-          <Route path="/recovery" element={<PasswordRecovery />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/memberships" element={<LoadableMemberships />} />
-          <Route path="/send-recovery" element={<SendEmailPasswordRecovery />} />
-          <Route path="/member-card" element={<QrClient />} />
-          <Route path="/validate-email" element={<ValidateEmail />} />
-          <Route path="/activate" element={<LogMailConfirmation />} />
-          <Route path="/product" element={<LoadableExternalEvents />} />
-          <Route path="/profile/:id" element={<LoadableProfile />} />
-          <Route path="/profile" element={<LoadableProfile />} />
-          <Route path="/summary-checkout" element={<CheckoutFinished />} />
-          <Route path="/subscribe" element={<SubscriptionFinished />} />
-          <Route path="/legal" element={<LoadableLegal />} />
-          <Route path="/" element={<LoadableHome />} />
-          <Route path="/qr-view" element={<QrLanding />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="app-main-view">
+          <ScrollTop showBelow={250} />
+          <Suspense fallback={<FullscreenSpinner />}>
+            <Routes>
+              <Route path="/activitats" element={<Agenda />} />
+              <Route path="/botiga" element={<Botiga />} />
+              <Route path="/socis/:id" element={<SociosDetailed />} />
+              <Route path="/socis" element={<Socios />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/login" element={<LogSession />} />
+              <Route path="/recovery" element={<PasswordRecovery />} />
+              <Route path="/checkout" element={<CheckoutPage />} />
+              <Route path="/memberships" element={<Memberships />} />
+              <Route
+                path="/send-recovery"
+                element={<SendEmailPasswordRecovery />}
+              />
+              <Route path="/member-card" element={<QrClient />} />
+              <Route path="/validate-email" element={<ValidateEmail />} />
+              <Route path="/activate" element={<LogMailConfirmation />} />
+              <Route path="/product" element={<ExternalEvents />} />
+              <Route path="/profile/:id" element={<Profile />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route
+                path="/summary-checkout"
+                element={<CheckoutFinished />}
+              />
+              <Route
+                path="/subscribe"
+                element={<SubscriptionFinished />}
+              />
+              <Route path="/legal" element={<Legal />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/qr-view" element={<QrLanding />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </div>
       </UserContext.Provider>
       <Contacte />
     </div>

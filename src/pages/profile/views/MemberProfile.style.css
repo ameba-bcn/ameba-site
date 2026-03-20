@@ -28,7 +28,7 @@
 .member-profile-title {
   text-transform: uppercase;
   font-family: "Bebas Neue";
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-size: 3.3rem;
   text-align: center;
   width: 100%;
@@ -38,7 +38,7 @@
 .member-info-row {
   text-transform: uppercase;
   font-family: "Bebas Neue";
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-size: calc(12px + 1.3vw);
   margin: 0 auto;
   font-weight: 300;

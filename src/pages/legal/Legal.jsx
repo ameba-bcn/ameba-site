@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { radioDublabLink } from "../../utils/constants";
-import LettersMove from "../../components/layout/LettersMove";
+import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import dataService from "../../store/services/data.service";
 import "../../styles/GlobalStyles.style.css";
@@ -19,7 +19,14 @@ const Legal = () => {
   }, []);
 
   return (
-    <div className="logViewYellow legal-page">
+    <PageLayout
+      className="logViewYellow legal-page"
+      banner={{
+        sentence: "AMEBA RADIO @ dublab",
+        link: radioDublabLink,
+        color: "var(--color-cream)",
+      }}
+    >
       <div className="legal-page__content">
         <div className="height-block" />
         <div className="legal-page__title">{t("legal.title")}</div>
@@ -44,12 +51,7 @@ const Legal = () => {
           </ul>
         </div>
       </div>
-      <LettersMove
-        sentence="AMEBA RADIO @ dublab"
-        link={radioDublabLink}
-        color="#FAE6C5"
-      />
-    </div>
+    </PageLayout>
   );
 };
 

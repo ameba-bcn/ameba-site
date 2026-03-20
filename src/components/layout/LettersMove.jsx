@@ -7,7 +7,7 @@ import { isValidUrl } from "../../utils/validations";
 export default function LettersMove({
   link = "",
   sentence = "",
-  color = "#FAE6C5",
+  color = "var(--color-cream)",
 }) {
   if (isValidUrl(link))
     return (

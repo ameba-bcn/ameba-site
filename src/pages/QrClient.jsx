@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import stateService from "./../store/services/profile.services";
-import LettersMove from "../components/layout/LettersMove";
+import PageLayout from "../components/layout/PageLayout/PageLayout";
 
 export default function QrClient(props) {
   const [data, setData] = useState({});
@@ -19,7 +19,14 @@ export default function QrClient(props) {
   }, [parsed]);
 
   return (
-    <div className="logViewRed">
+    <PageLayout
+      className="logViewRed"
+      banner={{
+        sentence: t("banners.soci-curt"),
+        link: "/memberships",
+        color: "var(--color-cream)",
+      }}
+    >
       <div className="cardForm">
         <div className="card-form">
           <div className="logTitle">data</div>
@@ -30,12 +37,6 @@ export default function QrClient(props) {
           )}
         </div>
       </div>
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
-        color="#FAE6C5"
-      />
-    </div>
+    </PageLayout>
   );
 }

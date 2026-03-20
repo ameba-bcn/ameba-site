@@ -37,7 +37,7 @@
   margin: 0 auto;
   padding-top: 5px;
   padding-bottom: 5px;
-  color: #eb5e3e;
+  color: var(--color-rojo);
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   font-weight: bold;

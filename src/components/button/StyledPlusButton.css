@@ -41,18 +41,18 @@
 
 /* Color variants */
 .plus-button--light {
-  background-color: #fae6c5;
-  color: #1d1d1b;
+  background-color: var(--color-cream);
+  color: var(--color-negro);
 }
 
 .plus-button--obscure {
-  background-color: #1d1d1b;
-  color: #fae6c5;
+  background-color: var(--color-negro);
+  color: var(--color-cream);
 }
 
 .plus-button--red {
-  background-color: #eb5e3e;
-  color: #fae6c5;
+  background-color: var(--color-rojo);
+  color: var(--color-cream);
 }
 
 /* SVG icon sizes — scale 24/14 ≈ 1.71 so plus arms reach container edges */
@@ -67,10 +67,10 @@
 
 /* SVG stroke colors */
 .plus-button--light svg {
-  stroke: #1d1d1b;
+  stroke: var(--color-negro);
 }
 
 .plus-button--obscure svg,
 .plus-button--red svg {
-  stroke: #fae6c5;
+  stroke: var(--color-cream);
 }

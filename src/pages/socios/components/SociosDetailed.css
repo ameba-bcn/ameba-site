@@ -1,7 +1,7 @@
 .socios-main {
-  display: block;
+  display: flex;
   flex-direction: column;
-  background-color: #fae6c5;
+  background-color: var(--color-cream);
   min-height: min-content;
 }
 
@@ -16,27 +16,27 @@
 .socios-main .top-section-gral {
   height: auto;
   width: 100%;
-  background-color: #fae6c5;
+  background-color: var(--color-cream);
 }
 
 .socios-main .entrevista-gral {
   height: auto;
   width: 100%;
-  background-color: #ffed00;
+  background-color: var(--color-amarillo);
   padding: 80px 0px;
 }
 
 .socios-main .media-gral {
   height: auto;
   width: 100%;
-  background-color: #f2c571;
+  background-color: var(--color-naranja);
   padding: 80px 0px;
 }
 
 .socios-main .activitats-gral {
   height: auto;
   width: 100%;
-  background-color: #eb5e3e;
+  background-color: var(--color-rojo);
   padding: 80px 0px;
 }
 
@@ -68,8 +68,8 @@
 
 .socios-main .tags-e {
   display: inline-block;
-  background-color: #1d1d1b;
-  color: #fae6c5;
+  background-color: var(--color-negro);
+  color: var(--color-cream);
   line-height: 1em;
   padding: 5px 10px 3px 10px;
   margin: 2px 4px 20px 4px;
@@ -77,7 +77,7 @@
 
 .socios-main .menu-entrevista {
   width: 90%;
-  background-color: #1d1d1b;
+  background-color: var(--color-negro);
   text-transform: uppercase;
   margin: 0 auto;
   text-align: left;
@@ -97,10 +97,10 @@
 }
 
 .socios-main .menu-e:hover { background-color: whitesmoke; }
-.socios-main .menu-bio { background-color: #fae6c5; }
-.socios-main .menu-entrev { background-color: #ffed00; }
-.socios-main .menu-media { background-color: #f2c571; }
-.socios-main .menu-activit { background-color: #eb5e3e; }
+.socios-main .menu-bio { background-color: var(--color-cream); }
+.socios-main .menu-entrev { background-color: var(--color-amarillo); }
+.socios-main .menu-media { background-color: var(--color-naranja); }
+.socios-main .menu-activit { background-color: var(--color-rojo); }
 
 .socios-main .bio-section {
   display: flex;
@@ -214,8 +214,8 @@
 }
 
 .socios-main .plus-symbol {
-  color: #ffed00;
-  background-color: #1d1d1b;
+  color: var(--color-amarillo);
+  background-color: var(--color-negro);
   display: inline-block;
   width: 30px;
   height: 30px;

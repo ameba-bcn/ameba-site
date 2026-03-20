@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import LettersMove from "./../components/layout/LettersMove";
+import PageLayout from "../components/layout/PageLayout/PageLayout";
 import MailRecoveryForm from "../components/forms/MailRecoveryForm/MailRecoveryForm";
 import { useTranslation } from "react-i18next";
 
@@ -8,7 +8,14 @@ export default function SendEmailPasswordRecovery() {
   const [t] = useTranslation("translation");
 
   return (
-    <div className="logViewRed">
+    <PageLayout
+      className="logViewRed"
+      banner={{
+        sentence: t("banners.soci-curt"),
+        link: "/memberships",
+        color: "var(--color-cream)",
+      }}
+    >
       <div className="cardForm">
         <div className="card-form">
           <div className="logTitle">{t("login.recupera-curt")}</div>
@@ -20,12 +27,6 @@ export default function SendEmailPasswordRecovery() {
           )}
         </div>
       </div>
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
-        color="#FAE6C5"
-      />
-    </div>
+    </PageLayout>
   );
 }

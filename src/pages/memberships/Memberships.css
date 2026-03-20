@@ -1,7 +1,7 @@
 .membership-box {
   height: 100%;
   min-height: min-content;
-  background-color: #fae6c5;
+  background-color: var(--color-cream);
   flex-direction: column;
   justify-content: space-between;
 }

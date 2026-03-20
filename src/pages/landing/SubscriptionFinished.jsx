@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import LettersMove from "../../components/layout/LettersMove";
+import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import { AMEBA_EMAIL } from "../../utils/constants";
 import "../../styles/GlobalStyles.css";
 import useProfileStore from "../../stores/useProfileStore";
@@ -21,26 +21,26 @@ export default function SubscriptionFinished(props) {
   }, [email, subscribeNewsletter]);
 
   return (
-    <>
-      <div className="full-height-msg">
-        {!isSubmitted ? (
-          <div className="single-msg">
-            {t("errors.general")}
-            <br />
-            {t("errors.contacta")}
-            <div className="styled-link">
-              <a href="mailto:info@ameba.cat">{AMEBA_EMAIL}</a>
-            </div>
+    <PageLayout
+      className="full-height-msg"
+      centered
+      banner={{
+        sentence: t("banners.soci-curt"),
+        color: "var(--color-rojo)",
+      }}
+    >
+      {!isSubmitted ? (
+        <div className="single-msg">
+          {t("errors.general")}
+          <br />
+          {t("errors.contacta")}
+          <div className="styled-link">
+            <a href="mailto:info@ameba.cat">{AMEBA_EMAIL}</a>
           </div>
-        ) : (
-          <div className="single-msg">{t("general.agraiment")}</div>
-        )}
-      </div>
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        color="#EB5E3E"
-      />
-    </>
+        </div>
+      ) : (
+        <div className="single-msg">{t("general.agraiment")}</div>
+      )}
+    </PageLayout>
   );
 }

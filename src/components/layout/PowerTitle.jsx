@@ -3,7 +3,7 @@ import AmebaCardTitle from "../ui/AmebaCardTitle";
 import "./PowerTitle.css";
 
 function PowerTitle(props) {
-  const { subtitle, color = "#1d1d1b", fontStyle = "normal", maxSize = 220, autoScale = false } = props;
+  const { subtitle, color = "var(--color-negro)", fontStyle = "normal", maxSize = 220, autoScale = false } = props;
 
   return (
     <div className="power-title__box">

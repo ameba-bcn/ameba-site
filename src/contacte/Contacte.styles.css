@@ -45,7 +45,7 @@
 .contacte input:-webkit-autofill:hover,
 .contacte input:-webkit-autofill:focus,
 .contacte input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 30px #fae6c5 inset !important;
+  -webkit-box-shadow: 0 0 0 30px var(--color-cream) inset !important;
 }
 
 .contacte .form-group-button {
@@ -65,8 +65,8 @@
   font-weight: bold;
   padding: 12px 14px 12px 12px;
   background-color: transparent;
-  color: #1d1d1b;
-  border: 2px solid #1d1d1b;
+  color: var(--color-negro);
+  border: 2px solid var(--color-negro);
   width: 100%;
   height: auto;
   box-sizing: border-box;
@@ -74,12 +74,12 @@
 
 .contacte .formControlNews:focus,
 .contacte .formControlNews:active {
-  background-color: #fae6c5;
-  border-color: #fae6c5;
+  background-color: var(--color-cream);
+  border-color: var(--color-cream);
 }
 
 .contacte .formControlNews::placeholder {
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-family: "Bebas Neue";
   font-size: 2em;
   font-weight: 400;
@@ -92,8 +92,8 @@
   font-size: 2.5em;
   font-weight: 400;
   width: 15rem;
-  color: #f2c571;
-  background-color: #1d1d1b;
+  color: var(--color-naranja);
+  background-color: var(--color-negro);
 }
 
 .contacte .iconsFooter {
@@ -107,7 +107,7 @@
 
 .contacte .iconsFooter a {
   text-decoration: none;
-  color: #1d1d1b;
+  color: var(--color-negro);
   margin-right: 10px;
 }
 
@@ -116,7 +116,7 @@
 }
 
 .contacte .iconsFooter svg:hover {
-  color: #eb5e3e;
+  color: var(--color-rojo);
 }
 
 .contacte .rowNewsLine {
