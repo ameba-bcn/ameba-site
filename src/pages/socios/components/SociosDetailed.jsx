@@ -10,8 +10,8 @@ import "./SociosDetailed.css";
 import "../../../styles/GlobalStyles.style.css";
 import LinkBox from "../../../components/link-box/LinkBox";
 import TitleSection from "../../../components/layout/TitleSection";
-import Spinner from "../../../components/spinner/Spinner";
 import useDataStore from "../../../stores/useDataStore";
+import EmbeddedSpinner from "../../../components/spinner/EmbeddedSpinner";
 
 const SociosDetailed = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const SociosDetailed = () => {
   let urlID = location.pathname.substr(location.pathname.lastIndexOf("/") + 1);
   const { member_projects = [] } = useDataStore();
   const [urlData] = member_projects.filter(
-    (x) => x?.project_name === decodeURIComponent(urlID)
+    (x) => x?.project_name === decodeURIComponent(urlID),
   );
   const { project_name, description, images, media_urls, first_name } = project;
   const ID = urlData?.id;
@@ -40,51 +40,43 @@ const SociosDetailed = () => {
       });
   }, [ID]);
 
-  if (loading) {
-    return (
-      <div className="socios-main">
-        <Spinner height={400} />{" "}
-        <LettersMove
-          sentence={"l'associació de música electrònica de barcelona"}
-          color={"#F2C571"}
-        />
-      </div>
-    );
-  }
-
   return (
     <div className="socios-main">
-      <div className="styled-main-column-view">
-        <div className="top-section_entr">
-          <div className="ts-breadcrumbs">
-            <span onClick={() => navigate("/")}>AMEBA</span> /{" "}
-            <span onClick={() => navigate("/socis")}>#SOCI@S</span> /{" "}
-            {project_name}
+      {loading ? (
+        <EmbeddedSpinner alone />
+      ) : (
+        <div className="styled-main-column-view">
+          <div className="top-section_entr">
+            <div className="ts-breadcrumbs">
+              <span onClick={() => navigate("/")}>AMEBA</span> /{" "}
+              <span onClick={() => navigate("/socis")}>#SOCI@S</span> /{" "}
+              {project_name}
+            </div>
+            <div className="ts-title">{project_name}</div>
           </div>
-          <div className="ts-title">{project_name}</div>
+          <div className="bio-gral">
+            <TitleSection title={`by ${first_name}`} />
+            <div className="bio-section">
+              <div
+                className="bio-text"
+                dangerouslySetInnerHTML={{
+                  __html: sanitizeHTML(description),
+                }}
+              />
+              {images?.length > 0 && (
+                <div className="bio-img">
+                  <ImageCarousel imgList={images} />
+                </div>
+              )}
+            </div>
+          </div>
+          {media_urls?.length > 0 && (
+            <div className="link-section">
+              <LinkBox mediaLinks={media_urls} label="links" thinLine={true} />
+            </div>
+          )}
         </div>
-        <div className="bio-gral">
-          <TitleSection title={`by ${first_name}`} />
-          <div className="bio-section">
-            <div
-              className="bio-text"
-              dangerouslySetInnerHTML={{
-                __html: sanitizeHTML(description),
-              }}
-            />
-            {images?.length > 0 && (
-              <div className="bio-img">
-                <ImageCarousel imgList={images} />
-              </div>
-            )}
-          </div>
-        </div>
-        {media_urls?.length > 0 && (
-          <div className="link-section">
-            <LinkBox mediaLinks={media_urls} label="links" thinLine={true} />
-          </div>
-        )}
-      </div>
+      )}
       <LettersMove
         sentence={"l'associació de música electrònica de barcelona"}
         color={"#F2C571"}

@@ -445,4 +445,5 @@ function Icon(props) {
   }
 }
 
+export { AmebaSvgWrapper };
 export default Icon;

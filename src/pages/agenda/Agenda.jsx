@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import LettersMove from "../../components/layout/LettersMove";
 import PowerTitle from "../../components/layout/PowerTitle";
 import AgendaTable from "./components/AgendaTable";
-import Spinner from "../../components/spinner/Spinner";
 import useDataStore from "../../stores/useDataStore";
+import EmbeddedSpinner from "../../components/spinner/EmbeddedSpinner";
 
 export default function Agenda() {
   const [t] = useTranslation("translation");
@@ -13,7 +13,7 @@ export default function Agenda() {
   return (
     <div className="Articles">
       <PowerTitle title="AGENDA" autoScale />
-      {isEventsLoading ? <Spinner /> : <AgendaTable />}
+      <div>{isEventsLoading ? <EmbeddedSpinner /> : <AgendaTable />}</div>
       <LettersMove
         className="lettersMoveDiv"
         sentence={t("banners.soci-curt")}

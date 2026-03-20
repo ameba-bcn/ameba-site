@@ -3,9 +3,9 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import useMediaQuery from "../../../../hooks/use-media-query";
 import "./SupportLocals.style.css";
-import Spinner from "../../../../components/spinner/Spinner";
 import MainSupportLocals from "../../../support/components/MainSupportLocals";
 import useDataStore from "../../../../stores/useDataStore";
+import EmbeddedSpinner from "../../../../components/spinner/EmbeddedSpinner";
 
 export default function SupportLocals() {
   const breakpoint = useMediaQuery("(max-width:950px)");
@@ -15,7 +15,7 @@ export default function SupportLocals() {
   return (
     <div className="support-locals">
       {isArtistLoading ? (
-        <Spinner height={400} />
+        <EmbeddedSpinner alone />
       ) : (
         <>
           <MainSupportLocals className="gridNoticies" />

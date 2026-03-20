@@ -8,8 +8,8 @@ import {
   radioDublabLink,
 } from "../../utils/constants";
 import PowerTitle from "../../components/layout/PowerTitle";
-import Spinner from "../../components/spinner/Spinner";
 import useDataStore from "../../stores/useDataStore";
+import EmbeddedSpinner from "../../components/spinner/EmbeddedSpinner";
 
 const PAGE_SIZE = 20;
 
@@ -53,8 +53,10 @@ const Gallery = () => {
     <div className="SupportContent">
       <div className="logView">
         <PowerTitle title="PARKFEST 22" subtitle="* 21-05-22 *" autoScale />
-        {isGaleriaLoading && <Spinner />}
         <div ref={galleryTopRef} />
+        <div className="centered-element">
+          {isGaleriaLoading && <EmbeddedSpinner />}
+        </div>
         <Galeria
           images={imgArrayBuilder.slice(
             page * PAGE_SIZE,

@@ -1,5 +1,5 @@
 .socios-main {
-  display: block;
+  display: flex;
   flex-direction: column;
   background-color: #fae6c5;
   min-height: min-content;

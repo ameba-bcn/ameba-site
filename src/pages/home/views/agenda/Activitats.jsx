@@ -8,8 +8,8 @@ import PlusButton from "../../../../components/button/PlusButton";
 import { useTranslation } from "react-i18next";
 import { radioDublabLink } from "../../../../utils/constants";
 import ActivitatsMainSection from "../../../../components/layout/ActivitatsMainSection";
-import Spinner from "../../../../components/spinner/Spinner";
 import useDataStore from "../../../../stores/useDataStore";
+import EmbeddedSpinner from "../../../../components/spinner/EmbeddedSpinner";
 
 const Activitats = () => {
   const [activitats, setActivitats] = useState([]);
@@ -32,7 +32,7 @@ const Activitats = () => {
       <div className="activitats-box">
         <SectionTitle title={t("support.menu.activitats")} />
         {isEventsLoading ? (
-          <Spinner height={400} />
+          <EmbeddedSpinner alone />
         ) : (
           <>
             {activitats.length > 0 && (

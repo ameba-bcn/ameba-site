@@ -14,10 +14,10 @@ import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import { validate } from "./MemberProjectValidate";
 import { ACTIVE_STATUS, ERROR } from "../../../utils/constants";
 import CheckBox from "../../../components/layout/CheckBox";
-import Spinner from "../../../components/spinner/Spinner";
 import notificationToast, { isDateExpired } from "../../../utils/utils";
 import PreviewerSociosDetailed from "../../socios/components/PreviewerSociosDetailed";
 import ToogleButton from "../../../components/button/ToogleButton";
+import EmbeddedSpinner from "../../../components/spinner/EmbeddedSpinner";
 
 const MemberProject = () => {
   const [initialProjectData, setInitialProjectData] = useState({});
@@ -148,7 +148,7 @@ const MemberProject = () => {
             />
           )}
           {loading ? (
-            <Spinner color="black" height={400} />
+            <EmbeddedSpinner alone />
           ) : editMode && !isMembershipExpired ? (
             <>
               <div className="field-wrapper">

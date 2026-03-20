@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Manifesto.css";
-import Spinner from "../../../../components/spinner/Spinner";
 import useDataStore from "../../../../stores/useDataStore";
+import EmbeddedSpinner from "../../../../components/spinner/EmbeddedSpinner";
 
 const Manifesto = () => {
   const { about = {}, isManifestoLoading } = useDataStore();
@@ -27,7 +27,7 @@ const Manifesto = () => {
       <div className="manifesto-box">
         <div className="manifesto-title">manifesto</div>
         {isManifestoLoading ? (
-          <Spinner height={400} />
+          <EmbeddedSpinner alone />
         ) : (
           <div className="manifesto-text">{about?.text}</div>
         )}

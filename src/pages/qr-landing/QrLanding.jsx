@@ -3,10 +3,10 @@ import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import LettersMove from "../../components/layout/LettersMove";
 import { AMEBA_EMAIL, BASE_URL, radioDublabLink } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
-import Spinner from "../../components/spinner/Spinner";
 import "../../styles/GlobalStyles.css";
 import "./QrLanding.css";
 import axiosInstance from "../../axios";
+import EmbeddedSpinner from "../../components/spinner/EmbeddedSpinner";
 
 const QrLanding = (props) => {
   const [memberData, setMemberData] = useState({});
@@ -30,7 +30,7 @@ const QrLanding = (props) => {
   return (
     <div className="logViewYellow">
       {loading ? (
-        <Spinner height={400} color="black" />
+        <EmbeddedSpinner alone />
       ) : (
         <div className="qr-landing">
           {memberData && Object.keys(memberData)?.length > 0 ? (

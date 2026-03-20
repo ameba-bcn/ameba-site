@@ -4,38 +4,36 @@ import useProfileStore from "./stores/useProfileStore";
 import useAuthStore from "./stores/useAuthStore";
 import useDataStore from "./stores/useDataStore";
 import useCartStore from "./stores/useCartStore";
-import Botiga from "./pages/Botiga";
-import NotFound from "./pages/NotFound";
 import { Routes, Route } from "react-router-dom";
 import Contacte from "./contacte/Contacte";
 import Menu from "./components/navbar/Navbar";
-import LogSession from "./pages/LogSession";
-import CheckoutPage from "./pages/CheckoutPage";
-import CheckoutFinished from "./pages/landing/CheckoutFinished";
-import SubscriptionFinished from "./pages/landing/SubscriptionFinished";
-import LogMailConfirmation from "./pages/LogMailConfirmation";
-import SendEmailPasswordRecovery from "./pages/SendEmailPasswordRecovery";
-import ValidateEmail from "./pages/ValidateEmail";
 import ScrollTop from "./components/layout/ScrollTop";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "react-image-gallery/styles/image-gallery.css";
 import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
-import PasswordRecovery from "./pages/PasswordRecovery";
-import QrClient from "./pages/QrClient";
-import Agenda from "./pages/agenda/Agenda";
 import "./App.css";
 import LoadableHome from "./pages/home/LoadableHome";
-import LoadableEntrevista from "./pages/support/components/Entrevista/LoadableEntrevista";
-import LoadableBooking from "./pages/booking/LoadableBooking";
+import LoadableAgenda from "./pages/agenda/LoadableAgenda";
+import LoadableBotiga from "./pages/LoadableBotiga";
 import LoadableSociosDetailed from "./pages/socios/components/LoadableSociosDetailed";
 import LoadableSocios from "./pages/socios/LoadableSocios";
 import LoadableGallery from "./pages/gallery/LoadableGallery";
+import LoadableLogSession from "./pages/LoadableLogSession";
+import LoadablePasswordRecovery from "./pages/LoadablePasswordRecovery";
+import LoadableCheckoutPage from "./pages/LoadableCheckoutPage";
 import LoadableMemberships from "./pages/memberships/LoadableMemberships";
+import LoadableSendEmailPasswordRecovery from "./pages/LoadableSendEmailPasswordRecovery";
+import LoadableQrClient from "./pages/LoadableQrClient";
+import LoadableValidateEmail from "./pages/LoadableValidateEmail";
+import LoadableLogMailConfirmation from "./pages/LoadableLogMailConfirmation";
 import LoadableExternalEvents from "./pages/external-events/LoadableExternalEvents";
 import LoadableProfile from "./pages/profile/LoadableProfile";
+import LoadableCheckoutFinished from "./pages/landing/LoadableCheckoutFinished";
+import LoadableSubscriptionFinished from "./pages/landing/LoadableSubscriptionFinished";
 import LoadableLegal from "./pages/legal/LoadableLegal";
-import QrLanding from "./pages/qr-landing/QrLanding";
+import LoadableQrLanding from "./pages/qr-landing/LoadableQrLanding";
+import LoadableNotFound from "./pages/LoadableNotFound";
 
 const UserContext = createContext(null);
 
@@ -55,13 +53,18 @@ function App() {
   const fetchAbout = useDataStore((state) => state.fetchAbout);
   const fetchCover = useDataStore((state) => state.fetchCover);
   const fetchCollaborators = useDataStore((state) => state.fetchCollaborators);
-  const fetchMemberProjects = useDataStore((state) => state.fetchMemberProjects);
+  const fetchMemberProjects = useDataStore(
+    (state) => state.fetchMemberProjects,
+  );
   const getCart = useCartStore((state) => state.getCart);
 
   useEffect(() => {
-    const version = import.meta.env.VITE_VERSION || 'dev';
-    const commit = import.meta.env.VITE_COMMIT_SHA || 'local';
-    console.log(`%c Ameba v${version} | commit: ${commit} `, 'background:#222;color:#bada55;font-weight:bold;');
+    const version = import.meta.env.VITE_VERSION || "dev";
+    const commit = import.meta.env.VITE_COMMIT_SHA || "local";
+    console.log(
+      `%c Ameba v${version} | commit: ${commit} `,
+      "background:#222;color:#bada55;font-weight:bold;",
+    );
 
     const refresh = localStorage.getItem("refresh");
     if (refresh) {
@@ -95,33 +98,42 @@ function App() {
       {isFullscreenOpen && <FullscreenCheckout />}
       <Menu />
       <UserContext.Provider value={value}>
-        <ScrollTop showBelow={250} />
-        <Routes>
-          <Route path="/activitats" element={<Agenda />} />
-          <Route path="/botiga" element={<Botiga />} />
-          <Route path="/booking/:id" element={<LoadableEntrevista />} />
-          <Route path="/booking" element={<LoadableBooking />} />
-          <Route path="/socis/:id" element={<LoadableSociosDetailed />} />
-          <Route path="/socis" element={<LoadableSocios />} />
-          <Route path="/gallery" element={<LoadableGallery />} />
-          <Route path="/login" element={<LogSession />} />
-          <Route path="/recovery" element={<PasswordRecovery />} />
-          <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/memberships" element={<LoadableMemberships />} />
-          <Route path="/send-recovery" element={<SendEmailPasswordRecovery />} />
-          <Route path="/member-card" element={<QrClient />} />
-          <Route path="/validate-email" element={<ValidateEmail />} />
-          <Route path="/activate" element={<LogMailConfirmation />} />
-          <Route path="/product" element={<LoadableExternalEvents />} />
-          <Route path="/profile/:id" element={<LoadableProfile />} />
-          <Route path="/profile" element={<LoadableProfile />} />
-          <Route path="/summary-checkout" element={<CheckoutFinished />} />
-          <Route path="/subscribe" element={<SubscriptionFinished />} />
-          <Route path="/legal" element={<LoadableLegal />} />
-          <Route path="/" element={<LoadableHome />} />
-          <Route path="/qr-view" element={<QrLanding />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <div className="app-main-view">
+          <ScrollTop showBelow={250} />
+          <Routes>
+            <Route path="/activitats" element={<LoadableAgenda />} />
+            <Route path="/botiga" element={<LoadableBotiga />} />
+            <Route path="/socis/:id" element={<LoadableSociosDetailed />} />
+            <Route path="/socis" element={<LoadableSocios />} />
+            <Route path="/gallery" element={<LoadableGallery />} />
+            <Route path="/login" element={<LoadableLogSession />} />
+            <Route path="/recovery" element={<LoadablePasswordRecovery />} />
+            <Route path="/checkout" element={<LoadableCheckoutPage />} />
+            <Route path="/memberships" element={<LoadableMemberships />} />
+            <Route
+              path="/send-recovery"
+              element={<LoadableSendEmailPasswordRecovery />}
+            />
+            <Route path="/member-card" element={<LoadableQrClient />} />
+            <Route path="/validate-email" element={<LoadableValidateEmail />} />
+            <Route path="/activate" element={<LoadableLogMailConfirmation />} />
+            <Route path="/product" element={<LoadableExternalEvents />} />
+            <Route path="/profile/:id" element={<LoadableProfile />} />
+            <Route path="/profile" element={<LoadableProfile />} />
+            <Route
+              path="/summary-checkout"
+              element={<LoadableCheckoutFinished />}
+            />
+            <Route
+              path="/subscribe"
+              element={<LoadableSubscriptionFinished />}
+            />
+            <Route path="/legal" element={<LoadableLegal />} />
+            <Route path="/" element={<LoadableHome />} />
+            <Route path="/qr-view" element={<LoadableQrLanding />} />
+            <Route path="*" element={<LoadableNotFound />} />
+          </Routes>
+        </div>
       </UserContext.Provider>
       <Contacte />
     </div>
