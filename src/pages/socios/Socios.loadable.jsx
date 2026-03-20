@@ -2,15 +2,13 @@ import React, { Suspense } from "react";
 import FullscreenSpinner from "../../components/spinner/FullscreenSpinner";
 import lazyWithRetry from "../../utils/lazyWithRetry";
 
-const SubscriptionFinished = lazyWithRetry(() =>
-  import("./SubscriptionFinished"),
-);
+const SociosView = lazyWithRetry(() => import("./Socios"));
 
-const LoadableSubscriptionFinished = (props) => (
+const SociosLoadable = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>
-    <SubscriptionFinished {...props} />
+    <SociosView {...props} />
   </Suspense>
 );
 
 // eslint-disable-next-line react/display-name
-export default (props) => <LoadableSubscriptionFinished {...props} />;
+export default (props) => <SociosLoadable {...props} />;

@@ -4,11 +4,11 @@ import lazyWithRetry from "../../utils/lazyWithRetry";
 
 const LegalView = lazyWithRetry(() => import("./Legal"));
 
-const LoadableLegal = (props) => (
+const LegalLoadable = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>
     <LegalView {...props} />
   </Suspense>
 );
 
 // eslint-disable-next-line react/display-name
-export default (props) => <LoadableLegal {...props} />;
+export default (props) => <LegalLoadable {...props} />;

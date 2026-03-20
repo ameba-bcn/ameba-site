@@ -2,13 +2,13 @@ import React, { Suspense } from "react";
 import FullscreenSpinner from "../components/spinner/FullscreenSpinner";
 import lazyWithRetry from "../utils/lazyWithRetry";
 
-const ValidateEmail = lazyWithRetry(() => import("./ValidateEmail"));
+const LogSession = lazyWithRetry(() => import("./LogSession"));
 
-const LoadableValidateEmail = (props) => (
+const LogSessionLoadable = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>
-    <ValidateEmail {...props} />
+    <LogSession {...props} />
   </Suspense>
 );
 
 // eslint-disable-next-line react/display-name
-export default (props) => <LoadableValidateEmail {...props} />;
+export default (props) => <LogSessionLoadable {...props} />;

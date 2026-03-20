@@ -2,13 +2,13 @@ import React, { Suspense } from "react";
 import FullscreenSpinner from "../../components/spinner/FullscreenSpinner";
 import lazyWithRetry from "../../utils/lazyWithRetry";
 
-const ExternalEventsView = lazyWithRetry(() => import("./ExternalEvents"));
+const QrLanding = lazyWithRetry(() => import("./QrLanding"));
 
-const LoadableExternalEvents = (props) => (
+const QrLandingLoadable = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>
-    <ExternalEventsView {...props} />
+    <QrLanding {...props} />
   </Suspense>
 );
 
 // eslint-disable-next-line react/display-name
-export default (props) => <LoadableExternalEvents {...props} />;
+export default (props) => <QrLandingLoadable {...props} />;

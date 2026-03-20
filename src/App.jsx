@@ -13,27 +13,27 @@ import "react-toastify/dist/ReactToastify.css";
 import "react-image-gallery/styles/image-gallery.css";
 import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
 import "./App.css";
-import LoadableHome from "./pages/home/LoadableHome";
-import LoadableAgenda from "./pages/agenda/LoadableAgenda";
-import LoadableBotiga from "./pages/LoadableBotiga";
-import LoadableSociosDetailed from "./pages/socios/components/LoadableSociosDetailed";
-import LoadableSocios from "./pages/socios/LoadableSocios";
-import LoadableGallery from "./pages/gallery/LoadableGallery";
-import LoadableLogSession from "./pages/LoadableLogSession";
-import LoadablePasswordRecovery from "./pages/LoadablePasswordRecovery";
-import LoadableCheckoutPage from "./pages/LoadableCheckoutPage";
-import LoadableMemberships from "./pages/memberships/LoadableMemberships";
-import LoadableSendEmailPasswordRecovery from "./pages/LoadableSendEmailPasswordRecovery";
-import LoadableQrClient from "./pages/LoadableQrClient";
-import LoadableValidateEmail from "./pages/LoadableValidateEmail";
-import LoadableLogMailConfirmation from "./pages/LoadableLogMailConfirmation";
-import LoadableExternalEvents from "./pages/external-events/LoadableExternalEvents";
-import LoadableProfile from "./pages/profile/LoadableProfile";
-import LoadableCheckoutFinished from "./pages/landing/LoadableCheckoutFinished";
-import LoadableSubscriptionFinished from "./pages/landing/LoadableSubscriptionFinished";
-import LoadableLegal from "./pages/legal/LoadableLegal";
-import LoadableQrLanding from "./pages/qr-landing/LoadableQrLanding";
-import LoadableNotFound from "./pages/LoadableNotFound";
+import HomeLoadable from "./pages/home/Home.loadable";
+import AgendaLoadable from "./pages/agenda/Agenda.loadable";
+import BotigaLoadable from "./pages/Botiga.loadable";
+import SociosDetailedLoadable from "./pages/socios/components/SociosDetailed.loadable";
+import SociosLoadable from "./pages/socios/Socios.loadable";
+import GalleryLoadable from "./pages/gallery/Gallery.loadable";
+import LogSessionLoadable from "./pages/LogSession.loadable";
+import PasswordRecoveryLoadable from "./pages/PasswordRecovery.loadable";
+import CheckoutPageLoadable from "./pages/CheckoutPage.loadable";
+import MembershipsLoadable from "./pages/memberships/Memberships.loadable";
+import SendEmailPasswordRecoveryLoadable from "./pages/SendEmailPasswordRecovery.loadable";
+import QrClientLoadable from "./pages/QrClient.loadable";
+import ValidateEmailLoadable from "./pages/ValidateEmail.loadable";
+import LogMailConfirmationLoadable from "./pages/LogMailConfirmation.loadable";
+import ExternalEventsLoadable from "./pages/external-events/ExternalEvents.loadable";
+import ProfileLoadable from "./pages/profile/Profile.loadable";
+import CheckoutFinishedLoadable from "./pages/landing/CheckoutFinished.loadable";
+import SubscriptionFinishedLoadable from "./pages/landing/SubscriptionFinished.loadable";
+import LegalLoadable from "./pages/legal/Legal.loadable";
+import QrLandingLoadable from "./pages/qr-landing/QrLanding.loadable";
+import NotFoundLoadable from "./pages/NotFound.loadable";
 
 const UserContext = createContext(null);
 
@@ -101,37 +101,37 @@ function App() {
         <div className="app-main-view">
           <ScrollTop showBelow={250} />
           <Routes>
-            <Route path="/activitats" element={<LoadableAgenda />} />
-            <Route path="/botiga" element={<LoadableBotiga />} />
-            <Route path="/socis/:id" element={<LoadableSociosDetailed />} />
-            <Route path="/socis" element={<LoadableSocios />} />
-            <Route path="/gallery" element={<LoadableGallery />} />
-            <Route path="/login" element={<LoadableLogSession />} />
-            <Route path="/recovery" element={<LoadablePasswordRecovery />} />
-            <Route path="/checkout" element={<LoadableCheckoutPage />} />
-            <Route path="/memberships" element={<LoadableMemberships />} />
+            <Route path="/activitats" element={<AgendaLoadable />} />
+            <Route path="/botiga" element={<BotigaLoadable />} />
+            <Route path="/socis/:id" element={<SociosDetailedLoadable />} />
+            <Route path="/socis" element={<SociosLoadable />} />
+            <Route path="/gallery" element={<GalleryLoadable />} />
+            <Route path="/login" element={<LogSessionLoadable />} />
+            <Route path="/recovery" element={<PasswordRecoveryLoadable />} />
+            <Route path="/checkout" element={<CheckoutPageLoadable />} />
+            <Route path="/memberships" element={<MembershipsLoadable />} />
             <Route
               path="/send-recovery"
-              element={<LoadableSendEmailPasswordRecovery />}
+              element={<SendEmailPasswordRecoveryLoadable />}
             />
-            <Route path="/member-card" element={<LoadableQrClient />} />
-            <Route path="/validate-email" element={<LoadableValidateEmail />} />
-            <Route path="/activate" element={<LoadableLogMailConfirmation />} />
-            <Route path="/product" element={<LoadableExternalEvents />} />
-            <Route path="/profile/:id" element={<LoadableProfile />} />
-            <Route path="/profile" element={<LoadableProfile />} />
+            <Route path="/member-card" element={<QrClientLoadable />} />
+            <Route path="/validate-email" element={<ValidateEmailLoadable />} />
+            <Route path="/activate" element={<LogMailConfirmationLoadable />} />
+            <Route path="/product" element={<ExternalEventsLoadable />} />
+            <Route path="/profile/:id" element={<ProfileLoadable />} />
+            <Route path="/profile" element={<ProfileLoadable />} />
             <Route
               path="/summary-checkout"
-              element={<LoadableCheckoutFinished />}
+              element={<CheckoutFinishedLoadable />}
             />
             <Route
               path="/subscribe"
-              element={<LoadableSubscriptionFinished />}
+              element={<SubscriptionFinishedLoadable />}
             />
-            <Route path="/legal" element={<LoadableLegal />} />
-            <Route path="/" element={<LoadableHome />} />
-            <Route path="/qr-view" element={<LoadableQrLanding />} />
-            <Route path="*" element={<LoadableNotFound />} />
+            <Route path="/legal" element={<LegalLoadable />} />
+            <Route path="/" element={<HomeLoadable />} />
+            <Route path="/qr-view" element={<QrLandingLoadable />} />
+            <Route path="*" element={<NotFoundLoadable />} />
           </Routes>
         </div>
       </UserContext.Provider>

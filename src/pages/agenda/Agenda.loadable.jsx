@@ -2,13 +2,13 @@ import React, { Suspense } from "react";
 import FullscreenSpinner from "../../components/spinner/FullscreenSpinner";
 import lazyWithRetry from "../../utils/lazyWithRetry";
 
-const CheckoutFinished = lazyWithRetry(() => import("./CheckoutFinished"));
+const Agenda = lazyWithRetry(() => import("./Agenda"));
 
-const LoadableCheckoutFinished = (props) => (
+const AgendaLoadable = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>
-    <CheckoutFinished {...props} />
+    <Agenda {...props} />
   </Suspense>
 );
 
 // eslint-disable-next-line react/display-name
-export default (props) => <LoadableCheckoutFinished {...props} />;
+export default (props) => <AgendaLoadable {...props} />;

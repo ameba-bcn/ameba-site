@@ -2,13 +2,13 @@ import React, { Suspense } from "react";
 import FullscreenSpinner from "../components/spinner/FullscreenSpinner";
 import lazyWithRetry from "../utils/lazyWithRetry";
 
-const PasswordRecovery = lazyWithRetry(() => import("./PasswordRecovery"));
+const Botiga = lazyWithRetry(() => import("./Botiga"));
 
-const LoadablePasswordRecovery = (props) => (
+const BotigaLoadable = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>
-    <PasswordRecovery {...props} />
+    <Botiga {...props} />
   </Suspense>
 );
 
 // eslint-disable-next-line react/display-name
-export default (props) => <LoadablePasswordRecovery {...props} />;
+export default (props) => <BotigaLoadable {...props} />;

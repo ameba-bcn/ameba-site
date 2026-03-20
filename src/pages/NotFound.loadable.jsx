@@ -4,11 +4,11 @@ import lazyWithRetry from "../utils/lazyWithRetry";
 
 const NotFound = lazyWithRetry(() => import("./NotFound"));
 
-const LoadableNotFound = (props) => (
+const NotFoundLoadable = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>
     <NotFound {...props} />
   </Suspense>
 );
 
 // eslint-disable-next-line react/display-name
-export default (props) => <LoadableNotFound {...props} />;
+export default (props) => <NotFoundLoadable {...props} />;

@@ -6,11 +6,11 @@ const LogMailConfirmation = lazyWithRetry(() =>
   import("./LogMailConfirmation"),
 );
 
-const LoadableLogMailConfirmation = (props) => (
+const LogMailConfirmationLoadable = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>
     <LogMailConfirmation {...props} />
   </Suspense>
 );
 
 // eslint-disable-next-line react/display-name
-export default (props) => <LoadableLogMailConfirmation {...props} />;
+export default (props) => <LogMailConfirmationLoadable {...props} />;

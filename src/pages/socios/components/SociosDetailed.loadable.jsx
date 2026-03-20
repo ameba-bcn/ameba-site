@@ -4,11 +4,11 @@ import lazyWithRetry from "../../../utils/lazyWithRetry";
 
 const SociosDetailedView = lazyWithRetry(() => import("./SociosDetailed"));
 
-const LoadableSociosDetailed = (props) => (
+const SociosDetailedLoadable = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>
     <SociosDetailedView {...props} />
   </Suspense>
 );
 
 // eslint-disable-next-line react/display-name
-export default (props) => <LoadableSociosDetailed {...props} />;
+export default (props) => <SociosDetailedLoadable {...props} />;

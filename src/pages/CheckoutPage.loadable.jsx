@@ -2,13 +2,13 @@ import React, { Suspense } from "react";
 import FullscreenSpinner from "../components/spinner/FullscreenSpinner";
 import lazyWithRetry from "../utils/lazyWithRetry";
 
-const Botiga = lazyWithRetry(() => import("./Botiga"));
+const CheckoutPage = lazyWithRetry(() => import("./CheckoutPage"));
 
-const LoadableBotiga = (props) => (
+const CheckoutPageLoadable = (props) => (
   <Suspense fallback={<FullscreenSpinner {...props} />}>
-    <Botiga {...props} />
+    <CheckoutPage {...props} />
   </Suspense>
 );
 
 // eslint-disable-next-line react/display-name
-export default (props) => <LoadableBotiga {...props} />;
+export default (props) => <CheckoutPageLoadable {...props} />;
