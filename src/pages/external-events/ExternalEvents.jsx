@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./ExternalEvents.css";
-import LettersMove from "../../components/layout/LettersMove";
+import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import ExternalEvent from "../../components/externalEvents/ExternalEvent";
 import axiosInstance from "../../axios";
 import { API_URL, productQueryKind } from "../../utils/constants";
@@ -43,7 +43,13 @@ const ExternalEvents = () => {
   };
 
   return (
-    <div>
+    <PageLayout
+      banner={{
+        sentence: t("banners.soci-curt"),
+        link: "/memberships",
+        color: "var(--color-rojo)",
+      }}
+    >
       <div className="external-events__box">
         {producteLoading ? (
           <div className="external-events__error">
@@ -67,14 +73,8 @@ const ExternalEvents = () => {
           />
         )}
       </div>
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
-        color="#EB5E3E"
-      />
-    </div>
+    </PageLayout>
   );
 };
 
-export default React.memo(ExternalEvents);
+export default ExternalEvents;

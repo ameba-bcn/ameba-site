@@ -5,7 +5,7 @@
   border-radius: 2px;
   flex-direction: column;
   overflow-y: hidden;
-  background-color: #f2c571;
+  background-color: var(--color-naranja);
   height: 100%;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .support-locals__overlay .overlayTitle {
-  color: #fae6c5;
+  color: var(--color-cream);
   font-size: 180px;
   font-family: "Bebas Neue";
   font-weight: 400;
@@ -50,11 +50,11 @@
 }
 
 .support-locals__overlay .overlayTitle:hover {
-  color: #f2c571;
+  color: var(--color-naranja);
 }
 
 .support-locals__overlay .overlaySubtitle {
-  color: #fae6c5;
+  color: var(--color-cream);
   font-family: "Bebas Neue";
   font-size: 50px;
   margin-top: -95px;
@@ -83,7 +83,7 @@
 }
 
 .support-locals__overlay .overlayTitleMobile {
-  color: #fae6c5;
+  color: var(--color-cream);
   font-size: 180px;
   font-family: "Bebas Neue";
   font-weight: 900;

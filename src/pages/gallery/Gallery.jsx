@@ -1,15 +1,13 @@
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import Galeria from "../../components/galeria/Galeria";
-import LettersMove from "../../components/layout/LettersMove";
+import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import {
   FLICKR_ALBUM_ID,
   FLICKR_KEY,
   radioDublabLink,
 } from "../../utils/constants";
-import PowerTitle from "../../components/layout/PowerTitle";
 import useDataStore from "../../stores/useDataStore";
-import EmbeddedSpinner from "../../components/spinner/EmbeddedSpinner";
 
 const PAGE_SIZE = 20;
 
@@ -50,82 +48,80 @@ const Gallery = () => {
   });
 
   return (
-    <div className="SupportContent">
-      <div className="logView">
-        <PowerTitle title="PARKFEST 22" subtitle="* 21-05-22 *" autoScale />
-        <div ref={galleryTopRef} />
-        <div className="centered-element">
-          {isGaleriaLoading && <EmbeddedSpinner />}
-        </div>
-        <Galeria
-          images={imgArrayBuilder.slice(
-            page * PAGE_SIZE,
-            (page + 1) * PAGE_SIZE,
-          )}
-        />
-        {Math.ceil(imgArrayBuilder.length / PAGE_SIZE) > 1 && (
-          <div
+    <PageLayout
+      className="SupportContent"
+      title="PARKFEST 22"
+      titleProps={{ subtitle: "* 21-05-22 *" }}
+      loading={isGaleriaLoading}
+      banner={{
+        sentence: "AMEBA RADIO @ dublab",
+        link: radioDublabLink,
+        color: "var(--color-rojo)",
+      }}
+    >
+      <div ref={galleryTopRef} />
+      <Galeria
+        images={imgArrayBuilder.slice(
+          page * PAGE_SIZE,
+          (page + 1) * PAGE_SIZE,
+        )}
+      />
+      {Math.ceil(imgArrayBuilder.length / PAGE_SIZE) > 1 && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "16px",
+            padding: "16px 0",
+            fontFamily: "Bebas Neue",
+            fontSize: "1.4rem",
+          }}
+        >
+          <button
+            onClick={() => changePage(page - 1)}
+            disabled={page === 0}
             style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              gap: "16px",
-              padding: "16px 0",
-              fontFamily: "Bebas Neue",
+              background: "none",
+              border: "1px solid black",
               fontSize: "1.4rem",
+              padding: "4px 12px",
+              cursor: page === 0 ? "default" : "pointer",
+              borderRadius: "4px",
+              opacity: page === 0 ? 0.3 : 1,
             }}
           >
-            <button
-              onClick={() => changePage(page - 1)}
-              disabled={page === 0}
-              style={{
-                background: "none",
-                border: "1px solid black",
-                fontSize: "1.4rem",
-                padding: "4px 12px",
-                cursor: page === 0 ? "default" : "pointer",
-                borderRadius: "4px",
-                opacity: page === 0 ? 0.3 : 1,
-              }}
-            >
-              ←
-            </button>
-            <span>
-              {page + 1} / {Math.ceil(imgArrayBuilder.length / PAGE_SIZE)}
-            </span>
-            <button
-              onClick={() => changePage(page + 1)}
-              disabled={
+            ←
+          </button>
+          <span>
+            {page + 1} / {Math.ceil(imgArrayBuilder.length / PAGE_SIZE)}
+          </span>
+          <button
+            onClick={() => changePage(page + 1)}
+            disabled={
+              page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1
+            }
+            style={{
+              background: "none",
+              border: "1px solid black",
+              fontSize: "1.4rem",
+              padding: "4px 12px",
+              cursor:
                 page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1
-              }
-              style={{
-                background: "none",
-                border: "1px solid black",
-                fontSize: "1.4rem",
-                padding: "4px 12px",
-                cursor:
-                  page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1
-                    ? "default"
-                    : "pointer",
-                borderRadius: "4px",
-                opacity:
-                  page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1
-                    ? 0.3
-                    : 1,
-              }}
-            >
-              →
-            </button>
-          </div>
-        )}
-      </div>
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence="AMEBA RADIO @ dublab"
-        link={radioDublabLink}
-        color="#EB5E3E"
-      />
-    </div>
+                  ? "default"
+                  : "pointer",
+              borderRadius: "4px",
+              opacity:
+                page >= Math.ceil(imgArrayBuilder.length / PAGE_SIZE) - 1
+                  ? 0.3
+                  : 1,
+            }}
+          >
+            →
+          </button>
+        </div>
+      )}
+    </PageLayout>
   );
 };
 

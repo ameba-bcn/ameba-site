@@ -79,7 +79,7 @@ const SociosDetailed = () => {
       )}
       <LettersMove
         sentence={"l'associació de música electrònica de barcelona"}
-        color={"#F2C571"}
+        color={"var(--color-naranja)"}
       />
     </div>
   );

@@ -6,12 +6,12 @@
     font-family: "Bebas Neue";
     line-height: 1em;
     text-transform: uppercase;
-    color: #fae6c5;
+    color: var(--color-cream);
     text-align: left;
 }
 
 .productBanner {
-    background-color: #1d1d1b;
+    background-color: var(--color-negro);
     height: 7rem;
     overflow: hidden;
     display: flex;

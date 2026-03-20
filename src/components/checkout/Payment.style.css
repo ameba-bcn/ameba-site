@@ -9,7 +9,7 @@
   text-transform: uppercase;
   font-family: "Bebas Neue";
   font-weight: 300;
-  color: #1d1d1b;
+  color: var(--color-negro);
 }
 
 .payment-box {

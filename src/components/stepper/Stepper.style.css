@@ -16,15 +16,15 @@
 }
 
 .stepper-box--step-0::before {
-  background: linear-gradient(to right, #1d1d1b 50%, #1d1d1b 50%);
+  background: linear-gradient(to right, var(--color-negro) 50%, var(--color-negro) 50%);
 }
 
 .stepper-box--step-1::before {
-  background: linear-gradient(to right, #eb5e3e 50%, #1d1d1b 50%);
+  background: linear-gradient(to right, var(--color-rojo) 50%, var(--color-negro) 50%);
 }
 
 .stepper-box--step-2::before {
-  background: linear-gradient(to right, #eb5e3e 50%, #eb5e3e 50%);
+  background: linear-gradient(to right, var(--color-rojo) 50%, var(--color-rojo) 50%);
 }
 
 .stepper-dots-box {
@@ -41,11 +41,11 @@
   border-radius: 50%;
   display: inline-block;
   z-index: 9;
-  background-color: #1d1d1b;
+  background-color: var(--color-negro);
 }
 
 .stepper-dot--active {
-  background-color: #eb5e3e;
+  background-color: var(--color-rojo);
   animation: appearFromCenter 0.1s;
 }
 

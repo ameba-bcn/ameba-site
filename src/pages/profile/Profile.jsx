@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import LettersMove from "../../components/layout/LettersMove";
+import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import useAuthStore from "../../stores/useAuthStore";
 import { isEmptyObject } from "../../utils/utils";
 import { useTranslation } from "react-i18next";
@@ -40,7 +40,14 @@ export default function Profile() {
   const profileOptions = isMember ? ["PROFILE", "PROJECT", "QR"] : ["PROFILE"];
 
   return (
-    <div className="logViewYellow">
+    <PageLayout
+      className="logViewYellow"
+      banner={{
+        sentence: t("banners.soci-curt"),
+        link: "/memberships",
+        color: "var(--color-rojo)",
+      }}
+    >
       <div className="profileTitle">{`Hola ${username}!`}</div>
       {profileOptions.length > 1 && (
         <Breadcrums
@@ -50,12 +57,6 @@ export default function Profile() {
         />
       )}
       {arrView[step]}
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
-        color="#EB5E3E"
-      />
-    </div>
+    </PageLayout>
   );
 }

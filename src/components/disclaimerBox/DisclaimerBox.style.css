@@ -8,12 +8,12 @@
   font-size: 30px;
   border-style: solid;
   line-height: 30px;
-  border-color: #1d1d1b;
+  border-color: var(--color-negro);
   border-width: 4px;
-  background-color: #eb5e3e;
+  background-color: var(--color-rojo);
   padding: 24px 26px 12px 26px;
   text-decoration: none !important;
-  color: #1d1d1b !important;
+  color: var(--color-negro) !important;
   margin: 0 auto;
   word-wrap: break-word;
   width: auto;
@@ -36,12 +36,12 @@
   font-size: 18px;
   font-weight: 400;
   line-height: 1.5;
-  background-color: #fae6c5;
+  background-color: var(--color-cream);
 }
 
 .disclaimer-box--light.disclaimer-box--closable {
   border-style: solid;
-  border-color: #1d1d1b;
+  border-color: var(--color-negro);
   border-width: 4px;
 }
 

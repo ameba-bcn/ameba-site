@@ -1,24 +1,24 @@
 import React from "react";
-import LettersMove from "../../components/layout/LettersMove";
+import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import { radioDublabLink } from "../../utils/constants";
 
 function CheckoutFinished() {
   return (
-    <>
-      <div className="full-height-msg">
-        <div className="single-msg">
-          GRÀCIES!
-          <br />
-          Hem rebut la teva comanda
-        </div>
+    <PageLayout
+      className="full-height-msg"
+      centered
+      banner={{
+        sentence: "AMEBA RADIO @ dublab",
+        link: radioDublabLink,
+        color: "var(--color-rojo)",
+      }}
+    >
+      <div className="single-msg">
+        GRÀCIES!
+        <br />
+        Hem rebut la teva comanda
       </div>
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence="AMEBA RADIO @ dublab"
-        link={radioDublabLink}
-        color="#EB5E3E"
-      />
-    </>
+    </PageLayout>
   );
 }
 

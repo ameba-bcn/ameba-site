@@ -3,7 +3,7 @@
 .checkout-title {
   text-transform: uppercase;
   font-family: "Bebas Neue";
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-size: 6.5rem;
 }
 
@@ -16,7 +16,7 @@
 .checkout-subtitle {
   text-transform: uppercase;
   font-family: "Bebas Neue";
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-size: 3.3rem;
   margin-bottom: 30px;
 }

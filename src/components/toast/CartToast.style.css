@@ -3,8 +3,8 @@
 .toast-box a {
   width: 100%;
   height: auto;
-  background-color: #1d1d1b;
-  color: #1d1d1b;
+  background-color: var(--color-negro);
+  color: var(--color-negro);
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -19,18 +19,18 @@
 .toast-left-in-box {
   width: 75%;
   height: auto;
-  background-color: #fae6c5;
+  background-color: var(--color-cream);
   padding: 2px;
 }
 
 .toast-left-in-box > span {
-  color: #eb5e3e;
+  color: var(--color-rojo);
 }
 
 .toast-right-in-box {
   width: 22%;
   height: auto;
-  background-color: #eb5e3e;
-  color: #fae6c5;
+  background-color: var(--color-rojo);
+  color: var(--color-cream);
   padding: 2px;
 }

@@ -25,7 +25,6 @@ const Activitats = () => {
   return (
     <div className="Bloque" id="activitats">
       <LettersMove
-        className="lettersMoveDiv"
         sentence="AMEBA RADIO @ dublab"
         link={radioDublabLink}
       />

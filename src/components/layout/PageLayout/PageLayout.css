@@ -1,9 +1,19 @@
 .page-layout__inner {
   padding: 0 60px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .page-layout__content {
   flex: 1;
+}
+
+.page-layout__content--centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Reset padding on children that already define their own */

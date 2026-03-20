@@ -10,7 +10,7 @@
 }
 
 .menu-log__item .item {
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-family: "Bebas Neue";
   font-size: 30px;
   font-weight: 400;

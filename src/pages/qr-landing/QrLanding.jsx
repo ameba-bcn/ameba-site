@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
-import LettersMove from "../../components/layout/LettersMove";
+import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import { AMEBA_EMAIL, BASE_URL, radioDublabLink } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
 import "../../styles/GlobalStyles.css";
 import "./QrLanding.css";
 import axiosInstance from "../../axios";
-import EmbeddedSpinner from "../../components/spinner/EmbeddedSpinner";
 
 const QrLanding = (props) => {
   const [memberData, setMemberData] = useState({});
@@ -28,37 +27,35 @@ const QrLanding = (props) => {
   }, [parsed]);
 
   return (
-    <div className="logViewYellow">
-      {loading ? (
-        <EmbeddedSpinner alone />
-      ) : (
-        <div className="qr-landing">
-          {memberData && Object.keys(memberData)?.length > 0 ? (
-            <div className="json-formatted-box">
-              <DisclaimerBox text={t("soci.carnet")} style="light" />
-              <div className="json-formatted">
-                <pre>{JSON.stringify(memberData, null, 2)}</pre>
-              </div>
+    <PageLayout
+      className="logViewYellow"
+      loading={loading}
+      banner={{
+        sentence: "AMEBA RADIO @ dublab",
+        link: radioDublabLink,
+        color: "var(--color-cream)",
+      }}
+    >
+      <div className="qr-landing">
+        {memberData && Object.keys(memberData)?.length > 0 ? (
+          <div className="json-formatted-box">
+            <DisclaimerBox text={t("soci.carnet")} style="light" />
+            <div className="json-formatted">
+              <pre>{JSON.stringify(memberData, null, 2)}</pre>
             </div>
-          ) : (
-            <div className="single-msg">
-              {t("errors.general")}
-              <br />
-              {t("errors.contacta")}
-              <div className="styled-link">
-                <a href="mailto:info@ameba.cat">{AMEBA_EMAIL}</a>
-              </div>
+          </div>
+        ) : (
+          <div className="single-msg">
+            {t("errors.general")}
+            <br />
+            {t("errors.contacta")}
+            <div className="styled-link">
+              <a href="mailto:info@ameba.cat">{AMEBA_EMAIL}</a>
             </div>
-          )}
-        </div>
-      )}
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence="AMEBA RADIO @ dublab"
-        link={radioDublabLink}
-        color="#FAE6C5"
-      />
-    </div>
+          </div>
+        )}
+      </div>
+    </PageLayout>
   );
 };
 

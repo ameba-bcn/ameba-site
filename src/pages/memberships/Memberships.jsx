@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "../../stores/useAuthStore";
 import useDataStore from "../../stores/useDataStore";
-import LettersMove from "../../components/layout/LettersMove";
+import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import { MOBILE_NORMAL } from "../../utils/constants";
 import useCartStore from "../../stores/useCartStore";
 import "../../components/externalEvents/ExternalEvent.css";
@@ -17,7 +17,6 @@ import CartToast from "../../components/toast/CartToast";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import Icon from "../../components/ui/Icon";
 import useMediaQuery from "../../hooks/use-media-query";
-import PowerTitle from "../../components/layout/PowerTitle";
 
 const Memberships = () => {
   const [t] = useTranslation("translation");
@@ -72,19 +71,22 @@ const Memberships = () => {
   const buttons = [membership[0]?.name];
 
   return (
-    <div
+    <PageLayout
       className={`membership-box${membership.length === 0 ? " membership-box--empty" : ""}`}
+      title={`${t("banners.soci-curt")}!`}
+      titleProps={{ autoScale: false, maxSize: 100 }}
+      banner={{
+        sentence: t("banners.soci-curt"),
+        link: "/memberships",
+        color: "var(--color-rojo)",
+      }}
     >
       {membership.length > 0 ? (
         <div className="external-event-box">
-          <div className="external-event__title-box">
-            <PowerTitle title={`${t("banners.soci-curt")}!`} maxSize={100} />
-          </div>
           <div className="rowExternal">
             <div className="external-event__col1">
               <ImageCarousel imgList={images} />
               <div className="external-event__button-box">
-                {/* // eslint-disable-line */}
                 <Button
                   variant="contained"
                   color="primary"
@@ -168,14 +170,7 @@ const Memberships = () => {
           <DisclaimerBox text="No data available" closable />
         </div>
       )}
-
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
-        color="#EB5E3E"
-      />
-    </div>
+    </PageLayout>
   );
 };
 

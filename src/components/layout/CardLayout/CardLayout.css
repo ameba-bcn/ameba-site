@@ -106,8 +106,8 @@
   font-size: 2em;
   line-height: 1.4em;
   font-weight: 600;
-  color: #fae6c5;
-  background-color: #1d1d1b;
+  color: var(--color-cream);
+  background-color: var(--color-negro);
   left: 5%;
   top: 5%;
 }

@@ -10,7 +10,7 @@
   justify-content: space-between;
   width: 100%;
   margin: 0 auto;
-  background-color: #eb5e3e;
+  background-color: var(--color-rojo);
 }
 
 .agendaLink {
@@ -27,11 +27,11 @@
 
 .agendaLink a {
   text-decoration: none;
-  color: #fae6c5;
+  color: var(--color-cream);
 }
 
 .navLinkActivitat:hover {
-  color: #f2c571;
+  color: var(--color-naranja);
 }
 
 

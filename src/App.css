@@ -1,6 +1,6 @@
 .app {
   text-align: center;
-  background-color: #fae6c5;
+  background-color: var(--color-cream);
   width: 100%;
   max-width: 100%;
   min-height: 100vh;
@@ -22,7 +22,7 @@
 
 .app .logViewRed {
   height: 100%;
-  background-color: #eb5e3e;
+  background-color: var(--color-rojo);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -31,15 +31,11 @@
 .app .logViewYellow {
   width: 100%;
   min-height: min-content;
-  background-color: #fae6c5;
+  background-color: var(--color-cream);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   z-index: 0;
-}
-
-.app .logView {
-  height: 100%;
 }
 
 .app img {
@@ -51,7 +47,7 @@
 }
 
 .app .checkoutViewYellow {
-  background-color: #fae6c5;
+  background-color: var(--color-cream);
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -71,7 +67,6 @@
 
 .app .profileTitle {
   width: 100%;
-  background-color: #eb5e3e;
   font-size: 120px;
   font-family: "Bebas Neue";
   font-weight: 400;
@@ -206,16 +201,16 @@
 .app .Articles,
 .app .Botiga,
 .app .BookingContent {
-  background-color: #eb5e3e;
+  background-color: var(--color-rojo);
   flex: 1;
 }
 
-.app .SupportContent { background-color: #fae6c5; }
+.app .SupportContent { background-color: var(--color-cream); }
 
 .app #festi,
-.app #shop { background-color: #fae6c5; }
+.app #shop { background-color: var(--color-cream); }
 
-.app #contacte { background-color: #f2c571; }
+.app #contacte { background-color: var(--color-naranja); }
 
 .app .HomeContent {
   display: block;
@@ -248,7 +243,7 @@
 .app .wordsMoveFrame {
   width: 100%;
   height: 24px;
-  background-color: #1d1d1b;
+  background-color: var(--color-negro);
 }
 
 .app .wordsMove {
@@ -268,10 +263,10 @@
 }
 
 /* LOGIN NUEVO */
-.app .loginWall { background-color: #eb5e3e; }
+.app .loginWall { background-color: var(--color-rojo); }
 
 .app .toast-black-background {
-  background-color: #1d1d1b !important;
+  background-color: var(--color-negro) !important;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -288,7 +283,7 @@
 .app .logTitle {
   text-transform: uppercase;
   font-family: "Bebas Neue";
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-size: 4.5rem;
   line-height: 4rem;
   word-break: break-word;
@@ -304,7 +299,7 @@
 .app .logTitleSmall {
   text-transform: uppercase;
   font-family: "Bebas Neue";
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-size: 2.5rem;
   margin-top: 0px;
 }
@@ -312,7 +307,7 @@
 .app .new-member-title {
   text-transform: uppercase;
   font-family: "Bebas Neue";
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-size: 4.5rem;
   margin-bottom: 0px;
   margin-top: 20px;
@@ -321,7 +316,7 @@
 .app .checkout-payment-summary {
   font-family: "Montserrat", sans-serif;
   justify-content: center;
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-size: 1.6rem;
   margin: 0 auto;
   padding: 20px 0px 20px 0px;
@@ -330,26 +325,26 @@
 
 .app input.logForm {
   background-color: transparent;
-  border: 4px solid #1d1d1b;
+  border: 4px solid var(--color-negro);
   border-radius: 0rem;
   padding: 12px 14px 12px 12px;
   font-family: "Montserrat", sans-serif;
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-size: 1.2rem;
   font-weight: bold;
   width: 100%;
 }
 
 .app input.logForm:focus {
-  background-color: #fae6c5;
-  border: 4px solid #f2c571;
+  background-color: var(--color-cream);
+  border: 4px solid var(--color-naranja);
 }
 
 .app input.logForm::placeholder {
   text-transform: uppercase;
   padding-top: 2px;
   font-family: "Bebas Neue";
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-size: 2rem;
   transform: translateY(6px);
 }
@@ -369,8 +364,8 @@
 }
 
 .app .logFormButton {
-  background-color: #1d1d1b;
-  color: #fae6c5;
+  background-color: var(--color-negro);
+  color: var(--color-cream);
   text-transform: uppercase;
   font-family: "Bebas Neue";
   font-size: 1.8rem;
@@ -402,8 +397,8 @@
 }
 
 .app .sociLogBanner {
-  background-color: #f2c571;
-  color: #1d1d1b;
+  background-color: var(--color-naranja);
+  color: var(--color-negro);
   text-transform: uppercase;
   font-family: "Bebas Neue";
   font-size: 1.8rem;
@@ -417,9 +412,9 @@
 }
 
 .app .succesful-login-modificar {
-  background-color: #1d1d1b;
+  background-color: var(--color-negro);
   cursor: pointer;
-  color: #fae6c5;
+  color: var(--color-cream);
   text-transform: uppercase;
   font-family: "Bebas Neue";
   font-size: 1.8rem;
@@ -428,7 +423,7 @@
 }
 
 .app .succesful-login {
-  color: #fae6c5;
+  color: var(--color-cream);
   text-transform: uppercase;
   font-family: "Bebas Neue";
   font-size: 1.8rem;
@@ -437,7 +432,7 @@
 
 /* Main page messages */
 .app .full-height-msg {
-  background-color: #eb5e3e;
+  background-color: var(--color-rojo);
   flex: 1 0 auto;
   flex-direction: column;
   display: flex;
@@ -457,35 +452,32 @@
   align-items: center;
 }
 
-.app .lettersMoveDiv { flex: 1 0 auto; }
-
 .app .logFormEmailPasswordRecovery { margin-top: 1.8rem !important; }
 
 /* Toasts */
 .app .notificationToast-success {
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-weight: bold;
   background-color: #bbe5c2;
 }
 
 .app .notificationToast-error {
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-weight: bold;
   background-color: #f9adb3;
 }
 
 .app .notificationToast-warning {
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-weight: bold;
   background-color: #f5f1bb;
 }
 
 .app .notificationToast-info {
-  color: #1d1d1b;
+  color: var(--color-negro);
   font-weight: bold;
   background-color: #a2d8f4;
 }
-
 
 .centered-element {
   display: flex;

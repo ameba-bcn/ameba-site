@@ -28,7 +28,7 @@
 .fullscreen-checkout__nav div {
   font-size: 40px;
   font-family: "Bebas Neue";
-  color: #fae6c5;
+  color: var(--color-cream);
   cursor: pointer;
   margin-right: 12px;
 }

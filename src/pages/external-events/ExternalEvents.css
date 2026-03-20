@@ -1,6 +1,6 @@
 .external-events__box {
   height: 100%;
-  background-color: #fae6c5;
+  background-color: var(--color-cream);
 }
 
 .external-events__error {

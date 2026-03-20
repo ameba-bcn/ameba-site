@@ -1,20 +1,21 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Checkout from "../components/checkout/Checkout";
-import LettersMove from "../components/layout/LettersMove";
+import PageLayout from "../components/layout/PageLayout/PageLayout";
 
 export default function CheckoutPage() {
   const [t] = useTranslation("translation");
 
   return (
-    <div className="checkoutViewYellow">
+    <PageLayout
+      className="checkoutViewYellow"
+      banner={{
+        sentence: t("banners.soci-curt"),
+        link: "/memberships",
+        color: "var(--color-rojo)",
+      }}
+    >
       <Checkout />
-      <LettersMove
-        className="lettersMoveDiv"
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
-        color="#EB5E3E"
-      />
-    </div>
+    </PageLayout>
   );
 }

@@ -54,9 +54,8 @@ function Contacte() {
         </div>
       </div>
       <LettersMove
-        className="lettersMoveDiv"
         sentence="L'ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA "
-        color="#F2C571"
+        color="var(--color-naranja)"
       />
     </div>
   );

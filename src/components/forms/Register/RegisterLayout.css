@@ -4,6 +4,6 @@
 }
 
 .register-add-box svg {
-  background-color: #1d1d1b;
+  background-color: var(--color-negro);
   scale: 1;
 }

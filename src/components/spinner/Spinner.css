@@ -67,7 +67,7 @@
   -moz-animation: rotation 1s infinite linear;
   -o-animation: rotation 1s infinite linear;
   animation: rotation 1s infinite linear;
-  border: 6px solid #fae6c5;
+  border: 6px solid var(--color-cream);
   border-radius: 100%;
 }
 

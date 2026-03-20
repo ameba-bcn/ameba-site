@@ -16,7 +16,7 @@ export default function Agenda() {
       banner={{
         sentence: t("banners.soci-curt"),
         link: "/memberships",
-        color: "#EB5E3E",
+        color: "var(--color-rojo)",
       }}
     >
       <AgendaTable />

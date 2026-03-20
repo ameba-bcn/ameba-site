@@ -10,13 +10,16 @@ export default function PageLayout({
   titleProps,
   loading,
   banner,
+  centered,
   children,
 }) {
+  const contentClass = `page-layout__content${centered ? " page-layout__content--centered" : ""}`;
+
   return (
     <div className={className}>
       <div className="page-layout__inner">
-        <PowerTitle title={title} autoScale {...titleProps} />
-        <div className="page-layout__content">
+        {title && <PowerTitle title={title} autoScale {...titleProps} />}
+        <div className={contentClass}>
           {loading ? (
             <div className="page-layout__loader">
               <EmbeddedSpinner />
