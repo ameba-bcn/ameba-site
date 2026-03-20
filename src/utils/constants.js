@@ -115,11 +115,18 @@ export const API_URL =
 
 export const BASE_URL = API_URL.replace("/ameba-site/", "/");
 
-export const FLICKR_URL =
-  "https://api.flickr.com/services/rest/?method=flickr.galleries.getPhotos";
-export const FLICKR_KEY = "d42519b6c54602915c2d98ee7e717f73";
-export const FLICKR_ALBUM_ID = "72177720300073940";
-export const FLICKR_SECRET = "45216314df67fd07";
+// Cloudinary
+export const CLOUDINARY_CLOUD_NAME =
+  import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "drue2stwb";
+
+export const cloudinaryUrl = (publicId, transformations = "q_auto,f_auto") =>
+  `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/${transformations}/${publicId}`;
+
+export const cloudinaryThumb = (publicId) =>
+  cloudinaryUrl(publicId, "c_fill,w_400,h_400,q_auto,f_auto");
+
+export const cloudinaryCover = (publicId) =>
+  cloudinaryUrl(publicId, "c_fill,w_600,h_400,q_auto,f_auto");
 
 export const radioDublabLink = "https://www.dublab.es/shows/ameba";
 export const TEXT_EDITOR_KEY =
