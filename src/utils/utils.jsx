@@ -212,7 +212,11 @@ export default function notificationToast(text = "", type = "success") {
 export const isDevMode = () => localStorage.getItem("dev") === "true";
 
 export const tinymceTextAreaFormatter = (val) =>
-  val?.replaceAll(/&nbsp;/g, "")?.replaceAll("<p></p>", "");
+  val
+    ?.replaceAll(/&nbsp;/g, "")
+    ?.replaceAll("<p></p>", "")
+    ?.replace(/^<p>\s*(<p>)/i, "$1")
+    ?.replace(/(<\/p>)\s*<\/p>$/i, "$1");
 
 export function isDateExpired(expiringMembershipDate) {
   if (!expiringMembershipDate) return false;

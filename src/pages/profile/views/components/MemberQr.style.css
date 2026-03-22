@@ -1,0 +1,31 @@
+.member-qr {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.member-qr__title {
+  text-transform: uppercase;
+  font-family: "Bebas Neue";
+  color: var(--color-negro);
+  font-size: 3.3rem;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.member-qr__description {
+  font-size: 14px;
+  text-align: center;
+  color: var(--color-negro);
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.member-qr__image {
+  width: 100%;
+  max-width: 280px;
+}

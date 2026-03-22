@@ -130,7 +130,8 @@
     "missatge-ppal": "Conoce los proyectos de nuestros soci@s. Si quieres que tu proyecto aparezca aquí, hazte soci@",
     "perfil-gral": "Edita tu proyecto personal. Una vez guardados los cambios podrás visualizar tu proyecto en la vista de /soci@s",
     "no-soci-perfil": "Parece que tu membresía ha caducado. Para poder editar tu proyecto personal debes renovar tu membresía",
-    "carnet": "Este es tu carnet de socio, con él puedes acceder a todos los descuentos, eventos y promociones que ofrecemos"
+    "carnet": "Este es tu carnet de socio, con él puedes acceder a todos los descuentos, eventos y promociones que ofrecemos",
+    "carnet-title": "Carnet de socio"
   },
   "general": {
     "agraiment": "Petición recibida. ¡Gracias!",

@@ -47,7 +47,7 @@ const TextArea = (props) => {
           onInit={(evt, editor) => {
             editorRef.current = editor;
           }}
-          initialValue={`<p>${initText}</p>`}
+          initialValue={initText || ""}
           onEditorChange={(newValue) => {
             setText(tinymceTextAreaFormatter(newValue));
             if (newValue.length <= 0) setValid(false);
@@ -89,7 +89,6 @@ const TextArea = (props) => {
               "body { font-family:Helvetica,Arial,sans-serif; font-size:16px; }",
             statusbar: false,
             toolbar_location: "bottom",
-            forceNoPTags: true,
             setup: (editor) => {
               editor.on("focus", function () {
                 setFocus(true);
