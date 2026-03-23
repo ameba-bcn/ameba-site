@@ -526,28 +526,45 @@ export default function ModalCard(props) {
 
             {modalStyle === "ACTIVITAT" && (
               <div className="modal-card-location__row">
-                <div className="modal-card__column_thirtyfive">
+                {!maps_url?.includes("dice") && (
+                  <>
+                    <div className="modal-card__column_thirtyfive">
+                      <div className="modal-card___title_small">
+                        <Icon
+                          icon="place"
+                          type={colorMode === "dark" ? "cream" : ""}
+                        />{" "}
+                        <span>{t("modal.localitzacio")} / &nbsp;</span>
+                      </div>
+                    </div>
+                    <div className="interactiveDataBox-activitat__text-loca">
+                      <a
+                        href={maps_url?.length > 0 ? maps_url : "https://google.com/maps"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {address}
+                      </a>
+                    </div>
+                  </>
+                )}
+                {maps_url?.includes("dice") && (
                   <div className="modal-card___title_small">
                     <Icon
-                      icon={maps_url?.includes("dice") ? "ticket" : "place"}
+                      icon="ticket"
                       type={colorMode === "dark" ? "cream" : ""}
                     />{" "}
-                    <div>{maps_url?.includes("dice") ? t("modal.link-compra") : t("modal.localitzacio")} / &nbsp;</div>
+                    <span>{t("modal.link-compra")} / &nbsp;</span>
+                    <a
+                      href={maps_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="interactiveDataBox-activitat__text-loca"
+                    >
+                      {t("events.button.pago-externo")}
+                    </a>
                   </div>
-                </div>
-                <div className="interactiveDataBox-activitat__text-loca">
-                  <a
-                    href={
-                      maps_url?.length > 0
-                        ? maps_url
-                        : "https://google.com/maps"
-                    }
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {maps_url?.includes("dice") ? t("events.button.pago-externo") : address}
-                  </a>
-                </div>
+                )}
               </div>
             )}
             <ImageCarousel imgList={imgArr} />
