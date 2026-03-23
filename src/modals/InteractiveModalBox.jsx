@@ -107,8 +107,8 @@ const InteractiveModalBox = (props) => {
           {isMobile && (
             <div className="interactiveDataBox-activitat__row">
               <div className="modal-card___title_small">
-                <Icon icon="place" type={colorMode === "dark" ? "cream" : ""} />{" "}
-                <span>{t("modal.localitzacio")} / &nbsp;</span>
+                <Icon icon={maps_url?.includes("dice") ? "ticket" : "place"} type={colorMode === "dark" ? "cream" : ""} />{" "}
+                <span>{maps_url?.includes("dice") ? t("modal.link-compra") : t("modal.localitzacio")} / &nbsp;</span>
               </div>
               <div className="interactiveDataBox-activitat__text-loca">
                 <a
@@ -118,7 +118,7 @@ const InteractiveModalBox = (props) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {address}
+                  {maps_url?.includes("dice") ? maps_url : address}
                 </a>
               </div>
             </div>

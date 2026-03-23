@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useFormik } from "formik";
 import useAuthStore from "../../../stores/useAuthStore";
 import InputField from "../../../components/forms/InputField/InputField";
@@ -23,15 +23,10 @@ const MemberProject = () => {
   const [initialProjectData, setInitialProjectData] = useState({});
   const [t] = useTranslation("translation");
   const [editMode, setEditMode] = useState(false);
-  let disabled = false;
-  const [images, setImages] = useState(initialProjectData.images || []);
-  const [isPublic, setIsPublic] = useState(initialProjectData.public || false);
-  const [description, setDescription] = useState(
-    initialProjectData.description || "",
-  );
-  const [mediaLinks, setMediaLinks] = useState(
-    initialProjectData.media_urls || [],
-  );
+  const [images, setImages] = useState([]);
+  const [isPublic, setIsPublic] = useState(false);
+  const [description, setDescription] = useState("");
+  const [mediaLinks, setMediaLinks] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user_member_data } = useAuthStore();
   const { status = "", expires = "" } = user_member_data || {};
@@ -46,51 +41,68 @@ const MemberProject = () => {
         setIsPublic(data.public);
         setImages(data.images || []);
         setDescription(data.description);
-      })
-      .then(() => {
+        setMediaLinks(data.media_urls || []);
+        // Auto-switch to edit mode if project has no content
+        const hasContent =
+          data.project_name ||
+          data.description ||
+          (data.images && data.images.length > 0);
+        if (!hasContent) {
+          setEditMode(true);
+        }
         setLoading(false);
       })
       .catch(() => setLoading(false));
-  }, [editMode]);
+  }, []);
 
   const handleSubmit = (val) => {
-    setLoading(true);
-    if (images?.length === 0) setImages(null);
-    if (description?.length === 0 || description === null) {
+    const hasImages = images && images.length > 0;
+    const hasDescription = description && description.length > 0;
+
+    if (!hasImages) {
+      setImages(null);
+    }
+    if (!hasDescription) {
       setDescription(null);
     }
-    if (
-      !(images?.length === 0 || images === null) &&
-      !(description?.length === 0 || description === null)
-    ) {
-      const upload_images = images.map((img) => img.image);
-
-      authService
-        .updateMemberProject({
-          ...val,
-          description: description,
-          upload_media_urls: mediaLinks,
-          upload_images: upload_images,
-          public: isPublic || false,
-        })
-        .then(() => {
-          setLoading(false);
-          notificationToast(t("general.agraiment"), "success");
-          setEditMode(false);
-        })
-        .catch(() => {
-          setLoading(false);
-          notificationToast(t("errors.general"), "error");
-        });
+    if (!hasImages || !hasDescription) {
+      return;
     }
-    setLoading(false);
+
+    setLoading(true);
+    const upload_images = images.map((img) => img.image);
+
+    authService
+      .updateMemberProject({
+        ...val,
+        description: description,
+        upload_media_urls: mediaLinks,
+        upload_images: upload_images,
+        public: isPublic || false,
+      })
+      .then(() => {
+        notificationToast(t("general.agraiment"), "success");
+        setEditMode(false);
+        setInitialProjectData((prev) => ({
+          ...prev,
+          ...val,
+          description,
+          media_urls: mediaLinks,
+          images,
+          public: isPublic,
+        }));
+      })
+      .catch(() => {
+        notificationToast(t("errors.general"), "error");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const formik = useFormik({
     initialValues: {
-      ...initialProjectData,
-      images: initialProjectData?.images,
-      links: initialProjectData?.media_urls,
+      project_name: initialProjectData?.project_name || "",
     },
     enableReinitialize: true,
     validate,
@@ -101,42 +113,57 @@ const MemberProject = () => {
     },
   });
 
-  if (
-    initialProjectData?.description?.trim() === description?.trim() &&
-    initialProjectData?.project_name?.trim() === formik.values?.project_name &&
-    (initialProjectData?.media_urls?.length > 0 &&
-      initialProjectData?.media_urls[0]) ===
-      (mediaLinks?.length > 0 && mediaLinks[0]) &&
-    initialProjectData?.images == images &&
-    initialProjectData?.public === isPublic
-  ) {
-    disabled = true;
-  } else {
-    disabled = false;
-  }
+  const disabled = useMemo(() => {
+    const descriptionUnchanged =
+      (initialProjectData?.description || "").trim() ===
+      (description || "").trim();
+    const nameUnchanged =
+      (initialProjectData?.project_name || "").trim() ===
+      (formik.values?.project_name || "").trim();
+    const mediaUnchanged =
+      JSON.stringify(initialProjectData?.media_urls || []) ===
+      JSON.stringify(mediaLinks || []);
+    const imagesUnchanged =
+      JSON.stringify((initialProjectData?.images || []).map((i) => i.image)) ===
+      JSON.stringify((images || []).map((i) => i.image));
+    const publicUnchanged =
+      (initialProjectData?.public || false) === (isPublic || false);
+
+    return (
+      descriptionUnchanged &&
+      nameUnchanged &&
+      mediaUnchanged &&
+      imagesUnchanged &&
+      publicUnchanged
+    );
+  }, [
+    initialProjectData,
+    description,
+    formik.values?.project_name,
+    mediaLinks,
+    images,
+    isPublic,
+  ]);
 
   return (
     <div className="member-project-frame">
       <div className="member-form-box">
         <form className="formMembership" onSubmit={formik.handleSubmit}>
-          {status !== ACTIVE_STATUS && (
+          {isMembershipExpired ? (
             <DisclaimerBox
-              text={
-                !isMembershipExpired
-                  ? t("soci.perfil-gral")
-                  : t("soci.no-soci-perfil")
-              }
+              text={t("soci.no-soci-perfil")}
               id="project-disclaimer"
               closable
             />
-          )}
-          {!isMembershipExpired && (
-            <DisclaimerBox
-              text={t("info.project")}
-              id="project-disclaimer"
-              closable
-              style="light"
-            />
+          ) : (
+            <>
+              <DisclaimerBox
+                text={t("info.project")}
+                id="project-disclaimer-info"
+                closable
+                style="light"
+              />
+            </>
           )}
           {!isMembershipExpired && (
             <ToogleButton
@@ -234,7 +261,8 @@ const MemberProject = () => {
               </div>
             </>
           ) : (
-            <>
+            <div className="preview-frame">
+              <div className="preview-frame__label">{t("boto.preview")}</div>
               <PreviewerSociosDetailed
                 project_name={initialProjectData.project_name}
                 description={initialProjectData.description}
@@ -242,7 +270,7 @@ const MemberProject = () => {
                 media_urls={initialProjectData?.media_urls}
                 first_name={initialProjectData.username}
               />
-            </>
+            </div>
           )}
         </form>
       </div>

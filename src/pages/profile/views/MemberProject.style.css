@@ -7,7 +7,8 @@
   margin: 0 auto;
 }
 
-.member-project-frame #project-disclaimer {
+.member-project-frame #project-disclaimer,
+.member-project-frame #project-disclaimer-info {
   margin-top: 0px;
   margin-bottom: 20px;
 }
@@ -38,4 +39,23 @@
 
 .member-form-box #project-toogle-button {
   margin-bottom: 20px;
+}
+
+.preview-frame {
+  border: 3px solid var(--color-negro);
+  padding: 20px;
+  position: relative;
+}
+
+.preview-frame__label {
+  font-family: "Bebas Neue";
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background-color: var(--color-negro);
+  color: var(--color-cream);
+  padding: 4px 12px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }

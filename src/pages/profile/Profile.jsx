@@ -7,7 +7,6 @@ import { useTranslation } from "react-i18next";
 import Breadcrums from "../../components/breadcrums/Breadcrums";
 import useBreadcrumsSteps from "../../components/breadcrums/use-breadcrums-steps";
 import MemberProfile from "./views/MemberProfile";
-import QrView from "./views/QrView";
 import MemberProject from "./views/MemberProject";
 
 export default function Profile() {
@@ -22,7 +21,7 @@ export default function Profile() {
   const location = useLocation();
   const section = location.pathname.split("/")?.at(-1);
   const { step, changeStep } = useBreadcrumsSteps(
-    ["PROFILE", "PROJECT", "QR"].indexOf(section?.toUpperCase())
+    ["PROFILE", "PROJECT"].indexOf(section?.toUpperCase())
   );
 
   if (!isLoggedIn) {
@@ -33,11 +32,10 @@ export default function Profile() {
     ? [
         <MemberProfile isMember={isMember} key="member-profile" />,
         <MemberProject key="member-project" />,
-        <QrView key="qr-view-profile" />,
       ]
     : [<MemberProfile isMember={isMember} key="member-profile" />];
 
-  const profileOptions = isMember ? ["PROFILE", "PROJECT", "QR"] : ["PROFILE"];
+  const profileOptions = isMember ? ["PROFILE", "PROJECT"] : ["PROFILE"];
 
   return (
     <PageLayout
@@ -56,7 +54,7 @@ export default function Profile() {
           changeStep={changeStep}
         />
       )}
-      {arrView[step]}
+      {arrView[step] || arrView[0]}
     </PageLayout>
   );
 }

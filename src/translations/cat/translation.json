@@ -52,6 +52,7 @@
     "quota": "quota de soci/a",
     "professional": "professional",
     "localitzacio": "localització",
+    "link-compra": "link de compra",
     "preu": "preu",
     "afegir": "afegir a cistella",
     "descripcio": "descripció",
@@ -130,7 +131,8 @@
     "missatge-ppal": "Conèix els projectes dels nostres soci@s. Si vols que els teus apareguin aquí, fes-te soci@.",
     "perfil-gral": "Edita el teu projecte personal. Un cop guardats els canvis podràs visualitzar-ho a la vista de /soci@s",
     "no-soci-perfil": "Sembla que la teva membresia ha expirat. Per a poder editar el teu projecte personal, has de renovar la teva membresia.",
-    "carnet": "Aquest es el teu carnet de soci, amb ell podràs accedir a tots els descomptes, events i promocions que t'oferim."
+    "carnet": "Aquest es el teu carnet de soci, amb ell podràs accedir a tots els descomptes, events i promocions que t'oferim.",
+    "carnet-title": "Carnet de soci"
   },
   "general": {
     "agraiment": "Petició rebuda. Gràcies!",
@@ -147,7 +149,8 @@
       "gratis": "gratis",
       "cancelado": "cancelat",
       "caducado": "caducat",
-      "pago-taquilla": "pagament en taquilla"
+      "pago-taquilla": "pagament en taquilla",
+      "pago-externo": "comprar entrades"
     },
     "tooltip": {
       "pago": "Disponible",
@@ -158,6 +161,7 @@
       "cancelado": "Cancelat",
       "caducado": "Caducat",
       "pago-taquilla": "Pagament en taquilla",
+      "pago-externo": "Compra externa",
       "title": "Afegeix un títol al teu projecte",
       "description": "Afegeix una descripció al teu projecte, pots canviar el format del text amb l'editor.",
       "link": "Afegeix un link al teu projecte, de la teva web o dels teus perfils de media en format www o iframe",

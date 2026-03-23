@@ -8,10 +8,15 @@ export function getIDValuesFromArrayObj(ObjectArray = []) {
 }
 
 export function formatPrice(price = "") {
-  var fields = (String(price) || "")?.split(".");
-  if (fields && fields.length > 0 && fields[1] === "00€")
-    return fields[0] + "€";
-  return price;
+  const str = String(price) || "";
+  if (str.includes("€")) {
+    const fields = str.split(".");
+    if (fields.length > 1 && fields[1] === "00€") return fields[0] + "€";
+    return str;
+  }
+  const num = parseFloat(str);
+  if (isNaN(num)) return str;
+  return num % 1 === 0 ? num + "€" : num.toFixed(2) + "€";
 }
 
 export function getNFirstElementsOfArray(inArray = [], numberElements) {
@@ -118,14 +123,14 @@ export const truncate = (string, length) => {
 
 export const urlify = (text) => {
   const urlRegex = /(https?:\/\/[^\s]+)/g;
-  return text?.split(urlRegex).map((part) => {
+  return text?.split(urlRegex).map((part, i) => {
     if (part.match(urlRegex)) {
       return (
         // eslint-disable-next-line
-        <a href={part}>{part}</a>
+        <a key={i} href={part}>{part}</a>
       );
     }
-    return part;
+    return <React.Fragment key={i}>{part}</React.Fragment>;
   });
 };
 
@@ -212,7 +217,11 @@ export default function notificationToast(text = "", type = "success") {
 export const isDevMode = () => localStorage.getItem("dev") === "true";
 
 export const tinymceTextAreaFormatter = (val) =>
-  val?.replaceAll(/&nbsp;/g, "")?.replaceAll("<p></p>", "");
+  val
+    ?.replaceAll(/&nbsp;/g, "")
+    ?.replaceAll("<p></p>", "")
+    ?.replace(/^<p>\s*(<p>)/i, "$1")
+    ?.replace(/(<\/p>)\s*<\/p>$/i, "$1");
 
 export function isDateExpired(expiringMembershipDate) {
   if (!expiringMembershipDate) return false;

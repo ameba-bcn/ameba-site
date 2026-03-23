@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Icon from "../components/ui/Icon";
 import { formatPrice, urlify } from "../utils/utils";
 import Button from "../components/button/Button";
@@ -124,6 +124,29 @@ export default function ModalCard(props) {
       // Evento caducado
       if (todayIsoString > datetime) {
         return null;
+      }
+
+      // Evento de pago en plataforma externa (DICE, etc.)
+      if (price !== 0 && stock === -1 && maps_url?.includes("dice")) {
+        return (
+          <a href={maps_url} target="_blank" rel="noopener noreferrer">
+            <Button
+              variant="contained"
+              color="primary"
+              buttonSize="boton--medium"
+              disabled={false}
+              buttonStyle={
+                colorMode && colorMode === "dark"
+                  ? "boton--back-orange--solid"
+                  : "boton--primary--solid"
+              }
+              icon={buttonIcon}
+              onClick={() => {}}
+            >
+              {t("events.button.pago-externo")}
+            </Button>
+          </a>
+        );
       }
 
       // Evento de pago en taquilla
@@ -293,6 +316,29 @@ export default function ModalCard(props) {
         return null;
       }
 
+      // Evento de pago en plataforma externa (DICE, etc.)
+      if (price !== 0 && stock === -1 && maps_url?.includes("dice")) {
+        return (
+          <a href={maps_url} target="_blank" rel="noopener noreferrer">
+            <Button
+              variant="contained"
+              color="primary"
+              buttonSize="boton--megaxxl"
+              buttonStyle={
+                colorMode && colorMode === "dark"
+                  ? "boton--back-orange--solid"
+                  : "boton--primary--solid"
+              }
+              disabled={false}
+              icon={buttonIcon}
+              onClick={() => {}}
+            >
+              {t("events.button.pago-externo")} - {formatPrice(price)}
+            </Button>
+          </a>
+        );
+      }
+
       // Evento de pago en taquilla
       if (price !== 0 && stock === -1) {
         return (
@@ -383,6 +429,8 @@ export default function ModalCard(props) {
   };
 
   const isMobile = useMediaQuery(MOBILE_NORMAL);
+  const modalRef = useRef(null);
+  const animatedClose = () => modalRef.current?.requestClose();
   const types = productKinds;
   const [activeSize, setActiveSize] = useState([]);
   const [selectSizeError, setSelectSizeError] = useState(false);
@@ -430,7 +478,7 @@ export default function ModalCard(props) {
   }, []);
 
   return (
-    <ModalDialog onClose={handleClose} open={open}>
+    <ModalDialog ref={modalRef} onClose={handleClose} open={open}>
       {!isMobile && (
         <>
           <div
@@ -446,7 +494,7 @@ export default function ModalCard(props) {
               />
               <Icon
                 icon="clear"
-                onClick={handleClose}
+                onClick={animatedClose || handleClose}
                 type={
                   colorMode === "dark" ? "hoverable-dark" : "hoverable-cream"
                 }
@@ -481,10 +529,10 @@ export default function ModalCard(props) {
                 <div className="modal-card__column_thirtyfive">
                   <div className="modal-card___title_small">
                     <Icon
-                      icon="place"
+                      icon={maps_url?.includes("dice") ? "ticket" : "place"}
                       type={colorMode === "dark" ? "cream" : ""}
                     />{" "}
-                    <div>{t("modal.localitzacio")} / &nbsp;</div>
+                    <div>{maps_url?.includes("dice") ? t("modal.link-compra") : t("modal.localitzacio")} / &nbsp;</div>
                   </div>
                 </div>
                 <div className="interactiveDataBox-activitat__text-loca">
@@ -497,7 +545,7 @@ export default function ModalCard(props) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {address}
+                    {maps_url?.includes("dice") ? maps_url : address}
                   </a>
                 </div>
               </div>
@@ -568,7 +616,7 @@ export default function ModalCard(props) {
             />
             <Icon
               icon="clear"
-              onClick={handleClose}
+              onClick={animatedClose || handleClose}
               type={colorMode === "dark" ? "hoverable-dark" : "hoverable-cream"}
             />
             {copied ? (

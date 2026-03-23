@@ -6,11 +6,11 @@
 }
 
 .toogle-button button {
-  border-radius: 0px 25px 25px 0px;
+  border-radius: 0;
 }
 
 .toogle-button button:first-of-type {
-  border-radius: 25px 0px 0px 25px;
+  border-radius: 0;
 }
 
 .toogle-button button:hover {
