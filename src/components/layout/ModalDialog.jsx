@@ -1,16 +1,37 @@
-import React, { useRef, useState } from "react";
-import "./ModalDialog.css";
+import React, {
+  useRef,
+  useState,
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
 import useOutsideClick from "../../hooks/use-outside-click";
+import "./ModalDialog.css";
 
-const ModalDialog = ({ children, onClose }) => {
-  const dialogRef = useRef("ModalDialog ");
-  const [firstClicked, setfirstClicked] = useState(false);
+const ModalDialog = forwardRef(({ children, onClose }, ref) => {
+  const dialogRef = useRef(null);
+  const [firstClicked, setFirstClicked] = useState(false);
+  const [closing, setClosing] = useState(false);
+
+  const requestClose = useCallback(() => {
+    if (closing) return;
+    setClosing(true);
+    setTimeout(() => {
+      onClose();
+    }, 250);
+  }, [onClose, closing]);
+
+  useImperativeHandle(ref, () => ({
+    requestClose,
+  }));
+
   useOutsideClick(dialogRef, () => {
-    setfirstClicked(true);
-    firstClicked && onClose();
+    setFirstClicked(true);
+    if (firstClicked) requestClose();
   });
+
   return (
-    <div className="modal-dialog">
+    <div className={`modal-dialog${closing ? " modal-dialog--closing" : ""}`}>
       <div className="backdrop-root">
         <div className="dialog-container">
           <div className="dialog-paper" ref={dialogRef}>
@@ -20,6 +41,8 @@ const ModalDialog = ({ children, onClose }) => {
       </div>
     </div>
   );
-};
+});
+
+ModalDialog.displayName = "ModalDialog";
 
 export default ModalDialog;

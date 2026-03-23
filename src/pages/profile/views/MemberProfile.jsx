@@ -4,14 +4,13 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import useAuthStore from "../../../stores/useAuthStore";
 import SociDialog from "../../../components/botiga/Soci";
-// import Button from "../../../components/button/Button";
 import MembershipFormLayout from "../../../components/forms/MembershipForm/MembershipFormLayout";
 import MembershipFormReadOnly from "../../../components/forms/MembershipForm/MembershipFormReadOnly";
-// import { deleteUser } from "../../../redux/actions/auth";
 import "../../../styles/GlobalStyles.style.css";
 import "../../../styles/GlobalStyles.css";
 import "./MemberProfile.style.css";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
+import MemberQr from "./components/MemberQr";
 import { isDateExpired } from "../../../utils/utils";
 
 export default function MemberProfile({ setButtonDisabled, isMember }) {
@@ -24,14 +23,10 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
     setOpen(!open);
   };
   const isMembershipExpired = isDateExpired(expires);
-  // const unsubscribeUser = () => {
-  //   dispatch(deleteUser());
-  // };
 
   return (
     <div className="member-profile-frame">
       <div className="member-profile-box">
-        <div className="member-profile-title">{t("perfil.dades")}</div>
         <div className="member-profile-box-border">
           {isMember && isMembershipExpired && (
             <DisclaimerBox
@@ -42,6 +37,9 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
             />
           )}
 
+          {isMember && !isMembershipExpired && <MemberQr />}
+
+          <div className="member-profile-title">{t("perfil.dades")}</div>
           {isMember && !isMembershipExpired ? (
             <MembershipFormLayout setButtonDisabled={setButtonDisabled} />
           ) : (
@@ -54,7 +52,10 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
               <div className="member-info-row">
                 {t("perfil.vols-soci")}?<br />
                 <NavLink
-                  style={{ textDecoration: "none", color: "var(--color-negro)" }}
+                  style={{
+                    textDecoration: "none",
+                    color: "var(--color-negro)",
+                  }}
                   to={{
                     pathname: "/memberships",
                   }}
@@ -70,15 +71,6 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
             </>
           )}
 
-          {/* <Button
-            variant="contained"
-            color="primary"
-            buttonSize="boton--big"
-            buttonStyle="boton--primary--solid"
-            onClick={() => unsubscribeUser()}
-          >
-            {t("perfil.baixa")}
-          </Button> */}
           {memberships.length > 0 && !isMembershipExpired && (
             <DisclaimerBox
               text={
@@ -93,6 +85,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
             />
           )}
         </div>
+
         {open && <SociDialog open={open} onClose={handleClick} />}
       </div>
     </div>
