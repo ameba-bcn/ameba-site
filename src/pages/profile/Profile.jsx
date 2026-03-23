@@ -28,6 +28,10 @@ export default function Profile() {
     return <Navigate to="/" replace />;
   }
 
+  if (location.pathname === "/profile") {
+    return <Navigate to="/profile/profile" replace />;
+  }
+
   const arrView = isMember
     ? [
         <MemberProfile isMember={isMember} key="member-profile" />,

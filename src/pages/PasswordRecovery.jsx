@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import PageLayout from "../components/layout/PageLayout/PageLayout";
 import PasswordRecoveryForm from "./../components/forms/PasswordRecoveryForm/PasswordRecoveryForm";
 import "../styles/GlobalStyles.css";
 
-export default function PasswordRecovery(props) {
+export default function PasswordRecovery() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [strToken, setStrToken] = useState("");
-  const parsed = Object.fromEntries(new URLSearchParams(props.location.search));
+  const location = useLocation();
   const [t] = useTranslation("translation");
 
   useEffect(() => {
+    const parsed = Object.fromEntries(new URLSearchParams(location.search));
     setStrToken(parsed["token"] || parsed["?token"]);
-  }, [parsed, strToken, setStrToken]);
+  }, [location.search]);
 
   return (
     <PageLayout

@@ -118,7 +118,7 @@ const InteractiveModalBox = (props) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {maps_url?.includes("dice") ? maps_url : address}
+                  {maps_url?.includes("dice") ? t("events.button.pago-externo") : address}
                 </a>
               </div>
             </div>
