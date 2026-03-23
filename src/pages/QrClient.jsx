@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 import stateService from "./../store/services/profile.services";
 import PageLayout from "../components/layout/PageLayout/PageLayout";
 
-export default function QrClient(props) {
+export default function QrClient() {
   const [data, setData] = useState({});
-  const parsed = Object.fromEntries(new URLSearchParams(props.location.search));
+  const location = useLocation();
   const [t] = useTranslation("translation");
 
   useEffect(() => {
-    if (parsed["token"].length > 0) {
-      stateService
-        .getCarnet(parsed["token"] || parsed["?token"])
-        ?.then((data) => {
-          setData(data);
-        });
+    const parsed = Object.fromEntries(new URLSearchParams(location.search));
+    const token = parsed["token"] || parsed["?token"];
+    if (token?.length > 0) {
+      stateService.getCarnet(token)?.then((data) => {
+        setData(data);
+      });
     }
-  }, [parsed]);
+  }, [location.search]);
 
   return (
     <PageLayout

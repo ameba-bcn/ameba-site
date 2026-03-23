@@ -545,7 +545,7 @@ export default function ModalCard(props) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {maps_url?.includes("dice") ? maps_url : address}
+                    {maps_url?.includes("dice") ? t("events.button.pago-externo") : address}
                   </a>
                 </div>
               </div>
@@ -579,9 +579,11 @@ export default function ModalCard(props) {
               />
               {buttonMapper(type)}
             </div>
-            <hr
-              className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
-            />
+            {!(maps_url?.includes("dice")) && (
+              <hr
+                className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
+              />
+            )}
             <div className="modal-card__description-title">{box1Title}</div>
             <div className="modal-card__description-content">
               {urlify(box1Text)}

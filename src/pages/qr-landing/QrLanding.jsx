@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import { AMEBA_EMAIL, BASE_URL, radioDublabLink } from "../../utils/constants";
@@ -7,13 +8,14 @@ import "../../styles/GlobalStyles.css";
 import "./QrLanding.css";
 import axiosInstance from "../../axios";
 
-const QrLanding = (props) => {
+const QrLanding = () => {
   const [memberData, setMemberData] = useState({});
-
+  const location = useLocation();
   const [t] = useTranslation("translation");
-  const parsed = Object.fromEntries(new URLSearchParams(props.location.search));
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
+    const parsed = Object.fromEntries(new URLSearchParams(location.search));
     const strToken = parsed["token"] || parsed["?token"];
     axiosInstance
       .get(BASE_URL + `member_card/?token=${strToken}`, {})
@@ -24,7 +26,7 @@ const QrLanding = (props) => {
       .catch(() => {
         setLoading(false);
       });
-  }, [parsed]);
+  }, [location.search]);
 
   return (
     <PageLayout

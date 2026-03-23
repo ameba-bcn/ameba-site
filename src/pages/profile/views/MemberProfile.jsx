@@ -37,8 +37,6 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
             />
           )}
 
-          {isMember && !isMembershipExpired && <MemberQr />}
-
           <div className="member-profile-title">{t("perfil.dades")}</div>
           {isMember && !isMembershipExpired ? (
             <MembershipFormLayout setButtonDisabled={setButtonDisabled} />
@@ -84,6 +82,8 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
               closable
             />
           )}
+
+          {isMember && !isMembershipExpired && <MemberQr />}
         </div>
 
         {open && <SociDialog open={open} onClose={handleClick} />}

@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router-dom";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import { AMEBA_EMAIL } from "../../utils/constants";
 import "../../styles/GlobalStyles.css";
 import useProfileStore from "../../stores/useProfileStore";
 
-export default function SubscriptionFinished(props) {
+export default function SubscriptionFinished() {
   const subscribeNewsletter = useProfileStore((state) => state.subscribeNewsletter);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [t] = useTranslation("translation");
-
-  const parsed = Object.fromEntries(new URLSearchParams(props.location.search));
-  let email = parsed["email"]?.trim() || parsed["?email"]?.trim();
-  // Un email con un '+' lo recupera como espaciado, hay que reconstruirlo
-  if (email && email.indexOf(" ") > 0) email = email.replace(" ", "+");
+  const location = useLocation();
 
   useEffect(() => {
+    const parsed = Object.fromEntries(new URLSearchParams(location.search));
+    let email = parsed["email"]?.trim() || parsed["?email"]?.trim();
+    if (email && email.indexOf(" ") > 0) email = email.replace(" ", "+");
     if (email && email.length > 0)
       subscribeNewsletter(email).then(setIsSubmitted(true));
-  }, [email, subscribeNewsletter]);
+  }, [location.search, subscribeNewsletter]);
 
   return (
     <PageLayout
