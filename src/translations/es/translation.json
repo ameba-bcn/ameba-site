@@ -52,6 +52,7 @@
     "quota": "cuota de socio/a",
     "professional": "profesional",
     "localitzacio": "localización",
+    "link-compra": "link de compra",
     "preu": "precio",
     "afegir": "añadir a la cesta",
     "descripcio": "descripción",
@@ -148,7 +149,8 @@
       "gratis": "gratis",
       "cancelado": "cancelado",
       "caducado": "caducado",
-      "pago-taquilla": "pago en taquilla"
+      "pago-taquilla": "pago en taquilla",
+      "pago-externo": "comprar entradas"
     },
     "tooltip": {
       "pago": "Disponible",
@@ -159,6 +161,7 @@
       "cancelado": "Cancelado",
       "caducado": "Caducado",
       "pago-taquilla": "Pago en taquilla",
+      "pago-externo": "Compra externa",
       "title": "Añade un título a tu proyecto",
       "description": "Añade una descripción a tu proyecto, puedes cambiar el formato del texto con el editor.",
       "link": "Añade un link a tu proyecto, de tu web o de tus perfiles de media en formato www o iframe",

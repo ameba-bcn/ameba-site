@@ -246,6 +246,8 @@ hr>.modal-card__hr_dashed {
     text-align: start;
     flex-grow: 1;
     line-height: initial;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .modal-card-location__row {
@@ -316,7 +318,7 @@ hr>.modal-card__hr_dashed {
     color: var(--color-negro);
 }
 
-.interactiveDataBox-activitat__text-loca-fullview {
+.interactiveDataBox-activitat__text-loca,.interactiveDataBox-activitat__text-loca-fullview {
     text-align: left;
 }
 

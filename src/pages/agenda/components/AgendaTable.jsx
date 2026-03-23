@@ -105,6 +105,21 @@ const AgendaTable = () => {
         />
       );
 
+    // Evento de pago en plataforma externa (DICE, etc.)
+    if (price !== 0 && stock === -1 && data.maps_url?.includes("dice"))
+      return (
+        <a href={data.maps_url} target="_blank" rel="noopener noreferrer">
+          <Icon
+            icon="ticket"
+            className="cardActivitat"
+            disabled={false}
+            type="hoverable-cream"
+            onClick={() => {}}
+            tooltip={t("events.tooltip.pago-externo")}
+          />
+        </a>
+      );
+
     // Evento de pago en taquilla
     if (price !== 0 && stock === -1)
       return (

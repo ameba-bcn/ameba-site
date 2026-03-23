@@ -151,8 +151,8 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
           {modalStyle === "ACTIVITAT" && (
             <div className="modal-card-location__row">
               <div className="modal-card___title_small">
-                <Icon icon="place" />{" "}
-                <div>{t("modal.localitzacio")} / &nbsp;</div>
+                <Icon icon={maps_url?.includes("dice") ? "ticket" : "place"} />{" "}
+                <div>{maps_url?.includes("dice") ? t("modal.link-compra") : t("modal.localitzacio")} / &nbsp;</div>
               </div>
               <div className="interactiveDataBox-activitat__text-loca-fullview">
                 <a
@@ -162,7 +162,7 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {address}
+                  {maps_url?.includes("dice") ? maps_url : address}
                 </a>
               </div>
             </div>

@@ -52,6 +52,7 @@
     "quota": "quota de soci/a",
     "professional": "professional",
     "localitzacio": "localització",
+    "link-compra": "link de compra",
     "preu": "preu",
     "afegir": "afegir a cistella",
     "descripcio": "descripció",
@@ -148,7 +149,8 @@
       "gratis": "gratis",
       "cancelado": "cancelat",
       "caducado": "caducat",
-      "pago-taquilla": "pagament en taquilla"
+      "pago-taquilla": "pagament en taquilla",
+      "pago-externo": "comprar entrades"
     },
     "tooltip": {
       "pago": "Disponible",
@@ -159,6 +161,7 @@
       "cancelado": "Cancelat",
       "caducado": "Caducat",
       "pago-taquilla": "Pagament en taquilla",
+      "pago-externo": "Compra externa",
       "title": "Afegeix un títol al teu projecte",
       "description": "Afegeix una descripció al teu projecte, pots canviar el format del text amb l'editor.",
       "link": "Afegeix un link al teu projecte, de la teva web o dels teus perfils de media en format www o iframe",
