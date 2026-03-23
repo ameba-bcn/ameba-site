@@ -291,6 +291,10 @@ hr>.modal-card__hr_dashed {
     margin: 10px 0px 20px 0px;
 }
 
+.modal-card-mobile__button-wrapper a {
+    text-decoration: none;
+    width: 100%;
+}
 
 /* InteractiveDataBox */
 

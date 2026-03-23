@@ -129,7 +129,7 @@ const AgendaTable = () => {
           disabled={false}
           type="hoverable-cream"
           onClick={() => {}}
-          tooltip={t("events.tooltip.pago-taquilla")}
+          tooltip={`${t("events.tooltip.pago-taquilla")} / ${t("events.tooltip.pago-externo")}`}
         />
       );
 

@@ -4,6 +4,11 @@
   width: 100%;
 }
 
+.modal-row a {
+  text-decoration: none;
+  width: 100%;
+}
+
 .modal-row button {
   width: 100%;
   margin: 0 auto;
