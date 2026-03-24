@@ -158,7 +158,11 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
                   </div>
                   <div className="interactiveDataBox-activitat__text-loca-fullview">
                     <a
-                      href={maps_url?.length > 0 ? maps_url : "https://google.com/maps"}
+                      href={
+                        maps_url?.length > 0
+                          ? maps_url
+                          : "https://google.com/maps"
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -170,7 +174,9 @@ const ExternalEvent = ({ productData = {}, kind = "", handleAddClick }) => {
               {maps_url?.includes("dice") && (
                 <div className="modal-card___title_small">
                   <Icon icon="ticket" />{" "}
-                  <span>{t("modal.link-compra")} / &nbsp;</span>
+                  <span className="modal-card___title_small__tickets">
+                    {t("modal.link-compra")} / &nbsp;
+                  </span>
                   <a
                     href={maps_url}
                     target="_blank"

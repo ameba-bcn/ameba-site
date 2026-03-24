@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import "./ModalCardStyled.css";
+import "./Modals.css";
 import { formatDateToHour, priceMayDiscount } from "../utils/utils";
 import Icon from "../components/ui/Icon";
 
@@ -54,8 +55,8 @@ const InteractiveModalBox = (props) => {
               {productSoldOut
                 ? t("modal.esgotat")
                 : isMobile
-                ? t("modal.talles").split(" ")[0]
-                : t("modal.talles")}{" "}
+                  ? t("modal.talles").split(" ")[0]
+                  : t("modal.talles")}{" "}
               / &nbsp;
             </span>
           </div>
@@ -109,12 +110,19 @@ const InteractiveModalBox = (props) => {
               {!maps_url?.includes("dice") && (
                 <>
                   <div className="modal-card___title_small">
-                    <Icon icon="place" type={colorMode === "dark" ? "cream" : ""} />{" "}
+                    <Icon
+                      icon="place"
+                      type={colorMode === "dark" ? "cream" : ""}
+                    />{" "}
                     <span>{t("modal.localitzacio")} / &nbsp;</span>
                   </div>
                   <div className="interactiveDataBox-activitat__text-loca">
                     <a
-                      href={maps_url?.length > 0 ? maps_url : "https://google.com/maps"}
+                      href={
+                        maps_url?.length > 0
+                          ? maps_url
+                          : "https://google.com/maps"
+                      }
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -125,8 +133,13 @@ const InteractiveModalBox = (props) => {
               )}
               {maps_url?.includes("dice") && (
                 <div className="modal-card___title_small">
-                  <Icon icon="ticket" type={colorMode === "dark" ? "cream" : ""} />{" "}
-                  <span>{t("modal.link-compra")} / &nbsp;</span>
+                  <Icon
+                    icon="ticket"
+                    type={colorMode === "dark" ? "cream" : ""}
+                  />{" "}
+                  <span className="modal-card___title_small__tickets">
+                    {t("modal.link-compra")} / &nbsp;
+                  </span>
                   <a
                     href={maps_url}
                     target="_blank"

@@ -259,7 +259,7 @@ export default function ModalCard(props) {
               handleAddToCard(id);
             }}
           >
-            {t("events.button.gratis-inscripcion")} - {formatPrice(price)}
+            {t("events.button.gratis-inscripcion")}
           </Button>
         );
       }
@@ -280,7 +280,7 @@ export default function ModalCard(props) {
             icon={buttonIcon}
             onClick={() => {}}
           >
-            {t("events.button.gratis-aforo-completo")} - {formatPrice(price)}
+            {t("events.button.gratis-aforo-completo")}
           </Button>
         );
       }
@@ -306,7 +306,7 @@ export default function ModalCard(props) {
             icon={buttonIcon}
             onClick={() => {}}
           >
-            {t("events.button.cancelado")} - {formatPrice(price)}
+            {t("events.button.cancelado")}
           </Button>
         );
       }
@@ -333,7 +333,7 @@ export default function ModalCard(props) {
               icon={buttonIcon}
               onClick={() => {}}
             >
-              {t("events.button.pago-externo")} - {formatPrice(price)}
+              {t("events.button.pago-externo")}
             </Button>
           </a>
         );
@@ -357,7 +357,7 @@ export default function ModalCard(props) {
               handleAddToCard(id);
             }}
           >
-            {t("events.button.pago-taquilla")} - {formatPrice(price)}
+            {t("events.button.pago-taquilla")}
           </Button>
         );
       }
@@ -380,7 +380,7 @@ export default function ModalCard(props) {
               handleAddToCard(id);
             }}
           >
-            {t("events.button.pago")} - {formatPrice(price)}
+            {t("events.button.pago")}
           </Button>
         );
 
@@ -400,7 +400,7 @@ export default function ModalCard(props) {
             icon={buttonIcon}
             onClick={() => {}}
           >
-            {t("events.button.pago-sold")} - {formatPrice(price)}
+            {t("events.button.pago-sold")}
           </Button>
         );
       }
@@ -422,7 +422,7 @@ export default function ModalCard(props) {
             handleAddToCard(id);
           }}
         >
-          {t("modal.afegir")}- {formatPrice(price)}
+          {t("modal.afegir")}
         </Button>
       );
     }
@@ -539,7 +539,11 @@ export default function ModalCard(props) {
                     </div>
                     <div className="interactiveDataBox-activitat__text-loca">
                       <a
-                        href={maps_url?.length > 0 ? maps_url : "https://google.com/maps"}
+                        href={
+                          maps_url?.length > 0
+                            ? maps_url
+                            : "https://google.com/maps"
+                        }
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -596,7 +600,7 @@ export default function ModalCard(props) {
               />
               {buttonMapper(type)}
             </div>
-            {!(maps_url?.includes("dice")) && (
+            {!maps_url?.includes("dice") && (
               <hr
                 className={`modal-card__hr_dashed modal-card__hr_dashed-${colorMode}`}
               />
