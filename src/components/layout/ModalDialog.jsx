@@ -2,6 +2,7 @@ import React, {
   useRef,
   useState,
   useCallback,
+  useEffect,
   forwardRef,
   useImperativeHandle,
 } from "react";
@@ -12,6 +13,13 @@ const ModalDialog = forwardRef(({ children, onClose }, ref) => {
   const dialogRef = useRef(null);
   const [firstClicked, setFirstClicked] = useState(false);
   const [closing, setClosing] = useState(false);
+
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
 
   const requestClose = useCallback(() => {
     if (closing) return;
