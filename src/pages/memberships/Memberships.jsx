@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "../../stores/useAuthStore";
 import useDataStore from "../../stores/useDataStore";
@@ -16,12 +16,13 @@ import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import Icon from "../../components/ui/Icon";
 import useMediaQuery from "../../hooks/use-media-query";
 import "../../components/externalEvents/ExternalEvent.css";
+import "../../modals/Modals.css";
 import "./Memberships.css";
 
 const Memberships = () => {
   const [t] = useTranslation("translation");
   const { membership = [] } = useDataStore();
-  const [productData, setProductData] = useState(membership[0]);
+  const productData = membership[0];
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const { cart_data = {}, addToCart } = useCartStore();
   const { item_variants = [] } = cart_data;
@@ -49,10 +50,6 @@ const Memberships = () => {
   const box1Title = t("modal.descripcio");
   const box2Title = t("modal.beneficis");
   const checkoutRedirect = isLoggedIn ? "/checkout" : "/login";
-
-  useEffect(() => {
-    setProductData(membership[0]);
-  }, [membership]);
 
   const handleAddClick = () => {
     addToCart(variants[0]);

@@ -275,6 +275,18 @@ hr>.modal-card__hr_dashed {
     margin-left: 4px;
 }
 
+.modal-card___title_small a,
+.modal-card___title_small a:visited,
+.modal-card___title_small a:active {
+    color: var(--color-negro);
+    text-decoration: none;
+}
+
+.modal-card___title_small__tickets{
+    text-align: left;
+    line-height: 1.5rem;
+}
+
 .modal-card__button-wrapper {
     display: flex;
     justify-content: center;
