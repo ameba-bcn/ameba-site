@@ -6,7 +6,6 @@ import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import useDataStore from "../stores/useDataStore";
 import "./Contacte.styles.css";
-import "../styles/GlobalStyles.css";
 
 function Contacte() {
   const [t] = useTranslation("translation");

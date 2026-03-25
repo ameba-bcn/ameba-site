@@ -7,7 +7,6 @@ import CardLayout from "../../components/layout/CardLayout/CardLayout";
 import SearchBox from "../../components/searchBox/SearchBox";
 import Pagination from "../../components/pagination/Pagination";
 import { ACTIVE_STATUS } from "../../utils/constants";
-import "../../styles/GlobalStyles.css";
 import "./Socios.css";
 
 const PAGE_SIZE = 20;

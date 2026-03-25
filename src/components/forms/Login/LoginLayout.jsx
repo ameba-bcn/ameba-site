@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Navigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
-import "../../../styles/GlobalStyles.css";
 import useCartStore from "../../../stores/useCartStore";
 
 const LoginLayout = (props) => {

@@ -57,3 +57,61 @@ iframe#webpack-dev-server-client-overlay {
     justify-content: center;
     align-items: center;
 }
+
+/* Global utility classes */
+
+.height-block {
+  display: flex;
+  width: 100%;
+  height: var(--height-block-h, 24px);
+}
+
+.styled-link {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: var(--color-negro) !important;
+  margin-top: 12px;
+  font-weight: 300;
+}
+
+.styled-link--center {
+  margin-top: 0px;
+}
+
+.styled-link--bold {
+  font-weight: 600;
+}
+
+.styled-link a {
+  text-decoration: none;
+  color: var(--color-negro) !important;
+}
+
+.styled-link:hover {
+  text-decoration: underline !important;
+}
+
+.title-inner-section {
+  font-size: 40px;
+  font-family: "Bebas Neue";
+  font-weight: 400;
+}
+
+.row-separator {
+  width: var(--row-separator-width, 85%);
+  height: 2px;
+  border-bottom: var(--row-separator-border, 2px solid black);
+  margin: 5px auto;
+}
+
+.styled-main-column-view {
+  padding: 0 60px;
+  margin-bottom: 60px;
+}
+
+@media screen and (max-width: 980px) {
+  .styled-main-column-view {
+    padding: 0 20px;
+  }
+}

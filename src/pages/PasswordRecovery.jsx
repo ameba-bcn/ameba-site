@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
 import PageLayout from "../components/layout/PageLayout/PageLayout";
 import PasswordRecoveryForm from "./../components/forms/PasswordRecoveryForm/PasswordRecoveryForm";
-import "../styles/GlobalStyles.css";
 
 export default function PasswordRecovery() {
   const [isSubmitted, setIsSubmitted] = useState(false);

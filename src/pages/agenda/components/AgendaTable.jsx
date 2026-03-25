@@ -18,7 +18,6 @@ import {
 import Icon from "../../../components/ui/Icon";
 import ActivitatDialog from "./Activitat";
 import "./AgendaTable.styled.css";
-import "../../../styles/GlobalStyles.style.css";
 import axiosInstance from "../../../axios";
 import { API_URL } from "../../../utils/constants";
 import SearchBox from "../../../components/searchBox/SearchBox";

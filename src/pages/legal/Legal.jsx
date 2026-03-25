@@ -4,8 +4,6 @@ import { radioDublabLink } from "../../utils/constants";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import dataService from "../../store/services/data.service";
-import "../../styles/GlobalStyles.style.css";
-import "../../styles/GlobalStyles.css";
 import "./Legal.css";
 import Icon from "../../components/ui/Icon";
 
