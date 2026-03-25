@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
 import FullscreenSpinner from "./components/spinner/FullscreenSpinner";
+import NavigationProgress from "./components/spinner/NavigationProgress";
 import lazyWithRetry from "./utils/lazyWithRetry";
 import "./App.css";
 
@@ -44,6 +45,7 @@ function App() {
   const [user, setUser] = useState(null);
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
   const isFullscreenOpen = useUIStore((state) => state.isFullscreenOpen);
+  const isNavigating = useUIStore((state) => state.isNavigating);
   const validateLocalToken = useAuthStore((state) => state.validateLocalToken);
   const getUserData = useAuthStore((state) => state.getUserData);
   const getMemberProfile = useAuthStore((state) => state.getMemberProfile);
@@ -103,6 +105,8 @@ function App() {
       <UserContext.Provider value={value}>
         <div className="app-main-view">
           <ScrollTop showBelow={250} />
+          <NavigationProgress />
+          {isNavigating && <FullscreenSpinner />}
           <Suspense fallback={<FullscreenSpinner />}>
             <Routes>
               <Route path="/activitats" element={<Agenda />} />

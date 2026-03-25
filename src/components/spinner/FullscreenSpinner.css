@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
   opacity: 0;
-  animation: overlay-enter 0.5s ease-out 0.5s forwards;
+  animation: overlay-enter 0.4s ease-out 0.15s forwards;
 }
 
 .fullscreen-spinner-overlay.closing {

@@ -143,7 +143,7 @@ export default function ModalCard(props) {
               icon={buttonIcon}
               onClick={() => {}}
             >
-              {t("events.button.pago-externo")}
+              {t("events.button.pago")}
             </Button>
           </a>
         );
@@ -333,7 +333,7 @@ export default function ModalCard(props) {
               icon={buttonIcon}
               onClick={() => {}}
             >
-              {t("events.button.pago-externo")}
+              {t("events.button.pago")}
             </Button>
           </a>
         );

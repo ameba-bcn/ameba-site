@@ -10,7 +10,16 @@
 .spinner-logo {
   width: 100px;
   height: 100px;
-  animation: spinner 4s infinite linear;
+  color: var(--color-negro);
+  animation: spinner 4s infinite linear, spinner-color-cycle 8s infinite;
+}
+
+@keyframes spinner-color-cycle {
+  0% { color: var(--color-negro); }
+  25% { color: var(--color-cream); }
+  50% { color: var(--color-rojo); }
+  75% { color: var(--color-naranja); }
+  100% { color: var(--color-negro); }
 }
 
 @keyframes spinner {
