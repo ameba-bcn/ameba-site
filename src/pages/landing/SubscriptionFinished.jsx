@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from "react-router-dom";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import { AMEBA_EMAIL } from "../../utils/constants";
-import "../../styles/GlobalStyles.css";
 import useProfileStore from "../../stores/useProfileStore";
 
 export default function SubscriptionFinished() {

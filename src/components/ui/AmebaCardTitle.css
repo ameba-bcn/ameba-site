@@ -1,7 +1,7 @@
 .ameba-card-title {
   display: block;
   position: relative;
-  left: -1rem;
+  left: var(--title-offset, 0);
   font-size: clamp(1rem, 14cqi, var(--max-title-size, 200px));
   line-height: 1;
   overflow: var(--title-overflow);
@@ -26,7 +26,7 @@
   text-transform: uppercase;
   color: var(--title-color, #fae6c5);
   z-index: 999;
-  margin: 2rem;
+  margin: var(--title-margin, 0);
   font-weight: 800;
   font-style: var(--title-font-style, italic);
 }

@@ -3,7 +3,6 @@ import { sanitizeHTML } from "../../../utils/sanitize";
 import TitleSection from "../../../components/layout/TitleSection";
 import ImageCarousel from "../../../components/images/ImageCarousel";
 import LinkBox from "../../../components/link-box/LinkBox";
-import "../../../styles/GlobalStyles.style.css";
 
 const PreviewerSociosDetailed = (props) => {
   const {

@@ -7,7 +7,6 @@ import ImageCarousel from "../../../components/images/ImageCarousel";
 import LettersMove from "../../../components/layout/LettersMove";
 import { API_URL } from "../../../utils/constants";
 import "./SociosDetailed.css";
-import "../../../styles/GlobalStyles.style.css";
 import LinkBox from "../../../components/link-box/LinkBox";
 import TitleSection from "../../../components/layout/TitleSection";
 import useDataStore from "../../../stores/useDataStore";

@@ -4,7 +4,6 @@ import SociDialog from "../../botiga/Soci";
 import RegisterForm from "./RegisterForm";
 import { useTranslation } from "react-i18next";
 import Icon from "../../ui/Icon";
-import "../../../styles/GlobalStyles.css";
 import "./RegisterLayout.css";
 import useProfileStore from "../../../stores/useProfileStore";
 

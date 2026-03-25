@@ -42,6 +42,8 @@ export default function CardLayout(props) {
                 className="cardSupportTitle"
                 maxSize={400}
                 overflow="inherit"
+                margin="2rem"
+                offset="-1rem"
               >
                 {project_name ? project_name : name}
               </AmebaCardTitle>

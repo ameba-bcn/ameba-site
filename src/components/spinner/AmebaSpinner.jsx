@@ -9,7 +9,7 @@ const AmebaSpinner = ({ height, color = "black" }) => {
       style={height ? { minHeight: `${height}px` } : undefined}
     >
       <div className="spinner-logo">
-        <AmebaLogo width="100" height="100" fill="var(--color-negro)" />
+        <AmebaLogo width="100" height="100" fill="currentColor" />
       </div>
     </div>
   );

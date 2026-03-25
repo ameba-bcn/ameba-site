@@ -10,6 +10,10 @@ const useUIStore = create((set) => ({
   isFullscreenOpen: false,
   isSiteUnavailableOpen: true,
 
+  // Navigation loading
+  isNavigating: false,
+  setNavigating: (value) => set({ isNavigating: value }),
+
   // Menu actions
   openMenu: () => set({ isMenuOpen: true }),
   closeMenu: () => set({ isMenuOpen: false }),

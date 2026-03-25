@@ -6,8 +6,6 @@ import useAuthStore from "../../../stores/useAuthStore";
 import SociDialog from "../../../components/botiga/Soci";
 import MembershipFormLayout from "../../../components/forms/MembershipForm/MembershipFormLayout";
 import MembershipFormReadOnly from "../../../components/forms/MembershipForm/MembershipFormReadOnly";
-import "../../../styles/GlobalStyles.style.css";
-import "../../../styles/GlobalStyles.css";
 import "./MemberProfile.style.css";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import MemberQr from "./components/MemberQr";

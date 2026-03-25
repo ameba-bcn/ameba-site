@@ -301,11 +301,20 @@ hr>.modal-card__hr_dashed {
     display: flex;
     justify-content: center;
     margin: 10px 0px 20px 0px;
+    max-width: 100%;
 }
 
 .modal-card-mobile__button-wrapper a {
     text-decoration: none;
     width: 100%;
+}
+
+.modal-card-mobile__button-wrapper button {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box;
 }
 
 /* InteractiveDataBox */
@@ -444,12 +453,14 @@ hr>.modal-card__hr_dashed {
 }
 
 @media screen and (max-width: 500px) {
-    .modal-card-mobile__button-wrapper>button {
+    .modal-card-mobile__button-wrapper>button,
+    .modal-card-mobile__button-wrapper a>button {
         font-size: 25px;
         padding-left: 20px;
         padding-right: 20px;
     }
-    .modal-card-mobile__button-wrapper>button>svg {
+    .modal-card-mobile__button-wrapper>button>svg,
+    .modal-card-mobile__button-wrapper a>button>svg {
         width: 25px;
         height: 25px;
     }

@@ -4,7 +4,6 @@ import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import { AMEBA_EMAIL, BASE_URL, radioDublabLink } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
-import "../../styles/GlobalStyles.css";
 import "./QrLanding.css";
 import axiosInstance from "../../axios";
 
