@@ -1,7 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Navbar from "../navbar/Navbar";
-import "../../styles/GlobalStyles.css";
 import "./ErrorPage.css";
 
 const ErrorPage = () => {
