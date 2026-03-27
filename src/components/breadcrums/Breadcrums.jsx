@@ -9,16 +9,16 @@ const Breadcrums = (props) => {
     <div className="breadcrums">
       {steps.map((s, index) => (
         <NavLink
-          key={s}
+          key={s.path}
           className="menuOptions"
-          to={`/profile/${s?.toLowerCase()}`}
+          to={`/profile/${s.path}`}
         >
           {index !== 0 ? " / " : ""}
           <span
             className={step === index ? "active" : ""}
             onClick={() => changeStep(index)}
           >
-            {s}
+            {s.label}
           </span>{" "}
         </NavLink>
       ))}

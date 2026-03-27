@@ -1,9 +1,7 @@
 import React from "react";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import useAuthStore from "../../../stores/useAuthStore";
-import SociDialog from "../../../components/botiga/Soci";
 import MembershipFormLayout from "../../../components/forms/MembershipForm/MembershipFormLayout";
 import MembershipFormReadOnly from "../../../components/forms/MembershipForm/MembershipFormReadOnly";
 import "./MemberProfile.style.css";
@@ -15,11 +13,6 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
   const [t] = useTranslation("translation");
   const { user_member_data } = useAuthStore();
   const { memberships = [], expires = "" } = user_member_data || {};
-  const [open, setOpen] = useState(false);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
   const isMembershipExpired = isDateExpired(expires);
 
   return (
@@ -84,7 +77,6 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
           {isMember && !isMembershipExpired && <MemberQr />}
         </div>
 
-        {open && <SociDialog open={open} onClose={handleClick} />}
       </div>
     </div>
   );

@@ -484,9 +484,10 @@
 }
 
 .centered-element {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  min-height: 50vh;
   padding: 20px;
 }

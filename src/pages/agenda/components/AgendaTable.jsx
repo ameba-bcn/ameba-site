@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useProfileStore from "../../../stores/useProfileStore";
 import useDataStore from "../../../stores/useDataStore";
 import useCartStore from "../../../stores/useCartStore";
+import FilterBar from "../../../components/ui/FilterBar";
 import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import {
   formatDateToHour,
   formatISODateToDate,
   sortByDate,
 } from "../../../utils/utils";
 import Icon from "../../../components/ui/Icon";
-import ActivitatDialog from "./Activitat";
 import "./AgendaTable.styled.css";
 import axiosInstance from "../../../axios";
 import { API_URL } from "../../../utils/constants";
@@ -28,15 +28,32 @@ const AgendaTable = () => {
   const { agenda } = useDataStore();
   const { user_profile = "" } = useProfileStore();
   const { addToCart } = useCartStore();
+  const navigate = useNavigate();
   const [redirect, setRedirect] = useState(false);
-  const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [activeType, setActiveType] = useState(null);
   const checkoutRedirect = user_profile === "GUEST" ? "/login" : "/checkout";
   const [t] = useTranslation("translation");
   const isMobile = useMediaQuery("(max-width:1000px)");
   const today = new Date();
   const todayIsoString = today.toISOString();
+
+  const goToEvent = (data) => {
+    navigate(`/activitats/${data.id}`);
+  };
+
+  const fetchAndAdd = (rowData) => {
+    axiosInstance
+      .get(`${API_URL}events/${rowData.id}`, {})
+      .then((res) => {
+        const { variants } = res.data;
+        addToCart(variants[0]?.id);
+      })
+      .then(setRedirect(true))
+      .catch((error) => {
+        console.warn("ERROR", error.response);
+      });
+  };
 
   const eventIconMapper = (data, price, stock, eventDate, cancelled) => {
     // Evento cancelado
@@ -99,7 +116,7 @@ const AgendaTable = () => {
           className="cardActivitat"
           disabled={false}
           type="hoverable-cream"
-          onClick={() => fetchEvent(data)}
+          onClick={() => goToEvent(data)}
           tooltip={t("events.tooltip.gratis")}
         />
       );
@@ -168,52 +185,6 @@ const AgendaTable = () => {
         tooltip={t("events.tooltip.caducado")}
       />
     );
-  };
-
-  const [eventData, setEventData] = useState([
-    {
-      id: 0,
-      name: "",
-      price: "",
-      images: [""],
-      discount: "",
-      datetime: "",
-      address: "",
-      description: "",
-      saved: "",
-      purchased: "",
-      stock: 0,
-      is_active: false,
-      artists: [false],
-    },
-  ]);
-
-  const fetchAndAdd = (rowData) => {
-    axiosInstance
-      .get(`${API_URL}events/${rowData.id}`, {})
-      .then((res) => {
-        const { variants } = res.data;
-        addToCart(variants[0]?.id);
-      })
-      .then(setRedirect(true))
-      .catch((error) => {
-        console.warn("ERROR", error.response);
-      });
-  };
-
-  const fetchEvent = (data) => {
-    setLoading(true);
-    axiosInstance
-      .get(`${API_URL}events/${data.id}`, {})
-      .then((res) => {
-        setEventData(res.data);
-        setLoading(false);
-      })
-      .then(() => setOpen(true))
-      .catch((err) => {
-        setLoading(false);
-        console.warn("ERROR: ", err);
-      });
   };
 
   const columns = React.useMemo(
@@ -288,12 +259,21 @@ const AgendaTable = () => {
     [],
   );
 
-  const filteredAgenda = React.useMemo(
+  const types = useMemo(
+    () => [...new Set(agenda.map((e) => e.type).filter(Boolean))].sort(),
+    [agenda],
+  );
+
+  const filteredAgenda = useMemo(
     () =>
-      sortByDate(agenda).filter((activity) =>
-        activity?.name?.toLowerCase()?.includes(searchInput?.toLowerCase()),
-      ),
-    [agenda, searchInput],
+      sortByDate(agenda)
+        .filter((activity) =>
+          activity?.name?.toLowerCase()?.includes(searchInput?.toLowerCase()),
+        )
+        .filter((activity) =>
+          activeType ? activity.type === activeType : true,
+        ),
+    [agenda, searchInput, activeType],
   );
 
   const table = useReactTable({
@@ -321,6 +301,12 @@ const AgendaTable = () => {
     <div
       className={`styled-main-column-view agenda-table${agenda.length === 0 ? " agenda-table--empty" : ""}`}
     >
+      <FilterBar
+        items={types}
+        activeItem={activeType}
+        onSelect={setActiveType}
+        allLabel={t("gallery.tot")}
+      />
       {isMobile ? (
         <table>
           <thead>
@@ -343,7 +329,7 @@ const AgendaTable = () => {
                 <tr
                   key={row.id}
                   className="agenda-mobile-row"
-                  onClick={() => fetchEvent(row.original)}
+                  onClick={() => goToEvent(row.original)}
                 >
                   <td>
                     <div className="agenda-mobile-card">
@@ -406,7 +392,7 @@ const AgendaTable = () => {
                         key={cell.id}
                         onClick={() =>
                           cell.column.id !== "reserva" &&
-                          fetchEvent(row.original)
+                          goToEvent(row.original)
                         }
                       >
                         {flexRender(
@@ -423,15 +409,6 @@ const AgendaTable = () => {
         </table>
       )}
       {renderPagination()}
-      {open && (
-        <ActivitatDialog
-          open={open}
-          dataRow={eventData}
-          onClose={() => setOpen(false)}
-          setEventData={setEventData}
-          loading={loading}
-        />
-      )}
     </div>
   );
 };

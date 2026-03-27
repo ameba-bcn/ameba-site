@@ -106,7 +106,9 @@
     "vols-soci": "Vols ser soci",
     "mes-info": "més info aqui",
     "baixa": "Donar-se de baixa",
-    "baixa-missatge": "Per donar-te de baixa i cancel·lar la teva subscripció automàtica escriu un correu a"
+    "baixa-missatge": "Per donar-te de baixa i cancel·lar la teva subscripció automàtica escriu un correu a",
+    "breadcrumb-perfil": "PERFIL",
+    "breadcrumb-projecte": "PROJECTE"
   },
   "boto": {
     "cancela": "cancel·la",

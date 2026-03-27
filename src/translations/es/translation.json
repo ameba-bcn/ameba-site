@@ -106,7 +106,9 @@
     "vols-soci": "¿Quieres ser socio",
     "mes-info": "más info aquí",
     "baixa": "Darse de baja",
-    "baixa-missatge": "Para darte de baja y cancelar tu suscripción automática escribe un correo a"
+    "baixa-missatge": "Para darte de baja y cancelar tu suscripción automática escribe un correo a",
+    "breadcrumb-perfil": "PERFIL",
+    "breadcrumb-projecte": "PROYECTO"
   },
   "boto": {
     "cancela": "cancela",
