@@ -1,6 +1,6 @@
 {
   "name": "ameba-site",
-  "version": "3.4.15",
+  "version": "3.4.16",
   "private": true,
   "packageManager": "yarn@1.22.22",
   "homepage": "/",
@@ -12,8 +12,10 @@
     "@tinymce/tinymce-react": "^6.3.0",
     "axios": "^1.7.4",
     "formik": "^2.2.9",
+    "html2canvas": "^1.4.1",
     "i18next": "^21.2.4",
     "i18next-browser-languagedetector": "^6.1.2",
+    "jspdf": "^4.2.1",
     "react": "19",
     "react-dom": "19",
     "react-i18next": "^11.12.0",

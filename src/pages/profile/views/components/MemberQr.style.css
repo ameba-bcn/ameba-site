@@ -1,10 +1,11 @@
 .member-qr {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
   margin-bottom: 40px;
+  border-top: 1px solid var(--color-gris-claro);
+  padding-top: 20px;
 }
 
 .member-qr__title {
@@ -12,20 +13,189 @@
   font-family: "Bebas Neue";
   color: var(--color-negro);
   font-size: 3.3rem;
-  text-align: center;
+  text-align: left;
   width: 100%;
   margin-bottom: 8px;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-gris-claro);
 }
 
 .member-qr__description {
   font-size: 14px;
-  text-align: center;
+  text-align: left;
   color: var(--color-negro);
-  max-width: 400px;
+  width: 100%;
   margin-bottom: 20px;
 }
 
-.member-qr__image {
+/* ── Member Card ── */
+.member-card {
+  position: relative;
   width: 100%;
-  max-width: 280px;
+  max-width: 380px;
+  background: var(--color-naranja);
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* Header: logo + valid badge */
+.member-card__header {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.member-card__brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.member-card__logo {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-negro);
+  margin: 0;
+  line-height: 1;
+  letter-spacing: 2px;
+}
+
+.member-card__subtitle {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--color-negro);
+  margin: 2px 0 0;
+  letter-spacing: 1.5px;
+  font-weight: 400;
+}
+
+.member-card__valid-badge {
+  background: var(--color-negro);
+  color: var(--color-amarillo);
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 6px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* QR section */
+.member-card__qr-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.member-card__qr-frame {
+  background: #fff;
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+.member-card__qr-img {
+  width: 280px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Name & ID */
+.member-card__info {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.member-card__name {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-negro);
+  margin: 0 0 4px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.member-card__id {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1rem;
+  color: var(--color-negro);
+  margin: 0;
+  letter-spacing: 1px;
+  opacity: 0.75;
+}
+
+/* Footer: membership since + member type */
+.member-card__footer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  padding-top: 16px;
+}
+
+.member-card__footer-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.member-card__footer-item:last-child {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.member-card__footer-label {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  color: var(--color-negro);
+  letter-spacing: 1px;
+  opacity: 0.7;
+  margin-bottom: 2px;
+}
+
+.member-card__footer-value {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-negro);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.member-qr__download-btn {
+  margin-top: 16px;
+  min-width: 220px;
+}
+
+@media (max-width: 760px) {
+  .member-qr {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 }
