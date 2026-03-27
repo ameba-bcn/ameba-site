@@ -47,7 +47,6 @@ const SociosDetailed = () => {
         <div className="styled-main-column-view">
           <div className="top-section_entr">
             <div className="ts-breadcrumbs">
-              <span onClick={() => navigate("/")}>AMEBA</span> /{" "}
               <span onClick={() => navigate("/socis")}>#SOCI@S</span> /{" "}
               {project_name}
             </div>

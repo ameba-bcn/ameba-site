@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
+import FilterBar from "../../components/ui/FilterBar";
 import { galleries } from "../../config/galleryConfig";
 import { cloudinaryCover, radioDublabLink } from "../../utils/constants";
 import useDataStore from "../../stores/useDataStore";
@@ -45,23 +46,12 @@ const Gallery = () => {
         color: "var(--color-rojo)",
       }}
     >
-      <div className="gallery-filter">
-        <button
-          className={`gallery-filter__btn ${activeYear === null ? "gallery-filter__btn--active" : ""}`}
-          onClick={() => setActiveYear(null)}
-        >
-          {t("gallery.tot")}
-        </button>
-        {years.map((year) => (
-          <button
-            key={year}
-            className={`gallery-filter__btn ${activeYear === year ? "gallery-filter__btn--active" : ""}`}
-            onClick={() => setActiveYear(year)}
-          >
-            {year}
-          </button>
-        ))}
-      </div>
+      <FilterBar
+        items={years}
+        activeItem={activeYear}
+        onSelect={setActiveYear}
+        allLabel={t("gallery.tot")}
+      />
 
       <div className="gallery-grid">
         {filtered.map((gallery) => {

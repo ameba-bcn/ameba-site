@@ -1,0 +1,43 @@
+.card-view__button-wrapper {
+  width: 100%;
+  padding-top: 20px;
+}
+
+.card-view__button-wrapper button {
+  width: 100%;
+  max-width: 457px;
+}
+
+.card-view__button-wrapper a {
+  text-decoration: none;
+  width: 100%;
+}
+
+.card-view__button-wrapper button:hover:not([disabled]) #hoverable-black-svg path {
+  fill: var(--color-negro);
+}
+
+@media (max-width: 760px) {
+  .card-view__button-wrapper button {
+    max-width: 100%;
+    padding: 8px 40px 5px 40px;
+    font-size: 40px;
+    height: 53px;
+  }
+  .card-view__button-wrapper button > svg {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 500px) {
+  .card-view__button-wrapper button {
+    font-size: 25px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .card-view__button-wrapper button > svg {
+    width: 25px;
+    height: 25px;
+  }
+}

@@ -31,7 +31,9 @@ const SendEmailPasswordRecovery = lazyWithRetry(() => import("./pages/SendEmailP
 const QrClient = lazyWithRetry(() => import("./pages/QrClient"));
 const ValidateEmail = lazyWithRetry(() => import("./pages/ValidateEmail"));
 const LogMailConfirmation = lazyWithRetry(() => import("./pages/LogMailConfirmation"));
-const ExternalEvents = lazyWithRetry(() => import("./pages/external-events/ExternalEvents"));
+const ActivitatPage = lazyWithRetry(() => import("./pages/activitat/ActivitatPage"));
+const ProductePage = lazyWithRetry(() => import("./pages/botiga/ProductePage"));
+const ProductRedirect = lazyWithRetry(() => import("./pages/ProductRedirect"));
 const Profile = lazyWithRetry(() => import("./pages/profile/Profile"));
 const CheckoutFinished = lazyWithRetry(() => import("./pages/landing/CheckoutFinished"));
 const SubscriptionFinished = lazyWithRetry(() => import("./pages/landing/SubscriptionFinished"));
@@ -109,7 +111,9 @@ function App() {
           {isNavigating && <FullscreenSpinner />}
           <Suspense fallback={<FullscreenSpinner />}>
             <Routes>
+              <Route path="/activitats/:id" element={<ActivitatPage />} />
               <Route path="/activitats" element={<Agenda />} />
+              <Route path="/botiga/:id" element={<ProductePage />} />
               <Route path="/botiga" element={<Botiga />} />
               <Route path="/socis/:id" element={<SociosDetailed />} />
               <Route path="/socis" element={<Socios />} />
@@ -126,7 +130,7 @@ function App() {
               <Route path="/member-card" element={<QrClient />} />
               <Route path="/validate-email" element={<ValidateEmail />} />
               <Route path="/activate" element={<LogMailConfirmation />} />
-              <Route path="/product" element={<ExternalEvents />} />
+              <Route path="/product" element={<ProductRedirect />} />
               <Route path="/profile/:id" element={<Profile />} />
               <Route path="/profile" element={<Profile />} />
               <Route

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./FullscreenCheckout.css";
-import CloseModal from "../modals/CloseModal";
+import CloseModal from "./CloseModal";
 import { useTranslation } from "react-i18next";
 import useUIStore from "../stores/useUIStore";
 import useCartStore from "../stores/useCartStore";

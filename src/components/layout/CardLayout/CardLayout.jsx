@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { MOBILE_SMALL } from "../../../utils/constants";
 import "./CardLayout.css";
-import AmebaCardTitle from "../../ui/AmebaCardTitle";
 import PlusButton from "../../button/PlusButton";
 import { createLastRowIterator, sortByProperty } from "../../../utils/utils";
 import useMediaQuery from "../../../hooks/use-media-query";
@@ -37,26 +36,21 @@ export default function CardLayout(props) {
             }}
           >
             <div className="cardSupport">
-              <AmebaCardTitle
-                autoGrow={true}
-                className="cardSupportTitle"
-                maxSize={400}
-                overflow="inherit"
-                margin="2rem"
-                offset="-1rem"
-              >
-                {project_name ? project_name : name}
-              </AmebaCardTitle>
               <img
                 src={image ? image : images[0]}
                 alt={name}
                 className="cardSupportImgTop"
               />
-              <div className="cardSupportPlusBox">
-                <PlusButton
-                  plusStyle="plus--obscure"
-                  plusSize={isMobile ? "plus--medium" : "plus--big"}
-                />
+              <div className="cardSupport__bottom">
+                <span className="cardSupport__title">
+                  {project_name ? project_name : name}
+                </span>
+                <div className="cardSupportPlusBox">
+                  <PlusButton
+                    plusStyle="plus--obscure"
+                    plusSize={isMobile ? "plus--medium" : "plus--big"}
+                  />
+                </div>
               </div>
               {!!tags.length && <div className="cardTagBox">{tags[0]}</div>}
             </div>

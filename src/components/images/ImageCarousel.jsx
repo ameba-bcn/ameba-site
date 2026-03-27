@@ -34,7 +34,7 @@ function ImageCarousel(props) {
   if (total === 0) return null;
 
   return (
-    <div className="image-carousel-root">
+    <div>
       <div
         className="image-carousel-viewport"
         onTouchStart={handleTouchStart}

@@ -1,29 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "../../stores/useAuthStore";
 import useDataStore from "../../stores/useDataStore";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
-import { MOBILE_NORMAL } from "../../utils/constants";
 import useCartStore from "../../stores/useCartStore";
 import ImageCarousel from "../../components/images/ImageCarousel";
 import Button from "../../components/button/Button";
-import InteractiveModalBox from "../../modals/InteractiveModalBox";
+import MembershipDetails from "../../components/cardView/MembershipDetails";
 import { toast } from "react-toastify";
 import { isMemberCheckout, urlify } from "../../utils/utils";
 import { NavLink } from "react-router-dom";
 import CartToast from "../../components/toast/CartToast";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import Icon from "../../components/ui/Icon";
-import useMediaQuery from "../../hooks/use-media-query";
-import "../../components/externalEvents/ExternalEvent.css";
-import "../../modals/Modals.css";
+import "../../components/cardView/CardView.css";
 import "./Memberships.css";
 
 const Memberships = () => {
   const [t] = useTranslation("translation");
   const { membership = [] } = useDataStore();
   const productData = membership[0];
-  const isMobile = useMediaQuery(MOBILE_NORMAL);
   const { cart_data = {}, addToCart } = useCartStore();
   const { item_variants = [] } = cart_data;
   const hasMembershipInCart = isMemberCheckout(item_variants);
@@ -31,24 +27,18 @@ const Memberships = () => {
   const {
     price_range = "",
     images = [],
-    datetime = "",
     description = "",
     variants = [],
     benefits = "",
     has_stock = true,
     id = null,
-    maps_url = null,
   } = productData || {};
 
-  const colorMode = "";
-  const [activeSize, setActiveSize] = useState([]);
-  const [selectSizeError, setSelectSizeError] = useState(false);
-  const { isLoggedIn } = useAuthStore();
-  const modalStyle = "SOCI";
   const productSoldOut = !has_stock;
   const buttonText = t("modal.afegir");
   const box1Title = t("modal.descripcio");
   const box2Title = t("modal.beneficis");
+  const { isLoggedIn } = useAuthStore();
   const checkoutRedirect = isLoggedIn ? "/checkout" : "/login";
 
   const handleAddClick = () => {
@@ -65,13 +55,11 @@ const Memberships = () => {
     });
   };
 
-  const buttons = [membership[0]?.name];
-
   return (
     <PageLayout
       className={`membership-box${membership.length === 0 ? " membership-box--empty" : ""}`}
       title={`${t("banners.soci-curt")}!`}
-      titleProps={{ autoScale: false, maxSize: 160, marginTop: "sm" }}
+      titleProps={{ autoScale: false, maxSize: 160 }}
       banner={{
         sentence: t("banners.soci-curt"),
         link: "/memberships",
@@ -79,21 +67,20 @@ const Memberships = () => {
       }}
     >
       {membership.length > 0 ? (
-        <div className="external-event-box">
-          <div className="rowExternal">
-            <div className="external-event__col1">
+        <div className="card-view">
+          <div className="card-view__row">
+            <div className="card-view__col-image">
               <ImageCarousel imgList={images} />
-              <div className="external-event__button-box">
+              <div
+                className="card-view__button-wrapper"
+                style={{ paddingTop: 20 }}
+              >
                 <Button
                   variant="contained"
                   color="primary"
                   buttonSize="boton--medium"
                   disabled={productSoldOut}
-                  buttonStyle={
-                    colorMode && colorMode === "dark"
-                      ? "boton--back-orange--solid"
-                      : "boton--primary--solid"
-                  }
+                  buttonStyle="boton--primary--solid"
                   onClick={() => {
                     !productSoldOut && handleAddClick(id);
                   }}
@@ -102,24 +89,8 @@ const Memberships = () => {
                 </Button>
               </div>
             </div>
-            <div className="external-event__col2">
-              <InteractiveModalBox
-                modalStyle={modalStyle}
-                isMobile={isMobile}
-                productSoldOut={productSoldOut}
-                sizes={[]}
-                activeSize={activeSize}
-                setActiveSize={setActiveSize}
-                selectSizeError={selectSizeError}
-                setSelectSizeError={setSelectSizeError}
-                extraButtons={buttons}
-                datetime={datetime}
-                handleAddClick={handleAddClick}
-                price={price_range}
-                maps_url={maps_url}
-                colorMode={colorMode}
-              />
-
+            <div className="card-view__col-details">
+              <MembershipDetails />
               <div className="interactiveDataBox-activitat__row">
                 <span className="modal-card___title_small">
                   <Icon icon="money" /> <span>{t("modal.preu")} / &nbsp;</span>
@@ -128,25 +99,18 @@ const Memberships = () => {
                   {price_range}
                 </span>
               </div>
-              <div className="modal-card__description-title-external">
-                {box1Title}
-              </div>
-              <div className="modal-card__description-content">
+              <div className="card-view__description-title">{box1Title}</div>
+              <div className="card-view__description-content">
                 {urlify(description)}
               </div>
-              {box2Title && (
+              {box2Title && benefits && (
                 <>
-                  {benefits && (
-                    <>
-                      {" "}
-                      <div className="modal-card__description-title-external">
-                        {box2Title}
-                      </div>
-                      <div className="modal-card__description-content">
-                        {urlify(benefits)}
-                      </div>
-                    </>
-                  )}
+                  <div className="card-view__description-title">
+                    {box2Title}
+                  </div>
+                  <div className="card-view__description-content">
+                    {urlify(benefits)}
+                  </div>
                 </>
               )}
               {hasMembershipInCart && (
