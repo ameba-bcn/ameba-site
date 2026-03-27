@@ -6,7 +6,6 @@ import { productKinds } from "../../utils/constants";
 import { urlify } from "../../utils/utils";
 import ImageCarousel from "../images/ImageCarousel";
 import Icon from "../ui/Icon";
-import PowerTitle from "../layout/PowerTitle";
 import CartToast from "../toast/CartToast";
 import CardViewButton from "./CardViewButton";
 import ItemDetails from "./ItemDetails";
@@ -116,9 +115,7 @@ const CardView = ({ productData = {}, kind = "", handleAddClick }) => {
         / {name}
       </div>
       <div className="card-view__header">
-        <div className="card-view__title-box">
-          <PowerTitle title={displayTitle} />
-        </div>
+        <div className="card-view__title-box">{displayTitle}</div>
       </div>
       <div className="card-view__row">
         <div className="card-view__col-image">

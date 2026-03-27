@@ -35,6 +35,43 @@
 .card-view__title-box {
   flex: 1;
   min-width: 0;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 800;
+  font-size: 90px;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  padding: 40px 0;
+}
+
+@media screen and (max-width: 1519px) {
+  .card-view__title-box {
+    font-size: 76px;
+    padding: 35px 0;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .card-view__title-box {
+    font-size: 64px;
+    padding: 28px 0;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .card-view__title-box {
+    font-size: 48px;
+    padding: 24px 0;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .card-view__title-box {
+    font-size: 36px;
+    padding: 20px 0;
+  }
 }
 
 .card-view__row {

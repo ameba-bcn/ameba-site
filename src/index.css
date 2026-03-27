@@ -22,6 +22,12 @@
     --rojo: var(--color-rojo);
     --negro: var(--color-negro);
     --amarillo: var(--color-amarillo);
+
+    /* Breakpoints */
+    --bp-big: 1519px;
+    --bp-semi-big: 1200px;
+    --bp-normal: 760px;
+    --bp-small: 400px;
   }
 
   #root{
