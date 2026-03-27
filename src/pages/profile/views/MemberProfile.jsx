@@ -60,6 +60,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
             </>
           )}
 
+          {isMember && !isMembershipExpired && <MemberQr />}
           {memberships.length > 0 && !isMembershipExpired && (
             <DisclaimerBox
               text={
@@ -73,8 +74,6 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
               closable
             />
           )}
-
-          {isMember && !isMembershipExpired && <MemberQr />}
         </div>
       </div>
     </div>

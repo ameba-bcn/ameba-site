@@ -9,9 +9,12 @@ import EmbeddedSpinner from "../../../../components/spinner/EmbeddedSpinner";
 import Button from "../../../../components/button/Button";
 import "./MemberQr.style.css";
 
+const toSecureUrl = (url) =>
+  window.location.protocol === "https:" ? url.replace(/^http:/, "https:") : url;
+
 const fetchImageAsBase64 = (url) =>
   axiosInstance
-    .get(url, { responseType: "blob" })
+    .get(toSecureUrl(url), { responseType: "blob" })
     .then(
       (res) =>
         new Promise((resolve, reject) => {
@@ -160,7 +163,7 @@ const MemberQr = () => {
         <div className="member-card__qr-container">
           {qr && (
             <div className="member-card__qr-frame">
-              <img className="member-card__qr-img" src={qrBase64 || qr} alt="Member QR" />
+              <img className="member-card__qr-img" src={qrBase64 || toSecureUrl(qr)} alt="Member QR" />
             </div>
           )}
         </div>
