@@ -1,35 +1,15 @@
-import React, { useState, useEffect } from "react";
-import "./BotigaGeneral.css";
-import ProducteDialog from "./Producte";
-import axiosInstance from "../../axios";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import { createLastRowIterator, formatPrice } from "./../../utils/utils";
-import { useLocation } from "react-router-dom";
-import { API_URL, MOBILE_NORMAL, MOBILE_SMALL } from "../../utils/constants";
+import { MOBILE_NORMAL, MOBILE_SMALL } from "../../utils/constants";
 import useMediaQuery from "../../hooks/use-media-query";
 import useDataStore from "../../stores/useDataStore";
 import AmebaCardTitle from "../ui/AmebaCardTitle";
+import "./BotigaGeneral.css";
 
 export default function BotigaGeneral() {
-  const [open, setOpen] = useState(false);
-  const [producteLoading, setProducteLoading] = useState(false);
-  let location = useLocation();
-  const value = Object.fromEntries(new URLSearchParams(location.search));
-  const externalId = value.id;
   const { botiga = [] } = useDataStore();
-  const [productData, setProductData] = useState([
-    {
-      id: 0,
-      name: "",
-      description: "",
-      price: "",
-      stock: 0,
-      variants: [""],
-      images: [""],
-      is_active: false,
-      discount: "",
-    },
-  ]);
-
+  const navigate = useNavigate();
   const isOneColumn = useMediaQuery("(max-width:1178px)");
   const isMobileNormal = useMediaQuery(MOBILE_NORMAL);
   const isMobileSmall = useMediaQuery(MOBILE_SMALL);
@@ -40,38 +20,6 @@ export default function BotigaGeneral() {
     return 50;
   };
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const fetchProduct = (data) => {
-    setProducteLoading(true);
-    axiosInstance
-      .get(`${API_URL}articles/${data.id}`, {})
-      .then((res) => {
-        setProductData(res.data);
-        setProducteLoading(false);
-      })
-      .then(handleClickOpen())
-      .catch((err) => {
-        setProducteLoading(false);
-
-        console.warn("ERROR: ", err);
-      });
-  };
-
-  useEffect(() => {
-    if (externalId?.length > 0 && botiga?.length > 0) {
-      const extIdInt = parseInt(externalId) || 0;
-      const product2Display = botiga.filter((x) => x.id === extIdInt);
-      product2Display.length > 0 && fetchProduct(product2Display[0]);
-    }
-  }, [botiga]);
-
   const cardGenerator =
     botiga.length > 0
       ? botiga.map((data) => {
@@ -79,7 +27,7 @@ export default function BotigaGeneral() {
             <div
               className="fullcardBotiga"
               key={data.id}
-              onClick={() => fetchProduct(data)}
+              onClick={() => navigate(`/botiga/${data.id}`)}
             >
               <div className="productCard">
                 <div className="productImgFrame">
@@ -117,15 +65,6 @@ export default function BotigaGeneral() {
         createLastRowIterator(botiga, 470).map((n, index) => (
           <i aria-hidden={true} key={index}></i>
         ))}
-      {open && (
-        <ProducteDialog
-          open={open}
-          dataRow={productData}
-          setProductData={setProductData}
-          onClose={handleClose}
-          loading={producteLoading}
-        />
-      )}
     </div>
   );
 }
