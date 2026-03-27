@@ -26,7 +26,7 @@ const ProductDetails = ({
           {productSoldOut ? t("modal.esgotat") : t("modal.talles")} / &nbsp;
         </span>
       </div>
-      {sizes && sizes[0] === "UNIQUE" ? (
+      {(sizes && sizes[0] === "UNIQUE") || sizes?.length === 1 ? (
         <div className="modal-center-label">Talla única</div>
       ) : (
         <>
@@ -35,7 +35,7 @@ const ProductDetails = ({
             return (
               <div
                 className={
-                  activeSize === el || sizes.length === 1
+                  activeSize === el
                     ? "sizes interactiveDataBox-product-sizes__button_active"
                     : "sizes interactiveDataBox-product-sizes__button"
                 }
