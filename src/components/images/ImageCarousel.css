@@ -1,9 +1,3 @@
-.image-carousel-root {
-  flex-grow: 1;
-  margin: 0 auto;
-  margin-bottom: 24px;
-}
-
 .image-carousel-viewport {
   position: relative;
   display: flex;
@@ -67,10 +61,4 @@
 
 .image-carousel-dot--active {
   background: var(--color-negro);
-}
-
-@media screen and (max-width: 500px) {
-  .image-carousel-root {
-    margin: 24px;
-  }
 }

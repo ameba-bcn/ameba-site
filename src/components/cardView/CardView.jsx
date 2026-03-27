@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { productKinds } from "../../utils/constants";
@@ -32,10 +33,18 @@ const CardView = ({ productData = {}, kind = "", handleAddClick }) => {
   } = productData;
 
   const [t] = useTranslation("translation");
+  const navigate = useNavigate();
   const [activeSize, setActiveSize] = useState([]);
   const [selectSizeError, setSelectSizeError] = useState(false);
   const [sizes, setSizes] = useState([]);
   const [copied, setCopied] = useState(false);
+
+  const breadcrumbMap = {
+    activitat: { path: "/activitats", label: "ACTIVITATS" },
+    producte: { path: "/botiga", label: "BOTIGA" },
+    soci: { path: "/memberships", label: "SOCIS" },
+  };
+  const breadcrumb = breadcrumbMap[kind] || breadcrumbMap.activitat;
 
   const modalStyle = productKinds.includes(kind)
     ? kind.toUpperCase()
@@ -100,15 +109,15 @@ const CardView = ({ productData = {}, kind = "", handleAddClick }) => {
 
   return (
     <div className="card-view">
+      <div className="card-view__breadcrumbs">
+        <span onClick={() => navigate(breadcrumb.path)}>
+          {breadcrumb.label}
+        </span>{" "}
+        / {name}
+      </div>
       <div className="card-view__header">
         <div className="card-view__title-box">
           <PowerTitle title={displayTitle} autoScale={true} />
-        </div>
-        <div className="card-view__actions">
-          <Icon icon="link" onClick={handleCopyLink} type="hoverable-cream" />
-          {copied && (
-            <span className="card-view__copied">{t("modal.copiat")}</span>
-          )}
         </div>
       </div>
       <div className="card-view__row">
@@ -147,8 +156,7 @@ const CardView = ({ productData = {}, kind = "", handleAddClick }) => {
           {modalStyle !== "ACTIVITAT" && (
             <div className="interactiveDataBox-activitat__row">
               <span className="modal-card___title_small">
-                <Icon icon="money" />{" "}
-                <span>{t("modal.preu")} / &nbsp;</span>
+                <Icon icon="money" /> <span>{t("modal.preu")} / &nbsp;</span>
               </span>
               <span className="interactiveDataBox-activitat__text-data">
                 {price_range}
