@@ -9,7 +9,7 @@ import { deleteStringDecimals } from "../utils/utils";
 import useMediaQuery from "../hooks/use-media-query";
 
 function Botiga() {
-  const { membership = [] } = useDataStore();
+  const { membership = [], isArtistsLoading } = useDataStore();
   const [t] = useTranslation("translation");
   const isMobile = useMediaQuery("(max-width:1163px)");
   const sociPreu = membership[0]?.price_range;
@@ -18,6 +18,7 @@ function Botiga() {
     <PageLayout
       className="Botiga"
       title={t("menu.botiga")}
+      loading={isArtistsLoading}
       banner={{
         sentence: t("banners.soci-curt"),
         link: "/memberships",

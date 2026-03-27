@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useProfileStore from "../../../stores/useProfileStore";
 import useDataStore from "../../../stores/useDataStore";
 import useCartStore from "../../../stores/useCartStore";
+import FilterBar from "../../../components/ui/FilterBar";
 import {
   flexRender,
   getCoreRowModel,
@@ -30,6 +31,7 @@ const AgendaTable = () => {
   const navigate = useNavigate();
   const [redirect, setRedirect] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [activeType, setActiveType] = useState(null);
   const checkoutRedirect = user_profile === "GUEST" ? "/login" : "/checkout";
   const [t] = useTranslation("translation");
   const isMobile = useMediaQuery("(max-width:1000px)");
@@ -257,12 +259,21 @@ const AgendaTable = () => {
     [],
   );
 
-  const filteredAgenda = React.useMemo(
+  const types = useMemo(
+    () => [...new Set(agenda.map((e) => e.type).filter(Boolean))].sort(),
+    [agenda],
+  );
+
+  const filteredAgenda = useMemo(
     () =>
-      sortByDate(agenda).filter((activity) =>
-        activity?.name?.toLowerCase()?.includes(searchInput?.toLowerCase()),
-      ),
-    [agenda, searchInput],
+      sortByDate(agenda)
+        .filter((activity) =>
+          activity?.name?.toLowerCase()?.includes(searchInput?.toLowerCase()),
+        )
+        .filter((activity) =>
+          activeType ? activity.type === activeType : true,
+        ),
+    [agenda, searchInput, activeType],
   );
 
   const table = useReactTable({
@@ -290,6 +301,12 @@ const AgendaTable = () => {
     <div
       className={`styled-main-column-view agenda-table${agenda.length === 0 ? " agenda-table--empty" : ""}`}
     >
+      <FilterBar
+        items={types}
+        activeItem={activeType}
+        onSelect={setActiveType}
+        allLabel={t("gallery.tot")}
+      />
       {isMobile ? (
         <table>
           <thead>
