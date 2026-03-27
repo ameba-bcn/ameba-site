@@ -145,7 +145,6 @@
 .modal-card-location__row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   align-items: center;
   margin-bottom: 0.3em;
 }
@@ -230,10 +229,11 @@
 .interactiveDataBox-product-sizes__button_active,
 .interactiveDataBox-product-sizes__button {
   display: inline-flex;
-  width: 30px;
+  min-width: 30px;
   height: 30px;
   font-size: 1.8rem;
   margin-right: 0.15rem;
+  padding: 0 4px;
   justify-content: center;
   align-items: center;
   border: 3px solid var(--color-negro);
