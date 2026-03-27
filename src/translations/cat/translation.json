@@ -134,7 +134,12 @@
     "perfil-gral": "Edita el teu projecte personal. Un cop guardats els canvis podràs visualitzar-ho a la vista de /soci@s",
     "no-soci-perfil": "Sembla que la teva membresia ha expirat. Per a poder editar el teu projecte personal, has de renovar la teva membresia.",
     "carnet": "Aquest es el teu carnet de soci, amb ell podràs accedir a tots els descomptes, events i promocions que t'oferim.",
-    "carnet-title": "Carnet de soci"
+    "carnet-title": "Carnet de soci",
+    "carnet-subtitle": "Barcelona Cultura Electrònica",
+    "carnet-valid": "VÀLID",
+    "carnet-member-since": "Soci des de",
+    "carnet-member-type": "Tipus de soci",
+    "carnet-download": "Descarregar carnet"
   },
   "general": {
     "agraiment": "Petició rebuda. Gràcies!",
