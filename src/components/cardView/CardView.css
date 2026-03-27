@@ -185,31 +185,27 @@
   display: flex;
 }
 
-.interactiveDataBox-product-sizes__button_active {
+.interactiveDataBox-product-sizes__button_active,
+.interactiveDataBox-product-sizes__button {
   display: inline-flex;
-  background-color: var(--color-cream);
-  width: 2.188rem;
-  height: 2.188rem;
-  color: var(--color-negro);
-  border-width: 3px;
-  border-style: solid;
-  border-color: var(--color-negro);
+  width: 30px;
+  height: 30px;
   font-size: 1.8rem;
   margin-right: 0.15rem;
   justify-content: center;
   align-items: center;
+  border: 3px solid var(--color-negro);
+  box-sizing: content-box;
 }
 
 .interactiveDataBox-product-sizes__button {
-  display: inline-flex;
   background-color: var(--color-negro);
-  width: 2.188rem;
-  height: 2.188rem;
   color: var(--color-cream);
-  font-size: 1.8rem;
-  margin-right: 0.15rem;
-  justify-content: center;
-  align-items: center;
+}
+
+.interactiveDataBox-product-sizes__button_active {
+  background-color: var(--color-cream);
+  color: var(--color-negro);
 }
 
 .sizes {
