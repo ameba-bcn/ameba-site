@@ -18,7 +18,7 @@ export default function PageLayout({
   return (
     <div className={className}>
       <div className="page-layout__inner">
-        {title && <PowerTitle title={title} autoScale {...titleProps} />}
+        {title && <PowerTitle title={title} {...titleProps} />}
         <div className={contentClass}>
           {loading ? (
             <div className="page-layout__loader">

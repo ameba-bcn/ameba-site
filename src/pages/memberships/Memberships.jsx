@@ -59,7 +59,7 @@ const Memberships = () => {
     <PageLayout
       className={`membership-box${membership.length === 0 ? " membership-box--empty" : ""}`}
       title={`${t("banners.soci-curt")}!`}
-      titleProps={{ autoScale: false, maxSize: 160, marginTop: "sm" }}
+      titleProps={{ autoScale: false, maxSize: 160 }}
       banner={{
         sentence: t("banners.soci-curt"),
         link: "/memberships",
@@ -71,7 +71,10 @@ const Memberships = () => {
           <div className="card-view__row">
             <div className="card-view__col-image">
               <ImageCarousel imgList={images} />
-              <div className="card-view__button-wrapper" style={{ paddingTop: 20 }}>
+              <div
+                className="card-view__button-wrapper"
+                style={{ paddingTop: 20 }}
+              >
                 <Button
                   variant="contained"
                   color="primary"
@@ -96,9 +99,7 @@ const Memberships = () => {
                   {price_range}
                 </span>
               </div>
-              <div className="card-view__description-title">
-                {box1Title}
-              </div>
+              <div className="card-view__description-title">{box1Title}</div>
               <div className="card-view__description-content">
                 {urlify(description)}
               </div>

@@ -182,7 +182,6 @@
 .interactiveDataBox-soci__row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
   width: 100%;
   margin: 0.6rem 0rem;
 }

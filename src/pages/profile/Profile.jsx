@@ -10,18 +10,15 @@ import MemberProfile from "./views/MemberProfile";
 import MemberProject from "./views/MemberProject";
 
 export default function Profile() {
-  const {
-    user_member_data,
-    user_data,
-    isLoggedIn = false,
-  } = useAuthStore();
+  const { user_member_data, user_data, isLoggedIn = false } = useAuthStore();
   const { username = "" } = user_data;
   const isMember = !isEmptyObject(user_member_data);
   const [t] = useTranslation("translation");
   const location = useLocation();
   const section = location.pathname.split("/")?.at(-1);
+  const routeKeys = ["profile", "project"];
   const { step, changeStep } = useBreadcrumsSteps(
-    ["PROFILE", "PROJECT"].indexOf(section?.toUpperCase())
+    routeKeys.indexOf(section?.toLowerCase()),
   );
 
   if (!isLoggedIn) {
@@ -39,18 +36,23 @@ export default function Profile() {
       ]
     : [<MemberProfile isMember={isMember} key="member-profile" />];
 
-  const profileOptions = isMember ? ["PROFILE", "PROJECT"] : ["PROFILE"];
+  const profileOptions = isMember
+    ? [
+        { path: "profile", label: t("perfil.breadcrumb-perfil") },
+        { path: "project", label: t("perfil.breadcrumb-projecte") },
+      ]
+    : [{ path: "profile", label: t("perfil.breadcrumb-perfil") }];
 
   return (
     <PageLayout
       className="logViewYellow"
+      title="perfil"
       banner={{
         sentence: t("banners.soci-curt"),
         link: "/memberships",
         color: "var(--color-rojo)",
       }}
     >
-      <div className="profileTitle">{`Hola ${username}!`}</div>
       {profileOptions.length > 1 && (
         <Breadcrums
           steps={profileOptions}

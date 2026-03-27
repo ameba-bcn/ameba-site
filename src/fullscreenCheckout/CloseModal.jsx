@@ -1,5 +1,4 @@
 import React from "react";
-import "./CloseModal.css";
 import Button from "../components/button/Button";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";

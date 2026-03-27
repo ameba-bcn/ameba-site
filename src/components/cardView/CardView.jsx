@@ -117,7 +117,7 @@ const CardView = ({ productData = {}, kind = "", handleAddClick }) => {
       </div>
       <div className="card-view__header">
         <div className="card-view__title-box">
-          <PowerTitle title={displayTitle} autoScale={true} />
+          <PowerTitle title={displayTitle} />
         </div>
       </div>
       <div className="card-view__row">
