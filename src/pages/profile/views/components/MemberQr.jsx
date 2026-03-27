@@ -80,18 +80,30 @@ const MemberQr = () => {
       });
       pdf.addImage(imgData, "PNG", 0, 0, pdfW, pdfH);
 
-      // Overlay the QR directly onto the PDF if html2canvas missed it
+      // Overlay QR only if html2canvas failed to render it (CORS)
       if (qrData) {
         const cardEl = cardRef.current;
         const qrImg = cardEl.querySelector(".member-card__qr-img");
         if (qrImg) {
           const cardRect = cardEl.getBoundingClientRect();
           const qrRect = qrImg.getBoundingClientRect();
-          const qrX = (qrRect.left - cardRect.left) * pxToMm * scale;
-          const qrY = (qrRect.top - cardRect.top) * pxToMm * scale;
-          const qrW = qrRect.width * pxToMm * scale;
-          const qrH = qrRect.height * pxToMm * scale;
-          pdf.addImage(qrData, "PNG", qrX, qrY, qrW, qrH);
+
+          // Sample the QR area in the canvas to check if it was captured
+          const sx = Math.round((qrRect.left - cardRect.left) * scale);
+          const sy = Math.round((qrRect.top - cardRect.top) * scale);
+          const sw = Math.round(qrRect.width * scale);
+          const sh = Math.round(qrRect.height * scale);
+          const ctx = canvas.getContext("2d");
+          const sample = ctx.getImageData(sx, sy, Math.min(sw, 1), Math.min(sh, 1));
+          const isBlank = sample.data[3] === 0 || (sample.data[0] > 250 && sample.data[1] > 250 && sample.data[2] > 250);
+
+          if (isBlank) {
+            const qrX = (qrRect.left - cardRect.left) * pxToMm * scale;
+            const qrY = (qrRect.top - cardRect.top) * pxToMm * scale;
+            const qrW = qrRect.width * pxToMm * scale;
+            const qrH = qrRect.height * pxToMm * scale;
+            pdf.addImage(qrData, "PNG", qrX, qrY, qrW, qrH);
+          }
         }
       }
 
