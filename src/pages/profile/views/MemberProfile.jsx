@@ -4,10 +4,10 @@ import { NavLink } from "react-router-dom";
 import useAuthStore from "../../../stores/useAuthStore";
 import MembershipFormLayout from "../../../components/forms/MembershipForm/MembershipFormLayout";
 import MembershipFormReadOnly from "../../../components/forms/MembershipForm/MembershipFormReadOnly";
-import "./MemberProfile.style.css";
 import DisclaimerBox from "../../../components/disclaimerBox/DisclaimerBox";
 import MemberQr from "./components/MemberQr";
 import { isDateExpired } from "../../../utils/utils";
+import "./MemberProfile.style.css";
 
 export default function MemberProfile({ setButtonDisabled, isMember }) {
   const [t] = useTranslation("translation");
@@ -60,6 +60,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
             </>
           )}
 
+          {isMember && !isMembershipExpired && <MemberQr />}
           {memberships.length > 0 && !isMembershipExpired && (
             <DisclaimerBox
               text={
@@ -73,10 +74,7 @@ export default function MemberProfile({ setButtonDisabled, isMember }) {
               closable
             />
           )}
-
-          {isMember && !isMembershipExpired && <MemberQr />}
         </div>
-
       </div>
     </div>
   );
