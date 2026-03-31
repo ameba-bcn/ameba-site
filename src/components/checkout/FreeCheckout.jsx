@@ -4,11 +4,9 @@ import { Navigate } from "react-router-dom";
 import useAuthStore from "../../stores/useAuthStore";
 import Button from "../button/Button";
 import { useTranslation } from "react-i18next";
-import useUIStore from "../../stores/useUIStore";
 import useCartStore from "../../stores/useCartStore";
 
 export default function FreeCheckout() {
-  const closeFullscreen = useUIStore((state) => state.closeFullscreen);
   const [t] = useTranslation("translation");
   const { cart_data = {}, checkoutPaymentCart, getCart } = useCartStore();
   const { id = "" } = cart_data;
@@ -18,7 +16,6 @@ export default function FreeCheckout() {
     checkoutPaymentCart(id).then(() => {
       getMemberProfile();
       getCart();
-      closeFullscreen();
     });
     setRedirect(true);
   };

@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import { radioDublabLink } from "../../utils/constants";
 
 function CheckoutFinished() {
+  useEffect(() => {
+    localStorage.removeItem("checkoutStep");
+  }, []);
+
   return (
     <PageLayout
       className="full-height-msg"
