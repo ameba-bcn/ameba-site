@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
 import Review from "./Review";
 import { isMemberCheckout } from "../../utils/utils";
@@ -7,140 +7,191 @@ import Button from "../button/Button";
 import { Navigate } from "react-router-dom";
 import useAuthStore from "../../stores/useAuthStore";
 import MembershipFormReadOnly from "../forms/MembershipForm/MembershipFormReadOnly";
-import Stepper from "../stepper/Stepper";
 import "./Checkout.style.css";
 import Payment from "./Payment";
 import { MOBILE_NORMAL, MOBILE_SMALL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
-import useUIStore from "../../stores/useUIStore";
 import useCartStore from "../../stores/useCartStore";
 import useMediaQuery from "../../hooks/use-media-query";
 
+const CHECKOUT_STEP_KEY = "checkoutStep";
+
+function CheckoutSection({
+  stepNumber,
+  title,
+  isActive,
+  isCompleted,
+  onHeaderClick,
+  children,
+}) {
+  const stateClass = isActive
+    ? "checkout-section--active"
+    : isCompleted
+      ? "checkout-section--completed"
+      : "checkout-section--disabled";
+
+  const handleClick = () => {
+    if (isCompleted && onHeaderClick) {
+      onHeaderClick();
+    }
+  };
+
+  return (
+    <div className={`checkout-section ${stateClass}`}>
+      <div className="checkout-section__header" onClick={handleClick}>
+        <div className="checkout-section__header-left">
+          <span className="checkout-section__number">{stepNumber}</span>
+          <span className="checkout-section__title">{title}</span>
+        </div>
+        <span className="checkout-section__indicator">
+          {isCompleted ? "\u2713" : isActive ? "\u25BC" : ""}
+        </span>
+      </div>
+      <div className="checkout-section__body">
+        <div className="checkout-section__content">{children}</div>
+      </div>
+    </div>
+  );
+}
+
 function Checkout() {
-  const closeFullscreen = useUIStore((state) => state.closeFullscreen);
   const [t] = useTranslation("translation");
-  const { cart_data = {}, checkoutCart, checkoutPaymentCart, getCart } = useCartStore();
+  const { cart_data = {}, checkoutCart, checkoutPaymentCart } = useCartStore();
   const { isLoggedIn = false } = useAuthStore();
   const getMemberProfile = useAuthStore((state) => state.getMemberProfile);
   const { total = "", item_variants = [], id = "" } = cart_data;
   const isPaymentFree = total === "0.00 €";
-  const hasMembershipInCart = isMemberCheckout(item_variants); // sacar del carro cuando esté en back
-  const [activeStep, setActiveStep] = useState(hasMembershipInCart ? 0 : 1);
+  const hasMembershipInCart = isMemberCheckout(item_variants);
+  const firstStep = hasMembershipInCart ? 0 : 1;
+
+  const getSavedStep = () => {
+    const saved = parseInt(localStorage.getItem(CHECKOUT_STEP_KEY));
+    if (isNaN(saved)) return firstStep;
+    if (!hasMembershipInCart && saved === 0) return 1;
+    return saved;
+  };
+
+  const [activeStep, setActiveStep] = useState(getSavedStep);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
   const userIsEditingData =
     buttonDisabled && activeStep === 0 && hasMembershipInCart;
+
+  const isMobile = useMediaQuery(MOBILE_NORMAL);
+  const isMinMobile = useMediaQuery(MOBILE_SMALL);
+
   const steps =
     localStorage.getItem("i18nextLng") === "es"
       ? ["Datos personales", "Cesta", "Datos de pago"]
       : ["Dades personals", "Cistella", "Dades de pagament"];
-  const isMobile = useMediaQuery(MOBILE_NORMAL);
-  const isMinMobile = useMediaQuery(MOBILE_SMALL);
 
   useEffect(() => {
     getMemberProfile();
   }, [getMemberProfile]);
+
+  useEffect(() => {
+    localStorage.setItem(CHECKOUT_STEP_KEY, activeStep);
+  }, [activeStep]);
+
+  const goToStep = useCallback(
+    (step) => {
+      setActiveStep(step);
+      isMobile && window.scrollTo(0, 0);
+    },
+    [isMobile],
+  );
+
+  const handleNext = useCallback(
+    (fromStep) => {
+      if (fromStep === 1) {
+        setLoading(true);
+        checkoutCart()
+          .then(() => !isPaymentFree && checkoutPaymentCart(id))
+          .then(() => {
+            goToStep(fromStep + 1);
+            setLoading(false);
+          })
+          .catch(() => {
+            setLoading(false);
+          });
+      } else {
+        goToStep(fromStep + 1);
+      }
+    },
+    [checkoutCart, checkoutPaymentCart, id, isPaymentFree, goToStep],
+  );
+
+  const handleSectionClick = useCallback(
+    (step) => {
+      goToStep(step);
+    },
+    [goToStep],
+  );
+
   if (!item_variants.length || !isLoggedIn) return <Navigate to="/" replace />;
 
-  const handleNext = () => {
-    if (activeStep === 1) {
-      setLoading(true);
-      checkoutCart()
-        .then(() => !isPaymentFree && checkoutPaymentCart(id))
-        .then(() => {
-          setActiveStep(activeStep + 1);
-          setLoading(false);
-        })
-        .catch(() => {
-          setLoading(false);
-        });
-    } else {
-      setActiveStep(activeStep + 1);
-    }
-    isMobile && window.scrollTo(0, 0);
+  const getStepState = (step) => {
+    if (step === activeStep) return "active";
+    if (step < activeStep) return "completed";
+    return "disabled";
   };
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
-    isMobile && window.scrollTo(0, 0);
-  };
-
-  const getStepContent = (step) => {
-    switch (step) {
-      case 0:
-        return (
-          <div className="checkout-member-frame">
-            {hasMembershipInCart ? (
-              <MembershipFormLayout setButtonDisabled={setButtonDisabled} />
-            ) : (
-              <MembershipFormReadOnly isCheckout={true} />
-            )}
-          </div>
-        );
-      case 1:
-        return (
-          <>
-            <Review />
-          </>
-        );
-      case 2:
-        return <Payment />;
-      default:
-        throw new Error("Unknown step");
-    }
-  };
-
-  const handleClose = () => {
-    closeFullscreen();
-    getCart();
-  };
+  const visibleSteps = [0, 1, 2];
 
   return (
     <div className="checkout-frame">
       <div className="checkout-box">
         <div className="checkout-title">{t("checkout.pagament")}</div>
-        <div className="checkout-subtitle">{steps[activeStep]}</div>
-        <Stepper arraySteps={steps} activeStep={activeStep} />
-        <div className="checkout-content">{getStepContent(activeStep)}</div>
-        {loading && <span className="spinner-border"></span>}
-        <div className="checkout-buttons">
-          {activeStep !== 0 &&
-            (activeStep < 2 ? (
-              <Button
-                variant="contained"
-                color="primary"
-                buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
-                buttonStyle="boton--primary--solid"
-                disabled={loading}
-                onClick={handleBack}
-              >
-                {t("boto.enrere")}
-              </Button>
-            ) : (
-              <Button
-                variant="contained"
-                color="primary"
-                buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
-                buttonStyle="boton--primary--solid"
-                disabled={loading}
-                onClick={() => handleClose()}
-              >
-                {t("modal.sortir")}
-              </Button>
-            ))}
-          {activeStep < steps.length - 1 && !userIsEditingData && (
-            <Button
-              variant="contained"
-              color="primary"
-              buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
-              buttonStyle="boton--primary--solid"
-              disabled={loading}
-              onClick={handleNext}
+
+        {visibleSteps.map((step) => {
+          const state = getStepState(step);
+          return (
+            <CheckoutSection
+              key={step}
+              stepNumber={step + 1}
+              title={steps[step]}
+              isActive={state === "active"}
+              isCompleted={state === "completed"}
+              isDisabled={state === "disabled"}
+              onHeaderClick={() => handleSectionClick(step)}
             >
-              {t("boto.seguent")}
-            </Button>
-          )}
-        </div>
+              {step === 0 && (
+                <div className="checkout-member-frame">
+                  {hasMembershipInCart ? (
+                    <MembershipFormLayout
+                      setButtonDisabled={setButtonDisabled}
+                    />
+                  ) : (
+                    <MembershipFormReadOnly isCheckout={true} />
+                  )}
+                </div>
+              )}
+
+              {step === 1 && <Review />}
+
+              {step === 2 && <Payment />}
+
+              {loading && step === activeStep && (
+                <span className="spinner-border"></span>
+              )}
+
+              {step < 2 && step === activeStep && (
+                <div className="checkout-section__buttons">
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
+                    buttonStyle="boton--primary--solid"
+                    disabled={loading || (step === 0 && userIsEditingData)}
+                    onClick={() => handleNext(step)}
+                  >
+                    {t("boto.seguent")}
+                  </Button>
+                </div>
+              )}
+            </CheckoutSection>
+          );
+        })}
       </div>
     </div>
   );
