@@ -1,10 +1,19 @@
 import React from "react";
 import LettersMove from "../layout/LettersMove";
+import useMediaQuery from "../../hooks/use-media-query";
+import { MOBILE_NORMAL } from "../../utils/constants";
 import "./Banner.css";
 
+function getMobileImage(image) {
+  const ext = image.lastIndexOf(".");
+  return image.slice(0, ext) + "-mobile" + image.slice(ext);
+}
+
 export default function Banner({ image, link, alt, title }) {
+  const isMobile = useMediaQuery(MOBILE_NORMAL);
+  const src = isMobile ? getMobileImage(image) : image;
   const content = (
-    <img className="Banner__image" src={image} alt={alt || "banner"} />
+    <img className="Banner__image" src={src} alt={alt || "banner"} />
   );
 
   return (
