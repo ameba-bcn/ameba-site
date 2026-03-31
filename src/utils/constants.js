@@ -128,6 +128,6 @@ export const cloudinaryThumb = (publicId) =>
 export const cloudinaryCover = (publicId) =>
   cloudinaryUrl(publicId, "c_fill,w_600,h_400,q_auto,f_auto");
 
-export const radioDublabLink = "https://www.dublab.es/shows/ameba";
+export const radioDublabLink = "https://www.dublab.cat/shows/ameba";
 export const TEXT_EDITOR_KEY =
   "3tpoe00fct6ffh0uhj84y2twrfb2e64jy0b7o0yhvmme31o1";
