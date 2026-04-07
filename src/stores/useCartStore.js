@@ -46,9 +46,14 @@ const useCartStore = create((set, get) => ({
         set({ cart_data: response });
       },
       (error) => {
-        const message = error.response?.data?.detail;
         set({ cart_data: {} });
-        return Promise.reject(message);
+        // Cart not found (expired/deleted) — clean up stale cart_id silently
+        if (error.response?.status === 404) {
+          localStorage.removeItem("cart_id");
+          return;
+        }
+        const message = error.response?.data?.detail;
+        notificationToast(message, "error");
       }
     );
   },
