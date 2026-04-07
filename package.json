@@ -1,6 +1,6 @@
 {
   "name": "ameba-site",
-  "version": "3.4.19",
+  "version": "3.4.20",
   "private": true,
   "packageManager": "yarn@1.22.22",
   "homepage": "/",
