@@ -1,15 +1,16 @@
 import axios from "axios";
 import * as Sentry from "@sentry/react";
 import { BASE_URL } from "./utils/constants";
+import { safeLocalStorage } from "./utils/safeStorage";
 
-const storedLang = localStorage.getItem("i18nextLng") || "ca";
+const storedLang = safeLocalStorage.getItem("i18nextLng") || "ca";
 
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   timeout: 120000,
   headers: {
-    Authorization: localStorage.getItem("access")
-      ? `Bearer ${localStorage.getItem("access")}`
+    Authorization: safeLocalStorage.getItem("access")
+      ? `Bearer ${safeLocalStorage.getItem("access")}`
       : null,
     "Content-Type": "application/json",
     Accept: "application/json, text/plain, */*",
