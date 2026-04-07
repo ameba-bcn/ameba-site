@@ -2,8 +2,9 @@ import i18next from "i18next";
 import translations_es from "./translations/es/translation.json";
 import translations_cat from "./translations/cat/translation.json";
 import I18nextBrowserLanguageDetector from "i18next-browser-languagedetector";
+import { safeLocalStorage } from "./utils/safeStorage";
 
-const storedLang = localStorage.getItem("i18nextLng");
+const storedLang = safeLocalStorage.getItem("i18nextLng");
 
 i18next.use(I18nextBrowserLanguageDetector).init({
   resources: {

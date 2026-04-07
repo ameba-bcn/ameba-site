@@ -3,9 +3,10 @@ import AuthService from "../store/services/auth.service";
 import notificationToast from "../utils/utils";
 import useProfileStore from "./useProfileStore";
 import useCartStore from "./useCartStore";
+import { safeLocalStorage } from "../utils/safeStorage";
 
-const access = localStorage.getItem("access");
-const refresh = localStorage.getItem("refresh");
+const access = safeLocalStorage.getItem("access");
+const refresh = safeLocalStorage.getItem("refresh");
 
 const defaultUserData = {
   username: "",
