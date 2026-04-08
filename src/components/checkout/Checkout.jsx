@@ -173,10 +173,6 @@ function Checkout() {
 
               {step === 2 && <Payment />}
 
-              {loading && step === activeStep && (
-                <span className="spinner-border"></span>
-              )}
-
               {step < 2 && step === activeStep && (
                 <div className="checkout-section__buttons">
                   <Button
@@ -185,6 +181,7 @@ function Checkout() {
                     buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
                     buttonStyle="boton--primary--solid"
                     disabled={loading || (step === 0 && userIsEditingData)}
+                    loading={loading && step === 1}
                     onClick={() => handleNext(step)}
                   >
                     {t("boto.seguent")}
