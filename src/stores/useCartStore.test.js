@@ -59,7 +59,7 @@ describe("useCartStore - addToCart", () => {
     CartService.addInCart.mockRejectedValue({ response: { data: { detail: "Error" } } });
     try {
       await useCartStore.getState().addToCart(1);
-    } catch {}
+    } catch { /* expected */ }
     expect(useCartStore.getState().cartBusy).toBe(false);
   });
 });
@@ -84,7 +84,7 @@ describe("useCartStore - substractToCart", () => {
     CartService.removeItemCart.mockRejectedValue({ response: { data: { detail: "Error" } } });
     try {
       await useCartStore.getState().substractToCart(1);
-    } catch {}
+    } catch { /* expected */ }
     expect(useCartStore.getState().cartBusy).toBe(false);
   });
 });
@@ -126,7 +126,7 @@ describe("useCartStore - checkoutCart", () => {
     CartService.checkoutCart.mockRejectedValue({ response: { data: { detail: "Error" } } });
     try {
       await useCartStore.getState().checkoutCart();
-    } catch {}
+    } catch { /* expected */ }
     expect(useCartStore.getState().checkout).toEqual({});
     expect(useCartStore.getState().stripe).toBe(false);
   });
@@ -149,7 +149,7 @@ describe("useCartStore - checkoutPaymentCart", () => {
     CartService.checkoutPaymentCart.mockRejectedValue({ response: { data: { detail: "Error" } } });
     try {
       await useCartStore.getState().checkoutPaymentCart("cart-uuid");
-    } catch {}
+    } catch { /* expected */ }
     expect(useCartStore.getState().checkout).toEqual({});
     expect(useCartStore.getState().stripe).toBe(false);
   });
@@ -169,7 +169,7 @@ describe("useCartStore - deleteFullCart", () => {
     CartService.deleteFullCart.mockRejectedValue(new Error("fail"));
     try {
       await useCartStore.getState().deleteFullCart();
-    } catch {}
+    } catch { /* expected */ }
     expect(useCartStore.getState().cart_data).toEqual({});
   });
 });

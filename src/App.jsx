@@ -1,4 +1,10 @@
-import React, { Suspense, useState, useMemo, useEffect, createContext } from "react";
+import React, {
+  Suspense,
+  useState,
+  useMemo,
+  useEffect,
+  createContext,
+} from "react";
 import useUIStore from "./stores/useUIStore";
 import useProfileStore from "./stores/useProfileStore";
 import useAuthStore from "./stores/useAuthStore";
@@ -10,7 +16,7 @@ import Menu from "./components/navbar/Navbar";
 import ScrollTop from "./components/layout/ScrollTop";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import FullscreenCheckout from "./fullscreenCheckout/FullscreenCheckout";
+
 import FullscreenSpinner from "./components/spinner/FullscreenSpinner";
 import NavigationProgress from "./components/spinner/NavigationProgress";
 import lazyWithRetry from "./utils/lazyWithRetry";
@@ -19,24 +25,42 @@ import "./App.css";
 const Home = lazyWithRetry(() => import("./pages/home/Home"));
 const Agenda = lazyWithRetry(() => import("./pages/agenda/Agenda"));
 const Botiga = lazyWithRetry(() => import("./pages/Botiga"));
-const SociosDetailed = lazyWithRetry(() => import("./pages/socios/components/SociosDetailed"));
+const SociosDetailed = lazyWithRetry(
+  () => import("./pages/socios/components/SociosDetailed"),
+);
 const Socios = lazyWithRetry(() => import("./pages/socios/Socios"));
 const Gallery = lazyWithRetry(() => import("./pages/gallery/Gallery"));
-const GalleryAlbum = lazyWithRetry(() => import("./pages/gallery/GalleryAlbum"));
+const GalleryAlbum = lazyWithRetry(
+  () => import("./pages/gallery/GalleryAlbum"),
+);
 const LogSession = lazyWithRetry(() => import("./pages/LogSession"));
-const PasswordRecovery = lazyWithRetry(() => import("./pages/PasswordRecovery"));
+const PasswordRecovery = lazyWithRetry(
+  () => import("./pages/PasswordRecovery"),
+);
 const CheckoutPage = lazyWithRetry(() => import("./pages/CheckoutPage"));
-const Memberships = lazyWithRetry(() => import("./pages/memberships/Memberships"));
-const SendEmailPasswordRecovery = lazyWithRetry(() => import("./pages/SendEmailPasswordRecovery"));
+const Memberships = lazyWithRetry(
+  () => import("./pages/memberships/Memberships"),
+);
+const SendEmailPasswordRecovery = lazyWithRetry(
+  () => import("./pages/SendEmailPasswordRecovery"),
+);
 const QrClient = lazyWithRetry(() => import("./pages/QrClient"));
 const ValidateEmail = lazyWithRetry(() => import("./pages/ValidateEmail"));
-const LogMailConfirmation = lazyWithRetry(() => import("./pages/LogMailConfirmation"));
-const ActivitatPage = lazyWithRetry(() => import("./pages/activitat/ActivitatPage"));
+const LogMailConfirmation = lazyWithRetry(
+  () => import("./pages/LogMailConfirmation"),
+);
+const ActivitatPage = lazyWithRetry(
+  () => import("./pages/activitat/ActivitatPage"),
+);
 const ProductePage = lazyWithRetry(() => import("./pages/botiga/ProductePage"));
 const ProductRedirect = lazyWithRetry(() => import("./pages/ProductRedirect"));
 const Profile = lazyWithRetry(() => import("./pages/profile/Profile"));
-const CheckoutFinished = lazyWithRetry(() => import("./pages/landing/CheckoutFinished"));
-const SubscriptionFinished = lazyWithRetry(() => import("./pages/landing/SubscriptionFinished"));
+const CheckoutFinished = lazyWithRetry(
+  () => import("./pages/landing/CheckoutFinished"),
+);
+const SubscriptionFinished = lazyWithRetry(
+  () => import("./pages/landing/SubscriptionFinished"),
+);
 const Legal = lazyWithRetry(() => import("./pages/legal/Legal"));
 const QrLanding = lazyWithRetry(() => import("./pages/qr-landing/QrLanding"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
@@ -46,7 +70,6 @@ const UserContext = createContext(null);
 function App() {
   const [user, setUser] = useState(null);
   const value = useMemo(() => ({ user, setUser }), [user, setUser]);
-  const isFullscreenOpen = useUIStore((state) => state.isFullscreenOpen);
   const isNavigating = useUIStore((state) => state.isNavigating);
   const validateLocalToken = useAuthStore((state) => state.validateLocalToken);
   const getUserData = useAuthStore((state) => state.getUserData);
@@ -102,7 +125,7 @@ function App() {
   return (
     <div className="app">
       <ToastContainer position="bottom-center" />
-      {isFullscreenOpen && <FullscreenCheckout />}
+
       <Menu />
       <UserContext.Provider value={value}>
         <div className="app-main-view">
@@ -133,14 +156,8 @@ function App() {
               <Route path="/product" element={<ProductRedirect />} />
               <Route path="/profile/:id" element={<Profile />} />
               <Route path="/profile" element={<Profile />} />
-              <Route
-                path="/summary-checkout"
-                element={<CheckoutFinished />}
-              />
-              <Route
-                path="/subscribe"
-                element={<SubscriptionFinished />}
-              />
+              <Route path="/summary-checkout" element={<CheckoutFinished />} />
+              <Route path="/subscribe" element={<SubscriptionFinished />} />
               <Route path="/legal" element={<Legal />} />
               <Route path="/" element={<Home />} />
               <Route path="/qr-view" element={<QrLanding />} />

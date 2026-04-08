@@ -3,19 +3,18 @@
 .review-content {
   display: flex;
   flex-direction: column;
-  width: 95%;
-  padding: 0px 40px;
+  width: 100%;
+  padding: 0px;
   margin: 0 auto;
   text-transform: uppercase;
   font-family: "Bebas Neue";
   font-weight: 300;
   color: var(--color-negro);
-  border: 4px solid black;
 }
 
 @media (max-width: 400px) {
   .review-content {
-    padding: 0px 20px;
+    padding: 0px;
   }
 }
 
@@ -74,7 +73,7 @@
   padding: 10px;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 520px) {
   .review-table tbody tr .reviewTable-col1 {
     display: none;
   }
