@@ -146,6 +146,11 @@
     height: 40px;
 }
 
+.boton .spinner {
+    position: static;
+    margin: 0;
+}
+
 @media screen and (max-width: 320px) {
     .boton {
         font-size: 22px;

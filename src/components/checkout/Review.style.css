@@ -73,7 +73,7 @@
   padding: 10px;
 }
 
-@media (max-width: 420px) {
+@media (max-width: 520px) {
   .review-table tbody tr .reviewTable-col1 {
     display: none;
   }
