@@ -33,6 +33,40 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <script>
+      // Safe sessionStorage helpers (storage may be blocked — SecurityError)
+      function ssGet(k) { try { return sessionStorage.getItem(k); } catch(e) { return null; } }
+      function ssSet(k, v) { try { sessionStorage.setItem(k, v); } catch(e) {} }
+      function ssRm(k) { try { sessionStorage.removeItem(k); } catch(e) {} }
+      // Reload once when the main entry script fails after a deployment
+      // (e.g. tab was idle, old chunk no longer exists on the server)
+      window.addEventListener('error', function (e) {
+        if (e.target && e.target.tagName === 'SCRIPT' && e.target.type === 'module') {
+          var key = 'module_reload';
+          if (!ssGet(key)) {
+            ssSet(key, '1');
+            window.location.reload();
+          } else {
+            ssRm(key);
+          }
+        }
+      }, true);
+      // Clear the flag on successful load
+      window.addEventListener('DOMContentLoaded', function () {
+        ssRm('module_reload');
+      });
+      // Catch Vite dynamic-import preload failures (belt-and-suspenders with lazyWithRetry)
+      window.addEventListener('vite:preloadError', function (e) {
+        e.preventDefault();
+        var key = 'chunk_reload';
+        if (!ssGet(key)) {
+          ssSet(key, '1');
+          window.location.reload();
+        } else {
+          ssRm(key);
+        }
+      });
+    </script>
     <script type="module" src="/src/index.jsx"></script>
   </body>
 </html>

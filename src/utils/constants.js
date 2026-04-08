@@ -1,83 +1,86 @@
 /* eslint-disable no-undef */
+import { safeLocalStorage } from "./safeStorage";
+
+const lang = safeLocalStorage.getItem("i18nextLng");
 
 export const ERROR = {
   EMAIL: {
     REQUIRED:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Email: aquest camp es obligatori"
         : "Email: este campo es obligatorio",
     FORMAT:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Email: format erroni"
         : "Email: formato erróneo",
   },
   USERNAME: {
     REQUIRED:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Nom d'usuari: camp es obligatori"
         : "Nombre de usuario: campo obligatorio",
     FORMAT:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Nom d'usuari: ha de tenir entre 1 i 20 lletres"
         : "Nombre de usuario: debe tener entre 1 y 20 caracteres",
   },
   PASSWORD: {
     REQUIRED:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Contrasenya: aquest camp es obligatori"
         : "Contraseña: este campo es obligatorio",
     FORMAT:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Contrasenya: ha de tenir entre 6 i 20 lletres"
         : "Contraseña: debe tener entre 6 y 20 caracteres",
   },
   PHONE: {
     REQUIRED:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Telèfon: aquest camp es obligatori"
         : "Teléfono: este campo es obligatorio",
     FORMAT:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Telèfon: format erroni"
         : "Teléfono: formato erróneo",
   },
   FIRSTNAME: {
     REQUIRED:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Nom: aquest camp es obligatori"
         : "Nombre: este campo es obligatorio",
   },
   LASTNAME: {
     REQUIRED:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Cognoms: aquest camp es obligatori"
         : "Apellidos: este campo es obligatorio",
   },
   ADDRESS: {
     REQUIRED:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "DNI/NIE: aquest camp es obligatori"
         : "DNI/NIE: este campo es obligatorio",
   },
   CODE: {
     REQUIRED:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Descompte: aquest camp es obligatori"
         : "Descuento: este campo es obligatorio",
     FORMAT:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Descompte: format o longitud(6 lletres) erroni"
         : "Descuento: formato o longitud(6 letras) erróneo",
   },
   TITLE: {
     REQUIRED:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Títol: aquest camp es obligatori"
         : "Título: este campo es obligatorio",
   },
   GENERIC: {
     REQUIRED:
-      localStorage.getItem("i18nextLng") === "ca"
+      lang === "ca"
         ? "Aquest camp es obligatori"
         : "Este campo es obligatorio",
   },
@@ -128,6 +131,6 @@ export const cloudinaryThumb = (publicId) =>
 export const cloudinaryCover = (publicId) =>
   cloudinaryUrl(publicId, "c_fill,w_600,h_400,q_auto,f_auto");
 
-export const radioDublabLink = "https://www.dublab.es/shows/ameba";
+export const radioDublabLink = "https://www.dublab.cat/shows/ameba";
 export const TEXT_EDITOR_KEY =
   "3tpoe00fct6ffh0uhj84y2twrfb2e64jy0b7o0yhvmme31o1";
