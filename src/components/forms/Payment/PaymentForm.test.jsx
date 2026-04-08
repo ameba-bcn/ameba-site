@@ -1,4 +1,5 @@
-import { describe, it, expect, vi } from "vitest";
+import React from "react";
+import { describe, it, expect, vi, beforeEach } from "vitest";
 import { screen, fireEvent, waitFor } from "@testing-library/react";
 import PaymentForm from "./PaymentForm";
 import renderWithProviders from "../../../test/helpers/renderWithProviders";
@@ -8,7 +9,7 @@ const mockStripe = { confirmPayment: mockConfirmPayment };
 const mockElements = {};
 
 vi.mock("@stripe/react-stripe-js", () => ({
-  PaymentElement: (props) => <div data-testid="payment-element" />,
+  PaymentElement: () => <div data-testid="payment-element" />,
   useStripe: () => mockStripe,
   useElements: () => mockElements,
 }));

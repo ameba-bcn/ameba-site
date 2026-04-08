@@ -1,9 +1,9 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, waitFor } from "@testing-library/react";
 import Checkout from "./Checkout";
 import useCartStore from "../../stores/useCartStore";
 import useAuthStore from "../../stores/useAuthStore";
-import useUIStore from "../../stores/useUIStore";
 import renderWithProviders from "../../test/helpers/renderWithProviders";
 import { mockCartRegular, mockCartMember, mockCartFree } from "../../test/mocks/data";
 
@@ -15,24 +15,15 @@ vi.mock("./Payment", () => ({
   default: () => <div data-testid="payment">Payment</div>,
 }));
 vi.mock("../forms/MembershipForm/MembershipFormLayout", () => ({
-  default: ({ setButtonDisabled }) => (
+  default: () => (
     <div data-testid="membership-form-layout">MembershipFormLayout</div>
   ),
 }));
 vi.mock("../forms/MembershipForm/MembershipFormReadOnly", () => ({
   default: () => <div data-testid="membership-form-readonly">MembershipFormReadOnly</div>,
 }));
-vi.mock("../stepper/Stepper", () => ({
-  default: ({ arraySteps, activeStep }) => (
-    <div data-testid="stepper" data-active-step={activeStep}>
-      {arraySteps.map((s, i) => (
-        <span key={i} data-testid={`step-${i}`}>{s}</span>
-      ))}
-    </div>
-  ),
-}));
 vi.mock("../button/Button", () => ({
-  default: ({ children, onClick, disabled, ...rest }) => (
+  default: ({ children, onClick, disabled }) => (
     <button onClick={onClick} disabled={disabled} data-testid={`btn-${typeof children === 'string' ? children : 'action'}`}>
       {children}
     </button>
@@ -42,40 +33,37 @@ vi.mock("../button/Button", () => ({
 const setupLoggedIn = (cartData) => {
   const mockCheckoutCart = vi.fn().mockResolvedValue();
   const mockCheckoutPaymentCart = vi.fn().mockResolvedValue();
-  const mockGetCart = vi.fn().mockResolvedValue();
   const mockGetMemberProfile = vi.fn().mockResolvedValue();
-  const mockCloseFullscreen = vi.fn();
 
   useAuthStore.setState({
     isLoggedIn: true,
+    user_data: { member: true },
     getMemberProfile: mockGetMemberProfile,
   });
   useCartStore.setState({
     cart_data: cartData,
     checkoutCart: mockCheckoutCart,
     checkoutPaymentCart: mockCheckoutPaymentCart,
-    getCart: mockGetCart,
-  });
-  useUIStore.setState({
-    closeFullscreen: mockCloseFullscreen,
   });
 
-  return { mockCheckoutCart, mockCheckoutPaymentCart, mockGetCart, mockGetMemberProfile, mockCloseFullscreen };
+  return { mockCheckoutCart, mockCheckoutPaymentCart, mockGetMemberProfile };
 };
+
+// Helpers to query accordion sections
+const getSections = () => document.querySelectorAll(".checkout-section");
 
 describe("Checkout - route guards", () => {
   it("redirects to / when user is not logged in", () => {
     useAuthStore.setState({ isLoggedIn: false });
     useCartStore.setState({ cart_data: mockCartRegular });
-    const { container } = renderWithProviders(<Checkout />, { route: "/checkout" });
-    // Navigate component renders nothing visible
+    renderWithProviders(<Checkout />, { route: "/checkout" });
     expect(screen.queryByText("pagament")).not.toBeInTheDocument();
   });
 
   it("redirects to / when cart has no items", () => {
     useAuthStore.setState({ isLoggedIn: true, getMemberProfile: vi.fn().mockResolvedValue() });
     useCartStore.setState({ cart_data: { item_variants: [] } });
-    const { container } = renderWithProviders(<Checkout />, { route: "/checkout" });
+    renderWithProviders(<Checkout />, { route: "/checkout" });
     expect(screen.queryByText("pagament")).not.toBeInTheDocument();
   });
 
@@ -86,25 +74,64 @@ describe("Checkout - route guards", () => {
   });
 });
 
-describe("Checkout - stepper initialization", () => {
-  it("starts at step 1 when no subscription items", () => {
+describe("Checkout - accordion sections", () => {
+  it("renders all 3 sections", () => {
     setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
-    // Should show Review (step 1)
-    expect(screen.getByTestId("review")).toBeInTheDocument();
+    expect(getSections().length).toBe(3);
   });
 
-  it("starts at step 0 when cart has subscription items", () => {
+  it("renders section numbers 1, 2, 3", () => {
+    setupLoggedIn(mockCartRegular);
+    renderWithProviders(<Checkout />);
+    const numbers = document.querySelectorAll(".checkout-section__number");
+    expect(numbers[0].textContent).toBe("1");
+    expect(numbers[1].textContent).toBe("2");
+    expect(numbers[2].textContent).toBe("3");
+  });
+
+  it("renders Catalan section titles by default", () => {
+    setupLoggedIn(mockCartRegular);
+    renderWithProviders(<Checkout />);
+    expect(screen.getByText("Dades personals")).toBeInTheDocument();
+    expect(screen.getByText("Cistella")).toBeInTheDocument();
+    expect(screen.getByText("Dades de pagament")).toBeInTheDocument();
+  });
+
+  it("marks step 1 as active for regular cart (no subscription)", () => {
+    setupLoggedIn(mockCartRegular);
+    renderWithProviders(<Checkout />);
+    const sections = getSections();
+    // Step 0 is completed (0 < activeStep=1), step 1 active, step 2 disabled
+    expect(sections[0].classList.contains("checkout-section--completed")).toBe(true);
+    expect(sections[1].classList.contains("checkout-section--active")).toBe(true);
+    expect(sections[2].classList.contains("checkout-section--disabled")).toBe(true);
+  });
+
+  it("marks step 0 as active for subscription cart", () => {
     setupLoggedIn(mockCartMember);
     renderWithProviders(<Checkout />);
-    // Should show membership form (step 0)
-    expect(screen.getByTestId("membership-form-layout")).toBeInTheDocument();
+    const sections = getSections();
+    expect(sections[0].classList.contains("checkout-section--active")).toBe(true);
+    expect(sections[1].classList.contains("checkout-section--disabled")).toBe(true);
+    expect(sections[2].classList.contains("checkout-section--disabled")).toBe(true);
   });
 
-  it("renders Stepper component", () => {
+  it("shows ▼ indicator on active section", () => {
     setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
-    expect(screen.getByTestId("stepper")).toBeInTheDocument();
+    const indicators = document.querySelectorAll(".checkout-section__indicator");
+    expect(indicators[1].textContent).toBe("▼");
+  });
+
+  it("shows ✓ indicator on completed sections after advancing", async () => {
+    setupLoggedIn(mockCartRegular);
+    renderWithProviders(<Checkout />);
+    fireEvent.click(screen.getByText("següent pas"));
+    await waitFor(() => {
+      const indicators = document.querySelectorAll(".checkout-section__indicator");
+      expect(indicators[1].textContent).toBe("✓");
+    });
   });
 });
 
@@ -115,7 +142,13 @@ describe("Checkout - step 0 (Membership)", () => {
     expect(screen.getByTestId("membership-form-layout")).toBeInTheDocument();
   });
 
-  it("shows Next button at step 0", () => {
+  it("renders MembershipFormReadOnly for regular cart", () => {
+    setupLoggedIn(mockCartRegular);
+    renderWithProviders(<Checkout />);
+    expect(screen.getByTestId("membership-form-readonly")).toBeInTheDocument();
+  });
+
+  it("shows Next button at step 0 for subscription cart", () => {
     setupLoggedIn(mockCartMember);
     renderWithProviders(<Checkout />);
     expect(screen.getByText("següent pas")).toBeInTheDocument();
@@ -123,7 +156,7 @@ describe("Checkout - step 0 (Membership)", () => {
 });
 
 describe("Checkout - step 1 (Review)", () => {
-  it("renders Review at step 1", () => {
+  it("renders Review component", () => {
     setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
     expect(screen.getByTestId("review")).toBeInTheDocument();
@@ -133,14 +166,6 @@ describe("Checkout - step 1 (Review)", () => {
     setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
     expect(screen.getByText("següent pas")).toBeInTheDocument();
-  });
-
-  it("shows subtitle Cistella at step 1", () => {
-    setupLoggedIn(mockCartRegular);
-    renderWithProviders(<Checkout />);
-    // Subtitle is in checkout-subtitle class
-    const subtitle = document.querySelector(".checkout-subtitle");
-    expect(subtitle.textContent).toBe("Cistella");
   });
 });
 
@@ -153,7 +178,7 @@ describe("Checkout - step navigation", () => {
   });
 
   it("calls checkoutPaymentCart when not free on Next at step 1", async () => {
-    const { mockCheckoutCart, mockCheckoutPaymentCart } = setupLoggedIn(mockCartRegular);
+    const { mockCheckoutPaymentCart } = setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
     fireEvent.click(screen.getByText("següent pas"));
     await waitFor(() => {
@@ -176,7 +201,7 @@ describe("Checkout - step navigation", () => {
     renderWithProviders(<Checkout />);
     fireEvent.click(screen.getByText("següent pas"));
     await waitFor(() => {
-      expect(screen.getByTestId("payment")).toBeInTheDocument();
+      expect(getSections()[2].classList.contains("checkout-section--active")).toBe(true);
     });
   });
 
@@ -186,49 +211,88 @@ describe("Checkout - step navigation", () => {
     renderWithProviders(<Checkout />);
     fireEvent.click(screen.getByText("següent pas"));
     await waitFor(() => {
-      expect(screen.getByTestId("review")).toBeInTheDocument();
+      expect(getSections()[1].classList.contains("checkout-section--active")).toBe(true);
     });
+  });
+
+  it("navigates back to completed section by clicking its header", async () => {
+    setupLoggedIn(mockCartMember);
+    renderWithProviders(<Checkout />);
+    // Advance from step 0 to step 1
+    fireEvent.click(screen.getByText("següent pas"));
+    // Step 0 should be completed
+    expect(getSections()[0].classList.contains("checkout-section--completed")).toBe(true);
+    // Click step 0 header to go back
+    const header = getSections()[0].querySelector(".checkout-section__header");
+    fireEvent.click(header);
+    await waitFor(() => {
+      expect(getSections()[0].classList.contains("checkout-section--active")).toBe(true);
+    });
+  });
+
+  it("does not navigate when clicking disabled section header", () => {
+    setupLoggedIn(mockCartRegular);
+    renderWithProviders(<Checkout />);
+    // Step 2 is disabled, clicking should not change active step
+    const header = getSections()[2].querySelector(".checkout-section__header");
+    fireEvent.click(header);
+    expect(getSections()[1].classList.contains("checkout-section--active")).toBe(true);
   });
 });
 
 describe("Checkout - step 2 (Payment)", () => {
-  it("shows Exit button at step 2", async () => {
-    setupLoggedIn(mockCartRegular);
-    renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
-    await waitFor(() => {
-      expect(screen.getByTestId("payment")).toBeInTheDocument();
-    });
-    expect(screen.getByText("sortir")).toBeInTheDocument();
-  });
-
   it("does not show Next button at step 2", async () => {
     setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
     fireEvent.click(screen.getByText("següent pas"));
     await waitFor(() => {
-      expect(screen.getByTestId("payment")).toBeInTheDocument();
+      expect(getSections()[2].classList.contains("checkout-section--active")).toBe(true);
     });
     expect(screen.queryByText("següent pas")).not.toBeInTheDocument();
   });
 
-  it("calls closeFullscreen and getCart when Exit clicked at step 2", async () => {
-    const { mockCloseFullscreen, mockGetCart } = setupLoggedIn(mockCartRegular);
+  it("renders Payment component", () => {
+    setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
+    expect(screen.getByTestId("payment")).toBeInTheDocument();
+  });
+});
+
+describe("Checkout - step persistence", () => {
+  it("saves active step to localStorage", () => {
+    setupLoggedIn(mockCartRegular);
+    renderWithProviders(<Checkout />);
+    expect(localStorage.getItem("checkoutStep")).toBe("1");
+  });
+
+  it("restores step from localStorage for subscription cart", () => {
+    localStorage.setItem("checkoutStep", "0");
+    setupLoggedIn(mockCartMember);
+    renderWithProviders(<Checkout />);
+    expect(getSections()[0].classList.contains("checkout-section--active")).toBe(true);
+  });
+
+  it("skips saved step 0 for regular cart (no subscription)", () => {
+    localStorage.setItem("checkoutStep", "0");
+    setupLoggedIn(mockCartRegular);
+    renderWithProviders(<Checkout />);
+    expect(getSections()[1].classList.contains("checkout-section--active")).toBe(true);
+  });
+
+  it("updates localStorage when step changes", async () => {
+    setupLoggedIn(mockCartRegular);
+    renderWithProviders(<Checkout />);
+    expect(localStorage.getItem("checkoutStep")).toBe("1");
     fireEvent.click(screen.getByText("següent pas"));
     await waitFor(() => {
-      expect(screen.getByTestId("payment")).toBeInTheDocument();
+      expect(localStorage.getItem("checkoutStep")).toBe("2");
     });
-    fireEvent.click(screen.getByText("sortir"));
-    expect(mockCloseFullscreen).toHaveBeenCalled();
-    expect(mockGetCart).toHaveBeenCalled();
   });
 });
 
 describe("Checkout - loading state", () => {
   it("shows spinner when loading", async () => {
     const { mockCheckoutCart } = setupLoggedIn(mockCartRegular);
-    // Make checkoutCart take a long time
     mockCheckoutCart.mockReturnValue(new Promise(() => {})); // never resolves
     const { container } = renderWithProviders(<Checkout />);
     fireEvent.click(screen.getByText("següent pas"));
@@ -238,18 +302,17 @@ describe("Checkout - loading state", () => {
   });
 });
 
-describe("Checkout - i18n", () => {
-  it("renders Catalan step labels by default", () => {
-    setupLoggedIn(mockCartRegular);
-    renderWithProviders(<Checkout />);
-    expect(screen.getByTestId("step-1").textContent).toBe("Cistella");
-  });
-});
-
 describe("Checkout - fetches member profile on mount", () => {
-  it("calls getMemberProfile on mount", () => {
+  it("calls getMemberProfile when user has member profile", () => {
     const { mockGetMemberProfile } = setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
     expect(mockGetMemberProfile).toHaveBeenCalled();
+  });
+
+  it("does not call getMemberProfile when user has no member profile", () => {
+    const { mockGetMemberProfile } = setupLoggedIn(mockCartRegular);
+    useAuthStore.setState({ user_data: { member: null } });
+    renderWithProviders(<Checkout />);
+    expect(mockGetMemberProfile).not.toHaveBeenCalled();
   });
 });

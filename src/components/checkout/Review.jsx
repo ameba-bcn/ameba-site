@@ -34,8 +34,9 @@ function Review() {
                 {t("checkout.review-footer-5")} <br />
                 <br />
               </>
-            ) : null}
-            {t("checkout.review-footer-3")}{" "}
+            ) : (
+              t("checkout.review-footer-3")
+            )}
           </>
         ) : (
           <>

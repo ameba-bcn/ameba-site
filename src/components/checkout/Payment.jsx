@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 import PaymentForm from "../forms/Payment/PaymentForm";
@@ -6,11 +6,9 @@ import FreeCheckout from "./FreeCheckout";
 import MiniTableProducts from "./MiniTableProducts";
 import "./Payment.style.css";
 import "./Review.style.css";
-import useUIStore from "../../stores/useUIStore";
 import useCartStore from "../../stores/useCartStore";
 
 export default function Payment() {
-  const openFullscreen = useUIStore((state) => state.openFullscreen);
   const { cart_data = {}, checkout = {} } = useCartStore();
   const { checkout_stripe = {}, amount } = checkout;
   const isPaymentFree = amount === 0;
@@ -31,10 +29,6 @@ export default function Payment() {
   );
 
   const isStripeReady = !!(stripe_public && client_secret && stripePromise);
-
-  useEffect(() => {
-    openFullscreen();
-  }, []);
 
   return (
     <div className="payment-content">
