@@ -1,9 +1,9 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, waitFor } from "@testing-library/react";
 import Checkout from "../../components/checkout/Checkout";
 import useCartStore from "../../stores/useCartStore";
 import useAuthStore from "../../stores/useAuthStore";
-import useUIStore from "../../stores/useUIStore";
 import renderWithProviders from "../helpers/renderWithProviders";
 import {
   mockCartRegular,
@@ -13,7 +13,6 @@ import {
   mockCartDiscounted,
   mockMemberProfile,
   mockCheckoutPaid,
-  mockCheckoutFree,
 } from "../mocks/data";
 
 // Mock heavy external deps
@@ -35,6 +34,8 @@ vi.mock("../../components/ui/Icon", () => ({
   default: (props) => <span data-testid={`icon-${props.icon}`}>{props.icon}</span>,
 }));
 
+const getSections = () => document.querySelectorAll(".checkout-section");
+
 const setupCheckout = (cartData, extraCartState = {}) => {
   const mockCheckoutCart = vi.fn().mockResolvedValue();
   const mockCheckoutPaymentCart = vi.fn().mockResolvedValue();
@@ -42,10 +43,10 @@ const setupCheckout = (cartData, extraCartState = {}) => {
   const mockGetMemberProfile = vi.fn().mockResolvedValue(mockMemberProfile);
   const mockSubstractToCart = vi.fn().mockResolvedValue();
   const mockApplyDiscount = vi.fn().mockResolvedValue(mockCartDiscounted);
-  const mockCloseFullscreen = vi.fn();
 
   useAuthStore.setState({
     isLoggedIn: true,
+    user_data: { member: true },
     user_member_data: mockMemberProfile,
     getMemberProfile: mockGetMemberProfile,
     updateMemberProfile: vi.fn().mockResolvedValue(mockMemberProfile),
@@ -62,11 +63,6 @@ const setupCheckout = (cartData, extraCartState = {}) => {
     ...extraCartState,
   });
 
-  useUIStore.setState({
-    closeFullscreen: mockCloseFullscreen,
-    openFullscreen: vi.fn(),
-  });
-
   return {
     mockCheckoutCart,
     mockCheckoutPaymentCart,
@@ -74,24 +70,25 @@ const setupCheckout = (cartData, extraCartState = {}) => {
     mockGetMemberProfile,
     mockSubstractToCart,
     mockApplyDiscount,
-    mockCloseFullscreen,
   };
 };
 
 describe("Integration: Regular checkout (no subscription, paid)", () => {
-  it("starts at Review step for regular cart", () => {
+  it("starts at Review step (section 1 active) for regular cart", () => {
     setupCheckout(mockCartRegular);
     renderWithProviders(<Checkout />);
-    // Subtitle shows "Cistella" at step 1
-    const subtitle = document.querySelector(".checkout-subtitle");
-    expect(subtitle.textContent).toBe("Cistella");
+    const sections = getSections();
+    expect(sections[1].classList.contains("checkout-section--active")).toBe(true);
+    expect(screen.getByText("Cistella")).toBeInTheDocument();
     expect(screen.getByText("Total")).toBeInTheDocument();
   });
 
   it("displays cart items in Review", () => {
     setupCheckout(mockCartRegular);
     renderWithProviders(<Checkout />);
-    expect(screen.getByText(/Ameba T-shirt/)).toBeInTheDocument();
+    // Item appears in both Review (TableProducts) and Payment (MiniTableProducts)
+    const matches = screen.getAllByText(/Ameba T-shirt/);
+    expect(matches.length).toBeGreaterThanOrEqual(1);
   });
 
   it("advances to Payment step on Next click", async () => {
@@ -99,7 +96,8 @@ describe("Integration: Regular checkout (no subscription, paid)", () => {
     renderWithProviders(<Checkout />);
     fireEvent.click(screen.getByText("següent pas"));
     await waitFor(() => {
-      expect(screen.getByText("Dades de pagament")).toBeInTheDocument();
+      const sections = getSections();
+      expect(sections[2].classList.contains("checkout-section--active")).toBe(true);
     });
   });
 
@@ -118,15 +116,18 @@ describe("Integration: Regular checkout (no subscription, paid)", () => {
     renderWithProviders(<Checkout />);
     fireEvent.click(screen.getByText("següent pas"));
     await waitFor(() => {
-      expect(screen.getByText("Dades de pagament")).toBeInTheDocument();
+      const sections = getSections();
+      expect(sections[2].classList.contains("checkout-section--active")).toBe(true);
     });
   });
 });
 
 describe("Integration: Subscription checkout", () => {
-  it("starts at Membership step for subscription cart", () => {
+  it("starts at Membership step (section 0 active) for subscription cart", () => {
     setupCheckout(mockCartMember);
     renderWithProviders(<Checkout />);
+    const sections = getSections();
+    expect(sections[0].classList.contains("checkout-section--active")).toBe(true);
     expect(screen.getByText("Dades personals")).toBeInTheDocument();
   });
 
@@ -141,7 +142,17 @@ describe("Integration: Subscription checkout", () => {
     setupCheckout(mockCartMember);
     renderWithProviders(<Checkout />);
     fireEvent.click(screen.getByText("següent pas"));
-    expect(screen.getByText("Cistella")).toBeInTheDocument();
+    const sections = getSections();
+    expect(sections[1].classList.contains("checkout-section--active")).toBe(true);
+  });
+
+  it("allows navigating back to completed Membership section", () => {
+    setupCheckout(mockCartMember);
+    renderWithProviders(<Checkout />);
+    fireEvent.click(screen.getByText("següent pas")); // step 0 -> 1
+    const header = getSections()[0].querySelector(".checkout-section__header");
+    fireEvent.click(header); // click completed step 0
+    expect(getSections()[0].classList.contains("checkout-section--active")).toBe(true);
   });
 });
 
@@ -188,7 +199,8 @@ describe("Integration: Error handling", () => {
     renderWithProviders(<Checkout />);
     fireEvent.click(screen.getByText("següent pas"));
     await waitFor(() => {
-      expect(screen.getByText("Cistella")).toBeInTheDocument();
+      const sections = getSections();
+      expect(sections[1].classList.contains("checkout-section--active")).toBe(true);
     });
   });
 });
@@ -198,17 +210,5 @@ describe("Integration: Cross-store coordination", () => {
     const { mockGetMemberProfile } = setupCheckout(mockCartRegular);
     renderWithProviders(<Checkout />);
     expect(mockGetMemberProfile).toHaveBeenCalled();
-  });
-
-  it("calls closeFullscreen and getCart on Exit at payment step", async () => {
-    const { mockCloseFullscreen, mockGetCart } = setupCheckout(mockCartRegular);
-    renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
-    await waitFor(() => {
-      expect(screen.getByText("Dades de pagament")).toBeInTheDocument();
-    });
-    fireEvent.click(screen.getByText("sortir"));
-    expect(mockCloseFullscreen).toHaveBeenCalled();
-    expect(mockGetCart).toHaveBeenCalled();
   });
 });

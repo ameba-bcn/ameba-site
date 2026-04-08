@@ -51,7 +51,7 @@ describe("useAuthStore - getMemberProfile", () => {
     AuthService.getMemberProfile.mockRejectedValue({ response: { data: { detail: "Error" } } });
     try {
       await useAuthStore.getState().getMemberProfile();
-    } catch {}
+    } catch { /* expected */ }
     expect(useAuthStore.getState().user_member_data).toEqual({});
   });
 });
@@ -103,7 +103,7 @@ describe("useAuthStore - login", () => {
     AuthService.login.mockRejectedValue({ response: { data: { detail: "Bad credentials" } } });
     try {
       await useAuthStore.getState().login("user", "bad");
-    } catch {}
+    } catch { /* expected */ }
     expect(useAuthStore.getState().isLoggedIn).toBe(false);
     expect(useProfileStore.getState().user_profile).toBe("GUEST");
   });

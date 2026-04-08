@@ -1,8 +1,8 @@
+import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { screen } from "@testing-library/react";
 import Payment from "./Payment";
 import useCartStore from "../../stores/useCartStore";
-import useUIStore from "../../stores/useUIStore";
 import renderWithProviders from "../../test/helpers/renderWithProviders";
 import { mockCartRegular, mockCartFree, mockCheckoutPaid, mockCheckoutFree } from "../../test/mocks/data";
 
@@ -30,17 +30,6 @@ vi.mock("../forms/Payment/PaymentForm", () => ({
 }));
 
 describe("Payment", () => {
-  it("calls openFullscreen on mount", () => {
-    const openFullscreen = vi.fn();
-    useUIStore.setState({ openFullscreen });
-    useCartStore.setState({
-      cart_data: mockCartRegular,
-      checkout: mockCheckoutPaid,
-    });
-    renderWithProviders(<Payment />);
-    expect(openFullscreen).toHaveBeenCalled();
-  });
-
   it("renders MiniTableProducts", () => {
     useCartStore.setState({
       cart_data: mockCartRegular,

@@ -1,9 +1,9 @@
+import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, waitFor } from "@testing-library/react";
 import Checkout from "../../components/checkout/Checkout";
 import useCartStore from "../../stores/useCartStore";
 import useAuthStore from "../../stores/useAuthStore";
-import useUIStore from "../../stores/useUIStore";
 import renderWithProviders from "../helpers/renderWithProviders";
 import { mockCartRegular, mockCartMember, mockMemberProfile } from "../mocks/data";
 
@@ -23,6 +23,8 @@ vi.mock("../../components/ui/Icon", () => ({
   default: (props) => <span>{props.icon}</span>,
 }));
 
+const getSections = () => document.querySelectorAll(".checkout-section");
+
 const setup = (cartData) => {
   const mocks = {
     checkoutCart: vi.fn().mockResolvedValue(),
@@ -34,6 +36,7 @@ const setup = (cartData) => {
 
   useAuthStore.setState({
     isLoggedIn: true,
+    user_data: { member: true },
     user_member_data: mockMemberProfile,
     getMemberProfile: vi.fn().mockResolvedValue(mockMemberProfile),
     updateMemberProfile: vi.fn().mockResolvedValue(mockMemberProfile),
@@ -45,24 +48,14 @@ const setup = (cartData) => {
     ...mocks,
   });
 
-  useUIStore.setState({
-    closeFullscreen: vi.fn(),
-    openFullscreen: vi.fn(),
-  });
-
   return mocks;
 };
 
 describe("Edge Cases: Cart busy guard", () => {
   it("prevents duplicate addToCart when cartBusy is true", async () => {
-    const mockAddInCart = vi.fn().mockResolvedValue();
     useCartStore.setState({ cartBusy: true, addToCart: useCartStore.getState().addToCart });
-
-    // The actual addToCart from the store checks cartBusy
     const store = useCartStore.getState();
     await store.addToCart(1);
-    // Since cartBusy is true, the service should not be called
-    // This is tested more thoroughly in the store unit tests
   });
 });
 
@@ -70,7 +63,7 @@ describe("Edge Cases: Authentication guard", () => {
   it("does not render checkout for guest user", () => {
     useAuthStore.setState({ isLoggedIn: false });
     useCartStore.setState({ cart_data: mockCartRegular });
-    const { container } = renderWithProviders(<Checkout />);
+    renderWithProviders(<Checkout />);
     expect(screen.queryByText("pagament")).not.toBeInTheDocument();
   });
 
@@ -92,9 +85,9 @@ describe("Edge Cases: Checkout step error recovery", () => {
     renderWithProviders(<Checkout />);
     fireEvent.click(screen.getByText("següent pas"));
 
-    // After error, should still be on Review step with no spinner
     await waitFor(() => {
-      expect(screen.getByText("Cistella")).toBeInTheDocument();
+      const sections = getSections();
+      expect(sections[1].classList.contains("checkout-section--active")).toBe(true);
     });
   });
 
@@ -112,13 +105,15 @@ describe("Edge Cases: Checkout step error recovery", () => {
     // First attempt fails
     fireEvent.click(screen.getByText("següent pas"));
     await waitFor(() => {
-      expect(screen.getByText("Cistella")).toBeInTheDocument();
+      const sections = getSections();
+      expect(sections[1].classList.contains("checkout-section--active")).toBe(true);
     });
 
     // Second attempt succeeds
     fireEvent.click(screen.getByText("següent pas"));
     await waitFor(() => {
-      expect(screen.getByText("Dades de pagament")).toBeInTheDocument();
+      const sections = getSections();
+      expect(sections[2].classList.contains("checkout-section--active")).toBe(true);
     });
   });
 });
@@ -127,24 +122,47 @@ describe("Edge Cases: Subscription checkout step flow", () => {
   it("goes from step 0 to step 1 on Next for subscription cart", () => {
     setup(mockCartMember);
     renderWithProviders(<Checkout />);
-    expect(screen.getByText("Dades personals")).toBeInTheDocument();
+    expect(getSections()[0].classList.contains("checkout-section--active")).toBe(true);
     fireEvent.click(screen.getByText("següent pas"));
-    expect(screen.getByText("Cistella")).toBeInTheDocument();
+    expect(getSections()[1].classList.contains("checkout-section--active")).toBe(true);
   });
 
-  it("shows back button at step 1 for subscription cart (can go back to step 0)", () => {
+  it("navigates back from step 1 to step 0 via section header click", () => {
     setup(mockCartMember);
     renderWithProviders(<Checkout />);
     fireEvent.click(screen.getByText("següent pas")); // step 0 -> 1
-    expect(screen.getByText("enrere")).toBeInTheDocument();
+    // Click completed step 0 header to go back
+    const header = getSections()[0].querySelector(".checkout-section__header");
+    fireEvent.click(header);
+    expect(getSections()[0].classList.contains("checkout-section--active")).toBe(true);
   });
 
-  it("navigates back from step 1 to step 0", () => {
+  it("does not allow navigating to disabled sections", () => {
     setup(mockCartMember);
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas")); // step 0 -> 1
-    fireEvent.click(screen.getByText("enrere")); // step 1 -> 0
-    expect(screen.getByText("Dades personals")).toBeInTheDocument();
+    // Step 2 is disabled, clicking its header should not change anything
+    const header = getSections()[2].querySelector(".checkout-section__header");
+    fireEvent.click(header);
+    expect(getSections()[0].classList.contains("checkout-section--active")).toBe(true);
+  });
+});
+
+describe("Edge Cases: Step persistence", () => {
+  it("persists step to localStorage on navigation", async () => {
+    setup(mockCartRegular);
+    renderWithProviders(<Checkout />);
+    expect(localStorage.getItem("checkoutStep")).toBe("1");
+    fireEvent.click(screen.getByText("següent pas"));
+    await waitFor(() => {
+      expect(localStorage.getItem("checkoutStep")).toBe("2");
+    });
+  });
+
+  it("restores saved step on re-render", () => {
+    localStorage.setItem("checkoutStep", "1");
+    setup(mockCartMember);
+    renderWithProviders(<Checkout />);
+    expect(getSections()[1].classList.contains("checkout-section--active")).toBe(true);
   });
 });
 

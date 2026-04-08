@@ -57,7 +57,7 @@ function CheckoutSection({
 function Checkout() {
   const [t] = useTranslation("translation");
   const { cart_data = {}, checkoutCart, checkoutPaymentCart } = useCartStore();
-  const { isLoggedIn = false } = useAuthStore();
+  const { isLoggedIn = false, user_data = {} } = useAuthStore();
   const getMemberProfile = useAuthStore((state) => state.getMemberProfile);
   const { total = "", item_variants = [], id = "" } = cart_data;
   const isPaymentFree = total === "0.00 €";
@@ -86,8 +86,10 @@ function Checkout() {
       : ["Dades personals", "Cistella", "Dades de pagament"];
 
   useEffect(() => {
-    getMemberProfile();
-  }, [getMemberProfile]);
+    if (user_data?.member) {
+      getMemberProfile();
+    }
+  }, [getMemberProfile, user_data?.member]);
 
   useEffect(() => {
     localStorage.setItem(CHECKOUT_STEP_KEY, activeStep);

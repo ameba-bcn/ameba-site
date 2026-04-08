@@ -1,4 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import React from "react";
+import { describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, waitFor } from "@testing-library/react";
 import MembershipForm from "./MembershipForm";
 import useAuthStore from "../../../stores/useAuthStore";

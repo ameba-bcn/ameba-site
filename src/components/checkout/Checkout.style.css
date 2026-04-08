@@ -59,6 +59,8 @@
   display: flex;
   align-items: center;
   gap: 16px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .checkout-section__number {
@@ -78,11 +80,14 @@
 
 .checkout-section__title {
   font-size: 2.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .checkout-section__indicator {
   font-size: 1.5rem;
+  flex-shrink: 0;
   transition: transform 0.3s ease;
 }
 
@@ -169,11 +174,16 @@
 
   .checkout-section__title {
     font-size: 1.8rem;
+    white-space: normal;
   }
 
   .checkout-section__number {
     width: 28px;
     height: 28px;
     font-size: 1.3rem;
+  }
+
+  .checkout-section--completed .checkout-section__indicator {
+    font-size: 1.5rem;
   }
 }
