@@ -68,6 +68,7 @@ function Checkout() {
     const saved = parseInt(localStorage.getItem(CHECKOUT_STEP_KEY));
     if (isNaN(saved)) return firstStep;
     if (!hasMembershipInCart && saved === 0) return 1;
+    if (hasMembershipInCart && !user_data?.member) return 0;
     return saved;
   };
 
