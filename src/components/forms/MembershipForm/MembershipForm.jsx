@@ -1,19 +1,23 @@
 import { useFormik } from "formik";
 import React, { useEffect, useState } from "react";
 import { deepComparision, isEmptyObject } from "../../../utils/utils";
-import useAuthStore from "../../../stores/useAuthStore";
+import useAuthStore, { defaultMemberData } from "../../../stores/useAuthStore";
 import Button from "../../button/Button";
 import InputField from "../InputField/InputField";
-import "../Log.style.css";
 import { validate } from "../MembershipForm/MembershipValidate";
 import { useTranslation } from "react-i18next";
+import "../Log.style.css";
 
 export default function MembershipForm({ handleNext, setButtonDisabled }) {
   const [loading, setLoading] = useState(false);
   const [dataHasChanged, setDataHasChanged] = useState(false);
   const { user_member_data = {} } = useAuthStore();
-  const updateMemberProfile = useAuthStore((state) => state.updateMemberProfile);
-  const createMemberProfile = useAuthStore((state) => state.createMemberProfile);
+  const updateMemberProfile = useAuthStore(
+    (state) => state.updateMemberProfile,
+  );
+  const createMemberProfile = useAuthStore(
+    (state) => state.createMemberProfile,
+  );
   const initialMemberValues = {
     username: user_member_data.username,
     first_name: user_member_data.first_name,
@@ -22,7 +26,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
     phone_number: user_member_data.phone_number,
   };
   const [t] = useTranslation("translation");
-  const isNewMember = deepComparision(user_member_data, {});
+  const isNewMember = deepComparision(user_member_data, defaultMemberData);
 
   const InitialValues = {
     username: user_member_data.username || "",
@@ -74,7 +78,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
         first_name,
         last_name,
         phone_number,
-        username
+        username,
       )
         .then(() => {
           setLoading(false);
@@ -91,7 +95,7 @@ export default function MembershipForm({ handleNext, setButtonDisabled }) {
         first_name,
         last_name,
         phone_number,
-        username
+        username,
       )
         .then(() => {
           setLoading(false);

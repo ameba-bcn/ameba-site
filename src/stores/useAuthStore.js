@@ -16,7 +16,7 @@ const defaultUserData = {
   date_joined: "",
 };
 
-const defaultMemberData = {
+export const defaultMemberData = {
   address: "",
   first_name: "",
   last_name: "",
