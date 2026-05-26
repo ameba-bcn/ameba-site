@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import axiosInstance from "../../axios";
@@ -8,6 +8,47 @@ import useProfileStore from "../../stores/useProfileStore";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import CardView from "../../components/cardView/CardView";
 import EmbeddedSpinner from "../../components/spinner/EmbeddedSpinner";
+import PageMeta from "../../components/seo/PageMeta";
+
+function buildEventJsonLd(data) {
+  if (!data || !data.name) return null;
+  const ld = {
+    "@context": "https://schema.org",
+    "@type": "MusicEvent",
+    name: data.header || data.name,
+    url: `https://ameba.cat/activitats/${data.id}`,
+    organizer: {
+      "@type": "Organization",
+      name: "AMEBA — Associació de Música Electrònica de Barcelona",
+      url: "https://ameba.cat",
+    },
+  };
+  if (data.datetime) {
+    ld.startDate = data.datetime;
+  }
+  if (data.address) {
+    ld.location = {
+      "@type": "Place",
+      name: data.address,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Barcelona",
+        addressRegion: "Catalunya",
+        addressCountry: "ES",
+      },
+    };
+  }
+  if (data.images?.length > 0) {
+    ld.image = data.images;
+  }
+  if (data.cancelled) {
+    ld.eventStatus = "https://schema.org/EventCancelled";
+  } else {
+    ld.eventStatus = "https://schema.org/EventScheduled";
+  }
+  ld.eventAttendanceMode = "https://schema.org/OfflineEventAttendanceMode";
+  return ld;
+}
 
 const ActivitatPage = () => {
   const { id } = useParams();
@@ -43,6 +84,15 @@ const ActivitatPage = () => {
   };
 
   const noData = Object.keys(productData).length === 0;
+  const eventName = productData.header || productData.name || "";
+  const eventDescription = productData.description
+    ? productData.description.replace(/<[^>]+>/g, "").slice(0, 200)
+    : "";
+  const eventImage = productData.images?.[0];
+  const eventJsonLd = useMemo(
+    () => buildEventJsonLd(productData),
+    [productData],
+  );
 
   return (
     <PageLayout
@@ -52,6 +102,16 @@ const ActivitatPage = () => {
         color: "var(--color-rojo)",
       }}
     >
+      {!loading && !noData && (
+        <PageMeta
+          title={eventName}
+          description={eventDescription || undefined}
+          image={eventImage || undefined}
+          url={`/activitats/${id}`}
+          type="event"
+          jsonLd={eventJsonLd}
+        />
+      )}
       {loading ? (
         <EmbeddedSpinner alone />
       ) : noData ? (

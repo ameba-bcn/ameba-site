@@ -6,6 +6,7 @@ import FilterBar from "../../components/ui/FilterBar";
 import { galleries } from "../../config/galleryConfig";
 import { cloudinaryCover, radioDublabLink } from "../../utils/constants";
 import useDataStore from "../../stores/useDataStore";
+import PageMeta from "../../components/seo/PageMeta";
 import "./Gallery.css";
 
 const Gallery = () => {
@@ -46,6 +47,11 @@ const Gallery = () => {
         color: "var(--color-rojo)",
       }}
     >
+      <PageMeta
+        title="Arxiu"
+        description="Galeria de fotos i arxiu visual d'AMEBA: concerts, festivals i esdeveniments de música electrònica a Barcelona."
+        url="/gallery"
+      />
       <FilterBar
         items={years}
         activeItem={activeYear}

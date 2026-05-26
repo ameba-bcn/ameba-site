@@ -13,6 +13,7 @@ import { NavLink } from "react-router-dom";
 import CartToast from "../../components/toast/CartToast";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import Icon from "../../components/ui/Icon";
+import PageMeta from "../../components/seo/PageMeta";
 import "../../components/cardView/CardView.css";
 import "./Memberships.css";
 
@@ -66,6 +67,11 @@ const Memberships = () => {
         color: "var(--color-rojo)",
       }}
     >
+      <PageMeta
+        title="Fes-te soci/a"
+        description="Fes-te soci o sòcia d'AMEBA i gaudeix d'avantatges exclusius: descomptes, accés prioritari i més."
+        url="/memberships"
+      />
       {membership.length > 0 ? (
         <div className="card-view">
           <div className="card-view__row">

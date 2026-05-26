@@ -7,6 +7,7 @@ import useCartStore from "../../stores/useCartStore";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import CardView from "../../components/cardView/CardView";
 import EmbeddedSpinner from "../../components/spinner/EmbeddedSpinner";
+import PageMeta from "../../components/seo/PageMeta";
 
 const ProductePage = () => {
   const { id } = useParams();
@@ -48,6 +49,18 @@ const ProductePage = () => {
         color: "var(--color-rojo)",
       }}
     >
+      {!loading && !noData && (
+        <PageMeta
+          title={productData.header || productData.name}
+          description={
+            productData.description
+              ? productData.description.replace(/<[^>]+>/g, "").slice(0, 200)
+              : undefined
+          }
+          image={productData.images?.[0] || undefined}
+          url={`/botiga/${id}`}
+        />
+      )}
       {loading ? (
         <EmbeddedSpinner alone />
       ) : noData ? (

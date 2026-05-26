@@ -7,6 +7,7 @@ import CardLayout from "../../components/layout/CardLayout/CardLayout";
 import SearchBox from "../../components/searchBox/SearchBox";
 import Pagination from "../../components/pagination/Pagination";
 import { ACTIVE_STATUS } from "../../utils/constants";
+import PageMeta from "../../components/seo/PageMeta";
 import "./Socios.css";
 
 const PAGE_SIZE = 20;
@@ -55,6 +56,11 @@ const Socios = () => {
         color: "var(--color-rojo)",
       }}
     >
+      <PageMeta
+        title="Soci@s"
+        description="Projectes dels socis i sòcies d'AMEBA, l'Associació de Música Electrònica de Barcelona."
+        url="/socis"
+      />
       <div className="height-block" />
       <SearchBox
         searchText="Busca"
