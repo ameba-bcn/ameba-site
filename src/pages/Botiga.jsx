@@ -3,6 +3,7 @@ import BotigaGeneral from "../components/botiga/BotigaGeneral";
 import useDataStore from "../stores/useDataStore";
 import ProductBanner from "../components/botiga/ProductBanner";
 import PageLayout from "../components/layout/PageLayout/PageLayout";
+import PageMeta from "../components/seo/PageMeta";
 import { useTranslation } from "react-i18next";
 import { NavLink } from "react-router-dom";
 import { deleteStringDecimals } from "../utils/utils";
@@ -25,6 +26,11 @@ function Botiga() {
         color: "var(--color-rojo)",
       }}
     >
+      <PageMeta
+        title="Botiga"
+        description="Botiga d'AMEBA: merchandising, entrades i productes de l'Associació de Música Electrònica de Barcelona."
+        url="/botiga"
+      />
       <div className="clickBanner">
         <NavLink
           style={{ textDecoration: "none" }}

@@ -4,6 +4,7 @@ import { radioDublabLink } from "../../utils/constants";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import dataService from "../../store/services/data.service";
+import PageMeta from "../../components/seo/PageMeta";
 import "./Legal.css";
 import Icon from "../../components/ui/Icon";
 
@@ -25,6 +26,11 @@ const Legal = () => {
         color: "var(--color-cream)",
       }}
     >
+      <PageMeta
+        title="Avís legal"
+        description="Informació legal, política de privacitat i condicions d'ús d'AMEBA, l'Associació de Música Electrònica de Barcelona."
+        url="/legal"
+      />
       <div className="legal-page__content">
         <div className="height-block" />
         <div className="legal-page__title">{t("legal.title")}</div>
