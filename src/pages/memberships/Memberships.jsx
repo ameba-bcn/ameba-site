@@ -7,10 +7,8 @@ import useCartStore from "../../stores/useCartStore";
 import ImageCarousel from "../../components/images/ImageCarousel";
 import Button from "../../components/button/Button";
 import MembershipDetails from "../../components/cardView/MembershipDetails";
-import { toast } from "react-toastify";
 import { isMemberCheckout, urlify } from "../../utils/utils";
-import { NavLink } from "react-router-dom";
-import CartToast from "../../components/toast/CartToast";
+import { NavLink, useNavigate } from "react-router-dom";
 import DisclaimerBox from "../../components/disclaimerBox/DisclaimerBox";
 import Icon from "../../components/ui/Icon";
 import PageMeta from "../../components/seo/PageMeta";
@@ -40,19 +38,12 @@ const Memberships = () => {
   const box1Title = t("modal.descripcio");
   const box2Title = t("modal.beneficis");
   const { isLoggedIn } = useAuthStore();
+  const navigate = useNavigate();
   const checkoutRedirect = isLoggedIn ? "/checkout" : "/login";
 
   const handleAddClick = () => {
-    addToCart(variants[0]);
-    toast(<CartToast />, {
-      position: "bottom-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      className: "toast-black-background",
+    addToCart(variants[0]).then(() => {
+      navigate(checkoutRedirect);
     });
   };
 
