@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { NavLink } from "react-router-dom";
 import NavbarButtons from "./NavbarButtons";
 import NavbarButtonsMobile from "./NavbarButtonsMobile";
@@ -13,9 +13,31 @@ export default function Navbar({ isErrored = false }) {
   const ref = useRef(null);
   const toggleRef = useRef(null);
   const { isMenuOpen, openMenu, closeMenu } = useUIStore();
+  const [hidden, setHidden] = useState(false);
+  const scrollTimeout = useRef(null);
+
+  const handleScroll = useCallback(() => {
+    setHidden(true);
+    if (scrollTimeout.current) {
+      clearTimeout(scrollTimeout.current);
+    }
+    scrollTimeout.current = setTimeout(() => {
+      setHidden(false);
+    }, 400);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
+  }, [handleScroll]);
 
   return (
-    <div className="navbar">
+    <div className={`navbar${hidden && !isMenuOpen ? " navbar--hidden" : ""}`}>
       <div className="menuContainer">
         <div className="menuSuperior">
           <div className="menu-logo-box">

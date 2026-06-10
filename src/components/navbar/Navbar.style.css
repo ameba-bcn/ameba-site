@@ -1,3 +1,16 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+.navbar--hidden {
+  transform: translateY(-100%);
+}
+
 .navbar .menuSuperior {
   background-color: var(--color-negro) !important;
   display: flex;
