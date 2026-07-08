@@ -15,7 +15,12 @@
   display: flex;
   flex-direction: column;
   padding-top: 80px;
-  background-color: var(--color-cream);
+  /* Black behind the fixed navbar strip so hiding it doesn't flash cream */
+  background: linear-gradient(
+    to bottom,
+    var(--color-negro) 80px,
+    var(--color-cream) 80px
+  );
 }
 
 @keyframes fadein {
