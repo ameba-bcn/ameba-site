@@ -1,9 +1,10 @@
+/* No background here: the view container decides its own color
+   (default cream comes from .app-main-view) */
 .page-layout__inner {
-  margin: 0 60px 40px 60px;
+  padding: 0 60px 40px 60px;
   display: flex;
   flex-direction: column;
   flex: 1;
-  background-color: var(--color-cream);
 }
 
 .page-layout__content {
@@ -33,6 +34,6 @@
 
 @media screen and (max-width: 980px) {
   .page-layout__inner {
-    margin: 0 20px 40px 20px;
+    padding: 0 20px 40px 20px;
   }
 }
