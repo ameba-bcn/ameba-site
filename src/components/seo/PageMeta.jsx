@@ -1,6 +1,6 @@
 /**
  * SEO metadata component.
- * Manages <title>, <meta> (description, OG, Twitter), and optional JSON-LD
+ * Manages <title>, <meta> (description, OG), and optional JSON-LD
  * structured data via imperative DOM manipulation.
  */
 import { useEffect } from "react";
@@ -44,10 +44,6 @@ export default function PageMeta({
     setMeta("property", "og:description", description);
     setMeta("property", "og:image", image);
     setMeta("property", "og:url", fullUrl);
-    setMeta("name", "twitter:card", "summary_large_image");
-    setMeta("name", "twitter:title", fullTitle);
-    setMeta("name", "twitter:description", description);
-    setMeta("name", "twitter:image", image);
 
     return () => {
       document.title = prevTitle;

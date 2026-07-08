@@ -262,21 +262,6 @@ function Icon(props) {
     </AmebaSvgWrapper>
   );
 
-  const twitter = (
-    <AmebaSvgWrapper {...props}>
-      <g
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M4 4l11.733 16h4.267l-11.733 -16l-4.267 0" />
-        <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
-      </g>
-    </AmebaSvgWrapper>
-  );
-
   const instagram = (
     <AmebaSvgWrapper {...props}>
       <g
@@ -420,8 +405,6 @@ function Icon(props) {
       return facebook;
     case "youtube":
       return youtube;
-    case "twitter":
-      return twitter;
     case "instagram":
       return instagram;
     case "soundcloud":
