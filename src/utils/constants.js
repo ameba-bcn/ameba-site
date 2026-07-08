@@ -9,10 +9,7 @@ export const ERROR = {
       lang === "ca"
         ? "Email: aquest camp es obligatori"
         : "Email: este campo es obligatorio",
-    FORMAT:
-      lang === "ca"
-        ? "Email: format erroni"
-        : "Email: formato erróneo",
+    FORMAT: lang === "ca" ? "Email: format erroni" : "Email: formato erróneo",
   },
   USERNAME: {
     REQUIRED:
@@ -40,9 +37,7 @@ export const ERROR = {
         ? "Telèfon: aquest camp es obligatori"
         : "Teléfono: este campo es obligatorio",
     FORMAT:
-      lang === "ca"
-        ? "Telèfon: format erroni"
-        : "Teléfono: formato erróneo",
+      lang === "ca" ? "Telèfon: format erroni" : "Teléfono: formato erróneo",
   },
   FIRSTNAME: {
     REQUIRED:
@@ -80,9 +75,7 @@ export const ERROR = {
   },
   GENERIC: {
     REQUIRED:
-      lang === "ca"
-        ? "Aquest camp es obligatori"
-        : "Este campo es obligatorio",
+      lang === "ca" ? "Aquest camp es obligatori" : "Este campo es obligatorio",
   },
 };
 
@@ -107,8 +100,8 @@ export const productQueryKind = {
   activitat: "events",
 };
 
-export const API_URL =
-  process.env.REACT_APP_API_HOST ||
+// export const API_URL =
+process.env.REACT_APP_API_HOST ||
   `${window.location.protocol}//${window.location.hostname}${
     window.location.port ? ":" + window.location.port : ""
   }/api/`;

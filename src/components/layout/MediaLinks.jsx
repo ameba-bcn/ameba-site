@@ -6,7 +6,6 @@ const LINKS = [
   { key: "soundcloud", url: "https://soundcloud.com/", icon: "soundcloud" },
   { key: "fcbk", url: "https://www.facebook.com/", icon: "facebook" },
   { key: "yout", url: "https://www.youtube.com/", icon: "youtube" },
-  { key: "twit", url: "https://twitter.com/", icon: "twitter" },
 ];
 
 export default function MediaLinks(props) {

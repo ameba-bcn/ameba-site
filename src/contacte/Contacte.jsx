@@ -20,7 +20,6 @@ function Contacte() {
         <MediaLinks
           fcbk="amebabarcelona"
           insta="ameba_bcn"
-          twit="ameba_bcn"
           yout="channel/UCH5ssfBCmgJ1IDM-pSn2cEg"
           soundcloud="ameba-barcelona"
         />
