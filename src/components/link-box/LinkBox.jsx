@@ -1,6 +1,7 @@
 import React from "react";
 import "./LinkBox.css";
 import { iframesValidation } from "../../utils/validations";
+import { sanitizeEmbed } from "../../utils/sanitize";
 import Icon from "../ui/Icon";
 
 const LinkBox = (props) => {
@@ -18,8 +19,9 @@ const LinkBox = (props) => {
         <div className="link-label">{label}</div>
       </div>
       <div className={thinLine ? "link-box link-box--thin" : "link-box"}>
-        {mediaLinks.map((link) =>
-          iframesValidation(link) ? (
+        {mediaLinks.map((link) => {
+          const safeEmbed = iframesValidation(link) ? sanitizeEmbed(link) : "";
+          return safeEmbed ? (
             <div className="link-row" key={link}>
               {editMode ? (
                 <div className="delete-link-icon">
@@ -34,7 +36,7 @@ const LinkBox = (props) => {
               ) : null}
               <div
                 className="content"
-                dangerouslySetInnerHTML={{ __html: `${link}` }}
+                dangerouslySetInnerHTML={{ __html: safeEmbed }}
               />
             </div>
           ) : (
@@ -51,15 +53,19 @@ const LinkBox = (props) => {
                 </div>
               ) : null}
               <div className="content">
-                <a href={link} rel="noreferrer" target="_blank">
-                  {typeof link === "string" && link?.split("www.").length > 1
-                    ? link?.split("www.")[1]
-                    : link}
-                </a>
+                {/^https?:\/\//i.test(link || "") ? (
+                  <a href={link} rel="noreferrer" target="_blank">
+                    {typeof link === "string" && link?.split("www.").length > 1
+                      ? link?.split("www.")[1]
+                      : link}
+                  </a>
+                ) : (
+                  <span>{link}</span>
+                )}
               </div>
             </div>
-          )
-        )}
+          );
+        })}
       </div>
     </div>
   );
