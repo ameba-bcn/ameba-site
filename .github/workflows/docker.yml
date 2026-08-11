@@ -88,6 +88,7 @@ jobs:
     if: github.ref_name == 'dev'
     runs-on: ubuntu-latest
     environment: dev
+    permissions: {}
 
     steps:
       - name: Deploy to Dev Server
@@ -119,6 +120,7 @@ jobs:
     if: github.ref_name == 'master'
     runs-on: ubuntu-latest
     environment: prod
+    permissions: {}
 
     steps:
       - name: Deploy to prod Server

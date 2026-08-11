@@ -12,7 +12,12 @@ export default function PasswordRecovery() {
 
   useEffect(() => {
     const parsed = Object.fromEntries(new URLSearchParams(location.search));
-    setStrToken(parsed["token"] || parsed["?token"]);
+    const token = parsed["token"] || parsed["?token"];
+    setStrToken(token);
+    // Elimina el token de recovery de la URL visible (historial/referrer).
+    if (token) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
   }, [location.search]);
 
   return (
