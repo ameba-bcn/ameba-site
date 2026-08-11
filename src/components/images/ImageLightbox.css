@@ -42,7 +42,7 @@
   left: 50%;
   transform: translateX(-50%);
   color: var(--color-cream);
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-size: 1.4rem;
   letter-spacing: 2px;
   opacity: 0.8;

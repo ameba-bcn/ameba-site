@@ -1,16 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap');
 
 /* COLOURS */
+/* ⚠ Hex del rediseño 2026 pendientes de muestrear del arte final */
 :root {
-    --color-cream: #FAE6C5;
-    --color-naranja: #F2C571;
-    --color-rojo: #EB5E3E;
-    --color-negro: #1D1D1B;
+    --color-cream: #f2e3c9;
+    --color-naranja: #e8912d;
+    --color-rojo: #e05a3a;
+    --color-negro: #1d1d1b;
     --color-gris: #485461;
-    --color-amarillo: #FFED00;
+    --color-amarillo: #f5e400;
     --color-gris-claro: #A9A9A9;
     --color-white: #fdfdfd;
     --color-success: #75fa83;
+
+    /* Semantic section aliases (rediseño 2026) */
+    --section-associacio: var(--color-cream);
+    --section-festivals: var(--color-amarillo);
+    --section-lab: var(--color-naranja);
+    --section-shop: var(--color-rojo);
+
+    /* Typography */
+    --font-display: "Bebas Neue", sans-serif;
+    --font-body: "Montserrat", sans-serif;
+
+    /* Display type scale */
+    --display-xl: clamp(70px, 14vw, 220px);
+    --display-lg: clamp(48px, 9vw, 140px);
+    --display-md: clamp(32px, 5vw, 80px);
 
     /* Aliases for Button.css compatibility */
     --primary: var(--color-naranja);
@@ -44,7 +60,7 @@
     padding: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: var(--font-body);
 }
 
 code {
@@ -66,6 +82,13 @@ iframe#webpack-dev-server-client-overlay {
 
 /* Global utility classes */
 
+.outline-display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  -webkit-text-stroke: 2px var(--color-negro);
+  color: transparent;
+}
+
 .height-block {
   display: flex;
   width: 100%;
@@ -73,7 +96,7 @@ iframe#webpack-dev-server-client-overlay {
 }
 
 .styled-link {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-body);
   font-size: 1.2rem;
   cursor: pointer;
   color: var(--color-negro) !important;
@@ -100,7 +123,7 @@ iframe#webpack-dev-server-client-overlay {
 
 .title-inner-section {
   font-size: 40px;
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-weight: 400;
 }
 

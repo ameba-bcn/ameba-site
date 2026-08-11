@@ -18,7 +18,7 @@
 }
 
 .ameba-card-title__container {
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   width: -webkit-fill-available;
   height: -webkit-fill-available;
   display: flex;

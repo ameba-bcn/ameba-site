@@ -3,7 +3,7 @@
 .breadcrums {
   display: flex;
   justify-content: center;
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-size: 24px;
   font-weight: 500;
   text-transform: uppercase;

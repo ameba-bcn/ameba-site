@@ -3,7 +3,12 @@
     "botiga": "tienda",
     "soci-menu": "HAZTE SOCIO",
     "projectes": "PROYECTOS",
-    "arxiu": "archivo"
+    "arxiu": "archivo",
+    "associacio": "Asociación",
+    "festivals": "Festivales",
+    "lab": "Lab",
+    "shop": "Shop",
+    "idioma": "Cambia el idioma"
   },
   "checkout": {
     "finalitzarCompra": "finalizar compra",
@@ -39,7 +44,10 @@
   "banners": {
     "soci-curt": "hazte socio/a",
     "soci-llarg-pt1": "hazte socio/a de ameba desde ",
-    "soci-llarg-pt2": "/año"
+    "soci-llarg-pt2": "/año",
+    "promo-text": "Hazte socio/socia de Ameba y disfruta de todas las ventajas",
+    "promo-cta": ">>>>>> Descubre más haciendo click aquí",
+    "promo-close": "Cierra el banner"
   },
   "agenda": {
     "data": "fecha",
@@ -67,7 +75,43 @@
   },
   "footer": {
     "drets": "Todos los derechos reservados",
-    "colab": "Con la colaboración de:"
+    "colab": "Con la colaboración de:",
+    "nav-label": "Enlaces del pie de página",
+    "newsletter": "Newsletter"
+  },
+  "lab": {
+    "proximament": "Próximamente",
+    "meta": "El laboratorio creativo de AMEBA. Próximamente."
+  },
+  "home": {
+    "meta": "AMEBA — Asociación, Festivales, Lab y Shop. Desde 2014 dando apoyo al talento local de Barcelona.",
+    "hero": {
+      "title-1": "DESDE 2014 DANDO APOYO",
+      "title-2": "AL TALENTO LOCAL DE LA CIUDAD!",
+      "bullet-1": "Descuentos en talleres, festivales y actividades",
+      "bullet-2": "Acceso a eventos y contenido exclusivo para socios",
+      "bullet-3": "Forma parte de la comunidad electrónica de Barcelona",
+      "cta-soci": "¡HAZTE SOCIO!",
+      "cta-acces": "ACCESO SOCIOS"
+    },
+    "band": {
+      "associacio": {
+        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      },
+      "festivals": {
+        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      },
+      "lab": {
+        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      },
+      "shop": {
+        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    }
   },
   "newsletter": {
     "subscriute": "subscríbete"

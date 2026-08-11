@@ -10,7 +10,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 22px;
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   text-transform: uppercase;
   font-weight: 500;
   text-decoration: none;

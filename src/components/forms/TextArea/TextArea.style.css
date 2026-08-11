@@ -10,7 +10,7 @@
   width: min-content;
   color: var(--color-negro);
   text-transform: uppercase;
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-size: 20px;
   z-index: 1000;
   line-height: 0.8;

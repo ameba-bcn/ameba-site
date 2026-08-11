@@ -8,8 +8,8 @@
 }
 
 .SectionTitle {
-    font-size: 160px;
-    font-family: 'Bebas Neue';
+    font-size: clamp(60px, 10vw, 160px);
+    font-family: var(--font-display);
     font-weight: 400;
     text-align: center;
     text-transform: uppercase;
@@ -17,27 +17,3 @@
     color: var(--color-negro);
     width: auto;
 }
-
-@media screen and (max-width: 1300px) {
-    .SectionTitle {
-        font-size: 120px;
-    }
-}
-
-@media screen and (max-width: 1100px) {
-    .SectionTitle {
-        font-size: 100px;
-    }
-}
-
-@media screen and (max-width: 635px) {
-    .SectionTitle {
-        font-size: 60px;
-    }
-}
-
-
-/* 
-white-space: nowrap;
-    overflow: hidden;
-    display: block; */

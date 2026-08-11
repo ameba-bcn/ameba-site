@@ -1,0 +1,126 @@
+.section-band {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 60vh;
+  padding: 60px 5vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: var(--band-color, var(--color-cream));
+  color: var(--color-negro);
+}
+
+/* Megatítulo outline decorativo de fondo */
+.section-band__megatitle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  font-family: var(--font-display);
+  font-size: var(--display-xl);
+  line-height: 0.9;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-negro);
+  opacity: 0.35;
+  pointer-events: none;
+  user-select: none;
+}
+
+.section-band__content {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 8vh;
+}
+
+.section-band--reverse .section-band__content {
+  flex-direction: row-reverse;
+}
+
+/* Imagen duotono: una sola imagen sirve para las 4 bandas */
+.section-band__media {
+  flex: 0 1 480px;
+  background-color: var(--band-color, var(--color-cream));
+}
+
+.section-band__image {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(1) contrast(1.05);
+  mix-blend-mode: multiply;
+}
+
+.section-band__detail {
+  flex: 0 1 420px;
+  text-align: left;
+}
+
+.section-band__title {
+  font-family: var(--font-display);
+  font-size: var(--display-md);
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0 0 16px;
+}
+
+.section-band__lead {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.section-band__body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  margin: 0 0 24px;
+}
+
+.section-band__more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 3px solid var(--color-negro);
+  border-radius: 50%;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  line-height: 1;
+  text-decoration: none;
+  color: var(--color-negro);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.section-band__more:hover {
+  background-color: var(--color-negro);
+  color: var(--band-color, var(--color-cream));
+}
+
+@media screen and (max-width: 960px) {
+  .section-band__content {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .section-band--reverse .section-band__content {
+    flex-direction: column;
+  }
+
+  .section-band__media,
+  .section-band__detail {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+}

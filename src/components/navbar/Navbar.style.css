@@ -12,7 +12,7 @@
 }
 
 .navbar .menuSuperior {
-  background-color: var(--color-negro) !important;
+  background-color: var(--color-negro);
   display: flex;
   flex-wrap: wrap;
   flex-flow: row;
@@ -50,11 +50,11 @@
 }
 
 .navbar .cart-cistella a {
-  color: var(--color-cream) !important;
+  color: var(--color-cream);
 }
 
 .navbar .menu-logo-box a {
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   cursor: pointer;
   text-decoration: none;
   font-size: 2.5rem;
@@ -67,7 +67,7 @@
 
 .navbar .cartIconMenu,
 .navbar .sessio-menu-button {
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   cursor: pointer;
   text-decoration: none;
   font-size: 2.5rem;
@@ -104,6 +104,7 @@
   align-items: center;
   justify-content: center;
   vertical-align: middle;
+  gap: 24px;
   margin: 0;
 }
 
@@ -113,42 +114,68 @@
   white-space: nowrap;
 }
 
-.navbar .nav-ul div a,
-.navbar .nav-ul li a {
-  display: inline-block;
-  font-family: "Bebas Neue";
-  font-size: 2.5rem;
-  margin-right: 20px;
+/* Section links: color chip + label (rediseño 2026) */
+.navbar .nav-section-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
   font-weight: 400;
   text-decoration: none;
   color: var(--color-cream);
-  transition: all 0.5s ease-in-out;
-  position: relative;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-color-chip {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  background-color: transparent;
+  border: 2px solid var(--chip-color, var(--color-cream));
+  transition: background-color 0.3s ease;
+}
+
+.navbar .nav-section-link:hover,
+.navbar .nav-section-link.active {
+  color: var(--chip-color, var(--color-cream));
+}
+
+.navbar .nav-section-link:hover .nav-color-chip,
+.navbar .nav-section-link.active .nav-color-chip {
+  background-color: var(--chip-color, var(--color-cream));
+}
+
+/* Right icon group: user / cart / language */
+.navbar .nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: 16px;
+}
+
+.navbar .nav-icon-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar .nav-lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--color-cream);
   text-transform: uppercase;
 }
 
-.navbar .nav-ul div a::before,
-.navbar .nav-ul li a::before {
-  content: attr(data-item);
-  transition: 0.5s;
-  color: var(--color-naranja);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 10;
-  width: 0;
-  overflow: hidden;
-}
-
-.navbar .nav-ul div a:hover::before,
-.navbar .nav-ul li a:hover::before {
-  width: 100%;
-  transition: all 0.5s ease-in-out;
-}
-
-.navbar .nav-ul div a.active,
-.navbar .nav-ul li a.active {
+.navbar .nav-lang-toggle:hover {
   color: var(--color-rojo);
 }
 
@@ -220,60 +247,15 @@
   justify-content: flex-start;
 }
 
-.navbar .nav-ul_mobile div a.active,
-.navbar .nav-ul_mobile li a.active {
-  color: var(--color-rojo);
-}
-
-.navbar .nav-ul_mobile div a,
-.navbar .nav-ul_mobile li a {
-  margin: 4px 0px;
-  display: inline-block;
-  font-family: "Bebas Neue";
+.navbar .nav-ul_mobile .nav-section-link {
+  margin: 8px 0;
   font-size: 2.5rem;
-  margin-right: 20px;
-  font-weight: 400;
-  text-decoration: none;
-  color: var(--color-cream);
-  transition: all 0.5s ease-in-out;
-  position: relative;
-  text-transform: uppercase;
 }
 
-.navbar .nav-ul_mobile div a::before,
-.navbar .nav-ul_mobile li a::before {
-  content: attr(data-item);
-  transition: 0.5s;
-  color: var(--color-naranja);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 10;
-  width: 0;
-  overflow: hidden;
-}
-
-.navbar .nav-ul_mobile div a:hover::before,
-.navbar .nav-ul_mobile li a:hover::before {
-  width: 100%;
-  transition: all 0.5s ease-in-out;
-}
-
-.navbar .menu-lang li {
-  cursor: pointer;
-}
-
-.navbar .menu-lang li a {
-  color: var(--color-cream) !important;
-}
-
-.navbar .menu-lang li a:last-child {
-  margin-left: -20px;
-}
-
-.navbar .menu-lang li > a.active {
-  color: var(--color-amarillo) !important;
+.navbar .nav-icons--mobile {
+  margin-left: 0;
+  margin-top: 8px;
+  gap: 24px;
 }
 
 .navbar .cartIconMenu {
@@ -298,7 +280,7 @@
   height: 18px;
   padding: 2px 1px 0px 1px;
   background-color: var(--color-naranja);
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.7em;
   border-radius: 50%;
@@ -313,7 +295,7 @@
   height: 18px;
   padding: 2px 5px 2px 6px;
   background-color: var(--color-naranja);
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.3em;
   border-radius: 50%;
@@ -347,7 +329,7 @@
 .navbar .dropdown-profile-mobile,
 .navbar .dropdown-logout-mobile {
   color: var(--color-negro);
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-size: 2.5rem;
   font-weight: 400;
   text-transform: uppercase;

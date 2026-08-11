@@ -10,7 +10,7 @@
 
 .member-qr__title {
   text-transform: uppercase;
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   color: var(--color-negro);
   font-size: 3.3rem;
   text-align: left;
@@ -60,7 +60,7 @@
 }
 
 .member-card__logo {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-size: 3rem;
   font-weight: 700;
   color: var(--color-negro);
@@ -70,7 +70,7 @@
 }
 
 .member-card__subtitle {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-size: 0.85rem;
   text-transform: uppercase;
   color: var(--color-negro);
@@ -82,7 +82,7 @@
 .member-card__valid-badge {
   background: var(--color-negro);
   color: var(--color-amarillo);
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-size: 0.85rem;
   font-weight: 700;
   padding: 6px 14px;
@@ -130,7 +130,7 @@
 }
 
 .member-card__name {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-size: 1.6rem;
   font-weight: 700;
   color: var(--color-negro);
@@ -140,7 +140,7 @@
 }
 
 .member-card__id {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-size: 1rem;
   color: var(--color-negro);
   margin: 0;
@@ -170,7 +170,7 @@
 }
 
 .member-card__footer-label {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-size: 0.65rem;
   text-transform: uppercase;
   color: var(--color-negro);
@@ -180,7 +180,7 @@
 }
 
 .member-card__footer-value {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-size: 1.2rem;
   font-weight: 700;
   color: var(--color-negro);

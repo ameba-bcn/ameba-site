@@ -11,7 +11,7 @@
 
 .menu-log__item .item {
   color: var(--color-negro);
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-size: 30px;
   font-weight: 400;
   text-transform: uppercase;

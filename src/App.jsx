@@ -13,6 +13,7 @@ import useCartStore from "./stores/useCartStore";
 import { Routes, Route } from "react-router-dom";
 import Contacte from "./contacte/Contacte";
 import Menu from "./components/navbar/Navbar";
+import PromoBanner from "./components/banner/PromoBanner";
 import ScrollTop from "./components/layout/ScrollTop";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -62,6 +63,7 @@ const SubscriptionFinished = lazyWithRetry(
   () => import("./pages/landing/SubscriptionFinished"),
 );
 const Legal = lazyWithRetry(() => import("./pages/legal/Legal"));
+const Lab = lazyWithRetry(() => import("./pages/lab/Lab"));
 const QrLanding = lazyWithRetry(() => import("./pages/qr-landing/QrLanding"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
@@ -129,6 +131,7 @@ function App() {
       <Menu />
       <UserContext.Provider value={value}>
         <div className="app-main-view">
+          <PromoBanner />
           <ScrollTop showBelow={250} />
           <NavigationProgress />
           {isNavigating && <FullscreenSpinner />}
@@ -159,6 +162,7 @@ function App() {
               <Route path="/summary-checkout" element={<CheckoutFinished />} />
               <Route path="/subscribe" element={<SubscriptionFinished />} />
               <Route path="/legal" element={<Legal />} />
+              <Route path="/lab" element={<Lab />} />
               <Route path="/" element={<Home />} />
               <Route path="/qr-view" element={<QrLanding />} />
               <Route path="*" element={<NotFound />} />

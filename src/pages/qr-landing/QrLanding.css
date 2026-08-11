@@ -15,7 +15,7 @@
 }
 
 .qr-landing .json-formatted {
-  font-family: Montserrat, sans-serif;
+  font-family: var(--font-body);
   font-size: 22px;
   text-align: start;
   word-wrap: break-word;
