@@ -32,12 +32,25 @@ function addRefreshSubscriber(callback) {
   refreshSubscribers.push(callback);
 }
 
+function clearSession() {
+  isRefreshing = false;
+  refreshSubscribers = [];
+  localStorage.removeItem("access");
+  localStorage.removeItem("refresh");
+}
+
 axiosInstance.interceptors.response.use(
   (response) => {
     return response;
   },
   async (error) => {
-    console.warn("Axios, On nok", error);
+    // No volcar el objeto de error completo: error.config.headers.Authorization
+    // contiene el Bearer token. Log solo de metadatos no sensibles.
+    console.warn(
+      "Axios error:",
+      error.response?.status,
+      error.config?.url
+    );
     const originalRequest = error.config;
 
     if (typeof error.response === "undefined") {
@@ -53,8 +66,7 @@ axiosInstance.interceptors.response.use(
       error.response.status === 401 &&
       originalRequest.url === BASE_URL + "token/refresh/"
     ) {
-      isRefreshing = false;
-      refreshSubscribers = [];
+      clearSession();
       window.location.href = "/login/";
       return Promise.reject(error);
     }
@@ -69,6 +81,7 @@ axiosInstance.interceptors.response.use(
 
       if (!refreshToken) {
         console.warn("Refresh token not available");
+        clearSession();
         window.location.href = "/login/";
         return Promise.reject(error);
       }
@@ -84,11 +97,20 @@ axiosInstance.interceptors.response.use(
         });
       }
 
-      const tokenParts = JSON.parse(atob(refreshToken.split(".")[1]));
+      let tokenParts;
+      try {
+        tokenParts = JSON.parse(atob(refreshToken.split(".")[1]));
+      } catch (e) {
+        console.warn("Refresh token is malformed");
+        clearSession();
+        window.location.href = "/login/";
+        return Promise.reject(error);
+      }
       const now = Math.ceil(Date.now() / 1000);
 
       if (tokenParts.exp <= now) {
         console.warn("Refresh token is expired", tokenParts.exp, now);
+        clearSession();
         window.location.href = "/login/";
         return Promise.reject(error);
       }
@@ -118,9 +140,8 @@ axiosInstance.interceptors.response.use(
           return axiosInstance(originalRequest);
         })
         .catch((err) => {
-          isRefreshing = false;
-          refreshSubscribers = [];
-          console.warn("Token refresh failed", err);
+          clearSession();
+          console.warn("Token refresh failed", err?.response?.status);
           return Promise.reject(err);
         });
     }

@@ -45,7 +45,7 @@ const passwordRecovery = (token, password) => {
 
 const sendEmailPasswordRecovery = (email) => {
   return axiosInstance
-    .get(API_URL + `recovery/?email=${email}`)
+    .get(API_URL + `recovery/?email=${encodeURIComponent(email)}`)
     .then((response) => {
       return response?.data;
     });

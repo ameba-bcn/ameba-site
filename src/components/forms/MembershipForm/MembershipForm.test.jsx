@@ -2,7 +2,7 @@ import React from "react";
 import { describe, it, expect, vi } from "vitest";
 import { screen, fireEvent, waitFor } from "@testing-library/react";
 import MembershipForm from "./MembershipForm";
-import useAuthStore from "../../../stores/useAuthStore";
+import useAuthStore, { defaultMemberData } from "../../../stores/useAuthStore";
 import renderWithProviders from "../../../test/helpers/renderWithProviders";
 import { mockMemberProfile } from "../../../test/mocks/data";
 
@@ -26,7 +26,9 @@ describe("MembershipForm", () => {
     const mockUpdate = vi.fn().mockResolvedValue({});
     const mockCreate = vi.fn().mockResolvedValue(mockMemberProfile);
     useAuthStore.setState({
-      user_member_data: {},
+      // A new member mirrors the store's initial value (defaultMemberData);
+      // the component derives isNewMember via deepComparision against it.
+      user_member_data: { ...defaultMemberData },
       updateMemberProfile: mockUpdate,
       createMemberProfile: mockCreate,
     });

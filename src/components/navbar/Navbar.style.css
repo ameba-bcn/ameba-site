@@ -4,11 +4,22 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  transition: transform 0.3s ease;
+  animation: navbar-appear 0.2s ease-out;
 }
 
 .navbar--hidden {
-  transform: translateY(-100%);
+  display: none;
+}
+
+@keyframes navbar-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .navbar .menuSuperior {

@@ -16,8 +16,12 @@ const QrLanding = () => {
   useEffect(() => {
     const parsed = Object.fromEntries(new URLSearchParams(location.search));
     const strToken = parsed["token"] || parsed["?token"];
+    // Elimina el token de la URL visible para que no quede en historial/referrer.
+    if (strToken) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
     axiosInstance
-      .get(BASE_URL + `member_card/?token=${strToken}`, {})
+      .get(BASE_URL + `member_card/?token=${encodeURIComponent(strToken)}`, {})
       .then((res) => {
         setMemberData(res?.data);
         setLoading(false);

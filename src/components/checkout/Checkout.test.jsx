@@ -23,9 +23,9 @@ vi.mock("../forms/MembershipForm/MembershipFormReadOnly", () => ({
   default: () => <div data-testid="membership-form-readonly">MembershipFormReadOnly</div>,
 }));
 vi.mock("../button/Button", () => ({
-  default: ({ children, onClick, disabled }) => (
+  default: ({ children, onClick, disabled, loading }) => (
     <button onClick={onClick} disabled={disabled} data-testid={`btn-${typeof children === 'string' ? children : 'action'}`}>
-      {children}
+      {loading ? <div className="spinner" id="spinner" /> : children}
     </button>
   ),
 }));
@@ -297,7 +297,7 @@ describe("Checkout - loading state", () => {
     const { container } = renderWithProviders(<Checkout />);
     fireEvent.click(screen.getByText("següent pas"));
     await waitFor(() => {
-      expect(container.querySelector(".spinner-border")).toBeInTheDocument();
+      expect(container.querySelector(".spinner")).toBeInTheDocument();
     });
   });
 });
