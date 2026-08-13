@@ -12,16 +12,18 @@ function getMobileImage(image) {
 export default function Banner({ image, link, alt, title }) {
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const src = isMobile ? getMobileImage(image) : image;
+  // Solo se permiten enlaces http(s) (evita javascript:/data: desde la API).
+  const safeLink = /^https?:\/\//i.test(link || "") ? link : null;
   const content = (
     <img className="Banner__image" src={src} alt={alt || "banner"} />
   );
 
   return (
     <div className="Bloque" id="banner">
-      {link ? (
+      {safeLink ? (
         <a
           className="Banner"
-          href={link}
+          href={safeLink}
           target="_blank"
           rel="noopener noreferrer"
         >

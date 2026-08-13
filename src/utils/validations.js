@@ -38,8 +38,11 @@ export const isValidUrl = (urlString) => {
 
 export const iframesValidation = (value) => {
   if (!value) return false;
+  // Anchored: the whole string must be a single <iframe> with an https(s) src,
+  // with no extra markup before/after (defense-in-depth; sanitizeEmbed enforces
+  // the host allowlist and strips anything else).
   var res = ("" + value).match(
-    /<iframe[^\\>]+src=["'](https?:\/\/[^"']+)["'][^\\>]*>.*<\/iframe>/
+    /^\s*<iframe\b[^>]*\bsrc=["'](https?:\/\/[^"']+)["'][^>]*>[\s\S]*?<\/iframe>\s*$/i
   );
   if (res == null) return false;
   else return true;

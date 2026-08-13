@@ -17,10 +17,15 @@ export default function Navbar({ isErrored = false }) {
   const scrollTimeout = useRef(null);
 
   const handleScroll = useCallback(() => {
-    setHidden(true);
     if (scrollTimeout.current) {
       clearTimeout(scrollTimeout.current);
     }
+    // En el top de la vista el menú siempre está visible (sin esperar).
+    if (window.scrollY <= 0) {
+      setHidden(false);
+      return;
+    }
+    setHidden(true);
     scrollTimeout.current = setTimeout(() => {
       setHidden(false);
     }, 400);

@@ -21,6 +21,8 @@ export default function LogMailConfirmation() {
 
   useEffect(() => {
     if (strToken) {
+      // Elimina el token de la URL: es canjeable por una sesión completa.
+      window.history.replaceState(null, "", window.location.pathname);
       validateEmail(strToken).then(() => {
         setHasQueryParams(true);
       });
