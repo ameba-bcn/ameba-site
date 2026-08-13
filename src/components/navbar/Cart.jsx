@@ -70,7 +70,7 @@ function Cart() {
           <Icon
             icon="shoppingCart"
             className="cartIconMenu"
-            type="orange"
+            type="hoverable-black"
             onClick={() => setCartMenuOpen(!cartMenuOpen)}
           />
 

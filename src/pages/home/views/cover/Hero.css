@@ -3,16 +3,16 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  min-height: 70vh;
+  min-height: 80vh;
   overflow: hidden;
-  background-color: var(--color-negro);
+  background-color: var(--color-cream);
 }
 
-/* Full-bleed duotone photo */
+/* Foto full-bleed en duotono crema/sepia */
 .hero__media {
   position: absolute;
   inset: 0;
-  background-color: var(--color-rojo);
+  background-color: var(--color-cream);
 }
 
 .hero__image {
@@ -23,94 +23,115 @@
   mix-blend-mode: multiply;
 }
 
+/* Titular a la izquierda, tarjeta a la derecha */
 .hero__content {
   position: relative;
+  flex: 1;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: flex-start;
-  gap: 32px;
-  padding: 8vh 5vw;
+  gap: 40px;
+  padding: 10vh 7vw;
 }
 
-/* Outline headline over black boxes */
+/* Titular outline en 4 cajas negras */
 .hero__title {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 6px;
   margin: 0;
   text-align: left;
 }
 
 .hero__title-line {
   display: inline-block;
-  padding: 4px 16px;
+  padding: 6px 24px;
   background-color: var(--color-negro);
   font-family: var(--font-display);
-  font-size: var(--display-md);
-  line-height: 1.05;
+  font-size: clamp(40px, 7.5vw, 150px);
+  line-height: 0.95;
   text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 2px var(--color-cream);
+  /* Relleno = fondo de la caja: tapa la mitad interior del trazo,
+     dejando un outline efectivo de ~0.5px (los strokes sub-píxel
+     se redondean a 1px de dispositivo y no adelgazan) */
+  color: var(--color-negro);
+  -webkit-text-stroke: 1px var(--color-cream);
 }
 
-/* Red card with bullets + CTAs */
+/* Tarjeta roja estrecha a la derecha */
 .hero__card {
-  max-width: 480px;
+  flex: 0 0 clamp(280px, 24vw, 360px);
+  margin-right: 8vw;
+  box-sizing: border-box;
   background-color: var(--color-rojo);
   color: var(--color-negro);
-  padding: 24px 28px;
+  padding: 36px 32px;
   text-align: left;
 }
 
 .hero__bullets {
-  margin: 0 0 20px;
+  margin: 0 0 32px;
   padding-left: 20px;
   font-family: var(--font-body);
-  font-size: 1.05rem;
-  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-cream);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 20px;
 }
 
+/* Botones apilados: caja negra + sombra crema desplazada */
 .hero__actions {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .hero__btn {
   display: inline-block;
-  padding: 8px 20px;
+  padding: 6px 16px;
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 1.8rem;
+  line-height: 1.1;
   text-transform: uppercase;
   text-decoration: none;
-  color: var(--color-negro);
-  border: 3px solid var(--color-negro);
-  background-color: transparent;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
-}
-
-.hero__btn--primary {
-  background-color: var(--color-negro);
   color: var(--color-cream);
+  background-color: var(--color-negro);
+  box-shadow: -6px 6px 0 var(--color-cream);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hero__btn:hover {
-  background-color: var(--color-cream);
-  color: var(--color-negro);
+  transform: translate(-3px, 3px);
+  box-shadow: -3px 3px 0 var(--color-cream);
 }
 
-@media screen and (max-width: 760px) {
+/* Variante invertida (ACCÉS SOCIS): caja crema, texto negro, sombra negra */
+.hero__btn--invert {
+  color: var(--color-negro);
+  background-color: var(--color-cream);
+  box-shadow: 6px 6px 0 var(--color-negro);
+}
+
+.hero__btn--invert:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--color-negro);
+}
+
+@media screen and (max-width: 960px) {
   .hero__content {
+    flex-direction: column;
     padding: 6vh 16px;
   }
 
   .hero__card {
-    max-width: 100%;
+    flex: 1 1 auto;
+    margin-right: 0;
+    width: 100%;
+    max-width: 420px;
   }
+
 }

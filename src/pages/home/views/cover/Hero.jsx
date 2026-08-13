@@ -18,6 +18,8 @@ const Hero = () => {
         <h1 className="hero__title">
           <span className="hero__title-line">{t("home.hero.title-1")}</span>
           <span className="hero__title-line">{t("home.hero.title-2")}</span>
+          <span className="hero__title-line">{t("home.hero.title-3")}</span>
+          <span className="hero__title-line">{t("home.hero.title-4")}</span>
         </h1>
         <div className="hero__card">
           <ul className="hero__bullets">
@@ -26,11 +28,11 @@ const Hero = () => {
             <li>{t("home.hero.bullet-3")}</li>
           </ul>
           <div className="hero__actions">
-            <NavLink className="hero__btn hero__btn--primary" to="/memberships">
+            <NavLink className="hero__btn" to="/memberships">
               {t("home.hero.cta-soci")}
             </NavLink>
             <NavLink
-              className="hero__btn"
+              className="hero__btn hero__btn--invert"
               to={isLoggedIn ? "/profile" : "/login"}
             >
               {t("home.hero.cta-acces")}

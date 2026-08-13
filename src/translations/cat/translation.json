@@ -86,11 +86,13 @@
   "home": {
     "meta": "AMEBA — Associació, Festivals, Lab i Shop. Des de 2014 donant suport al talent local de Barcelona.",
     "hero": {
-      "title-1": "DES DE 2014 DONANT SUPORT",
-      "title-2": "AL TALENT LOCAL DE LA CIUTAT!",
-      "bullet-1": "Descomptes en tallers, festivals i activitats",
-      "bullet-2": "Accés a events i contingut exclusiu per a socis",
-      "bullet-3": "Forma part de la comunitat electrònica de Barcelona",
+      "title-1": "DES DE 2014",
+      "title-2": "DONANT SUPORT",
+      "title-3": "AL TALENT LOCAL",
+      "title-4": "DE LA CIUTAT!",
+      "bullet-1": "Encara no ets soci/sòcia d'Ameba?",
+      "bullet-2": "Vols formar part d'aquesta comunitat?",
+      "bullet-3": "Descobreix els avantatges de formar part de la comunitat.",
       "cta-soci": "FES-TE SOCI!",
       "cta-acces": "ACCÉS SOCIS"
     },
