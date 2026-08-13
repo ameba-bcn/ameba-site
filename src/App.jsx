@@ -19,6 +19,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import FullscreenSpinner from "./components/spinner/FullscreenSpinner";
+import RouteFallback from "./components/spinner/RouteFallback";
 import NavigationProgress from "./components/spinner/NavigationProgress";
 import lazyWithRetry from "./utils/lazyWithRetry";
 import "./App.css";
@@ -138,7 +139,7 @@ function App() {
           <ScrollTop showBelow={250} />
           <NavigationProgress />
           {isNavigating && <FullscreenSpinner />}
-          <Suspense fallback={<FullscreenSpinner />}>
+          <Suspense fallback={<RouteFallback />}>
             <Routes>
               <Route path="/activitats/:id" element={<ActivitatPage />} />
               <Route path="/activitats" element={<Agenda />} />
