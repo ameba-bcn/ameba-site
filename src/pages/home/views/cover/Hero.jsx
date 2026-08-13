@@ -2,22 +2,17 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./Hero.css";
-import { MOBILE_NORMAL } from "../../../../utils/constants";
-import useMediaQuery from "../../../../hooks/use-media-query";
 import useAuthStore from "../../../../stores/useAuthStore";
+import heroImg from "../../../../assets/images/home/hero.jpg";
 
 const Hero = () => {
-  const isMobile = useMediaQuery(MOBILE_NORMAL);
   const { isLoggedIn } = useAuthStore();
   const [t] = useTranslation("translation");
-  const staticImg = isMobile
-    ? "/AmebaPortadaMobile.jpg"
-    : "/AmebaPortadaDesktop.jpg";
 
   return (
     <section className="hero" id="hero">
       <div className="hero__media" aria-hidden="true">
-        <img src={staticImg} className="hero__image" alt="" />
+        <img src={heroImg} className="hero__image" alt="" />
       </div>
       <div className="hero__content">
         <h1 className="hero__title">

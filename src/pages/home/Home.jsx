@@ -4,6 +4,10 @@ import SectionBand from "./views/band/SectionBand";
 import LettersMove from "../../components/layout/LettersMove";
 import PageMeta from "../../components/seo/PageMeta";
 import { useTranslation } from "react-i18next";
+import home1 from "../../assets/images/home/home1.jpg";
+import home2 from "../../assets/images/home/home2.jpg";
+import home3 from "../../assets/images/home/home3.jpg";
+import home4 from "../../assets/images/home/home4.jpg";
 
 const ORG_JSON_LD = {
   "@context": "https://schema.org",
@@ -20,10 +24,10 @@ const ORG_JSON_LD = {
 };
 
 const BANDS = [
-  { id: "associacio", color: "var(--section-associacio)", to: null },
-  { id: "festivals", color: "var(--section-festivals)", to: null },
-  { id: "lab", color: "var(--section-lab)", to: "/lab" },
-  { id: "shop", color: "var(--section-shop)", to: "/botiga" },
+  { id: "associacio", color: "var(--section-associacio)", image: home1, to: null },
+  { id: "festivals", color: "var(--section-festivals)", image: home2, to: null },
+  { id: "lab", color: "var(--section-lab)", image: home3, to: "/lab" },
+  { id: "shop", color: "var(--section-shop)", image: home4, to: "/botiga" },
 ];
 
 export default function Home() {
@@ -44,7 +48,7 @@ export default function Home() {
             id={band.id}
             color={band.color}
             title={t(`menu.${band.id}`)}
-            image="/AmebaPortadaDesktop.jpg"
+            image={band.image}
             lead={t(`home.band.${band.id}.lead`)}
             body={t(`home.band.${band.id}.body`)}
             to={band.to}

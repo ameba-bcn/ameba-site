@@ -29,7 +29,13 @@ export default function SectionBand({
       <div className="section-band__content">
         {image && (
           <div className="section-band__media">
-            <img src={image} alt="" className="section-band__image" />
+            <img
+              src={image}
+              alt=""
+              className="section-band__image"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         )}
         <div className="section-band__detail">

@@ -52,10 +52,13 @@
 
 .section-band__image {
   width: 100%;
-  height: auto;
+  /* Recorte fijo como en el mock: la imagen se corta, no se escala entera */
+  height: clamp(220px, 24vw, 320px);
+  object-fit: cover;
   display: block;
   filter: grayscale(1) contrast(1.05);
   mix-blend-mode: multiply;
+  opacity: 0.7;
 }
 
 .section-band__detail {
