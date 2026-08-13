@@ -45,8 +45,10 @@
     "soci-curt": "hazte socio/a",
     "soci-llarg-pt1": "hazte socio/a de ameba desde ",
     "soci-llarg-pt2": "/año",
-    "promo-text": "Hazte socio/socia de Ameba y disfruta de todas las ventajas",
-    "promo-cta": ">>>>>> Descubre más haciendo click aquí",
+    "promo-text-1": "Hazte ",
+    "promo-text-bold": "socio/socia de Ameba",
+    "promo-text-2": " y disfruta de las ventajas de formar parte de nuestra comunidad!",
+    "promo-cta": ">>>>>> Descubre más haciendo click aquí!",
     "promo-close": "Cierra el banner"
   },
   "agenda": {

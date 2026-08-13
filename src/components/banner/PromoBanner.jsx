@@ -23,7 +23,11 @@ export default function PromoBanner() {
   return (
     <div className="promo-banner">
       <Link to="/memberships" className="promo-banner__link">
-        <span className="promo-banner__text">{t("banners.promo-text")}</span>
+        <span className="promo-banner__text">
+          {t("banners.promo-text-1")}
+          <strong>{t("banners.promo-text-bold")}</strong>
+          {t("banners.promo-text-2")}
+        </span>
         <span className="promo-banner__cta">{t("banners.promo-cta")}</span>
       </Link>
       <button

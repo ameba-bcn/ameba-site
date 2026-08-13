@@ -19,6 +19,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Desplaza la imagen hacia arriba dentro del recorte:
+     ↑ subir más = % mayor · ↓ bajar = % menor (50% = centrado) */
+  object-position: 50% 70%;
   filter: grayscale(1) contrast(1.05);
   mix-blend-mode: multiply;
 }
@@ -88,7 +91,7 @@
 .hero__actions {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
 }
 
@@ -102,13 +105,13 @@
   text-decoration: none;
   color: var(--color-cream);
   background-color: var(--color-negro);
-  box-shadow: -6px 6px 0 var(--color-cream);
+  box-shadow: 6px 6px 0 var(--color-cream);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .hero__btn:hover {
-  transform: translate(-3px, 3px);
-  box-shadow: -3px 3px 0 var(--color-cream);
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--color-cream);
 }
 
 /* Variante invertida (ACCÉS SOCIS): caja crema, texto negro, sombra negra */

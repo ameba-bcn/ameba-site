@@ -12,17 +12,25 @@
   color: var(--color-negro);
 }
 
-/* Megatítulo outline decorativo de fondo */
+/* Megatítulo outline a todo el ancho.
+   Capas: imagen (1) < megatítulo (2) < texto detalle (3) */
 .section-band__megatitle {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0 2vw;
+  box-sizing: border-box;
+  z-index: 2;
   font-family: var(--font-display);
-  font-size: var(--display-xl);
-  line-height: 0.9;
+  font-size: clamp(90px, 17vw, 340px);
+  font-weight: 400;
+  line-height: 1;
+  text-align: left;
   text-transform: uppercase;
   white-space: nowrap;
+  overflow: hidden;
   color: transparent;
   -webkit-text-stroke: 2px var(--color-negro);
   opacity: 0.35;
@@ -31,13 +39,13 @@
 }
 
 .section-band__content {
-  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 48px;
-  margin-top: 8vh;
+  /* La imagen arranca dentro de la mitad inferior del megatítulo */
+  margin-top: clamp(24px, 5vw, 120px);
 }
 
 .section-band--reverse .section-band__content {
@@ -46,8 +54,17 @@
 
 /* Imagen duotono: una sola imagen sirve para las 4 bandas */
 .section-band__media {
+  position: relative;
+  z-index: 1;
   flex: 0 1 480px;
   background-color: var(--band-color, var(--color-cream));
+}
+
+/* Puntitos decorativos: abajo a la izquierda de la imagen */
+.section-band__dots {
+  position: absolute;
+  left: -34px;
+  bottom: 0;
 }
 
 .section-band__image {
@@ -62,16 +79,10 @@
 }
 
 .section-band__detail {
+  position: relative;
+  z-index: 3;
   flex: 0 1 420px;
   text-align: left;
-}
-
-.section-band__title {
-  font-family: var(--font-display);
-  font-size: var(--display-md);
-  line-height: 1;
-  text-transform: uppercase;
-  margin: 0 0 16px;
 }
 
 .section-band__lead {

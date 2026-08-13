@@ -34,7 +34,8 @@ describe("revamp smoke", () => {
 
   it("renders PromoBanner on home with an accessible close button", () => {
     renderWithProviders(<PromoBanner />);
-    expect(screen.getByText(/Fes-te soci/i)).toBeInTheDocument();
+    expect(screen.getByText(/soci\/sòcia d'Ameba/i)).toBeInTheDocument();
+    expect(screen.getByText(/Descobreix més/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Tanca/i })).toBeInTheDocument();
   });
 

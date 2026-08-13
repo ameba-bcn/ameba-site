@@ -3,14 +3,16 @@
   align-items: center;
   background-color: var(--color-cream);
   color: var(--color-negro);
-  padding: 10px 16px;
+  /* Mismo margen horizontal que navbar (.menuSuperior) y hero (.hero__content)
+     para que el texto quede alineado con el contenido de la home */
+  padding: 10px 7vw;
 }
 
 .promo-banner__link {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
   align-items: baseline;
   gap: 4px 12px;
   text-decoration: none;
@@ -18,15 +20,16 @@
 }
 
 .promo-banner__text {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  text-align: left;
 }
 
 .promo-banner__cta {
   font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
 }
 
 .promo-banner__link:hover .promo-banner__cta {

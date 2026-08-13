@@ -1,7 +1,6 @@
 import React from "react";
 import Hero from "./views/cover/Hero";
 import SectionBand from "./views/band/SectionBand";
-import LettersMove from "../../components/layout/LettersMove";
 import PageMeta from "../../components/seo/PageMeta";
 import { useTranslation } from "react-i18next";
 import home1 from "../../assets/images/home/home1.jpg";
@@ -24,8 +23,18 @@ const ORG_JSON_LD = {
 };
 
 const BANDS = [
-  { id: "associacio", color: "var(--section-associacio)", image: home1, to: null },
-  { id: "festivals", color: "var(--section-festivals)", image: home2, to: null },
+  {
+    id: "associacio",
+    color: "var(--section-associacio)",
+    image: home1,
+    to: null,
+  },
+  {
+    id: "festivals",
+    color: "var(--section-festivals)",
+    image: home2,
+    to: null,
+  },
   { id: "lab", color: "var(--section-lab)", image: home3, to: "/lab" },
   { id: "shop", color: "var(--section-shop)", image: home4, to: "/botiga" },
 ];
@@ -37,11 +46,6 @@ export default function Home() {
       <PageMeta url="/" description={t("home.meta")} jsonLd={ORG_JSON_LD} />
       <div className="HomeContent">
         <Hero />
-        <LettersMove
-          sentence={t("banners.soci-curt")}
-          link="/memberships"
-          color="var(--color-rojo)"
-        />
         {BANDS.map((band, index) => (
           <SectionBand
             key={band.id}

@@ -45,8 +45,10 @@
     "soci-curt": "fes-te soci/a",
     "soci-llarg-pt1": "fes-te soci/a d'ameba desde ",
     "soci-llarg-pt2": "/any",
-    "promo-text": "Fes-te soci/sòcia d'Ameba i gaudeix de tots els avantatges",
-    "promo-cta": ">>>>>> Descobreix més fent click aquí",
+    "promo-text-1": "Fes-te ",
+    "promo-text-bold": "soci/sòcia d'Ameba",
+    "promo-text-2": " i gaudeix dels avantatges de formar part de la nostre comunitat!",
+    "promo-cta": ">>>>>> Descobreix més fent click aquí!",
     "promo-close": "Tanca el banner"
   },
   "agenda": {
