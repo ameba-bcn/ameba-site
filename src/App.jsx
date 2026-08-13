@@ -23,7 +23,10 @@ import NavigationProgress from "./components/spinner/NavigationProgress";
 import lazyWithRetry from "./utils/lazyWithRetry";
 import "./App.css";
 
-const Home = lazyWithRetry(() => import("./pages/home/Home"));
+// Home se importa estática: es la landing, pesa ~4KB y así el hero
+// se pinta en el primer render sin pasar por el spinner de Suspense
+import Home from "./pages/home/Home";
+
 const Agenda = lazyWithRetry(() => import("./pages/agenda/Agenda"));
 const Botiga = lazyWithRetry(() => import("./pages/Botiga"));
 const SociosDetailed = lazyWithRetry(

@@ -12,7 +12,13 @@ const Hero = () => {
   return (
     <section className="hero" id="hero">
       <div className="hero__media" aria-hidden="true">
-        <img src={heroImg} className="hero__image" alt="" />
+        <img
+          src={heroImg}
+          className="hero__image"
+          alt=""
+          fetchPriority="high"
+          decoding="async"
+        />
       </div>
       <div className="hero__content">
         <h1 className="hero__title">
