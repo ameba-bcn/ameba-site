@@ -1,12 +1,12 @@
 import React from "react";
-import AmebaLogo from "../ui/logo/AmebaLogo";
+import AmebaBlob from "../ui/logo/AmebaBlob";
 import "./AmebaDots.css";
 
 /**
- * Decoración vertical: el logo Ameba en negro repetido como puntitos,
- * cada uno con una ligera rotación.
+ * Decoración vertical: la silueta ameba (logo-ameba.svg) en negro repetida
+ * como puntitos, cada uno con una ligera rotación.
  */
-export default function AmebaDots({ count = 10, size = 14 }) {
+export default function AmebaDots({ count = 10, size = 14, color = "black" }) {
   return (
     <div className="ameba-dots" aria-hidden="true">
       {Array.from({ length: count }, (_, i) => (
@@ -15,7 +15,7 @@ export default function AmebaDots({ count = 10, size = 14 }) {
           className="ameba-dots__dot"
           style={{ transform: `rotate(${(i * 36) % 360}deg)` }}
         >
-          <AmebaLogo width={size} height={size} fill="var(--color-negro)" />
+          <AmebaBlob color={color} size={size} />
         </span>
       ))}
     </div>
