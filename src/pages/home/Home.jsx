@@ -28,15 +28,31 @@ const BANDS = [
     color: "var(--section-associacio)",
     image: home1,
     to: "/socis",
+    // (+) pegado a la derecha de la columna de texto: el contenido centrado
+    // mide 948px (mitad = 474) + 16px de separación
+    morePosition: { left: "calc(50% + 490px)", top: "54%" },
   },
   {
     id: "festivals",
     color: "var(--section-festivals)",
     image: home2,
     to: "/activitats",
+    dotsPosition: "top-right",
   },
-  { id: "lab", color: "var(--section-lab)", image: home3, to: "/lab" },
-  { id: "shop", color: "var(--section-shop)", image: home4, to: "/botiga" },
+  {
+    id: "lab",
+    color: "var(--section-lab)",
+    image: home3,
+    to: "/lab",
+    dotsPosition: "image-top-right",
+  },
+  {
+    id: "shop",
+    color: "var(--section-shop)",
+    image: home4,
+    to: "/botiga",
+    dotsPosition: "bottom-left",
+  },
 ];
 
 export default function Home() {
@@ -56,6 +72,8 @@ export default function Home() {
             lead={t(`home.band.${band.id}.lead`)}
             body={t(`home.band.${band.id}.body`)}
             to={band.to}
+            morePosition={band.morePosition}
+            dotsPosition={band.dotsPosition}
             reverse={index % 2 === 1}
           />
         ))}
