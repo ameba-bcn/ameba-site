@@ -170,6 +170,15 @@
   align-items: center;
 }
 
+/* Blob de acceso/login: cream, a rojo en hover como el resto de controles */
+.navbar .nav-user-blob path {
+  transition: fill 0.2s ease;
+}
+
+.navbar .nav-icon-link:hover .nav-user-blob path {
+  fill: var(--color-rojo);
+}
+
 .navbar .nav-lang-toggle {
   display: inline-flex;
   align-items: center;

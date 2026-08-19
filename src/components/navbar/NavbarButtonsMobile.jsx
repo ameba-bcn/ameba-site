@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import MenuLog from "./MenuLog";
 import CartMobile from "./CartMobile";
 import Icon from "../ui/Icon";
+import AmebaBlob from "../ui/logo/AmebaBlob";
 import useOutsideClick from "../../hooks/use-outside-click";
 import useUIStore from "../../stores/useUIStore";
 import useCartStore from "../../stores/useCartStore";
@@ -62,11 +63,10 @@ export default function NavbarButtonsMobile(props) {
                 aria-label="Login"
                 onClick={() => closeMenu()}
               >
-                <Icon
-                  icon="user"
-                  type="hoverable-black"
-                  width="30"
-                  height="30"
+                <AmebaBlob
+                  color="cream"
+                  size={30}
+                  className="nav-user-blob"
                 />
               </NavLink>
             ) : (

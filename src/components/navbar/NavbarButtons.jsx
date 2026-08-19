@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import MenuLog from "./MenuLog";
 import Cart from "./Cart";
 import Icon from "../ui/Icon";
+import AmebaBlob from "../ui/logo/AmebaBlob";
 import { NAV_SECTIONS, isSectionActive } from "./navSections";
 
 export default function NavbarButtons(props) {
@@ -48,11 +49,10 @@ export default function NavbarButtons(props) {
                 className="nav-icon-link"
                 aria-label="Login"
               >
-                <Icon
-                  icon="user"
-                  type="hoverable-black"
-                  width="30"
-                  height="30"
+                <AmebaBlob
+                  color="cream"
+                  size={30}
+                  className="nav-user-blob"
                 />
               </NavLink>
             ) : (
