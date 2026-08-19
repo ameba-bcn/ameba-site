@@ -16,6 +16,12 @@ if (dsn && environment === "production") {
         blockAllMedia: true,
       }),
     ],
+    // Ruido conocido de scripts ajenos a la app (escáner de enlaces de
+    // Outlook/Office 365 inyecta código que rechaza promesas con este texto).
+    ignoreErrors: [
+      "Object Not Found Matching Id:",
+      "Non-Error promise rejection captured with value: Object Not Found",
+    ],
     tracesSampleRate: 0.2,
     replaysSessionSampleRate: 0,
     replaysOnErrorSampleRate: 1.0,
