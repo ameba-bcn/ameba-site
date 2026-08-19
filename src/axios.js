@@ -54,11 +54,23 @@ axiosInstance.interceptors.response.use(
     const originalRequest = error.config;
 
     if (typeof error.response === "undefined") {
-      console.warn(
-        "A server/network error occurred. " +
-          "Sorry about this - we will get it fixed shortly."
-      );
-      Sentry.captureException(error);
+      // Ruido de cliente no accionable — no reportar a Sentry:
+      // - abortos/cancelaciones (navegación, cierre de pestaña)
+      // - ERR_NETWORK (sin conexión, adblockers, WiFi caída); la
+      //   disponibilidad del backend se monitoriza en servidor.
+      // Los timeouts (ECONNABORTED por timeout) sí se reportan.
+      const isClientNoise =
+        axios.isCancel(error) ||
+        error.code === "ERR_CANCELED" ||
+        error.code === "ERR_NETWORK" ||
+        (error.code === "ECONNABORTED" && error.message === "Request aborted");
+      if (!isClientNoise) {
+        console.warn(
+          "A server/network error occurred. " +
+            "Sorry about this - we will get it fixed shortly."
+        );
+        Sentry.captureException(error);
+      }
       return Promise.reject(error);
     }
 
