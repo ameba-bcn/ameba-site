@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
 }
 
 .card-view__breadcrumbs {
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-size: 24px;
   font-weight: 500;
   text-transform: uppercase;
@@ -35,7 +35,7 @@
 .card-view__title-box {
   flex: 1;
   min-width: 0;
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-weight: 800;
   font-size: 90px;
   line-height: 0.9;
@@ -128,7 +128,7 @@
 }
 
 .card-view__description-content {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-body);
   font-size: 1.1rem;
   margin-top: -0.3rem;
   margin-bottom: 0.5rem;
@@ -152,7 +152,7 @@
 .modal-card___title_small {
   display: flex;
   align-items: center;
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-size: 26px;
   text-transform: uppercase;
 }
@@ -193,7 +193,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-body);
   font-size: 20px;
   color: var(--color-negro);
 }
@@ -210,7 +210,7 @@
 .interactiveDataBox-activitat__text-loca a,
 .interactiveDataBox-activitat__text-loca-fullview a {
   color: inherit;
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-body);
   font-size: 20px;
   line-height: 20px;
 }

@@ -9,8 +9,21 @@ const ScrollTop = ({ showBelow }) => {
   const location = useLocation();
 
   useEffect(() => {
+    if (location.hash) {
+      const scrollToAnchor = () => {
+        const el = document.querySelector(location.hash);
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+        return Boolean(el);
+      };
+      // La home es lazy: reintenta cuando el destino aún no está montado
+      if (!scrollToAnchor()) {
+        const retry = setTimeout(scrollToAnchor, 400);
+        return () => clearTimeout(retry);
+      }
+      return;
+    }
     window.scrollTo(0, 0);
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   const handleScroll = () => {
     if (window.pageYOffset > showBelow) {

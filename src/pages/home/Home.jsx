@@ -1,10 +1,12 @@
 import React from "react";
-import Associacio from "./views/cover/Associacio";
-import Activitats from "./views/agenda/Activitats";
-import Manifesto from "./views/manifesto/Manifesto";
-import LettersMove from "../../components/layout/LettersMove";
+import Hero from "./views/cover/Hero";
+import SectionBand from "./views/band/SectionBand";
 import PageMeta from "../../components/seo/PageMeta";
 import { useTranslation } from "react-i18next";
+import home1 from "../../assets/images/home/home1.jpg";
+import home2 from "../../assets/images/home/home2.jpg";
+import home3 from "../../assets/images/home/home3.jpg";
+import home4 from "../../assets/images/home/home4.jpg";
 
 const ORG_JSON_LD = {
   "@context": "https://schema.org",
@@ -20,21 +22,62 @@ const ORG_JSON_LD = {
   },
 };
 
+const BANDS = [
+  {
+    id: "associacio",
+    color: "var(--section-associacio)",
+    image: home1,
+    to: "/socis",
+    // (+) pegado a la derecha de la columna de texto: el contenido centrado
+    // mide 948px (mitad = 474) + 16px de separación
+    morePosition: { left: "calc(50% + 490px)", top: "54%" },
+  },
+  {
+    id: "festivals",
+    color: "var(--section-festivals)",
+    image: home2,
+    to: "/activitats",
+    dotsPosition: "top-right",
+  },
+  {
+    id: "lab",
+    color: "var(--section-lab)",
+    image: home3,
+    to: "/lab",
+    dotsPosition: "image-top-right",
+  },
+  {
+    id: "shop",
+    color: "var(--section-shop)",
+    image: home4,
+    to: "/botiga",
+    dotsPosition: "bottom-left",
+  },
+];
+
 export default function Home() {
   const [t] = useTranslation("translation");
   return (
     <div className="Home">
-      <PageMeta url="/" jsonLd={ORG_JSON_LD} />
+      <PageMeta url="/" description={t("home.meta")} jsonLd={ORG_JSON_LD} />
       <div className="HomeContent">
-        <Associacio />
-        <Manifesto />
-        <Activitats />
+        <Hero />
+        {BANDS.map((band, index) => (
+          <SectionBand
+            key={band.id}
+            id={band.id}
+            color={band.color}
+            title={t(`menu.${band.id}`)}
+            image={band.image}
+            lead={t(`home.band.${band.id}.lead`)}
+            body={t(`home.band.${band.id}.body`)}
+            to={band.to}
+            morePosition={band.morePosition}
+            dotsPosition={band.dotsPosition}
+            reverse={index % 2 === 1}
+          />
+        ))}
       </div>
-      <LettersMove
-        sentence={t("banners.soci-curt")}
-        link="/memberships"
-        color="var(--color-rojo)"
-      />
     </div>
   );
 }

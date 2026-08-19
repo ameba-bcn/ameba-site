@@ -1,0 +1,245 @@
+.section-band {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  min-height: 60vh;
+  padding: 60px 5vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: var(--band-color, var(--color-cream));
+  color: var(--color-negro);
+}
+
+/* Megatítulo outline a todo el ancho.
+   Capas: imagen (1) < megatítulo (2) < texto detalle (3) */
+.section-band__megatitle {
+  position: absolute;
+  top: clamp(12px, 2.5vw, 56px);
+  left: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0 2vw;
+  box-sizing: border-box;
+  z-index: 2;
+  font-family: "Arimo", Arial, sans-serif;
+  font-size: clamp(95px, 18.5vw, 370px);
+  font-weight: 400;
+  line-height: 1;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--color-negro);
+  opacity: 0.35;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* El JS mide el ancho natural y encoge (escala uniforme) solo si no cabe */
+.section-band__megatitle-text {
+  display: inline-block;
+  transform-origin: left top;
+}
+
+.section-band__content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  /* La imagen arranca dentro de la mitad inferior del megatítulo */
+  margin-top: clamp(24px, 5vw, 120px);
+}
+
+.section-band--reverse .section-band__content {
+  flex-direction: row-reverse;
+}
+
+/* Imagen duotono: una sola imagen sirve para las 4 bandas */
+.section-band__media {
+  position: relative;
+  z-index: 1;
+  flex: 0 1 480px;
+  background-color: var(--band-color, var(--color-cream));
+}
+
+/* Puntitos decorativos: abajo a la izquierda de la imagen */
+.section-band__dots {
+  position: absolute;
+  left: -34px;
+  bottom: 0;
+}
+
+/* Variante: fila horizontal sobre la esquina superior derecha de la
+   imagen (dotsPosition="image-top-right") */
+.section-band__dots--image-top-right {
+  left: auto;
+  bottom: auto;
+  right: 0;
+  top: -24px;
+}
+
+.section-band__dots--image-top-right .ameba-dots {
+  flex-direction: row;
+}
+
+/* Variante: esquina superior derecha de la sección (dotsPosition="top-right") */
+.section-band__dots--top-right {
+  left: auto;
+  bottom: auto;
+  top: clamp(16px, 2vw, 32px);
+  right: clamp(16px, 2vw, 40px);
+  z-index: 1;
+}
+
+/* Variante: esquina inferior izquierda de la sección (dotsPosition="bottom-left") */
+.section-band__dots--bottom-left {
+  left: clamp(16px, 3vw, 60px);
+  bottom: clamp(16px, 2.5vw, 48px);
+  z-index: 1;
+}
+
+.section-band__image {
+  width: 100%;
+  /* Recorte fijo como en el mock: la imagen se corta, no se escala entera */
+  height: clamp(220px, 24vw, 320px);
+  object-fit: cover;
+  display: block;
+  filter: grayscale(1) contrast(1.05);
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+}
+
+.section-band__detail {
+  position: relative;
+  z-index: 3;
+  flex: 0 1 420px;
+  text-align: left;
+}
+
+/* Línea sutil bajo el contenido, hasta el borde derecho de la vista
+   (compensa el padding lateral de 5vw de la sección).
+   Margen izquierdo = borde izquierdo de __media: el contenido va centrado
+   y mide 948px (480 media + 48 gap + 420 detail) mientras no encoge */
+.section-band__rule {
+  height: 1px;
+  margin: clamp(24px, 3vw, 48px) -5vw 0 max(0px, calc((100% - 948px) / 2));
+  background-color: var(--color-negro);
+  opacity: 0.3;
+}
+
+.section-band__lead {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.section-band__body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  margin: 0 0 24px;
+}
+
+/* A la derecha de la sección, centrado verticalmente por defecto.
+   Cada sección puede recolocarlo vía --more-left / --more-right /
+   --more-top (prop morePosition de SectionBand). Si hay left y right,
+   gana left (sobreconstrained + width fija) */
+.section-band__more {
+  position: absolute;
+  left: var(--more-left, auto);
+  right: var(--more-right, clamp(16px, 4vw, 64px));
+  top: var(--more-top, 50%);
+  z-index: 3;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  text-decoration: none;
+  transform: translateY(-50%);
+  transition: transform 0.3s ease;
+}
+
+/* Superposición de amebas (AmebaBlob): negra estática debajo, naranja
+   rotando encima; al ser siluetas irregulares, el giro deja asomar la negra */
+.section-band__more-blob {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.section-band__more-blob--base {
+  z-index: -2;
+}
+
+.section-band__more-blob--spin {
+  z-index: -1;
+  animation: section-band-more-spin 6s linear infinite;
+}
+
+@keyframes section-band-more-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.section-band__more:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-band__more-blob--spin {
+    animation: none;
+  }
+}
+
+/* Por debajo de 1200px no queda hueco a la derecha del texto para el (+)
+   absoluto sin pisarlo: pasa a flujo, centrado bajo el contenido.
+   OJO: relative (no static) — las amebas hijas son absolute/inset:0 y
+   necesitan que el enlace siga siendo su contenedor de posicionamiento */
+@media screen and (max-width: 1200px) {
+  .section-band__more {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    margin: 24px auto 0;
+    transform: none;
+  }
+
+  .section-band__more:hover {
+    transform: scale(1.1);
+  }
+
+  /* La línea cierra la sección: el (+) queda encima de ella */
+  .section-band__rule {
+    order: 1;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .section-band__content {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .section-band--reverse .section-band__content {
+    flex-direction: column;
+  }
+
+  .section-band__media,
+  .section-band__detail {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .section-band__rule {
+    margin-left: 16px;
+  }
+}

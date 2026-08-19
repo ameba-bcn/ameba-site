@@ -14,7 +14,25 @@ function Contacte() {
   return (
     <div className="contacte" id="contacte">
       <div className="contenedorContacto">
-        <div className="newletterForm">
+        <nav className="footer-links" aria-label={t("footer.nav-label")}>
+          <div className="footer-links__col">
+            <span className="footer-links__title">{t("menu.associacio")}</span>
+            <NavLink to="/memberships">{t("menu.soci-menu")}</NavLink>
+            <NavLink to="/socis">SOCI@S</NavLink>
+          </div>
+          <div className="footer-links__col">
+            <span className="footer-links__title">{t("menu.lab")}</span>
+            <NavLink to="/activitats">AGENDA</NavLink>
+            <NavLink to="/gallery">{t("menu.arxiu")}</NavLink>
+          </div>
+          <div className="footer-links__col">
+            <span className="footer-links__title">Info</span>
+            <a href="#newsletter">{t("footer.newsletter")}</a>
+            <NavLink to="/legal">Legal</NavLink>
+            <a href="mailto:info@ameba.cat">info@ameba.cat</a>
+          </div>
+        </nav>
+        <div className="newletterForm" id="newsletter">
           <NewsletterFormLayout />
         </div>
         <MediaLinks
@@ -38,7 +56,7 @@ function Contacte() {
           })}
         </div>
         <div className="endingText">
-          <span>AMEBA 2022©</span>
+          <span>AMEBA {new Date().getFullYear()}©</span>
           <div className="styled-link">
             <a href="mailto:info@ameba.cat">info@ameba.cat</a>
           </div>

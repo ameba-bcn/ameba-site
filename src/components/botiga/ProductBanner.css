@@ -3,7 +3,7 @@
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     font-size: 4rem;
-    font-family: "Bebas Neue";
+    font-family: var(--font-display);
     line-height: 1em;
     text-transform: uppercase;
     color: var(--color-cream);

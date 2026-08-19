@@ -13,16 +13,21 @@ import useCartStore from "./stores/useCartStore";
 import { Routes, Route } from "react-router-dom";
 import Contacte from "./contacte/Contacte";
 import Menu from "./components/navbar/Navbar";
+import PromoBanner from "./components/banner/PromoBanner";
 import ScrollTop from "./components/layout/ScrollTop";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import FullscreenSpinner from "./components/spinner/FullscreenSpinner";
+import RouteFallback from "./components/spinner/RouteFallback";
 import NavigationProgress from "./components/spinner/NavigationProgress";
 import lazyWithRetry from "./utils/lazyWithRetry";
 import "./App.css";
 
-const Home = lazyWithRetry(() => import("./pages/home/Home"));
+// Home se importa estática: es la landing, pesa ~4KB y así el hero
+// se pinta en el primer render sin pasar por el spinner de Suspense
+import Home from "./pages/home/Home";
+
 const Agenda = lazyWithRetry(() => import("./pages/agenda/Agenda"));
 const Botiga = lazyWithRetry(() => import("./pages/Botiga"));
 const SociosDetailed = lazyWithRetry(
@@ -62,6 +67,7 @@ const SubscriptionFinished = lazyWithRetry(
   () => import("./pages/landing/SubscriptionFinished"),
 );
 const Legal = lazyWithRetry(() => import("./pages/legal/Legal"));
+const Lab = lazyWithRetry(() => import("./pages/lab/Lab"));
 const QrLanding = lazyWithRetry(() => import("./pages/qr-landing/QrLanding"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
@@ -129,10 +135,11 @@ function App() {
       <Menu />
       <UserContext.Provider value={value}>
         <div className="app-main-view">
+          <PromoBanner />
           <ScrollTop showBelow={250} />
           <NavigationProgress />
           {isNavigating && <FullscreenSpinner />}
-          <Suspense fallback={<FullscreenSpinner />}>
+          <Suspense fallback={<RouteFallback />}>
             <Routes>
               <Route path="/activitats/:id" element={<ActivitatPage />} />
               <Route path="/activitats" element={<Agenda />} />
@@ -159,6 +166,7 @@ function App() {
               <Route path="/summary-checkout" element={<CheckoutFinished />} />
               <Route path="/subscribe" element={<SubscriptionFinished />} />
               <Route path="/legal" element={<Legal />} />
+              <Route path="/lab" element={<Lab />} />
               <Route path="/" element={<Home />} />
               <Route path="/qr-view" element={<QrLanding />} />
               <Route path="*" element={<NotFound />} />

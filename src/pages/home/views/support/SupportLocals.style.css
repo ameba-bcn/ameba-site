@@ -43,7 +43,7 @@
 .support-locals__overlay .overlayTitle {
   color: var(--color-cream);
   font-size: 180px;
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-weight: 400;
   line-height: 1.1em;
   overflow: hidden;
@@ -55,7 +55,7 @@
 
 .support-locals__overlay .overlaySubtitle {
   color: var(--color-cream);
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-size: 50px;
   margin-top: -95px;
   text-transform: uppercase;
@@ -85,7 +85,7 @@
 .support-locals__overlay .overlayTitleMobile {
   color: var(--color-cream);
   font-size: 180px;
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-weight: 900;
   line-height: 0.9em;
 }

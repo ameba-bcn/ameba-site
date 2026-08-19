@@ -1,0 +1,10 @@
+.ameba-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ameba-dots__dot {
+  display: block;
+  line-height: 0;
+}

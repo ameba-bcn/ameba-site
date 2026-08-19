@@ -6,7 +6,7 @@
 }
 
 .filter-bar__btn {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-size: 1.4rem;
   padding: 6px 16px;
   border: 2px solid var(--color-negro);

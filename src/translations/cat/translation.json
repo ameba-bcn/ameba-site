@@ -3,7 +3,12 @@
     "botiga": "botiga",
     "soci-menu": "FES-TE SOCI",
     "projectes": "PROJECTES",
-    "arxiu": "arxiu"
+    "arxiu": "arxiu",
+    "associacio": "Associació",
+    "festivals": "Festivals",
+    "lab": "Lab",
+    "shop": "Shop",
+    "idioma": "Canvia l'idioma"
   },
   "checkout": {
     "finalitzarCompra": "finalitzar compra",
@@ -39,7 +44,12 @@
   "banners": {
     "soci-curt": "fes-te soci/a",
     "soci-llarg-pt1": "fes-te soci/a d'ameba desde ",
-    "soci-llarg-pt2": "/any"
+    "soci-llarg-pt2": "/any",
+    "promo-text-1": "Fes-te ",
+    "promo-text-bold": "soci/sòcia d'Ameba",
+    "promo-text-2": " i gaudeix dels avantatges de formar part de la nostre comunitat!",
+    "promo-cta": ">>>>>> Descobreix més fent click aquí!",
+    "promo-close": "Tanca el banner"
   },
   "agenda": {
     "data": "data",
@@ -67,7 +77,45 @@
   },
   "footer": {
     "drets": "Tots els drets reservats",
-    "colab": "Amb la col·laboració de:"
+    "colab": "Amb la col·laboració de:",
+    "nav-label": "Enllaços del peu de pàgina",
+    "newsletter": "Newsletter"
+  },
+  "lab": {
+    "proximament": "Pròximament",
+    "meta": "El laboratori creatiu d'AMEBA. Pròximament."
+  },
+  "home": {
+    "meta": "AMEBA — Associació, Festivals, Lab i Shop. Des de 2014 donant suport al talent local de Barcelona.",
+    "hero": {
+      "title-1": "DES DE 2014",
+      "title-2": "DONANT SUPORT",
+      "title-3": "AL TALENT LOCAL",
+      "title-4": "DE LA CIUTAT!",
+      "bullet-1": "Encara no ets soci/sòcia d'Ameba?",
+      "bullet-2": "Vols formar part d'aquesta comunitat?",
+      "bullet-3": "Descobreix els avantatges de formar part de la comunitat.",
+      "cta-soci": "FES-TE SOCI!",
+      "cta-acces": "ACCÉS SOCIS"
+    },
+    "band": {
+      "associacio": {
+        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      },
+      "festivals": {
+        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      },
+      "lab": {
+        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      },
+      "shop": {
+        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+      }
+    }
   },
   "newsletter": {
     "subscriute": "subscriu-te"

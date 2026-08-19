@@ -1,5 +1,5 @@
 .boton {
-    font-family: "Bebas Neue", sans-serif;
+    font-family: var(--font-display);
     width: fit-content;
     font-weight: 400;
     cursor: pointer;

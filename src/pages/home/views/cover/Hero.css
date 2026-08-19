@@ -1,0 +1,142 @@
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 80vh;
+  overflow: hidden;
+  background-color: var(--color-cream);
+}
+
+/* Foto full-bleed en duotono crema/sepia */
+.hero__media {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-cream);
+}
+
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Desplaza la imagen hacia arriba dentro del recorte:
+     ↑ subir más = % mayor · ↓ bajar = % menor (50% = centrado) */
+  object-position: 50% 70%;
+  filter: grayscale(1) contrast(1.05);
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+}
+
+/* Titular a la izquierda, tarjeta a la derecha */
+.hero__content {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 10vh 7vw;
+}
+
+/* Titular outline en 4 cajas negras */
+.hero__title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  text-align: left;
+}
+
+.hero__title-line {
+  display: inline-block;
+  padding: 6px 20px;
+  background-color: var(--color-negro);
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5.5vw, 110px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  /* Relleno = fondo de la caja: tapa la mitad interior del trazo,
+     dejando un outline efectivo de ~0.5px (los strokes sub-píxel
+     se redondean a 1px de dispositivo y no adelgazan) */
+  color: var(--color-negro);
+  -webkit-text-stroke: 0.1px var(--color-cream);
+}
+
+/* Tarjeta roja estrecha a la derecha */
+.hero__card {
+  flex: 0 0 clamp(240px, 15vw, 300px);
+  margin-right: 8vw;
+  box-sizing: border-box;
+  background-color: var(--color-rojo);
+  color: var(--color-negro);
+  padding: 32px 26px;
+  text-align: left;
+  max-width: 240px;
+}
+
+.hero__bullets {
+  margin: 0 0 32px;
+  padding-left: 20px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-cream);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Botones apilados: caja negra + sombra crema desplazada */
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.hero__btn {
+  display: inline-block;
+  padding: 6px 16px;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-cream);
+  background-color: var(--color-negro);
+  box-shadow: 6px 6px 0 var(--color-cream);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero__btn:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--color-cream);
+}
+
+/* Variante invertida (ACCÉS SOCIS): caja crema, texto negro, sombra negra */
+.hero__btn--invert {
+  color: var(--color-negro);
+  background-color: var(--color-cream);
+  box-shadow: 6px 6px 0 var(--color-negro);
+}
+
+.hero__btn--invert:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--color-negro);
+}
+
+@media screen and (max-width: 960px) {
+  .hero__content {
+    flex-direction: column;
+    padding: 6vh 16px;
+  }
+
+  .hero__card {
+    flex: 1 1 auto;
+    margin-right: 0;
+    width: 100%;
+    max-width: 420px;
+  }
+
+}
