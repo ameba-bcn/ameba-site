@@ -10,7 +10,7 @@ import useProfileStore from "./stores/useProfileStore";
 import useAuthStore from "./stores/useAuthStore";
 import useDataStore from "./stores/useDataStore";
 import useCartStore from "./stores/useCartStore";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Contacte from "./contacte/Contacte";
 import Menu from "./components/navbar/Navbar";
 import PromoBanner from "./components/banner/PromoBanner";
@@ -145,6 +145,7 @@ function App() {
               <Route path="/activitats" element={<Agenda />} />
               <Route path="/botiga/:id" element={<ProductePage />} />
               <Route path="/botiga" element={<Botiga />} />
+              <Route path="/shop" element={<Navigate to="/botiga" replace />} />
               <Route path="/socis/:id" element={<SociosDetailed />} />
               <Route path="/socis" element={<Socios />} />
               <Route path="/gallery/:slug/:year" element={<GalleryAlbum />} />

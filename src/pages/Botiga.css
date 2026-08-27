@@ -1,0 +1,22 @@
+.clickBanner {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.clickBanner a {
+  width: 100%;
+  display: contents;
+}
+
+.botiga-shop__state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 240px;
+  text-align: center;
+  font-family: var(--font-body);
+}
