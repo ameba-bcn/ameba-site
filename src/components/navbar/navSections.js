@@ -5,7 +5,7 @@
  */
 export const NAV_SECTIONS = [
   { key: "associacio", to: "/#associacio", chip: "--section-associacio" },
-  { key: "festivals", to: "/#festivals", chip: "--section-festivals" },
+  { key: "festivals", to: "/festivals", chip: "--section-festivals" },
   { key: "lab", to: "/lab", chip: "--section-lab" },
   { key: "shop", to: "/botiga", chip: "--section-shop" },
 ];

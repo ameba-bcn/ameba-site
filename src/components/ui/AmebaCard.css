@@ -32,6 +32,12 @@
   object-fit: cover;
   transition: all 0.4s ease;
   opacity: 0.9;
+  /* If the image 404s, browsers render its alt text inline instead of a
+     broken-image glyph — hide that visually (screen readers still read the
+     real alt attribute from the DOM) rather than let it collide with the
+     badge. */
+  color: transparent;
+  font-size: 0;
 }
 
 .ameba-card:hover .ameba-card__image {
