@@ -16,7 +16,9 @@ export default function SubscriptionFinished() {
     let email = parsed["email"]?.trim() || parsed["?email"]?.trim();
     if (email && email.indexOf(" ") > 0) email = email.replace(" ", "+");
     if (email && email.length > 0)
-      subscribeNewsletter(email).then(setIsSubmitted(true));
+      subscribeNewsletter(email)
+        .then(() => setIsSubmitted(true))
+        .catch(() => {}); // el mensaje de error ya se muestra vía isSubmitted=false
   }, [location.search, subscribeNewsletter]);
 
   return (
