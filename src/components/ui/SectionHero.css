@@ -1,0 +1,104 @@
+.section-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: center;
+  gap: 24px;
+  padding: 40px 0;
+}
+
+.section-hero__visual {
+  position: relative;
+  grid-column: 1 / span 2;
+}
+
+.section-hero__outline-title {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.section-hero__outline-title .power-title__box {
+  width: 100%;
+}
+
+.section-hero__outline-title .power-title__title {
+  white-space: normal;
+  overflow: visible;
+}
+
+.section-hero__image-wrap {
+  position: relative;
+  z-index: 1;
+  width: 58%;
+  aspect-ratio: 2.4 / 1;
+  overflow: hidden;
+}
+
+.section-hero__image-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+}
+
+.section-hero--associacio .section-hero__image-wrap::after {
+  background-color: var(--section-associacio);
+}
+
+.section-hero--festivals .section-hero__image-wrap::after {
+  background-color: var(--section-festivals);
+}
+
+.section-hero--lab .section-hero__image-wrap::after {
+  background-color: var(--section-lab);
+}
+
+.section-hero--shop .section-hero__image-wrap::after {
+  background-color: var(--section-shop);
+}
+
+.section-hero__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+}
+
+.section-hero__text {
+  grid-column: 3;
+}
+
+.section-hero__lead {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-style: italic;
+  margin: 0 0 12px;
+}
+
+.section-hero__dots {
+  grid-column: 4;
+}
+
+@media (max-width: 1200px) {
+  .section-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .section-hero__visual,
+  .section-hero__text {
+    grid-column: 1;
+  }
+
+  .section-hero__image-wrap {
+    width: 100%;
+  }
+
+  .section-hero__dots {
+    display: none;
+  }
+}

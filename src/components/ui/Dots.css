@@ -1,0 +1,34 @@
+.dots-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dots-row__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-negro);
+  flex-shrink: 0;
+}
+
+.dots-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.dots-column__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-negro);
+  flex-shrink: 0;
+}
+
+@media (max-width: 1200px) {
+  .dots-column {
+    display: none;
+  }
+}

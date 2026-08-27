@@ -16,7 +16,9 @@
     /* Semantic section aliases (rediseño 2026) */
     --section-associacio: var(--color-cream);
     --section-festivals: var(--color-amarillo);
-    --section-lab: var(--color-naranja);
+    /* Own value, not an alias of --color-naranja (pale, used by manifesto/footer) —
+       the Lab render uses a more saturated orange. */
+    --section-lab: #e8862a;
     --section-shop: var(--color-rojo);
 
     /* Typography */
@@ -142,5 +144,22 @@ iframe#webpack-dev-server-client-overlay {
 @media screen and (max-width: 980px) {
   .styled-main-column-view {
     padding: 0 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardSupportImgTop,
+  .productImgTop,
+  .ameba-card__image,
+  .marquee {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .card-layout .cardSupport:hover .cardSupportImgTop,
+  .card-layout .cardSupportImgTop:hover,
+  .productImgTop:hover,
+  .ameba-card:hover .ameba-card__image {
+    transform: none !important;
   }
 }

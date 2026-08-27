@@ -1,0 +1,69 @@
+.ameba-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.ameba-card__media {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-white);
+}
+
+.ameba-card__badge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: var(--color-negro);
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  padding: 4px 10px;
+}
+
+.ameba-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.4s ease;
+  opacity: 0.9;
+}
+
+.ameba-card:hover .ameba-card__image {
+  transform: scale(1.05);
+  opacity: 0.7;
+}
+
+.ameba-card__title-block {
+  background-color: var(--color-negro);
+  padding-bottom: 16px;
+}
+
+.ameba-card__subtitle {
+  padding: 0 16px;
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.ameba-card__highlight {
+  background-color: var(--color-cream);
+  color: var(--color-negro);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  padding: 6px 16px;
+}
+
+.ameba-card__meta {
+  background-color: var(--color-negro);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  padding: 6px 16px;
+}
