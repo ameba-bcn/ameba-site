@@ -2,8 +2,10 @@
   display: block;
   position: relative;
   left: var(--title-offset, 0);
-  font-size: clamp(1rem, 14cqi, var(--max-title-size, 200px));
-  line-height: 1;
+  /* Fixed instead of auto-fit to the container's width — every card
+     reads at the same size regardless of how long its title is. */
+  font-size: 1.375rem;
+  line-height: 1.2;
   overflow: var(--title-overflow);
   text-overflow: ellipsis;
   width: 100%;
@@ -18,16 +20,15 @@
 }
 
 .ameba-card-title__container {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   width: -webkit-fill-available;
   height: -webkit-fill-available;
   display: flex;
   align-items: center;
-  text-transform: uppercase;
   color: var(--title-color, #fae6c5);
   z-index: 999;
   margin: var(--title-margin, 0);
-  font-weight: 800;
+  font-weight: 500;
   font-style: var(--title-font-style, italic);
 }
 

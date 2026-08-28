@@ -83,7 +83,75 @@
   },
   "lab": {
     "proximament": "Pròximament",
-    "meta": "El laboratori creatiu d'AMEBA. Pròximament."
+    "meta": "El laboratori creatiu d'AMEBA.",
+    "calendari": "Calendari",
+    "propera-activitat": "Propera activitat",
+    "activitats-en-curs": "Activitats en curs",
+    "cap-activitat-propera": "No hi ha cap activitat propera",
+    "calendar": {
+      "dl": "DL",
+      "dt": "DT",
+      "dc": "DC",
+      "dj": "DJ",
+      "dv": "DV",
+      "ds": "DS",
+      "dm": "DM"
+    }
+  },
+  "associacio": {
+    "meta": "Associació — qui som, què fem i com formar-ne part.",
+    "hero": {
+      "lead1": "Ameba som una associació cultural formada per persones voluntàries apassionades de la música electrònica i la cultura dj.",
+      "lead2": "Organitzem esdeveniments, tallers i diverses activitats culturals amb l'objectiu de promocionar i difondre als artistes de l'escena electrònica local."
+    },
+    "blobs": {
+      "qui-som": { "title": "QUI SOM?" },
+      "que-fem": { "title": "QUÈ FEM?" },
+      "per-que": { "title": "PER QUÈ?" }
+    },
+    "cta": {
+      "title": "FES-TE SOCI/SÒCIA D'AMEBA DES DE 10€ ANUALS",
+      "bullet1": "Vols formar part d'aquesta comunitat?",
+      "bullet2": "Descobreix els avantatges de formar part de la comunitat.",
+      "button": "INSCRIU-TE!"
+    },
+    "since": {
+      "title": "DES DE 2014 DONANT SUPORT AL TALENT LOCAL DE LA CIUTAT!",
+      "text": "Descobreix els projectes personals dels nostres socis en el nostre directori",
+      "button": "PROJECTES SOCIS/SÒCIES"
+    },
+    "principis": {
+      "title": "ELS NOSTRES PRINCIPIS"
+    },
+    "stats": {
+      "artistes-programats": "ARTISTES PROGRAMATS",
+      "tallers": "TALLERS",
+      "festivals": "FESTIVALS",
+      "socis-1": "SOCIS",
+      "seguidors": "SEGUIDORS",
+      "assistents": "ASSISTENTS",
+      "xerrades": "XERRADES",
+      "socis-2": "SOCIS"
+    },
+    "grups": {
+      "title": "ELS NOSTRES GRUPS DE TREBALL",
+      "button": "CONTACTA",
+      "gestio": { "title": "GESTIÓ" },
+      "art": { "title": "ART" },
+      "cultura": { "title": "CULTURA" },
+      "produccio": { "title": "PRODUCCIÓ" },
+      "rrss": { "title": "RRSS" },
+      "booking": { "title": "BOOKING" },
+      "clubs": { "title": "CLUBS" },
+      "radio": { "title": "RADIO" }
+    }
+  },
+  "festivals": {
+    "meta": "Festivals d'AMEBA — l'Associació de Música Electrònica de Barcelona.",
+    "historic": "Històric festivals",
+    "any": "Any",
+    "festival": "Festival",
+    "cancellat": "CANCEL·LAT"
   },
   "home": {
     "meta": "AMEBA — Associació, Festivals, Lab i Shop. Des de 2014 donant suport al talent local de Barcelona.",

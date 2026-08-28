@@ -1,0 +1,73 @@
+.lab-calendar__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  font-family: var(--font-body);
+}
+
+.lab-calendar__nav button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lab-calendar__month {
+  text-transform: capitalize;
+  min-width: 160px;
+  text-align: center;
+}
+
+.lab-calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.lab-calendar__weekday {
+  background-color: var(--color-gris-claro);
+  color: var(--color-negro);
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 8px 0;
+}
+
+.lab-calendar__day {
+  background-color: var(--color-cream);
+  color: var(--color-negro);
+  text-align: center;
+  font-family: var(--font-body);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 0;
+}
+
+.lab-calendar__day--muted {
+  opacity: 0.4;
+}
+
+.lab-calendar__day--active {
+  background-color: var(--color-negro);
+  color: var(--color-cream);
+  cursor: pointer;
+}
+
+.lab-calendar__day--active:hover {
+  opacity: 0.85;
+}
+
+.lab-calendar__day--selected {
+  outline: 2px solid var(--color-rojo);
+  outline-offset: -2px;
+}

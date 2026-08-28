@@ -28,8 +28,6 @@ export default function AmebaCard({
       </div>
       <div className="ameba-card__title-block">
         <AmebaCardTitle
-          autoGrow
-          maxSize={28}
           padding="16px 16px 0"
           color="var(--color-cream)"
           fontStyle="normal"

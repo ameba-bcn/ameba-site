@@ -1,7 +1,8 @@
-import React, { useLayoutEffect, useRef, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import AmebaDots from "../../../../components/layout/AmebaDots";
 import AmebaBlob from "../../../../components/ui/logo/AmebaBlob";
+import MegaTitle from "../../../../components/ui/MegaTitle";
 import plusIcon from "../../../../assets/images/general/plus-icon.png";
 import "./SectionBand.css";
 
@@ -29,53 +30,13 @@ export default function SectionBand({
   dotsPosition = "image",
   reverse = false,
 }) {
-  const megatitleRef = useRef(null);
-  const textRef = useRef(null);
-  const [scale, setScale] = useState(1);
-
-  // Encoge el megatítulo (escala uniforme, sin deformar) si no cabe
-  // en el ancho de la sección; si cabe, se queda a tamaño natural
-  useLayoutEffect(() => {
-    const wrap = megatitleRef.current;
-    const text = textRef.current;
-    if (!wrap || !text) return undefined;
-
-    const fit = () => {
-      const styles = window.getComputedStyle(wrap);
-      const available =
-        wrap.clientWidth -
-        parseFloat(styles.paddingLeft) -
-        parseFloat(styles.paddingRight);
-      const natural = text.offsetWidth;
-      if (natural > 0 && available > 0)
-        setScale(Math.min(1, available / natural));
-    };
-
-    fit();
-    // Remedir cuando termina de cargar la webfont (Arimo)
-    document.fonts?.ready?.then(fit);
-    if (typeof ResizeObserver === "undefined") return undefined;
-    const observer = new ResizeObserver(fit);
-    observer.observe(wrap);
-    observer.observe(text);
-    return () => observer.disconnect();
-  }, [title]);
-
   return (
     <section
       className={`section-band${reverse ? " section-band--reverse" : ""}`}
       id={id}
       style={{ "--band-color": color }}
     >
-      <h2 className="section-band__megatitle" ref={megatitleRef}>
-        <span
-          className="section-band__megatitle-text"
-          ref={textRef}
-          style={{ transform: `scale(${scale})` }}
-        >
-          {title}
-        </span>
-      </h2>
+      <MegaTitle as="h2" title={title} className="section-band__megatitle" />
       <div className="section-band__content">
         {image && (
           <div className="section-band__media">

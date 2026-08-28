@@ -1,0 +1,75 @@
+/* Black hr on Festivals, like Lab/Associació's own override — the
+   browser default is a light grey, barely visible against the yellow
+   background. */
+.page-layout--festivals hr {
+  border: none;
+  border-top: 1px solid var(--color-negro);
+}
+
+/* Bleed to sang like Associació's principis band: the hr around the
+   featured festival breaks out on alternating sides instead of stopping
+   at the page's own padding. */
+.festivals__hr--bleed-right {
+  width: calc(100% + var(--page-margin-x));
+  margin-right: calc(-1 * var(--page-margin-x));
+}
+
+.festivals__hr--bleed-left {
+  width: calc(100% + var(--page-margin-x));
+  margin-left: calc(-1 * var(--page-margin-x));
+}
+
+/* Same dot size as the hero's own dots column */
+.festivals__hero-dots .dots-row__dot {
+  width: 10px;
+  height: 10px;
+}
+
+.festivals__hero-dots {
+  margin-bottom: 24px;
+}
+
+/* Same plain left-aligned section-label treatment as Lab's
+   .lab__section-title: body font (not the unicase display font),
+   solid fill, sentence case forced regardless of source casing. */
+.festivals__section-title {
+  font-family: var(--font-body);
+  text-align: left;
+  text-transform: lowercase;
+  color: var(--color-negro);
+  -webkit-text-stroke: 0;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.festivals__section-title::first-letter {
+  text-transform: uppercase;
+}
+
+.festivals__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 16px 0 24px;
+}
+
+.festivals__clear {
+  min-height: 44px;
+  padding: 6px 16px;
+  border: 2px solid var(--color-negro);
+  background: transparent;
+  color: var(--color-negro);
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.festivals__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  font-family: var(--font-body);
+  text-align: center;
+}

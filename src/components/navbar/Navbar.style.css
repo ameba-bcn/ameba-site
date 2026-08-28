@@ -31,7 +31,7 @@
   align-items: center;
   height: 80px;
   box-sizing: border-box;
-  padding: 0 7vw;
+  padding: 0 var(--page-margin-x);
 }
 
 .navbar .menuButton {
