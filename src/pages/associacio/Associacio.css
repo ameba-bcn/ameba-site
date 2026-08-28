@@ -9,6 +9,11 @@
   margin: 16px 0 32px;
 }
 
+.page-layout--associacio hr {
+  border: none;
+  border-top: 1px solid var(--color-negro);
+}
+
 /* Tres blobs: QUI SOM? / QUÈ FEM? / PER QUÈ? — cols 1-3 / 5-7 / 9-11 */
 .associacio__blobs {
   display: grid;
@@ -38,7 +43,7 @@
 }
 
 .associacio__blob .outline-heading {
-  font-size: clamp(32px, 2.6vw, 36px);
+  font-size: clamp(40px, 3.2vw, 60px);
 }
 
 .associacio__blob p {
@@ -47,10 +52,10 @@
   margin: 0;
 }
 
-/* CTA soci — banda naranja */
+/* CTA soci — banda roja */
 .associacio__cta {
-  background-color: var(--color-naranja);
-  color: var(--color-negro);
+  background-color: var(--color-rojo);
+  color: var(--color-cream);
   padding: 32px;
   margin-bottom: 32px;
   display: flex;
@@ -60,10 +65,13 @@
   gap: 24px 48px;
 }
 
+/* Sobre rojo el título va sólido en cream, no en outline */
 .associacio__cta .outline-heading {
   max-width: 320px;
   font-size: clamp(40px, 4vw, 64px);
   text-align: left;
+  color: var(--color-cream);
+  -webkit-text-stroke: 0;
 }
 
 .associacio__cta-bullets {
@@ -76,6 +84,7 @@
   font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 700;
+  color: var(--color-cream);
 }
 
 .associacio__cta-bullets li {
@@ -92,7 +101,7 @@
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background-color: var(--color-negro);
+  background-color: var(--color-cream);
 }
 
 /* Des de 2014 — banda negra full-bleed */

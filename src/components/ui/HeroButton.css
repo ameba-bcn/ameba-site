@@ -1,0 +1,30 @@
+.hero-button {
+  display: inline-block;
+  padding: 6px 16px;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-cream);
+  background-color: var(--color-negro);
+  box-shadow: 6px 6px 0 var(--color-cream);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-button:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--color-cream);
+}
+
+/* Caja crema, texto negro, sombra negra */
+.hero-button--invert {
+  color: var(--color-negro);
+  background-color: var(--color-cream);
+  box-shadow: 6px 6px 0 var(--color-negro);
+}
+
+.hero-button--invert:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--color-negro);
+}

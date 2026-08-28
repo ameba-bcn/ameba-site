@@ -79,26 +79,27 @@
   opacity: 0.7;
 }
 
-/* Associació's own reference: a smaller, top-anchored image (~5 of 12
-   grid columns, fixed height) sitting ABOVE a huge, unfit outline title
-   that's allowed to bleed past its box — opposite proportions from the
-   other 3 section views' hero, so scoped here instead of changing the
+/* Associació's own reference: a smaller image (~5 of 12 grid columns,
+   fixed height, vertically centered in the row) sitting BELOW a huge,
+   unfit outline title that bleeds well above both the image and the
+   text before any of it starts — opposite proportions from the other
+   3 section views' hero, so scoped here instead of changing the
    shared defaults above. */
-.section-hero--associacio .section-hero__outline-title.mega-title {
-  top: -48px;
-  z-index: 1;
-  font-size: clamp(180px, 20vw, 340px);
-  white-space: nowrap;
+.section-hero--associacio {
+  padding: 64px 0 56px;
 }
 
-.section-hero--associacio .section-hero__visual {
+.section-hero--associacio .section-hero__outline-title.mega-title {
+  top: -90px;
   z-index: 2;
+  font-size: clamp(180px, 20vw, 340px);
+  white-space: nowrap;
 }
 
 .section-hero--associacio .section-hero__image-wrap {
   width: 71%;
   aspect-ratio: auto;
-  height: 180px;
+  height: 220px;
 }
 
 .section-hero__text {

@@ -8,6 +8,7 @@ import DotsRow from "../../components/ui/DotsRow";
 import OutlineHeading from "../../components/ui/OutlineHeading";
 import AmebaBlob from "../../components/ui/logo/AmebaBlob";
 import Button from "../../components/button/Button";
+import HeroButton from "../../components/ui/HeroButton";
 import { BLOBS, STATS, WORK_GROUPS } from "../../content/associacio";
 import { AMEBA_EMAIL } from "../../utils/constants";
 import heroImage from "../../assets/images/home/home1.jpg";
@@ -62,11 +63,7 @@ function Associacio() {
           <li>{t("associacio.cta.bullet1")}</li>
           <li>{t("associacio.cta.bullet2")}</li>
         </ul>
-        <NavLink to="/memberships">
-          <Button buttonStyle="boton--primary--solid" buttonSize="boton--medium">
-            {t("associacio.cta.button")}
-          </Button>
-        </NavLink>
+        <HeroButton to="/memberships">{t("associacio.cta.button")}</HeroButton>
       </div>
 
       {/* Des de 2014 */}
