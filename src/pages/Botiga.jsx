@@ -13,6 +13,7 @@ import ProductBanner from "../components/botiga/ProductBanner";
 import Button from "../components/button/Button";
 import { formatPrice, deleteStringDecimals } from "../utils/utils";
 import useMediaQuery from "../hooks/use-media-query";
+import heroImage from "../assets/images/home/home4.jpg";
 import "./Botiga.css";
 
 const PAGE_SIZE = 12;
@@ -36,7 +37,7 @@ function Botiga() {
       <SectionHero
         title={t("menu.botiga")}
         section="shop"
-        image="https://ameba.cat/AmebaPortadaDesktop.jpg"
+        image={heroImage}
         imageAlt={t("menu.botiga")}
         lead={/* TODO copy */ "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
       >

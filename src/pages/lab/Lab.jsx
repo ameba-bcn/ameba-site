@@ -16,6 +16,7 @@ import LoadMoreButton from "../../components/ui/LoadMoreButton";
 import LabCalendar from "../../components/lab/LabCalendar";
 import NextActivityCard from "../../components/lab/NextActivityCard";
 import { activityDateSet, dateKey } from "../../components/lab/calendarGrid";
+import heroImage from "../../assets/images/home/home3.jpg";
 import "./Lab.css";
 
 const PAGE_SIZE = 12;
@@ -79,7 +80,7 @@ function Lab() {
       <SectionHero
         title={t("menu.lab")}
         section="lab"
-        image="https://ameba.cat/AmebaPortadaDesktop.jpg"
+        image={heroImage}
         imageAlt={t("menu.lab")}
         lead={/* TODO copy */ "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
       >

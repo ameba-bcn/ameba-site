@@ -1,5 +1,5 @@
 import React from "react";
-import PowerTitle from "../layout/PowerTitle";
+import MegaTitle from "./MegaTitle";
 import DotsColumn from "./DotsColumn";
 import "./SectionHero.css";
 
@@ -13,10 +13,9 @@ export default function SectionHero({
 }) {
   return (
     <div className={`section-hero section-hero--${section}`}>
+      <DotsColumn className="section-hero__dots" />
       <div className="section-hero__visual">
-        <div className="section-hero__outline-title">
-          <PowerTitle title={title} variant="outline" />
-        </div>
+        <MegaTitle title={title} className="section-hero__outline-title" />
         <div className="section-hero__image-wrap">
           <img className="section-hero__image" src={image} alt={imageAlt || ""} />
         </div>
@@ -25,7 +24,6 @@ export default function SectionHero({
         {lead && <p className="section-hero__lead">{lead}</p>}
         {children}
       </div>
-      <DotsColumn className="section-hero__dots" />
     </div>
   );
 }

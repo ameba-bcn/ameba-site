@@ -10,6 +10,7 @@ import AmebaBlob from "../../components/ui/logo/AmebaBlob";
 import Button from "../../components/button/Button";
 import { BLOBS, STATS, WORK_GROUPS } from "../../content/associacio";
 import { AMEBA_EMAIL } from "../../utils/constants";
+import heroImage from "../../assets/images/home/home1.jpg";
 import "./Associacio.css";
 
 function Associacio() {
@@ -25,7 +26,7 @@ function Associacio() {
       <SectionHero
         title={t("menu.associacio")}
         section="associacio"
-        image="https://ameba.cat/AmebaPortadaDesktop.jpg"
+        image={heroImage}
         imageAlt={t("menu.associacio")}
         lead={t("associacio.hero.lead1")}
       >

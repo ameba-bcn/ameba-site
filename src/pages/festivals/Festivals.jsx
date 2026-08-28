@@ -14,6 +14,7 @@ import CardGrid from "../../components/ui/CardGrid";
 import AmebaCard from "../../components/ui/AmebaCard";
 import LoadMoreButton from "../../components/ui/LoadMoreButton";
 import FeaturedFestival from "../../components/festivals/FeaturedFestival";
+import heroImage from "../../assets/images/home/home2.jpg";
 import "./Festivals.css";
 
 const PAGE_SIZE = 12;
@@ -89,7 +90,7 @@ function Festivals() {
       <SectionHero
         title={t("menu.festivals")}
         section="festivals"
-        image="https://ameba.cat/AmebaPortadaDesktop.jpg"
+        image={heroImage}
         imageAlt={t("menu.festivals")}
         lead={/* TODO copy */ "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
       >
