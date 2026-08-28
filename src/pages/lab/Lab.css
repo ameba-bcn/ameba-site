@@ -1,3 +1,36 @@
+/* Same dot size as the hero's own dots column */
+.lab__hero-dots .dots-row__dot {
+  width: 10px;
+  height: 10px;
+}
+
+/* Black hr on Lab, like Associació's own override — the browser default
+   is a light grey, barely visible against the orange background. */
+.page-layout--lab hr {
+  border: none;
+  border-top: 1px solid var(--color-negro);
+}
+
+/* Reference has these as plain left-aligned section labels, not the big
+   hollow display treatment OutlineHeading defaults to — including the
+   body font instead of Bebas Neue, which is unicase and would still
+   read as all-caps regardless of text-transform. Case is forced instead
+   of relying on the translation strings, so only the first letter is
+   ever capitalized regardless of source casing. */
+.lab__section-title {
+  font-family: var(--font-body);
+  text-align: left;
+  text-transform: lowercase;
+  color: var(--color-negro);
+  -webkit-text-stroke: 0;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.lab__section-title::first-letter {
+  text-transform: uppercase;
+}
+
 .lab__calendar-row {
   display: grid;
   grid-template-columns: 1fr 1fr;

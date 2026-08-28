@@ -80,22 +80,33 @@ function Lab() {
       <SectionHero
         title={t("menu.lab")}
         section="lab"
+        variant="mega"
+        dotsPosition="end"
+        titleColor="var(--color-cream)"
         image={heroImage}
         imageAlt={t("menu.lab")}
         lead={/* TODO copy */ "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+        titleFit={false}
       >
         {/* TODO copy */}
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras diam
           sem, molestie sed orci nec, eleifend porta arcu.
         </p>
+        <p className="section-hero__text-p--regular">
+          Aliquam mi velit, tincidunt sit amet diam non, rhoncus cursus
+          urna. Nulla semper tortor a pretium suscipit. Integer volutpat
+          egestas arcu sit amet luctus.
+        </p>
       </SectionHero>
       <hr />
-      <DotsRow />
+      <DotsRow className="lab__hero-dots" />
 
       <div className="lab__calendar-row">
         <div>
-          <OutlineHeading as="h2">{t("lab.calendari")}</OutlineHeading>
+          <OutlineHeading as="h2" className="lab__section-title">
+            {t("lab.calendari")}
+          </OutlineHeading>
           <LabCalendar
             activityDateSet={activityDates}
             selectedDate={selectedDate}
@@ -106,13 +117,17 @@ function Lab() {
           />
         </div>
         <div>
-          <OutlineHeading as="h2">{t("lab.propera-activitat")}</OutlineHeading>
+          <OutlineHeading as="h2" className="lab__section-title">
+            {t("lab.propera-activitat")}
+          </OutlineHeading>
           <NextActivityCard activity={nextActivity} />
         </div>
       </div>
 
       <hr />
-      <OutlineHeading as="h2">{t("lab.activitats-en-curs")}</OutlineHeading>
+      <OutlineHeading as="h2" className="lab__section-title">
+        {t("lab.activitats-en-curs")}
+      </OutlineHeading>
 
       <FilterBar
         items={types}

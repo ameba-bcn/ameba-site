@@ -14,17 +14,26 @@ export default function SectionHero({
   bgColor,
   titleColor,
   titleFit = true,
+  dotsPosition = "start",
 }) {
   // `section` alone still resolves the legacy per-page tint (--section-x);
   // bgColor overrides it so a future reuse isn't forced to register a new
   // CSS variable just to pick a color.
   const resolvedBgColor = bgColor || (section ? `var(--section-${section})` : undefined);
 
+  const classes = [
+    "section-hero",
+    `section-hero--${section}`,
+    variant === "mega" && "section-hero--mega",
+    dotsPosition === "end" && "section-hero--dots-end",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <div
-      className={`section-hero section-hero--${section} ${
-        variant === "mega" ? "section-hero--mega" : ""
-      }`.trim()}
+      className={classes}
+      style={resolvedBgColor ? { "--hero-bg-color": resolvedBgColor } : undefined}
     >
       <DotsColumn className="section-hero__dots" />
       {/* Spans the visual + text columns (wider than just the image) —
@@ -40,10 +49,7 @@ export default function SectionHero({
         strokeColor={titleColor}
       />
       <div className="section-hero__visual">
-        <div
-          className="section-hero__image-wrap"
-          style={resolvedBgColor ? { "--hero-bg-color": resolvedBgColor } : undefined}
-        >
+        <div className="section-hero__image-wrap">
           <img className="section-hero__image" src={image} alt={imageAlt || ""} />
         </div>
       </div>

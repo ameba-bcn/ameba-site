@@ -12,12 +12,14 @@
 
 .section-hero__dots {
   grid-column: 1;
+  grid-row: 1;
 }
 
 .section-hero__visual {
   position: relative;
   z-index: 1;
   grid-column: 2;
+  grid-row: 1;
 }
 
 /* Spans the visual + text columns — wider than the image alone — so the
@@ -120,22 +122,59 @@
 }
 
 /* Opaque backdrop: the title bleeds behind this column too, and a
-   transparent background would let its strokes show through the copy. */
+   transparent background would let its strokes show through the copy.
+   Reuses the same resolved page/section color as the image tint so it
+   blends into the page instead of drawing its own visible box — that
+   value already tracks whatever `bgColor`/`section` this instance uses. */
 .section-hero--mega .section-hero__text {
-  background-color: var(--color-cream);
+  background-color: var(--hero-bg-color, var(--color-cream));
   padding: 12px 0 12px 24px;
+}
+
+/* dotsPosition="end": dots move from their own leading column to a
+   trailing one after visual+text, which shift left to fill the gap —
+   opt-in per instance since Associació's own reference keeps them
+   leading. */
+.section-hero--dots-end {
+  grid-template-columns: 1.4fr 1fr auto;
+}
+
+.section-hero--dots-end .section-hero__visual {
+  grid-column: 1;
+}
+
+.section-hero--dots-end .section-hero__text {
+  grid-column: 2;
+}
+
+.section-hero--dots-end .section-hero__dots {
+  grid-column: 3;
+  margin-right: 0;
+  margin-left: 24px;
+}
+
+.section-hero--dots-end .section-hero__outline-title.mega-title {
+  grid-column: 1 / span 2;
 }
 
 .section-hero__text {
   position: relative;
   z-index: 3;
   grid-column: 3;
+  grid-row: 1;
   min-width: 0;
   text-align: left;
 }
 
 .section-hero__text p {
   font-weight: 700;
+}
+
+/* Opt-in modifier for a trailing paragraph that should read lighter than
+   the bold copy above it (e.g. Lab's reference has a 3rd, regular-weight
+   line after the bold one). */
+.section-hero__text p.section-hero__text-p--regular {
+  font-weight: 400;
 }
 
 .section-hero__lead {
