@@ -30,15 +30,27 @@
 }
 
 /* Same cream box + black text as --invert, but for use directly on a
-   black background: a black box-shadow would vanish against it, so
-   this uses a cream one instead to stay visible there. */
+   black background: a solid cream box-shadow blends into the cream
+   box itself (no depth cue against black). The offset "shadow" here
+   is a hollow cream border instead (drawn via ::after), so only its
+   outline shows past the button's own edge. */
 .hero-button--invert-bordered {
+  position: relative;
   color: var(--color-negro);
   background-color: var(--color-cream);
-  box-shadow: 6px 6px 0 var(--color-cream);
+  box-shadow: none;
 }
 
-.hero-button--invert-bordered:hover {
+.hero-button--invert-bordered::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--color-cream);
+  transform: translate(6px, 6px);
+  z-index: -1;
+  transition: transform 0.2s ease;
+}
+
+.hero-button--invert-bordered:hover::after {
   transform: translate(3px, 3px);
-  box-shadow: 3px 3px 0 var(--color-cream);
 }
