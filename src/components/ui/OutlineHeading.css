@@ -1,9 +1,16 @@
 .outline-heading {
   font-family: var(--font-display);
   text-transform: uppercase;
-  -webkit-text-stroke: 1.5px var(--color-negro);
   color: transparent;
   font-weight: 400;
   margin: 0;
   line-height: 1;
+}
+
+.outline-heading--dark {
+  -webkit-text-stroke: 1px var(--color-negro);
+}
+
+.outline-heading--light {
+  -webkit-text-stroke: 1px var(--color-cream);
 }

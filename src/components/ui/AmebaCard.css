@@ -46,6 +46,10 @@
 }
 
 .ameba-card__title-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 76px;
   background-color: var(--color-negro);
   padding-bottom: 16px;
 }

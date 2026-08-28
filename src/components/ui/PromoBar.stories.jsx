@@ -8,3 +8,7 @@ export default {
 export const Default = {
   args: {},
 };
+
+export const Closable = {
+  args: { closable: true },
+};

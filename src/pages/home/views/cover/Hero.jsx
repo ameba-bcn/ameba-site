@@ -1,8 +1,8 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./Hero.css";
 import useAuthStore from "../../../../stores/useAuthStore";
+import HeroButton from "../../../../components/ui/HeroButton";
 import heroImg from "../../../../assets/images/home/hero.jpg";
 
 const Hero = () => {
@@ -34,15 +34,15 @@ const Hero = () => {
             <li>{t("home.hero.bullet-3")}</li>
           </ul>
           <div className="hero__actions">
-            <NavLink className="hero__btn" to="/memberships">
+            <HeroButton to="/memberships">
               {t("home.hero.cta-soci")}
-            </NavLink>
-            <NavLink
-              className="hero__btn hero__btn--invert"
+            </HeroButton>
+            <HeroButton
+              variant="invert"
               to={isLoggedIn ? "/profile" : "/login"}
             >
               {t("home.hero.cta-acces")}
-            </NavLink>
+            </HeroButton>
           </div>
         </div>
       </div>

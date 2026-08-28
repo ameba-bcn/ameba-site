@@ -1,13 +1,25 @@
-.clickBanner {
-  padding: 0;
-  display: flex;
-  justify-content: center;
+/* Black hr on Shop, like Lab/Festivals/Associació's own override — the
+   browser default is a light grey, barely visible against the red
+   background. */
+.page-layout--shop hr {
+  border: none;
+  border-top: 1px solid var(--color-negro);
+}
+
+/* Same dot size as the hero's own dots column */
+.botiga__hero-dots .dots-row__dot {
+  width: 10px;
+  height: 10px;
+}
+
+.botiga__hero-dots {
   margin-bottom: 24px;
 }
 
-.clickBanner a {
-  width: 100%;
-  display: contents;
+/* Bleed to sang like Festivals' own hr around its featured image. */
+.botiga__hr--bleed-right {
+  width: calc(100% + var(--page-margin-x));
+  margin-right: calc(-1 * var(--page-margin-x));
 }
 
 .botiga-shop__state {

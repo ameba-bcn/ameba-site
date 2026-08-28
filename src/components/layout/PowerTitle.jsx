@@ -1,13 +1,16 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import "./PowerTitle.css";
 
+// Deprecada de cara al rediseño 2026: los títulos outline grandes ahora
+// usan MegaTitle (src/components/ui/MegaTitle.jsx — Arimo, escala uniforme
+// por JS). PowerTitle se mantiene solo para las vistas aún no migradas
+// (PageLayout title prop) — no la uses en código nuevo.
 function PowerTitle({
   title,
   subtitle,
   color = "var(--color-negro)",
   fontStyle = "normal",
   marginTop,
-  variant = "solid",
 }) {
   const titleRef = useRef(null);
 
@@ -39,11 +42,7 @@ function PowerTitle({
     <div
       className={`power-title__box${marginTop ? ` power-title__box--mt-${marginTop}` : ""}`}
     >
-      <h1
-        ref={titleRef}
-        className={`power-title__title${variant === "outline" ? " power-title__title--outline" : ""}`}
-        style={variant === "outline" ? { fontStyle } : { color, fontStyle }}
-      >
+      <h1 ref={titleRef} className="power-title__title" style={{ color, fontStyle }}>
         {title}
       </h1>
       {subtitle && <h3 className="SupportSubtitle">{subtitle}</h3>}

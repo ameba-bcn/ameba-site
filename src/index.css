@@ -41,6 +41,10 @@
     --negro: var(--color-negro);
     --amarillo: var(--color-amarillo);
 
+    /* Site-wide horizontal margin — navbar, promo bar and (for the
+       redesign 2026 section views) the page content all align to this. */
+    --page-margin-x: 9vw;
+
     /* Breakpoints */
     --bp-big: 1519px;
     --bp-semi-big: 1200px;
