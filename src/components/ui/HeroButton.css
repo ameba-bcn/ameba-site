@@ -35,9 +35,24 @@
    is a hollow cream border instead (drawn via ::after), so only its
    outline shows past the button's own edge. */
 .hero-button--invert-bordered {
+  /* z-index:0 (not just position:relative) is required here: without
+     it this box doesn't establish its own stacking context, so the
+     ::after's z-index:-1 escapes past it and gets painted underneath
+     the section's own opaque background instead of just behind this
+     button — invisible except when the generic .hero-button:hover
+     rule's (unrelated) solid box-shadow happened to paint over it. */
   position: relative;
+  z-index: 0;
   color: var(--color-negro);
   background-color: var(--color-cream);
+  box-shadow: none;
+}
+
+.hero-button--invert-bordered:hover {
+  /* Override the generic .hero-button:hover box-shadow/transform —
+     this variant's "shadow" is the ::after border below, not a
+     box-shadow on the button itself. */
+  transform: none;
   box-shadow: none;
 }
 
