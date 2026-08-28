@@ -1,24 +1,22 @@
-.Lab {
-  flex: 1;
+.lab__calendar-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+
+.lab__empty {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  min-height: 60vh;
-  background-color: var(--section-lab);
-  padding: 40px 20px;
-}
-
-.Lab__title {
-  font-size: var(--display-xl);
-  line-height: 1;
-  margin: 0;
-}
-
-.Lab__soon {
+  justify-content: center;
+  min-height: 240px;
   font-family: var(--font-body);
-  font-size: 1.4rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: var(--color-negro);
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  .lab__calendar-row {
+    grid-template-columns: 1fr;
+  }
 }

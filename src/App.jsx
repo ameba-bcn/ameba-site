@@ -28,7 +28,6 @@ import "./App.css";
 // se pinta en el primer render sin pasar por el spinner de Suspense
 import Home from "./pages/home/Home";
 
-const Agenda = lazyWithRetry(() => import("./pages/agenda/Agenda"));
 const Botiga = lazyWithRetry(() => import("./pages/Botiga"));
 const SociosDetailed = lazyWithRetry(
   () => import("./pages/socios/components/SociosDetailed"),
@@ -143,7 +142,7 @@ function App() {
           <Suspense fallback={<RouteFallback />}>
             <Routes>
               <Route path="/activitats/:id" element={<ActivitatPage />} />
-              <Route path="/activitats" element={<Agenda />} />
+              <Route path="/activitats" element={<Navigate to="/lab" replace />} />
               <Route path="/botiga/:id" element={<ProductePage />} />
               <Route path="/botiga" element={<Botiga />} />
               <Route path="/shop" element={<Navigate to="/botiga" replace />} />

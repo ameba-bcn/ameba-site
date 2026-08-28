@@ -83,7 +83,20 @@
   },
   "lab": {
     "proximament": "Próximamente",
-    "meta": "El laboratorio creativo de AMEBA. Próximamente."
+    "meta": "El laboratorio creativo de AMEBA.",
+    "calendari": "Calendario",
+    "propera-activitat": "Próxima actividad",
+    "activitats-en-curs": "Actividades en curso",
+    "cap-activitat-propera": "No hay ninguna actividad próxima",
+    "calendar": {
+      "dl": "LU",
+      "dt": "MA",
+      "dc": "MI",
+      "dj": "JU",
+      "dv": "VI",
+      "ds": "SA",
+      "dm": "DO"
+    }
   },
   "festivals": {
     "meta": "Festivales de AMEBA — la Asociación de Música Electrónica de Barcelona.",

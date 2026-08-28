@@ -18,10 +18,10 @@ describe("revamp smoke", () => {
     expect(document.getElementById("shop")).toBeTruthy();
   });
 
-  it("renders Lab placeholder", () => {
-    renderWithProviders(<Lab />);
-    expect(screen.getByText("Lab")).toBeInTheDocument();
-    expect(screen.getByText(/Pròximament/i)).toBeInTheDocument();
+  it("renders the real Lab view with its calendar and activity grid", () => {
+    renderWithProviders(<Lab />, { route: "/lab" });
+    expect(screen.getByText("Calendari")).toBeInTheDocument();
+    expect(screen.getByText("Activitats en curs")).toBeInTheDocument();
   });
 
   it("renders Navbar with the 4 section items", () => {
