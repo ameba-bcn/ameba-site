@@ -115,7 +115,7 @@
      though the title still ends up well above the now-lower
      visual/text row. */
   top: -16px;
-  left: -48px;
+  left: -64px;
   z-index: 2;
   font-size: clamp(170px, 18.5vw, 320px);
   white-space: nowrap;
