@@ -9,6 +9,12 @@
   margin: 16px 0 32px;
 }
 
+/* Same dot size as the hero's own vertical dots-column */
+.associacio__hero-dots .dots-row__dot {
+  width: 10px;
+  height: 10px;
+}
+
 .page-layout--associacio hr {
   border: none;
   border-top: 1px solid var(--color-negro);
@@ -58,10 +64,9 @@
   color: var(--color-cream);
   padding: 24px 32px;
   margin-bottom: 32px;
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
   gap: 24px 48px;
 }
 
@@ -80,10 +85,9 @@
 
 .associacio__cta-bullets {
   list-style: none;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
-  align-self: center;
-  justify-content: center;
+  justify-self: center;
   display: grid;
   grid-template-columns: repeat(2, minmax(160px, 220px));
   gap: 10px 24px;
@@ -94,17 +98,24 @@
 }
 
 .associacio__cta-bullets li {
-  text-align: center;
+  position: relative;
+  padding-left: 14px;
+  text-align: left;
 }
 
 .associacio__cta-bullets li::before {
   content: "";
-  display: block;
+  position: absolute;
+  left: 0;
+  top: 0.5em;
   width: 5px;
   height: 5px;
-  margin: 0 auto 8px;
   border-radius: 50%;
   background-color: var(--color-cream);
+}
+
+.associacio__cta > .hero-button {
+  justify-self: end;
 }
 
 /* Des de 2014 — banda negra full-bleed */
@@ -328,10 +339,19 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .associacio__cta,
   .associacio__since {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .associacio__cta {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+
+  .associacio__cta-bullets,
+  .associacio__cta > .hero-button {
+    justify-self: start;
   }
 
   .associacio__since-title,

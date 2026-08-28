@@ -114,10 +114,10 @@
      a small positive offset (clearance below the promo bar) even
      though the title still ends up well above the now-lower
      visual/text row. */
-  top: 0;
-  left: -32px;
+  top: -16px;
+  left: -48px;
   z-index: 2;
-  font-size: clamp(180px, 20vw, 340px);
+  font-size: clamp(170px, 18.5vw, 320px);
   white-space: nowrap;
   /* Lighter than a plain 2px black stroke so it reads as a background
      texture, not competing with the real copy in front of it. */
