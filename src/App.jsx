@@ -13,7 +13,6 @@ import useCartStore from "./stores/useCartStore";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Contacte from "./contacte/Contacte";
 import Menu from "./components/navbar/Navbar";
-import PromoBanner from "./components/banner/PromoBanner";
 import ScrollTop from "./components/layout/ScrollTop";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -136,7 +135,6 @@ function App() {
       <Menu />
       <UserContext.Provider value={value}>
         <div className="app-main-view">
-          <PromoBanner />
           <ScrollTop showBelow={250} />
           <NavigationProgress />
           {isNavigating && <FullscreenSpinner />}

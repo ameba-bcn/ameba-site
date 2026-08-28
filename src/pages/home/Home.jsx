@@ -2,6 +2,7 @@ import React from "react";
 import Hero from "./views/cover/Hero";
 import SectionBand from "./views/band/SectionBand";
 import PageMeta from "../../components/seo/PageMeta";
+import PromoBar from "../../components/ui/PromoBar";
 import { useTranslation } from "react-i18next";
 import home1 from "../../assets/images/home/home1.jpg";
 import home2 from "../../assets/images/home/home2.jpg";
@@ -60,6 +61,7 @@ export default function Home() {
   return (
     <div className="Home">
       <PageMeta url="/" description={t("home.meta")} jsonLd={ORG_JSON_LD} />
+      <PromoBar closable />
       <div className="HomeContent">
         <Hero />
         {BANDS.map((band, index) => (
