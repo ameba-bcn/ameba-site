@@ -14,6 +14,7 @@ import CardGrid from "../../components/ui/CardGrid";
 import AmebaCard from "../../components/ui/AmebaCard";
 import LoadMoreButton from "../../components/ui/LoadMoreButton";
 import FeaturedFestival from "../../components/festivals/FeaturedFestival";
+import heroImage from "../../assets/images/home/home2.jpg";
 import "./Festivals.css";
 
 const PAGE_SIZE = 12;
@@ -89,23 +90,40 @@ function Festivals() {
       <SectionHero
         title={t("menu.festivals")}
         section="festivals"
-        image="https://ameba.cat/AmebaPortadaDesktop.jpg"
+        variant="mega"
+        dotsPosition="end"
+        image={heroImage}
         imageAlt={t("menu.festivals")}
         lead={/* TODO copy */ "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+        titleFit={false}
       >
         {/* TODO copy */}
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras diam
           sem, molestie sed orci nec, eleifend porta arcu.
         </p>
+        <p className="section-hero__text-p--regular">
+          Aliquam mi velit, tincidunt sit amet diam non, rhoncus cursus
+          urna. Nulla semper tortor a pretium suscipit. Integer volutpat
+          egestas arcu sit amet luctus.
+        </p>
       </SectionHero>
-      <hr />
-      <DotsRow />
+      <hr className="festivals__hr--bleed-right" />
+      <DotsRow className="festivals__hero-dots" />
 
-      {featured && <FeaturedFestival festival={featured} />}
+      {featured ? (
+        <FeaturedFestival festival={featured} />
+      ) : (
+        // TODO: placeholder until there's an upcoming festival with real images
+        <div className="featured-festival">
+          <img className="featured-festival__image" src={heroImage} alt="" />
+        </div>
+      )}
 
-      <hr />
-      <OutlineHeading as="h2">{t("festivals.historic")}</OutlineHeading>
+      <hr className="festivals__hr--bleed-left" />
+      <OutlineHeading as="h2" className="festivals__section-title">
+        {t("festivals.historic")}
+      </OutlineHeading>
 
       <div className="festivals__filters">
         <DropdownFilter

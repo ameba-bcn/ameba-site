@@ -21,11 +21,6 @@
   overflow: hidden;
 }
 
-.power-title__title--outline {
-  -webkit-text-stroke: 1.5px var(--color-negro);
-  color: transparent;
-}
-
 /* Subtitle */
 .power-title__box .SupportSubtitle {
   margin: -20px 30px 1rem;

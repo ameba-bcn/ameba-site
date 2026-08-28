@@ -32,6 +32,24 @@
   background-color: var(--section-shop);
 }
 
+/* Redesign 2026 section views align to the site's shared horizontal
+   margin (navbar, promo bar) instead of the legacy fixed 60px used by
+   pages not yet migrated — scoped to these 4 so nothing else shifts. */
+.page-layout--associacio > .page-layout__inner,
+.page-layout--festivals > .page-layout__inner,
+.page-layout--lab > .page-layout__inner,
+.page-layout--shop > .page-layout__inner {
+  padding-left: var(--page-margin-x);
+  padding-right: var(--page-margin-x);
+}
+
+/* .app sets text-align:center as a global legacy default (fine for the
+   pages that still rely on it); Associació's grid is left-aligned
+   throughout, per its reference. */
+.page-layout--associacio .page-layout__content {
+  text-align: left;
+}
+
 .page-layout__inner {
   padding: 0 60px 40px 60px;
   display: flex;

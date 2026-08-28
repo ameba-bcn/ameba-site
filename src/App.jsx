@@ -13,7 +13,6 @@ import useCartStore from "./stores/useCartStore";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Contacte from "./contacte/Contacte";
 import Menu from "./components/navbar/Navbar";
-import PromoBanner from "./components/banner/PromoBanner";
 import ScrollTop from "./components/layout/ScrollTop";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -28,7 +27,6 @@ import "./App.css";
 // se pinta en el primer render sin pasar por el spinner de Suspense
 import Home from "./pages/home/Home";
 
-const Agenda = lazyWithRetry(() => import("./pages/agenda/Agenda"));
 const Botiga = lazyWithRetry(() => import("./pages/Botiga"));
 const SociosDetailed = lazyWithRetry(
   () => import("./pages/socios/components/SociosDetailed"),
@@ -69,6 +67,7 @@ const SubscriptionFinished = lazyWithRetry(
 const Legal = lazyWithRetry(() => import("./pages/legal/Legal"));
 const Lab = lazyWithRetry(() => import("./pages/lab/Lab"));
 const Festivals = lazyWithRetry(() => import("./pages/festivals/Festivals"));
+const Associacio = lazyWithRetry(() => import("./pages/associacio/Associacio"));
 const QrLanding = lazyWithRetry(() => import("./pages/qr-landing/QrLanding"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
@@ -136,14 +135,13 @@ function App() {
       <Menu />
       <UserContext.Provider value={value}>
         <div className="app-main-view">
-          <PromoBanner />
           <ScrollTop showBelow={250} />
           <NavigationProgress />
           {isNavigating && <FullscreenSpinner />}
           <Suspense fallback={<RouteFallback />}>
             <Routes>
               <Route path="/activitats/:id" element={<ActivitatPage />} />
-              <Route path="/activitats" element={<Agenda />} />
+              <Route path="/activitats" element={<Navigate to="/lab" replace />} />
               <Route path="/botiga/:id" element={<ProductePage />} />
               <Route path="/botiga" element={<Botiga />} />
               <Route path="/shop" element={<Navigate to="/botiga" replace />} />
@@ -170,6 +168,7 @@ function App() {
               <Route path="/legal" element={<Legal />} />
               <Route path="/lab" element={<Lab />} />
               <Route path="/festivals" element={<Festivals />} />
+              <Route path="/associacio" element={<Associacio />} />
               <Route path="/" element={<Home />} />
               <Route path="/qr-view" element={<QrLanding />} />
               <Route path="*" element={<NotFound />} />

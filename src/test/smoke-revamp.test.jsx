@@ -5,7 +5,7 @@ import renderWithProviders from "./helpers/renderWithProviders";
 import Home from "../pages/home/Home";
 import Lab from "../pages/lab/Lab";
 import Navbar from "../components/navbar/Navbar";
-import PromoBanner from "../components/banner/PromoBanner";
+import PromoBar from "../components/ui/PromoBar";
 import Contacte from "../contacte/Contacte";
 
 describe("revamp smoke", () => {
@@ -18,10 +18,10 @@ describe("revamp smoke", () => {
     expect(document.getElementById("shop")).toBeTruthy();
   });
 
-  it("renders Lab placeholder", () => {
-    renderWithProviders(<Lab />);
-    expect(screen.getByText("Lab")).toBeInTheDocument();
-    expect(screen.getByText(/Pròximament/i)).toBeInTheDocument();
+  it("renders the real Lab view with its calendar and activity grid", () => {
+    renderWithProviders(<Lab />, { route: "/lab" });
+    expect(screen.getByText("Calendari")).toBeInTheDocument();
+    expect(screen.getByText("Activitats en curs")).toBeInTheDocument();
   });
 
   it("renders Navbar with the 4 section items", () => {
@@ -32,8 +32,8 @@ describe("revamp smoke", () => {
     expect(screen.getByText("Shop")).toBeInTheDocument();
   });
 
-  it("renders PromoBanner on home with an accessible close button", () => {
-    renderWithProviders(<PromoBanner />);
+  it("renders the closable PromoBar (shared with Home) with an accessible close button", () => {
+    renderWithProviders(<PromoBar closable />);
     expect(screen.getByText(/soci\/sòcia d'Ameba/i)).toBeInTheDocument();
     expect(screen.getByText(/Descobreix més/i)).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /Tanca/i })).toBeInTheDocument();
