@@ -31,15 +31,14 @@
 
 /* Same cream box + black text as --invert, but for use directly on a
    black background: a black box-shadow would vanish against it, so
-   this adds a black border instead to keep the box legible. */
+   this uses a cream one instead to stay visible there. */
 .hero-button--invert-bordered {
   color: var(--color-negro);
   background-color: var(--color-cream);
-  border: 2px solid var(--color-negro);
-  box-shadow: 6px 6px 0 var(--color-negro);
+  box-shadow: 6px 6px 0 var(--color-cream);
 }
 
 .hero-button--invert-bordered:hover {
   transform: translate(3px, 3px);
-  box-shadow: 3px 3px 0 var(--color-negro);
+  box-shadow: 3px 3px 0 var(--color-cream);
 }
