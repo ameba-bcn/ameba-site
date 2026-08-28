@@ -26,3 +26,11 @@ export const Centered = {
     children: <p style={{ padding: "1rem" }}>Contingut centrat.</p>,
   },
 };
+
+export const WithSectionTint = {
+  args: {
+    section: "lab",
+    promo: true,
+    children: <p style={{ padding: "1rem" }}>Contingut de la secció Lab.</p>,
+  },
+};

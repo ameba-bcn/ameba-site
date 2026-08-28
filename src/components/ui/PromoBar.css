@@ -1,0 +1,40 @@
+.promo-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 4px 12px;
+  width: 100%;
+  background-color: var(--color-cream);
+  color: var(--color-negro);
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.promo-bar:hover .promo-bar__cta {
+  text-decoration: underline;
+}
+
+.promo-bar__text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  text-align: left;
+}
+
+.promo-bar__cta {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
+}
+
+@media (max-width: 760px) {
+  .promo-bar {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .promo-bar__cta {
+    display: none;
+  }
+}

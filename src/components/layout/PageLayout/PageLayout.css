@@ -1,5 +1,37 @@
-/* No background here: the view container decides its own color
-   (default cream comes from .app-main-view) */
+/* No background here by default: the view container decides its own color
+   (default cream comes from .app-main-view's gradient). A `section` page
+   paints its own tint instead — CSS custom properties only inherit
+   downward, so a --page-tint set here can't reach .app-main-view (its
+   ancestor) in App.css; painting the color directly on this root is the
+   only way that actually works. min-height covers the viewport below the
+   fixed 80px navbar so the tint fully replaces the cream underneath,
+   whatever the page's own content height ends up being. */
+.page-layout--associacio,
+.page-layout--festivals,
+.page-layout--lab,
+.page-layout--shop {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: calc(100vh - 80px);
+}
+
+.page-layout--associacio {
+  background-color: var(--section-associacio);
+}
+
+.page-layout--festivals {
+  background-color: var(--section-festivals);
+}
+
+.page-layout--lab {
+  background-color: var(--section-lab);
+}
+
+.page-layout--shop {
+  background-color: var(--section-shop);
+}
+
 .page-layout__inner {
   padding: 0 60px 40px 60px;
   display: flex;

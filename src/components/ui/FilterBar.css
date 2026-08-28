@@ -9,6 +9,9 @@
   font-family: var(--font-display);
   font-size: 1.4rem;
   padding: 6px 16px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   border: 2px solid var(--color-negro);
   background: transparent;
   color: var(--color-negro);
@@ -25,6 +28,26 @@
 .filter-bar__btn--active {
   background: var(--color-negro);
   color: var(--color-cream);
+}
+
+/* Solid variant: pills are filled black/cream by default, not just on
+   hover/active. The reset button always stays outline, whatever the
+   variant, so it reads as a distinct action from the filter pills. */
+.filter-bar--solid .filter-bar__btn:not(.filter-bar__btn--reset) {
+  background: var(--color-negro);
+  color: var(--color-cream);
+}
+
+.filter-bar--solid .filter-bar__btn:not(.filter-bar__btn--reset):hover,
+.filter-bar--solid .filter-bar__btn--active:not(.filter-bar__btn--reset) {
+  background: var(--color-cream);
+  color: var(--color-negro);
+}
+
+.filter-bar__btn--reset {
+  border-color: var(--color-negro);
+  background: transparent;
+  color: var(--color-negro);
 }
 
 @media (max-width: 760px) {

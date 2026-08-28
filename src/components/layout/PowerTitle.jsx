@@ -7,6 +7,7 @@ function PowerTitle({
   color = "var(--color-negro)",
   fontStyle = "normal",
   marginTop,
+  variant = "solid",
 }) {
   const titleRef = useRef(null);
 
@@ -38,7 +39,11 @@ function PowerTitle({
     <div
       className={`power-title__box${marginTop ? ` power-title__box--mt-${marginTop}` : ""}`}
     >
-      <h1 ref={titleRef} className="power-title__title" style={{ color, fontStyle }}>
+      <h1
+        ref={titleRef}
+        className={`power-title__title${variant === "outline" ? " power-title__title--outline" : ""}`}
+        style={variant === "outline" ? { fontStyle } : { color, fontStyle }}
+      >
         {title}
       </h1>
       {subtitle && <h3 className="SupportSubtitle">{subtitle}</h3>}

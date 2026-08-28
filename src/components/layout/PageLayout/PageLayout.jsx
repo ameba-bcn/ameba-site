@@ -2,6 +2,7 @@ import React from "react";
 import PowerTitle from "../PowerTitle";
 import LettersMove from "../LettersMove";
 import EmbeddedSpinner from "../../spinner/EmbeddedSpinner";
+import PromoBar from "../../ui/PromoBar";
 import "./PageLayout.css";
 
 export default function PageLayout({
@@ -12,11 +13,17 @@ export default function PageLayout({
   banner,
   centered,
   children,
+  section,
+  promo,
 }) {
   const contentClass = `page-layout__content${centered ? " page-layout__content--centered" : ""}`;
+  const rootClass = [className, section && `page-layout--${section}`]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <div className={className}>
+    <div className={rootClass}>
+      {promo && <PromoBar />}
       <div className="page-layout__inner">
         {title && <PowerTitle title={title} {...titleProps} />}
         <div className={contentClass}>
