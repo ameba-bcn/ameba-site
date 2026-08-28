@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import PageMeta from "../../components/seo/PageMeta";
@@ -73,11 +72,9 @@ function Associacio() {
         </OutlineHeading>
         <div className="associacio__since-body">
           <p>{t("associacio.since.text")}</p>
-          <NavLink to="/socis">
-            <Button buttonStyle="boton--primary--solid" buttonSize="boton--small">
-              {t("associacio.since.button")}
-            </Button>
-          </NavLink>
+          <HeroButton to="/socis" variant="invert-bordered">
+            {t("associacio.since.button")}
+          </HeroButton>
         </div>
       </div>
 
