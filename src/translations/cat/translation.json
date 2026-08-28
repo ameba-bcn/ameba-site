@@ -85,6 +85,13 @@
     "proximament": "Pròximament",
     "meta": "El laboratori creatiu d'AMEBA. Pròximament."
   },
+  "festivals": {
+    "meta": "Festivals d'AMEBA — l'Associació de Música Electrònica de Barcelona.",
+    "historic": "Històric festivals",
+    "any": "Any",
+    "festival": "Festival",
+    "cancellat": "CANCEL·LAT"
+  },
   "home": {
     "meta": "AMEBA — Associació, Festivals, Lab i Shop. Des de 2014 donant suport al talent local de Barcelona.",
     "hero": {

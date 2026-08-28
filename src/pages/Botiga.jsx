@@ -86,7 +86,7 @@ function Botiga() {
                 image={item.images?.[0]}
                 imageAlt={item.name}
                 imageFit="contain"
-                badge={formatPrice(item.price_range)}
+                badge={item.price_range ? formatPrice(item.price_range) : null}
                 title={item.name}
               />
             ))}
