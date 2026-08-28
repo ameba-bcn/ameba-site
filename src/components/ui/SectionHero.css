@@ -1,6 +1,9 @@
 .section-hero {
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  /* visual | text | dots — visual gets a bigger share (~58%, matching the
+     render's image width) than text; dots is a narrow decorative column
+     sized to its own content. */
+  grid-template-columns: 1.4fr 1fr auto;
   align-items: center;
   gap: 24px;
   padding: 40px 0;
@@ -8,7 +11,7 @@
 
 .section-hero__visual {
   position: relative;
-  grid-column: 1 / span 2;
+  grid-column: 1;
 }
 
 .section-hero__outline-title {
@@ -70,7 +73,8 @@
 }
 
 .section-hero__text {
-  grid-column: 3;
+  grid-column: 2;
+  min-width: 0;
 }
 
 .section-hero__lead {
@@ -81,7 +85,7 @@
 }
 
 .section-hero__dots {
-  grid-column: 4;
+  grid-column: 3;
 }
 
 @media (max-width: 1200px) {

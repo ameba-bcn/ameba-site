@@ -13,12 +13,18 @@ export default function AmebaCard({
   highlight,
   meta,
   aspect = "1/1",
+  imageFit = "cover",
 }) {
   return (
     <NavLink to={to} className="ameba-card">
       <div className="ameba-card__media" style={{ aspectRatio: aspect }}>
         {badge && <span className="ameba-card__badge">{badge}</span>}
-        <img className="ameba-card__image" src={image} alt={imageAlt || ""} />
+        <img
+          className="ameba-card__image"
+          style={{ objectFit: imageFit }}
+          src={image}
+          alt={imageAlt || ""}
+        />
       </div>
       <div className="ameba-card__title-block">
         <AmebaCardTitle
