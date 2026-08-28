@@ -8,15 +8,15 @@
 }
 
 .contacte .contenedorContacto {
-  margin: 0 auto;
-  padding: 40px;
+  padding: 40px var(--page-margin-x);
 }
 
-/* Columnas de enlaces (rutas que salen del menú) */
+/* Columnas de enlaces (rutas que salen del menú) — mismo margen lateral
+   que el resto de la página (navbar, promo bar, vistas de sección). */
 .contacte .footer-links {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 32px 80px;
   margin-bottom: 3rem;
   text-align: left;

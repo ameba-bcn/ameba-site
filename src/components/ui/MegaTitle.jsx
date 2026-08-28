@@ -9,17 +9,23 @@ import "./MegaTitle.css";
  * Solo controla tipografía + fit; el llamante decide tamaño/posición vía
  * className (ver .section-band__megatitle / .section-hero__outline-title).
  */
-export default function MegaTitle({ title, as: Tag = "h1", className = "" }) {
+export default function MegaTitle({
+  title,
+  as: Tag = "h1",
+  className = "",
+  fit = true,
+}) {
   const wrapRef = useRef(null);
   const textRef = useRef(null);
   const [scale, setScale] = useState(1);
 
   useLayoutEffect(() => {
+    if (!fit) return undefined;
     const wrap = wrapRef.current;
     const text = textRef.current;
     if (!wrap || !text) return undefined;
 
-    const fit = () => {
+    const measure = () => {
       const styles = window.getComputedStyle(wrap);
       const available =
         wrap.clientWidth -
@@ -30,15 +36,15 @@ export default function MegaTitle({ title, as: Tag = "h1", className = "" }) {
         setScale(Math.min(1, available / natural));
     };
 
-    fit();
+    measure();
     // Remedir cuando termina de cargar la webfont (Arimo)
-    document.fonts?.ready?.then(fit);
+    document.fonts?.ready?.then(measure);
     if (typeof ResizeObserver === "undefined") return undefined;
-    const observer = new ResizeObserver(fit);
+    const observer = new ResizeObserver(measure);
     observer.observe(wrap);
     observer.observe(text);
     return () => observer.disconnect();
-  }, [title]);
+  }, [title, fit]);
 
   return (
     <Tag className={`mega-title ${className}`.trim()} ref={wrapRef}>

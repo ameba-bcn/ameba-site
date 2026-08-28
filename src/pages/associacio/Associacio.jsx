@@ -29,17 +29,20 @@ function Associacio() {
         image={heroImage}
         imageAlt={t("menu.associacio")}
         lead={t("associacio.hero.lead1")}
+        titleFit={false}
       >
         <p>{t("associacio.hero.lead2")}</p>
       </SectionHero>
       <hr />
-      <DotsRow />
+      <div className="associacio__hero-dots">
+        <DotsRow />
+      </div>
 
       {/* Tres blobs: QUI SOM? / QUÈ FEM? / PER QUÈ? */}
       <div className="associacio__blobs">
         {BLOBS.map((key) => (
           <div key={key} className="associacio__blob">
-            <AmebaBlob color="black" size={80} />
+            <AmebaBlob color="black" size={110} />
             <OutlineHeading as="h2">{t(`associacio.blobs.${key}.title`)}</OutlineHeading>
             {/* TODO copy */}
             <p>
@@ -83,7 +86,9 @@ function Associacio() {
 
       {/* Els nostres principis */}
       <div className="associacio__principis">
-        <OutlineHeading as="h2">{t("associacio.principis.title")}</OutlineHeading>
+        <OutlineHeading as="h2" className="associacio__principis-title">
+          {t("associacio.principis.title")}
+        </OutlineHeading>
         <div className="associacio__principis-band">
           {[1, 2, 3].map((n) => (
             <OutlineHeading key={n} as="span" tone="light" className="associacio__principis-number">
@@ -119,7 +124,9 @@ function Associacio() {
 
       {/* Els nostres grups de treball */}
       <div className="associacio__grups">
-        <OutlineHeading as="h2">{t("associacio.grups.title")}</OutlineHeading>
+        <OutlineHeading as="h2" className="associacio__grups-title">
+          {t("associacio.grups.title")}
+        </OutlineHeading>
         <div className="associacio__grups-cta">
           {/* TODO copy */}
           <p>

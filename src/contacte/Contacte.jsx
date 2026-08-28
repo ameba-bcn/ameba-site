@@ -51,6 +51,9 @@ function Contacte() {
                   className="AjuntamentBcnImg"
                   alt="AjuntamentBcn"
                   key={el.name}
+                  onError={(e) => {
+                    e.target.style.display = "none";
+                  }}
                 />
               );
           })}
