@@ -50,23 +50,10 @@
   content: "";
   position: absolute;
   inset: 0;
+  /* Set inline per-instance via the `bgColor`/`section` props (see
+     SectionHero.jsx) — no per-page-name selector needed here. */
+  background-color: var(--hero-bg-color, transparent);
   mix-blend-mode: multiply;
-}
-
-.section-hero--associacio .section-hero__image-wrap::after {
-  background-color: var(--section-associacio);
-}
-
-.section-hero--festivals .section-hero__image-wrap::after {
-  background-color: var(--section-festivals);
-}
-
-.section-hero--lab .section-hero__image-wrap::after {
-  background-color: var(--section-lab);
-}
-
-.section-hero--shop .section-hero__image-wrap::after {
-  background-color: var(--section-shop);
 }
 
 .section-hero__image {
@@ -79,13 +66,14 @@
   opacity: 0.7;
 }
 
-/* Associació's own reference: a smaller image (~5 of 12 grid columns,
-   fixed height, vertically centered in the row) sitting BELOW a huge,
-   unfit outline title that bleeds well above both the image and the
-   text before any of it starts — opposite proportions from the other
-   3 section views' hero, so scoped here instead of changing the
-   shared defaults above. */
-.section-hero--associacio {
+/* "mega" variant (variant="mega"): a smaller image (~5 of 12 grid
+   columns, fixed height, vertically centered in the row) sitting BELOW a
+   huge, unfit outline title that bleeds well above both the image and the
+   text before any of it starts — opposite proportions from the plain
+   default layout above. Originally built for Associació's reference but
+   kept name-agnostic so any view can opt in via the `variant` prop and
+   restyle it with `bgColor`/`titleColor`/`title`/children alone. */
+.section-hero--mega {
   /* Extra top padding makes room for the title bleeding further up
      without crowding the promo bar above it. */
   padding: 130px 0 56px;
@@ -95,19 +83,19 @@
   column-gap: 0;
 }
 
-.section-hero--associacio .section-hero__dots {
+.section-hero--mega .section-hero__dots {
   margin-right: 24px;
   /* Reference has the dots hugging the image's bottom edge instead of
      centered on the (taller, title-driven) row. */
   align-self: end;
 }
 
-.section-hero--associacio .section-hero__dots .dots-column__dot {
+.section-hero--mega .section-hero__dots .dots-column__dot {
   width: 10px;
   height: 10px;
 }
 
-.section-hero--associacio .section-hero__outline-title.mega-title {
+.section-hero--mega .section-hero__outline-title.mega-title {
   /* Grid items with no explicit grid-row anchor their absolute `top`
      to the grid container's border-box edge, not the padded row —
      padding-top above doesn't shift this reference point, so this is
@@ -119,13 +107,13 @@
   z-index: 2;
   font-size: clamp(170px, 18.5vw, 320px);
   white-space: nowrap;
-  /* Lighter than a plain 2px black stroke so it reads as a background
-     texture, not competing with the real copy in front of it. */
-  -webkit-text-stroke: 1px var(--color-negro);
+  /* Lighter than a plain 2px stroke so it reads as a background texture,
+     not competing with the real copy in front of it. */
+  -webkit-text-stroke: 1px var(--mega-title-stroke, var(--color-negro));
   opacity: 0.55;
 }
 
-.section-hero--associacio .section-hero__image-wrap {
+.section-hero--mega .section-hero__image-wrap {
   width: 100%;
   aspect-ratio: auto;
   height: 220px;
@@ -133,7 +121,7 @@
 
 /* Opaque backdrop: the title bleeds behind this column too, and a
    transparent background would let its strokes show through the copy. */
-.section-hero--associacio .section-hero__text {
+.section-hero--mega .section-hero__text {
   background-color: var(--color-cream);
   padding: 12px 0 12px 24px;
 }

@@ -14,6 +14,7 @@ export default function MegaTitle({
   as: Tag = "h1",
   className = "",
   fit = true,
+  strokeColor,
 }) {
   const wrapRef = useRef(null);
   const textRef = useRef(null);
@@ -47,7 +48,11 @@ export default function MegaTitle({
   }, [title, fit]);
 
   return (
-    <Tag className={`mega-title ${className}`.trim()} ref={wrapRef}>
+    <Tag
+      className={`mega-title ${className}`.trim()}
+      ref={wrapRef}
+      style={strokeColor ? { "--mega-title-stroke": strokeColor } : undefined}
+    >
       <span
         className="mega-title__text"
         ref={textRef}

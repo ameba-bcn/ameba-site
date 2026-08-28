@@ -6,7 +6,6 @@ import SectionHero from "../../components/ui/SectionHero";
 import DotsRow from "../../components/ui/DotsRow";
 import OutlineHeading from "../../components/ui/OutlineHeading";
 import AmebaBlob from "../../components/ui/logo/AmebaBlob";
-import Button from "../../components/button/Button";
 import HeroButton from "../../components/ui/HeroButton";
 import { BLOBS, STATS, WORK_GROUPS } from "../../content/associacio";
 import { AMEBA_EMAIL } from "../../utils/constants";
@@ -26,6 +25,7 @@ function Associacio() {
       <SectionHero
         title={t("menu.associacio")}
         section="associacio"
+        variant="mega"
         image={heroImage}
         imageAlt={t("menu.associacio")}
         lead={t("associacio.hero.lead1")}
@@ -127,11 +127,9 @@ function Associacio() {
             Lorem ipsum dolor sit amet, tincidunt sit amet, honcus cursus
             urna. Nulla semper tortor a pretium suscipit.
           </p>
-          <a href={`mailto:${AMEBA_EMAIL}`}>
-            <Button buttonStyle="boton--primary--solid" buttonSize="boton--small">
-              {t("associacio.grups.button")}
-            </Button>
-          </a>
+          <HeroButton to={`mailto:${AMEBA_EMAIL}`}>
+            {t("associacio.grups.button")}
+          </HeroButton>
         </div>
         <div className="associacio__grups-grid">
           {WORK_GROUPS.map((key) => (

@@ -6,7 +6,7 @@
   white-space: nowrap;
   overflow: hidden;
   color: transparent;
-  -webkit-text-stroke: 2px var(--color-negro);
+  -webkit-text-stroke: 2px var(--mega-title-stroke, var(--color-negro));
   pointer-events: none;
   user-select: none;
 }
