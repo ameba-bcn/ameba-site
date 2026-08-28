@@ -87,19 +87,41 @@
    shared defaults above. */
 .section-hero--associacio {
   padding: 64px 0 56px;
+  /* Visual and text sit flush against each other; only the dots keep a
+     gap (added back below as a margin, since column-gap is shared by
+     every column pair). */
+  column-gap: 0;
+}
+
+.section-hero--associacio .section-hero__dots {
+  margin-right: 24px;
+  /* Reference has the dots hugging the image's bottom edge instead of
+     centered on the (taller, title-driven) row. */
+  align-self: end;
 }
 
 .section-hero--associacio .section-hero__outline-title.mega-title {
-  top: -90px;
+  top: -24px;
   z-index: 2;
   font-size: clamp(180px, 20vw, 340px);
   white-space: nowrap;
+  /* Lighter than a plain 2px black stroke so it reads as a background
+     texture, not competing with the real copy in front of it. */
+  -webkit-text-stroke: 1px var(--color-negro);
+  opacity: 0.55;
 }
 
 .section-hero--associacio .section-hero__image-wrap {
-  width: 71%;
+  width: 100%;
   aspect-ratio: auto;
   height: 220px;
+}
+
+/* Opaque backdrop: the title bleeds behind this column too, and a
+   transparent background would let its strokes show through the copy. */
+.section-hero--associacio .section-hero__text {
+  background-color: var(--color-cream);
+  padding: 12px 0 12px 24px;
 }
 
 .section-hero__text {
