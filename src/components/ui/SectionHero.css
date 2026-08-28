@@ -86,7 +86,9 @@
    3 section views' hero, so scoped here instead of changing the
    shared defaults above. */
 .section-hero--associacio {
-  padding: 64px 0 56px;
+  /* Extra top padding makes room for the title bleeding further up
+     without crowding the promo bar above it. */
+  padding: 130px 0 56px;
   /* Visual and text sit flush against each other; only the dots keep a
      gap (added back below as a margin, since column-gap is shared by
      every column pair). */
@@ -100,8 +102,19 @@
   align-self: end;
 }
 
+.section-hero--associacio .section-hero__dots .dots-column__dot {
+  width: 10px;
+  height: 10px;
+}
+
 .section-hero--associacio .section-hero__outline-title.mega-title {
-  top: -24px;
+  /* Grid items with no explicit grid-row anchor their absolute `top`
+     to the grid container's border-box edge, not the padded row —
+     padding-top above doesn't shift this reference point, so this is
+     a small positive offset (clearance below the promo bar) even
+     though the title still ends up well above the now-lower
+     visual/text row. */
+  top: 32px;
   z-index: 2;
   font-size: clamp(180px, 20vw, 340px);
   white-space: nowrap;

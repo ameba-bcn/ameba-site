@@ -56,10 +56,10 @@
 .associacio__cta {
   background-color: var(--color-rojo);
   color: var(--color-cream);
-  padding: 32px;
+  padding: 24px 32px;
   margin-bottom: 32px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 24px 48px;
@@ -67,39 +67,42 @@
 
 /* Sobre rojo el título va sólido en cream, no en outline */
 .associacio__cta .outline-heading {
-  max-width: 320px;
-  font-size: clamp(40px, 4vw, 64px);
+  max-width: 420px;
+  font-size: clamp(28px, 2.6vw, 40px);
   text-align: left;
   color: var(--color-cream);
   -webkit-text-stroke: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 .associacio__cta-bullets {
   list-style: none;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
+  align-self: center;
+  justify-content: center;
   display: grid;
   grid-template-columns: repeat(2, minmax(160px, 220px));
-  gap: 8px 24px;
+  gap: 10px 24px;
   font-family: var(--font-body);
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 400;
   color: var(--color-cream);
 }
 
 .associacio__cta-bullets li {
-  position: relative;
-  padding-left: 14px;
-  text-align: left;
+  text-align: center;
 }
 
 .associacio__cta-bullets li::before {
   content: "";
-  position: absolute;
-  left: 0;
-  top: 0.5em;
+  display: block;
   width: 5px;
   height: 5px;
+  margin: 0 auto 8px;
   border-radius: 50%;
   background-color: var(--color-cream);
 }

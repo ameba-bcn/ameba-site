@@ -43,7 +43,7 @@ function Associacio() {
       <div className="associacio__blobs">
         {BLOBS.map((key) => (
           <div key={key} className="associacio__blob">
-            <AmebaBlob color="black" size={110} />
+            <AmebaBlob color="black" size={150} />
             <OutlineHeading as="h2">{t(`associacio.blobs.${key}.title`)}</OutlineHeading>
             {/* TODO copy */}
             <p>
