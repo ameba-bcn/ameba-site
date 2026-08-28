@@ -13,3 +13,8 @@ export const Default = {
 export const AsH3 = {
   args: { as: "h3", children: "GESTIÓ" },
 };
+
+export const LightTone = {
+  decorators: [(Story) => <div style={{ background: "var(--color-negro)", padding: "1rem" }}><Story /></div>],
+  args: { tone: "light", children: "DES DE 2014" },
+};

@@ -1,0 +1,212 @@
+/* Tres blobs */
+.associacio__blobs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 32px 0;
+}
+
+.associacio__blob p {
+  font-family: var(--font-body);
+  margin-top: 8px;
+}
+
+/* CTA soci — banda roja */
+.associacio__cta {
+  background-color: var(--color-rojo);
+  color: var(--color-negro);
+  padding: 32px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+}
+
+.associacio__cta .outline-heading {
+  flex: 1;
+  min-width: 260px;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.associacio__cta-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+
+/* Des de 2014 — banda negra */
+.associacio__since {
+  background-color: var(--color-negro);
+  color: var(--color-cream);
+  padding: 32px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.associacio__since-title {
+  font-size: clamp(1.6rem, 3vw, 2.6rem);
+  max-width: 60%;
+}
+
+.associacio__since-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: var(--font-body);
+}
+
+/* Els nostres principis */
+.associacio__principis {
+  margin-bottom: 32px;
+}
+
+.associacio__principis-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: var(--color-rojo);
+  padding: 16px;
+  margin-top: 16px;
+}
+
+.associacio__principis-number {
+  font-size: clamp(3rem, 8vw, 6rem);
+}
+
+.associacio__principis-cols {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+
+/* Banda de estadísticas */
+.associacio__stats {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  background-color: var(--color-negro);
+  margin-bottom: 32px;
+}
+
+.associacio__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 8px;
+  background-color: var(--stat-color);
+  color: var(--color-negro);
+  min-height: 220px;
+  border-right: 1px solid var(--color-negro);
+}
+
+.associacio__stat:last-child {
+  border-right: none;
+}
+
+.associacio__stat-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  flex: 1;
+}
+
+.associacio__stat-value {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+}
+
+/* Els nostres grups de treball */
+.associacio__grups {
+  margin-bottom: 32px;
+}
+
+.associacio__grups-cta {
+  background-color: var(--color-rojo);
+  color: var(--color-negro);
+  padding: 24px;
+  margin: 16px 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-body);
+}
+
+.associacio__grups-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.associacio__grup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.associacio__grup-circle {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-negro);
+}
+
+.associacio__grup p {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 1200px) {
+  .associacio__grups-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .associacio__blobs {
+    grid-template-columns: 1fr;
+  }
+
+  .associacio__principis-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .associacio__grups-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .associacio__since-title {
+    max-width: 100%;
+  }
+
+  /* Estadísticas: scroll horizontal en vez de apilar (perdería la
+     lectura de la banda). */
+  .associacio__stats {
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(88px, 1fr);
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  .associacio__stat {
+    scroll-snap-align: start;
+  }
+}

@@ -5,8 +5,13 @@ export default function OutlineHeading({
   as: Tag = "h2",
   children,
   className = "",
+  tone = "dark",
 }) {
   return (
-    <Tag className={`outline-heading ${className}`.trim()}>{children}</Tag>
+    <Tag
+      className={`outline-heading outline-heading--${tone} ${className}`.trim()}
+    >
+      {children}
+    </Tag>
   );
 }

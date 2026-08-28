@@ -68,6 +68,7 @@ const SubscriptionFinished = lazyWithRetry(
 const Legal = lazyWithRetry(() => import("./pages/legal/Legal"));
 const Lab = lazyWithRetry(() => import("./pages/lab/Lab"));
 const Festivals = lazyWithRetry(() => import("./pages/festivals/Festivals"));
+const Associacio = lazyWithRetry(() => import("./pages/associacio/Associacio"));
 const QrLanding = lazyWithRetry(() => import("./pages/qr-landing/QrLanding"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
@@ -169,6 +170,7 @@ function App() {
               <Route path="/legal" element={<Legal />} />
               <Route path="/lab" element={<Lab />} />
               <Route path="/festivals" element={<Festivals />} />
+              <Route path="/associacio" element={<Associacio />} />
               <Route path="/" element={<Home />} />
               <Route path="/qr-view" element={<QrLanding />} />
               <Route path="*" element={<NotFound />} />
