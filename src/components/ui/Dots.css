@@ -32,3 +32,11 @@
     display: none;
   }
 }
+
+/* Phones: bring the dots column back — SectionHero's own ≤760 layout
+   (see SectionHero.css) makes room for it beside the image again. */
+@media (max-width: 760px) {
+  .dots-column {
+    display: flex;
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useDataStore from "../../stores/useDataStore";
@@ -13,8 +13,11 @@ import DropdownFilter from "../../components/ui/DropdownFilter";
 import CardGrid from "../../components/ui/CardGrid";
 import AmebaCard from "../../components/ui/AmebaCard";
 import LoadMoreButton from "../../components/ui/LoadMoreButton";
-import FeaturedFestival from "../../components/festivals/FeaturedFestival";
+import FeaturedFestival, { useFeaturedFestivalReveal } from "../../components/festivals/FeaturedFestival";
 import heroImage from "../../assets/images/home/home2.jpg";
+import { gsap, Flip, prefersReducedMotion } from "../../utils/gsapSetup";
+import usePageEnter from "../../hooks/use-page-enter";
+import useGsapContext from "../../hooks/use-gsap-context";
 import "./Festivals.css";
 
 const PAGE_SIZE = 12;
@@ -24,9 +27,58 @@ function Festivals() {
   const [t] = useTranslation("translation");
   const [searchParams, setSearchParams] = useSearchParams();
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const rootRef = useRef(null);
+  const flipState = useRef(null);
+  const fallbackFeaturedRef = useFeaturedFestivalReveal();
+
+  usePageEnter(rootRef, "festivals");
+
+  // §2.2 — dots row above the featured band, just before its mask opens.
+  useGsapContext(() => {
+    const dots = gsap.utils.toArray(".festivals__hero-dots .dots-row__dot", rootRef.current);
+    if (!dots.length) return;
+    if (prefersReducedMotion()) {
+      gsap.set(dots, { autoAlpha: 1 });
+      return;
+    }
+    gsap.set(dots, { scale: 0 });
+    gsap.to(dots, {
+      scale: 1,
+      duration: 0.4,
+      stagger: 0.04,
+      ease: "power2.out",
+      scrollTrigger: { trigger: rootRef.current.querySelector(".festivals__hero-dots"), start: "top 90%", once: true },
+    });
+  }, [], rootRef);
 
   const activeYear = searchParams.get("any");
   const activeFestival = searchParams.get("festival");
+
+  // §2.3 "Aplicar filtre → FLIP" — capture card positions synchronously
+  // before the filter changes the result set, apply the transition once
+  // React has re-rendered.
+  const captureFlip = () => {
+    if (prefersReducedMotion()) return;
+    const cards = gsap.utils.toArray(".festivals__card-grid .ameba-card");
+    if (cards.length) flipState.current = Flip.getState(cards);
+  };
+
+  useEffect(() => {
+    if (!flipState.current) return;
+    const state = flipState.current;
+    flipState.current = null;
+    requestAnimationFrame(() => {
+      Flip.from(state, {
+        duration: 0.55,
+        ease: "power3.inOut",
+        stagger: 0.03,
+        absolute: true,
+        onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, scale: 0.92 }, { autoAlpha: 1, scale: 1, duration: 0.4 }),
+        onLeave: (els) => gsap.to(els, { autoAlpha: 0, scale: 0.92, duration: 0.3 }),
+      });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeYear, activeFestival]);
 
   const festivals = useMemo(() => selectFestivals(agenda), [agenda]);
 
@@ -68,6 +120,7 @@ function Festivals() {
   const visibleItems = filtered.slice(0, visibleCount);
 
   const setFilter = (key, value) => {
+    captureFlip();
     const next = new URLSearchParams(searchParams);
     if (value) next.set(key, value);
     else next.delete(key);
@@ -76,6 +129,7 @@ function Festivals() {
   };
 
   const clearFilters = () => {
+    captureFlip();
     setSearchParams({});
     setVisibleCount(PAGE_SIZE);
   };
@@ -87,6 +141,7 @@ function Festivals() {
         description={t("festivals.meta")}
         url="/festivals"
       />
+      <div ref={rootRef}>
       <SectionHero
         title={t("menu.festivals")}
         section="festivals"
@@ -115,7 +170,7 @@ function Festivals() {
         <FeaturedFestival festival={featured} />
       ) : (
         // TODO: placeholder until there's an upcoming festival with real images
-        <div className="featured-festival">
+        <div className="featured-festival" ref={fallbackFeaturedRef}>
           <img className="featured-festival__image" src={heroImage} alt="" />
         </div>
       )}
@@ -149,7 +204,7 @@ function Festivals() {
         <div className="festivals__empty">{t("general.sense-resultats")}</div>
       ) : (
         <>
-          <CardGrid>
+          <CardGrid className="festivals__card-grid">
             {visibleItems.map((f) => (
               <div key={f.id} style={f.cancelled ? { opacity: 0.6 } : undefined}>
                 <AmebaCard
@@ -178,6 +233,7 @@ function Festivals() {
           )}
         </>
       )}
+      </div>
     </PageLayout>
   );
 }

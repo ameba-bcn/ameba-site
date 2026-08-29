@@ -53,3 +53,41 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 760px) {
+  .lab__section-title {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .lab__calendar-row {
+    gap: 32px;
+  }
+
+  /* CardGrid defaults to a single column at this breakpoint (shared by
+     Botiga too) — Lab's mock keeps the 2-column poster grid on phones. */
+  .lab__card-grid.card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .lab__card-grid .ameba-card__badge {
+    font-size: 0.65rem;
+    padding: 3px 6px;
+  }
+
+  .lab__card-grid .ameba-card-title {
+    font-size: 0.95rem;
+  }
+
+  .lab__card-grid .ameba-card__title-block {
+    min-height: 56px;
+    padding-bottom: 10px;
+  }
+
+  .lab__card-grid .ameba-card__highlight,
+  .lab__card-grid .ameba-card__meta {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+}

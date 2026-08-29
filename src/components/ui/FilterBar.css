@@ -6,6 +6,8 @@
 }
 
 .filter-bar__btn {
+  position: relative;
+  overflow: hidden;
   font-family: var(--font-display);
   font-size: 1.4rem;
   padding: 6px 16px;
@@ -16,8 +18,24 @@
   background: transparent;
   color: var(--color-negro);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
   line-height: 1;
+}
+
+/* GSAP-driven activation fill (FilterBar.jsx) — sits behind the label,
+   scaleX 0→1 sliding in from the left. Hover stays the instant CSS swap
+   below, on the button's own background, independent of this layer. */
+.filter-bar__btn-fill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-color: var(--color-negro);
+  transform: scaleX(0);
+}
+
+.filter-bar__btn-label {
+  position: relative;
+  z-index: 1;
 }
 
 .filter-bar__btn:hover {
@@ -25,8 +43,7 @@
   color: var(--color-cream);
 }
 
-.filter-bar__btn--active {
-  background: var(--color-negro);
+.filter-bar__btn--active .filter-bar__btn-label {
   color: var(--color-cream);
 }
 
@@ -38,9 +55,16 @@
   color: var(--color-cream);
 }
 
-.filter-bar--solid .filter-bar__btn:not(.filter-bar__btn--reset):hover,
-.filter-bar--solid .filter-bar__btn--active:not(.filter-bar__btn--reset) {
+.filter-bar--solid .filter-bar__btn-fill {
+  background-color: var(--color-cream);
+}
+
+.filter-bar--solid .filter-bar__btn:not(.filter-bar__btn--reset):hover {
   background: var(--color-cream);
+  color: var(--color-negro);
+}
+
+.filter-bar--solid .filter-bar__btn--active:not(.filter-bar__btn--reset) .filter-bar__btn-label {
   color: var(--color-negro);
 }
 

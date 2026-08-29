@@ -32,3 +32,24 @@
   text-align: center;
   font-family: var(--font-body);
 }
+
+@media screen and (max-width: 760px) {
+  /* Tighter dot row between the hr and the product grid — same shrink
+     SectionHero's own mobile dots get. */
+  .botiga__hero-dots {
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  .botiga__hero-dots .dots-row__dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  /* Reference keeps the product grid two-up on phones instead of
+     CardGrid's own default single column. */
+  .page-layout--shop .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 12px;
+  }
+}

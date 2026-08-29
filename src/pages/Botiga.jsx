@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useDataStore from "../stores/useDataStore";
 import PageLayout from "../components/layout/PageLayout/PageLayout";
@@ -11,6 +11,7 @@ import LoadMoreButton from "../components/ui/LoadMoreButton";
 import Button from "../components/button/Button";
 import { formatPrice } from "../utils/utils";
 import heroImage from "../assets/images/home/home4.jpg";
+import usePageEnter from "../hooks/use-page-enter";
 import "./Botiga.css";
 
 const PAGE_SIZE = 12;
@@ -20,6 +21,9 @@ function Botiga() {
   const [t] = useTranslation("translation");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const visibleItems = botiga.slice(0, visibleCount);
+  const rootRef = useRef(null);
+
+  usePageEnter(rootRef, "shop");
 
   return (
     <PageLayout section="shop" promo loading={isArtistsLoading}>
@@ -28,6 +32,7 @@ function Botiga() {
         description="Botiga d'AMEBA: merchandising, entrades i productes de l'Associació de Música Electrònica de Barcelona."
         url="/botiga"
       />
+      <div ref={rootRef}>
       <SectionHero
         title={t("menu.shop")}
         section="shop"
@@ -88,6 +93,7 @@ function Botiga() {
           )}
         </>
       )}
+      </div>
     </PageLayout>
   );
 }

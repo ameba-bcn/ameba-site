@@ -150,6 +150,16 @@
   transition: transform 0.3s ease;
 }
 
+/* GSAP-only layer (entrance/hover/click rotate+scale) — kept separate
+   from .section-band__more so its own CSS transform (translateY
+   centering, see above) never fights with GSAP's inline transform. */
+.section-band__more-inner {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 /* Superposición de amebas (AmebaBlob): negra estática debajo, naranja
    rotando encima; al ser siluetas irregulares, el giro deja asomar la negra */
 .section-band__more-blob {
@@ -226,5 +236,65 @@
 
   .section-band__rule {
     margin-left: 16px;
+  }
+}
+
+/* Mobile (telèfon): banda més compacta — imatge més baixa, títol
+   fantasma ajustat i botó (+) ancorat a la dreta del contingut. */
+@media screen and (max-width: 760px) {
+  .section-band {
+    padding: 34px 20px 30px;
+    min-height: 0;
+  }
+
+  .section-band__megatitle {
+    position: static;
+    padding: 0;
+    margin-bottom: 14px;
+    font-size: clamp(56px, 16vw, 90px);
+    line-height: 0.9;
+  }
+
+  .section-band__content {
+    margin-top: 0;
+    gap: 18px;
+  }
+
+  .section-band__image {
+    height: clamp(150px, 46vw, 200px);
+  }
+
+  .section-band__rule {
+    display: none;
+  }
+
+  /* La secció és molt més curta que a desktop: els punts "bottom-left"
+     (ancorats a baix de tota la banda) col·lisionarien amb el cos de
+     text. Es reubiquen a la cantonada superior, com "top-right". */
+  .section-band__dots--bottom-left {
+    left: auto;
+    right: clamp(16px, 3vw, 40px);
+    bottom: auto;
+    top: clamp(16px, 2vw, 32px);
+  }
+
+  .section-band__more {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    width: 64px;
+    height: 64px;
+    margin: 14px 0 0 auto;
+    transform: none;
+  }
+
+  .section-band__more img {
+    width: 60%;
+    height: 60%;
+  }
+
+  .section-band__more:hover {
+    transform: scale(1.1);
   }
 }

@@ -41,6 +41,7 @@
 }
 
 .lab-calendar__day {
+  position: relative;
   background-color: var(--color-cream);
   color: var(--color-negro);
   text-align: center;
@@ -51,6 +52,14 @@
   justify-content: center;
   border: none;
   padding: 0;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* §3.1 "Hover de cel·la" — plain background/color swap, no movement:
+   it's a data grid, not a decorative element. */
+.lab-calendar__day:hover {
+  background-color: var(--color-negro);
+  color: var(--color-cream);
 }
 
 .lab-calendar__day--muted {
@@ -63,11 +72,40 @@
   cursor: pointer;
 }
 
-.lab-calendar__day--active:hover {
-  opacity: 0.85;
-}
-
 .lab-calendar__day--selected {
   outline: 2px solid var(--color-rojo);
   outline-offset: -2px;
+}
+
+.lab-calendar__today-dot {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--color-rojo);
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .lab-calendar__nav {
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .lab-calendar__month {
+    min-width: 0;
+    font-size: 0.85rem;
+  }
+
+  .lab-calendar__weekday {
+    font-size: 0.7rem;
+    padding: 6px 0;
+  }
+
+  .lab-calendar__day {
+    font-size: 0.8rem;
+  }
 }

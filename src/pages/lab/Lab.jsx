@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useDataStore from "../../stores/useDataStore";
@@ -17,6 +17,8 @@ import LabCalendar from "../../components/lab/LabCalendar";
 import NextActivityCard from "../../components/lab/NextActivityCard";
 import { activityDateSet, dateKey } from "../../components/lab/calendarGrid";
 import heroImage from "../../assets/images/home/home3.jpg";
+import { gsap, Flip, prefersReducedMotion } from "../../utils/gsapSetup";
+import usePageEnter from "../../hooks/use-page-enter";
 import "./Lab.css";
 
 const PAGE_SIZE = 12;
@@ -27,8 +29,39 @@ function Lab() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedDate, setSelectedDate] = useState(null);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const rootRef = useRef(null);
+  const flipState = useRef(null);
+
+  usePageEnter(rootRef, "lab");
 
   const activeType = searchParams.get("tipus");
+
+  // §7 "Filtres (Lab/Festivals)" — FLIP the card grid whenever a filter
+  // (type or calendar day) changes the result set. Capture state
+  // synchronously in the click handlers below, apply it here once React
+  // has re-rendered the new set.
+  const captureFlip = () => {
+    if (prefersReducedMotion()) return;
+    const cards = gsap.utils.toArray(".lab__card-grid .ameba-card");
+    if (cards.length) flipState.current = Flip.getState(cards);
+  };
+
+  useEffect(() => {
+    if (!flipState.current) return;
+    const state = flipState.current;
+    flipState.current = null;
+    requestAnimationFrame(() => {
+      Flip.from(state, {
+        duration: 0.5,
+        ease: "power3.inOut",
+        stagger: 0.03,
+        absolute: true,
+        onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, duration: 0.3 }),
+        onLeave: (els) => gsap.to(els, { autoAlpha: 0, scale: 0.9, duration: 0.2 }),
+      });
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeType, selectedDate]);
 
   const activities = useMemo(() => selectLabActivities(agenda), [agenda]);
 
@@ -61,6 +94,7 @@ function Lab() {
   const visibleItems = filtered.slice(0, visibleCount);
 
   const setType = (value) => {
+    captureFlip();
     const next = new URLSearchParams(searchParams);
     if (value) next.set("tipus", value);
     else next.delete("tipus");
@@ -69,6 +103,7 @@ function Lab() {
   };
 
   const clearFilters = () => {
+    captureFlip();
     setSearchParams({});
     setSelectedDate(null);
     setVisibleCount(PAGE_SIZE);
@@ -77,6 +112,7 @@ function Lab() {
   return (
     <PageLayout section="lab" promo loading={isEventsLoading}>
       <PageMeta title="Lab" description={t("lab.meta")} url="/lab" />
+      <div ref={rootRef}>
       <SectionHero
         title={t("menu.lab")}
         section="lab"
@@ -111,6 +147,7 @@ function Lab() {
             activityDateSet={activityDates}
             selectedDate={selectedDate}
             onSelectDate={(d) => {
+              captureFlip();
               setSelectedDate(d);
               setVisibleCount(PAGE_SIZE);
             }}
@@ -142,7 +179,7 @@ function Lab() {
         <div className="lab__empty">{t("general.sense-resultats")}</div>
       ) : (
         <>
-          <CardGrid>
+          <CardGrid className="lab__card-grid">
             {visibleItems.map((a) => (
               <AmebaCard
                 key={a.id}
@@ -167,6 +204,7 @@ function Lab() {
           )}
         </>
       )}
+      </div>
     </PageLayout>
   );
 }

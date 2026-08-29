@@ -54,10 +54,15 @@
 @media (max-width: 760px) {
   .promo-bar {
     justify-content: center;
-    text-align: center;
+    text-align: left;
+  }
+
+  .promo-bar__text {
+    font-size: 0.7rem;
   }
 
   .promo-bar__cta {
-    display: none;
+    font-size: 0.7rem;
+    white-space: nowrap;
   }
 }

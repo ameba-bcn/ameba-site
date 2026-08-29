@@ -228,6 +228,8 @@
 
 .interactiveDataBox-product-sizes__button_active,
 .interactiveDataBox-product-sizes__button {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   min-width: 30px;
   height: 30px;
@@ -245,8 +247,11 @@
   color: var(--color-cream);
 }
 
+/* Background comes from the GSAP/Flip-driven .modal-sizes-row__highlight
+   underneath (ProductDetails.jsx) — this stays transparent so it shows
+   through, only the text color flips. */
 .interactiveDataBox-product-sizes__button_active {
-  background-color: var(--color-cream);
+  background-color: transparent;
   color: var(--color-negro);
 }
 
@@ -255,9 +260,18 @@
 }
 
 .modal-sizes-row {
+  position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.modal-sizes-row__highlight {
+  position: absolute;
+  z-index: 0;
+  background-color: var(--color-cream);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .modal-center-label {

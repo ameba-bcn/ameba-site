@@ -32,3 +32,5 @@ export function buildCalendarGrid(month) {
 export function activityDateSet(activities = []) {
   return new Set(activities.map((a) => dateKey(new Date(a.datetime))));
 }
+
+export const isToday = (key) => key === dateKey(new Date());
