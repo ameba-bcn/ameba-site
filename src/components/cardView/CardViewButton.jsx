@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import Button from "../button/Button";
+import { gsap, prefersReducedMotion } from "../../utils/gsapSetup";
 import "./CardViewButton.css";
 
 const CardViewButton = ({
@@ -170,8 +171,24 @@ const CardViewButton = ({
   }
 
   if (type === "PRODUCTE") {
+    // §4.2 — press feedback on the wrapper (scale 0.96 on pointerdown,
+    // back with power2.out); the flying-to-cart animation itself lives
+    // in ProductePage.jsx's handleAddClick (pulses the header cart icon).
+    const press = (e) => {
+      if (prefersReducedMotion()) return;
+      gsap.to(e.currentTarget, { scale: 0.96, duration: 0.12, ease: "power2.out" });
+    };
+    const release = (e) => {
+      if (prefersReducedMotion()) return;
+      gsap.to(e.currentTarget, { scale: 1, duration: 0.2, ease: "power2.out" });
+    };
     return (
-      <div className="card-view__button-wrapper">
+      <div
+        className="card-view__button-wrapper"
+        onPointerDown={press}
+        onPointerUp={release}
+        onPointerLeave={release}
+      >
         <Button
           variant="contained"
           color="primary"

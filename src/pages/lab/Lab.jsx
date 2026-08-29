@@ -18,6 +18,7 @@ import NextActivityCard from "../../components/lab/NextActivityCard";
 import { activityDateSet, dateKey } from "../../components/lab/calendarGrid";
 import heroImage from "../../assets/images/home/home3.jpg";
 import { gsap, Flip, prefersReducedMotion } from "../../utils/gsapSetup";
+import usePageEnter from "../../hooks/use-page-enter";
 import "./Lab.css";
 
 const PAGE_SIZE = 12;
@@ -28,7 +29,10 @@ function Lab() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedDate, setSelectedDate] = useState(null);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const rootRef = useRef(null);
   const flipState = useRef(null);
+
+  usePageEnter(rootRef, "lab");
 
   const activeType = searchParams.get("tipus");
 
@@ -108,6 +112,7 @@ function Lab() {
   return (
     <PageLayout section="lab" promo loading={isEventsLoading}>
       <PageMeta title="Lab" description={t("lab.meta")} url="/lab" />
+      <div ref={rootRef}>
       <SectionHero
         title={t("menu.lab")}
         section="lab"
@@ -199,6 +204,7 @@ function Lab() {
           )}
         </>
       )}
+      </div>
     </PageLayout>
   );
 }

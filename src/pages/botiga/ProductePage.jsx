@@ -8,6 +8,7 @@ import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import CardView from "../../components/cardView/CardView";
 import EmbeddedSpinner from "../../components/spinner/EmbeddedSpinner";
 import PageMeta from "../../components/seo/PageMeta";
+import { gsap, prefersReducedMotion } from "../../utils/gsapSetup";
 
 const ProductePage = () => {
   const { id } = useParams();
@@ -36,6 +37,14 @@ const ProductePage = () => {
     );
     if (variant?.id) {
       addToCart(variant.id);
+      // §4.2 — the cart icon pulses as feedback; it's conditionally
+      // mounted only once the cart has items, so it may not exist yet.
+      if (!prefersReducedMotion()) {
+        const cartIcon = document.querySelector(".cartIconMenu");
+        if (cartIcon) {
+          gsap.to(cartIcon, { scale: 1.25, duration: 0.15, yoyo: true, repeat: 1, ease: "power2.inOut" });
+        }
+      }
     }
   };
 

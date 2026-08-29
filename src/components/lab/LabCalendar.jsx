@@ -1,7 +1,7 @@
 import React, { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import Icon from "../ui/Icon";
-import { buildCalendarGrid, dateKey } from "./calendarGrid";
+import { buildCalendarGrid, dateKey, isToday } from "./calendarGrid";
 import { gsap, prefersReducedMotion } from "../../utils/gsapSetup";
 import useGsapContext from "../../hooks/use-gsap-context";
 import "./LabCalendar.css";
@@ -44,6 +44,24 @@ export default function LabCalendar({ activityDateSet, selectedDate, onSelectDat
         ease: "power2.out",
       },
     );
+
+    // §3.1 — today's dot: pops in, then a very soft continuous pulse.
+    const todayDot = gridRef.current.querySelector(".lab-calendar__today-dot");
+    if (todayDot) {
+      gsap.fromTo(
+        todayDot,
+        { scale: 0 },
+        {
+          scale: 1,
+          duration: 0.4,
+          delay: 0.3,
+          ease: "expo.out",
+          onComplete: () => {
+            gsap.to(todayDot, { scale: 1.15, duration: 1.4, yoyo: true, repeat: -1, ease: "sine.inOut" });
+          },
+        },
+      );
+    }
   }, [month], gridRef);
 
   return (
@@ -72,6 +90,7 @@ export default function LabCalendar({ activityDateSet, selectedDate, onSelectDat
         {cells.map((cell) => {
           const hasActivity = activityDateSet.has(cell.key);
           const isSelected = cell.key === selectedKey;
+          const today = isToday(cell.key);
           const classes = [
             "lab-calendar__day",
             hasActivity ? "lab-calendar__day--active" : "",
@@ -85,6 +104,7 @@ export default function LabCalendar({ activityDateSet, selectedDate, onSelectDat
             return (
               <div key={cell.key} className={classes} title={cell.date.toLocaleDateString("ca-ES")}>
                 {cell.date.getDate()}
+                {today && <span className="lab-calendar__today-dot" aria-hidden="true" />}
               </div>
             );
           }
@@ -99,6 +119,7 @@ export default function LabCalendar({ activityDateSet, selectedDate, onSelectDat
               aria-label={`${cell.date.toLocaleDateString("ca-ES")} — dia amb activitat`}
             >
               {cell.date.getDate()}
+              {today && <span className="lab-calendar__today-dot" aria-hidden="true" />}
             </button>
           );
         })}
