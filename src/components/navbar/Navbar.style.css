@@ -4,22 +4,8 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  animation: navbar-appear 0.2s ease-out;
-}
-
-.navbar--hidden {
-  display: none;
-}
-
-@keyframes navbar-appear {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* Entrance + auto-hide-on-scroll are GSAP-driven (Navbar.jsx) — no CSS
+     animation/class here, so nothing fights its inline transform. */
 }
 
 .navbar .menuSuperior {
@@ -221,30 +207,16 @@
   justify-content: flex-end;
 }
 
+/* Open/close is GSAP-driven (clip-path + per-item reveals — see the
+   drawer timeline in NavbarButtonsMobile.jsx), not this max-height/
+   opacity transition. max-height+overflow-y stay only as a safety net
+   so a very tall drawer (many activities + cart + CTA buttons) never
+   overflows a short viewport with no way to scroll it. */
 .navbar .nav-ul_box-mobile {
   width: 100%;
-  overflow: hidden;
-  max-height: 0;
+  max-height: 100vh;
+  overflow-y: auto;
   background-color: var(--color-negro);
-  transition: max-height 0.35s ease;
-}
-
-.navbar .nav-ul_box-mobile--open {
-  max-height: 500px;
-}
-
-.navbar .nav-ul_box-mobile--open.nav-ul_box-mobile--has-cart {
-  max-height: fit-content;
-}
-
-.navbar .nav-ul_box-mobile .nav-ul_mobile {
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-
-.navbar .nav-ul_box-mobile--open .nav-ul_mobile {
-  opacity: 1;
-  transition: opacity 0.3s ease 0.1s;
 }
 
 .navbar .nav-ul_mobile {
@@ -391,6 +363,30 @@
 
 .menu-icon:hover .menu-icon__bar {
   background-color: var(--color-rojo);
+}
+
+.navbar .nav-drawer-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.navbar .nav-drawer-cta__button {
+  width: 100%;
+}
+
+@media screen and (max-width: 760px) {
+  .navbar .nav-ul_mobile .nav-section-link {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    letter-spacing: 0.02em;
+  }
+
+  .navbar .nav-color-chip {
+    width: 12px;
+    height: 30px;
+  }
 }
 
 @media screen and (max-width: 350px) {

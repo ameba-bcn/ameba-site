@@ -15,12 +15,6 @@
     color: var(--color-negro);
 }
 
-@keyframes marqueee {
-    0% { transform: translateX(0%); }
-    50% { transform: translateX(-50%); }
-    100% { transform: translateX(0%); }
-}
-
 .letters-move__wrapper {
     width: 100%;
     background: var(--color-negro);
@@ -37,7 +31,7 @@
 }
 
 .letters-move__wrapper .marquee {
-    animation: marqueee 20s linear infinite;
+    /* Driven by GSAP (LettersMove.jsx) — xPercent, not this @keyframes. */
     display: block;
     min-width: 100%;
     left: 0;
@@ -51,12 +45,6 @@
     font-weight: 500;
     text-transform: uppercase;
     cursor: default;
-}
-
-@media (max-width: 700px) {
-    .letters-move__wrapper .marquee {
-        animation: marqueee 7s linear infinite;
-    }
 }
 
 .letters-move__wrapper a,

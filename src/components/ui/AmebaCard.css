@@ -41,7 +41,8 @@
 }
 
 .ameba-card:hover .ameba-card__image {
-  transform: scale(1.05);
+  /* scale is GSAP-driven now (AmebaCard.jsx) — an inline transform would
+     override this anyway, opacity stays CSS since GSAP doesn't touch it */
   opacity: 0.7;
 }
 

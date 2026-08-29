@@ -186,7 +186,8 @@
     }
   },
   "newsletter": {
-    "subscriute": "subscríbete"
+    "subscriute": "subscríbete",
+    "success": "¡Gracias! Ya estás en la lista."
   },
   "login": {
     "registrat": "Regístrate",

@@ -407,12 +407,65 @@
 }
 
 @media (max-width: 760px) {
-  .associacio__grups-grid {
-    grid-template-columns: 1fr;
+  /* La fila horitzontal de punts sota l'hero només fa de separador
+     decoratiu a desktop; al mòbil ja n'hi ha prou amb la línia i la
+     columna de punts que torna a mostrar el propi SectionHero. */
+  .associacio__hero-dots {
+    display: none;
+  }
+
+  /* Tres blobs: una sola columna, blob més petit */
+  .associacio__blob svg {
+    width: 80px;
+    height: 80px;
+  }
+
+  .associacio__blob .outline-heading {
+    font-size: clamp(30px, 8vw, 40px);
+  }
+
+  .associacio__blob p {
+    font-size: 0.8rem;
+  }
+
+  /* CTA soci */
+  .associacio__cta {
+    padding: 20px;
   }
 
   .associacio__cta-bullets {
     grid-template-columns: 1fr;
+  }
+
+  /* Des de 2014 */
+  .associacio__since {
+    padding: 32px var(--page-margin-x) 34px;
+  }
+
+  .associacio__since-body p {
+    font-size: 1.1rem;
+  }
+
+  /* Principis: cada número i el seu text llegibles a una sola columna */
+  .associacio__principis {
+    padding: 24px 0;
+  }
+
+  .associacio__principis-band {
+    grid-template-columns: 1fr;
+    row-gap: 8px;
+    padding: 14px 20px 18px;
+  }
+
+  .associacio__principis-number {
+    text-align: left;
+    font-size: clamp(44px, 15vw, 60px);
+  }
+
+  .associacio__principis-cols {
+    grid-template-columns: 1fr;
+    row-gap: 14px;
+    margin-top: 14px;
   }
 
   /* Estadístiques: scroll horitzontal en comptes d'apilar (perdria la
@@ -423,8 +476,35 @@
   }
 
   .associacio__stat {
-    flex: 0 0 88px;
+    flex: 0 0 108px;
+    height: 230px;
     max-width: none;
     scroll-snap-align: start;
+  }
+
+  .associacio__stat-label {
+    font-size: 1.1rem;
+  }
+
+  .associacio__stat-value {
+    font-size: 40px;
+  }
+
+  /* Grups de treball: es manté la graella de 2 columnes també al mòbil */
+  .associacio__grups-grid {
+    gap: 24px 16px;
+  }
+
+  .associacio__grup-circle {
+    width: 56px;
+    height: 56px;
+  }
+
+  .associacio__grup .outline-heading {
+    font-size: 22px;
+  }
+
+  .associacio__grup p {
+    font-size: 11px;
   }
 }

@@ -48,10 +48,18 @@
   text-align: left;
 }
 
+/* The box: background + padding, and the overflow-hidden mask the text
+   slides up out of (GSAP reveal in Hero.jsx — the inner span is the one
+   that actually carries the type). */
 .hero__title-line {
   display: inline-block;
+  overflow: hidden;
   padding: 6px 20px;
   background-color: var(--color-negro);
+}
+
+.hero__title-line-inner {
+  display: inline-block;
   font-family: var(--font-display);
   font-size: clamp(36px, 5.5vw, 110px);
   line-height: 0.95;
@@ -111,4 +119,60 @@
     max-width: 420px;
   }
 
+}
+
+/* Mobile (telèfon): la foto es converteix en una franja fixa amb el
+   titular ancorat al seu peu; la targeta de soci passa a text negre i
+   botons en fila, com a la resta de continguts d'aquesta vista. */
+@media screen and (max-width: 760px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero__content {
+    padding: 220px 16px 24px;
+    gap: 18px;
+  }
+
+  .hero__title-line-inner {
+    font-size: clamp(32px, 9vw, 40px);
+    color: transparent;
+    -webkit-text-stroke: 1.2px var(--color-cream);
+  }
+
+  .hero__card {
+    max-width: none;
+    padding: 22px 20px 24px;
+    color: var(--color-negro);
+  }
+
+  .hero__bullets {
+    gap: 8px;
+    color: var(--color-negro);
+  }
+
+  .hero__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .hero__actions .hero-button {
+    flex: 1 1 140px;
+    text-align: center;
+    font-size: 1rem;
+    padding: 12px 16px;
+    box-shadow: none;
+    border: 2px solid var(--color-negro);
+  }
+
+  .hero__actions .hero-button--invert {
+    border-color: var(--color-cream);
+  }
+
+  .hero__actions .hero-button:hover {
+    transform: none;
+    box-shadow: none;
+  }
 }

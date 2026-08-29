@@ -71,3 +71,24 @@
   outline: 2px solid var(--color-rojo);
   outline-offset: -2px;
 }
+
+@media (max-width: 760px) {
+  .lab-calendar__nav {
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .lab-calendar__month {
+    min-width: 0;
+    font-size: 0.85rem;
+  }
+
+  .lab-calendar__weekday {
+    font-size: 0.7rem;
+    padding: 6px 0;
+  }
+
+  .lab-calendar__day {
+    font-size: 0.8rem;
+  }
+}

@@ -215,3 +215,62 @@
     display: none;
   }
 }
+
+/* Phone: the mega variant's title/image/text tower gets a narrow dots
+   column back beside the image (title still overlays above as one
+   spanning row; text keeps flowing full-width below). */
+@media (max-width: 760px) {
+  .section-hero--mega {
+    grid-template-columns: auto 1fr;
+    gap: 8px;
+    padding: 90px 0 32px;
+  }
+
+  .section-hero--mega .section-hero__dots {
+    display: flex;
+    grid-column: 1;
+    grid-row: 1;
+    margin-right: 0;
+  }
+
+  .section-hero--mega .section-hero__dots .dots-column__dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .section-hero--mega .section-hero__visual {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .section-hero--mega .section-hero__image-wrap {
+    height: 190px;
+  }
+
+  .section-hero--mega .section-hero__outline-title.mega-title {
+    grid-column: 1 / -1;
+    top: -8px;
+    left: 0;
+    font-size: clamp(56px, 18vw, 90px);
+  }
+
+  .section-hero--mega .section-hero__text {
+    grid-column: 1 / -1;
+    padding: 12px 0 0;
+  }
+
+  /* dotsPosition="end" (e.g. Lab): mirror the columns so the dots stay
+     trailing (after the image) instead of jumping to the leading side. */
+  .section-hero--mega.section-hero--dots-end {
+    grid-template-columns: 1fr auto;
+  }
+
+  .section-hero--mega.section-hero--dots-end .section-hero__visual {
+    grid-column: 1;
+  }
+
+  .section-hero--mega.section-hero--dots-end .section-hero__dots {
+    grid-column: 2;
+    margin-left: 0;
+  }
+}

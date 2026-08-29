@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import PageMeta from "../../components/seo/PageMeta";
@@ -10,10 +10,105 @@ import HeroButton from "../../components/ui/HeroButton";
 import { BLOBS, STATS, WORK_GROUPS } from "../../content/associacio";
 import { AMEBA_EMAIL } from "../../utils/constants";
 import heroImage from "../../assets/images/home/home1.jpg";
+import { gsap, prefersReducedMotion } from "../../utils/gsapSetup";
+import useGsapContext from "../../hooks/use-gsap-context";
 import "./Associacio.css";
 
 function Associacio() {
   const [t] = useTranslation("translation");
+  const rootRef = useRef(null);
+
+  useGsapContext(() => {
+    const root = rootRef.current;
+    const cta = root.querySelector(".associacio__cta");
+    const ctaBullets = gsap.utils.toArray(".associacio__cta-bullets li", cta);
+    const ctaButton = cta?.querySelector(".hero-button");
+
+    const blobs = gsap.utils.toArray(".associacio__blob", root);
+    const blobCircles = blobs.map((b) => b.querySelector("svg"));
+    const blobTitles = blobs.map((b) => b.querySelector(".outline-heading"));
+
+    const principisBand = root.querySelector(".associacio__principis-band");
+    const principisNumbers = gsap.utils.toArray(".associacio__principis-number", root);
+
+    const statCols = gsap.utils.toArray(".associacio__stat", root);
+    const statValues = statCols.map((c) => c.querySelector(".associacio__stat-value"));
+
+    const allTargets = [
+      cta, ...ctaBullets, ctaButton,
+      ...blobCircles, ...blobTitles,
+      principisBand, ...principisNumbers,
+      ...statCols,
+    ].filter(Boolean);
+
+    if (prefersReducedMotion()) {
+      gsap.set(allTargets, { autoAlpha: 0 });
+      gsap.to(allTargets, {
+        autoAlpha: 1,
+        duration: 0.2,
+        scrollTrigger: { trigger: root, start: "top 80%", once: true },
+      });
+      return;
+    }
+
+    // §5 "franja de captació" — same red-card pattern as Home's hero card.
+    if (cta) {
+      gsap.set(cta, { scaleX: 0, transformOrigin: "left center" });
+      gsap.set(ctaBullets, { x: -12, autoAlpha: 0 });
+      if (ctaButton) gsap.set(ctaButton, { y: 14, autoAlpha: 0 });
+      gsap
+        .timeline({ scrollTrigger: { trigger: cta, start: "top 85%", once: true } })
+        .to(cta, { scaleX: 1, duration: 0.6, ease: "expo.out" })
+        .to(ctaBullets, { x: 0, autoAlpha: 1, duration: 0.4, stagger: 0.08 }, "-=0.3")
+        .to(ctaButton, { y: 0, autoAlpha: 1, duration: 0.4 }, "-=0.2");
+    }
+
+    // §7 — blobs: circle scale + outline title, staggered block to block.
+    if (blobs.length) {
+      gsap.set(blobCircles, { scale: 0, transformOrigin: "center" });
+      gsap.set(blobTitles, { autoAlpha: 0, xPercent: -8 });
+      gsap
+        .timeline({ scrollTrigger: { trigger: blobs[0], start: "top 80%", once: true } })
+        .to(blobCircles, { scale: 1, duration: 0.5, stagger: 0.12, ease: "expo.out" })
+        .to(blobTitles, { autoAlpha: 1, xPercent: 0, duration: 0.4, stagger: 0.12, ease: "power3.out" }, "-=0.35");
+    }
+
+    // §7 — principis: numbers reveal inside their band, band sweeps in.
+    if (principisBand) {
+      gsap.set(principisBand, { scaleX: 0, transformOrigin: "left center" });
+      gsap.set(principisNumbers, { yPercent: 100, autoAlpha: 0 });
+      gsap
+        .timeline({ scrollTrigger: { trigger: principisBand, start: "top 85%", once: true } })
+        .to(principisBand, { scaleX: 1, duration: 0.6, ease: "expo.out" })
+        .to(principisNumbers, { yPercent: 0, autoAlpha: 1, duration: 0.5, stagger: 0.1, ease: "power3.out" }, "-=0.3");
+    }
+
+    // §7 — xifres: columns scale up from the bottom, numbers count up.
+    if (statCols.length) {
+      gsap.set(statCols, { scaleY: 0, transformOrigin: "bottom" });
+      gsap
+        .timeline({ scrollTrigger: { trigger: statCols[0], start: "top 80%", once: true } })
+        .to(statCols, { scaleY: 1, duration: 0.5, stagger: 0.06, ease: "power3.out" })
+        .add(() => {
+          STATS.forEach((stat, i) => {
+            const el = statValues[i];
+            if (!el) return;
+            const suffix = stat.value.replace(/[0-9.]/g, "");
+            const target = parseFloat(stat.value) || 0;
+            const proxy = { val: 0 };
+            gsap.to(proxy, {
+              val: target,
+              duration: 1.2,
+              ease: "power1.out",
+              snap: { val: 1 },
+              onUpdate: () => {
+                el.textContent = `${Math.round(proxy.val)}${suffix}`;
+              },
+            });
+          });
+        }, "-=0.2");
+    }
+  }, [], rootRef);
 
   return (
     <PageLayout section="associacio" promo>
@@ -22,6 +117,7 @@ function Associacio() {
         description={t("associacio.meta")}
         url="/associacio"
       />
+      <div ref={rootRef}>
       <SectionHero
         title={t("menu.associacio")}
         section="associacio"
@@ -144,6 +240,7 @@ function Associacio() {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </PageLayout>
   );
