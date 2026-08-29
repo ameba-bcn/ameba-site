@@ -73,3 +73,33 @@
   font-family: var(--font-body);
   text-align: center;
 }
+
+@media screen and (max-width: 760px) {
+  /* Tighter dot row between the hr and the featured-festival band —
+     same shrink SectionHero's own mobile dots get. */
+  .festivals__hero-dots {
+    gap: 4px;
+    margin-bottom: 12px;
+  }
+
+  .festivals__hero-dots .dots-row__dot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .festivals__section-title {
+    margin-top: 16px;
+    margin-bottom: 12px;
+  }
+
+  .festivals__filters {
+    margin: 0 0 16px;
+  }
+
+  /* Reference keeps the historic grid two-up on phones instead of
+     CardGrid's own default single column. */
+  .page-layout--festivals .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px 12px;
+  }
+}
