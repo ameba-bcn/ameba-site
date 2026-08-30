@@ -1,12 +1,10 @@
-import { useFormik } from "formik";
 import React, { useState } from "react";
-import Button from "../../button/Button";
-import InputField from "../InputField/InputField";
-import { validate } from "../Register/RegisterValidate";
-import "../Log.style.css";
-import useAuthStore from "../../../stores/useAuthStore";
-import { isEmptyObject } from "../../../utils/utils";
+import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
+import Button from "../../button/Button";
+import { validate } from "../Register/RegisterValidate";
+import "../../user/AuthCard.css";
+import useAuthStore from "../../../stores/useAuthStore";
 import useCartStore from "../../../stores/useCartStore";
 
 export default function RegisterForm({ setRedirect }) {
@@ -15,6 +13,7 @@ export default function RegisterForm({ setRedirect }) {
   const { id = null } = cart_data;
   const register = useAuthStore((state) => state.register);
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleRegister = (values) => {
     const { username, email, password } = values;
@@ -47,65 +46,78 @@ export default function RegisterForm({ setRedirect }) {
     },
   });
 
+  const firstError = Object.values(formik.errors)[0];
+
   return (
-    <div className="log-form-box">
-      <form onSubmit={formik.handleSubmit}>
-        <div className="field-wrapper">
-          <InputField
-            id="username"
-            name="username"
-            type="text"
-            placeholder={t("form.usuari")}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.username}
-            valid={true}
-          />
-        </div>
-        <div className="field-wrapper">
-          <InputField
-            id="emailRegister"
-            name="email"
-            type="text"
-            placeholder="email"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.email}
-            valid={true}
-          />
-        </div>
-        <div className="field-wrapper">
-          <InputField
-            id="password"
-            name="password"
-            type="password"
-            placeholder="password"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.password}
-            valid={true}
-          />
-        </div>
-        {!isEmptyObject(formik.errors) && (
-          <div className="log-form-error">
-            {Object.values(formik.errors).map((x) => {
-              return <div key={x}>{x}</div>;
-            })}
-          </div>
-        )}
-        <Button
-          type="submit"
-          variant="contained"
-          className="submit"
-          color="primary"
-          buttonSize="boton--medium"
-          buttonStyle="boton--primary--solid"
-          hoverStyle="bg-cream"
-          loading={loading}
-        >
-          <>{t("login.registrat")}</>
-        </Button>
-      </form>
-    </div>
+    <form className="auth-form" onSubmit={formik.handleSubmit}>
+      <label className="auth-form__field">
+        <span className="auth-form__label">{t("form.usuari")}</span>
+        <input
+          className="au-input"
+          type="text"
+          name="username"
+          autoComplete="username"
+          placeholder={t("form.usuari").toUpperCase()}
+          value={formik.values.username}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          aria-invalid={Boolean(formik.errors.username)}
+        />
+      </label>
+
+      <label className="auth-form__field">
+        <span className="auth-form__label">Email</span>
+        <input
+          className="au-input"
+          type="email"
+          name="email"
+          autoComplete="email"
+          placeholder="EMAIL"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          aria-invalid={Boolean(formik.errors.email)}
+        />
+      </label>
+
+      <label className="auth-form__field">
+        <span className="auth-form__label auth-form__label--row">
+          {t("form.contrassenya")}
+          <button
+            type="button"
+            className="auth-form__reveal"
+            onClick={() => setShowPassword((value) => !value)}
+          >
+            {showPassword ? t("login.ocultar") : t("login.mostrar")}
+          </button>
+        </span>
+        <input
+          className="au-input"
+          type={showPassword ? "text" : "password"}
+          name="password"
+          placeholder="PASSWORD"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          aria-invalid={Boolean(formik.errors.password)}
+        />
+        <span className="auth-form__hint">{t("login.password-hint")}</span>
+      </label>
+
+      <div className="auth-form__message auth-form__message--error">
+        {firstError}
+      </div>
+
+      <Button
+        type="submit"
+        className=""
+        buttonStyle="boton--back-orange--solid"
+        buttonSize="boton--megaxxl"
+        hoverStyle="bg-cream"
+        loading={loading}
+      >
+        {t("login.registrat")}
+      </Button>
+    </form>
   );
 }

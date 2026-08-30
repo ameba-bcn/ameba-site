@@ -66,7 +66,13 @@ export default function AmebaCard({
   };
 
   return (
-    <NavLink to={to} className="ameba-card" onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
+    <NavLink
+      to={to}
+      className="ameba-card"
+      aria-label={title}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+    >
       <div className="ameba-card__media" style={{ aspectRatio: aspect }}>
         {badge && (
           <span className="ameba-card__badge" ref={badgeRef}>

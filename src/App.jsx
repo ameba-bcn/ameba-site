@@ -11,7 +11,7 @@ import useAuthStore from "./stores/useAuthStore";
 import useDataStore from "./stores/useDataStore";
 import useCartStore from "./stores/useCartStore";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Contacte from "./contacte/Contacte";
+import Footer from "./components/footer/Footer";
 import Menu from "./components/navbar/Navbar";
 import ScrollTop from "./components/layout/ScrollTop";
 import { ToastContainer } from "react-toastify";
@@ -67,6 +67,9 @@ const SubscriptionFinished = lazyWithRetry(
 const Legal = lazyWithRetry(() => import("./pages/legal/Legal"));
 const Lab = lazyWithRetry(() => import("./pages/lab/Lab"));
 const Festivals = lazyWithRetry(() => import("./pages/festivals/Festivals"));
+const FestivalDetail = lazyWithRetry(
+  () => import("./pages/festivals/FestivalDetail"),
+);
 const Associacio = lazyWithRetry(() => import("./pages/associacio/Associacio"));
 const QrLanding = lazyWithRetry(() => import("./pages/qr-landing/QrLanding"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
@@ -150,6 +153,7 @@ function App() {
               <Route path="/gallery/:slug/:year" element={<GalleryAlbum />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/login" element={<LogSession />} />
+              <Route path="/signup" element={<LogSession />} />
               <Route path="/recovery" element={<PasswordRecovery />} />
               <Route path="/checkout" element={<CheckoutPage />} />
               <Route path="/memberships" element={<Memberships />} />
@@ -167,6 +171,7 @@ function App() {
               <Route path="/subscribe" element={<SubscriptionFinished />} />
               <Route path="/legal" element={<Legal />} />
               <Route path="/lab" element={<Lab />} />
+              <Route path="/festivals/:id" element={<FestivalDetail />} />
               <Route path="/festivals" element={<Festivals />} />
               <Route path="/associacio" element={<Associacio />} />
               <Route path="/" element={<Home />} />
@@ -176,7 +181,7 @@ function App() {
           </Suspense>
         </div>
       </UserContext.Provider>
-      <Contacte />
+      <Footer />
     </div>
   );
 }

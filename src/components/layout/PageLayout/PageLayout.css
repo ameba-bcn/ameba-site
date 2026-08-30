@@ -9,7 +9,8 @@
 .page-layout--associacio,
 .page-layout--festivals,
 .page-layout--lab,
-.page-layout--shop {
+.page-layout--shop,
+.page-layout--auth {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -32,15 +33,27 @@
   background-color: var(--section-shop);
 }
 
+.page-layout--auth {
+  background-color: var(--color-negro);
+}
+
 /* Redesign 2026 section views align to the site's shared horizontal
    margin (navbar, promo bar) instead of the legacy fixed 60px used by
-   pages not yet migrated — scoped to these 4 so nothing else shifts. */
+   pages not yet migrated — scoped to these so nothing else shifts. */
 .page-layout--associacio > .page-layout__inner,
 .page-layout--festivals > .page-layout__inner,
 .page-layout--lab > .page-layout__inner,
 .page-layout--shop > .page-layout__inner {
   padding-left: var(--page-margin-x);
   padding-right: var(--page-margin-x);
+}
+
+/* Auth's card already carries its own internal gutters (aside/form
+   padding) sized to its 1240px max-width, like the reference design's
+   full-bleed page — the shared 60px/9vw inset would double them up. */
+.page-layout--auth > .page-layout__inner {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 /* .app sets text-align:center as a global legacy default (fine for the
