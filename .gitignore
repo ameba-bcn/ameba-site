@@ -36,3 +36,14 @@ SECURITY_AUDIT.md
 SENTRY_SETUP.md
 .env.example
 CURRENT_CHECKOUT.md
+
+*storybook.log
+storybook-static
+
+# design-sync
+.ds-sync/
+ds-bundle/
+.design-sync/sb-reference/
+.design-sync/learnings/
+.design-sync/.cache/
+.design-sync/node_modules
