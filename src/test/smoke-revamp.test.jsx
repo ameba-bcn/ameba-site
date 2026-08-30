@@ -6,9 +6,27 @@ import Home from "../pages/home/Home";
 import Lab from "../pages/lab/Lab";
 import Navbar from "../components/navbar/Navbar";
 import PromoBar from "../components/ui/PromoBar";
-import Contacte from "../contacte/Contacte";
+import Footer from "../components/footer/Footer";
+import LogSession from "../pages/LogSession";
 
 describe("revamp smoke", () => {
+  it("renders the login card at /login with tabs and the membership CTA", () => {
+    renderWithProviders(<LogSession />, { route: "/login" });
+    expect(screen.getByRole("heading", { name: /login/i })).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("EMAIL")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("PASSWORD")).toBeInTheDocument();
+    expect(document.querySelector('a[href="/memberships"]')).toBeTruthy();
+    expect(document.querySelector('a[href="/signup"]')).toBeTruthy();
+  });
+
+  it("renders the signup form at /signup", () => {
+    renderWithProviders(<LogSession />, { route: "/signup" });
+    expect(screen.getByPlaceholderText("EMAIL")).toBeInTheDocument();
+    expect(screen.getByPlaceholderText("PASSWORD")).toBeInTheDocument();
+    expect(document.querySelector('input[name="username"]')).toBeTruthy();
+    expect(document.querySelector('a[href="/login"]')).toBeTruthy();
+  });
+
   it("renders Home with hero and 4 section bands", () => {
     renderWithProviders(<Home />);
     expect(screen.getByText(/DES DE 2014/i)).toBeInTheDocument();
@@ -40,11 +58,11 @@ describe("revamp smoke", () => {
   });
 
   it("renders footer link columns and dynamic year", () => {
-    renderWithProviders(<Contacte />);
+    renderWithProviders(<Footer />);
     expect(
-      screen.getByText(`AMEBA ${new Date().getFullYear()}©`),
+      screen.getByText(`AMEBA ${new Date().getFullYear()} © · Tots els drets reservats`),
     ).toBeInTheDocument();
-    expect(screen.getByText("AGENDA")).toBeInTheDocument();
-    expect(screen.getByText("SOCI@S")).toBeInTheDocument();
+    expect(screen.getByText("Agenda")).toBeInTheDocument();
+    expect(screen.getByText("Soci@s")).toBeInTheDocument();
   });
 });

@@ -52,7 +52,12 @@ export default function FeaturedFestival({ festival }) {
   const { id, name, images, address } = festival;
 
   return (
-    <NavLink to={`/activitats/${id}`} className="featured-festival" ref={rootRef}>
+    <NavLink
+      to={`/festivals/${id}`}
+      className="featured-festival"
+      ref={rootRef}
+      aria-label={name}
+    >
       <img
         className="featured-festival__image"
         src={images?.[0]}

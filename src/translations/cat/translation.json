@@ -77,9 +77,16 @@
   },
   "footer": {
     "drets": "Tots els drets reservats",
-    "colab": "Amb la col·laboració de:",
+    "colab": "Amb la col·laboració de",
     "nav-label": "Enllaços del peu de pàgina",
-    "newsletter": "Newsletter"
+    "newsletter": "NEWSLETTER",
+    "tagline": "Associació de Música Electrònica de Barcelona.",
+    "inici": "Ameba — inici",
+    "hazte-socio": "Fes-te soci",
+    "socios": "Soci@s",
+    "agenda": "Agenda",
+    "archivo": "Arxiu",
+    "legal": "Legal"
   },
   "lab": {
     "proximament": "Pròximament",
@@ -151,7 +158,16 @@
     "historic": "Històric festivals",
     "any": "Any",
     "festival": "Festival",
-    "cancellat": "CANCEL·LAT"
+    "cancellat": "CANCEL·LAT",
+    "localitzacio": "Localització",
+    "dia": "Dia",
+    "horari": "Horari",
+    "entrada": "Entrada",
+    "gratuita": "Gratuïta",
+    "cartell": "Cartell",
+    "torna": "Torna a Festivals",
+    "breadcrumb": "Camí de navegació",
+    "boilerplate": "Ameba som una associació cultural formada per persones voluntàries apassionades de la música electrònica i la cultura dj."
   },
   "home": {
     "meta": "AMEBA — Associació, Festivals, Lab i Shop. Des de 2014 donant suport al talent local de Barcelona.",
@@ -186,8 +202,11 @@
     }
   },
   "newsletter": {
-    "subscriute": "subscriu-te",
-    "success": "Gràcies! Ja ets a la llista."
+    "subscriute": "Subscriu-te",
+    "body": "Agenda, convocatòries i novetats del LAB, un cop al mes.",
+    "placeholder": "EMAIL",
+    "success": "Gràcies! Revisa el teu correu.",
+    "error": "Introdueix un email vàlid."
   },
   "login": {
     "registrat": "Registra't",
@@ -199,7 +218,19 @@
     "recupera": "Hem enviat una contrassenya nova al teu correu electrònic. Verifícala per poder continuar.",
     "link-recupera": "No has rebut cap correu? Torna-ho a intentar",
     "verifica": "Compte verificat: Benvingut!",
-    "contrasenya-canviada": "Contrassenya canviada correctament. Pots iniciar sessió amb la teva nova contrassenya a la vista "
+    "contrasenya-canviada": "Contrassenya canviada correctament. Pots iniciar sessió amb la teva nova contrassenya a la vista ",
+    "login": "Login",
+    "no-tens-compte": "Encara no tens compte? Registra't",
+    "login-subtitol": "Accedeix amb el teu compte de soci/a.",
+    "registre-subtitol": "Crea el teu compte per seguir l'escena de prop.",
+    "aside-titol": "Fes-te soci/a",
+    "aside-text": "El teu compte et dona accés a l'agenda de socis, les convocatòries del LAB i les entrades anticipades dels festivals.",
+    "aside-bullet1": "Entrades anticipades i descomptes",
+    "aside-bullet2": "Convocatòries obertes del LAB",
+    "aside-bullet3": "Newsletter mensual de l'escena",
+    "mostrar": "Mostra",
+    "ocultar": "Oculta",
+    "password-hint": "Entre 7 i 19 caràcters."
   },
   "form": {
     "nom": "nom",

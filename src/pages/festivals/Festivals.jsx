@@ -208,7 +208,7 @@ function Festivals() {
             {visibleItems.map((f) => (
               <div key={f.id} style={f.cancelled ? { opacity: 0.6 } : undefined}>
                 <AmebaCard
-                  to={`/activitats/${f.id}`}
+                  to={`/festivals/${f.id}`}
                   image={f.images?.[0]}
                   imageAlt={f.name}
                   badge={`${formatISODateToDate(f.datetime)} - ${formatDateToHour(f.datetime)}h`}
