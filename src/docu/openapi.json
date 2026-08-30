@@ -1,0 +1,2941 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Ameba API",
+    "version": "1.0.0",
+    "description": "Reverse-engineered from the ameba-backend Django REST Framework source (not from a live schema endpoint — drf-yasg's /api/docs/ swagger UI only mounts when settings.DEBUG=True, so it is not available on the production ameba.cat deployment this frontend talks to). Verified directly against api/serializers/*.py, api/views/*.py and api/urls.py in the ameba-backend repo, then cross-checked against how ameba-site actually consumes each endpoint. Treat this file as the source of truth for future frontend work against this API, and re-verify against ameba-backend if either repo has moved on since.\n\n## Global facts that apply to every endpoint below\n\n- **No pagination anywhere.** No DEFAULT_PAGINATION_CLASS is configured; every list endpoint returns a bare JSON array, never a `{count, next, previous, results}` envelope.\n- **No server-side filtering/search/ordering.** No django-filter/SearchFilter/OrderingFilter is wired up on any viewset. Query params like `?type=festival` are NOT honored server-side — list endpoints just return their queryset as-is (typically pre-filtered to `is_active=True` and a fixed ordering). All client-side filtering (e.g. Lab vs Festivals by `event.type`) must happen after fetching the full list.\n- **Auth is JWT (SimpleJWT)** for the standard `Authorization: Bearer <access>` flow (`token/`, `token/refresh/`), EXCEPT `member_card` (custom signed `?token=` query param, see `memberCardAuth`) and `ticket` (custom signed Bearer token with its own salt, see `eventTicketAuth`) — these two do not accept a normal JWT access token.\n- **`type` means something different on almost every resource that has it** — it is not one enum across the API: on `events` it's the event category (`taller`, `concierto`, `mercado`, `charla`, `concurso`, `festival` — `festival` is the sole discriminator the frontend uses to split Festivals from Lab activities); on `member_card` it's a hardcoded literal `\"card\"`; on `ticket` it's a hardcoded literal `\"event\"`; on a member's own profile it's the name of their current subscription plan (e.g. `\"Standard\"`). Don't assume a shared meaning when reading `.type` off a response.\n- **`carts`, `subscriptions`, `articles`, `events` all model their purchasable content as `Item` → `ItemVariant`.** Cart mutations always operate on **variant ids**, never item/product ids — `POST`/`PATCH` a cart with `item_variant_ids: [<variant id>, ...]`.\n"
+  },
+  "servers": [
+    {
+      "url": "https://ameba.cat/api",
+      "description": "Production"
+    },
+    {
+      "url": "http://localhost:8000/api",
+      "description": "Local backend (docker-compose)"
+    }
+  ],
+  "tags": [
+    {
+      "name": "auth",
+      "description": "Login, token refresh/logout, registration, activation, password recovery"
+    },
+    {
+      "name": "events",
+      "description": "Lab activities + Festivals (same resource, split client-side by `type === \"festival\"`)"
+    },
+    {
+      "name": "shop",
+      "description": "Articles (merch), Subscriptions (memberships), Carts"
+    },
+    {
+      "name": "members",
+      "description": "Authenticated user's own member/project profile, member card, profile images"
+    },
+    {
+      "name": "member_projects",
+      "description": "Public \"Socis\" directory (members who opted `public=true`)"
+    },
+    {
+      "name": "artists",
+      "description": "Artist/DJ profiles and interviews — not currently consumed by ameba-site (see description)"
+    },
+    {
+      "name": "content",
+      "description": "Covers, collaborators, legal documents, manifesto/about, genres"
+    },
+    {
+      "name": "newsletter",
+      "description": "Mailing-list subscription (distinct from `subscriptions`/memberships)"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Standard SimpleJWT access token from POST /token/. Sent as `Authorization: Bearer <access>`. The frontend's axios interceptor (src/axios.js) auto-refreshes via POST /token/refresh/ on a 401 with SimpleJWT's `code: \"token_not_valid\"`."
+      },
+      "memberCardAuth": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "token",
+        "description": "Custom signed token (django.core.signing, salt=QR_MEMBER_SALT, signature=(member.pk, member.qr_date)), NOT a JWT. Produced server-side and embedded in the member's QR code. Only valid for GET /member_card/."
+      },
+      "eventTicketAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Custom signed Bearer token (django.core.signing, salt=QR_EVENT_SALT, signature=(user_id, item_variant_id)), NOT a JWT — do not send a normal login access token here. Only valid for GET /ticket/. WARNING: reading this endpoint is side-effecting — the first successful GET marks the ticket as checked in (adds the user to the event's checked_in set) and returns `checked_in: false`; every subsequent read returns `checked_in: true`."
+      }
+    },
+    "schemas": {
+      "Attribute": {
+        "type": "object",
+        "properties": {
+          "attribute": {
+            "type": "string",
+            "description": "Attribute name, e.g. \"Size\""
+          },
+          "value": {
+            "type": "string",
+            "description": "e.g. \"M\""
+          }
+        }
+      },
+      "Variant": {
+        "type": "object",
+        "description": "A purchasable variant of an Item (event ticket tier, article size, subscription plan length). Cart mutations reference variants by `id`, never the parent item's id.",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "item": {
+            "type": "integer",
+            "description": "FK id of the parent Item/Event/Article/Subscription"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Attribute"
+            }
+          },
+          "stock": {
+            "type": "integer",
+            "description": "-1 is a sentinel meaning unlimited stock"
+          },
+          "price": {
+            "type": "string",
+            "description": "Decimal serialized as a string, e.g. \"12.00\""
+          }
+        },
+        "x-known-gap": "Model field ItemVariant.recurrence (monthly/yearly, used by subscription variants) exists but is NOT exposed here — if you ever need to distinguish monthly vs yearly membership variants in the UI, this field must be added to VariantSerializer server-side first. The frontend does not currently read/need it."
+      },
+      "ItemList": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "Plain URL strings, NOT objects"
+          },
+          "price_range": {
+            "type": "string",
+            "description": "e.g. \"12€ / 20€\", or \"-\" if the item has no variants"
+          },
+          "price": {
+            "type": "string",
+            "nullable": true,
+            "description": "Cheapest variant's price, or null if none"
+          },
+          "stock": {
+            "type": "integer",
+            "description": "Aggregate of variant stocks; -1 means unlimited"
+          }
+        }
+      },
+      "ItemDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemList"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "variants": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Variant"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "EventList": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemList"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "header": {
+                "type": "string",
+                "maxLength": 22,
+                "description": "Short display title, used in card badges. `name` is the full name."
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "taller",
+                  "concierto",
+                  "mercado",
+                  "charla",
+                  "concurso",
+                  "festival"
+                ],
+                "description": "The ONLY field distinguishing a Festival from a Lab activity — frontend selector (src/selectors/festivals.js) does `event.type === \"festival\"` for Festivals, everything else for Lab."
+              },
+              "cancelled": {
+                "type": "boolean"
+              },
+              "datetime": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        ]
+      },
+      "EventDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemDetail"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "header": {
+                "type": "string",
+                "maxLength": 22
+              },
+              "datetime": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "address": {
+                "type": "string"
+              },
+              "maps_url": {
+                "type": "string",
+                "format": "uri",
+                "nullable": true,
+                "description": "Frontend treats a maps_url containing the substring \"dice\" as an external-ticketing-platform enum (see EventDetails.jsx) — a substring check, not a real enum field."
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "taller",
+                  "concierto",
+                  "mercado",
+                  "charla",
+                  "concurso",
+                  "festival"
+                ]
+              },
+              "cancelled": {
+                "type": "boolean"
+              }
+            }
+          }
+        ]
+      },
+      "Article": {
+        "description": "List shape for /articles/ (webshop merchandise — NOT editorial articles). Identical fields to ItemList, no extra ones.",
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemList"
+          }
+        ]
+      },
+      "ArticleDetail": {
+        "$ref": "#/components/schemas/ItemDetail"
+      },
+      "Subscription": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ItemDetail"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "benefits": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "description": "Membership plans. Unusually, the List and Detail serializers expose identical (full) fields — list responses are not trimmed down. The frontend's /memberships page assumes there is exactly one Subscription product and reads membership[0]."
+      },
+      "SavedEvent": {
+        "type": "object",
+        "description": "GET/POST/DELETE users/current/events/saved/ — the body/response shape for saving an event as a favourite.",
+        "properties": {
+          "event": {
+            "type": "integer",
+            "description": "POST body is {\"event\": <event id>}; `user` is injected server-side from the request. DELETE by the event's item pk at users/current/events/saved/{item_pk}/."
+          }
+        }
+      },
+      "SignedUpEvent": {
+        "type": "object",
+        "description": "users/current/events/signed_up/ reuses the same declared serializer as SavedEvent (field `event`, sourced from `.item`), but its actual queryset is ItemVariant.acquired_by.through, whose real attribute is `.itemvariant` not `.item`. This looks like a backend serializer/model mismatch — verify the ACTUAL runtime response shape before building a frontend feature on this endpoint; nothing in ameba-site currently calls it.",
+        "properties": {
+          "event": {
+            "type": "integer"
+          }
+        }
+      },
+      "MemberCard": {
+        "type": "object",
+        "description": "GET /member_card/ (memberCardAuth). Despite ListModelMixin, list() is overridden to return a SINGLE object, not an array.",
+        "properties": {
+          "number": {
+            "type": "integer",
+            "description": "Member PK"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "identity_card": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "description": "Membership state, e.g. active/expired"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "card"
+            ],
+            "description": "Always the literal string \"card\" — not the membership plan name (see Member.type for that)."
+          },
+          "username": {
+            "type": "string"
+          },
+          "expires": {
+            "type": "string",
+            "format": "date-time",
+            "description": "member.get_newest_membership().expires"
+          }
+        }
+      },
+      "EventTicket": {
+        "type": "object",
+        "description": "GET /ticket/ (eventTicketAuth). Reading this endpoint is side-effecting — see the eventTicketAuth security scheme description.",
+        "properties": {
+          "user_name": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string",
+            "nullable": true,
+            "description": "null if the user has no member profile"
+          },
+          "last_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "event": {
+            "type": "string",
+            "description": "The event's name (string, not an id)"
+          },
+          "variants": {
+            "type": "string",
+            "nullable": true,
+            "description": "e.g. \"Size: M\" — only populated if the event has more than one variant, else null"
+          },
+          "checked_in": {
+            "type": "boolean",
+            "description": "false on first read (and marks the ticket checked-in as a side effect), true thereafter"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "event"
+            ],
+            "description": "Always the literal string \"event\""
+          }
+        }
+      },
+      "Genre": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Primary key, normalized uppercase/underscored, e.g. \"HIP_HOP\""
+          },
+          "validated": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CartItem": {
+        "type": "object",
+        "description": "One line item inside carts[].item_variants (read-only, computed). ALL fields are SerializerMethodFields.",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "The item_variant's id"
+          },
+          "name": {
+            "type": "string",
+            "example": "T-Shirt(Size=M)"
+          },
+          "item_name": {
+            "type": "string"
+          },
+          "discount_value": {
+            "type": "string",
+            "description": "Empty string if no discount, else e.g. \"20\""
+          },
+          "discount_name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string",
+            "example": "12€"
+          },
+          "preview": {
+            "type": "string",
+            "format": "uri",
+            "nullable": true
+          },
+          "subtotal": {
+            "type": "string",
+            "example": "9.60€",
+            "description": "Price after discount"
+          },
+          "is_subscription": {
+            "type": "boolean",
+            "description": "Frontend's isMemberCheckout() (src/utils/utils.jsx) checks `item_variants.some(x => x.is_subscription)` to detect a membership-only checkout."
+          },
+          "item_type": {
+            "type": "string",
+            "enum": [
+              "subscription",
+              "article",
+              "event",
+              "item"
+            ]
+          },
+          "variant_details": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "example": {
+              "Size": "M"
+            }
+          }
+        }
+      },
+      "Cart": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "readOnly": true
+          },
+          "user": {
+            "type": "integer",
+            "nullable": true,
+            "readOnly": true
+          },
+          "total": {
+            "type": "string",
+            "readOnly": true,
+            "example": "12.00 €"
+          },
+          "count": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "item_variant_ids": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Writable AND readable (not write_only, not in read_only_fields) — PATCH this to replace the cart's contents entirely (it clears then re-adds). Also present verbatim on every read response as the flat list of current variant ids, in addition to the expanded `item_variants` below."
+          },
+          "item_variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItem"
+            },
+            "readOnly": true
+          },
+          "discount_code": {
+            "type": "string",
+            "nullable": true,
+            "description": "Writable — set to a DiscountCode's `code` string to apply it."
+          },
+          "state": {
+            "type": "object",
+            "readOnly": true,
+            "properties": {
+              "has_user": {
+                "type": "boolean"
+              },
+              "has_member_profile": {
+                "type": "boolean"
+              },
+              "has_memberships": {
+                "type": "boolean"
+              },
+              "has_articles": {
+                "type": "integer"
+              },
+              "has_events": {
+                "type": "integer"
+              },
+              "has_subscriptions": {
+                "type": "integer"
+              },
+              "needs_checkout": {
+                "type": "boolean",
+                "description": "Reading this property has a side effect server-side: it calls cart.has_changed(), which saves the cart if its content hash changed."
+              }
+            }
+          }
+        }
+      },
+      "CartCheckout": {
+        "type": "object",
+        "description": "GET carts/{id}/checkout/ — runs validation only, does not charge.",
+        "properties": {
+          "user": {
+            "type": "integer"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "total": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "item_variants": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CartItem"
+            }
+          },
+          "checkout": {
+            "type": "object",
+            "properties": {
+              "client_secret": {
+                "type": "string"
+              }
+            },
+            "description": "{} if no Stripe payment_intent exists yet"
+          }
+        }
+      },
+      "PaymentData": {
+        "type": "object",
+        "description": "GET carts/{id}/payment/ — creates the Stripe PaymentIntent. NOTE: despite being routed as GET, the view calls serializer.is_valid(raise_exception=True) against request.data, which is unusual for GET — verify against real traffic whether a body is actually required/sent.",
+        "properties": {
+          "client_secret": {
+            "type": "string"
+          },
+          "payment_intent_id": {
+            "type": "string"
+          },
+          "stripe_public": {
+            "type": "string",
+            "description": "Stripe publishable key, read from settings"
+          }
+        }
+      },
+      "Collaborator": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string",
+            "format": "uri"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "Cover": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "uri",
+            "description": "Despite the field name `file`, this is a URL string, not a file upload representation."
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "index": {
+            "type": "integer",
+            "description": "Manual ordering position"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "LegalDocument": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "size": {
+            "type": "string",
+            "example": "1.23 MB"
+          },
+          "file": {
+            "type": "string",
+            "format": "uri"
+          },
+          "is_active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Manifest": {
+        "type": "object",
+        "description": "GET /about/ (also aliased at /manifest/). Single most-recent active object, not a list.",
+        "properties": {
+          "text": {
+            "type": "string"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ArtistList": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "bio_preview": {
+            "type": "string",
+            "description": "First 160 chars of biography"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "has_interview": {
+            "type": "boolean"
+          },
+          "is_ameba_dj": {
+            "type": "boolean"
+          },
+          "featured": {
+            "type": "boolean"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Artist": {
+        "type": "object",
+        "description": "Detail shape. NOTE: ameba-site has no reachable consumer of /artists/ today — its only reader, SupportLocals.jsx, is not imported from Home.jsx/App.jsx and itself imports a non-existent file (MainSupportLocals) that would break the build if the component were ever wired back in.",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "biography": {
+            "type": "string"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "media": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "oEmbed/embed-HTML strings (e.g. YouTube/Spotify embeds), not URLs"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "has_interview": {
+            "type": "boolean"
+          },
+          "is_ameba_dj": {
+            "type": "boolean"
+          },
+          "featured": {
+            "type": "boolean"
+          },
+          "interview_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "InterviewList": {
+        "type": "object",
+        "description": "NOT consumed anywhere in ameba-site currently.",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "artist": {
+            "type": "string",
+            "description": "Artist's name (string), not an id or object"
+          },
+          "title": {
+            "type": "string"
+          },
+          "intro_preview": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "image": {
+            "type": "string",
+            "format": "uri"
+          },
+          "artist_id": {
+            "type": "integer"
+          }
+        }
+      },
+      "InterviewDetail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "artist": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "introduction": {
+            "type": "string"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "image": {
+            "type": "string",
+            "format": "uri"
+          },
+          "current_answers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "question": {
+                  "type": "string"
+                },
+                "answer": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Only is_active=True answers, ordered by question position"
+          },
+          "artist_id": {
+            "type": "integer"
+          }
+        }
+      },
+      "MemberProjectList": {
+        "type": "object",
+        "description": "GET /member_projects/ — public directory (\"Socis\"), filtered server-side to Member.public=true.",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "project_name": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "genres": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "is_active": {
+            "type": "boolean"
+          },
+          "expires": {
+            "type": "string",
+            "description": "Formatted 'dd/mm/YYYY', not ISO"
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "Plain URL strings — DIFFERENT shape than MemberDetail.images (which is a list of objects). This is the public-facing serializer; don't assume the same shape as the authenticated members/current/ endpoint."
+          }
+        }
+      },
+      "MemberProjectDetail": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MemberProjectList"
+          },
+          {
+            "type": "object",
+            "properties": {
+              "member_number": {
+                "type": "integer",
+                "description": "Alias of Member.id/number"
+              },
+              "first_name": {
+                "type": "string"
+              },
+              "last_name": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "media_urls": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "Membership": {
+        "type": "object",
+        "description": "One entry in Member.memberships[] (a purchased subscription period, distinct from the shop-side Subscription/Variant model).",
+        "properties": {
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration": {
+            "type": "string"
+          },
+          "starts": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "expires": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "subscription": {
+            "type": "integer",
+            "description": "FK id of the Subscription item"
+          },
+          "state": {
+            "type": "string"
+          },
+          "subscription_type": {
+            "type": "string",
+            "description": "The plan's name, e.g. \"Standard\""
+          }
+        }
+      },
+      "MemberImage": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "image": {
+            "type": "string",
+            "format": "uri"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "member": {
+            "type": "integer"
+          }
+        }
+      },
+      "MemberDetail": {
+        "type": "object",
+        "description": "The shape returned by GET users/current/member_profile/, GET/PATCH members/current/ (or members/{any pk}/ — the URL pk is ALWAYS ignored server-side and overridden with request.user's own member; you can never read/write anyone else's profile through this endpoint), and GET users/current/reset_qr/.",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "readOnly": true,
+            "description": "Actually Member.number aliased as `id`"
+          },
+          "number": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "identity_card": {
+            "type": "string"
+          },
+          "phone_number": {
+            "type": "string"
+          },
+          "user": {
+            "type": "integer",
+            "readOnly": true
+          },
+          "status": {
+            "type": "string",
+            "readOnly": true
+          },
+          "type": {
+            "type": "string",
+            "readOnly": true,
+            "description": "The member's current subscription PLAN NAME (e.g. \"Standard\") — do NOT confuse with MemberCard.type, which is always the literal \"card\"."
+          },
+          "memberships": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/Membership"
+            }
+          },
+          "payment_methods": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "type": "object"
+            },
+            "description": "Stripe stored-card dicts"
+          },
+          "expires": {
+            "type": "string",
+            "readOnly": true
+          },
+          "project_name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "images": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/components/schemas/MemberImage"
+            },
+            "description": "OBJECTS here (id/image/created/member) — different shape than MemberProjectList.images (plain URL strings). Read via images[i].image, not images[i] directly."
+          },
+          "media_urls": {
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "genres": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Writable — server auto-normalizes each value to upper-snake-case and get_or_creates the MusicGenres row."
+          },
+          "created": {
+            "type": "string",
+            "readOnly": true,
+            "format": "date-time"
+          },
+          "is_active": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "public": {
+            "type": "boolean",
+            "description": "Whether this profile shows up on the public member_projects/ listing."
+          },
+          "upload_images": {
+            "type": "array",
+            "writeOnly": true,
+            "items": {
+              "type": "string"
+            },
+            "description": "Write-only. Accepts a list of base64 data-URIs (or an existing image URL to keep). Saving this REPLACES ALL existing images — it's not additive."
+          },
+          "upload_media_urls": {
+            "type": "array",
+            "writeOnly": true,
+            "items": {
+              "type": "string",
+              "format": "uri"
+            },
+            "description": "Write-only, also fully replaces media_urls on save."
+          },
+          "username": {
+            "type": "string",
+            "description": "Special-cased server-side: writing this field actually updates the related User.username directly, bypassing normal field assignment."
+          },
+          "qr": {
+            "type": "string",
+            "format": "uri",
+            "readOnly": true
+          }
+        }
+      },
+      "ProfileImage": {
+        "$ref": "#/components/schemas/MemberImage"
+      },
+      "User": {
+        "type": "object",
+        "description": "GET users/current/ shape (ReadUserSerializer) — all fields read-only here. PATCH via UpdateUserSerializer allows writing username/language (email/date_joined/member stay read-only).",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "member": {
+            "type": "integer",
+            "nullable": true
+          },
+          "date_joined": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "language": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateUserRequest": {
+        "type": "object",
+        "required": [
+          "username",
+          "password",
+          "email"
+        ],
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string",
+            "writeOnly": true
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "language": {
+            "type": "string"
+          },
+          "cart_id": {
+            "type": "string",
+            "maxLength": 64,
+            "description": "Optional anonymous cart UUID (from localStorage) to attach and auto-checkout onto the new account."
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/token/": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Login",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access": {
+                      "type": "string"
+                    },
+                    "refresh": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid credentials — src/store/services/auth.service.js also treats this as a signal the account may need re-registration confirmation (WrongProvidedCredentials)."
+          }
+        },
+        "operationId": "login"
+      }
+    },
+    "/token/refresh/": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Refresh access token",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "refresh"
+                ],
+                "properties": {
+                  "refresh": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access": {
+                      "type": "string"
+                    },
+                    "refresh": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "src/axios.js's interceptor calls this automatically on any 401 whose body has code === \"token_not_valid\", then retries the original request once.",
+        "operationId": "refreshToken"
+      }
+    },
+    "/token/{token}/": {
+      "delete": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Logout (blacklist refresh token)",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The refresh token to blacklist, embedded in the URL path."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Logged out"
+          }
+        },
+        "operationId": "logout"
+      }
+    },
+    "/activate/": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Activate a newly-registered account",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "token"
+                ],
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "maxLength": 120,
+                    "description": "Signed token (salt=ACTIVATION_SALT, signature=(id, is_active)) from the activation email link."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "detail": {
+                      "type": "string"
+                    },
+                    "username": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "activateAccount"
+      }
+    },
+    "/member_register/": {
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Register + create a member profile + attach/checkout a cart in one call",
+        "security": [],
+        "description": "Distinct from POST /users/ (plain account) — this creates the User AND the Member profile together, and REQUIRES cart_id to reference a cart that contains at least one subscription item (raises CartNeedOneSubscription otherwise). Not currently called anywhere in ameba-site — worth double-checking whether the actual registration flow should be using this instead of the two-step users/ + member_profile/ calls it does today.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "identity_card",
+                  "first_name",
+                  "last_name",
+                  "phone_number",
+                  "username",
+                  "password",
+                  "email",
+                  "cart_id"
+                ],
+                "properties": {
+                  "identity_card": {
+                    "type": "string",
+                    "maxLength": 9
+                  },
+                  "first_name": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "maxLength": 20
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "maxLength": 10
+                  },
+                  "username": {
+                    "type": "string",
+                    "maxLength": 30
+                  },
+                  "password": {
+                    "type": "string",
+                    "writeOnly": true
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "cart_id": {
+                    "type": "string",
+                    "writeOnly": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "registerMember"
+      }
+    },
+    "/recovery/": {
+      "get": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Request a password-recovery email",
+        "security": [],
+        "parameters": [
+          {
+            "name": "email",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "email"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Always 200 regardless of whether the email exists, deliberately non-revealing."
+          }
+        },
+        "operationId": "requestPasswordRecovery"
+      },
+      "post": {
+        "tags": [
+          "auth"
+        ],
+        "summary": "Perform password recovery",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "token",
+                  "password"
+                ],
+                "properties": {
+                  "token": {
+                    "type": "string",
+                    "maxLength": 250,
+                    "description": "Signed token (salt=RECOVERY_SALT, signature=(id, email, password))"
+                  },
+                  "password": {
+                    "type": "string",
+                    "maxLength": 128
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "performPasswordRecovery"
+      }
+    },
+    "/users/": {
+      "post": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Register a plain account (no member profile)",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "operationId": "createUser"
+      }
+    },
+    "/users/{id}/": {
+      "get": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Get a user (use \"current\" as {id} for the logged-in user)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "A numeric pk, or the literal string \"current\"."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        },
+        "description": "Object-level permission only allows the user themself, or a staff account with the `api.full_user` permission.",
+        "operationId": "getUser"
+      },
+      "patch": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Update username/language",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "language": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "updateUser"
+      }
+    },
+    "/users/{id}/member_profile/": {
+      "get": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Get the user's member profile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "UserHasNotMemberProfile — the user has no Member row yet"
+          }
+        },
+        "operationId": "getMemberProfile"
+      },
+      "post": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Create a member profile for the user",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "identity_card": {
+                    "type": "string"
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "phone_number": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberDetail"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createMemberProfile"
+      },
+      "patch": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Update the user's member profile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberDetail"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "updateMemberProfileNested"
+      }
+    },
+    "/users/{id}/reset_qr/": {
+      "get": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Regenerate the member's QR code",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberDetail"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "resetMemberQr"
+      }
+    },
+    "/events/": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "List events (Lab activities + Festivals, undifferentiated server-side)",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EventList"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Filters to is_active=True, ordered -datetime, server-side. Split into Festivals vs Lab entirely client-side by `type === \"festival\"` (see src/selectors/festivals.js).",
+        "operationId": "listEvents"
+      }
+    },
+    "/events/{id}/": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get one event/activity/festival",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventDetail"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getEvent"
+      }
+    },
+    "/users/current/events/saved/": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "List the current user's saved (favourited) events",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SavedEvent"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listSavedEvents"
+      },
+      "post": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Save an event",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SavedEvent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        },
+        "operationId": "saveEvent"
+      }
+    },
+    "/users/current/events/saved/{item_pk}/": {
+      "delete": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Unsave an event",
+        "parameters": [
+          {
+            "name": "item_pk",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "The event's own id, not a saved-relation id — lookup_field='item'."
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Removed"
+          }
+        },
+        "operationId": "unsaveEvent"
+      }
+    },
+    "/users/current/events/signed_up/": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "List events/tickets the current user has purchased",
+        "description": "See SignedUpEvent schema — likely serializer/model field mismatch server-side, not currently used by ameba-site. Verify the real response shape before building on this.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SignedUpEvent"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listSignedUpEvents"
+      }
+    },
+    "/users/current/events/signed_up/{id}/": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get one signed-up event",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "getSignedUpEvent"
+      }
+    },
+    "/articles/": {
+      "get": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "List shop products",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Article"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "\"Articles\" here means webshop merchandise (t-shirts etc.), not editorial/blog articles — there is no editorial-articles endpoint in this API.",
+        "operationId": "listArticles"
+      }
+    },
+    "/articles/{id}/": {
+      "get": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "Get one product",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleDetail"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getArticle"
+      }
+    },
+    "/subscriptions/": {
+      "get": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "List membership plans",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Subscription"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "ameba-site's /memberships page assumes a single product and reads element [0].",
+        "operationId": "listSubscriptions"
+      }
+    },
+    "/subscriptions/{id}/": {
+      "get": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "Get one membership plan",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Subscription"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getSubscription"
+      }
+    },
+    "/carts/": {
+      "post": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "Create a cart",
+        "description": "Anonymous if unauthenticated (frontend stores the returned id in localStorage as cart_id); attaches to the requesting user if authenticated. This same POST is also reused by the frontend's applyDiscount() with a body of {item_variant_ids, discount_code} — same endpoint/verb serving two different purposes, differentiated only by body shape.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "item_variant_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "discount_code": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "createCart"
+      }
+    },
+    "/carts/{id}/": {
+      "get": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "Get a cart (use \"current\" for the logged-in user's cart, get-or-created)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "A UUID, or the literal string \"current\" (requires auth — raises NotAuthenticated if anonymous)."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getCart"
+      },
+      "patch": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "Replace cart contents / set a discount code",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "item_variant_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    },
+                    "description": "Full replacement list of variant ids — the server clears existing items then re-adds these, it is not a delta/patch of individual items."
+                  },
+                  "discount_code": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "updateCart"
+      },
+      "put": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "Not allowed",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "MethodNotAllowed — PUT is explicitly blocked, use PATCH."
+          }
+        },
+        "operationId": "replaceCartNotAllowed"
+      },
+      "delete": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "Not allowed on this path",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "MethodNotAllowed — always blocked. Use DELETE /carts/current/ instead (deleteCartAfterSuccesfullCheckout)."
+          }
+        },
+        "operationId": "deleteCartNotAllowed"
+      }
+    },
+    "/carts/{id}/checkout/": {
+      "get": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "Validate checkout (no charge)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CartCheckout"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "validateCartCheckout"
+      }
+    },
+    "/carts/{id}/payment/": {
+      "get": {
+        "tags": [
+          "shop"
+        ],
+        "summary": "Create the Stripe PaymentIntent for this cart",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentData"
+                }
+              }
+            }
+          }
+        },
+        "description": "Requires authentication (CartPermission + IsAuthenticated). Despite being a GET, the server-side view validates request.data — double check with real traffic whether this actually needs/accepts a request body in practice.",
+        "operationId": "createCartPaymentIntent"
+      }
+    },
+    "/member_card/": {
+      "get": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Get the member card for a QR-scanned token",
+        "security": [
+          {
+            "memberCardAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK — a single object, not a list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberCard"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getMemberCard"
+      }
+    },
+    "/ticket/": {
+      "get": {
+        "tags": [
+          "events"
+        ],
+        "summary": "Get event-ticket details for a QR-scanned token (marks the ticket checked-in as a side effect)",
+        "security": [
+          {
+            "eventTicketAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventTicket"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getEventTicket"
+      }
+    },
+    "/genres/": {
+      "get": {
+        "tags": [
+          "content"
+        ],
+        "summary": "List music genres",
+        "security": [],
+        "description": "Not currently consumed anywhere in ameba-site.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Genre"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listGenres"
+      }
+    },
+    "/genres/{name}/": {
+      "get": {
+        "tags": [
+          "content"
+        ],
+        "summary": "Get one genre",
+        "security": [],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Genre"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getGenre"
+      }
+    },
+    "/covers/": {
+      "get": {
+        "tags": [
+          "content"
+        ],
+        "summary": "List homepage cover images",
+        "security": [],
+        "description": "Fetched by ameba-site on every app load (App.jsx) but currently has ZERO consumers — no component reads useDataStore().cover. Dead fetch as of this writing.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Cover"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listCovers"
+      }
+    },
+    "/collaborators/": {
+      "get": {
+        "tags": [
+          "content"
+        ],
+        "summary": "List footer collaborator/sponsor logos",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Collaborator"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listCollaborators"
+      }
+    },
+    "/legal/": {
+      "get": {
+        "tags": [
+          "content"
+        ],
+        "summary": "List legal documents",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LegalDocument"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listLegalDocuments"
+      }
+    },
+    "/legal/{id}/": {
+      "get": {
+        "tags": [
+          "content"
+        ],
+        "summary": "Get one legal document",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LegalDocument"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getLegalDocument"
+      }
+    },
+    "/about/": {
+      "get": {
+        "tags": [
+          "content"
+        ],
+        "summary": "Get the current manifesto/about text",
+        "security": [],
+        "description": "Also aliased at GET /manifest/. NOT listed in the DRF router's API-root JSON (it's a bare path(), not a router-registered viewset) — don't be misled by the root view into thinking this endpoint doesn't exist. Currently feeds Manifesto.jsx, which is not rendered by the live Home page (dead consumer as of this writing).",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Manifest"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getManifest"
+      }
+    },
+    "/subscribe/": {
+      "post": {
+        "tags": [
+          "newsletter"
+        ],
+        "summary": "Subscribe an email to the default mailing list",
+        "security": [],
+        "description": "Also not in the router's root JSON (bare path()), but a real, working endpoint — used by the footer newsletter form. Distinct from /subscriptions/ (membership plans) despite the similar name.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email"
+                ],
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "subscribeToNewsletter"
+      }
+    },
+    "/artists/": {
+      "get": {
+        "tags": [
+          "artists"
+        ],
+        "summary": "List artist/DJ profiles",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ArtistList"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listArtists"
+      }
+    },
+    "/artists/{id}/": {
+      "get": {
+        "tags": [
+          "artists"
+        ],
+        "summary": "Get one artist",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Artist"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getArtist"
+      }
+    },
+    "/interviews/": {
+      "get": {
+        "tags": [
+          "artists"
+        ],
+        "summary": "List interviews",
+        "security": [],
+        "description": "Not currently consumed anywhere in ameba-site.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InterviewList"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listInterviews"
+      }
+    },
+    "/interviews/{id}/": {
+      "get": {
+        "tags": [
+          "artists"
+        ],
+        "summary": "Get one interview",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InterviewDetail"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getInterview"
+      }
+    },
+    "/member_projects/": {
+      "get": {
+        "tags": [
+          "member_projects"
+        ],
+        "summary": "Public \"Socis\" directory",
+        "security": [],
+        "description": "Filtered server-side to Member.objects.filter(public=True).",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MemberProjectList"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listMemberProjects"
+      }
+    },
+    "/member_projects/{id}/": {
+      "get": {
+        "tags": [
+          "member_projects"
+        ],
+        "summary": "Get one public member project",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberProjectDetail"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getMemberProject"
+      }
+    },
+    "/members/": {
+      "get": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Get \"my\" member profile (despite being a list endpoint)",
+        "description": "Overridden server-side to just call retrieve() on request.user.member — always returns a single object, never an array, and always the current user's own profile.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberDetail"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getOwnMember"
+      }
+    },
+    "/members/{pk}/": {
+      "get": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Get \"my\" member profile (the {pk} is ignored)",
+        "parameters": [
+          {
+            "name": "pk",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "IGNORED server-side — get_object() always resolves to request.user's own Member regardless of what's passed here. You can never read someone else's profile through this endpoint."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberDetail"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "getOwnMemberByPath"
+      },
+      "patch": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Update \"my\" member/project profile ({pk} ignored)",
+        "parameters": [
+          {
+            "name": "pk",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MemberDetail"
+                }
+              }
+            }
+          }
+        },
+        "description": "Requires MemberPermission (authenticated AND already has a member profile). If `genres` is present in the body, the server get_or_creates each MusicGenres row by (normalized) name before saving.",
+        "operationId": "updateOwnMember"
+      },
+      "put": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Same as PATCH",
+        "parameters": [
+          {
+            "name": "pk",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MemberDetail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "replaceOwnMember"
+      }
+    },
+    "/profile_images/": {
+      "get": {
+        "tags": [
+          "members"
+        ],
+        "summary": "List my profile images",
+        "description": "Not currently consumed anywhere in ameba-site (uploads go through members/current/'s upload_images instead). Scoped server-side to request.user.member.",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProfileImage"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "listProfileImages"
+      },
+      "post": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Upload one profile image",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "image": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "`member` is auto-injected server-side from the current user — do not send it.",
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfileImage"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "uploadProfileImage"
+      }
+    },
+    "/profile_images/{id}/": {
+      "get": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Get one profile image",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "getProfileImage"
+      },
+      "patch": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Update one profile image",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "updateProfileImage"
+      },
+      "delete": {
+        "tags": [
+          "members"
+        ],
+        "summary": "Delete one profile image",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Deleted"
+          }
+        },
+        "operationId": "deleteProfileImage"
+      }
+    }
+  }
+}

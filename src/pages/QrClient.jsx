@@ -13,8 +13,8 @@ export default function QrClient() {
     const parsed = Object.fromEntries(new URLSearchParams(location.search));
     const token = parsed["token"] || parsed["?token"];
     if (token?.length > 0) {
-      stateService.getCarnet(token)?.then((data) => {
-        setData(data);
+      stateService.getCarnet(token)?.then((response) => {
+        setData(response.data);
       });
     }
   }, [location.search]);
@@ -32,7 +32,7 @@ export default function QrClient() {
         <div className="card-form">
           <div className="logTitle">data</div>
           {Object.keys(data).length > 0 ? (
-            <>{JSON.parse(data)}</>
+            <pre>{JSON.stringify(data, null, 2)}</pre>
           ) : (
             <>{t("general.sense-resultats")}</>
           )}
