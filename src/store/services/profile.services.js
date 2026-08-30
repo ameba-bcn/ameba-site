@@ -8,7 +8,9 @@ const subscribeNewsletter = (email) => {
 };
 
 const getCarnet = (token) => {
-  axiosInstance.get(API_URL + `member-card?token=${token}`);
+  return axiosInstance.get(
+    API_URL + `member_card/?token=${encodeURIComponent(token)}`,
+  );
 };
 
 export default {
