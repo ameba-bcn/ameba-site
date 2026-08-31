@@ -19,6 +19,18 @@
   padding-right: 0px;
 }
 
+@media (max-width: 760px) {
+  .ameba-card-title {
+    font-size: 1.05rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .ameba-card-title {
+    font-size: 0.95rem;
+  }
+}
+
 .ameba-card-title__container {
   font-family: var(--font-body);
   width: -webkit-fill-available;

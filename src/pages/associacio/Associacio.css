@@ -404,6 +404,16 @@
   .associacio__cta .outline-heading {
     max-width: 100%;
   }
+
+  /* .associacio__since-title/-body's `flex: _ _ 600px`/`520px` basis sizes
+     their WIDTH in the desktop row layout — once .associacio__since
+     switches to flex-direction:column above, that same basis sizes their
+     HEIGHT instead, forcing each block to a fixed 600px/520px tall box
+     regardless of actual content. Reset to content-based sizing here. */
+  .associacio__since-title,
+  .associacio__since-body {
+    flex: 1 1 auto;
+  }
 }
 
 @media (max-width: 760px) {
