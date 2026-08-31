@@ -1,6 +1,6 @@
 import React from "react";
 import { describe, it, expect, vi } from "vitest";
-import { screen } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 import Payment from "./Payment";
 import useCartStore from "../../stores/useCartStore";
 import renderWithProviders from "../../test/helpers/renderWithProviders";
@@ -21,33 +21,15 @@ vi.mock("./FreeCheckout", () => ({
   default: () => <div data-testid="free-checkout">FreeCheckout</div>,
 }));
 
-vi.mock("./MiniTableProducts", () => ({
-  default: () => <div data-testid="mini-table">MiniTableProducts</div>,
-}));
-
 vi.mock("../forms/Payment/PaymentForm", () => ({
-  default: () => <div data-testid="payment-form">PaymentForm</div>,
+  default: ({ disabled }) => (
+    <div data-testid="payment-form" data-disabled={disabled ? "true" : "false"}>
+      PaymentForm
+    </div>
+  ),
 }));
 
 describe("Payment", () => {
-  it("renders MiniTableProducts", () => {
-    useCartStore.setState({
-      cart_data: mockCartRegular,
-      checkout: mockCheckoutPaid,
-    });
-    renderWithProviders(<Payment />);
-    expect(screen.getByTestId("mini-table")).toBeInTheDocument();
-  });
-
-  it("renders total price", () => {
-    useCartStore.setState({
-      cart_data: mockCartRegular,
-      checkout: mockCheckoutPaid,
-    });
-    renderWithProviders(<Payment />);
-    expect(screen.getByText("25.00 €")).toBeInTheDocument();
-  });
-
   it("renders FreeCheckout when amount is 0", () => {
     useCartStore.setState({
       cart_data: mockCartFree,
@@ -55,6 +37,15 @@ describe("Payment", () => {
     });
     renderWithProviders(<Payment />);
     expect(screen.getByTestId("free-checkout")).toBeInTheDocument();
+  });
+
+  it("does not show the terms checkbox for a free checkout", () => {
+    useCartStore.setState({
+      cart_data: mockCartFree,
+      checkout: mockCheckoutFree,
+    });
+    renderWithProviders(<Payment />);
+    expect(screen.queryByRole("checkbox")).not.toBeInTheDocument();
   });
 
   it("renders Stripe Elements when amount > 0 and stripe ready", () => {
@@ -83,5 +74,16 @@ describe("Payment", () => {
     });
     renderWithProviders(<Payment />);
     expect(screen.queryByTestId("free-checkout")).not.toBeInTheDocument();
+  });
+
+  it("keeps PaymentForm disabled until the terms checkbox is checked", () => {
+    useCartStore.setState({
+      cart_data: mockCartRegular,
+      checkout: mockCheckoutPaid,
+    });
+    renderWithProviders(<Payment />);
+    expect(screen.getByTestId("payment-form")).toHaveAttribute("data-disabled", "true");
+    fireEvent.click(screen.getByRole("checkbox"));
+    expect(screen.getByTestId("payment-form")).toHaveAttribute("data-disabled", "false");
   });
 });

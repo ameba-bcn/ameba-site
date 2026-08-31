@@ -79,7 +79,7 @@ describe("Integration: Regular checkout (no subscription, paid)", () => {
     renderWithProviders(<Checkout />);
     const sections = getSections();
     expect(sections[1].classList.contains("checkout-section--active")).toBe(true);
-    expect(screen.getByText("Cistella")).toBeInTheDocument();
+    expect(screen.getAllByText("Cistella").length).toBeGreaterThan(0);
     expect(screen.getByText("Total")).toBeInTheDocument();
   });
 
@@ -94,7 +94,7 @@ describe("Integration: Regular checkout (no subscription, paid)", () => {
   it("advances to Payment step on Next click", async () => {
     setupCheckout(mockCartRegular);
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText("Ves al pagament"));
     await waitFor(() => {
       const sections = getSections();
       expect(sections[2].classList.contains("checkout-section--active")).toBe(true);
@@ -114,7 +114,7 @@ describe("Integration: Regular checkout (no subscription, paid)", () => {
     });
 
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText("Ves al pagament"));
     await waitFor(() => {
       const sections = getSections();
       expect(sections[2].classList.contains("checkout-section--active")).toBe(true);
@@ -141,7 +141,7 @@ describe("Integration: Subscription checkout", () => {
   it("allows advancing from Membership to Review", () => {
     setupCheckout(mockCartMember);
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText("Desa i continua"));
     const sections = getSections();
     expect(sections[1].classList.contains("checkout-section--active")).toBe(true);
   });
@@ -149,7 +149,7 @@ describe("Integration: Subscription checkout", () => {
   it("allows navigating back to completed Membership section", () => {
     setupCheckout(mockCartMember);
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas")); // step 0 -> 1
+    fireEvent.click(screen.getByText("Desa i continua")); // step 0 -> 1
     const header = getSections()[0].querySelector(".checkout-section__header");
     fireEvent.click(header); // click completed step 0
     expect(getSections()[0].classList.contains("checkout-section--active")).toBe(true);
@@ -160,7 +160,7 @@ describe("Integration: Free checkout flow", () => {
   it("does not call checkoutPaymentCart for free cart on step transition", async () => {
     const { mockCheckoutCart, mockCheckoutPaymentCart } = setupCheckout(mockCartFree);
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText("Ves al pagament"));
     await waitFor(() => {
       expect(mockCheckoutCart).toHaveBeenCalled();
     });
@@ -197,7 +197,7 @@ describe("Integration: Error handling", () => {
     const { mockCheckoutCart } = setupCheckout(mockCartRegular);
     mockCheckoutCart.mockRejectedValue(new Error("API error"));
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText("Ves al pagament"));
     await waitFor(() => {
       const sections = getSections();
       expect(sections[1].classList.contains("checkout-section--active")).toBe(true);

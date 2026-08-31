@@ -33,7 +33,12 @@ export default function LogComponent() {
     <div className="auth-card">
       <aside className="auth-card__aside">
         <AmebaLogo width={76} height={76} fill="var(--color-naranja)" />
-        <h2 className="auth-card__aside-title">{t("login.aside-titol")}</h2>
+        <h2 className="auth-card__aside-title auth-card__aside-title--desktop">
+          {t("login.aside-titol")}
+        </h2>
+        <h2 className="auth-card__aside-title auth-card__aside-title--mobile">
+          {t("login.aside-titol-mobile")}
+        </h2>
         <p className="auth-card__aside-text">{t("login.aside-text")}</p>
         <div className="auth-card__aside-list">
           <span>
@@ -59,6 +64,9 @@ export default function LogComponent() {
 
       <section className="auth-card__form">
         <div className="auth-card__heading">
+          <div className="auth-card__heading-logo">
+            <AmebaLogo width={52} height={52} fill="var(--color-naranja)" />
+          </div>
           <h1>{isLogin ? t("login.login") : t("login.registrat")}</h1>
           <p>{isLogin ? t("login.login-subtitol") : t("login.registre-subtitol")}</p>
         </div>

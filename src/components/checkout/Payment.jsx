@@ -1,19 +1,20 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import PaymentForm from "../forms/Payment/PaymentForm";
 import FreeCheckout from "./FreeCheckout";
-import MiniTableProducts from "./MiniTableProducts";
 import "./Payment.style.css";
-import "./Review.style.css";
 import useCartStore from "../../stores/useCartStore";
 
 export default function Payment() {
-  const { cart_data = {}, checkout = {} } = useCartStore();
+  const [t] = useTranslation("translation");
+  const { checkout = {} } = useCartStore();
   const { checkout_stripe = {}, amount } = checkout;
   const isPaymentFree = amount === 0;
   const { client_secret = "", stripe_public = "" } = checkout_stripe;
-  const { total } = cart_data;
+  const [terms, setTerms] = useState(false);
 
   const stripePromise = useMemo(
     () => (stripe_public ? loadStripe(stripe_public) : null),
@@ -32,24 +33,36 @@ export default function Payment() {
 
   return (
     <div className="payment-content">
-      <div className="payment-summary-box">
-        <div className="payment-review">
-          <div className="payment-total-row">
-            <div> Total:</div>
-            <div> {total}</div>
+      {!isPaymentFree && (
+        <>
+          <div className="payment-secure-note">
+            <span className="ck-lbl">{t("checkout.pago-seguro-titol")}</span>
+            <span className="payment-secure-note__text">
+              {t("checkout.pago-seguro-text")}
+            </span>
           </div>
-          <div className="review-row-separator review-row-separator--small" />
-          <MiniTableProducts />
-          <div className="review-row-separator review-row-separator--small" />
-        </div>
-      </div>
+
+          <label className="payment-terms">
+            <input
+              type="checkbox"
+              checked={terms}
+              onChange={(e) => setTerms(e.target.checked)}
+            />
+            <span>
+              {t("checkout.acceptar-pre")}
+              <Link to="/legal">{t("checkout.acceptar-link")}</Link>
+              {t("checkout.acceptar-post")}
+            </span>
+          </label>
+        </>
+      )}
 
       <div className="payment-box">
         {isPaymentFree ? (
           <FreeCheckout />
         ) : isStripeReady ? (
           <Elements stripe={stripePromise} options={options}>
-            <PaymentForm />
+            <PaymentForm disabled={!terms} />
           </Elements>
         ) : (
           <span className="spinner-border"></span>

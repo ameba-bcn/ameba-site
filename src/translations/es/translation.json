@@ -21,7 +21,25 @@
     "review-footer-5": "Para recoger tu compra, te enviaremos un mensaje indicándote cuándo y dónde hacerlo. Si tienes cualquier duda, puedes contactarnos en info@ameba.cat 💚",
     "compra-toast1": "tienes",
     "compra-toast2": "en la cesta",
-    "compra-toast3": "Has añadido un item en la cesta"
+    "compra-toast3": "Has añadido un item en la cesta",
+    "step1-title": "Datos personales",
+    "step2-title": "Cesta",
+    "step3-title": "Datos de pago",
+    "step1-short": "Datos",
+    "step2-short": "Cesta",
+    "step3-short": "Pago",
+    "resumen": "Resumen",
+    "recogida": "Recogida",
+    "editar": "Editar",
+    "guardar-continuar": "Guardar y continuar",
+    "ir-al-pago": "Ir al pago",
+    "pago-seguro-titol": "Tarjeta · pago seguro con Stripe",
+    "pago-seguro-text": "Nunca almacenamos los datos de tu tarjeta.",
+    "acceptar-pre": "Acepto las ",
+    "acceptar-link": "condiciones de compra",
+    "acceptar-post": " y la política de privacidad de Ameba.",
+    "codigo-aplicado": "Código {{code}} aplicado — {{value}}% de descuento.",
+    "descuento": "Descuento"
   },
   "support": {
     "menu": {
@@ -224,6 +242,7 @@
     "login-subtitol": "Accede con tu cuenta de socio/a.",
     "registre-subtitol": "Crea tu cuenta para seguir la escena de cerca.",
     "aside-titol": "Hazte socio/a",
+    "aside-titol-mobile": "Ventajas de ser socio/a",
     "aside-text": "Tu cuenta te da acceso a la agenda de socios, las convocatorias del LAB y las entradas anticipadas de los festivales.",
     "aside-bullet1": "Entradas anticipadas y descuentos",
     "aside-bullet2": "Convocatorias abiertas del LAB",
@@ -266,7 +285,8 @@
     "seguent": "siguiente",
     "recarrega": "recarga",
     "edit": "Modo edición",
-    "preview": "Modo previsualización"
+    "preview": "Modo previsualización",
+    "aplica": "Aplicar"
   },
   "errors": {
     "stripe": "Ha habido un error con el sistema de pago. Contacta con info@ameba.cat",

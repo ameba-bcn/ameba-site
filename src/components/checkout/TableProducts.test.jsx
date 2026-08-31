@@ -35,7 +35,7 @@ describe("TableProducts", () => {
   it("does not show size when unique", () => {
     useCartStore.setState({ cart_data: mockCartMultipleItems });
     renderWithProviders(<TableProducts />);
-    const vinylRow = screen.getByText(/Ameba Vinyl/).closest("tr");
+    const vinylRow = screen.getByText(/Ameba Vinyl/).closest(".review-row");
     expect(vinylRow.textContent).not.toContain("talla unique");
   });
 

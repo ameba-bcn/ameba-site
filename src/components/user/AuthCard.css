@@ -25,6 +25,14 @@
   color: var(--color-cream);
 }
 
+.auth-card__aside-title--mobile {
+  display: none;
+}
+
+.auth-card__heading-logo {
+  display: none;
+}
+
 .auth-card__aside-text {
   margin: 0;
   font-size: 14.5px;
@@ -197,6 +205,7 @@
 }
 
 .au-input {
+  box-sizing: border-box;
   width: 100%;
   background: transparent;
   border: 2px solid var(--color-cream);
@@ -240,15 +249,70 @@
     grid-template-columns: 1fr;
   }
 
+  /* Mobile puts the form first (the actual action) and the membership
+     pitch last, as a footer-like block — the opposite of the desktop
+     DOM order, where the pitch leads as an aside. */
   .auth-card__aside {
+    order: 2;
     border-right: none;
-    border-bottom: 1px solid rgba(242, 227, 201, 0.22);
-    padding: 48px var(--page-margin-x);
+    border-top: 1px solid rgba(242, 227, 201, 0.22);
+    padding: 32px var(--page-margin-x) 48px;
   }
 
   .auth-card__form {
-    padding: 48px var(--page-margin-x) 64px;
+    order: 1;
+    padding: 32px var(--page-margin-x) 24px;
     max-width: none;
+  }
+
+  /* The full "hazte soci/a" pitch (big title + paragraph) is a desktop
+     aside; mobile shows a compact "advantages" heading instead, straight
+     into the bullet list. */
+  .auth-card__aside-title--desktop,
+  .auth-card__aside-text {
+    display: none;
+  }
+
+  .auth-card__aside-title--mobile {
+    display: block;
+    font-size: 30px;
+    line-height: 1;
+  }
+
+  .auth-card__heading {
+    gap: 12px;
+  }
+
+  .auth-card__heading-logo {
+    display: block;
+  }
+
+  .auth-card__heading h1 {
+    font-size: clamp(40px, 14vw, 56px);
+  }
+
+  .auth-card__tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-self: stretch;
+  }
+
+  .auth-card__tab-frame {
+    width: 100%;
+  }
+
+  .auth-card__tabs .boton {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .au-input {
+    padding: 14px 16px;
+  }
+
+  .auth-form__reveal,
+  .auth-card__switch {
+    min-height: 24px;
   }
 }
 

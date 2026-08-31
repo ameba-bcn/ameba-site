@@ -1,18 +1,18 @@
 import React, { useEffect, useState, useCallback } from "react";
-import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
-import Review from "./Review";
-import { isMemberCheckout } from "../../utils/utils";
-import "./Checkout.css";
-import Button from "../button/Button";
 import { Navigate } from "react-router-dom";
-import useAuthStore from "../../stores/useAuthStore";
-import MembershipFormReadOnly from "../forms/MembershipForm/MembershipFormReadOnly";
-import "./Checkout.style.css";
-import Payment from "./Payment";
-import { MOBILE_NORMAL, MOBILE_SMALL } from "../../utils/constants";
 import { useTranslation } from "react-i18next";
+import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
+import MembershipFormReadOnly from "../forms/MembershipForm/MembershipFormReadOnly";
+import Review from "./Review";
+import Payment from "./Payment";
+import CheckoutSummary from "./CheckoutSummary";
+import Button from "../button/Button";
+import { isMemberCheckout } from "../../utils/utils";
+import useAuthStore from "../../stores/useAuthStore";
 import useCartStore from "../../stores/useCartStore";
 import useMediaQuery from "../../hooks/use-media-query";
+import { MOBILE_NORMAL } from "../../utils/constants";
+import "./Checkout.style.css";
 
 const CHECKOUT_STEP_KEY = "checkoutStep";
 
@@ -24,6 +24,7 @@ function CheckoutSection({
   onHeaderClick,
   children,
 }) {
+  const [t] = useTranslation("translation");
   const stateClass = isActive
     ? "checkout-section--active"
     : isCompleted
@@ -37,20 +38,27 @@ function CheckoutSection({
   };
 
   return (
-    <div className={`checkout-section ${stateClass}`}>
-      <div className="checkout-section__header" onClick={handleClick}>
-        <div className="checkout-section__header-left">
+    <section className={`checkout-section ${stateClass}`}>
+      <button
+        type="button"
+        className="checkout-section__header"
+        onClick={handleClick}
+        aria-expanded={isActive}
+      >
+        <span className="checkout-section__header-left">
           <span className="checkout-section__number">{stepNumber}</span>
           <span className="checkout-section__title">{title}</span>
-        </div>
-        <span className="checkout-section__indicator">
-          {isCompleted ? "\u2713" : isActive ? "\u25BC" : ""}
         </span>
-      </div>
+        {isCompleted && (
+          <span className="checkout-section__hint">
+            {t("checkout.editar")} &#10003;
+          </span>
+        )}
+      </button>
       <div className="checkout-section__body">
         <div className="checkout-section__content">{children}</div>
       </div>
-    </div>
+    </section>
   );
 }
 
@@ -75,16 +83,26 @@ function Checkout() {
   const [activeStep, setActiveStep] = useState(getSavedStep);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [loading, setLoading] = useState(false);
-  const userIsEditingData =
-    buttonDisabled && activeStep === 0 && hasMembershipInCart;
+  // MembershipForm's own save button only enables once the user actually
+  // changes something (see MembershipForm.jsx) — an existing member whose
+  // data is already correct would otherwise have no way to move on, since
+  // there's nothing for them to save. This mirrors that gate so the
+  // step's own "continue" button covers exactly that case, and hides
+  // itself while the user has unsaved edits in flight.
+  const userIsEditingData = buttonDisabled && activeStep === 0 && hasMembershipInCart;
 
   const isMobile = useMediaQuery(MOBILE_NORMAL);
-  const isMinMobile = useMediaQuery(MOBILE_SMALL);
 
-  const steps =
-    localStorage.getItem("i18nextLng") === "es"
-      ? ["Datos personales", "Cesta", "Datos de pago"]
-      : ["Dades personals", "Cistella", "Dades de pagament"];
+  const stepTitles = [
+    t("checkout.step1-title"),
+    t("checkout.step2-title"),
+    t("checkout.step3-title"),
+  ];
+  const stepShort = [
+    t("checkout.step1-short"),
+    t("checkout.step2-short"),
+    t("checkout.step3-short"),
+  ];
 
   useEffect(() => {
     if (user_data?.member) {
@@ -124,13 +142,6 @@ function Checkout() {
     [checkoutCart, checkoutPaymentCart, id, isPaymentFree, goToStep],
   );
 
-  const handleSectionClick = useCallback(
-    (step) => {
-      goToStep(step);
-    },
-    [goToStep],
-  );
-
   if (!item_variants.length || !isLoggedIn) return <Navigate to="/" replace />;
 
   const getStepState = (step) => {
@@ -142,56 +153,87 @@ function Checkout() {
   const visibleSteps = [0, 1, 2];
 
   return (
-    <div className="checkout-frame">
-      <div className="checkout-box">
-        <div className="checkout-title">{t("checkout.pagament")}</div>
+    <div className="checkout-shell">
+      <div className="checkout-head">
+        <h1 className="checkout-head__title">{t("checkout.pagament")}</h1>
+        <div className="checkout-progress">
+          {stepShort.map((label, i) => (
+            <React.Fragment key={label}>
+              {i > 0 && <span className="checkout-progress__line" />}
+              <span
+                className={`checkout-progress__step${
+                  activeStep >= i ? " checkout-progress__step--done" : ""
+                }`}
+              >
+                <span className="checkout-progress__dot" />
+                {label}
+              </span>
+            </React.Fragment>
+          ))}
+        </div>
+      </div>
 
-        {visibleSteps.map((step) => {
-          const state = getStepState(step);
-          return (
-            <CheckoutSection
-              key={step}
-              stepNumber={step + 1}
-              title={steps[step]}
-              isActive={state === "active"}
-              isCompleted={state === "completed"}
-              isDisabled={state === "disabled"}
-              onHeaderClick={() => handleSectionClick(step)}
-            >
-              {step === 0 && (
-                <div className="checkout-member-frame">
-                  {hasMembershipInCart ? (
-                    <MembershipFormLayout
-                      setButtonDisabled={setButtonDisabled}
-                    />
-                  ) : (
-                    <MembershipFormReadOnly isCheckout={true} />
-                  )}
-                </div>
-              )}
+      <div className="checkout-grid">
+        <div className="checkout-steps">
+          {visibleSteps.map((step) => {
+            const state = getStepState(step);
+            return (
+              <CheckoutSection
+                key={step}
+                stepNumber={step + 1}
+                title={stepTitles[step]}
+                isActive={state === "active"}
+                isCompleted={state === "completed"}
+                onHeaderClick={() => goToStep(step)}
+              >
+                {step === 0 && (
+                  <div className="checkout-member-step">
+                    {hasMembershipInCart ? (
+                      <MembershipFormLayout
+                        setButtonDisabled={setButtonDisabled}
+                        handleNext={() => handleNext(0)}
+                      />
+                    ) : (
+                      <MembershipFormReadOnly isCheckout={true} />
+                    )}
+                  </div>
+                )}
 
-              {step === 1 && <Review />}
+                {step === 1 && <Review />}
 
-              {step === 2 && <Payment />}
+                {step === 2 && <Payment />}
 
-              {step < 2 && step === activeStep && (
-                <div className="checkout-section__buttons">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    buttonSize={isMinMobile ? "boton--medium" : "boton--large"}
-                    buttonStyle="boton--primary--solid"
-                    disabled={loading || (step === 0 && userIsEditingData)}
-                    loading={loading && step === 1}
-                    onClick={() => handleNext(step)}
-                  >
-                    {t("boto.seguent")}
-                  </Button>
-                </div>
-              )}
-            </CheckoutSection>
-          );
-        })}
+                {step === 0 && state === "active" && !userIsEditingData && (
+                  <div className="checkout-section__buttons">
+                    <Button
+                      buttonSize="boton--medium"
+                      buttonStyle="boton--primary--solid"
+                      onClick={() => handleNext(0)}
+                    >
+                      {t("checkout.guardar-continuar")}
+                    </Button>
+                  </div>
+                )}
+
+                {step === 1 && state === "active" && (
+                  <div className="checkout-section__buttons">
+                    <Button
+                      buttonSize="boton--medium"
+                      buttonStyle="boton--primary--solid"
+                      disabled={loading}
+                      loading={loading}
+                      onClick={() => handleNext(1)}
+                    >
+                      {t("checkout.ir-al-pago")}
+                    </Button>
+                  </div>
+                )}
+              </CheckoutSection>
+            );
+          })}
+        </div>
+
+        <CheckoutSummary />
       </div>
     </div>
   );
