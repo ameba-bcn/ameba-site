@@ -28,7 +28,7 @@ const BANDS = [
     id: "associacio",
     color: "var(--section-associacio)",
     image: home1,
-    to: "/socis",
+    to: "/associacio",
     // (+) pegado a la derecha de la columna de texto: el contenido centrado
     // mide 948px (mitad = 474) + 16px de separación
     morePosition: { left: "calc(50% + 490px)", top: "54%" },

@@ -55,6 +55,13 @@
   padding-bottom: 16px;
 }
 
+@media (max-width: 760px) {
+  .ameba-card__title-block {
+    min-height: 60px;
+    padding-bottom: 12px;
+  }
+}
+
 .ameba-card__subtitle {
   padding: 0 16px;
   color: var(--color-cream);

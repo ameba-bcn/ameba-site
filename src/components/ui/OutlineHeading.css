@@ -5,6 +5,12 @@
   font-weight: 400;
   margin: 0;
   line-height: 1;
+  /* iOS Safari sometimes fails to repaint -webkit-text-stroke after a GSAP
+     transform/opacity reveal (scale, autoAlpha), leaving outlined numerals
+     invisible until something else forces a repaint. Promoting the element
+     to its own compositor layer keeps the stroke painted through the tween. */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .outline-heading--dark {
