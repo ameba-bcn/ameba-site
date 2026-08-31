@@ -8,6 +8,10 @@
      animation/class here, so nothing fights its inline transform. */
 }
 
+.navbar .menuContainer {
+  position: relative;
+}
+
 .navbar .menuSuperior {
   background-color: var(--color-negro);
   display: flex;
@@ -213,8 +217,12 @@
    so a very tall drawer (many activities + cart + CTA buttons) never
    overflows a short viewport with no way to scroll it. */
 .navbar .nav-ul_box-mobile {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
   width: 100%;
-  max-height: 100vh;
+  max-height: calc(100vh - 80px);
   overflow-y: auto;
   background-color: var(--color-negro);
 }

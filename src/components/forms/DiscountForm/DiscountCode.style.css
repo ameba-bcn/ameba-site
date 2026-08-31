@@ -1,29 +1,51 @@
+.discount-code {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .discount-code__row {
   display: flex;
-  flex-direction: row !important;
-  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
 }
 
-.discount-code__row input {
-  width: 45%;
+.discount-code__input {
+  flex: 1;
+  min-width: 200px;
+  background: var(--color-cream);
+  border: 2px solid var(--color-negro);
+  color: var(--color-negro);
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.03em;
+  padding: 11px 14px;
+  outline: none;
+  border-radius: 0;
+  text-transform: uppercase;
 }
 
-.discount-code__row button {
-  width: 45%;
+.discount-code__input::placeholder {
+  color: rgba(29, 29, 27, 0.45);
+  text-transform: uppercase;
 }
 
-@media (max-width: 350px) {
-  .discount-code__row input {
-    width: 58%;
-  }
+.discount-code__input:focus {
+  border-color: var(--color-rojo);
+}
 
-  .discount-code__row button {
-    width: 40%;
-  }
+.discount-code__confirmation {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--color-rojo);
 }
 
 @media (max-width: 490px) {
-  .discount-code__row input::placeholder {
-    font-size: 1.5rem;
+  .discount-code__input {
+    min-width: 0;
+    width: 100%;
   }
 }

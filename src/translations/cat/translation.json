@@ -21,7 +21,25 @@
     "review-footer-5": "Per recollir la teva compra, t'enviarem un missatge indicant-te quan i on fer la recollida. Si tens qualsevol dubte, pots contactar amb nosaltres a info@ameba.cat 💚",
     "compra-toast1": "tens",
     "compra-toast2": "a la cistella",
-    "compra-toast3": "Has afegit un item a la cistella"
+    "compra-toast3": "Has afegit un item a la cistella",
+    "step1-title": "Dades personals",
+    "step2-title": "Cistella",
+    "step3-title": "Dades de pagament",
+    "step1-short": "Dades",
+    "step2-short": "Cistella",
+    "step3-short": "Pagament",
+    "resumen": "Resum",
+    "recogida": "Recollida",
+    "editar": "Edita",
+    "guardar-continuar": "Desa i continua",
+    "ir-al-pago": "Ves al pagament",
+    "pago-seguro-titol": "Targeta · pagament segur amb Stripe",
+    "pago-seguro-text": "Mai emmagatzemem les dades de la teva targeta.",
+    "acceptar-pre": "Accepto les ",
+    "acceptar-link": "condicions de compra",
+    "acceptar-post": " i la política de privacitat d'Ameba.",
+    "codigo-aplicado": "Codi {{code}} aplicat — {{value}}% de descompte.",
+    "descuento": "Descompte"
   },
   "support": {
     "menu": {
@@ -224,6 +242,7 @@
     "login-subtitol": "Accedeix amb el teu compte de soci/a.",
     "registre-subtitol": "Crea el teu compte per seguir l'escena de prop.",
     "aside-titol": "Fes-te soci/a",
+    "aside-titol-mobile": "Avantatges de ser soci/a",
     "aside-text": "El teu compte et dona accés a l'agenda de socis, les convocatòries del LAB i les entrades anticipades dels festivals.",
     "aside-bullet1": "Entrades anticipades i descomptes",
     "aside-bullet2": "Convocatòries obertes del LAB",
@@ -266,7 +285,8 @@
     "seguent": "següent pas",
     "recarrega": "recarrega",
     "edit": "Mode edició",
-    "preview": "Mode previsualització"
+    "preview": "Mode previsualització",
+    "aplica": "Aplica"
   },
   "errors": {
     "stripe": "Hi ha hagut un error amb el sistema de pagament. Contacta amb info@ameba.cat",

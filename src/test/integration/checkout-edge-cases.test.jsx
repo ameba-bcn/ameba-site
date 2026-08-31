@@ -83,7 +83,7 @@ describe("Edge Cases: Checkout step error recovery", () => {
     const mocks = setup(mockCartRegular);
     mocks.checkoutCart.mockRejectedValue(new Error("API error"));
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText("Ves al pagament"));
 
     await waitFor(() => {
       const sections = getSections();
@@ -103,14 +103,14 @@ describe("Edge Cases: Checkout step error recovery", () => {
     renderWithProviders(<Checkout />);
 
     // First attempt fails
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText("Ves al pagament"));
     await waitFor(() => {
       const sections = getSections();
       expect(sections[1].classList.contains("checkout-section--active")).toBe(true);
     });
 
     // Second attempt succeeds
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText("Ves al pagament"));
     await waitFor(() => {
       const sections = getSections();
       expect(sections[2].classList.contains("checkout-section--active")).toBe(true);
@@ -123,14 +123,14 @@ describe("Edge Cases: Subscription checkout step flow", () => {
     setup(mockCartMember);
     renderWithProviders(<Checkout />);
     expect(getSections()[0].classList.contains("checkout-section--active")).toBe(true);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText("Desa i continua"));
     expect(getSections()[1].classList.contains("checkout-section--active")).toBe(true);
   });
 
   it("navigates back from step 1 to step 0 via section header click", () => {
     setup(mockCartMember);
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas")); // step 0 -> 1
+    fireEvent.click(screen.getByText("Desa i continua")); // step 0 -> 1
     // Click completed step 0 header to go back
     const header = getSections()[0].querySelector(".checkout-section__header");
     fireEvent.click(header);
@@ -152,7 +152,7 @@ describe("Edge Cases: Step persistence", () => {
     setup(mockCartRegular);
     renderWithProviders(<Checkout />);
     expect(localStorage.getItem("checkoutStep")).toBe("1");
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText("Ves al pagament"));
     await waitFor(() => {
       expect(localStorage.getItem("checkoutStep")).toBe("2");
     });

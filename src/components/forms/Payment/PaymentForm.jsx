@@ -8,7 +8,7 @@ import "./PaymentForm.css";
 import Button from "../../button/Button";
 import notificationToast from "../../../utils/utils";
 
-function PaymentForm() {
+function PaymentForm({ disabled = false }) {
   const [processing, setProcessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
@@ -52,10 +52,10 @@ function PaymentForm() {
           <Button
             variant="contained"
             color="primary"
-            buttonSize="boton--medium"
-            buttonStyle="boton--primary--solid"
+            buttonSize="boton--megaxxl"
+            buttonStyle="boton--back-orange--solid"
             id="submit"
-            disabled={!stripe || processing}
+            disabled={!stripe || processing || disabled}
             loading={processing}
           >
             <span id="button-text">Paga</span>
