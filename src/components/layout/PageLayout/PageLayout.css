@@ -10,7 +10,9 @@
 .page-layout--festivals,
 .page-layout--lab,
 .page-layout--shop,
-.page-layout--auth {
+.page-layout--auth,
+.page-layout--notfound,
+.page-layout--socis {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -33,7 +35,9 @@
   background-color: var(--section-shop);
 }
 
-.page-layout--auth {
+.page-layout--auth,
+.page-layout--notfound,
+.page-layout--socis {
   background-color: var(--color-negro);
 }
 
@@ -43,7 +47,9 @@
 .page-layout--associacio > .page-layout__inner,
 .page-layout--festivals > .page-layout__inner,
 .page-layout--lab > .page-layout__inner,
-.page-layout--shop > .page-layout__inner {
+.page-layout--shop > .page-layout__inner,
+.page-layout--notfound > .page-layout__inner,
+.page-layout--socis > .page-layout__inner {
   padding-left: var(--page-margin-x);
   padding-right: var(--page-margin-x);
 }
@@ -59,7 +65,9 @@
 /* .app sets text-align:center as a global legacy default (fine for the
    pages that still rely on it); Associació's grid is left-aligned
    throughout, per its reference. */
-.page-layout--associacio .page-layout__content {
+.page-layout--associacio .page-layout__content,
+.page-layout--notfound .page-layout__content,
+.page-layout--socis .page-layout__content {
   text-align: left;
 }
 
