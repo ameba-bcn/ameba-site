@@ -10,7 +10,7 @@ import useProfileStore from "./stores/useProfileStore";
 import useAuthStore from "./stores/useAuthStore";
 import useDataStore from "./stores/useDataStore";
 import useCartStore from "./stores/useCartStore";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useParams } from "react-router-dom";
 import Footer from "./components/footer/Footer";
 import Menu from "./components/navbar/Navbar";
 import ScrollTop from "./components/layout/ScrollTop";
@@ -52,9 +52,7 @@ const ValidateEmail = lazyWithRetry(() => import("./pages/ValidateEmail"));
 const LogMailConfirmation = lazyWithRetry(
   () => import("./pages/LogMailConfirmation"),
 );
-const ActivitatPage = lazyWithRetry(
-  () => import("./pages/activitat/ActivitatPage"),
-);
+const LabDetail = lazyWithRetry(() => import("./pages/lab/LabDetail"));
 const ProductePage = lazyWithRetry(() => import("./pages/botiga/ProductePage"));
 const ProductRedirect = lazyWithRetry(() => import("./pages/ProductRedirect"));
 const Profile = lazyWithRetry(() => import("./pages/profile/Profile"));
@@ -75,6 +73,13 @@ const QrLanding = lazyWithRetry(() => import("./pages/qr-landing/QrLanding"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
 const UserContext = createContext(null);
+
+// /activitats/:id was renamed to /lab/:id (rediseño 2026) — keep old links
+// (bookmarks, indexed search results) working via redirect.
+function ActivitatToLabRedirect() {
+  const { id } = useParams();
+  return <Navigate to={`/lab/${id}`} replace />;
+}
 
 function App() {
   const [user, setUser] = useState(null);
@@ -143,7 +148,7 @@ function App() {
           {isNavigating && <FullscreenSpinner />}
           <Suspense fallback={<RouteFallback />}>
             <Routes>
-              <Route path="/activitats/:id" element={<ActivitatPage />} />
+              <Route path="/activitats/:id" element={<ActivitatToLabRedirect />} />
               <Route path="/activitats" element={<Navigate to="/lab" replace />} />
               <Route path="/botiga/:id" element={<ProductePage />} />
               <Route path="/botiga" element={<Botiga />} />
@@ -170,6 +175,7 @@ function App() {
               <Route path="/summary-checkout" element={<CheckoutFinished />} />
               <Route path="/subscribe" element={<SubscriptionFinished />} />
               <Route path="/legal" element={<Legal />} />
+              <Route path="/lab/:id" element={<LabDetail />} />
               <Route path="/lab" element={<Lab />} />
               <Route path="/festivals/:id" element={<FestivalDetail />} />
               <Route path="/festivals" element={<Festivals />} />

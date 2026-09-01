@@ -18,7 +18,7 @@ export const Default = {
 
 export const FullRow = {
   args: {
-    to: "/activitats/1",
+    to: "/lab/1",
     image: "https://ameba.cat/AmebaPortadaDesktop.jpg",
     imageAlt: "Ameba Fest",
     badge: "29.4.2026 - 19H",
