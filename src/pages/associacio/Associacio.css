@@ -232,16 +232,75 @@
 }
 
 /* Banda de estadístiques — full-bleed, barres verticals altes */
+.associacio__stats-panel {
+  margin: 0 calc(-1 * var(--page-margin-x)) 32px;
+  background-color: var(--color-negro);
+}
+
+/* Interruptor "LIVE" — activa el mode caixa de ritmes 808 */
+.associacio__stats-controls {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px var(--page-margin-x) 0;
+}
+
+.associacio__stats-live-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  border: 1px solid var(--color-cream);
+  border-radius: 999px;
+  padding: 4px 12px;
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.associacio__stats-live-toggle:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.associacio__stats-live-toggle.is-on {
+  background-color: var(--color-rojo);
+  border-color: var(--color-rojo);
+  color: var(--color-negro);
+}
+
+.associacio__stats-live-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-negro);
+  opacity: 0.4;
+}
+
+.associacio__stats-live-toggle.is-on .associacio__stats-live-led {
+  background-color: var(--color-negro);
+  opacity: 1;
+  box-shadow: 0 0 6px 1px var(--color-negro);
+  animation: associacio-live-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes associacio-live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
 .associacio__stats {
   display: flex;
   justify-content: center;
   gap: 8px;
-  background-color: var(--color-negro);
-  padding: 24px var(--page-margin-x);
-  margin: 0 calc(-1 * var(--page-margin-x)) 32px;
+  padding: 14px var(--page-margin-x) 24px;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .associacio__stat {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -256,6 +315,42 @@
   background-color: var(--stat-color);
   color: var(--color-negro);
 }
+
+.associacio__stat--live {
+  cursor: pointer;
+  transition: transform 0.08s ease, filter 0.08s ease;
+}
+
+.associacio__stat--live:hover {
+  filter: brightness(1.08);
+}
+
+.associacio__stat--live:active,
+.associacio__stat--hit {
+  transform: scale(0.96);
+  filter: brightness(1.3);
+}
+
+/* LED superior, com el pad de gallet d'una 808 — s'encén en clicar/prémer la tecla */
+.associacio__stat-led {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.05s ease, box-shadow 0.05s ease;
+  pointer-events: none;
+}
+
+.associacio__stat-led.is-lit {
+  background-color: var(--color-rojo);
+  box-shadow: 0 0 8px 2px var(--color-rojo);
+}
+
 
 .associacio__stat-label {
   writing-mode: vertical-rl;
@@ -331,10 +426,9 @@
 }
 
 .associacio__grup-circle {
-  width: 85px;
-  height: 85px;
-  border-radius: 50%;
-  border: 1px solid var(--color-negro);
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
 }
 
 .associacio__grup .outline-heading {
@@ -506,8 +600,8 @@
   }
 
   .associacio__grup-circle {
-    width: 56px;
-    height: 56px;
+    width: 90px;
+    height: 90px;
   }
 
   .associacio__grup .outline-heading {
