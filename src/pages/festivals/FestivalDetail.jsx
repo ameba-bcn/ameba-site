@@ -5,58 +5,13 @@ import axiosInstance from "../../axios";
 import { API_URL } from "../../utils/constants";
 import { formatPrice, formatDateToHour } from "../../utils/utils";
 import { sanitizeHTML } from "../../utils/sanitize";
+import { formatDateChip, formatDayLine } from "../../utils/eventDateLabels";
+import { buildEventJsonLd } from "../../utils/eventJsonLd";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import PageMeta from "../../components/seo/PageMeta";
 import DotsRow from "../../components/ui/DotsRow";
 import Icon from "../../components/ui/Icon";
 import "./FestivalDetail.css";
-
-// Day/month names aren't exposed anywhere else in the app (every other date
-// display uses numeric d-m-Y / HH:mm) — the design's "Dissabte 21 de maig"
-// slot needs them spelled out, so they're kept local to this page.
-const DAY_NAMES = {
-  ca: ["Diumenge", "Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte"],
-  es: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
-};
-const MONTH_NAMES = {
-  ca: ["gener", "febrer", "març", "abril", "maig", "juny", "juliol", "agost", "setembre", "octubre", "novembre", "desembre"],
-  es: ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"],
-};
-
-function formatDateChip(datetime) {
-  const d = new Date(datetime);
-  return `${d.getDate()}.${d.getMonth() + 1}.${String(d.getFullYear()).slice(-2)} | ${formatDateToHour(datetime).replace(":", ".")}h`;
-}
-
-function formatDayLine(datetime, lang) {
-  const d = new Date(datetime);
-  return `${DAY_NAMES[lang][d.getDay()]} ${d.getDate()} de ${MONTH_NAMES[lang][d.getMonth()]}`;
-}
-
-function buildEventJsonLd(data, id) {
-  if (!data?.name) return null;
-  const ld = {
-    "@context": "https://schema.org",
-    "@type": "MusicEvent",
-    name: data.header || data.name,
-    url: `https://ameba.cat/festivals/${id}`,
-    organizer: {
-      "@type": "Organization",
-      name: "AMEBA — Associació de Música Electrònica de Barcelona",
-      url: "https://ameba.cat",
-    },
-    eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-    eventStatus: data.cancelled
-      ? "https://schema.org/EventCancelled"
-      : "https://schema.org/EventScheduled",
-  };
-  if (data.datetime) ld.startDate = data.datetime;
-  if (data.address) {
-    ld.location = { "@type": "Place", name: data.address };
-  }
-  if (data.images?.length > 0) ld.image = data.images;
-  return ld;
-}
 
 function FestivalDetail() {
   const { id } = useParams();
@@ -75,7 +30,7 @@ function FestivalDetail() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  const jsonLd = useMemo(() => buildEventJsonLd(event, id), [event, id]);
+  const jsonLd = useMemo(() => buildEventJsonLd(event, id, "festivals"), [event, id]);
 
   const eventName = event?.header || event?.name || "";
   const banner = event?.images?.[0];
