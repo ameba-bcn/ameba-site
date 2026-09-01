@@ -1,0 +1,316 @@
+/* .page-layout__content (PageLayout.jsx, shared) is a plain block box —
+   flex:1 only gives IT a definite height inside page-layout__inner's own
+   column, it doesn't turn it into a flex container for us to stretch
+   into. Make it one here, scoped to this section only, so .shop-product
+   can grow to fill the remaining height and push the buybar down. */
+.page-layout--shop .page-layout__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-product {
+  max-width: 1100px;
+  width: 100%;
+  flex: 1;
+  margin: 0 auto;
+  text-align: left;
+  color: var(--color-negro);
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-product__breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 18px 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* Divider stays anchored where the breadcrumb text starts (no left bleed)
+   but its right end should reach the true viewport edge — the reading
+   column is capped at 1100px, so a fixed calc(-1 * var(--page-margin-x))
+   margin (Botiga.jsx's own .botiga__hr--bleed-right) would only cancel
+   the page's own gutter and fall short once the viewport is wider than
+   1100px + 2 * var(--page-margin-x). margin-right alone, on an
+   otherwise-untouched width:auto element, resolves that regardless of
+   nesting depth (left edge is never touched, so it can't grow). */
+.shop-product__hr {
+  border: none;
+  border-top: 1px solid rgba(29, 29, 27, 0.28);
+  margin: 0;
+  margin-right: calc(50% - 50vw);
+}
+
+.shop-product__breadcrumb a {
+  color: var(--color-negro);
+  text-decoration: none;
+}
+
+.shop-product__breadcrumb a:hover {
+  opacity: 0.6;
+}
+
+.shop-product__hero {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 44px;
+  align-items: start;
+  padding: 26px 0 44px;
+}
+
+.shop-product__hero > * {
+  min-width: 0;
+}
+
+.shop-product__hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.shop-product__dots .dots-row__dot {
+  width: 12px;
+  height: 12px;
+}
+
+.shop-product__title {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(38px, 4.4vw, 58px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+  color: var(--color-cream);
+}
+
+.shop-product__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.shop-product__price {
+  font-family: var(--font-display);
+  font-size: 42px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--color-cream);
+}
+
+.shop-product__price-pill {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-display);
+  font-size: 17px;
+  letter-spacing: 0.03em;
+  background: var(--color-negro);
+  color: var(--color-cream);
+  padding: 4px 12px 1px;
+}
+
+.shop-product__description {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.45;
+  color: var(--color-cream);
+}
+
+.shop-product__description p {
+  margin: 0;
+}
+
+.shop-product__facts {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 12.5px;
+  color: var(--color-cream);
+}
+
+.shop-product__facts li {
+  position: relative;
+  padding-left: 19px;
+}
+
+.shop-product__facts li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 9px;
+  height: 9px;
+  background: var(--color-cream);
+}
+
+.shop-product__gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  min-width: 0;
+}
+
+.shop-product__gallery-cell {
+  aspect-ratio: 3 / 4;
+  background: var(--color-cream);
+  overflow: hidden;
+}
+
+.shop-product__gallery-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.shop-product__gallery-placeholder {
+  width: 100%;
+  height: 100%;
+  border: 1px dashed rgba(29, 29, 27, 0.3);
+}
+
+/* Full viewport bleed regardless of the 1100px reading column .shop-product
+   caps its parent at — same 50vw technique as the breadcrumb divider above,
+   since a fixed calc(-1 * var(--page-margin-x)) margin only cancels the
+   page's own gutter and falls short of the true edge once the viewport is
+   wider than 1100px + 2 * var(--page-margin-x). */
+/* Pushed to the bottom of .shop-product (which fills the full height of
+   page-layout__content via flex) rather than trailing right after the
+   hero — short-content products (e.g. "Talla única") would otherwise
+   leave a big empty gap between the buybar and the footer. */
+.shop-product__buybar {
+  box-sizing: border-box;
+  background: var(--color-cream);
+  color: var(--color-negro);
+  width: 100vw;
+  margin-top: auto;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 20px var(--page-margin-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.shop-product__buybar > :first-child {
+  min-width: 0;
+}
+
+.shop-product__cta {
+  display: flex;
+  flex-shrink: 0;
+}
+
+/* Reskin the shared size picker (ProductDetails.jsx) and CardViewButton as
+   the design's cream "sticker" badges (border + drop shadow) instead of the
+   default full-black boxes/buttons used elsewhere. The active size's
+   highlight is GSAP/Flip-animated (see ProductDetails.jsx) — its background
+   is recolored here rather than replaced, so that animation keeps working. */
+.shop-product .modal-sizes-row {
+  gap: 10px;
+}
+
+.shop-product .interactiveDataBox-product-sizes__button,
+.shop-product .interactiveDataBox-product-sizes__button_active {
+  min-width: 46px;
+  height: 44px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.02em;
+  border: 2px solid var(--color-negro);
+  margin-right: 0;
+}
+
+.shop-product .interactiveDataBox-product-sizes__button {
+  background-color: var(--color-cream);
+  color: var(--color-negro);
+  box-shadow: 3px 3px 0 var(--color-negro);
+}
+
+.shop-product .interactiveDataBox-product-sizes__button_active {
+  color: var(--color-cream);
+  box-shadow: none;
+  transform: translate(3px, 3px);
+}
+
+.shop-product .modal-sizes-row__highlight {
+  background-color: var(--color-negro);
+}
+
+.shop-product .card-view__button-wrapper {
+  width: auto;
+  padding-top: 0;
+}
+
+.shop-product .card-view__button-wrapper .boton {
+  width: auto;
+  max-width: none;
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.02em;
+  background: var(--color-cream);
+  color: var(--color-negro);
+  border: 2px solid var(--color-negro);
+  box-shadow: 4px 4px 0 var(--color-negro);
+  padding: 6px 18px 3px;
+  min-height: auto;
+}
+
+.shop-product .card-view__button-wrapper .boton:hover:not([disabled]) {
+  background: var(--color-negro);
+  color: var(--color-cream);
+  transform: translateY(-2px);
+}
+
+.shop-product__not-found {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  color: var(--color-negro);
+  font-family: var(--font-body);
+}
+
+.shop-product__back-link {
+  margin-top: 12px;
+  font-weight: 700;
+  color: var(--color-negro);
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1200px) {
+  .shop-product__hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .shop-product__buybar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .shop-product__gallery {
+    grid-template-columns: 1fr;
+  }
+}
