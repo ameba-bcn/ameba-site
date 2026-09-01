@@ -1,0 +1,287 @@
+/* Content column matches FestivalDetail's cap even though
+   PageLayout--lab already gives fluid var(--page-margin-x) padding —
+   this just caps the line length inside that padding, centered. */
+.lab-detail {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.lab-detail__breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 18px 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(29, 29, 27, 0.28);
+}
+
+.lab-detail__breadcrumb a {
+  color: var(--color-negro);
+  text-decoration: none;
+}
+
+.lab-detail__breadcrumb a:hover {
+  opacity: 0.6;
+}
+
+.lab-detail__hero {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 40px;
+  align-items: start;
+  padding: 26px 0 40px;
+}
+
+.lab-detail__hero > * {
+  min-width: 0;
+}
+
+.lab-detail__hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.lab-detail__dots .dots-row__dot {
+  width: 11px;
+  height: 11px;
+}
+
+.lab-detail__title {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(26px, 2.6vw, 34px);
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  text-wrap: pretty;
+  color: var(--color-negro);
+}
+
+.lab-detail__info {
+  margin: 0;
+  background: var(--color-negro);
+  color: var(--color-cream);
+  padding: 14px 20px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.lab-detail__info > div {
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(242, 227, 201, 0.35);
+}
+
+.lab-detail__info > div:first-child {
+  padding-top: 8px;
+}
+
+.lab-detail__info > div:last-child {
+  padding-bottom: 4px;
+  border-bottom: none;
+}
+
+.lab-detail__info dt {
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+.lab-detail__info dd {
+  margin: 2px 0 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.lab-detail__hero-right {
+  min-width: 0;
+}
+
+.lab-detail__hero-image,
+.lab-detail__hero-placeholder {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+  display: block;
+}
+
+.lab-detail__hero-placeholder {
+  background: rgba(29, 29, 27, 0.08);
+  border: 1px dashed rgba(29, 29, 27, 0.3);
+}
+
+.lab-detail__cta--hero {
+  margin-top: 4px;
+}
+
+/* Badge-style CTA: reskin the shared CardViewButton/Button as the
+   design's cream "sticker" (border + drop shadow) instead of the
+   default full-width solid black button used elsewhere. */
+.lab-detail .card-view__button-wrapper {
+  width: auto;
+  padding-top: 0;
+}
+
+.lab-detail .card-view__button-wrapper .boton {
+  width: auto;
+  max-width: none;
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.03em;
+  background: var(--color-cream);
+  color: var(--color-negro);
+  border: 3px solid var(--color-negro);
+  box-shadow: 5px 5px 0 var(--color-negro);
+  padding: 6px 18px 2px;
+  min-height: auto;
+}
+
+.lab-detail .card-view__button-wrapper .boton:hover:not([disabled]) {
+  background: var(--color-negro);
+  color: var(--color-cream);
+  transform: translateY(-2px);
+}
+
+.lab-detail__badge {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.03em;
+  background: var(--color-cream);
+  color: var(--color-negro);
+  padding: 5px 16px 2px;
+  border: 2px solid var(--color-negro);
+  box-shadow: 4px 4px 0 var(--color-negro);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.lab-detail__badge:hover {
+  background: var(--color-negro);
+  color: var(--color-cream);
+}
+
+.lab-detail__promo {
+  background: var(--color-cream);
+  color: var(--color-negro);
+  margin: 0 calc(-1 * var(--page-margin-x));
+  padding: 22px var(--page-margin-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.lab-detail__promo p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  max-width: 62ch;
+  text-wrap: pretty;
+}
+
+.lab-detail__body {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 44px;
+  align-items: start;
+  padding: 44px 0 56px;
+  border-top: 1px solid rgba(29, 29, 27, 0.28);
+  margin-top: 36px;
+}
+
+.lab-detail__body > * {
+  min-width: 0;
+}
+
+.lab-detail__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-size: 15.5px;
+  font-weight: 700;
+  line-height: 1.5;
+  color: var(--color-negro);
+}
+
+.lab-detail__intro p {
+  margin: 0;
+}
+
+.lab-detail__portrait {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.lab-detail__portrait-image,
+.lab-detail__portrait-placeholder {
+  width: 100%;
+  aspect-ratio: 1 / 1.05;
+  object-fit: cover;
+  display: block;
+}
+
+.lab-detail__portrait-placeholder {
+  background: rgba(29, 29, 27, 0.08);
+  border: 1px dashed rgba(29, 29, 27, 0.3);
+}
+
+.lab-detail__portrait-caption {
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: var(--color-negro);
+}
+
+.lab-detail__not-found {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  color: var(--color-negro);
+  font-family: var(--font-body);
+}
+
+.lab-detail__back-link {
+  margin-top: 12px;
+  font-weight: 700;
+  color: var(--color-negro);
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1200px) {
+  .lab-detail__hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .lab-detail__promo {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .lab-detail__body {
+    grid-template-columns: 1fr;
+  }
+
+  .lab-detail__hero-image,
+  .lab-detail__hero-placeholder {
+    aspect-ratio: 4 / 3;
+  }
+}

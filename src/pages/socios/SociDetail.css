@@ -1,0 +1,253 @@
+.soci-detail {
+  width: 100%;
+}
+
+.soci-detail__breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 18px 0 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-cream);
+}
+
+.soci-detail__breadcrumb a {
+  color: var(--color-cream);
+  text-decoration: none;
+}
+
+.soci-detail__breadcrumb a:hover {
+  opacity: 0.7;
+}
+
+/* Each band paints edge-to-edge regardless of the page's own
+   var(--page-margin-x) gutter — same viewport-relative bleed technique
+   used for the Shop Product Detail buybar, since .soci-detail sits inside
+   that padded page-layout__inner. */
+.soci-detail__band {
+  box-sizing: border-box;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: var(--page-margin-x);
+  padding-right: var(--page-margin-x);
+}
+
+.soci-detail__band--cream {
+  background: var(--color-cream);
+  color: var(--color-negro);
+}
+
+.soci-detail__band--negro {
+  background: var(--color-negro);
+  color: var(--color-cream);
+}
+
+.soci-detail__shell {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.soci-detail__hero {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 26px 0 34px;
+}
+
+.soci-detail__dots .dots-row__dot {
+  width: 12px;
+  height: 12px;
+}
+
+.soci-detail__title {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(34px, 4.4vw, 58px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.soci-detail__by {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(29, 29, 27, 0.7);
+}
+
+.soci-detail__chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.soci-detail__chip {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  border: 1px solid rgba(29, 29, 27, 0.5);
+  padding: 5px 10px;
+}
+
+.soci-detail__chip--fill {
+  background: var(--color-negro);
+  color: var(--color-cream);
+  border-color: var(--color-negro);
+}
+
+.soci-detail__body {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  align-items: start;
+  padding: 44px 0 48px;
+}
+
+.soci-detail__body > * {
+  min-width: 0;
+}
+
+.soci-detail__bio {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.soci-detail__bio p {
+  margin: 0 0 16px;
+}
+
+.soci-detail__bio p:last-child {
+  margin-bottom: 0;
+}
+
+.soci-detail__portrait {
+  display: flex;
+}
+
+.soci-detail__portrait-image,
+.soci-detail__portrait-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  display: block;
+}
+
+.soci-detail__portrait-placeholder {
+  background: rgba(242, 227, 201, 0.08);
+  border: 1px dashed rgba(242, 227, 201, 0.3);
+}
+
+.soci-detail__media {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 40px 0 48px;
+}
+
+.soci-detail__section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.soci-detail__section-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: 0.04em;
+}
+
+.soci-detail__embeds {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.soci-detail__embed {
+  border: 2px solid var(--color-negro);
+  overflow: hidden;
+}
+
+.soci-detail__embed iframe {
+  display: block;
+  width: 100%;
+}
+
+.soci-detail__links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.soci-detail__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 600;
+  background: var(--color-cream);
+  color: var(--color-negro);
+  padding: 10px 16px;
+  border: 2px solid var(--color-negro);
+  box-shadow: 4px 4px 0 var(--color-negro);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.soci-detail__link:hover {
+  opacity: 1;
+  background: var(--color-negro);
+  color: var(--color-cream);
+}
+
+.soci-detail__footer-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-top: 22px;
+  border-top: 2px solid var(--color-negro);
+}
+
+.soci-detail__member-number {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.soci-detail__not-found {
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-align: center;
+  color: var(--color-cream);
+  font-family: var(--font-body);
+}
+
+.soci-detail__back-link {
+  margin-top: 12px;
+  font-weight: 700;
+  color: var(--color-cream);
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 980px) {
+  .soci-detail__body {
+    grid-template-columns: 1fr;
+  }
+}

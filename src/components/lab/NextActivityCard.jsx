@@ -54,7 +54,7 @@ export default function NextActivityCard({ activity }) {
   const { id, name, header, images, price = 0, discount, address, datetime } = activity;
 
   return (
-    <NavLink to={`/activitats/${id}`} className="next-activity-card" ref={rootRef}>
+    <NavLink to={`/lab/${id}`} className="next-activity-card" ref={rootRef}>
       <img className="next-activity-card__image" src={images?.[0]} alt={header || name} />
       <div className="next-activity-card__panel">
         <div className="next-activity-card__date">

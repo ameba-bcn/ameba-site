@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import Icon from "../ui/Icon";
 import { gsap, Flip, prefersReducedMotion, isTestEnv } from "../../utils/gsapSetup";
+import "./CardView.css";
 
 const ProductDetails = ({
   sizes = [],

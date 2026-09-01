@@ -10,7 +10,7 @@ import useProfileStore from "./stores/useProfileStore";
 import useAuthStore from "./stores/useAuthStore";
 import useDataStore from "./stores/useDataStore";
 import useCartStore from "./stores/useCartStore";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useParams } from "react-router-dom";
 import Footer from "./components/footer/Footer";
 import Menu from "./components/navbar/Navbar";
 import ScrollTop from "./components/layout/ScrollTop";
@@ -28,10 +28,10 @@ import "./App.css";
 import Home from "./pages/home/Home";
 
 const Botiga = lazyWithRetry(() => import("./pages/Botiga"));
-const SociosDetailed = lazyWithRetry(
-  () => import("./pages/socios/components/SociosDetailed"),
+const SociDetail = lazyWithRetry(() => import("./pages/socios/SociDetail"));
+const SocisDirectory = lazyWithRetry(
+  () => import("./pages/socios/SocisDirectory"),
 );
-const Socios = lazyWithRetry(() => import("./pages/socios/Socios"));
 const Gallery = lazyWithRetry(() => import("./pages/gallery/Gallery"));
 const GalleryAlbum = lazyWithRetry(
   () => import("./pages/gallery/GalleryAlbum"),
@@ -52,9 +52,7 @@ const ValidateEmail = lazyWithRetry(() => import("./pages/ValidateEmail"));
 const LogMailConfirmation = lazyWithRetry(
   () => import("./pages/LogMailConfirmation"),
 );
-const ActivitatPage = lazyWithRetry(
-  () => import("./pages/activitat/ActivitatPage"),
-);
+const LabDetail = lazyWithRetry(() => import("./pages/lab/LabDetail"));
 const ProductePage = lazyWithRetry(() => import("./pages/botiga/ProductePage"));
 const ProductRedirect = lazyWithRetry(() => import("./pages/ProductRedirect"));
 const Profile = lazyWithRetry(() => import("./pages/profile/Profile"));
@@ -75,6 +73,23 @@ const QrLanding = lazyWithRetry(() => import("./pages/qr-landing/QrLanding"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
 const UserContext = createContext(null);
+
+// /activitats/:id was renamed to /lab/:id (rediseño 2026) — keep old links
+// (bookmarks, indexed search results) working via redirect.
+function ActivitatToLabRedirect() {
+  const { id } = useParams();
+  return <Navigate to={`/lab/${id}`} replace />;
+}
+
+// /socis[/:id] was renamed to /associacio/socis[/:id] (rediseño 2026) — same
+// redirect-preserving-id treatment. The old route's :id was a URL-encoded
+// project name; the new one is the numeric member_projects id (fed
+// straight from GET /member_projects/{id}/), so old name-slug links pass
+// through into the page's own not-found state rather than resolving.
+function SociDetailRedirect() {
+  const { id } = useParams();
+  return <Navigate to={`/associacio/socis/${id}`} replace />;
+}
 
 function App() {
   const [user, setUser] = useState(null);
@@ -143,13 +158,15 @@ function App() {
           {isNavigating && <FullscreenSpinner />}
           <Suspense fallback={<RouteFallback />}>
             <Routes>
-              <Route path="/activitats/:id" element={<ActivitatPage />} />
+              <Route path="/activitats/:id" element={<ActivitatToLabRedirect />} />
               <Route path="/activitats" element={<Navigate to="/lab" replace />} />
               <Route path="/botiga/:id" element={<ProductePage />} />
               <Route path="/botiga" element={<Botiga />} />
               <Route path="/shop" element={<Navigate to="/botiga" replace />} />
-              <Route path="/socis/:id" element={<SociosDetailed />} />
-              <Route path="/socis" element={<Socios />} />
+              <Route path="/socis/:id" element={<SociDetailRedirect />} />
+              <Route path="/socis" element={<Navigate to="/associacio/socis" replace />} />
+              <Route path="/associacio/socis/:id" element={<SociDetail />} />
+              <Route path="/associacio/socis" element={<SocisDirectory />} />
               <Route path="/gallery/:slug/:year" element={<GalleryAlbum />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/login" element={<LogSession />} />
@@ -170,6 +187,7 @@ function App() {
               <Route path="/summary-checkout" element={<CheckoutFinished />} />
               <Route path="/subscribe" element={<SubscriptionFinished />} />
               <Route path="/legal" element={<Legal />} />
+              <Route path="/lab/:id" element={<LabDetail />} />
               <Route path="/lab" element={<Lab />} />
               <Route path="/festivals/:id" element={<FestivalDetail />} />
               <Route path="/festivals" element={<Festivals />} />

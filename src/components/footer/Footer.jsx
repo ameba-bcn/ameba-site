@@ -66,7 +66,7 @@ export default function Footer() {
           <h3>{t("menu.associacio")}</h3>
           <div className="ameba-footer__links">
             <NavLink to="/memberships">{t("footer.hazte-socio")}</NavLink>
-            <NavLink to="/socis">{t("footer.socios")}</NavLink>
+            <NavLink to="/associacio/socis">{t("footer.socios")}</NavLink>
           </div>
         </nav>
 

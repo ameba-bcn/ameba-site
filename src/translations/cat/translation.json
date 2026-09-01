@@ -121,7 +121,27 @@
       "dv": "DV",
       "ds": "DS",
       "dm": "DM"
-    }
+    },
+    "localitzacio": "Localització",
+    "dia": "Dia",
+    "horari": "Horari",
+    "tallerista": "Tallerista",
+    "entrada": "Entrada",
+    "gratuita": "Gratuïta",
+    "cancellat": "CANCEL·LAT",
+    "retrat": "Retrat",
+    "torna": "Torna al Lab",
+    "breadcrumb": "Camí de navegació",
+    "promo-text": "Fes-te soci/sòcia d'Ameba i gaudeix de descomptes especials a totes les activitats del Lab!"
+  },
+  "botiga": {
+    "breadcrumb": "Camí de navegació",
+    "torna": "Torna a la Botiga",
+    "socis-preu": "SOCIS",
+    "enviament": "Enviament i punts de recollida disponibles!",
+    "fitxa-1": "Teixit 100% cotó ecològic.",
+    "fitxa-2": "Serigrafiat a Barcelona.",
+    "fitxa-3": "Unisex."
   },
   "associacio": {
     "meta": "Associació — qui som, què fem i com formar-ne part.",
@@ -296,6 +316,16 @@
     "linkBuit2": "No podem mostrarte res 🤷‍♂️",
     "descompte": "El descompte no s'ha pogut aplicar. Si us plau, revisa el codi i torna a intentar-ho."
   },
+  "notFound": {
+    "title": "Pàgina no trobada",
+    "headline": "Aquesta pàgina s'ha sortit de pista",
+    "text-pre": "No hem trobat res a",
+    "text-post": "Pot ser que l'enllaç estigui trencat o que el contingut ja no existeixi.",
+    "go-home": "Torna a l'inici",
+    "go-back": "Enrere",
+    "links-title": "Segueix per aquí",
+    "contact-pre": "Si creus que això és un error, escriu-nos a"
+  },
   "soci": {
     "disclaimer": "Per a poder finalitzar el procediment accedeix a la cistella i realitza el pagament",
     "missatge-ppal": "Conèix els projectes dels nostres soci@s. Si vols que els teus apareguin aquí, fes-te soci@.",
@@ -307,7 +337,16 @@
     "carnet-valid": "VÀLID",
     "carnet-member-since": "Soci des de",
     "carnet-member-type": "Tipus de soci",
-    "carnet-download": "Descarregar carnet"
+    "carnet-download": "Descarregar carnet",
+    "directori-lead": "Descobreix els projectes musicals dels nostres socis en aquest directori.",
+    "directori-crear": "Crear pàgina",
+    "directori-crear-text": "Si encara no has creat la teva pàgina d'artista, edita el teu perfil per fer-ho.",
+    "directori-breadcrumb": "Directori de projectes",
+    "directori-torna": "Tornar al directori",
+    "cerca-projecte": "Cerca un projecte",
+    "no-projectes": "Cap projecte coincideix",
+    "no-projectes-text": "Prova amb una altra cerca per veure tot el directori.",
+    "per": "per"
   },
   "general": {
     "agraiment": "Petició rebuda. Gràcies!",

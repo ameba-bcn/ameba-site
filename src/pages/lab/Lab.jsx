@@ -183,7 +183,7 @@ function Lab() {
             {visibleItems.map((a) => (
               <AmebaCard
                 key={a.id}
-                to={`/activitats/${a.id}`}
+                to={`/lab/${a.id}`}
                 image={a.images?.[0]}
                 imageAlt={a.header || a.name}
                 badge={`${formatISODateToDate(a.datetime)} - ${formatDateToHour(a.datetime)}h`}

@@ -8,7 +8,7 @@ const ProductRedirect = () => {
   const id = /^\d+$/.test(rawId || "") ? rawId : null;
   const kind = params.get("kind") || "";
 
-  if (kind === "activitat" && id) return <Navigate to={`/activitats/${id}`} replace />;
+  if (kind === "activitat" && id) return <Navigate to={`/lab/${id}`} replace />;
   if (kind === "producte" && id) return <Navigate to={`/botiga/${id}`} replace />;
   if (kind === "soci") return <Navigate to="/memberships" replace />;
 

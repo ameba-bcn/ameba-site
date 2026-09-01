@@ -113,6 +113,17 @@
     "propera-activitat": "Próxima actividad",
     "activitats-en-curs": "Actividades en curso",
     "cap-activitat-propera": "No hay ninguna actividad próxima",
+    "localitzacio": "Ubicación",
+    "dia": "Día",
+    "horari": "Horario",
+    "tallerista": "Tallerista",
+    "entrada": "Entrada",
+    "gratuita": "Gratuita",
+    "cancellat": "CANCELADO",
+    "retrat": "Retrato",
+    "torna": "Volver al Lab",
+    "breadcrumb": "Ruta de navegación",
+    "promo-text": "¡Hazte socio/a de Ameba y disfruta de descuentos especiales en todas las actividades del Lab!",
     "calendar": {
       "dl": "LU",
       "dt": "MA",
@@ -122,6 +133,15 @@
       "ds": "SA",
       "dm": "DO"
     }
+  },
+  "botiga": {
+    "breadcrumb": "Ruta de navegación",
+    "torna": "Volver a la Tienda",
+    "socis-preu": "SOCIOS",
+    "enviament": "¡Envío y puntos de recogida disponibles!",
+    "fitxa-1": "Tejido 100% algodón ecológico.",
+    "fitxa-2": "Serigrafiado en Barcelona.",
+    "fitxa-3": "Unisex."
   },
   "associacio": {
     "meta": "Asociación — quiénes somos, qué hacemos y cómo formar parte.",
@@ -296,6 +316,16 @@
     "linkBuit2": "No podemos mostrarte nada 🤷‍♂️",
     "descompte": "El descuento no se ha podido aplicar. Por favor, revisa el código e inténtalo de nuevo."
   },
+  "notFound": {
+    "title": "Página no encontrada",
+    "headline": "Esta página se ha salido de pista",
+    "text-pre": "No hemos encontrado nada en",
+    "text-post": "Puede que el enlace esté roto o que el contenido ya no exista.",
+    "go-home": "Volver al inicio",
+    "go-back": "Atrás",
+    "links-title": "Sigue por aquí",
+    "contact-pre": "Si crees que esto es un error, escríbenos a"
+  },
   "soci": {
     "disclaimer": "Para poder finalizar el procedimiento accede a la cesta y realiza el pago",
     "missatge-ppal": "Conoce los proyectos de nuestros soci@s. Si quieres que tu proyecto aparezca aquí, hazte soci@",
@@ -307,7 +337,16 @@
     "carnet-valid": "VÁLIDO",
     "carnet-member-since": "Socio desde",
     "carnet-member-type": "Tipo de socio",
-    "carnet-download": "Descargar carnet"
+    "carnet-download": "Descargar carnet",
+    "directori-lead": "Descubre los proyectos musicales de nuestros socios en este directorio.",
+    "directori-crear": "Crear página",
+    "directori-crear-text": "Si todavía no has creado tu página de artista, edita tu perfil para hacerlo.",
+    "directori-breadcrumb": "Directorio de proyectos",
+    "directori-torna": "Volver al directorio",
+    "cerca-projecte": "Busca un proyecto",
+    "no-projectes": "Ningún proyecto coincide",
+    "no-projectes-text": "Prueba con otra búsqueda para ver todo el directorio.",
+    "per": "por"
   },
   "general": {
     "agraiment": "Petición recibida. ¡Gracias!",
