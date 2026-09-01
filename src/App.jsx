@@ -28,10 +28,10 @@ import "./App.css";
 import Home from "./pages/home/Home";
 
 const Botiga = lazyWithRetry(() => import("./pages/Botiga"));
-const SociosDetailed = lazyWithRetry(
-  () => import("./pages/socios/components/SociosDetailed"),
+const SociDetail = lazyWithRetry(() => import("./pages/socios/SociDetail"));
+const SocisDirectory = lazyWithRetry(
+  () => import("./pages/socios/SocisDirectory"),
 );
-const Socios = lazyWithRetry(() => import("./pages/socios/Socios"));
 const Gallery = lazyWithRetry(() => import("./pages/gallery/Gallery"));
 const GalleryAlbum = lazyWithRetry(
   () => import("./pages/gallery/GalleryAlbum"),
@@ -79,6 +79,16 @@ const UserContext = createContext(null);
 function ActivitatToLabRedirect() {
   const { id } = useParams();
   return <Navigate to={`/lab/${id}`} replace />;
+}
+
+// /socis[/:id] was renamed to /associacio/socis[/:id] (rediseño 2026) — same
+// redirect-preserving-id treatment. The old route's :id was a URL-encoded
+// project name; the new one is the numeric member_projects id (fed
+// straight from GET /member_projects/{id}/), so old name-slug links pass
+// through into the page's own not-found state rather than resolving.
+function SociDetailRedirect() {
+  const { id } = useParams();
+  return <Navigate to={`/associacio/socis/${id}`} replace />;
 }
 
 function App() {
@@ -153,8 +163,10 @@ function App() {
               <Route path="/botiga/:id" element={<ProductePage />} />
               <Route path="/botiga" element={<Botiga />} />
               <Route path="/shop" element={<Navigate to="/botiga" replace />} />
-              <Route path="/socis/:id" element={<SociosDetailed />} />
-              <Route path="/socis" element={<Socios />} />
+              <Route path="/socis/:id" element={<SociDetailRedirect />} />
+              <Route path="/socis" element={<Navigate to="/associacio/socis" replace />} />
+              <Route path="/associacio/socis/:id" element={<SociDetail />} />
+              <Route path="/associacio/socis" element={<SocisDirectory />} />
               <Route path="/gallery/:slug/:year" element={<GalleryAlbum />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/login" element={<LogSession />} />
