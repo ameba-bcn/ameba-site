@@ -85,7 +85,7 @@ function SocisDirectory() {
           <h1 className="socis-directory__lead">{t("soci.directori-lead")}</h1>
           <div className="socis-directory__cta">
             <p>{t("soci.directori-crear-text")}</p>
-            <Link className="socis-directory__badge" to="/profile">
+            <Link className="socis-directory__badge" to="/compte/projecte">
               {t("soci.directori-crear")}
             </Link>
           </div>

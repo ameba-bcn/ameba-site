@@ -1,0 +1,247 @@
+.account-project__banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  background: rgba(242, 227, 201, 0.08);
+  border-left: 3px solid var(--color-naranja);
+  padding: 14px 18px;
+}
+
+.account-project__banner p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  max-width: 70ch;
+}
+
+.account-project__state {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 11px;
+  white-space: nowrap;
+}
+
+.account-project__tags {
+  display: flex;
+  gap: 9px;
+  flex-wrap: wrap;
+}
+
+.account-project__hint {
+  font-size: 11.5px;
+  color: rgba(29, 29, 27, 0.6);
+}
+
+.account-project__link-row {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  margin-bottom: 9px;
+}
+
+.account-project__link-row .compte-input {
+  flex: 1;
+  font-size: 15px;
+}
+
+.account-project__add-link {
+  align-self: flex-start;
+  font-size: 15px;
+  padding: 8px 14px;
+  min-height: 38px;
+}
+
+.account-project__images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.account-project__image-slot {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  border: 2px solid var(--color-negro);
+  overflow: hidden;
+}
+
+.account-project__image-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.account-project__image-actions {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  background: rgba(242, 227, 201, 0.92);
+}
+
+.account-project__image-actions .compte-tool {
+  flex: 1;
+  font-size: 10.5px;
+  min-height: 26px;
+  padding: 0 4px;
+}
+
+.account-project__image-add {
+  aspect-ratio: 1 / 1;
+  background: none;
+  border: 2px dashed rgba(29, 29, 27, 0.5);
+  color: rgba(29, 29, 27, 0.7);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.account-project__image-add:hover {
+  border-color: var(--color-negro);
+  color: var(--color-negro);
+}
+
+/* ── Live preview panel (mirrors the public SociDetail look) ── */
+.account-project__preview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: sticky;
+  top: 20px;
+  min-width: 0;
+}
+
+.account-project__preview-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.account-project__preview-label {
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.03em;
+}
+
+.account-project__preview-head a {
+  font-size: 12.5px;
+  text-decoration: underline;
+  color: var(--color-cream);
+}
+
+.account-project__preview-card {
+  border: 2px solid rgba(242, 227, 201, 0.4);
+}
+
+.account-project__preview-cream {
+  background: var(--color-cream);
+  color: var(--color-negro);
+  padding: 20px 22px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.account-project__preview-cream h3 {
+  margin: 0;
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.account-project__preview-tags {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+}
+
+.account-project__preview-tags span {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  background: var(--color-negro);
+  color: var(--color-cream);
+  padding: 4px 9px;
+}
+
+.account-project__preview-negro {
+  background: var(--color-negro);
+  color: var(--color-cream);
+  padding: 20px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.account-project__preview-negro p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.account-project__preview-empty {
+  color: rgba(242, 227, 201, 0.5);
+}
+
+.account-project__preview-images {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.account-project__preview-images img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+.account-project__preview-embeds iframe {
+  width: 100%;
+  display: block;
+}
+
+.account-project__preview-links {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.account-project__preview-links span {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  background: var(--color-cream);
+  color: var(--color-negro);
+  border: 2px solid var(--color-negro);
+  box-shadow: 3px 3px 0 rgba(242, 227, 201, 0.8);
+  padding: 8px 13px;
+}
+
+.account-project__preview-note {
+  margin: 0;
+  font-size: 12px;
+  color: rgba(242, 227, 201, 0.62);
+}
+
+@media (max-width: 1080px) {
+  .account-project__preview {
+    position: static;
+  }
+}

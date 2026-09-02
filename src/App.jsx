@@ -55,7 +55,7 @@ const LogMailConfirmation = lazyWithRetry(
 const LabDetail = lazyWithRetry(() => import("./pages/lab/LabDetail"));
 const ProductePage = lazyWithRetry(() => import("./pages/botiga/ProductePage"));
 const ProductRedirect = lazyWithRetry(() => import("./pages/ProductRedirect"));
-const Profile = lazyWithRetry(() => import("./pages/profile/Profile"));
+const Compte = lazyWithRetry(() => import("./pages/compte/Compte"));
 const CheckoutFinished = lazyWithRetry(
   () => import("./pages/landing/CheckoutFinished"),
 );
@@ -89,6 +89,13 @@ function ActivitatToLabRedirect() {
 function SociDetailRedirect() {
   const { id } = useParams();
   return <Navigate to={`/associacio/socis/${id}`} replace />;
+}
+
+// /profile/profile and /profile/project were renamed to /compte/dades and
+// /compte/projecte (rediseño 2026) — same redirect treatment as above.
+function ProfileToCompteRedirect() {
+  const { id } = useParams();
+  return <Navigate to={`/compte/${id === "project" ? "projecte" : "dades"}`} replace />;
 }
 
 function App() {
@@ -182,8 +189,10 @@ function App() {
               <Route path="/validate-email" element={<ValidateEmail />} />
               <Route path="/activate" element={<LogMailConfirmation />} />
               <Route path="/product" element={<ProductRedirect />} />
-              <Route path="/profile/:id" element={<Profile />} />
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/:id" element={<ProfileToCompteRedirect />} />
+              <Route path="/profile" element={<ProfileToCompteRedirect />} />
+              <Route path="/compte/:id" element={<Compte />} />
+              <Route path="/compte" element={<Compte />} />
               <Route path="/summary-checkout" element={<CheckoutFinished />} />
               <Route path="/subscribe" element={<SubscriptionFinished />} />
               <Route path="/legal" element={<Legal />} />

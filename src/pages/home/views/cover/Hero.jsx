@@ -106,7 +106,7 @@ const Hero = () => {
             </HeroButton>
             <HeroButton
               variant="invert"
-              to={isLoggedIn ? "/profile" : "/login"}
+              to={isLoggedIn ? "/compte" : "/login"}
             >
               {t("home.hero.cta-acces")}
             </HeroButton>
