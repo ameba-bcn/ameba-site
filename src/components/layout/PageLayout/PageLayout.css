@@ -14,7 +14,8 @@
 .page-layout--notfound,
 .page-layout--socis,
 .page-layout--compte,
-.page-layout--nou-soci {
+.page-layout--nou-soci,
+.page-layout--legal {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -37,7 +38,8 @@
   background-color: var(--section-shop);
 }
 
-.page-layout--nou-soci {
+.page-layout--nou-soci,
+.page-layout--legal {
   background-color: var(--color-cream);
 }
 
@@ -58,7 +60,8 @@
 .page-layout--notfound > .page-layout__inner,
 .page-layout--socis > .page-layout__inner,
 .page-layout--compte > .page-layout__inner,
-.page-layout--nou-soci > .page-layout__inner {
+.page-layout--nou-soci > .page-layout__inner,
+.page-layout--legal > .page-layout__inner {
   padding-left: var(--page-margin-x);
   padding-right: var(--page-margin-x);
 }
@@ -78,7 +81,8 @@
 .page-layout--notfound .page-layout__content,
 .page-layout--socis .page-layout__content,
 .page-layout--compte .page-layout__content,
-.page-layout--nou-soci .page-layout__content {
+.page-layout--nou-soci .page-layout__content,
+.page-layout--legal .page-layout__content {
   text-align: left;
 }
 

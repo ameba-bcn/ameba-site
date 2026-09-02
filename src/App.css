@@ -141,8 +141,6 @@
 
 .app .SupportContent { background-color: var(--color-cream); }
 
-.app #contacte { background-color: var(--color-negro); }
-
 .app .HomeContent {
   display: block;
   overflow: auto;
