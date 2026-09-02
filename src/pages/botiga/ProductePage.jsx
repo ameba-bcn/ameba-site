@@ -140,7 +140,7 @@ function ProductePage() {
   }
 
   return (
-    <PageLayout section="shop" promo loading={loading}>
+    <PageLayout section="shop" promo loading={loading} flushBottom>
       {!loading && name && (
         <PageMeta
           title={name}

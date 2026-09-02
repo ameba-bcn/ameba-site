@@ -89,6 +89,14 @@
   flex: 1;
 }
 
+/* Pages that end in a full-bleed band meant to sit flush against the
+   footer (e.g. a closing CTA band, a buy bar) opt into this via
+   PageLayout's `flushBottom` prop instead of fighting the shared 40px
+   bottom padding with negative margins. */
+.page-layout__inner.page-layout__inner--flush {
+  padding-bottom: 0;
+}
+
 .page-layout__content {
   flex: 1;
 }
