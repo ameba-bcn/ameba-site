@@ -26,7 +26,7 @@ export default function LogComponent() {
         <Navigate to={item_variant_ids.length > 0 ? "/checkout" : "/"} replace />
       );
     }
-    return <Navigate to="/validate-email" replace />;
+    return <Navigate to="/activate" state={{ email: redirect }} replace />;
   }
 
   return (

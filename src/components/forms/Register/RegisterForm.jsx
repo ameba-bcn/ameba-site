@@ -25,7 +25,7 @@ export default function RegisterForm({ setRedirect }) {
     register(registerData)
       .then(() => {
         setLoading(false);
-        setRedirect(true);
+        setRedirect(email);
       })
       .catch(() => {
         setLoading(false);
