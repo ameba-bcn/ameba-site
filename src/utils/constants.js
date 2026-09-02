@@ -75,6 +75,16 @@ export const getErrors = () => ({
       "Título: este campo es obligatorio",
     ),
   },
+  REPEAT_PASSWORD: {
+    REQUIRED: msg(
+      "Repeteix la contrasenya: aquest camp es obligatori",
+      "Repite la contraseña: este campo es obligatorio",
+    ),
+    MISMATCH: msg(
+      "Les dues contrasenyes no coincideixen",
+      "Las dos contraseñas no coinciden",
+    ),
+  },
   GENERIC: {
     REQUIRED: msg("Aquest camp es obligatori", "Este campo es obligatorio"),
   },

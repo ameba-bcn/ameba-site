@@ -1,0 +1,87 @@
+.recovery-form__step-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-naranja);
+}
+
+.recovery-sent {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.recovery-sent__callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: rgba(242, 227, 201, 0.08);
+  border-left: 3px solid var(--color-naranja);
+  padding: 16px 18px;
+}
+
+.recovery-sent__callout p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.recovery-sent__tips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 13.5px;
+  color: rgba(242, 227, 201, 0.75);
+}
+
+.recovery-sent__tips li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.recovery-sent__tips li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  background: var(--color-naranja);
+}
+
+.recovery-sent__tips li:nth-child(2)::before {
+  background: var(--color-rojo);
+}
+
+.recovery-sent__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.recovery-sent__actions .auth-form__reveal {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.recovery-done {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(242, 227, 201, 0.85);
+}
+
+.recovery-done a {
+  color: var(--color-naranja);
+  text-decoration: underline;
+}
