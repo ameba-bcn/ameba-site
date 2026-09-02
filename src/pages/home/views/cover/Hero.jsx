@@ -101,7 +101,7 @@ const Hero = () => {
             <li>{t("home.hero.bullet-3")}</li>
           </ul>
           <div className="hero__actions">
-            <HeroButton to="/memberships">
+            <HeroButton to="/nou-soci">
               {t("home.hero.cta-soci")}
             </HeroButton>
             <HeroButton

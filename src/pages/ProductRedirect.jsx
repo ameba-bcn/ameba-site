@@ -10,7 +10,7 @@ const ProductRedirect = () => {
 
   if (kind === "activitat" && id) return <Navigate to={`/lab/${id}`} replace />;
   if (kind === "producte" && id) return <Navigate to={`/botiga/${id}`} replace />;
-  if (kind === "soci") return <Navigate to="/memberships" replace />;
+  if (kind === "soci") return <Navigate to="/nou-soci" replace />;
 
   return <Navigate to="/" replace />;
 };

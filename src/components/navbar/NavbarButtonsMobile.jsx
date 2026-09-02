@@ -183,7 +183,7 @@ export default function NavbarButtonsMobile(props) {
             className="nav-drawer-cta__button"
             onClick={() => {
               closeMenu();
-              navigate("/memberships");
+              navigate("/nou-soci");
             }}
           >
             {t("home.hero.cta-soci")}

@@ -175,7 +175,7 @@ function LabDetail() {
 
           <section className="lab-detail__promo">
             <p>{t("lab.promo-text")}</p>
-            <Link to="/memberships" className="lab-detail__badge">
+            <Link to="/nou-soci" className="lab-detail__badge">
               {t("footer.hazte-socio")}
             </Link>
           </section>

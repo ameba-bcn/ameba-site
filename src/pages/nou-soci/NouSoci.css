@@ -1,0 +1,539 @@
+.nou-soci {
+  width: 100%;
+  color: var(--color-negro);
+}
+
+.nou-soci--empty {
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 15px;
+}
+
+.nou-soci__breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 18px 0 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-negro);
+}
+
+.nou-soci__breadcrumb a {
+  color: var(--color-negro);
+  text-decoration: none;
+}
+
+.nou-soci__breadcrumb a:hover {
+  opacity: 0.6;
+}
+
+/* ── Hero ── */
+.nou-soci__hero {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 44px;
+  align-items: start;
+  padding: 12px 0 48px;
+}
+
+.nou-soci__hero-main {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  min-width: 0;
+}
+
+.nou-soci__dots {
+  display: flex;
+  gap: 8px;
+}
+
+.nou-soci__dot {
+  width: 13px;
+  height: 13px;
+  display: block;
+}
+
+.nou-soci__dot--negro {
+  background: var(--color-negro);
+}
+
+.nou-soci__dot--naranja {
+  background: var(--color-naranja);
+}
+
+.nou-soci__dot--rojo {
+  background: var(--color-rojo);
+}
+
+.nou-soci__dot--amarillo {
+  background: var(--color-amarillo);
+}
+
+.nou-soci__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(64px, 11vw, 152px);
+  line-height: 0.85;
+  letter-spacing: 0.005em;
+}
+
+.nou-soci__lead {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.45;
+  max-width: 46ch;
+  text-wrap: pretty;
+}
+
+.nou-soci__lead p {
+  margin: 0 0 12px;
+}
+
+.nou-soci__lead p:last-child {
+  margin-bottom: 0;
+}
+
+.nou-soci__stats {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  flex-wrap: wrap;
+  padding-top: 2px;
+}
+
+.nou-soci__stats-sep {
+  width: 2px;
+  height: 44px;
+  background: rgba(29, 29, 27, 0.25);
+  display: block;
+}
+
+.nou-soci__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.nou-soci__stat-value {
+  font-family: var(--font-display);
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.nou-soci__stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: rgba(29, 29, 27, 0.62);
+}
+
+/* ── Sticky membership card ── */
+.nou-soci__card {
+  position: sticky;
+  top: 22px;
+  border: 2px solid var(--color-negro);
+  background: var(--color-negro);
+  color: var(--color-cream);
+  box-shadow: 8px 8px 0 var(--color-naranja);
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.nou-soci__card-image {
+  aspect-ratio: 4 / 3;
+  background: rgba(242, 227, 201, 0.08);
+}
+
+.nou-soci__card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.nou-soci__card-image-placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+.nou-soci__card-body {
+  padding: 20px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nou-soci__card-price-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.nou-soci__card-price-label {
+  font-family: var(--font-display);
+  font-size: 28px;
+  letter-spacing: 0.03em;
+}
+
+.nou-soci__card-price-value {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+  color: var(--color-naranja);
+  white-space: nowrap;
+}
+
+.nou-soci__card-note {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(242, 227, 201, 0.78);
+  text-wrap: pretty;
+}
+
+.nou-soci__card-bullets {
+  list-style: none;
+  margin: 0;
+  padding: 14px 0;
+  border-top: 1px solid rgba(242, 227, 201, 0.3);
+  border-bottom: 1px solid rgba(242, 227, 201, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13.5px;
+}
+
+.nou-soci__card-bullets li {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.nou-soci__card-bullet-dot {
+  width: 9px;
+  height: 9px;
+  display: block;
+  flex: none;
+}
+
+.nou-soci__card-bullet-dot--naranja {
+  background: var(--color-naranja);
+}
+
+.nou-soci__card-bullet-dot--rojo {
+  background: var(--color-rojo);
+}
+
+.nou-soci__card-bullet-dot--amarillo {
+  background: var(--color-amarillo);
+}
+
+.nou-soci__card-cta-note {
+  min-height: 17px;
+  font-size: 12.5px;
+  color: var(--color-naranja);
+}
+
+.nou-soci__card-cta-note a {
+  color: var(--color-naranja);
+  text-decoration: underline;
+}
+
+.nou-soci__card-secure {
+  font-size: 11.5px;
+  color: rgba(242, 227, 201, 0.6);
+}
+
+/* ── Shared badge button ── */
+.nou-soci__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 22px;
+  letter-spacing: 0.02em;
+  background: var(--color-cream);
+  color: var(--color-negro);
+  border: 2px solid var(--color-negro);
+  box-shadow: 5px 5px 0 var(--color-naranja);
+  padding: 10px 20px 7px;
+  min-height: 48px;
+  cursor: pointer;
+}
+
+.nou-soci__badge:hover:not(:disabled) {
+  background: var(--color-naranja);
+  color: var(--color-negro);
+  box-shadow: 5px 5px 0 var(--color-negro);
+}
+
+.nou-soci__badge:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Full-bleed color bands (same viewport-relative bleed technique used
+   elsewhere, since .nou-soci sits inside the padded page-layout__inner) ── */
+.nou-soci__band {
+  box-sizing: border-box;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: var(--page-margin-x);
+  padding-right: var(--page-margin-x);
+}
+
+.nou-soci__band--negro {
+  background: var(--color-negro);
+  color: var(--color-cream);
+}
+
+.nou-soci__band--naranja {
+  background: var(--color-naranja);
+  color: var(--color-negro);
+  border-top: 2px solid var(--color-negro);
+}
+
+.nou-soci__shell {
+  max-width: 1176px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.nou-soci__section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.nou-soci__section-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.4vw, 52px);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+}
+
+.nou-soci__section-hint {
+  font-size: 12.5px;
+  color: rgba(242, 227, 201, 0.65);
+}
+
+/* ── Què inclou ── */
+.nou-soci__benefits {
+  padding: 44px 0 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.nou-soci__benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.nou-soci__benefit {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 20px;
+  border: 2px solid var(--color-cream);
+  min-width: 0;
+}
+
+.nou-soci__benefit-title {
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: 0.02em;
+}
+
+.nou-soci__benefit-text {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.nou-soci__benefit-text a {
+  color: var(--color-cream);
+  text-decoration: underline;
+}
+
+/* ── Com funciona ── */
+.nou-soci__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 48px 0 44px;
+}
+
+.nou-soci__steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.nou-soci__step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  min-width: 0;
+}
+
+.nou-soci__step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex: none;
+  background: var(--color-negro);
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-size: 23px;
+  padding-top: 3px;
+}
+
+.nou-soci__step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.nou-soci__step-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  letter-spacing: 0.02em;
+}
+
+.nou-soci__step-text {
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
+/* ── FAQ ── */
+.nou-soci__faq {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px 0 48px;
+  border-top: 2px solid var(--color-negro);
+}
+
+.nou-soci__faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 32px;
+}
+
+.nou-soci__faq-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(29, 29, 27, 0.3);
+  min-width: 0;
+}
+
+.nou-soci__faq-question {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.nou-soci__faq-answer {
+  font-size: 13.5px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.nou-soci__faq-answer a {
+  color: var(--color-negro);
+  text-decoration: underline;
+}
+
+/* ── Closing CTA ── */
+.nou-soci__closing {
+  padding: 36px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.nou-soci__closing-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.nou-soci__closing-title {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 4.6vw, 54px);
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+}
+
+.nou-soci__closing-lead {
+  font-size: 14px;
+  font-weight: 700;
+  max-width: 48ch;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.nou-soci__badge--closing {
+  box-shadow: 5px 5px 0 var(--color-cream);
+}
+
+.nou-soci__badge--closing:hover:not(:disabled) {
+  background: var(--color-negro);
+  color: var(--color-cream);
+  box-shadow: 5px 5px 0 var(--color-cream);
+}
+
+@media (max-width: 1040px) {
+  .nou-soci__hero {
+    grid-template-columns: 1fr;
+  }
+
+  .nou-soci__card {
+    position: static;
+  }
+
+  .nou-soci__benefits-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .nou-soci__steps-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .nou-soci__benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nou-soci__faq-grid {
+    grid-template-columns: 1fr;
+  }
+}
