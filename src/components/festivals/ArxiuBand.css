@@ -1,0 +1,110 @@
+/* Full-bleed like the other black bands elsewhere in the redesign — this
+   section lives inside .page-layout__inner's own var(--page-margin-x)
+   padding, so it needs the same viewport-relative bleed to reach edge to
+   edge regardless of viewport width. */
+.arxiu-band {
+  box-sizing: border-box;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: 48px;
+  background: var(--color-negro);
+  color: var(--color-cream);
+  padding: 48px var(--page-margin-x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+
+.arxiu-band__previews {
+  display: flex;
+  flex: none;
+}
+
+.arxiu-band__preview {
+  width: 120px;
+  height: 120px;
+  flex: none;
+  margin-left: -28px;
+  border: 3px solid var(--color-negro);
+  background: rgba(242, 227, 201, 0.08);
+  overflow: hidden;
+  transform: rotate(calc((var(--i) - 1.5) * 4deg));
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.4);
+}
+
+.arxiu-band__preview:first-child {
+  margin-left: 0;
+}
+
+.arxiu-band__preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(0.3);
+}
+
+.arxiu-band__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1 1 320px;
+  max-width: 480px;
+  min-width: 260px;
+}
+
+.arxiu-band__title {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4vw, 44px);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+}
+
+.arxiu-band__lead {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(242, 227, 201, 0.78);
+  text-wrap: pretty;
+}
+
+.arxiu-band__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 19px;
+  letter-spacing: 0.02em;
+  background: var(--color-cream);
+  color: var(--color-negro);
+  border: 2px solid var(--color-cream);
+  box-shadow: 5px 5px 0 var(--color-amarillo);
+  padding: 10px 20px 7px;
+  min-height: 48px;
+  text-decoration: none;
+}
+
+.arxiu-band__cta:hover {
+  opacity: 1;
+  background: var(--color-amarillo);
+  box-shadow: 5px 5px 0 var(--color-cream);
+}
+
+@media screen and (max-width: 760px) {
+  .arxiu-band {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px var(--page-margin-x);
+    gap: 28px;
+  }
+
+  .arxiu-band__preview {
+    width: 76px;
+    height: 76px;
+    margin-left: -18px;
+  }
+}

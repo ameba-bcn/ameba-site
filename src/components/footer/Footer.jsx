@@ -74,7 +74,7 @@ export default function Footer() {
           <h3>{t("menu.lab")}</h3>
           <div className="ameba-footer__links">
             <NavLink to="/lab">{t("footer.agenda")}</NavLink>
-            <NavLink to="/gallery">{t("footer.archivo")}</NavLink>
+            <NavLink to="/festivals/arxiu">{t("footer.archivo")}</NavLink>
           </div>
         </nav>
 

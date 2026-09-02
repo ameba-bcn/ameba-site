@@ -1,6 +1,6 @@
 import React from "react";
 import { describe, it, expect, beforeEach } from "vitest";
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, within } from "@testing-library/react";
 import { useLocation } from "react-router-dom";
 import renderWithProviders from "../../test/helpers/renderWithProviders";
 import useDataStore from "../../stores/useDataStore";
@@ -46,7 +46,7 @@ describe("Festivals", () => {
   });
 
   it("filters the grid by year and reflects it in the URL", () => {
-    renderWithProviders(
+    const { container } = renderWithProviders(
       <>
         <Festivals />
         <LocationProbe />
@@ -57,9 +57,10 @@ describe("Festivals", () => {
     fireEvent.click(screen.getByText("Any"));
     fireEvent.click(screen.getByText("2024"));
 
-    expect(screen.getByText("Parkfest 2024")).toBeInTheDocument();
-    expect(screen.queryByText("Parkfest 2025")).not.toBeInTheDocument();
-    expect(screen.queryByText("Altre Fest 2025")).not.toBeInTheDocument();
+    const grid = within(container.querySelector(".festivals__card-grid"));
+    expect(grid.getByText("Parkfest 2024")).toBeInTheDocument();
+    expect(grid.queryByText("Parkfest 2025")).not.toBeInTheDocument();
+    expect(grid.queryByText("Altre Fest 2025")).not.toBeInTheDocument();
     expect(screen.getByTestId("location-search").textContent).toContain("any=2024");
   });
 
@@ -87,5 +88,40 @@ describe("Festivals", () => {
 
     expect(screen.getByText("Parkfest 2025")).toBeInTheDocument();
     expect(screen.getByTestId("location-search").textContent).toBe("");
+  });
+
+  it("features the next upcoming festival when one exists", () => {
+    const farFuture = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString();
+    const nearFuture = new Date(Date.now() + 5 * 24 * 60 * 60 * 1000).toISOString();
+    useDataStore.setState({
+      agenda: [
+        festival({ id: 1, name: "Parkfest passat", datetime: "2020-06-01T20:00:00Z" }),
+        festival({ id: 2, name: "Fest llunyà", datetime: farFuture }),
+        festival({ id: 3, name: "Fest proper", datetime: nearFuture }),
+      ],
+    });
+    const { container } = renderWithProviders(<Festivals />, { route: "/festivals" });
+
+    expect(
+      container.querySelector(".featured-festival__title").textContent,
+    ).toBe("Fest proper");
+  });
+
+  it("falls back to the most recent past festival when none are upcoming, and excludes it from the grid", () => {
+    useDataStore.setState({
+      agenda: [
+        festival({ id: 1, name: "Parkfest 2024", datetime: "2024-06-01T20:00:00Z" }),
+        festival({ id: 2, name: "Altre Fest 2025", datetime: "2025-07-01T20:00:00Z" }),
+      ],
+    });
+    const { container } = renderWithProviders(<Festivals />, { route: "/festivals" });
+
+    expect(
+      container.querySelector(".featured-festival__title").textContent,
+    ).toBe("Altre Fest 2025");
+
+    const grid = within(container.querySelector(".festivals__card-grid"));
+    expect(grid.getByText("Parkfest 2024")).toBeInTheDocument();
+    expect(grid.queryByText("Altre Fest 2025")).not.toBeInTheDocument();
   });
 });

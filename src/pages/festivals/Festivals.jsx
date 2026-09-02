@@ -14,6 +14,7 @@ import CardGrid from "../../components/ui/CardGrid";
 import AmebaCard from "../../components/ui/AmebaCard";
 import LoadMoreButton from "../../components/ui/LoadMoreButton";
 import FeaturedFestival, { useFeaturedFestivalReveal } from "../../components/festivals/FeaturedFestival";
+import ArxiuBand from "../../components/festivals/ArxiuBand";
 import heroImage from "../../assets/images/home/home2.jpg";
 import { gsap, Flip, prefersReducedMotion } from "../../utils/gsapSetup";
 import usePageEnter from "../../hooks/use-page-enter";
@@ -82,17 +83,27 @@ function Festivals() {
 
   const festivals = useMemo(() => selectFestivals(agenda), [agenda]);
 
+  // Next upcoming festival when there is one; otherwise the most recent
+  // past one, so the featured band is never empty just because nothing's
+  // scheduled yet.
   const featured = useMemo(() => {
     const now = new Date();
     const upcoming = festivals
       .filter((f) => new Date(f.datetime) >= now)
       .sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
-    return upcoming[0] ?? null;
+    if (upcoming[0]) return upcoming[0];
+    const past = festivals
+      .filter((f) => new Date(f.datetime) < now)
+      .sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
+    return past[0] ?? null;
   }, [festivals]);
 
   const historic = useMemo(
-    () => sortByDate(festivals.filter((f) => new Date(f.datetime) < new Date())),
-    [festivals],
+    () =>
+      sortByDate(
+        festivals.filter((f) => new Date(f.datetime) < new Date() && f.id !== featured?.id),
+      ),
+    [festivals, featured],
   );
 
   const years = useMemo(
@@ -169,7 +180,7 @@ function Festivals() {
       {featured ? (
         <FeaturedFestival festival={featured} />
       ) : (
-        // TODO: placeholder until there's an upcoming festival with real images
+        // No festival-type events at all yet (neither upcoming nor past).
         <div className="featured-festival" ref={fallbackFeaturedRef}>
           <img className="featured-festival__image" src={heroImage} alt="" />
         </div>
@@ -233,6 +244,8 @@ function Festivals() {
           )}
         </>
       )}
+
+      <ArxiuBand />
       </div>
     </PageLayout>
   );
