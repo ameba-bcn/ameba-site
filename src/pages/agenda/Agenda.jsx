@@ -16,7 +16,7 @@ export default function Agenda() {
       loading={isEventsLoading}
       banner={{
         sentence: t("banners.soci-curt"),
-        link: "/memberships",
+        link: "/nou-soci",
         color: "var(--color-rojo)",
       }}
     >

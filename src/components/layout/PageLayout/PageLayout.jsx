@@ -15,16 +15,18 @@ export default function PageLayout({
   children,
   section,
   promo,
+  flushBottom,
 }) {
   const contentClass = `page-layout__content${centered ? " page-layout__content--centered" : ""}`;
   const rootClass = [className, section && `page-layout--${section}`]
     .filter(Boolean)
     .join(" ");
+  const innerClass = `page-layout__inner${flushBottom ? " page-layout__inner--flush" : ""}`;
 
   return (
     <div className={rootClass}>
       {promo && <PromoBar />}
-      <div className="page-layout__inner">
+      <div className={innerClass}>
         {title && <PowerTitle title={title} {...titleProps} />}
         <div className={contentClass}>
           {loading ? (

@@ -65,7 +65,7 @@ export default function Footer() {
         <nav className="ameba-footer__nav" aria-label={t("menu.associacio")}>
           <h3>{t("menu.associacio")}</h3>
           <div className="ameba-footer__links">
-            <NavLink to="/memberships">{t("footer.hazte-socio")}</NavLink>
+            <NavLink to="/nou-soci">{t("footer.hazte-socio")}</NavLink>
             <NavLink to="/associacio/socis">{t("footer.socios")}</NavLink>
           </div>
         </nav>
@@ -74,7 +74,7 @@ export default function Footer() {
           <h3>{t("menu.lab")}</h3>
           <div className="ameba-footer__links">
             <NavLink to="/lab">{t("footer.agenda")}</NavLink>
-            <NavLink to="/gallery">{t("footer.archivo")}</NavLink>
+            <NavLink to="/festivals/arxiu">{t("footer.archivo")}</NavLink>
           </div>
         </nav>
 

@@ -73,7 +73,7 @@ export default function PromoBar({ closable = false }) {
 
   return (
     <div className="promo-bar" ref={rootRef}>
-      <Link to="/memberships" className="promo-bar__link">
+      <Link to="/nou-soci" className="promo-bar__link">
         <span className="promo-bar__text">
           {t("banners.promo-text-1")}
           <strong>{t("banners.promo-text-bold")}</strong>

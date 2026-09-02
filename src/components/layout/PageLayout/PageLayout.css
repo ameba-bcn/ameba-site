@@ -13,7 +13,8 @@
 .page-layout--auth,
 .page-layout--notfound,
 .page-layout--socis,
-.page-layout--compte {
+.page-layout--compte,
+.page-layout--nou-soci {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -36,6 +37,10 @@
   background-color: var(--section-shop);
 }
 
+.page-layout--nou-soci {
+  background-color: var(--color-cream);
+}
+
 .page-layout--auth,
 .page-layout--notfound,
 .page-layout--socis,
@@ -52,7 +57,8 @@
 .page-layout--shop > .page-layout__inner,
 .page-layout--notfound > .page-layout__inner,
 .page-layout--socis > .page-layout__inner,
-.page-layout--compte > .page-layout__inner {
+.page-layout--compte > .page-layout__inner,
+.page-layout--nou-soci > .page-layout__inner {
   padding-left: var(--page-margin-x);
   padding-right: var(--page-margin-x);
 }
@@ -71,7 +77,8 @@
 .page-layout--associacio .page-layout__content,
 .page-layout--notfound .page-layout__content,
 .page-layout--socis .page-layout__content,
-.page-layout--compte .page-layout__content {
+.page-layout--compte .page-layout__content,
+.page-layout--nou-soci .page-layout__content {
   text-align: left;
 }
 
@@ -80,6 +87,14 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+/* Pages that end in a full-bleed band meant to sit flush against the
+   footer (e.g. a closing CTA band, a buy bar) opt into this via
+   PageLayout's `flushBottom` prop instead of fighting the shared 40px
+   bottom padding with negative margins. */
+.page-layout__inner.page-layout__inner--flush {
+  padding-bottom: 0;
 }
 
 .page-layout__content {

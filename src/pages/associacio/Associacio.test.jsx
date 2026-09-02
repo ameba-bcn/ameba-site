@@ -24,11 +24,11 @@ describe("Associacio", () => {
     expect(screen.getByText("RADIO")).toBeInTheDocument();
   });
 
-  it("links the CTA button to /memberships and the directory button to /associacio/socis", () => {
+  it("links the CTA button to /nou-soci and the directory button to /associacio/socis", () => {
     renderWithProviders(<Associacio />, { route: "/associacio" });
     expect(screen.getByText("INSCRIU-TE!").closest("a")).toHaveAttribute(
       "href",
-      "/memberships",
+      "/nou-soci",
     );
     expect(
       screen.getByText("PROJECTES SOCIS/SÒCIES").closest("a"),

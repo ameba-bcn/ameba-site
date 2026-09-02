@@ -26,7 +26,7 @@ export default function LogComponent() {
         <Navigate to={item_variant_ids.length > 0 ? "/checkout" : "/"} replace />
       );
     }
-    return <Navigate to="/validate-email" replace />;
+    return <Navigate to="/activate" state={{ email: redirect }} replace />;
   }
 
   return (
@@ -55,7 +55,7 @@ export default function LogComponent() {
           </span>
         </div>
         {user_profile !== "LOGGED" && (
-          <Link to="/memberships" className="auth-card__cta">
+          <Link to="/nou-soci" className="auth-card__cta">
             {t("login.encara")}
             <Icon icon="plus" width="18" height="18" />
           </Link>

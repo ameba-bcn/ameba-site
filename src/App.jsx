@@ -32,25 +32,18 @@ const SociDetail = lazyWithRetry(() => import("./pages/socios/SociDetail"));
 const SocisDirectory = lazyWithRetry(
   () => import("./pages/socios/SocisDirectory"),
 );
-const Gallery = lazyWithRetry(() => import("./pages/gallery/Gallery"));
-const GalleryAlbum = lazyWithRetry(
-  () => import("./pages/gallery/GalleryAlbum"),
-);
 const LogSession = lazyWithRetry(() => import("./pages/LogSession"));
-const PasswordRecovery = lazyWithRetry(
-  () => import("./pages/PasswordRecovery"),
+const RecoveryReset = lazyWithRetry(
+  () => import("./pages/recovery/RecoveryReset"),
 );
 const CheckoutPage = lazyWithRetry(() => import("./pages/CheckoutPage"));
-const Memberships = lazyWithRetry(
-  () => import("./pages/memberships/Memberships"),
-);
-const SendEmailPasswordRecovery = lazyWithRetry(
-  () => import("./pages/SendEmailPasswordRecovery"),
+const NouSoci = lazyWithRetry(() => import("./pages/nou-soci/NouSoci"));
+const RecoveryRequest = lazyWithRetry(
+  () => import("./pages/recovery/RecoveryRequest"),
 );
 const QrClient = lazyWithRetry(() => import("./pages/QrClient"));
-const ValidateEmail = lazyWithRetry(() => import("./pages/ValidateEmail"));
-const LogMailConfirmation = lazyWithRetry(
-  () => import("./pages/LogMailConfirmation"),
+const ActivateAccount = lazyWithRetry(
+  () => import("./pages/activate/ActivateAccount"),
 );
 const LabDetail = lazyWithRetry(() => import("./pages/lab/LabDetail"));
 const ProductePage = lazyWithRetry(() => import("./pages/botiga/ProductePage"));
@@ -67,6 +60,10 @@ const Lab = lazyWithRetry(() => import("./pages/lab/Lab"));
 const Festivals = lazyWithRetry(() => import("./pages/festivals/Festivals"));
 const FestivalDetail = lazyWithRetry(
   () => import("./pages/festivals/FestivalDetail"),
+);
+const GalleryArxiu = lazyWithRetry(() => import("./pages/festivals/GalleryArxiu"));
+const GalleryArxiuAlbum = lazyWithRetry(
+  () => import("./pages/festivals/GalleryArxiuAlbum"),
 );
 const Associacio = lazyWithRetry(() => import("./pages/associacio/Associacio"));
 const QrLanding = lazyWithRetry(() => import("./pages/qr-landing/QrLanding"));
@@ -89,6 +86,13 @@ function ActivitatToLabRedirect() {
 function SociDetailRedirect() {
   const { id } = useParams();
   return <Navigate to={`/associacio/socis/${id}`} replace />;
+}
+
+// /gallery[/:slug/:year] moved under /festivals/arxiu[/:slug/:year]
+// (rediseño 2026) — same redirect-preserving-params treatment as above.
+function GalleryAlbumRedirect() {
+  const { slug, year } = useParams();
+  return <Navigate to={`/festivals/arxiu/${slug}/${year}`} replace />;
 }
 
 // /profile/profile and /profile/project were renamed to /compte/dades and
@@ -174,20 +178,18 @@ function App() {
               <Route path="/socis" element={<Navigate to="/associacio/socis" replace />} />
               <Route path="/associacio/socis/:id" element={<SociDetail />} />
               <Route path="/associacio/socis" element={<SocisDirectory />} />
-              <Route path="/gallery/:slug/:year" element={<GalleryAlbum />} />
-              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/gallery/:slug/:year" element={<GalleryAlbumRedirect />} />
+              <Route path="/gallery" element={<Navigate to="/festivals/arxiu" replace />} />
               <Route path="/login" element={<LogSession />} />
               <Route path="/signup" element={<LogSession />} />
-              <Route path="/recovery" element={<PasswordRecovery />} />
+              <Route path="/recovery" element={<RecoveryReset />} />
               <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/memberships" element={<Memberships />} />
-              <Route
-                path="/send-recovery"
-                element={<SendEmailPasswordRecovery />}
-              />
+              <Route path="/memberships" element={<Navigate to="/nou-soci" replace />} />
+              <Route path="/nou-soci" element={<NouSoci />} />
+              <Route path="/send-recovery" element={<RecoveryRequest />} />
               <Route path="/member-card" element={<QrClient />} />
-              <Route path="/validate-email" element={<ValidateEmail />} />
-              <Route path="/activate" element={<LogMailConfirmation />} />
+              <Route path="/validate-email" element={<Navigate to="/activate" replace />} />
+              <Route path="/activate" element={<ActivateAccount />} />
               <Route path="/product" element={<ProductRedirect />} />
               <Route path="/profile/:id" element={<ProfileToCompteRedirect />} />
               <Route path="/profile" element={<ProfileToCompteRedirect />} />
@@ -198,6 +200,8 @@ function App() {
               <Route path="/legal" element={<Legal />} />
               <Route path="/lab/:id" element={<LabDetail />} />
               <Route path="/lab" element={<Lab />} />
+              <Route path="/festivals/arxiu/:slug/:year" element={<GalleryArxiuAlbum />} />
+              <Route path="/festivals/arxiu" element={<GalleryArxiu />} />
               <Route path="/festivals/:id" element={<FestivalDetail />} />
               <Route path="/festivals" element={<Festivals />} />
               <Route path="/associacio" element={<Associacio />} />

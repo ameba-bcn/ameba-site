@@ -24,7 +24,7 @@ export default function QrClient() {
       className="logViewRed"
       banner={{
         sentence: t("banners.soci-curt"),
-        link: "/memberships",
+        link: "/nou-soci",
         color: "var(--color-cream)",
       }}
     >
