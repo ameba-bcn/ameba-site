@@ -5,7 +5,6 @@ import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import authService from "../../../../store/services/auth.service";
 import EmbeddedSpinner from "../../../../components/spinner/EmbeddedSpinner";
-import Button from "../../../../components/button/Button";
 import "./MemberQr.style.css";
 
 const toSecureUrl = (url) =>
@@ -81,31 +80,20 @@ const MemberQr = () => {
   const lang = i18next.language === "es" ? "es-ES" : "ca-ES";
   const memberSinceDate = created ? new Date(created) : null;
   const memberSinceMonth = memberSinceDate
-    ? memberSinceDate
-        .toLocaleString(lang, { month: "short" })
-        .toUpperCase()
+    ? memberSinceDate.toLocaleString(lang, { month: "short" }).toUpperCase()
     : "";
-  const memberSinceYear = memberSinceDate
-    ? memberSinceDate.getFullYear()
-    : "";
+  const memberSinceYear = memberSinceDate ? memberSinceDate.getFullYear() : "";
 
   const memberName = `${first_name || ""} ${last_name || ""}`.trim();
-  const memberId = identity_card
-    ? `${identity_card}-${validYear}`
-    : "";
+  const memberId = identity_card ? `${identity_card}-${validYear}` : "";
 
   return (
     <div className="member-qr">
-      <div className="member-qr__title">{t("soci.carnet-title")}</div>
-      <div className="member-qr__description">{t("soci.carnet")}</div>
-
       <div className="member-card" ref={cardRef}>
         <div className="member-card__header">
           <div className="member-card__brand">
             <h1 className="member-card__logo">AMEBA</h1>
-            <p className="member-card__subtitle">
-              {t("soci.carnet-subtitle")}
-            </p>
+            <p className="member-card__subtitle">{t("soci.carnet-subtitle")}</p>
           </div>
           {validYear && (
             <div className="member-card__valid-badge">
@@ -124,20 +112,22 @@ const MemberQr = () => {
 
         <div className="member-card__info">
           <h2 className="member-card__name">{memberName}</h2>
-          {memberId && (
-            <p className="member-card__id">ID: {memberId}</p>
-          )}
+          {memberId && <p className="member-card__id">ID: {memberId}</p>}
         </div>
 
         <div className="member-card__footer">
           <div className="member-card__footer-item">
-            <span className="member-card__footer-label">{t("soci.carnet-member-since")}</span>
+            <span className="member-card__footer-label">
+              {t("soci.carnet-member-since")}
+            </span>
             <span className="member-card__footer-value">
               {memberSinceMonth} {memberSinceYear}
             </span>
           </div>
           <div className="member-card__footer-item">
-            <span className="member-card__footer-label">{t("soci.carnet-member-type")}</span>
+            <span className="member-card__footer-label">
+              {t("soci.carnet-member-type")}
+            </span>
             <span className="member-card__footer-value">
               {type || activeMembership?.subscription_type || ""}
             </span>
@@ -145,15 +135,16 @@ const MemberQr = () => {
         </div>
       </div>
 
-      <Button
-        className="member-qr__download-btn"
+      <p className="member-qr__description">{t("soci.carnet")}</p>
+
+      <button
+        type="button"
+        className="compte-badge member-qr__download-btn"
         onClick={handleDownload}
         disabled={downloading}
-        loading={downloading}
-        buttonStyle="boton--primary--solid"
       >
         {t("soci.carnet-download")}
-      </Button>
+      </button>
     </div>
   );
 };

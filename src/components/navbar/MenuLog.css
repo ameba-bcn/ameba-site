@@ -1,19 +1,107 @@
 .menu-log {
   position: relative;
+  display: flex;
+}
+
+.menu-log__trigger {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: none;
+  border: none;
+  padding: 6px 2px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.03em;
+  color: var(--color-naranja);
+  text-transform: uppercase;
+}
+
+.menu-log__trigger:hover,
+.menu-log__trigger[aria-expanded="true"] {
+  color: var(--color-cream);
+}
+
+.menu-log__caret {
+  font-size: 0.75rem;
+  line-height: 1;
+  transform: translateY(-2px);
+}
+
+/* Popover content — the shared .popover-menu (Dropdown.jsx) is reused by
+   other dropdowns too (e.g. DropdownFilter), so its default box model is
+   left alone and this instance is re-skinned from within. */
+.menu-log .popover-menu {
+  right: 0;
+  min-width: 250px;
+  padding: 0;
+  border-radius: 0;
+  background-color: var(--color-cream);
+  border: 2px solid var(--color-negro);
+  box-shadow: 6px 6px 0 rgba(242, 227, 201, 0.9);
+}
+
+.menu-log__pop {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-log__head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 18px 12px;
+  border-bottom: 2px solid var(--color-negro);
+}
+
+.menu-log__fullname {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  color: var(--color-negro);
+}
+
+.menu-log__meta {
+  font-size: 11.5px;
+  color: rgba(29, 29, 27, 0.65);
 }
 
 .menu-log__item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.03em;
+  color: var(--color-negro);
+  padding: 12px 18px;
+  min-height: 48px;
+  box-sizing: border-box;
 }
 
-.menu-log__item .item {
-  color: var(--color-negro);
-  font-family: var(--font-display);
-  font-size: 30px;
-  font-weight: 400;
-  text-transform: uppercase;
-  cursor: pointer;
+.menu-log__item:hover {
+  background: var(--color-negro);
+  color: var(--color-cream);
+}
+
+.menu-log__foot {
+  border-top: 2px solid var(--color-negro);
+}
+
+.menu-log__item--danger {
+  color: var(--color-rojo);
+}
+
+.menu-log__item--danger:hover {
+  background: var(--color-rojo);
+  color: var(--color-cream);
 }

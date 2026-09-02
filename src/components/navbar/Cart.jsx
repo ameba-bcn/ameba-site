@@ -1,155 +1,164 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
+import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import Icon from "../ui/Icon";
 import Dropdown from "../dropdown/Dropdown";
-import { NavLink } from "react-router-dom";
-import Button from "../button/Button";
 import { truncate, priceMayDiscount } from "../../utils/utils";
-import { useTranslation } from "react-i18next";
 import useOutsideClick from "../../hooks/use-outside-click";
 import useProfileStore from "../../stores/useProfileStore";
 import useAuthStore from "../../stores/useAuthStore";
+import useUIStore from "../../stores/useUIStore";
 import useCartStore from "../../stores/useCartStore";
 import "./DropdownCart.css";
 
 function Cart() {
-  const {
-    cart_data = {},
-    addToCart,
-    substractToCart,
-    cartBusy,
-  } = useCartStore();
+  const { cart_data = {}, addToCart, substractToCart, cartBusy } = useCartStore();
   const { isLoggedIn } = useAuthStore();
   const setGuestUser = useProfileStore((state) => state.setGuestUser);
   const setLoggedUser = useProfileStore((state) => state.setLoggedUser);
-  const { item_variants = [], count = 0, total = 0 } = cart_data;
-  const [cartMenuOpen, setCartMenuOpen] = useState(false);
+  const { isCartMenuOpen, openCartMenu, closeCartMenu } = useUIStore();
   const [t] = useTranslation("translation");
-  const arrMono = [];
+  const { item_variants = [], count = 0, total = 0 } = cart_data;
+  const dropdownRef = useRef("menulocart");
 
-  const getQty = (arr, id) => {
-    arrMono.push(id);
-    return arr.filter((x) => x.id === id).length;
-  };
+  useOutsideClick(dropdownRef, () => {
+    if (isCartMenuOpen) closeCartMenu();
+  });
 
-  const handleCloseCart = () => {
-    setCartMenuOpen(false);
-  };
+  if (item_variants.length === 0) return null;
 
-  const addItem = (id) => {
-    addToCart(id);
-  };
+  const seenIds = [];
+  const uniqueItems = item_variants.filter((item) => {
+    if (seenIds.includes(item.id)) return false;
+    seenIds.push(item.id);
+    return true;
+  });
+  const getQty = (id) => item_variants.filter((item) => item.id === id).length;
+  const discounted = item_variants.find(
+    (item) => item.discount_name && item.discount_value,
+  );
 
-  const isMemberProduct = (id) => {
-    return id in [26, 27]; // Controlar que el id de cart nunca cambie. IMPORTANTE
-  };
+  const isMemberProduct = (id) => id in [26, 27]; // Controlar que el id de cart nunca cambie. IMPORTANTE
 
+  const addItem = (id) => addToCart(id);
   const substractItem = (id) => {
     if (isMemberProduct(id)) {
       isLoggedIn ? setLoggedUser() : setGuestUser();
     }
     substractToCart(id);
   };
-
-  const checkoutToCart = () => {
+  const handleToggle = () => (isCartMenuOpen ? closeCartMenu() : openCartMenu());
+  const handleCheckoutClick = () => {
     isLoggedIn ? setLoggedUser() : setGuestUser();
-    setCartMenuOpen(false);
-    handleCloseCart();
+    closeCartMenu();
   };
-  const dropdownRef = React.useRef("menulocart");
 
-  useOutsideClick(dropdownRef, () => {
-    if (cartMenuOpen) handleCloseCart();
-  });
-
-  const checkoutRedirect = isLoggedIn ? "/checkout" : "/login";
   return (
-    item_variants.length > 0 && (
-      <li>
-        <div className="cart-icon-bubble-box" ref={dropdownRef}>
-          {cart_data ? <div className="bubbleCart">{count}</div> : null}
-          <Icon
-            icon="shoppingCart"
-            className="cartIconMenu"
-            type="hoverable-black"
-            onClick={() => setCartMenuOpen(!cartMenuOpen)}
-          />
+    <div className="cart-popover" ref={dropdownRef}>
+      <button
+        type="button"
+        className="nb-icon"
+        aria-label={t("checkout.cistella")}
+        aria-haspopup="dialog"
+        aria-expanded={isCartMenuOpen}
+        onClick={handleToggle}
+      >
+        <Icon
+          icon="shoppingCart"
+          className="cartIconMenu"
+          type="hoverable-black"
+          width="21"
+          height="21"
+        />
+        <span className="nb-count">{count}</span>
+      </button>
 
-          {cartMenuOpen && (
-            <Dropdown
-              externalClickOutside={true}
-              open={cartMenuOpen}
-              setIsOpen={handleCloseCart}
-            >
-              {item_variants !== undefined ? (
-                <>
-                  <div className="totalCart">
-                    Total: <span>{total}</span>
-                  </div>
-                  <hr className="separadorCartDrop" />
-                  {item_variants.map((el, index) =>
-                    arrMono.includes(el.id) ? null : (
-                      <div className="menuItemCart" key={index}>
-                        <div className="rowCartProduct">
-                          <div className="colCartProduct1">
-                            <div
-                              className={`addCart${cartBusy ? " disabled" : ""}`}
-                              onClick={() => !cartBusy && addItem(el.id)}
-                            >
-                              <Icon icon="plus" />
-                            </div>
-                            <div
-                              className={`subsCart${cartBusy ? " disabled" : ""}`}
-                              onClick={() => !cartBusy && substractItem(el.id)}
-                            >
-                              <Icon icon="minus" />
-                            </div>
-                          </div>
-                          <div className="colCartProduct2">
-                            <div className="titleCartProduct">
-                              {truncate(el.item_name, 25)}
-                            </div>
-                            <div className="rowDetailedCart">
-                              <div className="cartPriceProduct">
-                                {priceMayDiscount(
-                                  el?.price,
-                                  el?.discount_value,
-                                  el?.discount_name,
-                                  t("form.descompte"),
-                                  el?.subtotal,
-                                )}
-                              </div>
-                              <div className="quantitySizeProduct">
-                                {el?.variant_details?.size !== "unique" &&
-                                  el?.variant_details?.size}
-                              </div>
-                              <div className="quantityPriceProduct">
-                                Qty: <span>{getQty(item_variants, el.id)}</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ),
-                  )}
-                  <hr className="separadorCartDrop" />
-                  <NavLink className="menuOptions" to={checkoutRedirect}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      buttonSize="boton--xxl"
-                      buttonStyle="boton--primary--solid"
-                      onClick={() => checkoutToCart()}
-                    >
-                      {t("checkout.finalitzarCompra")}
-                    </Button>
-                  </NavLink>
-                </>
-              ) : null}
-            </Dropdown>
+      <Dropdown open={isCartMenuOpen} setIsOpen={closeCartMenu} externalClickOutside>
+        <div className="cart-pop" role="dialog" aria-label={t("checkout.cistella")}>
+          <div className="cart-pop__head">
+            <span className="cart-pop__title">{t("checkout.cistella")}</span>
+            <span className="cart-pop__count">
+              {t("checkout.article-count", { count })}
+            </span>
+          </div>
+
+          <div className="cart-pop__items">
+            {uniqueItems.map((item) => (
+              <div className="cart-pop__item" key={item.id}>
+                {item.preview ? (
+                  <img className="cart-pop__thumb" src={item.preview} alt="" />
+                ) : (
+                  <div className="cart-pop__thumb cart-pop__thumb--empty" aria-hidden="true" />
+                )}
+                <div className="cart-pop__info">
+                  <span className="cart-pop__name">{truncate(item.item_name, 30)}</span>
+                  {item.variant_details?.size &&
+                    item.variant_details.size !== "unique" && (
+                      <span className="cart-pop__meta">{item.variant_details.size}</span>
+                    )}
+                  <span className="cart-pop__price">
+                    {priceMayDiscount(
+                      item.price,
+                      item.discount_value,
+                      item.discount_name,
+                      t("form.descompte"),
+                      item.subtotal,
+                    )}
+                  </span>
+                </div>
+                <div className="cart-pop__qty">
+                  <button
+                    type="button"
+                    className="nb-qty"
+                    aria-label={t("checkout.resta")}
+                    disabled={cartBusy}
+                    onClick={() => substractItem(item.id)}
+                  >
+                    −
+                  </button>
+                  <span className="cart-pop__qty-value">{getQty(item.id)}</span>
+                  <button
+                    type="button"
+                    className="nb-qty"
+                    aria-label={t("checkout.suma")}
+                    disabled={cartBusy}
+                    onClick={() => addItem(item.id)}
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {discounted && (
+            <div className="cart-pop__discount">
+              {t("checkout.codigo-aplicado", {
+                code: discounted.discount_name,
+                value: discounted.discount_value,
+              })}
+            </div>
           )}
+
+          <div className="cart-pop__foot">
+            <div className="cart-pop__total-row">
+              <span className="cart-pop__total-label">{t("checkout.total")}</span>
+              <span className="cart-pop__total-value">{total}</span>
+            </div>
+            <NavLink
+              className="nb-badge"
+              to={isLoggedIn ? "/checkout" : "/login"}
+              onClick={handleCheckoutClick}
+            >
+              {t("checkout.finalitzarCompra")}
+            </NavLink>
+            <button type="button" className="cart-pop__continue" onClick={closeCartMenu}>
+              {t("checkout.continua-comprant")}
+            </button>
+          </div>
         </div>
-      </li>
-    )
+      </Dropdown>
+    </div>
   );
 }
 

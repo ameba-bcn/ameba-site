@@ -560,19 +560,26 @@ function Associacio() {
 
         {/* Banda de estadístiques — mode "live" simula una caixa de ritmes 808 */}
         <div className="associacio__stats-panel">
-          <div className="associacio__stats-controls">
-            <button
-              type="button"
-              className={`associacio__stats-live-toggle${liveMode ? " is-on" : ""}`}
-              onClick={() => setLiveMode((v) => !v)}
-              aria-pressed={liveMode}
-            >
-              <span className="associacio__stats-live-led" aria-hidden="true" />
-              SYNTH ON
-            </button>
-          </div>
-          <div className="associacio__stats" role="list">
-            {STATS.map((stat, i) => (
+          <div
+            className="associacio__stats-inner"
+            style={{ "--stat-count": STATS.length }}
+          >
+            <div className="associacio__stats-controls">
+              <span className="associacio__stats-switch-label">SYNTH MODE</span>
+              <button
+                type="button"
+                className={`associacio__stats-switch${liveMode ? " is-on" : ""}`}
+                onClick={() => setLiveMode((v) => !v)}
+                role="switch"
+                aria-checked={liveMode}
+              >
+                <span className="associacio__stats-switch-track">
+                  <span className="associacio__stats-switch-thumb" />
+                </span>
+              </button>
+            </div>
+            <div className="associacio__stats" role="list">
+              {STATS.map((stat, i) => (
               <div
                 key={stat.key}
                 ref={(el) => (statRefs.current[i] = el)}
@@ -590,6 +597,7 @@ function Associacio() {
                 <span className="associacio__stat-value">{stat.value}</span>
               </div>
             ))}
+            </div>
           </div>
         </div>
 

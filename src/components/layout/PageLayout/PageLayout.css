@@ -12,7 +12,8 @@
 .page-layout--shop,
 .page-layout--auth,
 .page-layout--notfound,
-.page-layout--socis {
+.page-layout--socis,
+.page-layout--compte {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -37,7 +38,8 @@
 
 .page-layout--auth,
 .page-layout--notfound,
-.page-layout--socis {
+.page-layout--socis,
+.page-layout--compte {
   background-color: var(--color-negro);
 }
 
@@ -49,7 +51,8 @@
 .page-layout--lab > .page-layout__inner,
 .page-layout--shop > .page-layout__inner,
 .page-layout--notfound > .page-layout__inner,
-.page-layout--socis > .page-layout__inner {
+.page-layout--socis > .page-layout__inner,
+.page-layout--compte > .page-layout__inner {
   padding-left: var(--page-margin-x);
   padding-right: var(--page-margin-x);
 }
@@ -67,7 +70,8 @@
    throughout, per its reference. */
 .page-layout--associacio .page-layout__content,
 .page-layout--notfound .page-layout__content,
-.page-layout--socis .page-layout__content {
+.page-layout--socis .page-layout__content,
+.page-layout--compte .page-layout__content {
   text-align: left;
 }
 

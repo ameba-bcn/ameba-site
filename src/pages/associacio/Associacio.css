@@ -237,57 +237,97 @@
   background-color: var(--color-negro);
 }
 
-/* Interruptor "LIVE" — activa el mode caixa de ritmes 808 */
+/* Acota l'amplada de la capçalera i la banda a la suma real de columnes
+   (180px cadascuna, com a .associacio__stat) perquè en pantalles molt
+   amples l'interruptor quedi sempre alineat amb l'última columna, en lloc
+   de créixer fins al marge de pàgina mentre les columnes es queden
+   centrades amb marges buits. */
+.associacio__stats-inner {
+  max-width: calc(
+    var(--stat-count) * 180px + (var(--stat-count) - 1) * 8px
+  );
+  margin: 0 auto;
+}
+
+/* Interruptor "SYNTH MODE" — palanca de dues posicions, com la d'un
+   sintetitzador de maquinari, que activa la caixa de ritmes 808 */
 .associacio__stats-controls {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: 10px;
   padding: 10px var(--page-margin-x) 0;
 }
 
-.associacio__stats-live-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: transparent;
-  border: 1px solid var(--color-cream);
-  border-radius: 999px;
-  padding: 4px 12px;
-  color: var(--color-cream);
+.associacio__stats-switch-label {
   font-family: var(--font-display);
   font-size: 0.75rem;
   letter-spacing: 0.08em;
+  color: var(--color-cream);
+}
+
+.associacio__stats-switch {
+  position: relative;
+  width: 52px;
+  height: 26px;
+  padding: 3px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #313131, #131313);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.7);
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.associacio__stats-live-toggle:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+.associacio__stats-switch-track {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-.associacio__stats-live-toggle.is-on {
-  background-color: var(--color-rojo);
-  border-color: var(--color-rojo);
-  color: var(--color-negro);
+.associacio__stats-switch-track::before,
+.associacio__stats-switch-track::after {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-display);
+  font-size: 8px;
+  color: rgba(255, 255, 255, 0.4);
 }
 
-.associacio__stats-live-led {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: var(--color-negro);
-  opacity: 0.4;
+.associacio__stats-switch-track::before {
+  content: "0";
+  left: 4px;
 }
 
-.associacio__stats-live-toggle.is-on .associacio__stats-live-led {
-  background-color: var(--color-negro);
-  opacity: 1;
-  box-shadow: 0 0 6px 1px var(--color-negro);
+.associacio__stats-switch-track::after {
+  content: "1";
+  right: 4px;
+}
+
+.associacio__stats-switch-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #e8e4da, #c9c3b3);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.associacio__stats-switch.is-on .associacio__stats-switch-thumb {
+  transform: translateX(24px);
+  background: linear-gradient(180deg, #ff5a4a, var(--color-rojo));
+  box-shadow: 0 0 6px 1px var(--color-rojo);
   animation: associacio-live-pulse 1.2s ease-in-out infinite;
 }
 
 @keyframes associacio-live-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
+  0%, 100% { box-shadow: 0 0 6px 1px var(--color-rojo); }
+  50% { box-shadow: 0 0 2px 0 var(--color-rojo); }
 }
 
 .associacio__stats {
