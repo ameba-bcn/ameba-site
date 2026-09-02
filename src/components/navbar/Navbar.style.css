@@ -24,20 +24,6 @@
   padding: 0 var(--page-margin-x);
 }
 
-.navbar .menuButton {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.navbar .menuButton_mobile {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
 .navbar .menu-logo-box {
   justify-content: flex-start;
   align-items: center;
@@ -50,14 +36,6 @@
   height: 40px;
 }
 
-.navbar .cart-cistella {
-  cursor: pointer;
-}
-
-.navbar .cart-cistella a {
-  color: var(--color-cream);
-}
-
 .navbar .menu-logo-box a {
   font-family: var(--font-display);
   cursor: pointer;
@@ -67,40 +45,10 @@
   display: inline-block;
   color: var(--color-cream);
   position: relative;
-  transition: all 0.5s ease-in-out;
 }
 
-.navbar .cartIconMenu,
-.navbar .sessio-menu-button {
-  font-family: var(--font-display);
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 2.5rem;
-  font-weight: 400;
-  display: inline-block;
-  color: var(--color-cream);
-  position: relative;
-  transition: all 0.5s ease-in-out;
-}
-
-.navbar .cartIconMenu::before,
-.navbar .sessio-menu-button::before {
-  content: attr(data-item);
-  transition: 0.5s;
+.navbar .menu-logo-box a:hover {
   color: var(--color-naranja);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  overflow: hidden;
-}
-
-.navbar .cartIconMenu:hover::before,
-.navbar .sessio-menu-button:hover::before {
-  width: 100%;
-  transition: all 0.5s ease-in-out;
 }
 
 .navbar .nav-ul {
@@ -109,7 +57,7 @@
   align-items: center;
   justify-content: center;
   vertical-align: middle;
-  gap: 40px;
+  gap: 32px;
   margin: 0;
   padding: 0;
 }
@@ -120,39 +68,40 @@
   white-space: nowrap;
 }
 
-/* Section links: chip vertical relleno + label en el color de su sección */
+/* Section links: chip cuadrat + etiqueta en el color de la seva secció,
+   subratllat en hover/actiu — com un .nb-link del disseny. */
 .navbar .nav-section-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 9px;
   font-family: var(--font-body);
-  font-size: 1.3rem;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 600;
   text-decoration: none;
   color: var(--chip-color, var(--color-cream));
+  padding: 8px 2px;
+  border-bottom: 2px solid transparent;
 }
 
 .navbar .nav-color-chip {
   display: inline-block;
-  width: 16px;
-  height: 28px;
+  width: 11px;
+  height: 11px;
   flex-shrink: 0;
   background-color: var(--chip-color, var(--color-cream));
 }
 
 .navbar .nav-section-link:hover,
 .navbar .nav-section-link.active {
-  text-decoration: underline;
-  text-underline-offset: 5px;
-  text-decoration-thickness: 2px;
+  border-bottom-color: currentColor;
 }
 
 /* Right icon group: user / cart / language */
 .navbar .nav-icons {
   display: flex;
   align-items: center;
-  gap: 24px;
-  margin-left: 40px;
+  gap: 6px;
+  margin-left: 34px;
 }
 
 .navbar .nav-icon-link {
@@ -160,13 +109,14 @@
   align-items: center;
 }
 
-/* Blob de acceso/login: cream, a rojo en hover como el resto de controles */
+/* Blob de acceso/login: cream, a naranja en hover como el resto de
+   controles de la navbar rediseñada. */
 .navbar .nav-user-blob path {
   transition: fill 0.2s ease;
 }
 
 .navbar .nav-icon-link:hover .nav-user-blob path {
-  fill: var(--color-rojo);
+  fill: var(--color-naranja);
 }
 
 .navbar .nav-lang-toggle {
@@ -175,40 +125,71 @@
   gap: 6px;
   background: none;
   border: none;
-  padding: 0;
+  padding: 8px 4px;
   cursor: pointer;
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 19px;
+  letter-spacing: 0.04em;
   color: var(--color-cream);
   text-transform: uppercase;
 }
 
 .navbar .nav-lang-toggle:hover {
-  color: var(--color-rojo);
+  color: var(--color-naranja);
 }
 
-.navbar .logname-li {
-  width: fit-content;
-  display: flex;
-  vertical-align: middle;
-  padding-right: 0px;
-  margin-right: 0px;
-}
-
+.navbar .logname-li,
 .navbar .logname-li-mobile {
-  width: 100%;
   display: flex;
-  vertical-align: middle;
-  padding-right: 0px;
-  margin-right: 0px;
+  align-items: center;
 }
 
-.navbar .logname-li-mobile div {
-  width: 100%;
+/* Icon button shared by the cart trigger (desktop popover and the
+   collapsed mobile header) — 44×44 hit target, badge pinned top-right. */
+.nb-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-cream);
+  position: relative;
+}
+
+.nb-icon[aria-expanded="true"] {
+  color: var(--color-naranja);
+}
+
+.nb-count {
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: var(--color-naranja);
+  color: var(--color-negro);
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .navbar .menuButtons {
   justify-content: flex-end;
+}
+
+.menu-mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
 /* Open/close is GSAP-driven (clip-path + per-item reveals — see the
@@ -256,82 +237,62 @@
   gap: 24px;
 }
 
-.navbar .cartIconMenu {
-  width: 2.2rem !important;
-  height: auto !important;
-  margin-left: 0px;
-  margin-right: 5px;
-  margin-bottom: 4px;
+/* Account box within the mobile drawer: name/member#, quick links, logout —
+   mirrors the desktop user popover's content, inline instead of toggled. */
+.navbar .nav-account-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 16px;
+  margin: 8px 32px 0 0;
+  background: rgba(242, 227, 201, 0.08);
+}
+
+.navbar .nav-account-box__name {
+  font-family: var(--font-display);
+  font-size: 26px;
+  letter-spacing: 0.03em;
+  color: var(--color-naranja);
+}
+
+.navbar .nav-account-box__meta {
+  display: block;
+  margin-top: 2px;
+  font-size: 11.5px;
+  color: rgba(242, 227, 201, 0.7);
+}
+
+.navbar .nav-account-box__links {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 600;
+}
+
+.navbar .nav-account-box__links a,
+.navbar .nav-account-box__logout {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  color: var(--color-cream);
+  text-decoration: none;
+}
+
+.navbar .nav-account-box__logout {
+  background: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
-}
-
-.navbar .cart-icon-bubble-box {
-  margin-top: -18px;
-}
-
-.navbar .bubbleCart {
-  color: var(--color-negro);
-  position: relative;
-  top: 5px;
-  left: 25px;
-  width: 18px;
-  height: 18px;
-  padding: 2px 1px 0px 1px;
-  background-color: var(--color-naranja);
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.7em;
-  border-radius: 50%;
-}
-
-.navbar .bubbleCartMember {
-  color: var(--color-negro);
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 18px;
-  height: 18px;
-  padding: 2px 5px 2px 6px;
-  background-color: var(--color-naranja);
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.3em;
-  border-radius: 50%;
-  box-shadow: 1px 1px 1px gray;
-}
-
-.navbar .cart-mobile__box {
-  background-color: var(--color-cream);
-  margin-left: -2em;
-  animation: fade 0.5s 1;
-  -webkit-animation: fade 0.5s 1;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: var(--color-rojo);
 }
 
 .navbar .logBox {
   vertical-align: middle;
-}
-
-.navbar .menu-mobile-session-box {
-  background-color: var(--color-cream);
-  width: calc(100% + 32px);
-  margin-left: -32px;
-  padding-right: 32px;
-  animation: fade 0.5s 1;
-  -webkit-animation: fade 0.5s 1;
-}
-
-.navbar .menu-mobile-session {
-  margin-left: 32px;
-}
-
-.navbar .dropdown-profile-mobile,
-.navbar .dropdown-logout-mobile {
-  color: var(--color-negro);
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  cursor: pointer;
 }
 
 .menu-icon {
@@ -339,8 +300,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   gap: 6px;
   cursor: pointer;
   background: none;
@@ -370,7 +331,7 @@
 }
 
 .menu-icon:hover .menu-icon__bar {
-  background-color: var(--color-rojo);
+  background-color: var(--color-naranja);
 }
 
 .navbar .nav-drawer-cta {
@@ -394,6 +355,10 @@
   .navbar .nav-color-chip {
     width: 12px;
     height: 30px;
+  }
+
+  .navbar .nav-account-box {
+    margin-right: 16px;
   }
 }
 

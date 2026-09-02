@@ -46,7 +46,8 @@
     "festivals": "Festivales",
     "lab": "Lab",
     "shop": "Shop",
-    "idioma": "Cambia el idioma"
+    "idioma": "Cambia el idioma",
+    "el-meu-projecte": "MI PROYECTO"
   },
   "checkout": {
     "finalitzarCompra": "finalizar compra",
@@ -77,7 +78,13 @@
     "acceptar-link": "condiciones de compra",
     "acceptar-post": " y la política de privacidad de Ameba.",
     "codigo-aplicado": "Código {{code}} aplicado — {{value}}% de descuento.",
-    "descuento": "Descuento"
+    "descuento": "Descuento",
+    "article-count_one": "{{count}} artículo",
+    "article-count_other": "{{count}} artículos",
+    "total": "Total",
+    "resta": "Resta una unidad",
+    "suma": "Suma una unidad",
+    "continua-comprant": "Sigue comprando"
   },
   "support": {
     "menu": {

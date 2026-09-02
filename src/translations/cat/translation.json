@@ -46,7 +46,8 @@
     "festivals": "Festivals",
     "lab": "Lab",
     "shop": "Shop",
-    "idioma": "Canvia l'idioma"
+    "idioma": "Canvia l'idioma",
+    "el-meu-projecte": "EL MEU PROJECTE"
   },
   "checkout": {
     "finalitzarCompra": "finalitzar compra",
@@ -77,7 +78,13 @@
     "acceptar-link": "condicions de compra",
     "acceptar-post": " i la política de privacitat d'Ameba.",
     "codigo-aplicado": "Codi {{code}} aplicat — {{value}}% de descompte.",
-    "descuento": "Descompte"
+    "descuento": "Descompte",
+    "article-count_one": "{{count}} article",
+    "article-count_other": "{{count}} articles",
+    "total": "Total",
+    "resta": "Resta una unitat",
+    "suma": "Suma una unitat",
+    "continua-comprant": "Continua comprant"
   },
   "support": {
     "menu": {

@@ -7,6 +7,8 @@ import "./Navbar.style.css";
 import useMediaQuery from "../../hooks/use-media-query";
 import useUIStore from "../../stores/useUIStore";
 import useAuthStore from "../../stores/useAuthStore";
+import useCartStore from "../../stores/useCartStore";
+import Icon from "../ui/Icon";
 import { gsap, SplitText, prefersReducedMotion } from "../../utils/gsapSetup";
 import useGsapContext from "../../hooks/use-gsap-context";
 
@@ -17,6 +19,8 @@ export default function Navbar({ isErrored = false }) {
   const ref = useRef(null);
   const toggleRef = useRef(null);
   const { isMenuOpen, openMenu, closeMenu } = useUIStore();
+  const { cart_data = {} } = useCartStore();
+  const cartCount = cart_data?.count || 0;
   const [hidden, setHidden] = useState(false);
   const scrollTimeout = useRef(null);
   const shouldHide = hidden && !isMenuOpen;
@@ -108,16 +112,35 @@ export default function Navbar({ isErrored = false }) {
           </div>
           {isMobile
             ? !isErrored && (
-                <button
-                  ref={toggleRef}
-                  className={`menu-icon${isMenuOpen ? " menu-icon--open" : ""}`}
-                  onClick={() => (isMenuOpen ? closeMenu() : openMenu())}
-                  aria-label="Menu"
-                >
-                  <span className="menu-icon__bar" />
-                  <span className="menu-icon__bar" />
-                  <span className="menu-icon__bar" />
-                </button>
+                <div className="menu-mobile-actions">
+                  {cartCount > 0 && (
+                    <button
+                      type="button"
+                      className="nb-icon"
+                      aria-label="Cistella"
+                      onClick={() => openMenu()}
+                    >
+                      <Icon
+                        icon="shoppingCart"
+                        className="cartIconMenu"
+                        type="hoverable-black"
+                        width="20"
+                        height="20"
+                      />
+                      <span className="nb-count">{cartCount}</span>
+                    </button>
+                  )}
+                  <button
+                    ref={toggleRef}
+                    className={`menu-icon${isMenuOpen ? " menu-icon--open" : ""}`}
+                    onClick={() => (isMenuOpen ? closeMenu() : openMenu())}
+                    aria-label="Menu"
+                  >
+                    <span className="menu-icon__bar" />
+                    <span className="menu-icon__bar" />
+                    <span className="menu-icon__bar" />
+                  </button>
+                </div>
               )
             : !isErrored && <NavbarButtons isLoggedIn={isLoggedIn} />}
         </div>

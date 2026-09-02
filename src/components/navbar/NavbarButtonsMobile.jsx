@@ -1,14 +1,15 @@
 import React, { useEffect, useRef } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import MenuLog from "./MenuLog";
 import CartMobile from "./CartMobile";
 import Icon from "../ui/Icon";
 import Button from "../button/Button";
 import AmebaBlob from "../ui/logo/AmebaBlob";
 import useOutsideClick from "../../hooks/use-outside-click";
 import useUIStore from "../../stores/useUIStore";
+import useAuthStore from "../../stores/useAuthStore";
 import useCartStore from "../../stores/useCartStore";
+import { isEmptyObject, isDateExpired } from "../../utils/utils";
 import { NAV_SECTIONS, isSectionActive } from "./navSections";
 import { gsap, prefersReducedMotion } from "../../utils/gsapSetup";
 import useGsapContext from "../../hooks/use-gsap-context";
@@ -21,6 +22,16 @@ export default function NavbarButtonsMobile(props) {
   const closeMenu = useUIStore((state) => state.closeMenu);
   const { cart_data = {} } = useCartStore();
   const hasCartItems = (cart_data?.item_variants || []).length > 0;
+  const { user_data = {}, user_member_data = {} } = useAuthStore();
+  const logout = useAuthStore((state) => state.logout);
+  const isMember =
+    !isEmptyObject(user_member_data) && !isDateExpired(user_member_data.expires);
+  const fullName = [user_member_data.first_name, user_member_data.last_name]
+    .filter(Boolean)
+    .join(" ");
+  const validYear = user_member_data.expires
+    ? new Date(user_member_data.expires).getFullYear()
+    : null;
   const currentLang = localStorage.getItem("i18nextLng");
   const handleChangeLanguage = (lang) => {
     if (currentLang !== lang) {
@@ -30,6 +41,11 @@ export default function NavbarButtonsMobile(props) {
     }
   };
   const nextLang = currentLang === "es" ? "ca" : "es";
+
+  const handleLogout = () => {
+    closeMenu();
+    logout();
+  };
 
   useOutsideClick(refer, (e) => {
     if (isOpen && !toggleRef?.current?.contains(e.target)) closeMenu();
@@ -101,7 +117,7 @@ export default function NavbarButtonsMobile(props) {
 
         <div className="nav-icons nav-icons--mobile">
           <div className="liMenuOptions logname-li-mobile">
-            {!isLoggedIn ? (
+            {!isLoggedIn && (
               <NavLink
                 to="/login"
                 className="nav-icon-link"
@@ -114,8 +130,6 @@ export default function NavbarButtonsMobile(props) {
                   className="nav-user-blob"
                 />
               </NavLink>
-            ) : (
-              <MenuLog isMobile={true} />
             )}
           </div>
           <button
@@ -132,6 +146,34 @@ export default function NavbarButtonsMobile(props) {
             <span>{currentLang === "es" ? "CAST" : "CAT"}</span>
           </button>
         </div>
+
+        {isLoggedIn && (
+          <div className="nav-account-box">
+            <span className="nav-account-box__name">
+              {fullName || user_data.username}
+            </span>
+            {isMember && (
+              <span className="nav-account-box__meta">
+                {t("form.soci")} {user_member_data.number}
+                {validYear && ` · ${t("compte.valid-fins")} ${validYear}`}
+              </span>
+            )}
+            <div className="nav-account-box__links">
+              <NavLink to="/compte/dades" onClick={() => closeMenu()}>
+                {t("compte.eyebrow")}
+              </NavLink>
+              {isMember && (
+                <NavLink to="/compte/projecte" onClick={() => closeMenu()}>
+                  {t("menu.el-meu-projecte")}
+                </NavLink>
+              )}
+              <button type="button" className="nav-account-box__logout" onClick={handleLogout}>
+                {t("compte.logout")}
+              </button>
+            </div>
+          </div>
+        )}
+
         <CartMobile />
 
         <div className="nav-drawer-cta">
@@ -152,7 +194,7 @@ export default function NavbarButtonsMobile(props) {
             className="nav-drawer-cta__button"
             onClick={() => {
               closeMenu();
-              navigate(isLoggedIn ? "/profile" : "/login");
+              navigate(isLoggedIn ? "/compte" : "/login");
             }}
           >
             {t("home.hero.cta-acces")}
