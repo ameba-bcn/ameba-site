@@ -100,7 +100,16 @@
     "lab": "Lab",
     "shop": "Shop",
     "idioma": "Canvia l'idioma",
-    "el-meu-projecte": "EL MEU PROJECTE"
+    "el-meu-projecte": "EL MEU PROJECTE",
+    "seccions": "Seccions",
+    "submenu-associacio-qui-som": "Qui som",
+    "submenu-associacio-socis": "Socis i sòcies",
+    "submenu-associacio-fes-te-soci": "Fes-te soci/a",
+    "submenu-festivals-propers": "Propers festivals",
+    "submenu-festivals-arxiu": "Arxiu d'edicions",
+    "la-meva-cistella": "La meva cistella",
+    "obre-el-menu": "Obre el menú",
+    "tanca-el-menu": "Tanca el menú"
   },
   "checkout": {
     "finalitzarCompra": "finalitzar compra",

@@ -14,35 +14,47 @@
 
 .navbar .menuSuperior {
   background-color: var(--color-negro);
-  display: flex;
-  flex-wrap: wrap;
-  flex-flow: row;
-  justify-content: space-between;
-  align-items: center;
   height: 80px;
   box-sizing: border-box;
-  padding: 0 var(--page-margin-x);
+}
+
+/* Content row caps at the design's 1240px and centers, instead of the
+   fluid --page-margin-x used by page content — keeps the bar dense and
+   anchored on ultra-wide screens per the NavBar redesign. */
+.navbar .menuSuperior__inner {
+  max-width: 1240px;
+  height: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 28px;
+  padding: 0 28px;
 }
 
 .navbar .menu-logo-box {
   justify-content: flex-start;
   align-items: center;
   display: flex;
-  gap: 12px;
 }
 
 .navbar .menuAmebalogo {
-  width: 40px;
-  height: 40px;
+  display: flex;
+  flex: none;
 }
 
 .navbar .menu-logo-box a {
+  display: flex;
+  align-items: center;
+  gap: 11px;
   font-family: var(--font-display);
   cursor: pointer;
   text-decoration: none;
-  font-size: 2.5rem;
+  font-size: 29px;
+  letter-spacing: 0.04em;
   font-weight: 400;
-  display: inline-block;
   color: var(--color-cream);
   position: relative;
 }
@@ -192,109 +204,6 @@
   gap: 2px;
 }
 
-/* Open/close is GSAP-driven (clip-path + per-item reveals — see the
-   drawer timeline in NavbarButtonsMobile.jsx), not this max-height/
-   opacity transition. max-height+overflow-y stay only as a safety net
-   so a very tall drawer (many activities + cart + CTA buttons) never
-   overflows a short viewport with no way to scroll it. */
-.navbar .nav-ul_box-mobile {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  width: 100%;
-  max-height: calc(100vh - 80px);
-  overflow-y: auto;
-  background-color: var(--color-negro);
-}
-
-.navbar .nav-ul_mobile {
-  background-color: var(--color-negro);
-  list-style-type: none;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  text-align: start;
-  margin-bottom: 0;
-  padding-bottom: 1em;
-  padding-left: 2em;
-  margin-block-start: 0px;
-}
-
-.navbar .nav-ul_mobile div,
-.navbar .nav-ul_mobile li {
-  justify-content: flex-start;
-}
-
-.navbar .nav-ul_mobile .nav-section-link {
-  margin: 8px 0;
-  font-size: 1.5rem;
-}
-
-.navbar .nav-icons--mobile {
-  margin-left: 0;
-  margin-top: 8px;
-  gap: 24px;
-}
-
-/* Account box within the mobile drawer: name/member#, quick links, logout —
-   mirrors the desktop user popover's content, inline instead of toggled. */
-.navbar .nav-account-box {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 18px 16px;
-  margin: 8px 32px 0 0;
-  background: rgba(242, 227, 201, 0.08);
-}
-
-.navbar .nav-account-box__name {
-  font-family: var(--font-display);
-  font-size: 26px;
-  letter-spacing: 0.03em;
-  color: var(--color-naranja);
-}
-
-.navbar .nav-account-box__meta {
-  display: block;
-  margin-top: 2px;
-  font-size: 11.5px;
-  color: rgba(242, 227, 201, 0.7);
-}
-
-.navbar .nav-account-box__links {
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-  font-family: var(--font-body);
-  font-size: 14.5px;
-  font-weight: 600;
-}
-
-.navbar .nav-account-box__links a,
-.navbar .nav-account-box__logout {
-  min-height: 34px;
-  display: flex;
-  align-items: center;
-  color: var(--color-cream);
-  text-decoration: none;
-}
-
-.navbar .nav-account-box__logout {
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  color: var(--color-rojo);
-}
-
-.navbar .logBox {
-  vertical-align: middle;
-}
-
 .menu-icon {
   display: flex;
   flex-direction: column;
@@ -302,7 +211,7 @@
   align-items: center;
   width: 44px;
   height: 44px;
-  gap: 6px;
+  gap: 5px;
   cursor: pointer;
   background: none;
   border: none;
@@ -311,59 +220,312 @@
 
 .menu-icon__bar {
   display: block;
-  width: 28px;
-  height: 3px;
+  width: 23px;
+  height: 2px;
   background-color: var(--color-cream);
-  border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.menu-icon--open .menu-icon__bar:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-}
-
-.menu-icon--open .menu-icon__bar:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-icon--open .menu-icon__bar:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
 }
 
 .menu-icon:hover .menu-icon__bar {
   background-color: var(--color-naranja);
 }
 
-.navbar .nav-drawer-cta {
+/* ---- Mobile drawer (full-screen takeover) ---- */
+
+.nb-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  background: var(--color-negro);
+  color: var(--color-cream);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  /* Open/close is GSAP-driven (Navbar.style.css sets the base state,
+     NavbarButtonsMobile.jsx plays a clip-path reveal timeline). */
+}
+
+.nb-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(242, 227, 201, 0.25);
+  flex: none;
+}
+
+.nb-drawer__brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-size: 25px;
+  letter-spacing: 0.04em;
+}
+
+.nb-drawer__close {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.nb-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid rgba(242, 227, 201, 0.14);
+  flex: none;
+}
+
+.nb-identity__avatar {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  background: var(--color-naranja);
+  color: var(--color-negro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 20px;
+}
+
+.nb-identity__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.nb-identity__name {
+  font-family: var(--font-display);
+  font-size: 23px;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+}
+
+.nb-identity__sub {
+  font-size: 11.5px;
+  color: rgba(242, 227, 201, 0.7);
+}
+
+.nb-glabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  margin: 18px 0 10px;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(242, 227, 201, 0.5);
+}
+
+.nb-glabel::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(242, 227, 201, 0.2);
+}
+
+.nb-drawer nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nb-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(242, 227, 201, 0.14);
+  padding: 0 16px;
+  min-height: 60px;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-size: 30px;
+  letter-spacing: 0.03em;
+}
+
+.nb-row:hover {
+  background: rgba(242, 227, 201, 0.06);
+}
+
+.nb-row[aria-expanded="true"] {
+  background: rgba(242, 227, 201, 0.06);
+  border-bottom-color: transparent;
+}
+
+.nb-msq {
+  width: 15px;
+  height: 15px;
+  display: block;
+  flex: none;
+}
+
+.nb-chev {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border: 1.5px solid rgba(242, 227, 201, 0.35);
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--color-cream);
+  transition: transform 0.18s ease;
+}
+
+.nb-row[aria-expanded="true"] .nb-chev {
+  transform: rotate(180deg);
+  border-color: var(--color-naranja);
+  color: var(--color-naranja);
+}
+
+.nb-arrow {
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: rgba(242, 227, 201, 0.5);
+  flex: none;
+}
+
+.nb-row:hover .nb-arrow {
+  color: var(--color-naranja);
+}
+
+.nb-sub {
+  display: flex;
+  flex-direction: column;
+  background: rgba(242, 227, 201, 0.06);
+  border-bottom: 1px solid rgba(242, 227, 201, 0.14);
+  padding: 2px 16px 10px 44px;
+}
+
+.nb-sub a {
+  display: flex;
+  align-items: center;
+  min-height: 46px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(242, 227, 201, 0.86);
+  text-decoration: none;
+}
+
+.nb-sub a:hover {
+  color: var(--color-naranja);
+}
+
+.nb-arow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0 16px;
+  min-height: 56px;
+  border-bottom: 1px solid rgba(242, 227, 201, 0.14);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-cream);
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+}
+
+.nb-arow:hover {
+  background: rgba(242, 227, 201, 0.06);
+}
+
+.nb-drawer__cta {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-top: 16px;
+  padding: 22px 16px 18px;
 }
 
-.navbar .nav-drawer-cta__button {
-  width: 100%;
+.nb-badge--naranja {
+  background: var(--color-naranja);
+  border-color: var(--color-naranja);
+  color: var(--color-negro);
 }
 
-@media screen and (max-width: 760px) {
-  .navbar .nav-ul_mobile .nav-section-link {
-    font-family: var(--font-display);
-    font-size: 2rem;
-    letter-spacing: 0.02em;
-  }
+.nb-badge--naranja:hover {
+  background: var(--color-cream);
+  border-color: var(--color-cream);
+}
 
-  .navbar .nav-color-chip {
-    width: 12px;
-    height: 30px;
-  }
+.nb-badge--outline {
+  background: none;
+  border-color: rgba(242, 227, 201, 0.55);
+  color: var(--color-cream);
+}
 
-  .navbar .nav-account-box {
-    margin-right: 16px;
-  }
+.nb-badge--outline:hover {
+  background: rgba(242, 227, 201, 0.08);
+  color: var(--color-cream);
+}
+
+.nb-drawer__footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px;
+  border-top: 1px solid rgba(242, 227, 201, 0.25);
+  flex: none;
+}
+
+.nb-drawer__footer-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(242, 227, 201, 0.6);
+}
+
+.nb-seg {
+  display: flex;
+  border: 1.5px solid rgba(242, 227, 201, 0.35);
+}
+
+.nb-seg button {
+  background: none;
+  border: none;
+  padding: 0 14px;
+  min-height: 38px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 17px;
+  letter-spacing: 0.06em;
+  color: rgba(242, 227, 201, 0.6);
+}
+
+.nb-seg button[aria-pressed="true"] {
+  background: var(--color-cream);
+  color: var(--color-negro);
 }
 
 @media screen and (max-width: 350px) {
-  .navbar .nav-ul_mobile {
-    padding-left: 1.5em;
+  .nb-row {
+    font-size: 26px;
   }
 }

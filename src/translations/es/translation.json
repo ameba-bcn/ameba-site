@@ -100,7 +100,16 @@
     "lab": "Lab",
     "shop": "Shop",
     "idioma": "Cambia el idioma",
-    "el-meu-projecte": "MI PROYECTO"
+    "el-meu-projecte": "MI PROYECTO",
+    "seccions": "Secciones",
+    "submenu-associacio-qui-som": "Quiénes somos",
+    "submenu-associacio-socis": "Socios y socias",
+    "submenu-associacio-fes-te-soci": "Hazte socio/a",
+    "submenu-festivals-propers": "Próximos festivales",
+    "submenu-festivals-arxiu": "Archivo de ediciones",
+    "la-meva-cistella": "Mi cesta",
+    "obre-el-menu": "Abre el menú",
+    "tanca-el-menu": "Cierra el menú"
   },
   "checkout": {
     "finalitzarCompra": "finalizar compra",
