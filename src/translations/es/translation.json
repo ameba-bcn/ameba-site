@@ -207,6 +207,9 @@
   "lab": {
     "proximament": "Próximamente",
     "meta": "El laboratorio creativo de AMEBA.",
+    "hero-lead": "El laboratorio creativo de Ameba.",
+    "hero-body-1": "Talleres y charlas de producción, DJing y gestión cultural, pensados para quien quiere crecer dentro de la escena electrónica local.",
+    "hero-body-2": "Los socios y socias tienen precios reducidos en todas las actividades. Consulta el calendario y apúntate a la próxima convocatoria.",
     "calendari": "Calendario",
     "propera-activitat": "Próxima actividad",
     "activitats-en-curs": "Actividades en curso",
@@ -235,6 +238,9 @@
   "botiga": {
     "breadcrumb": "Ruta de navegación",
     "torna": "Volver a la Tienda",
+    "hero-lead": "Merchandising oficial y entradas de Ameba.",
+    "hero-body-1": "Ropa serigrafiada en Barcelona y entradas para festivales, talleres y actividades del Lab. Cada compra sostiene directamente a la asociación.",
+    "hero-body-2": "Los socios y socias tienen precios especiales en todas las prendas y entradas. Envío y puntos de recogida disponibles.",
     "socis-preu": "SOCIOS",
     "enviament": "¡Envío y puntos de recogida disponibles!",
     "fitxa-1": "Tejido 100% algodón ecológico.",
@@ -248,9 +254,18 @@
       "lead2": "Organizamos eventos, talleres y diversas actividades culturales con el objetivo de promocionar y difundir a los artistas de la escena electrónica local."
     },
     "blobs": {
-      "qui-som": { "title": "¿QUIÉNES SOMOS?" },
-      "que-fem": { "title": "¿QUÉ HACEMOS?" },
-      "per-que": { "title": "¿POR QUÉ?" }
+      "qui-som": {
+        "title": "¿QUIÉNES SOMOS?",
+        "text": "Somos una asociación sin ánimo de lucro formada por personas voluntarias desde 2014. Ni discográfica ni promotora: somos la gente que baila, produce y organiza la escena electrónica de Barcelona."
+      },
+      "que-fem": {
+        "title": "¿QUÉ HACEMOS?",
+        "text": "Organizamos el Parkfest y otros festivales gratuitos, talleres del Lab, un directorio de proyectos de socios y socias, y una tienda que devuelve cada euro a la asociación."
+      },
+      "per-que": {
+        "title": "¿POR QUÉ?",
+        "text": "Porque la escena electrónica local necesita estructura propia: espacios, recursos y apoyo mutuo que no dependan de ninguna discográfica ni marca."
+      }
     },
     "cta": {
       "title": "HAZTE SOCIO/SOCIA DE AMEBA DESDE 10€ ANUALES",
@@ -264,7 +279,10 @@
       "button": "PROYECTOS SOCIOS/SOCIAS"
     },
     "principis": {
-      "title": "NUESTROS PRINCIPIOS"
+      "title": "NUESTROS PRINCIPIOS",
+      "text1": "Autogestión: la junta y los grupos de trabajo son voluntarios, y las cuentas se presentan cada año en la asamblea.",
+      "text2": "Comunidad antes que negocio: ningún beneficio se reparte, todo vuelve a financiar actividades y festivales gratuitos.",
+      "text3": "Puertas abiertas: no hace falta ser músico ni artista para hacerte socio/a, solo tener ganas de sostener la escena."
     },
     "stats": {
       "artistes-programats": "ARTISTAS PROGRAMADOS",
@@ -277,20 +295,48 @@
       "socis-2": "SOCIOS"
     },
     "grups": {
-      "title": "NUESTROS GRUPOS DE TRABAJO",
+      "title": "GRUPOS DE TRABAJO",
+      "text": "Cada grupo se encarga de una parte de la asociación, de la producción de los festivales a las redes sociales. Si quieres aportar tiempo o conocimiento, escríbenos.",
       "button": "CONTACTA",
-      "gestio": { "title": "GESTIÓN" },
-      "art": { "title": "ARTE" },
-      "cultura": { "title": "CULTURA" },
-      "produccio": { "title": "PRODUCCIÓN" },
-      "rrss": { "title": "RRSS" },
-      "booking": { "title": "BOOKING" },
-      "clubs": { "title": "CLUBS" },
-      "radio": { "title": "RADIO" }
+      "gestio": {
+        "title": "GESTIÓN",
+        "text": "Cuentas, subvenciones y la parte administrativa que hace posible todo lo demás."
+      },
+      "art": {
+        "title": "ARTE",
+        "text": "Carteles, identidad visual y el diseño de cada festival y actividad."
+      },
+      "cultura": {
+        "title": "CULTURA",
+        "text": "Programación de actividades culturales más allá de la música: charlas, exposiciones y colaboraciones."
+      },
+      "produccio": {
+        "title": "PRODUCCIÓN",
+        "text": "Montaje, sonido y logística de los festivales y las actividades del Lab."
+      },
+      "rrss": {
+        "title": "RRSS",
+        "text": "Redes sociales, newsletter y comunicación con socios y socias."
+      },
+      "booking": {
+        "title": "BOOKING",
+        "text": "Contratación de artistas y relación con los sellos y colectivos de la escena."
+      },
+      "clubs": {
+        "title": "CLUBS",
+        "text": "Relación con las salas y clubs de la ciudad para llevar allí la escena local."
+      },
+      "radio": {
+        "title": "RADIO",
+        "text": "El programa de radio de Ameba, con sesiones y entrevistas de artistas locales."
+      }
     }
   },
   "festivals": {
     "meta": "Festivales de AMEBA — la Asociación de Música Electrónica de Barcelona.",
+    "hero-lead": "El Parkfest y otros festivales gratuitos en Barcelona.",
+    "hero-body-1": "Llevamos la escena electrónica local a las calles y plazas de la ciudad, con carteles que mezclan talento emergente y nombres consolidados.",
+    "hero-body-2": "Consulta el cartel, la localización y el horario de cada edición, y revisita las anteriores en nuestro archivo fotográfico.",
     "historic": "Histórico festivales",
     "any": "Año",
     "festival": "Festival",
@@ -325,20 +371,20 @@
     },
     "band": {
       "associacio": {
-        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        "lead": "La asociación que sostiene la escena electrónica de Barcelona.",
+        "body": "Somos un grupo de voluntarios y voluntarias que organiza festivales, talleres y un directorio de proyectos locales. Hazte socio/a desde 10 € al año y da apoyo directo a la cultura electrónica de la ciudad."
       },
       "festivals": {
-        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        "lead": "El Parkfest y otros festivales, gratuitos y al aire libre.",
+        "body": "Cada año llevamos la escena electrónica local a las calles y plazas de Barcelona. Consulta el cartel, la localización y el horario de cada edición."
       },
       "lab": {
-        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        "lead": "Talleres y charlas para aprender de la escena, de la mano de la escena.",
+        "body": "Producción, DJing, gestión cultural y mucho más, con precios reducidos para socios y socias. Consulta el calendario y apúntate a la próxima actividad."
       },
       "shop": {
-        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        "lead": "Merchandising y entradas, hecho en Barcelona.",
+        "body": "Camisetas serigrafiadas en la ciudad y entradas para todas nuestras actividades. Cada compra vuelve directamente a la asociación."
       }
     }
   },
@@ -591,7 +637,7 @@
     "dades-drets-title": "TUS DERECHOS",
     "dades-drets-text": "Acceso, rectificación, supresión y portabilidad. Escríbenos y respondemos en 30 días.",
     "contacte-name": "ASOCIACIÓN AMEBA",
-    "contacte-address": "NIF G-00000000 · Calle Lorem Ipsum 00, 08000 Barcelona",
+    "contacte-address": "NIF G-00000000 · Barcelona",
     "contacte-registre": "Inscrita en el Registro de Asociaciones de la Generalitat de Catalunya con el nº 00000.",
     "contacte-cta": "ESCRÍBENOS"
   },

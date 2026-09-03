@@ -121,19 +121,11 @@ function Lab() {
         titleColor="var(--color-cream)"
         image={heroImage}
         imageAlt={t("menu.lab")}
-        lead={/* TODO copy */ "Lorem ipsum dolor sit amet, consectetur adipiscing elit."}
+        lead={t("lab.hero-lead")}
         titleFit={false}
       >
-        {/* TODO copy */}
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras diam
-          sem, molestie sed orci nec, eleifend porta arcu.
-        </p>
-        <p className="section-hero__text-p--regular">
-          Aliquam mi velit, tincidunt sit amet diam non, rhoncus cursus
-          urna. Nulla semper tortor a pretium suscipit. Integer volutpat
-          egestas arcu sit amet luctus.
-        </p>
+        <p>{t("lab.hero-body-1")}</p>
+        <p className="section-hero__text-p--regular">{t("lab.hero-body-2")}</p>
       </SectionHero>
       <hr />
       <DotsRow className="lab__hero-dots" />

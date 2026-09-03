@@ -207,6 +207,9 @@
   "lab": {
     "proximament": "Pròximament",
     "meta": "El laboratori creatiu d'AMEBA.",
+    "hero-lead": "El laboratori creatiu d'Ameba.",
+    "hero-body-1": "Tallers i xerrades de producció, DJing i gestió cultural, pensats per a qui vol créixer dins l'escena electrònica local.",
+    "hero-body-2": "Els socis i sòcies tenen preus reduïts a totes les activitats. Consulta el calendari i apunta't a la propera convocatòria.",
     "calendari": "Calendari",
     "propera-activitat": "Propera activitat",
     "activitats-en-curs": "Activitats en curs",
@@ -235,6 +238,9 @@
   "botiga": {
     "breadcrumb": "Camí de navegació",
     "torna": "Torna a la Botiga",
+    "hero-lead": "Merchandising oficial i entrades d'Ameba.",
+    "hero-body-1": "Roba serigrafiada a Barcelona i entrades per a festivals, tallers i activitats del Lab. Cada compra sosté directament l'associació.",
+    "hero-body-2": "Els socis i sòcies tenen preus especials a totes les peces i entrades. Enviament i punts de recollida disponibles.",
     "socis-preu": "SOCIS",
     "enviament": "Enviament i punts de recollida disponibles!",
     "fitxa-1": "Teixit 100% cotó ecològic.",
@@ -248,9 +254,18 @@
       "lead2": "Organitzem esdeveniments, tallers i diverses activitats culturals amb l'objectiu de promocionar i difondre als artistes de l'escena electrònica local."
     },
     "blobs": {
-      "qui-som": { "title": "QUI SOM?" },
-      "que-fem": { "title": "QUÈ FEM?" },
-      "per-que": { "title": "PER QUÈ?" }
+      "qui-som": {
+        "title": "QUI SOM?",
+        "text": "Som una associació sense ànim de lucre formada per voluntaris i voluntàries des de 2014. Ni discogràfica ni promotora: som la gent que balla, produeix i organitza l'escena electrònica de Barcelona."
+      },
+      "que-fem": {
+        "title": "QUÈ FEM?",
+        "text": "Organitzem el Parkfest i altres festivals gratuïts, tallers del Lab, un directori de projectes de socis i sòcies, i una botiga que torna cada euro a l'associació."
+      },
+      "per-que": {
+        "title": "PER QUÈ?",
+        "text": "Perquè l'escena electrònica local necessita estructura pròpia: espais, recursos i suport mutu que no depenguin de cap discogràfica ni marca."
+      }
     },
     "cta": {
       "title": "FES-TE SOCI/SÒCIA D'AMEBA DES DE 10€ ANUALS",
@@ -264,7 +279,10 @@
       "button": "PROJECTES SOCIS/SÒCIES"
     },
     "principis": {
-      "title": "ELS NOSTRES PRINCIPIS"
+      "title": "ELS NOSTRES PRINCIPIS",
+      "text1": "Autogestió: la junta i els grups de treball són voluntaris, i els comptes es presenten cada any a l'assemblea.",
+      "text2": "Comunitat abans que negoci: cap benefici es reparteix, tot torna a finançar activitats i festivals gratuïts.",
+      "text3": "Portes obertes: no cal ser músic ni artista per fer-se'n soci/sòcia, només tenir ganes de sostenir l'escena."
     },
     "stats": {
       "artistes-programats": "ARTISTES PROGRAMATS",
@@ -277,20 +295,48 @@
       "socis-2": "SOCIS"
     },
     "grups": {
-      "title": "ELS NOSTRES GRUPS DE TREBALL",
+      "title": "GRUPS DE TREBALL",
+      "text": "Cada grup s'encarrega d'una part de l'associació, de la producció dels festivals a les xarxes socials. Si vols aportar-hi temps o coneixement, escriu-nos.",
       "button": "CONTACTA",
-      "gestio": { "title": "GESTIÓ" },
-      "art": { "title": "ART" },
-      "cultura": { "title": "CULTURA" },
-      "produccio": { "title": "PRODUCCIÓ" },
-      "rrss": { "title": "RRSS" },
-      "booking": { "title": "BOOKING" },
-      "clubs": { "title": "CLUBS" },
-      "radio": { "title": "RADIO" }
+      "gestio": {
+        "title": "GESTIÓ",
+        "text": "Comptes, subvencions i la part administrativa que fa possible tota la resta."
+      },
+      "art": {
+        "title": "ART",
+        "text": "Cartells, identitat visual i el disseny de cada festival i activitat."
+      },
+      "cultura": {
+        "title": "CULTURA",
+        "text": "Programació d'activitats culturals més enllà de la música: xerrades, exposicions i col·laboracions."
+      },
+      "produccio": {
+        "title": "PRODUCCIÓ",
+        "text": "Muntatge, so i logística dels festivals i les activitats del Lab."
+      },
+      "rrss": {
+        "title": "RRSS",
+        "text": "Xarxes socials, newsletter i comunicació amb socis i sòcies."
+      },
+      "booking": {
+        "title": "BOOKING",
+        "text": "Contractació d'artistes i relació amb els segells i col·lectius de l'escena."
+      },
+      "clubs": {
+        "title": "CLUBS",
+        "text": "Relació amb les sales i clubs de la ciutat per portar-hi l'escena local."
+      },
+      "radio": {
+        "title": "RADIO",
+        "text": "El programa de ràdio d'Ameba, amb sessions i entrevistes d'artistes locals."
+      }
     }
   },
   "festivals": {
     "meta": "Festivals d'AMEBA — l'Associació de Música Electrònica de Barcelona.",
+    "hero-lead": "El Parkfest i altres festivals gratuïts a Barcelona.",
+    "hero-body-1": "Portem l'escena electrònica local als carrers i places de la ciutat, amb cartells que barregen talent emergent i noms consolidats.",
+    "hero-body-2": "Consulta el cartell, la localització i l'horari de cada edició, i revisita les anteriors al nostre arxiu fotogràfic.",
     "historic": "Històric festivals",
     "any": "Any",
     "festival": "Festival",
@@ -325,20 +371,20 @@
     },
     "band": {
       "associacio": {
-        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        "lead": "L'associació que sosté l'escena electrònica de Barcelona.",
+        "body": "Som un grup de voluntaris i voluntàries que organitza festivals, tallers i un directori de projectes locals. Fes-te'n soci/sòcia des de 10 € l'any i dona suport directe a la cultura electrònica de la ciutat."
       },
       "festivals": {
-        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        "lead": "El Parkfest i altres festivals, gratuïts i a l'aire lliure.",
+        "body": "Cada any portem l'escena electrònica local als carrers i places de Barcelona. Consulta el cartell, la localització i l'horari de cada edició."
       },
       "lab": {
-        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        "lead": "Tallers i xerrades per aprendre de l'escena, de la mà de l'escena.",
+        "body": "Producció, DJing, gestió cultural i molt més, amb preus reduïts per a socis i sòcies. Consulta el calendari i apunta't a la propera activitat."
       },
       "shop": {
-        "lead": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-        "body": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        "lead": "Merchandising i entrades, fet a Barcelona.",
+        "body": "Samarretes serigrafiades a la ciutat i entrades per a totes les nostres activitats. Cada compra torna directament a l'associació."
       }
     }
   },
@@ -591,7 +637,7 @@
     "dades-drets-title": "ELS TEUS DRETS",
     "dades-drets-text": "Accés, rectificació, supressió i portabilitat. Escriu-nos i responem en 30 dies.",
     "contacte-name": "ASSOCIACIÓ AMEBA",
-    "contacte-address": "NIF G-00000000 · Carrer Lorem Ipsum 00, 08000 Barcelona",
+    "contacte-address": "NIF G-00000000 · Barcelona",
     "contacte-registre": "Inscrita al Registre d'Associacions de la Generalitat de Catalunya amb el nº 00000.",
     "contacte-cta": "ESCRIU-NOS"
   },
