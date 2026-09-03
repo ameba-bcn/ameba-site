@@ -32,19 +32,23 @@ export default function DropdownFilter({ label, value, options, onChange }) {
         >
           {label}
         </button>
-        {options.map((option) => (
-          <button
-            type="button"
-            key={option}
-            className="dropdown-filter__option"
-            onClick={() => {
-              onChange(option);
-              setOpen(false);
-            }}
-          >
-            {option}
-          </button>
-        ))}
+        {options.map((option) => {
+          const { value: optionValue, label: optionLabel } =
+            typeof option === "object" ? option : { value: option, label: option };
+          return (
+            <button
+              type="button"
+              key={optionValue}
+              className="dropdown-filter__option"
+              onClick={() => {
+                onChange(optionValue);
+                setOpen(false);
+              }}
+            >
+              {optionLabel}
+            </button>
+          );
+        })}
       </Dropdown>
     </div>
   );
