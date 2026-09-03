@@ -10,7 +10,7 @@ import useUIStore from "../../stores/useUIStore";
 import useAuthStore from "../../stores/useAuthStore";
 import useCartStore from "../../stores/useCartStore";
 import Icon from "../ui/Icon";
-import AmebaLogo from "../ui/logo/AmebaLogo";
+import AmebaBlob from "../ui/logo/AmebaBlob";
 import { gsap, SplitText, prefersReducedMotion } from "../../utils/gsapSetup";
 import useGsapContext from "../../hooks/use-gsap-context";
 
@@ -107,10 +107,9 @@ export default function Navbar({ isErrored = false }) {
               <div className="menu-logo-box">
                 <NavLink to="/" data-item="AMEBA">
                   <span className="menuAmebalogo">
-                    <AmebaLogo
-                      width={isMobile ? 24 : 28}
-                      height={isMobile ? 24 : 28}
-                      fill="var(--color-cream)"
+                    <AmebaBlob
+                      size={isMobile ? 24 : 28}
+                      color="cream"
                     />
                   </span>
                   <span className="menu-wordmark">AMEBA</span>
@@ -124,7 +123,15 @@ export default function Navbar({ isErrored = false }) {
                           type="button"
                           className="nb-icon"
                           aria-label={t("checkout.cistella")}
-                          onClick={() => openMenu()}
+                          onClick={() => {
+                            openMenu();
+                            document
+                              .querySelector(".cart-pop--mobile")
+                              ?.scrollIntoView({
+                                behavior: prefersReducedMotion() ? "auto" : "smooth",
+                                block: "start",
+                              });
+                          }}
                         >
                           <Icon
                             icon="shoppingCart"

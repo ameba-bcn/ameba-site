@@ -21,6 +21,7 @@ const SOCIALS = [
 export default function Footer() {
   const [t] = useTranslation("translation");
   const { collaborators = [] } = useDataStore();
+  const activeCollaborators = collaborators.filter((el) => el.is_active);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState(null); // { tone: "success"|"error", text }
   const [submitting, setSubmitting] = useState(false);
@@ -120,21 +121,21 @@ export default function Footer() {
 
       <div className="ameba-footer__bottom">
         <span>AMEBA {new Date().getFullYear()} © · {t("footer.drets")}</span>
-        <div className="ameba-footer__collab">
+        <div
+          className={`ameba-footer__collab${activeCollaborators.length === 1 ? " ameba-footer__collab--single" : ""}`}
+        >
           <span>{t("footer.colab")}</span>
-          {collaborators.map((el) =>
-            el.is_active ? (
-              <img
-                key={el.name}
-                src={el.image}
-                alt={el.name}
-                className="ameba-footer__collab-logo"
-                onError={(e) => {
-                  e.target.style.display = "none";
-                }}
-              />
-            ) : null,
-          )}
+          {activeCollaborators.map((el) => (
+            <img
+              key={el.name}
+              src={el.image}
+              alt={el.name}
+              className="ameba-footer__collab-logo"
+              onError={(e) => {
+                e.target.style.display = "none";
+              }}
+            />
+          ))}
         </div>
       </div>
     </footer>

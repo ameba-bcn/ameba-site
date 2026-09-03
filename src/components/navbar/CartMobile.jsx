@@ -116,7 +116,7 @@ function CartMobile() {
       </div>
       <NavLink
         className="nb-badge cart-pop__checkout-mobile"
-        to={isLoggedIn ? "/checkout" : "/login"}
+        to={isLoggedIn ? "/pagament" : "/inicia-sessio"}
         onClick={handleCheckoutClick}
       >
         {t("checkout.finalitzarCompra")}

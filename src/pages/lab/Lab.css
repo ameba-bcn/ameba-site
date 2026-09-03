@@ -67,7 +67,7 @@
   /* CardGrid defaults to a single column at this breakpoint (shared by
      Botiga too) — Lab's mock keeps the 2-column poster grid on phones. */
   .lab__card-grid.card-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
 

@@ -528,6 +528,12 @@
   }
 }
 
+@media (max-width: 760px) {
+  .nou-soci__stats {
+    display: none;
+  }
+}
+
 @media (max-width: 620px) {
   .nou-soci__benefits-grid {
     grid-template-columns: 1fr;

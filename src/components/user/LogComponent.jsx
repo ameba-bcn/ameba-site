@@ -18,12 +18,12 @@ export default function LogComponent() {
   const { cart_data = {} } = useCartStore();
   const { item_variant_ids = [] } = cart_data;
   const { user_profile = "" } = useProfileStore();
-  const isLogin = location.pathname !== "/signup";
+  const isLogin = location.pathname !== "/registre";
 
   if (redirect) {
     if (isLogin) {
       return (
-        <Navigate to={item_variant_ids.length > 0 ? "/checkout" : "/"} replace />
+        <Navigate to={item_variant_ids.length > 0 ? "/pagament" : "/"} replace />
       );
     }
     return <Navigate to="/activate" state={{ email: redirect }} replace />;
@@ -78,7 +78,7 @@ export default function LogComponent() {
               buttonStyle={isLogin ? "boton--back-orange--solid" : "boton--primary--solid"}
               buttonSize="boton--small"
               hoverStyle="bg-cream"
-              onClick={() => navigate("/login")}
+              onClick={() => navigate("/inicia-sessio")}
               role="tab"
               aria-selected={isLogin}
             >
@@ -92,7 +92,7 @@ export default function LogComponent() {
               buttonStyle={!isLogin ? "boton--back-orange--solid" : "boton--primary--solid"}
               buttonSize="boton--small"
               hoverStyle="bg-cream"
-              onClick={() => navigate("/signup")}
+              onClick={() => navigate("/registre")}
               role="tab"
               aria-selected={!isLogin}
             >
@@ -108,10 +108,10 @@ export default function LogComponent() {
         )}
 
         <div className="auth-card__links">
-          <Link to={isLogin ? "/signup" : "/login"} className="auth-card__switch">
+          <Link to={isLogin ? "/registre" : "/inicia-sessio"} className="auth-card__switch">
             {isLogin ? t("login.no-tens-compte") : t("login.inicia")}
           </Link>
-          <Link to="/send-recovery" className="auth-card__recover">
+          <Link to="/recupera-contrasenya" className="auth-card__recover">
             {t("login.recupera-llarg")}
           </Link>
         </div>

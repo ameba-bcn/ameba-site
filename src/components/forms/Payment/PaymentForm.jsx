@@ -17,7 +17,7 @@ function PaymentForm({ disabled = false }) {
     layout: "tabs",
   };
 
-  const return_url = `${window.location.origin}/summary-checkout`;
+  const return_url = `${window.location.origin}/resum-comanda`;
 
   const handleSubmit = async (event) => {
     event.preventDefault();

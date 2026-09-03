@@ -77,12 +77,12 @@ export default function RecoveryReset() {
               buttonStyle="boton--back-orange--solid"
               buttonSize="boton--megaxxl"
               hoverStyle="bg-cream"
-              onClick={() => navigate("/send-recovery")}
+              onClick={() => navigate("/recupera-contrasenya")}
             >
               {t("login.recupera-token-invalid-cta")}
             </Button>
             <div className="auth-card__links">
-              <Link to="/login" className="auth-card__switch">
+              <Link to="/inicia-sessio" className="auth-card__switch">
                 {t("login.torna-login")}
               </Link>
             </div>
@@ -112,14 +112,14 @@ export default function RecoveryReset() {
             <div className="recovery-done">
               <p>
                 {t("login.contrasenya-canviada")}
-                <Link to="/login">LOGIN</Link>.
+                <Link to="/inicia-sessio">LOGIN</Link>.
               </p>
               <Button
                 type="button"
                 buttonStyle="boton--back-orange--solid"
                 buttonSize="boton--megaxxl"
                 hoverStyle="bg-cream"
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/inicia-sessio")}
               >
                 {t("login.login")}
               </Button>
@@ -184,10 +184,10 @@ export default function RecoveryReset() {
 
           {!done && (
             <div className="auth-card__links">
-              <Link to="/send-recovery" className="auth-card__switch">
+              <Link to="/recupera-contrasenya" className="auth-card__switch">
                 {t("login.link-recupera")}
               </Link>
-              <Link to="/login" className="auth-card__recover">
+              <Link to="/inicia-sessio" className="auth-card__recover">
                 {t("login.torna-login")}
               </Link>
             </div>

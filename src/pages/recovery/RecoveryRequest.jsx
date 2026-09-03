@@ -163,10 +163,10 @@ export default function RecoveryRequest() {
           )}
 
           <div className="auth-card__links">
-            <Link to="/login" className="auth-card__switch">
+            <Link to="/inicia-sessio" className="auth-card__switch">
               {t("login.torna-login")}
             </Link>
-            <Link to="/signup" className="auth-card__recover">
+            <Link to="/registre" className="auth-card__recover">
               {t("login.no-tens-compte")}
             </Link>
           </div>

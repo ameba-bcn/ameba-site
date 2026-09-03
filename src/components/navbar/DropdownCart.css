@@ -198,7 +198,12 @@
   align-self: center;
 }
 
-.cart-pop__checkout-mobile {
+/* Specificity has to match .nb-badge (one class) or beat it — this rule
+   sits earlier in the file, so a same-specificity .cart-pop__checkout-mobile
+   selector would lose the cascade to .nb-badge's width:100% below and the
+   margin added here would overflow past the container's right edge. */
+.nb-badge.cart-pop__checkout-mobile {
+  width: calc(100% - 36px);
   margin: 0 18px 18px;
 }
 
@@ -213,7 +218,7 @@
   background: var(--color-negro);
   color: var(--color-cream);
   border: 2px solid var(--color-negro);
-  padding: 11px 18px 8px;
+  padding: 11px 18px;
   min-height: 48px;
   cursor: pointer;
   box-sizing: border-box;

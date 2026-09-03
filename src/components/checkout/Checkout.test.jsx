@@ -61,20 +61,20 @@ describe("Checkout - route guards", () => {
   it("redirects to / when user is not logged in", () => {
     useAuthStore.setState({ isLoggedIn: false });
     useCartStore.setState({ cart_data: mockCartRegular });
-    renderWithProviders(<Checkout />, { route: "/checkout" });
+    renderWithProviders(<Checkout />, { route: "/pagament" });
     expect(screen.queryByText("pagament")).not.toBeInTheDocument();
   });
 
   it("redirects to / when cart has no items", () => {
     useAuthStore.setState({ isLoggedIn: true, getMemberProfile: vi.fn().mockResolvedValue() });
     useCartStore.setState({ cart_data: { item_variants: [] } });
-    renderWithProviders(<Checkout />, { route: "/checkout" });
+    renderWithProviders(<Checkout />, { route: "/pagament" });
     expect(screen.queryByText("pagament")).not.toBeInTheDocument();
   });
 
   it("does not redirect when logged in with items", () => {
     setupLoggedIn(mockCartRegular);
-    renderWithProviders(<Checkout />, { route: "/checkout" });
+    renderWithProviders(<Checkout />, { route: "/pagament" });
     expect(screen.getByText("pagament")).toBeInTheDocument();
   });
 });

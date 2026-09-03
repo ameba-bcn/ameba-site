@@ -23,7 +23,7 @@ export default function MembershipFormReadOnly(props) {
   const showPasswordRecover = () => {
     setRedirect(true);
   };
-  if (redirect) return <Navigate to="/send-recovery" replace />;
+  if (redirect) return <Navigate to="/recupera-contrasenya" replace />;
   const inProfileView = section.includes("profile");
   const errors = usernameValidation(user) || user.length === 0;
 

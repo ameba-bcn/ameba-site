@@ -53,12 +53,12 @@
 
 .app .checkoutViewYellow {
   background-color: var(--color-cream);
-  height: fit-content;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   z-index: 0;
-  min-height: min-content;
+  flex: 1;
+  min-height: calc(100vh - 80px);
 }
 
 .app .freeCheckout-box {

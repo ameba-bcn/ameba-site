@@ -171,7 +171,7 @@ function AccountData({ isMember, isMembershipExpired }) {
           </div>
 
           <div className="compte-panel__actions">
-            <Link to="/send-recovery" className="account-data__password-link">
+            <Link to="/recupera-contrasenya" className="account-data__password-link">
               {t("compte.canvia-contrasenya")}
             </Link>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>

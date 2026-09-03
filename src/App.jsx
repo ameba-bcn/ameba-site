@@ -10,7 +10,7 @@ import useProfileStore from "./stores/useProfileStore";
 import useAuthStore from "./stores/useAuthStore";
 import useDataStore from "./stores/useDataStore";
 import useCartStore from "./stores/useCartStore";
-import { Routes, Route, Navigate, useParams } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Footer from "./components/footer/Footer";
 import Menu from "./components/navbar/Navbar";
 import ScrollTop from "./components/layout/ScrollTop";
@@ -70,37 +70,6 @@ const QrLanding = lazyWithRetry(() => import("./pages/qr-landing/QrLanding"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
 const UserContext = createContext(null);
-
-// /activitats/:id was renamed to /lab/:id (rediseño 2026) — keep old links
-// (bookmarks, indexed search results) working via redirect.
-function ActivitatToLabRedirect() {
-  const { id } = useParams();
-  return <Navigate to={`/lab/${id}`} replace />;
-}
-
-// /socis[/:id] was renamed to /associacio/socis[/:id] (rediseño 2026) — same
-// redirect-preserving-id treatment. The old route's :id was a URL-encoded
-// project name; the new one is the numeric member_projects id (fed
-// straight from GET /member_projects/{id}/), so old name-slug links pass
-// through into the page's own not-found state rather than resolving.
-function SociDetailRedirect() {
-  const { id } = useParams();
-  return <Navigate to={`/associacio/socis/${id}`} replace />;
-}
-
-// /gallery[/:slug/:year] moved under /festivals/arxiu[/:slug/:year]
-// (rediseño 2026) — same redirect-preserving-params treatment as above.
-function GalleryAlbumRedirect() {
-  const { slug, year } = useParams();
-  return <Navigate to={`/festivals/arxiu/${slug}/${year}`} replace />;
-}
-
-// /profile/profile and /profile/project were renamed to /compte/dades and
-// /compte/projecte (rediseño 2026) — same redirect treatment as above.
-function ProfileToCompteRedirect() {
-  const { id } = useParams();
-  return <Navigate to={`/compte/${id === "project" ? "projecte" : "dades"}`} replace />;
-}
 
 function App() {
   const [user, setUser] = useState(null);
@@ -169,34 +138,22 @@ function App() {
           {isNavigating && <FullscreenSpinner />}
           <Suspense fallback={<RouteFallback />}>
             <Routes>
-              <Route path="/activitats/:id" element={<ActivitatToLabRedirect />} />
-              <Route path="/activitats" element={<Navigate to="/lab" replace />} />
               <Route path="/botiga/:id" element={<ProductePage />} />
               <Route path="/botiga" element={<Botiga />} />
-              <Route path="/shop" element={<Navigate to="/botiga" replace />} />
-              <Route path="/socis/:id" element={<SociDetailRedirect />} />
-              <Route path="/socis" element={<Navigate to="/associacio/socis" replace />} />
               <Route path="/associacio/socis/:id" element={<SociDetail />} />
               <Route path="/associacio/socis" element={<SocisDirectory />} />
-              <Route path="/gallery/:slug/:year" element={<GalleryAlbumRedirect />} />
-              <Route path="/gallery" element={<Navigate to="/festivals/arxiu" replace />} />
-              <Route path="/login" element={<LogSession />} />
-              <Route path="/signup" element={<LogSession />} />
+              <Route path="/inicia-sessio" element={<LogSession />} />
+              <Route path="/registre" element={<LogSession />} />
               <Route path="/recovery" element={<RecoveryReset />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/memberships" element={<Navigate to="/associacio/nou-soci" replace />} />
-              <Route path="/nou-soci" element={<Navigate to="/associacio/nou-soci" replace />} />
+              <Route path="/pagament" element={<CheckoutPage />} />
               <Route path="/associacio/nou-soci" element={<NouSoci />} />
-              <Route path="/send-recovery" element={<RecoveryRequest />} />
+              <Route path="/recupera-contrasenya" element={<RecoveryRequest />} />
               <Route path="/member-card" element={<QrClient />} />
-              <Route path="/validate-email" element={<Navigate to="/activate" replace />} />
               <Route path="/activate" element={<ActivateAccount />} />
               <Route path="/product" element={<ProductRedirect />} />
-              <Route path="/profile/:id" element={<ProfileToCompteRedirect />} />
-              <Route path="/profile" element={<ProfileToCompteRedirect />} />
               <Route path="/compte/:id" element={<Compte />} />
               <Route path="/compte" element={<Compte />} />
-              <Route path="/summary-checkout" element={<CheckoutFinished />} />
+              <Route path="/resum-comanda" element={<CheckoutFinished />} />
               <Route path="/subscribe" element={<SubscriptionFinished />} />
               <Route path="/legal" element={<Legal />} />
               <Route path="/lab/:id" element={<LabDetail />} />

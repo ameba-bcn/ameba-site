@@ -99,7 +99,7 @@
   /* Reference keeps the historic grid two-up on phones instead of
      CardGrid's own default single column. */
   .page-layout--festivals .card-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px 12px;
   }
 }

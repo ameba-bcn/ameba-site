@@ -39,7 +39,7 @@ const CardView = ({ productData = {}, kind = "", handleAddClick }) => {
   const [copied, setCopied] = useState(false);
 
   const breadcrumbMap = {
-    activitat: { path: "/activitats", label: "ACTIVITATS" },
+    activitat: { path: "/lab", label: "ACTIVITATS" },
     producte: { path: "/botiga", label: "BOTIGA" },
     soci: { path: "/associacio/nou-soci", label: "SOCIS" },
   };
