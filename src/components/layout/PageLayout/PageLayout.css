@@ -78,11 +78,17 @@
    pages that still rely on it); Associació's grid is left-aligned
    throughout, per its reference. */
 .page-layout--associacio .page-layout__content,
+.page-layout--festivals .page-layout__content,
 .page-layout--notfound .page-layout__content,
 .page-layout--socis .page-layout__content,
 .page-layout--compte .page-layout__content,
 .page-layout--nou-soci .page-layout__content,
-.page-layout--legal .page-layout__content {
+.page-layout--legal .page-layout__content,
+.page-layout--auth .page-layout__content,
+/* /checkout doesn't pass PageLayout's `section` prop (predates that
+   convention), so it never gets a .page-layout--* class — target its
+   legacy `className` directly instead. */
+.checkoutViewYellow .page-layout__content {
   text-align: left;
 }
 
