@@ -15,7 +15,7 @@ describe("revamp smoke", () => {
     expect(screen.getByRole("heading", { name: /login/i })).toBeInTheDocument();
     expect(screen.getByPlaceholderText("EMAIL")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("PASSWORD")).toBeInTheDocument();
-    expect(document.querySelector('a[href="/nou-soci"]')).toBeTruthy();
+    expect(document.querySelector('a[href="/associacio/nou-soci"]')).toBeTruthy();
     expect(document.querySelector('a[href="/signup"]')).toBeTruthy();
   });
 

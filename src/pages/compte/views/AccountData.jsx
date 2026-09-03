@@ -218,7 +218,7 @@ function AccountData({ isMember, isMembershipExpired }) {
             {!isMember && (
               <span className="account-data__cta">
                 {t("perfil.vols-soci")}?{" "}
-                <Link to="/nou-soci">{t("perfil.mes-info")}</Link>
+                <Link to="/associacio/nou-soci">{t("perfil.mes-info")}</Link>
               </span>
             )}
             <button

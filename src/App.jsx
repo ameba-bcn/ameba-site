@@ -184,8 +184,9 @@ function App() {
               <Route path="/signup" element={<LogSession />} />
               <Route path="/recovery" element={<RecoveryReset />} />
               <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/memberships" element={<Navigate to="/nou-soci" replace />} />
-              <Route path="/nou-soci" element={<NouSoci />} />
+              <Route path="/memberships" element={<Navigate to="/associacio/nou-soci" replace />} />
+              <Route path="/nou-soci" element={<Navigate to="/associacio/nou-soci" replace />} />
+              <Route path="/associacio/nou-soci" element={<NouSoci />} />
               <Route path="/send-recovery" element={<RecoveryRequest />} />
               <Route path="/member-card" element={<QrClient />} />
               <Route path="/validate-email" element={<Navigate to="/activate" replace />} />

@@ -537,7 +537,7 @@ function Associacio() {
             <li>{t("associacio.cta.bullet1")}</li>
             <li>{t("associacio.cta.bullet2")}</li>
           </ul>
-          <HeroButton to="/nou-soci">{t("associacio.cta.button")}</HeroButton>
+          <HeroButton to="/associacio/nou-soci">{t("associacio.cta.button")}</HeroButton>
         </div>
 
         {/* Des de 2014 */}
