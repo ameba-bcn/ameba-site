@@ -47,6 +47,8 @@
   position: relative;
   z-index: 1;
   flex: 0 1 480px;
+  overflow: hidden;
+  isolation: isolate;
   background-color: var(--band-color, var(--color-cream));
 }
 
