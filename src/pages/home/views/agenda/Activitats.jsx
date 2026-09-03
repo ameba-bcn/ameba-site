@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 import { radioDublabLink } from "../../../../utils/constants";
 import ActivitatsMainSection from "../../../../components/layout/ActivitatsMainSection";
 import useDataStore from "../../../../stores/useDataStore";
-import EmbeddedSpinner from "../../../../components/spinner/EmbeddedSpinner";
+import Spinner from "../../../../components/spinner/Spinner";
 
 const Activitats = () => {
   const [activitats, setActivitats] = useState([]);
@@ -31,7 +31,7 @@ const Activitats = () => {
       <div className="activitats-box">
         <SectionTitle title={t("support.menu.activitats")} />
         {isEventsLoading ? (
-          <EmbeddedSpinner alone />
+          <Spinner size={64} alone />
         ) : (
           <>
             {activitats.length > 0 && (

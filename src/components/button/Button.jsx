@@ -1,4 +1,5 @@
 import React from "react";
+import Spinner from "../spinner/Spinner";
 import "./Button.css";
 
 const STYLES = [
@@ -44,7 +45,7 @@ export default function Button(props) {
       {...rest}
     >
       {loading ? (
-        <div className="spinner" id="spinner" />
+        <Spinner size={24} />
       ) : (
         <>
           {icon ? (

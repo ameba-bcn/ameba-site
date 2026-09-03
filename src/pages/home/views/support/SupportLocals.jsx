@@ -5,7 +5,7 @@ import useMediaQuery from "../../../../hooks/use-media-query";
 import "./SupportLocals.style.css";
 import MainSupportLocals from "../../../support/components/MainSupportLocals";
 import useDataStore from "../../../../stores/useDataStore";
-import EmbeddedSpinner from "../../../../components/spinner/EmbeddedSpinner";
+import Spinner from "../../../../components/spinner/Spinner";
 
 export default function SupportLocals() {
   const breakpoint = useMediaQuery("(max-width:950px)");
@@ -15,7 +15,7 @@ export default function SupportLocals() {
   return (
     <div className="support-locals">
       {isArtistLoading ? (
-        <EmbeddedSpinner alone />
+        <Spinner size={64} alone />
       ) : (
         <>
           <MainSupportLocals className="gridNoticies" />

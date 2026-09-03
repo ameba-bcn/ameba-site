@@ -1,7 +1,7 @@
 import React from "react";
 import PowerTitle from "../PowerTitle";
 import LettersMove from "../LettersMove";
-import EmbeddedSpinner from "../../spinner/EmbeddedSpinner";
+import Spinner from "../../spinner/Spinner";
 import PromoBar from "../../ui/PromoBar";
 import "./PageLayout.css";
 
@@ -31,7 +31,7 @@ export default function PageLayout({
         <div className={contentClass}>
           {loading ? (
             <div className="page-layout__loader">
-              <EmbeddedSpinner />
+              <Spinner size={64} />
             </div>
           ) : (
             children
