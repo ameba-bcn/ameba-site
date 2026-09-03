@@ -32,7 +32,6 @@ export default function LogComponent() {
   return (
     <div className="auth-card">
       <aside className="auth-card__aside">
-        <AmebaLogo width={76} height={76} fill="var(--color-naranja)" />
         <h2 className="auth-card__aside-title auth-card__aside-title--desktop">
           {t("login.aside-titol")}
         </h2>
@@ -55,7 +54,7 @@ export default function LogComponent() {
           </span>
         </div>
         {user_profile !== "LOGGED" && (
-          <Link to="/nou-soci" className="auth-card__cta">
+          <Link to="/associacio/nou-soci" className="auth-card__cta">
             {t("login.encara")}
             <Icon icon="plus" width="18" height="18" />
           </Link>
