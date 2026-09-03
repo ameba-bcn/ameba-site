@@ -33,8 +33,11 @@
 
 .ameba-card-title__container {
   font-family: var(--font-body);
-  width: -webkit-fill-available;
-  height: -webkit-fill-available;
+  /* -webkit-fill-available resolves against the viewport instead of this
+     flex parent on WebKit (iOS Safari/Chrome), blowing this box up to
+     ~800px tall. The flex item's default align-items:stretch already
+     gives it full width, and auto height (content-sized) is what
+     Chromium fell back to anyway since it ignores the value here. */
   display: flex;
   align-items: center;
   color: var(--title-color, #fae6c5);
