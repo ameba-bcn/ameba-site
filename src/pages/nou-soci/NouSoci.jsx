@@ -51,7 +51,7 @@ function NouSoci() {
   const firstVariantId =
     typeof variants[0] === "object" ? variants[0]?.id : variants[0];
   const productSoldOut = has_stock === false || stock === 0;
-  const checkoutRedirect = isLoggedIn ? "/checkout" : "/login";
+  const checkoutRedirect = isLoggedIn ? "/pagament" : "/inicia-sessio";
 
   const handleCtaClick = () => {
     if (productSoldOut) return;

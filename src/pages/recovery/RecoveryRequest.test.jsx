@@ -15,7 +15,7 @@ describe("RecoveryRequest", () => {
   it("shows an inline error and never calls the store for an invalid email", async () => {
     const sendEmailPasswordRecovery = vi.fn();
     useAuthStore.setState({ sendEmailPasswordRecovery });
-    renderWithProviders(<RecoveryRequest />, { route: "/send-recovery" });
+    renderWithProviders(<RecoveryRequest />, { route: "/recupera-contrasenya" });
 
     // "a@b" passes the <input type="email"> native constraint (so the
     // submit event actually fires in jsdom, same as a real browser) but
@@ -35,7 +35,7 @@ describe("RecoveryRequest", () => {
   });
 
   it("requests the link and moves to the confirmation step with the email shown", async () => {
-    renderWithProviders(<RecoveryRequest />, { route: "/send-recovery" });
+    renderWithProviders(<RecoveryRequest />, { route: "/recupera-contrasenya" });
 
     fireEvent.change(screen.getByPlaceholderText("EMAIL"), {
       target: { value: "hector@ameba.cat" },
@@ -51,7 +51,7 @@ describe("RecoveryRequest", () => {
   });
 
   it("can resend the link and go back to using another email", async () => {
-    renderWithProviders(<RecoveryRequest />, { route: "/send-recovery" });
+    renderWithProviders(<RecoveryRequest />, { route: "/recupera-contrasenya" });
     fireEvent.change(screen.getByPlaceholderText("EMAIL"), {
       target: { value: "hector@ameba.cat" },
     });

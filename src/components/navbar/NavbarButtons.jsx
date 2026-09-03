@@ -45,7 +45,7 @@ export default function NavbarButtons(props) {
           <div className="liMenuOptions logname-li">
             {!isLoggedIn ? (
               <NavLink
-                to="/login"
+                to="/inicia-sessio"
                 className="nav-icon-link"
                 aria-label="Login"
               >

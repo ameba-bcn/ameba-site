@@ -37,7 +37,7 @@ const BANDS = [
     id: "festivals",
     color: "var(--section-festivals)",
     image: home2,
-    to: "/activitats",
+    to: "/lab",
     dotsPosition: "top-right",
   },
   {

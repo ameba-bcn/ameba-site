@@ -558,17 +558,33 @@
     display: none;
   }
 
-  /* Tres blobs: una sola columna, blob més petit */
+  /* Tres blobs: una sola columna; dins de cada blob, el text va a la dreta
+     de l'svg i de l'h2, que queden apilats a l'esquerra. */
+  .associacio__blob {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "icon text"
+      "title text";
+    column-gap: 16px;
+    row-gap: 4px;
+    align-items: start;
+  }
+
   .associacio__blob svg {
+    grid-area: icon;
     width: 80px;
     height: 80px;
   }
 
   .associacio__blob .outline-heading {
+    grid-area: title;
     font-size: clamp(30px, 8vw, 40px);
   }
 
   .associacio__blob p {
+    grid-area: text;
+    align-self: end;
     font-size: 0.8rem;
   }
 
@@ -612,18 +628,16 @@
     margin-top: 14px;
   }
 
-  /* Estadístiques: scroll horitzontal en comptes d'apilar (perdria la
-     lectura de la banda). */
+  /* Estadístiques: dues fileres de 4 en comptes de scroll horitzontal. */
   .associacio__stats {
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    flex-wrap: wrap;
+    row-gap: 8px;
   }
 
   .associacio__stat {
-    flex: 0 0 108px;
+    flex: 0 1 calc(25% - 6px);
+    max-width: calc(25% - 6px);
     height: 230px;
-    max-width: none;
-    scroll-snap-align: start;
   }
 
   .associacio__stat-label {
@@ -634,21 +648,35 @@
     font-size: 40px;
   }
 
-  /* Grups de treball: es manté la graella de 2 columnes també al mòbil */
+  /* Grups de treball: CTA en dues files (text i botó apilats) en comptes
+     de columnes; es manté la graella de 2 columnes també al mòbil */
+  .associacio__grups-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .associacio__grups-cta p {
+    max-width: 100%;
+  }
+
+  .associacio__grups-cta a {
+    margin-right: 0;
+  }
+
   .associacio__grups-grid {
     gap: 24px 16px;
   }
 
   .associacio__grup-circle {
-    width: 90px;
-    height: 90px;
+    width: 108px;
+    height: 108px;
   }
 
   .associacio__grup .outline-heading {
-    font-size: 22px;
+    font-size: 26px;
   }
 
   .associacio__grup p {
-    font-size: 11px;
+    font-size: 13px;
   }
 }

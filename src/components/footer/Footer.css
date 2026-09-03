@@ -219,5 +219,14 @@
 
   .ameba-footer__collab {
     flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .ameba-footer__collab--single {
+    justify-content: center;
+  }
+
+  .ameba-footer__collab span {
+    flex-basis: 100%;
   }
 }

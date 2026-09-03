@@ -147,7 +147,7 @@ function Cart() {
             </div>
             <NavLink
               className="nb-badge"
-              to={isLoggedIn ? "/checkout" : "/login"}
+              to={isLoggedIn ? "/pagament" : "/inicia-sessio"}
               onClick={handleCheckoutClick}
             >
               {t("checkout.finalitzarCompra")}

@@ -10,21 +10,21 @@ import Footer from "../components/footer/Footer";
 import LogSession from "../pages/LogSession";
 
 describe("revamp smoke", () => {
-  it("renders the login card at /login with tabs and the membership CTA", () => {
-    renderWithProviders(<LogSession />, { route: "/login" });
+  it("renders the login card at /inicia-sessio with tabs and the membership CTA", () => {
+    renderWithProviders(<LogSession />, { route: "/inicia-sessio" });
     expect(screen.getByRole("heading", { name: /login/i })).toBeInTheDocument();
     expect(screen.getByPlaceholderText("EMAIL")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("PASSWORD")).toBeInTheDocument();
     expect(document.querySelector('a[href="/associacio/nou-soci"]')).toBeTruthy();
-    expect(document.querySelector('a[href="/signup"]')).toBeTruthy();
+    expect(document.querySelector('a[href="/registre"]')).toBeTruthy();
   });
 
-  it("renders the signup form at /signup", () => {
-    renderWithProviders(<LogSession />, { route: "/signup" });
+  it("renders the signup form at /registre", () => {
+    renderWithProviders(<LogSession />, { route: "/registre" });
     expect(screen.getByPlaceholderText("EMAIL")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("PASSWORD")).toBeInTheDocument();
     expect(document.querySelector('input[name="username"]')).toBeTruthy();
-    expect(document.querySelector('a[href="/login"]')).toBeTruthy();
+    expect(document.querySelector('a[href="/inicia-sessio"]')).toBeTruthy();
   });
 
   it("renders Home with hero and 4 section bands", () => {

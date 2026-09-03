@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import CartMobile from "./CartMobile";
-import AmebaLogo from "../ui/logo/AmebaLogo";
+import AmebaBlob from "../ui/logo/AmebaBlob";
 import Icon from "../ui/Icon";
 import useUIStore from "../../stores/useUIStore";
 import useAuthStore from "../../stores/useAuthStore";
@@ -130,7 +130,7 @@ export default function NavbarButtonsMobile(props) {
     <div className="nb-drawer" ref={drawerRef}>
       <div className="nb-drawer__header">
         <NavLink to="/" className="nb-drawer__brand" onClick={closeMenu}>
-          <AmebaLogo width={24} height={24} fill="var(--color-cream)" />
+          <AmebaBlob size={24} color="cream" />
           AMEBA
         </NavLink>
         <button
@@ -256,7 +256,7 @@ export default function NavbarButtonsMobile(props) {
           <NavLink to="/associacio/nou-soci" className="nb-badge nb-badge--naranja" onClick={closeMenu}>
             {t("home.hero.cta-soci")}
           </NavLink>
-          <NavLink to="/login" className="nb-badge nb-badge--outline" onClick={closeMenu}>
+          <NavLink to="/inicia-sessio" className="nb-badge nb-badge--outline" onClick={closeMenu}>
             {t("home.hero.cta-acces")}
           </NavLink>
         </div>

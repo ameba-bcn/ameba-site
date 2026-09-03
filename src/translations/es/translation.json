@@ -100,12 +100,12 @@
     "lab": "Lab",
     "shop": "Shop",
     "idioma": "Cambia el idioma",
-    "el-meu-projecte": "MI PROYECTO",
+    "el-meu-projecte": "Mi proyecto",
     "seccions": "Secciones",
     "submenu-associacio-qui-som": "Quiénes somos",
     "submenu-associacio-socis": "Socios y socias",
     "submenu-associacio-fes-te-soci": "Hazte socio/a",
-    "submenu-festivals-propers": "Próximos festivales",
+    "submenu-festivals-propers": "Eventos",
     "submenu-festivals-arxiu": "Archivo de ediciones",
     "la-meva-cistella": "Mi cesta",
     "obre-el-menu": "Abre el menú",
@@ -174,6 +174,7 @@
     "promo-text-bold": "socio/socia de Ameba",
     "promo-text-2": " y disfruta de las ventajas de formar parte de nuestra comunidad!",
     "promo-cta": ">>>>>> Descubre más haciendo click aquí!",
+    "promo-text-mobile": "Hazte socio/a de Ameba →",
     "promo-close": "Cierra el banner"
   },
   "agenda": {

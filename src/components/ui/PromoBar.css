@@ -51,18 +51,29 @@
   color: var(--color-rojo);
 }
 
+.promo-bar__text--mobile {
+  display: none;
+}
+
 @media (max-width: 760px) {
   .promo-bar {
     justify-content: center;
-    text-align: left;
+    text-align: center;
   }
 
-  .promo-bar__text {
-    font-size: 0.7rem;
+  .promo-bar__link {
+    justify-content: center;
   }
 
-  .promo-bar__cta {
-    font-size: 0.7rem;
-    white-space: nowrap;
+  .promo-bar__text--desktop,
+  .promo-bar__cta--desktop {
+    display: none;
+  }
+
+  .promo-bar__text--mobile {
+    display: inline;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
   }
 }

@@ -89,9 +89,16 @@
 
 .account-project__image-actions .compte-tool {
   flex: 1;
-  font-size: 10.5px;
   min-height: 26px;
   padding: 0 4px;
+}
+
+/* Icon-only — the slot is a third of an already-narrow mobile grid
+   column, too tight for "Substitueix"/"Elimina" without overflowing. The
+   icon's path has a hardcoded fill, so it needs an explicit override to
+   follow the button's own color (and its hover swap). */
+.account-project__image-actions .compte-tool svg path {
+  fill: currentColor;
 }
 
 .account-project__image-add {

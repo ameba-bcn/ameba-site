@@ -67,7 +67,7 @@ export default function ActivateAccount() {
   }[step];
 
   const handleGoToAccount = () => {
-    navigate(item_variant_ids.length > 0 ? "/checkout" : "/compte");
+    navigate(item_variant_ids.length > 0 ? "/pagament" : "/compte");
   };
 
   return (
@@ -155,7 +155,7 @@ export default function ActivateAccount() {
                 buttonStyle="boton--back-orange--solid"
                 buttonSize="boton--megaxxl"
                 hoverStyle="bg-cream"
-                onClick={() => navigate("/signup")}
+                onClick={() => navigate("/registre")}
               >
                 {t("login.activa-error-cta")}
               </Button>
@@ -163,7 +163,7 @@ export default function ActivateAccount() {
           )}
 
           <div className="auth-card__links">
-            <Link to="/login" className="auth-card__switch">
+            <Link to="/inicia-sessio" className="auth-card__switch">
               {t("login.torna-login")}
             </Link>
             <Link to="/" className="auth-card__recover">

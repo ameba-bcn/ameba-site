@@ -9,7 +9,7 @@ import "./PromoBar.css";
 const STORAGE_KEY = "promoBarClosed";
 
 /**
- * Banda promocional bajo la navbar — soci/sòcia d'Ameba → /memberships.
+ * Banda promocional bajo la navbar — soci/sòcia d'Ameba → /associacio/nou-soci.
  * Compartida entre Home (closable, con botón de cierre persistido en
  * sessionStorage — antes era el componente aparte PromoBanner) y las 4
  * vistas de sección (PageLayout `promo` prop, sin cerrar).
@@ -74,13 +74,16 @@ export default function PromoBar({ closable = false }) {
   return (
     <div className="promo-bar" ref={rootRef}>
       <Link to="/associacio/nou-soci" className="promo-bar__link">
-        <span className="promo-bar__text">
+        <span className="promo-bar__text promo-bar__text--desktop">
           {t("banners.promo-text-1")}
           <strong>{t("banners.promo-text-bold")}</strong>
           {t("banners.promo-text-2")}
         </span>
-        <span className="promo-bar__cta" ref={ctaRef}>
+        <span className="promo-bar__cta promo-bar__cta--desktop" ref={ctaRef}>
           {t("banners.promo-cta")}
+        </span>
+        <span className="promo-bar__text promo-bar__text--mobile">
+          {t("banners.promo-text-mobile")}
         </span>
       </Link>
       {closable && (

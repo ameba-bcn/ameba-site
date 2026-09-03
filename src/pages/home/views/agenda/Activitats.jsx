@@ -44,7 +44,7 @@ const Activitats = () => {
               <NavLink
                 className="navLinkActivitat"
                 style={{ textDecoration: "none" }}
-                to={{ pathname: "/activitats" }}
+                to={{ pathname: "/lab" }}
               >
                 <PlusButton plusStyle="plus--obscure" plusSize="plus--big" />
               </NavLink>

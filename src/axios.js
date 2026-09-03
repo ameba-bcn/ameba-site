@@ -79,7 +79,7 @@ axiosInstance.interceptors.response.use(
       originalRequest.url === BASE_URL + "token/refresh/"
     ) {
       clearSession();
-      window.location.href = "/login/";
+      window.location.href = "/inicia-sessio";
       return Promise.reject(error);
     }
 
@@ -94,7 +94,7 @@ axiosInstance.interceptors.response.use(
       if (!refreshToken) {
         console.warn("Refresh token not available");
         clearSession();
-        window.location.href = "/login/";
+        window.location.href = "/inicia-sessio";
         return Promise.reject(error);
       }
 
@@ -115,7 +115,7 @@ axiosInstance.interceptors.response.use(
       } catch (e) {
         console.warn("Refresh token is malformed");
         clearSession();
-        window.location.href = "/login/";
+        window.location.href = "/inicia-sessio";
         return Promise.reject(error);
       }
       const now = Math.ceil(Date.now() / 1000);
@@ -123,7 +123,7 @@ axiosInstance.interceptors.response.use(
       if (tokenParts.exp <= now) {
         console.warn("Refresh token is expired", tokenParts.exp, now);
         clearSession();
-        window.location.href = "/login/";
+        window.location.href = "/inicia-sessio";
         return Promise.reject(error);
       }
 

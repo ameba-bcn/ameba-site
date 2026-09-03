@@ -42,7 +42,7 @@ describe("PaymentForm", () => {
       expect(mockConfirmPayment).toHaveBeenCalledWith({
         elements: mockElements,
         confirmParams: {
-          return_url: expect.stringContaining("/summary-checkout"),
+          return_url: expect.stringContaining("/resum-comanda"),
         },
       });
     });

@@ -4,6 +4,7 @@ import ImageUploading from "react-images-uploading";
 import authService from "../../../store/services/auth.service";
 import TextArea from "../../../components/forms/TextArea/TextArea";
 import Spinner from "../../../components/spinner/Spinner";
+import Icon from "../../../components/ui/Icon";
 import { validate } from "./AccountProjectValidate";
 import { iframesValidation, urlValidation } from "../../../utils/validations";
 import { sanitizeHTML, sanitizeEmbed } from "../../../utils/sanitize";
@@ -272,11 +273,21 @@ function AccountProject({ isMembershipExpired }) {
                     <div key={index} className="account-project__image-slot">
                       <img src={image.image} alt="" />
                       <div className="account-project__image-actions">
-                        <button type="button" className="compte-tool" onClick={() => onImageUpdate(index)}>
-                          {t("compte.substitueix")}
+                        <button
+                          type="button"
+                          className="compte-tool"
+                          aria-label={t("compte.substitueix")}
+                          onClick={() => onImageUpdate(index)}
+                        >
+                          <Icon icon="replay" width="14" height="14" />
                         </button>
-                        <button type="button" className="compte-tool" onClick={() => onImageRemove(index)}>
-                          {t("compte.elimina")}
+                        <button
+                          type="button"
+                          className="compte-tool"
+                          aria-label={t("compte.elimina")}
+                          onClick={() => onImageRemove(index)}
+                        >
+                          <Icon icon="trash" width="14" height="14" />
                         </button>
                       </div>
                     </div>

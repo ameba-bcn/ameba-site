@@ -66,7 +66,7 @@ function LabDetail() {
         progress: undefined,
         className: "toast-black-background",
       });
-      navigate(user_profile === "LOGGED" ? "/checkout" : "/login");
+      navigate(user_profile === "LOGGED" ? "/pagament" : "/inicia-sessio");
     });
   };
 

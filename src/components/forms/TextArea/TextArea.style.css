@@ -29,29 +29,100 @@
 .text-area__styled {
   display: block;
   height: 100%;
-  border: 4px solid var(--color-negro);
+  border: 2px solid var(--color-negro);
   border-radius: 0px;
 }
 
 .text-area__styled--focus {
-  border-color: var(--color-naranja);
+  border-color: var(--color-rojo);
 }
 
 .text-area__styled--invalid {
   border-color: var(--color-rojo);
 }
 
+/* ── Harmonitza el skin per defecte de TinyMCE (Oxide) amb la identitat
+   visual de la resta del disseny: negre/crema/taronja, tipografia pròpia,
+   cantonades vives i sense les ombres/radis genèrics de Tiny. ── */
 .text-area__styled .tox-tinymce,
 .text-area__styled .tox-edit-area::before {
   border: none !important;
+}
+
+.text-area__styled .tox-tinymce {
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .text-area__styled iframe {
   background-color: transparent !important;
 }
 
+.text-area__styled .tox-editor-header {
+  box-shadow: none !important;
+}
+
 .text-area__styled .tox-editor-header,
-.text-area__styled .tox-toolbar__primary {
+.text-area__styled .tox-toolbar__primary,
+.text-area__styled .tox-toolbar-overlord {
   background-color: var(--color-naranja) !important;
   border-radius: 0px;
+}
+
+.text-area__styled .tox-toolbar__group {
+  border-color: rgba(29, 29, 27, 0.35) !important;
+}
+
+.text-area__styled .tox-tbtn {
+  border-radius: 0 !important;
+  color: var(--color-negro) !important;
+}
+
+.text-area__styled .tox-tbtn svg {
+  fill: var(--color-negro) !important;
+}
+
+.text-area__styled .tox-tbtn:hover,
+.text-area__styled .tox-tbtn--enabled,
+.text-area__styled .tox-tbtn--enabled:hover {
+  background-color: var(--color-negro) !important;
+}
+
+.text-area__styled .tox-tbtn:hover svg,
+.text-area__styled .tox-tbtn--enabled svg {
+  fill: var(--color-cream) !important;
+}
+
+.text-area__styled .tox-tbtn__select-label {
+  font-family: var(--font-body) !important;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+}
+
+.text-area__styled .tox-menu,
+.text-area__styled .tox-collection--list,
+.text-area__styled .tox-swatches {
+  background-color: var(--color-cream) !important;
+  border: 2px solid var(--color-negro) !important;
+  border-radius: 0 !important;
+  box-shadow: 4px 4px 0 var(--color-negro) !important;
+}
+
+.text-area__styled .tox-collection__item {
+  color: var(--color-negro) !important;
+  font-family: var(--font-body) !important;
+  border-radius: 0 !important;
+}
+
+.text-area__styled .tox-collection__item--active,
+.text-area__styled .tox-collection__item--enabled,
+.text-area__styled .tox-collection__item:hover {
+  background-color: var(--color-naranja) !important;
+  color: var(--color-negro) !important;
+}
+
+.text-area__styled .tox-collection__item-checkmark svg {
+  fill: var(--color-negro) !important;
 }

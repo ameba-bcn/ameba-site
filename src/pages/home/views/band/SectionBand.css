@@ -162,6 +162,18 @@
   height: 100%;
 }
 
+/* Sense això l'img queda en flux normal (top-left del span), en lloc de
+   centrada com les capes d'AmebaBlob que sí són absolute/inset:0. El
+   truc dels marges auto centra qualsevol width/height, per això
+   l'override mobile (60%) de sota no necessita repetir el centratge. */
+.section-band__more-inner img {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+}
+
 /* Superposición de amebas (AmebaBlob): negra estática debajo, naranja
    rotando encima; al ser siluetas irregulares, el giro deja asomar la negra */
 .section-band__more-blob {

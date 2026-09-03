@@ -4,6 +4,11 @@
   left: 0;
   right: 0;
   z-index: 1000;
+  /* Being position:fixed takes this out of .app's containing block, so
+     .app's own overflow-x:hidden (App.css) can't clip anything that
+     overflows in here — any child that overflows horizontally would
+     otherwise leak into page-wide scroll-x. */
+  overflow-x: hidden;
   /* Entrance + auto-hide-on-scroll are GSAP-driven (Navbar.jsx) — no CSS
      animation/class here, so nothing fights its inline transform. */
 }
@@ -240,6 +245,10 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  /* Same story as .navbar above: fixed positioning escapes .app's
+     overflow-x:hidden, so any row/button that overflows horizontally
+     inside the drawer would otherwise force page-wide scroll-x. */
+  overflow-x: hidden;
   /* Open/close is GSAP-driven (Navbar.style.css sets the base state,
      NavbarButtonsMobile.jsx plays a clip-path reveal timeline). */
 }
