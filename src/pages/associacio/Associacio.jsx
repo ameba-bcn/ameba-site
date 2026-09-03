@@ -285,16 +285,22 @@ function Associacio() {
               scrub: 1,
             },
           });
+          // stagger stays small relative to duration: with `scrub`, this
+          // whole timeline gets squeezed into the fixed "top 80%"→"top 20%"
+          // scroll distance regardless of these numbers, so a stagger as
+          // large as the duration itself (as this was) pushes the last
+          // line's start way out — it sat fully hidden for the first ~40%
+          // of the scroll range before finally catching up at the very end.
           tl.to(
             lines,
-            { yPercent: 0, stagger: 0.3, duration: 1, ease: "none" },
+            { yPercent: 0, stagger: 0.08, duration: 1, ease: "none" },
             0,
           ).to(sinceTitle, { webkitTextStrokeWidth: "1px", duration: 1 }, 0);
           if (sinceBody)
             tl.to(
               sinceBody,
               { x: 0, autoAlpha: 1, duration: 0.6, ease: "none" },
-              0.6,
+              0.5,
             );
         });
 
@@ -377,7 +383,8 @@ function Associacio() {
       if (statCols.length) {
         gsap.set(statCols, { scaleY: 0, transformOrigin: "bottom" });
         statLabels.forEach((label) => {
-          if (label) gsap.set(label, { overflow: "hidden", yPercent: 100 });
+          if (label)
+            gsap.set(label, { overflow: "hidden", yPercent: 100, autoAlpha: 0 });
         });
 
         gsap
@@ -396,7 +403,13 @@ function Associacio() {
           })
           .to(
             statLabels.filter(Boolean),
-            { yPercent: 0, duration: 0.4, stagger: 0.05, ease: "power2.out" },
+            {
+              yPercent: 0,
+              autoAlpha: 1,
+              duration: 0.4,
+              stagger: 0.05,
+              ease: "power2.out",
+            },
             "-=0.3",
           )
           .add(() => {
@@ -524,7 +537,7 @@ function Associacio() {
             <li>{t("associacio.cta.bullet1")}</li>
             <li>{t("associacio.cta.bullet2")}</li>
           </ul>
-          <HeroButton to="/nou-soci">{t("associacio.cta.button")}</HeroButton>
+          <HeroButton to="/associacio/nou-soci">{t("associacio.cta.button")}</HeroButton>
         </div>
 
         {/* Des de 2014 */}

@@ -4,7 +4,7 @@ import i18next from "i18next";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
 import authService from "../../../../store/services/auth.service";
-import EmbeddedSpinner from "../../../../components/spinner/EmbeddedSpinner";
+import Spinner from "../../../../components/spinner/Spinner";
 import "./MemberQr.style.css";
 
 const toSecureUrl = (url) =>
@@ -57,7 +57,7 @@ const MemberQr = () => {
   }, []);
 
   if (loading) {
-    return <EmbeddedSpinner alone />;
+    return <Spinner size={64} alone />;
   }
 
   if (!memberData) return null;

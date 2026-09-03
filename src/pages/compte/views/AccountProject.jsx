@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import ImageUploading from "react-images-uploading";
 import authService from "../../../store/services/auth.service";
 import TextArea from "../../../components/forms/TextArea/TextArea";
-import EmbeddedSpinner from "../../../components/spinner/EmbeddedSpinner";
+import Spinner from "../../../components/spinner/Spinner";
 import { validate } from "./AccountProjectValidate";
 import { iframesValidation, urlValidation } from "../../../utils/validations";
 import { sanitizeHTML, sanitizeEmbed } from "../../../utils/sanitize";
@@ -146,7 +146,7 @@ function AccountProject({ isMembershipExpired }) {
   if (loading) {
     return (
       <div style={{ paddingTop: 40 }}>
-        <EmbeddedSpinner alone />
+        <Spinner size={64} alone />
       </div>
     );
   }

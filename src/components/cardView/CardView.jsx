@@ -41,7 +41,7 @@ const CardView = ({ productData = {}, kind = "", handleAddClick }) => {
   const breadcrumbMap = {
     activitat: { path: "/activitats", label: "ACTIVITATS" },
     producte: { path: "/botiga", label: "BOTIGA" },
-    soci: { path: "/nou-soci", label: "SOCIS" },
+    soci: { path: "/associacio/nou-soci", label: "SOCIS" },
   };
   const breadcrumb = breadcrumbMap[kind] || breadcrumbMap.activitat;
 

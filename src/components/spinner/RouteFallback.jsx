@@ -1,5 +1,5 @@
 import React from "react";
-import AmebaSpinner from "./AmebaSpinner";
+import Spinner from "./Spinner";
 import "./RouteFallback.css";
 
 /**
@@ -8,7 +8,7 @@ import "./RouteFallback.css";
  */
 const RouteFallback = () => (
   <div className="route-fallback">
-    <AmebaSpinner />
+    <Spinner size={100} />
   </div>
 );
 

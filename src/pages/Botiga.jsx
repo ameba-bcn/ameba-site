@@ -29,7 +29,7 @@ function Botiga() {
     <PageLayout section="shop" promo loading={isArtistsLoading}>
       <PageMeta
         title="Botiga"
-        description="Botiga d'AMEBA: merchandising, entrades i productes de l'Associació de Música Electrònica de Barcelona."
+        description="Botiga d'AMEBA: merchandising oficial de l'Associació de Música Electrònica de Barcelona."
         url="/botiga"
       />
       <div ref={rootRef}>

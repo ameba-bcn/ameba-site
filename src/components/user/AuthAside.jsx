@@ -1,11 +1,10 @@
 import React from "react";
-import AmebaLogo from "../ui/logo/AmebaLogo";
 import { AMEBA_EMAIL } from "../../utils/constants";
 import "./AuthCard.css";
 import "./AuthAside.css";
 
 // Shared aside for the recovery and email-activation flows — same pitch
-// shape (logo, title, text, numbered checklist, mailto help line), only
+// shape (title, text, numbered checklist, mailto help line), only
 // the copy and the highlighted step change per flow.
 export default function AuthAside({
   title,
@@ -18,7 +17,6 @@ export default function AuthAside({
 }) {
   return (
     <aside className="auth-card__aside">
-      <AmebaLogo width={76} height={76} fill="var(--color-naranja)" />
       <h2 className="auth-card__aside-title auth-card__aside-title--desktop">
         {title}
       </h2>

@@ -11,7 +11,7 @@ export default function CheckoutPage() {
       className="checkoutViewYellow"
       banner={{
         sentence: t("banners.soci-curt"),
-        link: "/nou-soci",
+        link: "/associacio/nou-soci",
         color: "var(--color-rojo)",
       }}
     >

@@ -1,11 +1,9 @@
-import React, { useEffect, useRef } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import CartMobile from "./CartMobile";
+import AmebaLogo from "../ui/logo/AmebaLogo";
 import Icon from "../ui/Icon";
-import Button from "../button/Button";
-import AmebaBlob from "../ui/logo/AmebaBlob";
-import useOutsideClick from "../../hooks/use-outside-click";
 import useUIStore from "../../stores/useUIStore";
 import useAuthStore from "../../stores/useAuthStore";
 import useCartStore from "../../stores/useCartStore";
@@ -14,11 +12,23 @@ import { NAV_SECTIONS, isSectionActive } from "./navSections";
 import { gsap, prefersReducedMotion } from "../../utils/gsapSetup";
 import useGsapContext from "../../hooks/use-gsap-context";
 
+// Sub-links shown when the Associació/Festivals rows expand — the rest of
+// NAV_SECTIONS (Lab, Shop) has nowhere further to drill into, so those stay
+// plain links.
+const ASSOCIACIO_SUBLINKS = [
+  { to: "/associacio", labelKey: "menu.submenu-associacio-qui-som" },
+  { to: "/associacio/socis", labelKey: "menu.submenu-associacio-socis" },
+  { to: "/associacio/nou-soci", labelKey: "menu.submenu-associacio-fes-te-soci" },
+];
+const FESTIVALS_SUBLINKS = [
+  { to: "/festivals", labelKey: "menu.submenu-festivals-propers" },
+  { to: "/festivals/arxiu", labelKey: "menu.submenu-festivals-arxiu" },
+];
+
 export default function NavbarButtonsMobile(props) {
-  const { isLoggedIn = false, refer, toggleRef, isOpen = false } = props;
+  const { isLoggedIn = false, toggleRef, isOpen = false } = props;
   const [t, i18next] = useTranslation("translation");
   const location = useLocation();
-  const navigate = useNavigate();
   const closeMenu = useUIStore((state) => state.closeMenu);
   const { cart_data = {} } = useCartStore();
   const hasCartItems = (cart_data?.item_variants || []).length > 0;
@@ -32,6 +42,15 @@ export default function NavbarButtonsMobile(props) {
   const validYear = user_member_data.expires
     ? new Date(user_member_data.expires).getFullYear()
     : null;
+  const initials =
+    (fullName || user_data.username || "")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((word) => word[0]?.toUpperCase())
+      .join("") || "?";
+
   const currentLang = localStorage.getItem("i18nextLng");
   const handleChangeLanguage = (lang) => {
     if (currentLang !== lang) {
@@ -40,49 +59,43 @@ export default function NavbarButtonsMobile(props) {
       window.location.reload(false);
     }
   };
-  const nextLang = currentLang === "es" ? "ca" : "es";
 
   const handleLogout = () => {
     closeMenu();
     logout();
   };
 
-  useOutsideClick(refer, (e) => {
-    if (isOpen && !toggleRef?.current?.contains(e.target)) closeMenu();
+  // Single-open accordion, defaulting to whichever section (if any) the
+  // current route already sits under.
+  const [openSection, setOpenSection] = useState(() => {
+    const active = NAV_SECTIONS.find(
+      (item) =>
+        ["associacio", "festivals"].includes(item.key) &&
+        isSectionActive(item, location),
+    );
+    return active?.key ?? null;
   });
+  const toggleSection = (key) =>
+    setOpenSection((current) => (current === key ? null : key));
 
-  const boxRef = useRef(null);
+  const drawerRef = useRef(null);
   const timelineRef = useRef(null);
 
-  // 1.4 — one reversible timeline (paused, built once), not a second
-  // timeline for closing: `.reverse()` on close.
   useGsapContext(() => {
-    const box = boxRef.current;
-    if (!box) return;
-    const items = gsap.utils.toArray("li", box);
-    const links = items.map((li) => li.querySelector("a"));
-    const chips = items.map((li) => li.querySelector(".nav-color-chip"));
-    const ctaButtons = gsap.utils.toArray(".nav-drawer-cta .boton", box);
+    const drawer = drawerRef.current;
+    if (!drawer) return;
 
     if (prefersReducedMotion()) {
-      gsap.set(box, { autoAlpha: 0 });
-      timelineRef.current = gsap.timeline({ paused: true }).to(box, { autoAlpha: 1, duration: 0.2 });
+      gsap.set(drawer, { autoAlpha: 0 });
+      timelineRef.current = gsap.timeline({ paused: true }).to(drawer, { autoAlpha: 1, duration: 0.2 });
       return;
     }
 
-    gsap.set(box, { clipPath: "inset(0 0 100% 0)", autoAlpha: 1 });
-    gsap.set(items, { overflow: "hidden" });
-    gsap.set(links, { yPercent: 100 });
-    gsap.set(chips, { scaleY: 0, transformOrigin: "center bottom" });
-    gsap.set(ctaButtons, { y: 20, autoAlpha: 0 });
-
+    gsap.set(drawer, { clipPath: "inset(0 0 100% 0)", autoAlpha: 1 });
     timelineRef.current = gsap
       .timeline({ paused: true })
-      .to(box, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.5, ease: "expo.out" })
-      .to(links, { yPercent: 0, duration: 0.5, stagger: 0.06, ease: "power3.out" }, "-=0.25")
-      .to(chips, { scaleY: 1, duration: 0.5, stagger: 0.06, ease: "power3.out" }, "<")
-      .to(ctaButtons, { y: 0, autoAlpha: 1, duration: 0.4, stagger: 0.06 });
-  }, [], boxRef);
+      .to(drawer, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.45, ease: "expo.out" });
+  }, [], drawerRef);
 
   useEffect(() => {
     const tl = timelineRef.current;
@@ -91,116 +104,178 @@ export default function NavbarButtonsMobile(props) {
     else tl.reverse();
   }, [isOpen]);
 
+  // Full-screen takeover: lock page scroll, close on Escape, return focus
+  // to the burger button that opened it.
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") closeMenu();
+    };
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKeyDown);
+      toggleRef?.current?.focus();
+    };
+  }, [isOpen, closeMenu, toggleRef]);
+
+  // No role="dialog"/aria-modal here: like the panel it replaces, this
+  // stays mounted at all times (clip-path drives the open/close visual so
+  // the GSAP reveal has something to animate) rather than being
+  // mounted/unmounted with `isOpen` — asserting modal semantics on a node
+  // that's still in the tree (and tabbable) while "closed" would be
+  // misleading to assistive tech, not more accessible.
   return (
-    <div
-      className={`nav-ul_box-mobile${isOpen ? " nav-ul_box-mobile--open" : ""}${hasCartItems ? " nav-ul_box-mobile--has-cart" : ""}`}
-      ref={boxRef}
-    >
-      <ul className="nav-ul_mobile" ref={refer}>
-        {NAV_SECTIONS.map((item) => (
-          <li key={item.key}>
-            <NavLink
-              to={item.to}
-              className={() =>
-                `nav-section-link${
-                  isSectionActive(item, location) ? " active" : ""
-                }`
-              }
-              style={{ "--chip-color": `var(${item.chip})` }}
-              onClick={() => closeMenu()}
-            >
-              <span className="nav-color-chip" aria-hidden="true" />
-              {t(`menu.${item.key}`)}
-            </NavLink>
-          </li>
-        ))}
+    <div className="nb-drawer" ref={drawerRef}>
+      <div className="nb-drawer__header">
+        <NavLink to="/" className="nb-drawer__brand" onClick={closeMenu}>
+          <AmebaLogo width={24} height={24} fill="var(--color-cream)" />
+          AMEBA
+        </NavLink>
+        <button
+          type="button"
+          className="nb-icon"
+          aria-label={t("menu.tanca-el-menu")}
+          onClick={closeMenu}
+        >
+          <span className="nb-drawer__close" aria-hidden="true">×</span>
+        </button>
+      </div>
 
-        <div className="nav-icons nav-icons--mobile">
-          <div className="liMenuOptions logname-li-mobile">
-            {!isLoggedIn && (
-              <NavLink
-                to="/login"
-                className="nav-icon-link"
-                aria-label="Login"
-                onClick={() => closeMenu()}
-              >
-                <AmebaBlob
-                  color="cream"
-                  size={30}
-                  className="nav-user-blob"
-                />
-              </NavLink>
-            )}
-          </div>
-          <button
-            className="nav-lang-toggle"
-            onClick={() => handleChangeLanguage(nextLang)}
-            aria-label={t("menu.idioma")}
-          >
-            <Icon
-              icon="language"
-              type="hoverable-black"
-              width="24"
-              height="24"
-            />
-            <span>{currentLang === "es" ? "CAST" : "CAT"}</span>
-          </button>
-        </div>
-
-        {isLoggedIn && (
-          <div className="nav-account-box">
-            <span className="nav-account-box__name">
-              {fullName || user_data.username}
-            </span>
+      {isLoggedIn && (
+        <div className="nb-identity">
+          <span className="nb-identity__avatar" aria-hidden="true">{initials}</span>
+          <span className="nb-identity__meta">
+            <span className="nb-identity__name">{fullName || user_data.username}</span>
             {isMember && (
-              <span className="nav-account-box__meta">
+              <span className="nb-identity__sub">
                 {t("form.soci")} {user_member_data.number}
                 {validYear && ` · ${t("compte.valid-fins")} ${validYear}`}
               </span>
             )}
-            <div className="nav-account-box__links">
-              <NavLink to="/compte/dades" onClick={() => closeMenu()}>
-                {t("compte.eyebrow")}
+          </span>
+        </div>
+      )}
+
+      <span className="nb-glabel">{t("menu.seccions")}</span>
+      <nav aria-label={t("menu.seccions")}>
+        <button
+          type="button"
+          className="nb-row"
+          aria-expanded={openSection === "associacio"}
+          onClick={() => toggleSection("associacio")}
+        >
+          <span className="nb-msq" style={{ background: "var(--section-associacio)" }} aria-hidden="true" />
+          {t("menu.associacio")}
+          <span className="nb-chev" aria-hidden="true">▼</span>
+        </button>
+        {openSection === "associacio" && (
+          <div className="nb-sub">
+            {ASSOCIACIO_SUBLINKS.map(({ to, labelKey }) => (
+              <NavLink key={to} to={to} onClick={closeMenu}>
+                {t(labelKey)}
               </NavLink>
-              {isMember && (
-                <NavLink to="/compte/projecte" onClick={() => closeMenu()}>
-                  {t("menu.el-meu-projecte")}
-                </NavLink>
-              )}
-              <button type="button" className="nav-account-box__logout" onClick={handleLogout}>
-                {t("compte.logout")}
-              </button>
-            </div>
+            ))}
           </div>
         )}
 
-        <CartMobile />
+        <button
+          type="button"
+          className="nb-row"
+          style={{ color: "var(--color-amarillo)" }}
+          aria-expanded={openSection === "festivals"}
+          onClick={() => toggleSection("festivals")}
+        >
+          <span className="nb-msq" style={{ background: "var(--section-festivals)" }} aria-hidden="true" />
+          {t("menu.festivals")}
+          <span className="nb-chev" aria-hidden="true">▼</span>
+        </button>
+        {openSection === "festivals" && (
+          <div className="nb-sub">
+            {FESTIVALS_SUBLINKS.map(({ to, labelKey }) => (
+              <NavLink key={to} to={to} onClick={closeMenu}>
+                {t(labelKey)}
+              </NavLink>
+            ))}
+          </div>
+        )}
 
-        <div className="nav-drawer-cta">
-          <Button
-            buttonStyle="boton--orange--solid"
-            buttonSize="boton--big"
-            className="nav-drawer-cta__button"
-            onClick={() => {
-              closeMenu();
-              navigate("/nou-soci");
-            }}
-          >
+        <NavLink
+          to="/lab"
+          className="nb-row"
+          style={{ color: "var(--color-naranja)" }}
+          onClick={closeMenu}
+        >
+          <span className="nb-msq" style={{ background: "var(--section-lab)" }} aria-hidden="true" />
+          {t("menu.lab")}
+          <span className="nb-arrow" aria-hidden="true">→</span>
+        </NavLink>
+        <NavLink
+          to="/botiga"
+          className="nb-row"
+          style={{ color: "var(--color-rojo)" }}
+          onClick={closeMenu}
+        >
+          <span className="nb-msq" style={{ background: "var(--section-shop)" }} aria-hidden="true" />
+          {t("menu.shop")}
+          <span className="nb-arrow" aria-hidden="true">→</span>
+        </NavLink>
+      </nav>
+
+      {isLoggedIn && (
+        <>
+          <span className="nb-glabel">{t("compte.eyebrow")}</span>
+          <div>
+            <NavLink className="nb-arow" to="/compte/dades" onClick={closeMenu}>
+              {t("compte.dades-personals")}
+              <span className="nb-arrow" aria-hidden="true">→</span>
+            </NavLink>
+            {isMember && (
+              <NavLink className="nb-arow" to="/compte/projecte" onClick={closeMenu}>
+                {t("menu.el-meu-projecte")}
+                <span className="nb-arrow" aria-hidden="true">→</span>
+              </NavLink>
+            )}
+            <button type="button" className="nb-arow" style={{ color: "var(--color-rojo)" }} onClick={handleLogout}>
+              {t("compte.logout")}
+            </button>
+          </div>
+        </>
+      )}
+
+      {hasCartItems && (
+        <>
+          <span className="nb-glabel">{t("menu.la-meva-cistella")}</span>
+          <CartMobile />
+        </>
+      )}
+
+      {!isLoggedIn && (
+        <div className="nb-drawer__cta">
+          <NavLink to="/associacio/nou-soci" className="nb-badge nb-badge--naranja" onClick={closeMenu}>
             {t("home.hero.cta-soci")}
-          </Button>
-          <Button
-            buttonStyle="boton--primary--solid"
-            buttonSize="boton--big"
-            className="nav-drawer-cta__button"
-            onClick={() => {
-              closeMenu();
-              navigate(isLoggedIn ? "/compte" : "/login");
-            }}
-          >
+          </NavLink>
+          <NavLink to="/login" className="nb-badge nb-badge--outline" onClick={closeMenu}>
             {t("home.hero.cta-acces")}
-          </Button>
+          </NavLink>
         </div>
-      </ul>
+      )}
+
+      <div className="nb-drawer__footer">
+        <span className="nb-drawer__footer-label">
+          <Icon icon="language" type="hoverable-black" width="16" height="16" />
+          {t("menu.idioma")}
+        </span>
+        <div className="nb-seg" role="group" aria-label={t("menu.idioma")}>
+          <button type="button" aria-pressed={currentLang !== "es"} onClick={() => handleChangeLanguage("ca")}>
+            CAT
+          </button>
+          <button type="button" aria-pressed={currentLang === "es"} onClick={() => handleChangeLanguage("es")}>
+            CAST
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

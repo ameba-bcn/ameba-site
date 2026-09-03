@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import useAuthStore from "../../stores/useAuthStore";
 import useDataStore from "../../stores/useDataStore";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import PageMeta from "../../components/seo/PageMeta";
@@ -14,6 +15,8 @@ const PAGE_SIZE = 16;
 
 function SocisDirectory() {
   const { member_projects = [], isMemberProjectsLoading } = useDataStore();
+  const { isLoggedIn, user_member_data } = useAuthStore();
+  const isMember = isLoggedIn && user_member_data?.memberships?.length > 0;
   const [t] = useTranslation("translation");
   const [searchParams, setSearchParams] = useSearchParams();
   const activeRole = searchParams.get("rol");
@@ -83,12 +86,14 @@ function SocisDirectory() {
 
         <section className="socis-directory__intro">
           <h1 className="socis-directory__lead">{t("soci.directori-lead")}</h1>
-          <div className="socis-directory__cta">
-            <p>{t("soci.directori-crear-text")}</p>
-            <Link className="socis-directory__badge" to="/compte/projecte">
-              {t("soci.directori-crear")}
-            </Link>
-          </div>
+          {isMember && (
+            <div className="socis-directory__cta">
+              <p>{t("soci.directori-crear-text")}</p>
+              <Link className="socis-directory__badge" to="/compte/projecte">
+                {t("soci.directori-crear")}
+              </Link>
+            </div>
+          )}
         </section>
 
         <section aria-label={t("soci.cerca-projecte")} className="socis-directory__filters">

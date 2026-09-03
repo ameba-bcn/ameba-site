@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import PaymentForm from "../forms/Payment/PaymentForm";
 import FreeCheckout from "./FreeCheckout";
+import Spinner from "../spinner/Spinner";
 import "./Payment.style.css";
 import useCartStore from "../../stores/useCartStore";
 
@@ -65,7 +66,7 @@ export default function Payment() {
             <PaymentForm disabled={!terms} />
           </Elements>
         ) : (
-          <span className="spinner-border"></span>
+          <Spinner size={40} alone />
         )}
       </div>
     </div>

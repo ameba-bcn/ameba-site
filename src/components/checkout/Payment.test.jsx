@@ -64,7 +64,7 @@ describe("Payment", () => {
       checkout: { amount: 2500, checkout_stripe: {} },
     });
     const { container } = renderWithProviders(<Payment />);
-    expect(container.querySelector(".spinner-border")).toBeInTheDocument();
+    expect(container.querySelector(".spinner-mark")).toBeInTheDocument();
   });
 
   it("does not render FreeCheckout when amount > 0", () => {

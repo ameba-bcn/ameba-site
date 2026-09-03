@@ -16,7 +16,7 @@ function LocationProbe() {
 const festival = (overrides) => ({
   id: overrides.id,
   name: overrides.name,
-  type: "festival",
+  type: overrides.type ?? "festival",
   datetime: overrides.datetime,
   price: overrides.price ?? 0,
   images: ["/img/f.jpg"],
@@ -25,8 +25,10 @@ const festival = (overrides) => ({
 });
 
 const AGENDA = [
-  festival({ id: 1, name: "Parkfest 2024", datetime: "2024-06-01T20:00:00Z" }),
-  festival({ id: 2, name: "Parkfest 2025", datetime: "2025-06-01T20:00:00Z" }),
+  festival({ id: 1, name: "Parkfest 2024", type: "parkfest", datetime: "2024-06-01T20:00:00Z" }),
+  festival({ id: 5, name: "Festa Major 2025", type: "festa major", datetime: "2025-05-01T20:00:00Z" }),
+  festival({ id: 2, name: "Parkfest 2025", type: "parkfest", datetime: "2025-06-01T20:00:00Z" }),
+  // Latest past event — becomes the featured one, excluded from the grid below.
   festival({ id: 3, name: "Altre Fest 2025", datetime: "2025-07-01T20:00:00Z", price: 15 }),
   { id: 4, name: "Taller", type: "taller", datetime: "2025-01-01T20:00:00Z" },
 ];
@@ -36,13 +38,34 @@ beforeEach(() => {
 });
 
 describe("Festivals", () => {
-  it("only lists events of type festival in the historic grid", () => {
+  it("lists parkfest/festival/festa major events in the historic grid, excluding Lab activities", () => {
     renderWithProviders(<Festivals />, { route: "/festivals" });
 
     expect(screen.getByText("Parkfest 2024")).toBeInTheDocument();
-    expect(screen.getByText("Parkfest 2025")).toBeInTheDocument();
     expect(screen.getByText("Altre Fest 2025")).toBeInTheDocument();
+    expect(screen.getByText("Festa Major 2025")).toBeInTheDocument();
     expect(screen.queryByText("Taller")).not.toBeInTheDocument();
+  });
+
+  it("filters the grid by type and reflects it in the URL", () => {
+    const { container } = renderWithProviders(
+      <>
+        <Festivals />
+        <LocationProbe />
+      </>,
+      { route: "/festivals" },
+    );
+
+    fireEvent.click(screen.getByText("Festival"));
+    fireEvent.click(screen.getByText("FESTA MAJOR"));
+
+    const grid = within(container.querySelector(".festivals__card-grid"));
+    expect(grid.getByText("Festa Major 2025")).toBeInTheDocument();
+    expect(grid.queryByText("Parkfest 2024")).not.toBeInTheDocument();
+    expect(grid.queryByText("Altre Fest 2025")).not.toBeInTheDocument();
+    expect(screen.getByTestId("location-search").textContent).toContain(
+      "tipus=festa+major",
+    );
   });
 
   it("filters the grid by year and reflects it in the URL", () => {

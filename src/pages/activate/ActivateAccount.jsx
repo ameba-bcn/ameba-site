@@ -5,7 +5,7 @@ import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import AuthAside from "../../components/user/AuthAside";
 import Button from "../../components/button/Button";
 import Icon from "../../components/ui/Icon";
-import EmbeddedSpinner from "../../components/spinner/EmbeddedSpinner";
+import Spinner from "../../components/spinner/Spinner";
 import useAuthStore from "../../stores/useAuthStore";
 import useCartStore from "../../stores/useCartStore";
 import "../../components/user/AuthCard.css";
@@ -120,7 +120,7 @@ export default function ActivateAccount() {
 
           {step === "checking" && (
             <div className="activate-checking">
-              <EmbeddedSpinner />
+              <Spinner size={28} />
               <span>{t("login.activa-checking-label")}</span>
             </div>
           )}
@@ -139,7 +139,7 @@ export default function ActivateAccount() {
               >
                 {t("login.activa-done-cta")}
               </Button>
-              <Link to="/nou-soci" className="activate-inline-link">
+              <Link to="/associacio/nou-soci" className="activate-inline-link">
                 {t("login.activa-done-nou-soci")}
               </Link>
             </div>

@@ -352,11 +352,3 @@
   background-color: #a2d8f4;
 }
 
-.centered-element {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 50vh;
-  padding: 20px;
-}

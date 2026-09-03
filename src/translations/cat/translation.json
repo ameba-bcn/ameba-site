@@ -100,7 +100,16 @@
     "lab": "Lab",
     "shop": "Shop",
     "idioma": "Canvia l'idioma",
-    "el-meu-projecte": "EL MEU PROJECTE"
+    "el-meu-projecte": "EL MEU PROJECTE",
+    "seccions": "Seccions",
+    "submenu-associacio-qui-som": "Qui som",
+    "submenu-associacio-socis": "Socis i sòcies",
+    "submenu-associacio-fes-te-soci": "Fes-te soci/a",
+    "submenu-festivals-propers": "Propers festivals",
+    "submenu-festivals-arxiu": "Arxiu d'edicions",
+    "la-meva-cistella": "La meva cistella",
+    "obre-el-menu": "Obre el menú",
+    "tanca-el-menu": "Tanca el menú"
   },
   "checkout": {
     "finalitzarCompra": "finalitzar compra",
@@ -238,9 +247,9 @@
   "botiga": {
     "breadcrumb": "Camí de navegació",
     "torna": "Torna a la Botiga",
-    "hero-lead": "Merchandising oficial i entrades d'Ameba.",
-    "hero-body-1": "Roba serigrafiada a Barcelona i entrades per a festivals, tallers i activitats del Lab. Cada compra sosté directament l'associació.",
-    "hero-body-2": "Els socis i sòcies tenen preus especials a totes les peces i entrades. Enviament i punts de recollida disponibles.",
+    "hero-lead": "Merchandising oficial d'Ameba.",
+    "hero-body-1": "Samarretes, tote bags, gorres i altra roba serigrafiada a Barcelona. Cada compra sosté directament l'associació.",
+    "hero-body-2": "Els socis i sòcies tenen preus especials a totes les peces. Enviament i punts de recollida disponibles.",
     "socis-preu": "SOCIS",
     "enviament": "Enviament i punts de recollida disponibles!",
     "fitxa-1": "Teixit 100% cotó ecològic.",
@@ -340,6 +349,9 @@
     "historic": "Històric festivals",
     "any": "Any",
     "festival": "Festival",
+    "tipus-parkfest": "PARKFEST",
+    "tipus-festival": "FESTIVAL",
+    "tipus-festa-major": "FESTA MAJOR",
     "cancellat": "CANCEL·LAT",
     "localitzacio": "Localització",
     "dia": "Dia",
@@ -383,8 +395,8 @@
         "body": "Producció, DJing, gestió cultural i molt més, amb preus reduïts per a socis i sòcies. Consulta el calendari i apunta't a la propera activitat."
       },
       "shop": {
-        "lead": "Merchandising i entrades, fet a Barcelona.",
-        "body": "Samarretes serigrafiades a la ciutat i entrades per a totes les nostres activitats. Cada compra torna directament a l'associació."
+        "lead": "Merchandising fet a Barcelona.",
+        "body": "Samarretes, tote bags, gorres i altres peces serigrafiades a la ciutat. Cada compra torna directament a l'associació."
       }
     }
   },

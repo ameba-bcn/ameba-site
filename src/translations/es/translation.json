@@ -100,7 +100,16 @@
     "lab": "Lab",
     "shop": "Shop",
     "idioma": "Cambia el idioma",
-    "el-meu-projecte": "MI PROYECTO"
+    "el-meu-projecte": "MI PROYECTO",
+    "seccions": "Secciones",
+    "submenu-associacio-qui-som": "Quiénes somos",
+    "submenu-associacio-socis": "Socios y socias",
+    "submenu-associacio-fes-te-soci": "Hazte socio/a",
+    "submenu-festivals-propers": "Próximos festivales",
+    "submenu-festivals-arxiu": "Archivo de ediciones",
+    "la-meva-cistella": "Mi cesta",
+    "obre-el-menu": "Abre el menú",
+    "tanca-el-menu": "Cierra el menú"
   },
   "checkout": {
     "finalitzarCompra": "finalizar compra",
@@ -238,9 +247,9 @@
   "botiga": {
     "breadcrumb": "Ruta de navegación",
     "torna": "Volver a la Tienda",
-    "hero-lead": "Merchandising oficial y entradas de Ameba.",
-    "hero-body-1": "Ropa serigrafiada en Barcelona y entradas para festivales, talleres y actividades del Lab. Cada compra sostiene directamente a la asociación.",
-    "hero-body-2": "Los socios y socias tienen precios especiales en todas las prendas y entradas. Envío y puntos de recogida disponibles.",
+    "hero-lead": "Merchandising oficial de Ameba.",
+    "hero-body-1": "Camisetas, tote bags, gorras y otras prendas serigrafiadas en Barcelona. Cada compra sostiene directamente a la asociación.",
+    "hero-body-2": "Los socios y socias tienen precios especiales en todas las prendas. Envío y puntos de recogida disponibles.",
     "socis-preu": "SOCIOS",
     "enviament": "¡Envío y puntos de recogida disponibles!",
     "fitxa-1": "Tejido 100% algodón ecológico.",
@@ -340,6 +349,9 @@
     "historic": "Histórico festivales",
     "any": "Año",
     "festival": "Festival",
+    "tipus-parkfest": "PARKFEST",
+    "tipus-festival": "FESTIVAL",
+    "tipus-festa-major": "FIESTA MAYOR",
     "cancellat": "CANCELADO",
     "localitzacio": "Ubicación",
     "dia": "Día",
@@ -383,8 +395,8 @@
         "body": "Producción, DJing, gestión cultural y mucho más, con precios reducidos para socios y socias. Consulta el calendario y apúntate a la próxima actividad."
       },
       "shop": {
-        "lead": "Merchandising y entradas, hecho en Barcelona.",
-        "body": "Camisetas serigrafiadas en la ciudad y entradas para todas nuestras actividades. Cada compra vuelve directamente a la asociación."
+        "lead": "Merchandising hecho en Barcelona.",
+        "body": "Camisetas, tote bags, gorras y otras prendas serigrafiadas en la ciudad. Cada compra vuelve directamente a la asociación."
       }
     }
   },

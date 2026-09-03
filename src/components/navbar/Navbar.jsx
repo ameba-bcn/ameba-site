@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import NavbarButtons from "./NavbarButtons";
 import NavbarButtonsMobile from "./NavbarButtonsMobile";
 import { MOBILE_BIG } from "../../utils/constants";
@@ -9,16 +10,17 @@ import useUIStore from "../../stores/useUIStore";
 import useAuthStore from "../../stores/useAuthStore";
 import useCartStore from "../../stores/useCartStore";
 import Icon from "../ui/Icon";
+import AmebaLogo from "../ui/logo/AmebaLogo";
 import { gsap, SplitText, prefersReducedMotion } from "../../utils/gsapSetup";
 import useGsapContext from "../../hooks/use-gsap-context";
 
 export default function Navbar({ isErrored = false }) {
+  const [t] = useTranslation("translation");
   const isMobile = useMediaQuery(MOBILE_BIG);
   const { isLoggedIn } = useAuthStore();
   const rootRef = useRef(null);
-  const ref = useRef(null);
   const toggleRef = useRef(null);
-  const { isMenuOpen, openMenu, closeMenu } = useUIStore();
+  const { isMenuOpen, openMenu } = useUIStore();
   const { cart_data = {} } = useCartStore();
   const cartCount = cart_data?.count || 0;
   const [hidden, setHidden] = useState(false);
@@ -56,7 +58,7 @@ export default function Navbar({ isErrored = false }) {
   useGsapContext(() => {
     const root = rootRef.current;
     const logo = root.querySelector(".menuAmebalogo");
-    const wordmark = root.querySelector(".menu-logo-box a");
+    const wordmark = root.querySelector(".menu-wordmark");
     const navItems = gsap.utils.toArray(
       ".nav-ul > li, .nav-ul .nav-icons, .menu-icon",
       root,
@@ -97,57 +99,68 @@ export default function Navbar({ isErrored = false }) {
   }, [shouldHide]);
 
   return (
-    <div className="navbar" ref={rootRef}>
-      <div className="menuContainer">
-        <div className="menuSuperior">
-          <div className="menu-logo-box">
-            <img
-              src="/AmebaLogo.png"
-              className="menuAmebalogo"
-              alt="Ameba Logo"
-            />
-            <NavLink to="/" data-item="AMEBA">
-              AMEBA
-            </NavLink>
+    <>
+      <div className="navbar" ref={rootRef}>
+        <div className="menuContainer">
+          <div className="menuSuperior">
+            <div className="menuSuperior__inner">
+              <div className="menu-logo-box">
+                <NavLink to="/" data-item="AMEBA">
+                  <span className="menuAmebalogo">
+                    <AmebaLogo
+                      width={isMobile ? 24 : 28}
+                      height={isMobile ? 24 : 28}
+                      fill="var(--color-cream)"
+                    />
+                  </span>
+                  <span className="menu-wordmark">AMEBA</span>
+                </NavLink>
+              </div>
+              {isMobile
+                ? !isErrored && (
+                    <div className="menu-mobile-actions">
+                      {cartCount > 0 && (
+                        <button
+                          type="button"
+                          className="nb-icon"
+                          aria-label={t("checkout.cistella")}
+                          onClick={() => openMenu()}
+                        >
+                          <Icon
+                            icon="shoppingCart"
+                            className="cartIconMenu"
+                            type="hoverable-black"
+                            width="20"
+                            height="20"
+                          />
+                          <span className="nb-count">{cartCount}</span>
+                        </button>
+                      )}
+                      <button
+                        ref={toggleRef}
+                        className="menu-icon"
+                        onClick={() => openMenu()}
+                        aria-label={t("menu.obre-el-menu")}
+                      >
+                        <span className="menu-icon__bar" />
+                        <span className="menu-icon__bar" />
+                        <span className="menu-icon__bar" />
+                      </button>
+                    </div>
+                  )
+                : !isErrored && <NavbarButtons isLoggedIn={isLoggedIn} />}
+            </div>
           </div>
-          {isMobile
-            ? !isErrored && (
-                <div className="menu-mobile-actions">
-                  {cartCount > 0 && (
-                    <button
-                      type="button"
-                      className="nb-icon"
-                      aria-label="Cistella"
-                      onClick={() => openMenu()}
-                    >
-                      <Icon
-                        icon="shoppingCart"
-                        className="cartIconMenu"
-                        type="hoverable-black"
-                        width="20"
-                        height="20"
-                      />
-                      <span className="nb-count">{cartCount}</span>
-                    </button>
-                  )}
-                  <button
-                    ref={toggleRef}
-                    className={`menu-icon${isMenuOpen ? " menu-icon--open" : ""}`}
-                    onClick={() => (isMenuOpen ? closeMenu() : openMenu())}
-                    aria-label="Menu"
-                  >
-                    <span className="menu-icon__bar" />
-                    <span className="menu-icon__bar" />
-                    <span className="menu-icon__bar" />
-                  </button>
-                </div>
-              )
-            : !isErrored && <NavbarButtons isLoggedIn={isLoggedIn} />}
         </div>
-        {isMobile && !isErrored && (
-          <NavbarButtonsMobile isLoggedIn={isLoggedIn} refer={ref} toggleRef={toggleRef} isOpen={isMenuOpen} />
-        )}
       </div>
-    </div>
+      {/* Rendered as a sibling of .navbar, not a descendant: GSAP's
+          scroll-hide transform on .navbar would otherwise become this
+          fixed-positioned drawer's containing block (any non-none
+          `transform` on an ancestor does, per spec), breaking its
+          viewport-relative inset:0. */}
+      {isMobile && !isErrored && (
+        <NavbarButtonsMobile isLoggedIn={isLoggedIn} toggleRef={toggleRef} isOpen={isMenuOpen} />
+      )}
+    </>
   );
 }

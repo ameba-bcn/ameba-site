@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useDataStore from "../../stores/useDataStore";
-import { selectFestivals } from "../../selectors/festivals";
+import { selectFestivals, FESTIVAL_TYPES } from "../../selectors/festivals";
 import { formatPrice, sortByDate, formatISODateToDate, formatDateToHour } from "../../utils/utils";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import PageMeta from "../../components/seo/PageMeta";
@@ -22,6 +22,15 @@ import useGsapContext from "../../hooks/use-gsap-context";
 import "./Festivals.css";
 
 const PAGE_SIZE = 12;
+
+// Fixed taxonomy (not derived from the data) — Parkfest is Ameba's own
+// flagship event and always leads, unlike the dynamic per-type filter on
+// /lab where any type the backend returns is fair game.
+const TYPE_LABEL_KEYS = {
+  parkfest: "festivals.tipus-parkfest",
+  festival: "festivals.tipus-festival",
+  "festa major": "festivals.tipus-festa-major",
+};
 
 function Festivals() {
   const { agenda = [], isEventsLoading } = useDataStore();
@@ -53,7 +62,7 @@ function Festivals() {
   }, [], rootRef);
 
   const activeYear = searchParams.get("any");
-  const activeFestival = searchParams.get("festival");
+  const activeType = searchParams.get("tipus");
 
   // §2.3 "Aplicar filtre → FLIP" — capture card positions synchronously
   // before the filter changes the result set, apply the transition once
@@ -79,7 +88,7 @@ function Festivals() {
       });
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeYear, activeFestival]);
+  }, [activeYear, activeType]);
 
   const festivals = useMemo(() => selectFestivals(agenda), [agenda]);
 
@@ -113,19 +122,14 @@ function Festivals() {
     [historic],
   );
 
-  const festivalNames = useMemo(
-    () => [...new Set(historic.map((f) => f.name).filter(Boolean))].sort(),
-    [historic],
-  );
-
   const filtered = useMemo(
     () =>
       historic
         .filter((f) =>
           activeYear ? String(new Date(f.datetime).getFullYear()) === activeYear : true,
         )
-        .filter((f) => (activeFestival ? f.name === activeFestival : true)),
-    [historic, activeYear, activeFestival],
+        .filter((f) => (activeType ? f.type === activeType : true)),
+    [historic, activeYear, activeType],
   );
 
   const visibleItems = filtered.slice(0, visibleCount);
@@ -192,11 +196,14 @@ function Festivals() {
         />
         <DropdownFilter
           label={t("festivals.festival")}
-          value={activeFestival}
-          options={festivalNames}
-          onChange={(v) => setFilter("festival", v)}
+          value={activeType ? t(TYPE_LABEL_KEYS[activeType]) : null}
+          options={FESTIVAL_TYPES.map((type) => ({
+            value: type,
+            label: t(TYPE_LABEL_KEYS[type]),
+          }))}
+          onChange={(v) => setFilter("tipus", v)}
         />
-        {(activeYear || activeFestival) && (
+        {(activeYear || activeType) && (
           <button type="button" className="festivals__clear" onClick={clearFilters}>
             {t("general.borrar-filtres")}
           </button>

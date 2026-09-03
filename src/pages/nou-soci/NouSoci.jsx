@@ -28,7 +28,7 @@ function NouSoci() {
         <PageMeta
           title={t("nouSoci.meta-title")}
           description={t("nouSoci.meta-description")}
-          url="/nou-soci"
+          url="/associacio/nou-soci"
         />
         <div className="nou-soci nou-soci--empty">
           <p>{t("errors.general")}</p>
@@ -73,7 +73,7 @@ function NouSoci() {
       <PageMeta
         title={t("nouSoci.meta-title")}
         description={t("nouSoci.meta-description")}
-        url="/nou-soci"
+        url="/associacio/nou-soci"
       />
       <div className="nou-soci">
         <nav aria-label={t("compte.breadcrumb")} className="nou-soci__breadcrumb">
