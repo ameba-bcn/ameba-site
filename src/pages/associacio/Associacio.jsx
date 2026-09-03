@@ -179,7 +179,16 @@ function Associacio() {
           .to(cta, { scaleX: 1, duration: 0.6, ease: "expo.out" })
           .to(
             ctaWords,
-            { yPercent: 0, duration: 0.5, stagger: 0.05, ease: "power3.out" },
+            {
+              yPercent: 0,
+              duration: 0.5,
+              stagger: 0.05,
+              ease: "power3.out",
+              // Diacritics on uppercase accented chars (QUÈ, etc.) can poke
+              // above the tight line-height box; overflow:hidden above was
+              // only needed to mask the slide-up reveal, so drop it once done.
+              onComplete: () => ctaTitle && gsap.set(ctaTitle, { overflow: "visible" }),
+            },
             "-=0.35",
           )
           .to(
@@ -227,7 +236,18 @@ function Associacio() {
           if (blobCharsPerBlock[i].length) {
             tl.to(
               blobCharsPerBlock[i],
-              { yPercent: 0, duration: 0.4, stagger: 0.03, ease: "power3.out" },
+              {
+                yPercent: 0,
+                duration: 0.4,
+                stagger: 0.03,
+                ease: "power3.out",
+                // Diacritics on uppercase accented chars (QUÈ, PER QUÈ) can
+                // poke above the tight line-height box; overflow:hidden above
+                // was only needed to mask the slide-up reveal, so drop it
+                // once done.
+                onComplete: () =>
+                  blobTitles[i] && gsap.set(blobTitles[i], { overflow: "visible" }),
+              },
               at + 0.25,
             );
           }
@@ -490,11 +510,7 @@ function Associacio() {
               <OutlineHeading as="h2">
                 {t(`associacio.blobs.${key}.title`)}
               </OutlineHeading>
-              {/* TODO copy */}
-              <p>
-                Lorem ipsum dolor sit amet, tincidunt sit amet diam non, rhoncus
-                cursus urna. Nulla semper tortor a pretium suscipit.
-              </p>
+              <p>{t(`associacio.blobs.${key}.text`)}</p>
             </div>
           ))}
         </div>
@@ -508,9 +524,7 @@ function Associacio() {
             <li>{t("associacio.cta.bullet1")}</li>
             <li>{t("associacio.cta.bullet2")}</li>
           </ul>
-          <HeroButton to="/nou-soci">
-            {t("associacio.cta.button")}
-          </HeroButton>
+          <HeroButton to="/nou-soci">{t("associacio.cta.button")}</HeroButton>
         </div>
 
         {/* Des de 2014 */}
@@ -549,11 +563,7 @@ function Associacio() {
           </div>
           <div className="associacio__principis-cols">
             {[1, 2, 3].map((n) => (
-              // TODO copy
-              <p key={n}>
-                Lorem ipsum dolor sit amet, tincidunt sit amet diam non, rhoncus
-                cursus urna. Nulla semper tortor a pretium suscipit.
-              </p>
+              <p key={n}>{t(`associacio.principis.text${n}`)}</p>
             ))}
           </div>
         </div>
@@ -580,38 +590,34 @@ function Associacio() {
             </div>
             <div className="associacio__stats" role="list">
               {STATS.map((stat, i) => (
-              <div
-                key={stat.key}
-                ref={(el) => (statRefs.current[i] = el)}
-                role="listitem"
-                className={`associacio__stat${liveMode ? " associacio__stat--live" : ""}`}
-                style={{ "--stat-color": stat.color }}
-                onClick={() => handleStatClick(i)}
-              >
-                {liveMode && (
-                  <span className="associacio__stat-led" aria-hidden="true" />
-                )}
-                <span className="associacio__stat-label">
-                  {t(`associacio.stats.${stat.key}`)}
-                </span>
-                <span className="associacio__stat-value">{stat.value}</span>
-              </div>
-            ))}
+                <div
+                  key={stat.key}
+                  ref={(el) => (statRefs.current[i] = el)}
+                  role="listitem"
+                  className={`associacio__stat${liveMode ? " associacio__stat--live" : ""}`}
+                  style={{ "--stat-color": stat.color }}
+                  onClick={() => handleStatClick(i)}
+                >
+                  {liveMode && (
+                    <span className="associacio__stat-led" aria-hidden="true" />
+                  )}
+                  <span className="associacio__stat-label">
+                    {t(`associacio.stats.${stat.key}`)}
+                  </span>
+                  <span className="associacio__stat-value">{stat.value}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Els nostres grups de treball */}
+        {/* Grups de treball */}
         <div className="associacio__grups">
           <OutlineHeading as="h2" className="associacio__grups-title">
             {t("associacio.grups.title")}
           </OutlineHeading>
           <div className="associacio__grups-cta">
-            {/* TODO copy */}
-            <p>
-              Lorem ipsum dolor sit amet, tincidunt sit amet, honcus cursus
-              urna. Nulla semper tortor a pretium suscipit.
-            </p>
+            <p>{t("associacio.grups.text")}</p>
             <HeroButton to={`mailto:${AMEBA_EMAIL}`}>
               {t("associacio.grups.button")}
             </HeroButton>
@@ -628,11 +634,7 @@ function Associacio() {
                 <OutlineHeading as="h3">
                   {t(`associacio.grups.${key}.title`)}
                 </OutlineHeading>
-                {/* TODO copy */}
-                <p>
-                  Lorem ipsum dolor sit amet, tincidunt sit amet diam non,
-                  rhoncus cursus urna. Nulla semper tortor a pretium suscipit.
-                </p>
+                <p>{t(`associacio.grups.${key}.text`)}</p>
               </div>
             ))}
           </div>

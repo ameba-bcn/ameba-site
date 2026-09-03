@@ -1,8 +1,8 @@
 // Contenido estático de /associacio — no hay endpoint de API para esto
 // (decisión #3 de INSTRUCCIONES_NUEVAS_VISTAS.md). Los textos de cabecera,
 // botones y números vienen tal cual del render del diseñador; los párrafos
-// de cuerpo son lorem ipsum placeholder (marcados con i18n keys bajo
-// "associacio", listos para rellenar con copy real).
+// de cuerpo (i18n keys bajo "associacio") son copy de relleno coherente con
+// el resto de la app, pendiente de revisión editorial real.
 
 export const BLOBS = ["qui-som", "que-fem", "per-que"];
 

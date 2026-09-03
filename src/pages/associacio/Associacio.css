@@ -409,7 +409,7 @@
   line-height: 1;
 }
 
-/* Els nostres grups de treball */
+/* Grups de treball */
 .associacio__grups {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
