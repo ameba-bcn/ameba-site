@@ -169,10 +169,18 @@
   color: var(--color-cream);
 }
 
+/* Full viewport bleed regardless of .lab-detail's 1100px cap — a fixed
+   calc(-1 * var(--page-margin-x)) margin only cancels page-layout__inner's
+   own gutter and falls short of the true edge once the viewport is wider
+   than 1100px + 2 * var(--page-margin-x). Same 100vw technique as
+   .soci-detail__band / .shop-product__buybar. */
 .lab-detail__promo {
+  box-sizing: border-box;
   background: var(--color-cream);
   color: var(--color-negro);
-  margin: 0 calc(-1 * var(--page-margin-x));
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   padding: 22px var(--page-margin-x);
   display: flex;
   align-items: center;

@@ -7,8 +7,13 @@
   /* Being position:fixed takes this out of .app's containing block, so
      .app's own overflow-x:hidden (App.css) can't clip anything that
      overflows in here — any child that overflows horizontally would
-     otherwise leak into page-wide scroll-x. */
-  overflow-x: hidden;
+     otherwise leak into page-wide scroll-x. Using `clip` instead of
+     `hidden` matters: per spec, pairing overflow-x:hidden with an
+     unset (visible) overflow-y forces overflow-y to compute as `auto`,
+     which clipped the account/cart dropdown popovers rendered inside
+     .navbar. `clip` is exempt from that visible->auto coercion, so
+     overflow-y stays visible and the popovers show fully. */
+  overflow-x: clip;
   /* Entrance + auto-hide-on-scroll are GSAP-driven (Navbar.jsx) — no CSS
      animation/class here, so nothing fights its inline transform. */
 }
