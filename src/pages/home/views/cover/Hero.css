@@ -66,10 +66,11 @@
   text-transform: uppercase;
   letter-spacing: 0.02em;
   /* Relleno = fondo de la caja: tapa la mitad interior del trazo,
-     dejando un outline efectivo de ~0.5px (los strokes sub-píxel
-     se redondean a 1px de dispositivo y no adelgazan) */
+     dejando un outline efectivo fi. 1px en lloc d'un valor sub-píxel:
+     per sota d'1px Firefox no dibuixa el trazo de forma consistent
+     amb el fill i les lletres surten trencades. */
   color: var(--color-negro);
-  -webkit-text-stroke: 0.1px var(--color-cream);
+  -webkit-text-stroke: 1px var(--color-cream);
 }
 
 /* Tarjeta roja estrecha a la derecha */

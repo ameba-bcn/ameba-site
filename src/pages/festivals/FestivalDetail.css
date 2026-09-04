@@ -90,10 +90,19 @@
   color: var(--color-negro);
 }
 
+/* Full viewport bleed regardless of .festival-detail's 1100px cap — a fixed
+   calc(-1 * var(--page-margin-x)) margin only cancels page-layout__inner's
+   own gutter and falls short of the true edge once the viewport is wider
+   than 1100px + 2 * var(--page-margin-x). Same 100vw technique as
+   .soci-detail__band / .shop-product__buybar. */
 .festival-detail__banner {
+  box-sizing: border-box;
   background: var(--color-negro);
   padding: 14px 0;
-  margin: 26px calc(-1 * var(--page-margin-x)) 0;
+  width: 100vw;
+  margin-top: 26px;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
 }
 
 .festival-detail__banner-image {

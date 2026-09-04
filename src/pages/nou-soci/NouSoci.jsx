@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useAuthStore from "../../stores/useAuthStore";
@@ -103,15 +102,31 @@ function NouSoci() {
               <p className="nou-soci__lead">{t("nouSoci.lead-fallback")}</p>
             )}
 
+            <div className="nou-soci__how">
+              <span className="nou-soci__how-label">{t("nouSoci.com-funciona-title")}</span>
+              <ol className="nou-soci__how-list">
+                {STEPS.map((key, i) => (
+                  <li key={key} className="nou-soci__how-item">
+                    <span className="nou-soci__how-num">{i + 1}</span>
+                    <span className="nou-soci__how-body">
+                      <span className="nou-soci__how-title">
+                        {t(`nouSoci.step-${key}-title`)}
+                      </span>
+                      <span className="nou-soci__how-text">
+                        {t(`nouSoci.step-${key}-text`)}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            </div>
+
             <div className="nou-soci__stats">
-              {STATS.map((stat, i) => (
-                <React.Fragment key={stat.labelKey}>
-                  {i > 0 && <span className="nou-soci__stats-sep" aria-hidden="true" />}
-                  <span className="nou-soci__stat">
-                    <span className="nou-soci__stat-value">{stat.value}</span>
-                    <span className="nou-soci__stat-label">{t(stat.labelKey)}</span>
-                  </span>
-                </React.Fragment>
+              {STATS.map((stat) => (
+                <span key={stat.labelKey} className="nou-soci__stat">
+                  <span className="nou-soci__stat-value">{stat.value}</span>
+                  <span className="nou-soci__stat-label">{t(stat.labelKey)}</span>
+                </span>
               ))}
             </div>
           </div>
@@ -190,21 +205,6 @@ function NouSoci() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-        <section className="nou-soci__steps">
-          <h2 className="nou-soci__section-title">{t("nouSoci.com-funciona-title")}</h2>
-          <div className="nou-soci__steps-grid">
-            {STEPS.map((key, i) => (
-              <div key={key} className="nou-soci__step">
-                <span className="nou-soci__step-num">{i + 1}</span>
-                <span className="nou-soci__step-body">
-                  <span className="nou-soci__step-title">{t(`nouSoci.step-${key}-title`)}</span>
-                  <span className="nou-soci__step-text">{t(`nouSoci.step-${key}-text`)}</span>
-                </span>
-              </div>
-            ))}
           </div>
         </section>
 

@@ -43,6 +43,7 @@
   color: var(--title-color, #fae6c5);
   z-index: 999;
   margin: var(--title-margin, 0);
+  padding: var(--title-padding, 0);
   font-weight: 500;
   font-style: var(--title-font-style, italic);
 }
