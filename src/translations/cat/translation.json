@@ -408,6 +408,33 @@
     "success": "Gràcies! Revisa el teu correu.",
     "error": "Introdueix un email vàlid."
   },
+  "newsletterFinished": {
+    "meta-title": "Subscripció",
+    "tag-done": "Subscripció",
+    "titol-done": "Ja ets a la llista.",
+    "subtitol-done": "Un correu, no cinc: agenda, convocatòries i novetats del LAB, un cop al mes.",
+    "cta-done": "Veure l'agenda",
+    "tag-error": "Subscripció",
+    "titol-error": "No hem pogut confirmar-ho.",
+    "cta-error": "Tornar a l'inici"
+  },
+  "checkoutFinished": {
+    "meta-title": "Comanda confirmada",
+    "tag": "Pagament rebut",
+    "titol": "Gràcies.",
+    "subtitol": "Hem rebut la teva comanda. Si hi ha productes físics, t'avisarem per correu quan els puguis recollir.",
+    "cta-compte": "Anar al meu compte",
+    "cta-botiga": "Seguir comprant"
+  },
+  "ticket": {
+    "meta-title": "Entrada",
+    "eyebrow": "Entrada digital",
+    "text": "Porta aquesta pantalla al mòbil o impresa: és el que et donarà accés.",
+    "checked-in": "Ja validada",
+    "pending": "Pendent d'accés",
+    "assistent": "Assistent",
+    "variant": "Modalitat"
+  },
   "login": {
     "registrat": "Registra't",
     "recupera-curt": "Recupera contrassenya",
@@ -563,6 +590,7 @@
     "carnet-valid": "VÀLID",
     "carnet-member-since": "Soci des de",
     "carnet-member-type": "Tipus de soci",
+    "carnet-expira": "Expira",
     "carnet-download": "Descarregar carnet",
     "directori-lead": "Descobreix els projectes musicals dels nostres socis en aquest directori.",
     "directori-crear": "Crear pàgina",
