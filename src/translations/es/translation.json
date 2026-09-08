@@ -408,6 +408,33 @@
     "success": "¡Gracias! Revisa tu correo.",
     "error": "Introduce un email válido."
   },
+  "newsletterFinished": {
+    "meta-title": "Suscripción",
+    "tag-done": "Suscripción",
+    "titol-done": "Ya estás en la lista.",
+    "subtitol-done": "Un correo, no cinco: agenda, convocatorias y novedades del LAB, una vez al mes.",
+    "cta-done": "Ver la agenda",
+    "tag-error": "Suscripción",
+    "titol-error": "No hemos podido confirmarlo.",
+    "cta-error": "Volver al inicio"
+  },
+  "checkoutFinished": {
+    "meta-title": "Pedido confirmado",
+    "tag": "Pago recibido",
+    "titol": "Gracias.",
+    "subtitol": "Hemos recibido tu pedido. Si hay productos físicos, te avisaremos por correo cuando puedas recogerlos.",
+    "cta-compte": "Ir a mi cuenta",
+    "cta-botiga": "Seguir comprando"
+  },
+  "ticket": {
+    "meta-title": "Entrada",
+    "eyebrow": "Entrada digital",
+    "text": "Lleva esta pantalla en el móvil o impresa: es lo que te dará acceso.",
+    "checked-in": "Ya validada",
+    "pending": "Pendiente de acceso",
+    "assistent": "Asistente",
+    "variant": "Modalidad"
+  },
   "login": {
     "registrat": "Regístrate",
     "recupera-curt": "Recupera contraseña",
@@ -563,6 +590,7 @@
     "carnet-valid": "VÁLIDO",
     "carnet-member-since": "Socio desde",
     "carnet-member-type": "Tipo de socio",
+    "carnet-expira": "Expira",
     "carnet-download": "Descargar carnet",
     "directori-lead": "Descubre los proyectos musicales de nuestros socios en este directorio.",
     "directori-crear": "Crear página",

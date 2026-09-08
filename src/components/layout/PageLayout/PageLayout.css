@@ -15,7 +15,8 @@
 .page-layout--socis,
 .page-layout--compte,
 .page-layout--nou-soci,
-.page-layout--legal {
+.page-layout--legal,
+.page-layout--status {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -46,7 +47,8 @@
 .page-layout--auth,
 .page-layout--notfound,
 .page-layout--socis,
-.page-layout--compte {
+.page-layout--compte,
+.page-layout--status {
   background-color: var(--color-negro);
 }
 
@@ -61,7 +63,8 @@
 .page-layout--socis > .page-layout__inner,
 .page-layout--compte > .page-layout__inner,
 .page-layout--nou-soci > .page-layout__inner,
-.page-layout--legal > .page-layout__inner {
+.page-layout--legal > .page-layout__inner,
+.page-layout--status > .page-layout__inner {
   padding-left: var(--page-margin-x);
   padding-right: var(--page-margin-x);
 }
@@ -85,6 +88,7 @@
 .page-layout--nou-soci .page-layout__content,
 .page-layout--legal .page-layout__content,
 .page-layout--auth .page-layout__content,
+.page-layout--status .page-layout__content,
 /* /checkout doesn't pass PageLayout's `section` prop (predates that
    convention), so it never gets a .page-layout--* class — target its
    legacy `className` directly instead. */

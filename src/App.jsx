@@ -67,6 +67,7 @@ const GalleryArxiuAlbum = lazyWithRetry(
 );
 const Associacio = lazyWithRetry(() => import("./pages/associacio/Associacio"));
 const QrLanding = lazyWithRetry(() => import("./pages/qr-landing/QrLanding"));
+const EventTicket = lazyWithRetry(() => import("./pages/event-ticket/EventTicket"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
 const UserContext = createContext(null);
@@ -165,6 +166,7 @@ function App() {
               <Route path="/associacio" element={<Associacio />} />
               <Route path="/" element={<Home />} />
               <Route path="/qr-view" element={<QrLanding />} />
+              <Route path="/event-ticket" element={<EventTicket />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
