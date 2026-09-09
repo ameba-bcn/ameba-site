@@ -23,16 +23,28 @@
   color: var(--color-cream);
 }
 
+/* Empty at rest; drawn as an underline bar only while the popover is
+   open (see [aria-expanded="true"] below) — no caret glyph otherwise. */
 .menu-log__caret {
-  font-size: 0.75rem;
-  line-height: 1;
-  transform: translateY(-2px);
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+}
+
+.menu-log__trigger[aria-expanded="true"] .menu-log__caret {
+  width: 16px;
 }
 
 /* Popover content — the shared .popover-menu (Dropdown.jsx) is reused by
    other dropdowns too (e.g. DropdownFilter), so its default box model is
    left alone and this instance is re-skinned from within. */
 .menu-log .popover-menu {
+  /* .menuSuperior__inner centers this row (align-items: center), so the
+     trigger — and this `top: 100%` reference box — sits mid-bar rather
+     than flush with the 80px navbar's own bottom edge. The extra margin
+     clears that gap; adjust together if the trigger's own size changes. */
+  top: 100%;
+  margin-top: 24px;
   right: 0;
   min-width: 250px;
   padding: 0;
@@ -78,6 +90,7 @@
   background: none;
   border: none;
   text-align: left;
+  text-decoration: none;
   cursor: pointer;
   font-family: var(--font-display);
   font-size: 20px;

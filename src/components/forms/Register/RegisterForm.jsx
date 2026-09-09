@@ -56,7 +56,7 @@ export default function RegisterForm({ setRedirect }) {
           className="au-input"
           type="text"
           name="username"
-          autoComplete="username"
+          autoComplete="off"
           placeholder={t("form.usuari").toUpperCase()}
           value={formik.values.username}
           onChange={formik.handleChange}

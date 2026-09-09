@@ -21,21 +21,6 @@ function NouSoci() {
   const { item_variants = [] } = cart_data;
   const hasMembershipInCart = isMemberCheckout(item_variants);
 
-  if (membership.length === 0) {
-    return (
-      <PageLayout section="nou-soci">
-        <PageMeta
-          title={t("nouSoci.meta-title")}
-          description={t("nouSoci.meta-description")}
-          url="/associacio/nou-soci"
-        />
-        <div className="nou-soci nou-soci--empty">
-          <p>{t("errors.general")}</p>
-        </div>
-      </PageLayout>
-    );
-  }
-
   const productData = membership[0] || {};
   const {
     images = [],
@@ -75,7 +60,10 @@ function NouSoci() {
         url="/associacio/nou-soci"
       />
       <div className="nou-soci">
-        <nav aria-label={t("compte.breadcrumb")} className="nou-soci__breadcrumb">
+        <nav
+          aria-label={t("compte.breadcrumb")}
+          className="nou-soci__breadcrumb"
+        >
           <Link to="/">AMEBA</Link>
           <span>|</span>
           <Link to="/associacio">{t("menu.associacio")}</Link>
@@ -87,7 +75,10 @@ function NouSoci() {
           <div className="nou-soci__hero-main">
             <div className="nou-soci__dots">
               {DOT_COLORS.map((color) => (
-                <span key={color} className={`nou-soci__dot nou-soci__dot--${color}`} />
+                <span
+                  key={color}
+                  className={`nou-soci__dot nou-soci__dot--${color}`}
+                />
               ))}
             </div>
 
@@ -103,7 +94,9 @@ function NouSoci() {
             )}
 
             <div className="nou-soci__how">
-              <span className="nou-soci__how-label">{t("nouSoci.com-funciona-title")}</span>
+              <span className="nou-soci__how-label">
+                {t("nouSoci.com-funciona-title")}
+              </span>
               <ol className="nou-soci__how-list">
                 {STEPS.map((key, i) => (
                   <li key={key} className="nou-soci__how-item">
@@ -125,7 +118,9 @@ function NouSoci() {
               {STATS.map((stat) => (
                 <span key={stat.labelKey} className="nou-soci__stat">
                   <span className="nou-soci__stat-value">{stat.value}</span>
-                  <span className="nou-soci__stat-label">{t(stat.labelKey)}</span>
+                  <span className="nou-soci__stat-label">
+                    {t(stat.labelKey)}
+                  </span>
                 </span>
               ))}
             </div>
@@ -136,13 +131,20 @@ function NouSoci() {
               {images[0] ? (
                 <img src={images[0]} alt="" />
               ) : (
-                <div className="nou-soci__card-image-placeholder" aria-hidden="true" />
+                <div
+                  className="nou-soci__card-image-placeholder"
+                  aria-hidden="true"
+                />
               )}
             </div>
             <div className="nou-soci__card-body">
               <div className="nou-soci__card-price-row">
-                <span className="nou-soci__card-price-label">{t("nouSoci.quota-anual")}</span>
-                <span className="nou-soci__card-price-value">{price_range}</span>
+                <span className="nou-soci__card-price-label">
+                  {t("nouSoci.quota-anual")}
+                </span>
+                <span className="nou-soci__card-price-value">
+                  {price_range}
+                </span>
               </div>
               <p className="nou-soci__card-note">{t("nouSoci.quota-text")}</p>
 
@@ -171,10 +173,14 @@ function NouSoci() {
               </button>
               {hasMembershipInCart && (
                 <span className="nou-soci__card-cta-note" aria-live="polite">
-                  <NavLink to={checkoutRedirect}>{t("soci.disclaimer")}</NavLink>
+                  <NavLink to={checkoutRedirect}>
+                    {t("soci.disclaimer")}
+                  </NavLink>
                 </span>
               )}
-              <span className="nou-soci__card-secure">{t("nouSoci.pagament-segur")}</span>
+              <span className="nou-soci__card-secure">
+                {t("nouSoci.pagament-segur")}
+              </span>
             </div>
           </aside>
         </section>
@@ -182,8 +188,12 @@ function NouSoci() {
         <section className="nou-soci__band nou-soci__band--negro">
           <div className="nou-soci__shell nou-soci__benefits">
             <div className="nou-soci__section-head">
-              <h2 className="nou-soci__section-title">{t("nouSoci.que-inclou-title")}</h2>
-              <span className="nou-soci__section-hint">{t("nouSoci.que-inclou-hint")}</span>
+              <h2 className="nou-soci__section-title">
+                {t("nouSoci.que-inclou-title")}
+              </h2>
+              <span className="nou-soci__section-hint">
+                {t("nouSoci.que-inclou-hint")}
+              </span>
             </div>
             <div className="nou-soci__benefits-grid">
               {BENEFITS.map((key) => (
@@ -195,7 +205,9 @@ function NouSoci() {
                     {key === "projecte" ? (
                       <>
                         {t("nouSoci.benefit-projecte-text-pre")}{" "}
-                        <Link to="/associacio/socis">{t("nouSoci.benefit-projecte-link")}</Link>
+                        <Link to="/associacio/socis">
+                          {t("nouSoci.benefit-projecte-link")}
+                        </Link>
                         {t("nouSoci.benefit-projecte-text-post")}
                       </>
                     ) : (
@@ -213,12 +225,17 @@ function NouSoci() {
           <div className="nou-soci__faq-grid">
             {FAQ.map((key) => (
               <div key={key} className="nou-soci__faq-item">
-                <span className="nou-soci__faq-question">{t(`nouSoci.faq-${key}-q`)}</span>
+                <span className="nou-soci__faq-question">
+                  {t(`nouSoci.faq-${key}-q`)}
+                </span>
                 <span className="nou-soci__faq-answer">
                   {key === "carnet" ? (
                     <>
                       {t("nouSoci.faq-carnet-a-pre")}{" "}
-                      <Link to="/compte/dades">{t("nouSoci.faq-carnet-a-link")}</Link>.
+                      <Link to="/compte/dades">
+                        {t("nouSoci.faq-carnet-a-link")}
+                      </Link>
+                      .
                     </>
                   ) : (
                     t(`nouSoci.faq-${key}-a`)
@@ -232,8 +249,12 @@ function NouSoci() {
         <section className="nou-soci__band nou-soci__band--naranja">
           <div className="nou-soci__shell nou-soci__closing">
             <div className="nou-soci__closing-text">
-              <span className="nou-soci__closing-title">{t("nouSoci.closing-title")}</span>
-              <span className="nou-soci__closing-lead">{t("nouSoci.closing-lead")}</span>
+              <span className="nou-soci__closing-title">
+                {t("nouSoci.closing-title")}
+              </span>
+              <span className="nou-soci__closing-lead">
+                {t("nouSoci.closing-lead")}
+              </span>
             </div>
             <button
               type="button"

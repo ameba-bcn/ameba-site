@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import PageMeta from "../../components/seo/PageMeta";
 import useAuthStore from "../../stores/useAuthStore";
-import { isEmptyObject, isDateExpired } from "../../utils/utils";
+import { isDateExpired } from "../../utils/utils";
 import AccountData from "./views/AccountData";
 import AccountProject from "./views/AccountProject";
 import "./Compte.css";
@@ -15,9 +15,12 @@ function Compte() {
   const [t] = useTranslation("translation");
   const location = useLocation();
   const navigate = useNavigate();
-  const { isLoggedIn = false, user_member_data, logout } = useAuthStore();
+  const { isLoggedIn = false, user_data, user_member_data, logout } = useAuthStore();
 
-  const isMember = !isEmptyObject(user_member_data);
+  // "member" comes from /users/current/ — a non-member never has a
+  // member_profile to fetch (member_profile/ 403s for them), so
+  // user_member_data can't be used to tell the two apart.
+  const isMember = !!user_data?.member;
   const isMembershipExpired = isDateExpired(user_member_data?.expires);
 
   if (!isLoggedIn) {

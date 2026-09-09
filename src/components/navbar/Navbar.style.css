@@ -4,22 +4,30 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  /* Being position:fixed takes this out of .app's containing block, so
-     .app's own overflow-x:hidden (App.css) can't clip anything that
-     overflows in here — any child that overflows horizontally would
+  /* Entrance + auto-hide-on-scroll are GSAP-driven (Navbar.jsx) — no CSS
+     animation/class here, so nothing fights its inline transform.
+     The horizontal overflow-clip lives on .menuContainer below, NOT
+     here: a `transform` (Navbar.jsx sets one on this exact element,
+     even at rest it's translate(0,0)) combined with any non-`visible`
+     overflow on the SAME element makes Chromium/WebKit clip it on
+     BOTH axes as a single compositing rect — silently eating the
+     account/cart dropdown popovers that are meant to overflow below
+     this 80px bar, despite overflow-y being left `visible` on paper. */
+}
+
+.navbar .menuContainer {
+  position: relative;
+  /* Being position:fixed (on .navbar) takes this out of .app's containing
+     block, so .app's own overflow-x:hidden (App.css) can't clip anything
+     that overflows in here — any child that overflows horizontally would
      otherwise leak into page-wide scroll-x. Using `clip` instead of
      `hidden` matters: per spec, pairing overflow-x:hidden with an
      unset (visible) overflow-y forces overflow-y to compute as `auto`,
      which clipped the account/cart dropdown popovers rendered inside
      .navbar. `clip` is exempt from that visible->auto coercion, so
-     overflow-y stays visible and the popovers show fully. */
+     overflow-y stays visible and the popovers show fully. This rule is
+     deliberately on .menuContainer, not .navbar — see the comment above. */
   overflow-x: clip;
-  /* Entrance + auto-hide-on-scroll are GSAP-driven (Navbar.jsx) — no CSS
-     animation/class here, so nothing fights its inline transform. */
-}
-
-.navbar .menuContainer {
-  position: relative;
 }
 
 .navbar .menuSuperior {
@@ -158,6 +166,16 @@
 
 .navbar .nav-lang-toggle:hover {
   color: var(--color-naranja);
+}
+
+/* The language icon otherwise only reacts to hovering its own SVG box
+   (Icon.css's generic `#hoverable-black-svg:hover`, tinting red) instead
+   of the button as a whole, and to a different color than the "CAT"/
+   "CAST" label next to it (which just inherits the button's own hover
+   color above). Higher specificity here makes icon + label move and
+   recolor together as one button, matching the rest of the navbar. */
+.navbar .nav-lang-toggle:hover #hoverable-black-svg path {
+  fill: var(--color-naranja);
 }
 
 .navbar .logname-li,

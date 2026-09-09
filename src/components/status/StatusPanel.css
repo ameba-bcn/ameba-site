@@ -58,9 +58,21 @@
   color: rgba(242, 227, 201, 0.72);
 }
 
+.status-panel__text a {
+  color: var(--color-cream);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
 .status-panel__actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   margin-top: 8px;
+}
+
+.status-panel__actions .boton--primary--solid {
+  background-color: transparent;
+  border: 2px solid var(--color-cream);
+  color: var(--color-cream);
 }

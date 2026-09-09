@@ -42,6 +42,11 @@
   text-wrap: pretty;
 }
 
+.auth-card__aside-text a {
+  color: var(--color-cream);
+  text-decoration: none;
+}
+
 .auth-card__aside-list {
   display: flex;
   flex-direction: column;
