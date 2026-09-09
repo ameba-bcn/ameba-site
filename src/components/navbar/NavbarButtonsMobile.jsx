@@ -7,7 +7,7 @@ import Icon from "../ui/Icon";
 import useUIStore from "../../stores/useUIStore";
 import useAuthStore from "../../stores/useAuthStore";
 import useCartStore from "../../stores/useCartStore";
-import { isEmptyObject, isDateExpired } from "../../utils/utils";
+import { isDateExpired } from "../../utils/utils";
 import { NAV_SECTIONS, isSectionActive } from "./navSections";
 import { gsap, prefersReducedMotion } from "../../utils/gsapSetup";
 import useGsapContext from "../../hooks/use-gsap-context";
@@ -34,8 +34,10 @@ export default function NavbarButtonsMobile(props) {
   const hasCartItems = (cart_data?.item_variants || []).length > 0;
   const { user_data = {}, user_member_data = {} } = useAuthStore();
   const logout = useAuthStore((state) => state.logout);
-  const isMember =
-    !isEmptyObject(user_member_data) && !isDateExpired(user_member_data.expires);
+  // "member" comes from /users/current/ — a non-member never has a
+  // member_profile to fetch (member_profile/ 403s for them), so
+  // user_member_data can't be used to tell the two apart.
+  const isMember = !!user_data.member && !isDateExpired(user_member_data.expires);
   const fullName = [user_member_data.first_name, user_member_data.last_name]
     .filter(Boolean)
     .join(" ");
