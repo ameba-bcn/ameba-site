@@ -49,7 +49,7 @@
     "jsdom": "^26.1.0",
     "msw": "^2.7.5",
     "vite": "^7.3.5",
-    "vitest": "^4.1.3"
+    "vitest": "^4.1.11"
   },
   "resolutions": {
     "picomatch": ">=4.0.4",
