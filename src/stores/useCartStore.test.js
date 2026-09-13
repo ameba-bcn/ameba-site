@@ -19,11 +19,17 @@ vi.mock("react-toastify", () => ({
 }));
 
 let CartService;
+let toast;
 beforeEach(async () => {
   const mod = await import("../store/services/cart.services");
   CartService = mod.default;
+  toast = (await import("react-toastify")).toast;
   vi.clearAllMocks();
 });
+
+// notificationToast() passes toast.error/.success a lazily-evaluated
+// finalMessage function rather than a plain string — unwrap it to assert content.
+const lastToastMessage = (mock) => mock.mock.calls.at(-1)[0]();
 
 describe("useCartStore - initial state", () => {
   it("has empty cart_data by default", () => {
@@ -208,5 +214,201 @@ describe("useCartStore - clearCart", () => {
     useCartStore.setState({ cart_data: { id: "123" } });
     useCartStore.getState().clearCart();
     expect(useCartStore.getState().cart_data).toEqual({});
+  });
+});
+
+describe("useCartStore - error message content", () => {
+  it("addToCart toasts the detail message when present", async () => {
+    CartService.addInCart.mockRejectedValue({
+      response: { data: { detail: "Producte esgotat" } },
+    });
+    try {
+      await useCartStore.getState().addToCart(1);
+    } catch {
+      /* expected */
+    }
+    expect(lastToastMessage(toast.error)).toBe("Producte esgotat");
+  });
+
+  it("addToCart falls back to item_variant_ids[0] when detail is missing", async () => {
+    CartService.addInCart.mockRejectedValue({
+      response: { data: { item_variant_ids: ["Variant invàlida"] } },
+    });
+    try {
+      await useCartStore.getState().addToCart(1);
+    } catch {
+      /* expected */
+    }
+    expect(lastToastMessage(toast.error)).toBe("Variant invàlida");
+  });
+
+  it("substractToCart toasts the detail message when present", async () => {
+    CartService.removeItemCart.mockRejectedValue({
+      response: { data: { detail: "No es pot eliminar" } },
+    });
+    try {
+      await useCartStore.getState().substractToCart(1);
+    } catch {
+      /* expected */
+    }
+    expect(lastToastMessage(toast.error)).toBe("No es pot eliminar");
+  });
+
+  it("getCart toasts on non-404 errors without touching localStorage", async () => {
+    localStorage.setItem("cart_id", "keep-me");
+    CartService.getCart.mockRejectedValue({
+      response: { status: 500, data: { detail: "Error de servidor" } },
+    });
+    await useCartStore.getState().getCart();
+    expect(lastToastMessage(toast.error)).toBe("Error de servidor");
+    expect(localStorage.getItem("cart_id")).toBe("keep-me");
+  });
+
+  it("applyDiscount toasts the discount_code error", async () => {
+    CartService.applyDiscount.mockRejectedValue({
+      response: { data: { discount_code: ["Codi caducat"] } },
+    });
+    try {
+      await useCartStore.getState().applyDiscount([1], "OLD");
+    } catch {
+      /* expected */
+    }
+    expect(lastToastMessage(toast.error)).toBe("Codi caducat");
+  });
+});
+
+describe("useCartStore - deleteCartAfterCheckout error path", () => {
+  it("clears cart_data but preserves nothing else on failure, and toasts", async () => {
+    useCartStore.setState({
+      cart_data: { id: "123" },
+      checkout: { amount: 2500 },
+      stripe: true,
+    });
+    CartService.deleteCartAfterSuccesfullCheckout.mockRejectedValue({
+      response: { data: { detail: "No s'ha pogut netejar la cistella" } },
+    });
+
+    await expect(
+      useCartStore.getState().deleteCartAfterCheckout(),
+    ).rejects.toBeUndefined();
+
+    expect(useCartStore.getState().cart_data).toEqual({});
+    expect(lastToastMessage(toast.error)).toBe(
+      "No s'ha pogut netejar la cistella",
+    );
+  });
+});
+
+describe("useCartStore - cartBusy guard under real async timing", () => {
+  it("blocks a second addToCart while the first is still pending", async () => {
+    let resolveFirst;
+    CartService.addInCart.mockImplementation(
+      () =>
+        new Promise((resolve) => {
+          resolveFirst = resolve;
+        }),
+    );
+
+    const first = useCartStore.getState().addToCart(1);
+    expect(useCartStore.getState().cartBusy).toBe(true);
+
+    // Fired while busy: should no-op instead of calling the service again
+    await useCartStore.getState().addToCart(1);
+    expect(CartService.addInCart).toHaveBeenCalledTimes(1);
+
+    resolveFirst({ id: "123", item_variants: [{ id: 1 }] });
+    await first;
+    expect(useCartStore.getState().cartBusy).toBe(false);
+  });
+
+  it("allows a new addToCart once the previous one has resolved", async () => {
+    CartService.addInCart.mockResolvedValue({ id: "123" });
+    await useCartStore.getState().addToCart(1);
+    await useCartStore.getState().addToCart(2);
+    expect(CartService.addInCart).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe("useCartStore - full lifecycle battery", () => {
+  it("walks through add -> add -> remove -> discount -> checkout -> payment -> post-checkout cleanup", async () => {
+    const store = () => useCartStore.getState();
+
+    CartService.addInCart.mockResolvedValueOnce({
+      id: "cart-1",
+      item_variant_ids: [1],
+      item_variants: [{ id: 1 }],
+    });
+    await store().addToCart(1);
+    expect(useCartStore.getState().cart_data.item_variant_ids).toEqual([1]);
+
+    CartService.addInCart.mockResolvedValueOnce({
+      id: "cart-1",
+      item_variant_ids: [1, 2],
+      item_variants: [{ id: 1 }, { id: 2 }],
+    });
+    await store().addToCart(2);
+    expect(useCartStore.getState().cart_data.item_variant_ids).toEqual([1, 2]);
+
+    CartService.removeItemCart.mockResolvedValueOnce({
+      id: "cart-1",
+      item_variant_ids: [2],
+      item_variants: [{ id: 2 }],
+    });
+    await store().substractToCart(1);
+    expect(useCartStore.getState().cart_data.item_variant_ids).toEqual([2]);
+
+    CartService.applyDiscount.mockResolvedValueOnce({
+      id: "cart-1",
+      item_variant_ids: [2],
+      total: "20.00 €",
+    });
+    await store().applyDiscount([2], "AMEBA20");
+    expect(useCartStore.getState().cart_data.total).toBe("20.00 €");
+
+    CartService.checkoutCart.mockResolvedValueOnce({ amount: 2000, id: "checkout-1" });
+    await store().checkoutCart();
+    expect(useCartStore.getState().checkout.amount).toBe(2000);
+    expect(useCartStore.getState().stripe).toBe(true);
+
+    CartService.checkoutPaymentCart.mockResolvedValueOnce({
+      client_secret: "pi_1",
+      stripe_public: "pk_1",
+    });
+    await store().checkoutPaymentCart("cart-1");
+    expect(useCartStore.getState().checkout.checkout_stripe).toEqual({
+      client_secret: "pi_1",
+      stripe_public: "pk_1",
+    });
+
+    CartService.deleteCartAfterSuccesfullCheckout.mockResolvedValueOnce();
+    await store().deleteCartAfterCheckout();
+    expect(useCartStore.getState().cart_data).toEqual({});
+    expect(useCartStore.getState().checkout).toEqual({});
+    expect(useCartStore.getState().stripe).toBe(false);
+  });
+
+  it("recovers cleanly when checkoutCart fails mid-lifecycle, leaving the cart intact for retry", async () => {
+    useCartStore.setState({ cart_data: { id: "cart-1", item_variant_ids: [1] } });
+    CartService.checkoutCart.mockRejectedValueOnce({
+      response: { data: { detail: "Stock insuficient" } },
+    });
+
+    try {
+      await useCartStore.getState().checkoutCart();
+    } catch {
+      /* expected */
+    }
+    expect(useCartStore.getState().checkout).toEqual({});
+    expect(useCartStore.getState().stripe).toBe(false);
+    // cart_data itself is untouched by a checkoutCart failure, so the user can retry
+    expect(useCartStore.getState().cart_data).toEqual({
+      id: "cart-1",
+      item_variant_ids: [1],
+    });
+
+    CartService.checkoutCart.mockResolvedValueOnce({ amount: 2500 });
+    await useCartStore.getState().checkoutCart();
+    expect(useCartStore.getState().checkout.amount).toBe(2500);
+    expect(useCartStore.getState().stripe).toBe(true);
   });
 });

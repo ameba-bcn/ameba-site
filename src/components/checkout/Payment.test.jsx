@@ -86,4 +86,47 @@ describe("Payment", () => {
     fireEvent.click(screen.getByRole("checkbox"));
     expect(screen.getByTestId("payment-form")).toHaveAttribute("data-disabled", "false");
   });
+
+  it("renders spinner when stripe_public is present but client_secret is missing", () => {
+    useCartStore.setState({
+      cart_data: mockCartRegular,
+      checkout: { amount: 2500, checkout_stripe: { stripe_public: "pk_123" } },
+    });
+    const { container } = renderWithProviders(<Payment />);
+    expect(container.querySelector(".spinner-mark")).toBeInTheDocument();
+    expect(screen.queryByTestId("stripe-elements")).not.toBeInTheDocument();
+  });
+
+  it("renders spinner when client_secret is present but stripe_public is missing", () => {
+    useCartStore.setState({
+      cart_data: mockCartRegular,
+      checkout: { amount: 2500, checkout_stripe: { client_secret: "pi_123" } },
+    });
+    const { container } = renderWithProviders(<Payment />);
+    expect(container.querySelector(".spinner-mark")).toBeInTheDocument();
+    expect(screen.queryByTestId("stripe-elements")).not.toBeInTheDocument();
+  });
+
+  it("calls loadStripe with the stripe_public key from the checkout", async () => {
+    const { loadStripe } = await import("@stripe/stripe-js");
+    useCartStore.setState({
+      cart_data: mockCartRegular,
+      checkout: mockCheckoutPaid,
+    });
+    renderWithProviders(<Payment />);
+    expect(loadStripe).toHaveBeenCalledWith(mockCheckoutPaid.checkout_stripe.stripe_public);
+  });
+
+  it("shows the secure-payment note and terms link only for a paid checkout", () => {
+    useCartStore.setState({
+      cart_data: mockCartRegular,
+      checkout: mockCheckoutPaid,
+    });
+    const { rerender } = renderWithProviders(<Payment />);
+    expect(document.querySelector(".payment-secure-note")).toBeInTheDocument();
+
+    useCartStore.setState({ cart_data: mockCartFree, checkout: mockCheckoutFree });
+    rerender(<Payment />);
+    expect(document.querySelector(".payment-secure-note")).not.toBeInTheDocument();
+  });
 });
