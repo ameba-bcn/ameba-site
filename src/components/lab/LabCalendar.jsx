@@ -17,9 +17,21 @@ export default function LabCalendar({ activityDateSet, selectedDate, onSelectDat
   const cells = useMemo(() => buildCalendarGrid(month), [month]);
   const selectedKey = selectedDate ? dateKey(selectedDate) : null;
 
+  const years = useMemo(() => {
+    const currentYear = new Date().getFullYear();
+    const set = new Set([currentYear, month.getFullYear()]);
+    activityDateSet.forEach((key) => set.add(Number(key.slice(0, 4))));
+    return Array.from(set).sort((a, b) => a - b);
+  }, [activityDateSet, month]);
+
   const changeMonth = (delta) => {
     direction.current = delta;
     setMonth((m) => new Date(m.getFullYear(), m.getMonth() + delta, 1));
+  };
+
+  const changeYear = (year) => {
+    direction.current = year > month.getFullYear() ? 1 : -1;
+    setMonth((m) => new Date(year, m.getMonth(), 1));
   };
 
   // §7 Lab calendar: cells stagger in on first mount, and slide out/in
@@ -75,11 +87,23 @@ export default function LabCalendar({ activityDateSet, selectedDate, onSelectDat
           <Icon icon="arrowLeft" width="18" height="18" />
         </button>
         <span className="lab-calendar__month">
-          {month.toLocaleDateString("ca-ES", { month: "long", year: "numeric" })}
+          {month.toLocaleDateString("ca-ES", { month: "long" })}
         </span>
         <button type="button" aria-label="Mes següent" onClick={() => changeMonth(1)}>
           <Icon icon="arrowRight" width="18" height="18" />
         </button>
+        <select
+          className="lab-calendar__year"
+          aria-label="Any"
+          value={month.getFullYear()}
+          onChange={(e) => changeYear(Number(e.target.value))}
+        >
+          {years.map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
+        </select>
       </div>
       <div className="lab-calendar__grid" ref={gridRef}>
         {WEEKDAY_KEYS.map((key) => (

@@ -112,9 +112,14 @@
   cursor: pointer;
 }
 
-.account-project__image-add:hover {
+.account-project__image-add:hover,
+.account-project__image-add--dragging {
   border-color: var(--color-negro);
   color: var(--color-negro);
+}
+
+.account-project__image-add--dragging {
+  background: rgba(29, 29, 27, 0.06);
 }
 
 /* ── Live preview panel (mirrors the public SociDetail look) ── */
@@ -250,5 +255,41 @@
 @media (max-width: 1080px) {
   .account-project__preview {
     position: static;
+  }
+}
+
+/* ── Mobile: a long form deserves an always-reachable save bar instead of
+   making the user scroll back down to find it, and roomier tap targets. */
+@media (max-width: 620px) {
+  .account-project__panel {
+    padding: 18px 18px 16px;
+  }
+
+  .account-project__tags .compte-tool {
+    min-height: 40px;
+  }
+
+  .account-project__panel > .compte-panel__actions {
+    position: sticky;
+    bottom: 0;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 10px;
+    margin: 4px -18px -16px;
+    padding: 12px 18px calc(14px + env(safe-area-inset-bottom, 0px));
+    background: var(--color-cream);
+    border-top: 2px solid var(--color-negro);
+  }
+
+  .account-project__panel > .compte-panel__actions .compte-badge,
+  .account-project__panel > .compte-panel__actions .compte-ghost {
+    width: 100%;
+  }
+
+  .account-project__panel > .compte-panel__actions .compte-ghost {
+    border: none;
+    box-shadow: none;
+    text-decoration: underline;
+    min-height: 36px;
   }
 }

@@ -185,7 +185,7 @@
 
 .checkout-section__buttons {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   padding-top: 4px;
 }
 
@@ -258,5 +258,12 @@
 
   .checkout-member-step .log-form-box > form {
     grid-template-columns: 1fr;
+  }
+
+  /* A single column gives each field the full row width again, but long
+     values (emails especially) can still overrun it at the desktop font
+     size — shrink it so they fit instead of clipping mid-word. */
+  .checkout-member-step .input-field__input {
+    font-size: 16px;
   }
 }

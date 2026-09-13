@@ -5,7 +5,7 @@ import Dropdown from "../dropdown/Dropdown";
 import useOutsideClick from "../../hooks/use-outside-click";
 import useUIStore from "../../stores/useUIStore";
 import useAuthStore from "../../stores/useAuthStore";
-import { isDateExpired } from "../../utils/utils";
+import { getExpiryYear, isDateExpired } from "../../utils/utils";
 import "./MenuLog.css";
 
 export default function MenuLog() {
@@ -25,9 +25,7 @@ export default function MenuLog() {
   const userName = (user_data.username || "").split(" ")[0];
   const userNameShortened =
     userName.length > 9 ? userName.slice(0, 9) + "…" : userName;
-  const validYear = user_member_data.expires
-    ? new Date(user_member_data.expires).getFullYear()
-    : null;
+  const validYear = getExpiryYear(user_member_data.expires);
 
   const handleToggle = () =>
     isProfileMenuOpen ? closeProfileMenu() : openProfileMenu();

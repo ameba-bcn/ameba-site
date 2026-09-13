@@ -107,4 +107,13 @@
     height: 76px;
     margin-left: -18px;
   }
+
+  /* .arxiu-band__text's `flex: 1 1 320px` sizes its WIDTH in the desktop
+     row layout — once the band switches to flex-direction:column above,
+     that same basis sizes its HEIGHT instead, stretching it well past its
+     content and leaving a large empty gap below the CTA button. */
+  .arxiu-band__text {
+    flex: none;
+    max-width: none;
+  }
 }
