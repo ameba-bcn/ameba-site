@@ -1,6 +1,7 @@
 .input-field__input {
   display: block;
-  width: -webkit-fill-available;
+  width: 100%;
+  box-sizing: border-box;
   padding: 7px 14px 7px 12px;
   line-height: 1.5;
   background-clip: padding-box;
@@ -11,6 +12,8 @@
   color: var(--color-negro);
   font-size: 18px;
   font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .input-field__input--invalid {

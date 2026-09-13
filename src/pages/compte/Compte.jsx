@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import PageMeta from "../../components/seo/PageMeta";
 import useAuthStore from "../../stores/useAuthStore";
-import { isDateExpired } from "../../utils/utils";
+import { getExpiryYear, isDateExpired } from "../../utils/utils";
 import AccountData from "./views/AccountData";
 import AccountProject from "./views/AccountProject";
 import "./Compte.css";
@@ -41,9 +41,7 @@ function Compte() {
   const fullName = [user_member_data?.first_name, user_member_data?.last_name]
     .filter(Boolean)
     .join(" ");
-  const validYear = user_member_data?.expires
-    ? new Date(user_member_data.expires).getFullYear()
-    : null;
+  const validYear = getExpiryYear(user_member_data?.expires);
 
   return (
     <PageLayout section="compte" promo>

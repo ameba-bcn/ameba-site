@@ -117,6 +117,17 @@
   .card-view__header {
     width: 90%;
   }
+
+  /* La etiqueta "tallas disponibles" ocupa toda la fila para que las
+     tallas siempre queden juntas en la fila siguiente, en vez de que la
+     primera se cuele al final de la fila del título y el resto se parta. */
+  .modal-card___title_small {
+    flex: 1 0 100%;
+  }
+
+  .modal-sizes-row {
+    row-gap: 8px;
+  }
 }
 
 .card-view__description-title {

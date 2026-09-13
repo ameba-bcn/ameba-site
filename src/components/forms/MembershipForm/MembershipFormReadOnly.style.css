@@ -1,0 +1,72 @@
+/* Read-only field presentation — a dashed frame instead of a disabled
+   input, so it never reads as a broken/editable field. See design doc
+   "Read-only input styling" (Pago.dc.html, variant 1c). */
+.readonly-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.readonly-fields form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.readonly-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.readonly-field__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.readonly-field__label {
+  font-family: var(--font-display);
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-gris);
+}
+
+.readonly-field__edit {
+  font-family: var(--font-display);
+  font-size: 15px;
+  letter-spacing: 0.06em;
+  color: var(--color-rojo);
+  text-decoration: none;
+  border-bottom: 2px solid var(--color-rojo);
+}
+
+.readonly-field__edit:hover {
+  color: var(--color-naranja);
+  border-bottom-color: var(--color-naranja);
+}
+
+.readonly-field__hint {
+  font-family: var(--font-display);
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  color: var(--color-gris);
+}
+
+.readonly-field__value {
+  border: 3px dashed rgba(29, 29, 27, 0.32);
+  background: rgba(29, 29, 27, 0.05);
+  padding: 9px 12px;
+  font-size: 17px;
+  font-weight: 600;
+  overflow-wrap: break-word;
+}
+
+.readonly-fields__note {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--color-gris);
+}

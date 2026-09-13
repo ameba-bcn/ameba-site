@@ -25,6 +25,7 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   column-gap: 24px;
+  row-gap: 32px;
   margin: 32px 0;
 }
 
@@ -498,6 +499,7 @@
   .associacio__grups-cta,
   .associacio__grups-grid {
     grid-column: 1;
+    grid-row: auto;
   }
 
   .associacio__principis-band,
@@ -558,33 +560,18 @@
     display: none;
   }
 
-  /* Tres blobs: una sola columna; dins de cada blob, el text va a la dreta
-     de l'svg i de l'h2, que queden apilats a l'esquerra. */
-  .associacio__blob {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-areas:
-      "icon text"
-      "title text";
-    column-gap: 16px;
-    row-gap: 4px;
-    align-items: start;
-  }
-
+  /* Tres blobs: una sola columna, icona/títol/text apilats verticalment
+     (mateix patró que a desktop, només reduint mides). */
   .associacio__blob svg {
-    grid-area: icon;
     width: 80px;
     height: 80px;
   }
 
   .associacio__blob .outline-heading {
-    grid-area: title;
     font-size: clamp(30px, 8vw, 40px);
   }
 
   .associacio__blob p {
-    grid-area: text;
-    align-self: end;
     font-size: 0.8rem;
   }
 

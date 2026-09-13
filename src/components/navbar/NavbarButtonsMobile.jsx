@@ -7,7 +7,7 @@ import Icon from "../ui/Icon";
 import useUIStore from "../../stores/useUIStore";
 import useAuthStore from "../../stores/useAuthStore";
 import useCartStore from "../../stores/useCartStore";
-import { isDateExpired } from "../../utils/utils";
+import { getExpiryYear, isDateExpired } from "../../utils/utils";
 import { NAV_SECTIONS, isSectionActive } from "./navSections";
 import { gsap, prefersReducedMotion } from "../../utils/gsapSetup";
 import useGsapContext from "../../hooks/use-gsap-context";
@@ -41,9 +41,7 @@ export default function NavbarButtonsMobile(props) {
   const fullName = [user_member_data.first_name, user_member_data.last_name]
     .filter(Boolean)
     .join(" ");
-  const validYear = user_member_data.expires
-    ? new Date(user_member_data.expires).getFullYear()
-    : null;
+  const validYear = getExpiryYear(user_member_data.expires);
   const initials =
     (fullName || user_data.username || "")
       .trim()

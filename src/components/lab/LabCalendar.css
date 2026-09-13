@@ -20,8 +20,19 @@
 
 .lab-calendar__month {
   text-transform: capitalize;
-  min-width: 160px;
+  min-width: 90px;
   text-align: center;
+}
+
+.lab-calendar__year {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-negro);
+  background-color: transparent;
+  border: 1px solid var(--color-negro);
+  min-height: 36px;
+  padding: 0 8px;
+  cursor: pointer;
 }
 
 .lab-calendar__grid {
@@ -98,6 +109,12 @@
   .lab-calendar__month {
     min-width: 0;
     font-size: 0.85rem;
+  }
+
+  .lab-calendar__year {
+    font-size: 0.85rem;
+    min-height: 32px;
+    padding: 0 6px;
   }
 
   .lab-calendar__weekday {

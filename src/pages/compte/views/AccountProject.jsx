@@ -1,6 +1,5 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import ImageUploading from "react-images-uploading";
 import authService from "../../../store/services/auth.service";
 import TextArea from "../../../components/forms/TextArea/TextArea";
 import Spinner from "../../../components/spinner/Spinner";
@@ -21,6 +20,17 @@ const CURATED_TAGS = [
   "VJ",
   "Visuals",
 ];
+
+const MAX_IMAGES = 6;
+const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/gif"];
+
+const fileToDataURL = (file) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
 
 function AccountProject({ isMembershipExpired }) {
   const [t] = useTranslation("translation");
@@ -90,6 +100,41 @@ function AccountProject({ isMembershipExpired }) {
 
   const linkError = (link) =>
     link.length > 0 && !iframesValidation(link) && !urlValidation(link);
+
+  const addImageInputRef = useRef(null);
+  const replaceImageInputRef = useRef(null);
+  const replaceIndexRef = useRef(null);
+  const [isDraggingImage, setIsDraggingImage] = useState(false);
+
+  const acceptedImageFiles = (fileList) =>
+    Array.from(fileList).filter((file) => ACCEPTED_IMAGE_TYPES.includes(file.type));
+
+  const addImageFiles = (fileList) => {
+    const files = acceptedImageFiles(fileList);
+    if (!files.length) return;
+    const room = Math.max(0, MAX_IMAGES - images.length);
+    Promise.all(files.slice(0, room).map(fileToDataURL)).then((dataUrls) => {
+      setImages((prev) => [...prev, ...dataUrls.map((image) => ({ image }))]);
+    });
+  };
+
+  const replaceImageFile = (file) => {
+    if (!file || !ACCEPTED_IMAGE_TYPES.includes(file.type)) return;
+    const index = replaceIndexRef.current;
+    fileToDataURL(file).then((image) => {
+      setImages((prev) => prev.map((img, i) => (i === index ? { image } : img)));
+    });
+  };
+
+  const handleImageRemove = (index) => {
+    setImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const handleImageDrop = (e) => {
+    e.preventDefault();
+    setIsDraggingImage(false);
+    addImageFiles(e.dataTransfer.files);
+  };
 
   const handleDiscard = () => {
     setProjectName(initialProjectData.project_name || "");
@@ -178,7 +223,7 @@ function AccountProject({ isMembershipExpired }) {
       </div>
 
       <div className="compte-grid" style={{ display: "grid", gridTemplateColumns: "1.02fr .98fr", gap: 24, alignItems: "start" }}>
-        <form onSubmit={handleSubmit} className="compte-panel">
+        <form onSubmit={handleSubmit} className="compte-panel account-project__panel">
           <h2 className="compte-panel__title">{t("compte.edita-projecte")}</h2>
 
           <label className="compte-field">
@@ -259,52 +304,70 @@ function AccountProject({ isMembershipExpired }) {
 
           <div className="compte-field">
             <span className="compte-label">{t("form.imatges")}</span>
-            <ImageUploading
+            <input
+              ref={addImageInputRef}
+              type="file"
               multiple
-              value={images}
-              onChange={setImages}
-              maxNumber={6}
-              dataURLKey="image"
-              acceptType={["jpg", "jpeg", "gif", "png"]}
-            >
-              {({ imageList, onImageUpload, onImageRemove, onImageUpdate, dragProps }) => (
-                <div className="account-project__images">
-                  {imageList.map((image, index) => (
-                    <div key={index} className="account-project__image-slot">
-                      <img src={image.image} alt="" />
-                      <div className="account-project__image-actions">
-                        <button
-                          type="button"
-                          className="compte-tool"
-                          aria-label={t("compte.substitueix")}
-                          onClick={() => onImageUpdate(index)}
-                        >
-                          <Icon icon="replay" width="14" height="14" />
-                        </button>
-                        <button
-                          type="button"
-                          className="compte-tool"
-                          aria-label={t("compte.elimina")}
-                          onClick={() => onImageRemove(index)}
-                        >
-                          <Icon icon="trash" width="14" height="14" />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                  {imageList.length < 6 && (
+              accept={ACCEPTED_IMAGE_TYPES.join(",")}
+              style={{ display: "none" }}
+              onChange={(e) => {
+                addImageFiles(e.target.files);
+                e.target.value = "";
+              }}
+            />
+            <input
+              ref={replaceImageInputRef}
+              type="file"
+              accept={ACCEPTED_IMAGE_TYPES.join(",")}
+              style={{ display: "none" }}
+              onChange={(e) => {
+                replaceImageFile(e.target.files[0]);
+                e.target.value = "";
+              }}
+            />
+            <div className="account-project__images">
+              {images.map((image, index) => (
+                <div key={index} className="account-project__image-slot">
+                  <img src={image.image} alt="" />
+                  <div className="account-project__image-actions">
                     <button
                       type="button"
-                      className="account-project__image-add"
-                      onClick={onImageUpload}
-                      {...dragProps}
+                      className="compte-tool"
+                      aria-label={t("compte.substitueix")}
+                      onClick={() => {
+                        replaceIndexRef.current = index;
+                        replaceImageInputRef.current?.click();
+                      }}
                     >
-                      + {t("form.carrega-imatges")}
+                      <Icon icon="replay" width="14" height="14" />
                     </button>
-                  )}
+                    <button
+                      type="button"
+                      className="compte-tool"
+                      aria-label={t("compte.elimina")}
+                      onClick={() => handleImageRemove(index)}
+                    >
+                      <Icon icon="trash" width="14" height="14" />
+                    </button>
+                  </div>
                 </div>
+              ))}
+              {images.length < MAX_IMAGES && (
+                <button
+                  type="button"
+                  className={`account-project__image-add${isDraggingImage ? " account-project__image-add--dragging" : ""}`}
+                  onClick={() => addImageInputRef.current?.click()}
+                  onDragOver={(e) => {
+                    e.preventDefault();
+                    setIsDraggingImage(true);
+                  }}
+                  onDragLeave={() => setIsDraggingImage(false)}
+                  onDrop={handleImageDrop}
+                >
+                  + {t("form.carrega-imatges")}
+                </button>
               )}
-            </ImageUploading>
+            </div>
             <span className="account-project__hint">{t("compte.imatges-hint")}</span>
             {imagesError && <span className="compte-field-error">{imagesError}</span>}
           </div>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { Navigate, Link, useLocation } from "react-router-dom";
 import InputField from "../InputField/InputField";
 import "../Log.style.css";
+import "./MembershipFormReadOnly.style.css";
 import useAuthStore from "../../../stores/useAuthStore";
 import { useTranslation } from "react-i18next";
 import Button from "../../button/Button";
@@ -39,63 +40,60 @@ export default function MembershipFormReadOnly(props) {
   return (
     <div className="cardForm">
       <div className="card-form">
-        <div className="log-form-box">
+        <div className="readonly-fields">
           <form>
-            <div className="field-wrapper">
-              {inProfileView ? (
-                <>
-                  <InputField
-                    id="user"
-                    name="user"
-                    type="text"
-                    label={t("form.usuari")}
-                    onChange={(e) => setUser(e.target.value)}
-                    slimLine={true}
-                    value={user}
-                    valid={!usernameValidation(user)}
-                  />
-                  {errors && (
-                    <div className="log-form-error">
-                      <div>{ERROR.USERNAME.FORMAT}</div>
-                    </div>
-                  )}
-                </>
-              ) : (
+            {inProfileView ? (
+              <div className="field-wrapper">
                 <InputField
-                  id="userName"
-                  name="userName"
+                  id="user"
+                  name="user"
                   type="text"
                   label={t("form.usuari")}
-                  value={user_data?.username}
-                  valid={true}
-                  disabled={true}
+                  onChange={(e) => setUser(e.target.value)}
+                  slimLine={true}
+                  value={user}
+                  valid={!usernameValidation(user)}
                 />
-              )}
+                {errors && (
+                  <div className="log-form-error">
+                    <div>{ERROR.USERNAME.FORMAT}</div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="readonly-field">
+                <div className="readonly-field__row">
+                  <span className="readonly-field__label">{t("form.usuari")}</span>
+                  <Link to="/compte" className="readonly-field__edit">
+                    {t("checkout.editar")}
+                  </Link>
+                </div>
+                <div className="readonly-field__value">{user_data?.username}</div>
+              </div>
+            )}
+
+            <div className="readonly-field">
+              <div className="readonly-field__row">
+                <span className="readonly-field__label">{t("form.soci")}</span>
+                <span className="readonly-field__hint">{t("checkout.no-editable")}</span>
+              </div>
+              <div className="readonly-field__value">
+                {user_data?.number || user_member_data?.number || "-"}
+              </div>
             </div>
-            <div className="field-wrapper">
-              <InputField
-                id="memberNum"
-                name="memberNum"
-                type="text"
-                label={t("form.soci")}
-                value={user_data?.number || user_member_data?.number || "-"}
-                slimLine={true}
-                valid={true}
-                disabled={true}
-              />
-            </div>
-            <div className="field-wrapper">
-              <InputField
-                id="emailMemberReadOnly"
-                name="email"
-                type="email"
-                label="email"
-                value={user_data?.email}
-                valid={true}
-                disabled={true}
-              />
+
+            <div className="readonly-field">
+              <div className="readonly-field__row">
+                <span className="readonly-field__label">Email</span>
+                <span className="readonly-field__hint">{t("checkout.no-editable")}</span>
+              </div>
+              <div className="readonly-field__value">{user_data?.email}</div>
             </div>
           </form>
+
+          {!inProfileView && (
+            <p className="readonly-fields__note">{t("checkout.readonly-note")}</p>
+          )}
         </div>
         {!isCheckout && (
           <div className="log-button-box">

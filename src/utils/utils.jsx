@@ -234,3 +234,13 @@ export function isDateExpired(expiringMembershipDate) {
 
   return expiringDate < today;
 }
+
+// `expires` comes back from the API as "DD/MM/YYYY", which `new Date(...)`
+// can't parse (it reads "18/06/2027" as month 18 and returns Invalid Date,
+// whose .getFullYear() is NaN) — pull the year out of the string directly
+// instead, same as isDateExpired already does above.
+export function getExpiryYear(expiringMembershipDate) {
+  if (!expiringMembershipDate) return null;
+  const year = Number(expiringMembershipDate.split("/")[2]);
+  return Number.isNaN(year) ? null : year;
+}
