@@ -42,7 +42,9 @@ const Memberships = () => {
   const checkoutRedirect = isLoggedIn ? "/checkout" : "/login";
 
   const handleAddClick = () => {
-    addToCart(variants[0].id).then(() => {
+    const variantId = variants[0]?.id;
+    if (!variantId) return;
+    addToCart(variantId).then(() => {
       navigate(checkoutRedirect);
     });
   };

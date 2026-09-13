@@ -17,7 +17,9 @@ const useCartStore = create((set, get) => ({
       },
       (error) => {
         set({ cartBusy: false });
-        const message = error.response?.data?.detail;
+        const message =
+          error.response?.data?.detail ||
+          error.response?.data?.item_variant_ids?.[0];
         notificationToast(message, "error");
         return Promise.reject();
       }
@@ -33,7 +35,9 @@ const useCartStore = create((set, get) => ({
       },
       (error) => {
         set({ cartBusy: false });
-        const message = error.response?.data?.detail;
+        const message =
+          error.response?.data?.detail ||
+          error.response?.data?.item_variant_ids?.[0];
         notificationToast(message, "error");
         return Promise.reject();
       }
@@ -52,7 +56,9 @@ const useCartStore = create((set, get) => ({
           localStorage.removeItem("cart_id");
           return;
         }
-        const message = error.response?.data?.detail;
+        const message =
+          error.response?.data?.detail ||
+          error.response?.data?.item_variant_ids?.[0];
         notificationToast(message, "error");
       }
     );
