@@ -38,7 +38,7 @@ function Cart() {
     (item) => item.discount_name && item.discount_value,
   );
 
-  const isMemberProduct = (id) => id in [26, 27]; // Controlar que el id de cart nunca cambie. IMPORTANTE
+  const isMemberProduct = (id) => [26, 27].includes(id); // Controlar que el id de cart nunca cambie. IMPORTANTE
 
   const addItem = (id) => addToCart(id);
   const substractItem = (id) => {

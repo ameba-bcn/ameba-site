@@ -144,3 +144,65 @@ export const mockUserData = {
   member: true,
   date_joined: "2024-01-01",
 };
+
+export const mockUserDataNonMember = {
+  username: "testuser",
+  password: "",
+  email: "test@ameba.cat",
+  member: false,
+  date_joined: "2024-01-01",
+};
+
+export const mockCartMemberProduct = {
+  id: "cart-uuid-memberproduct",
+  total: "30.00 €",
+  count: 1,
+  item_variants: [
+    {
+      id: 26,
+      item_name: "Soci Anual",
+      price: "30.00 €",
+      preview: "/img/soci.jpg",
+      variant_details: { size: "unique" },
+      is_subscription: true,
+      item_type: "subscription",
+      discount_value: null,
+      discount_name: null,
+      subtotal: "30.00 €",
+    },
+  ],
+  item_variant_ids: [26],
+};
+
+export const mockCartMultipleUnits = {
+  id: "cart-uuid-qty",
+  total: "50.00 €",
+  count: 2,
+  item_variants: [
+    {
+      id: 1,
+      item_name: "Ameba T-shirt",
+      price: "25.00 €",
+      preview: "/img/tshirt.jpg",
+      variant_details: { size: "M" },
+      is_subscription: false,
+      item_type: "article",
+      discount_value: null,
+      discount_name: null,
+      subtotal: "25.00 €",
+    },
+    {
+      id: 1,
+      item_name: "Ameba T-shirt",
+      price: "25.00 €",
+      preview: "/img/tshirt.jpg",
+      variant_details: { size: "M" },
+      is_subscription: false,
+      item_type: "article",
+      discount_value: null,
+      discount_name: null,
+      subtotal: "25.00 €",
+    },
+  ],
+  item_variant_ids: [1, 1],
+};
