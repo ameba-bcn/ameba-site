@@ -6,6 +6,21 @@
   min-height: 400px;
 }
 
+.agenda-section-title {
+  margin: 32px 0 12px;
+  text-align: left;
+  font-family: "Bebas Neue";
+  font-weight: 400;
+  font-size: 2.5rem;
+  line-height: 0.8em;
+}
+
+@media screen and (max-width: 1460px) {
+  .agenda-section-title {
+    font-size: 2rem;
+  }
+}
+
 .agenda-table table {
   width: 100%;
   margin: 0 auto;
