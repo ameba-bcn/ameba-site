@@ -44,7 +44,8 @@
   "agenda": {
     "data": "data",
     "activitat": "activitat",
-    "inactiu": "Event inactiu"
+    "inactiu": "Event inactiu",
+    "pasats": "Activitats passades"
   },
   "modal": {
     "talles": "talles disponibles",

@@ -14,7 +14,6 @@ import { Navigate, useNavigate } from "react-router-dom";
 import {
   formatDateToHour,
   formatISODateToDate,
-  sortByDate,
 } from "../../../utils/utils";
 import Icon from "../../../components/ui/Icon";
 import "./AgendaTable.styled.css";
@@ -266,7 +265,7 @@ const AgendaTable = () => {
 
   const filteredAgenda = useMemo(
     () =>
-      sortByDate(agenda)
+      agenda
         .filter((activity) =>
           activity?.name?.toLowerCase()?.includes(searchInput?.toLowerCase()),
         )
@@ -276,8 +275,34 @@ const AgendaTable = () => {
     [agenda, searchInput, activeType],
   );
 
+  const upcomingAgenda = useMemo(
+    () =>
+      filteredAgenda
+        .filter((activity) => activity.datetime >= todayIsoString)
+        .sort((a, b) => new Date(a.datetime) - new Date(b.datetime)),
+    [filteredAgenda, todayIsoString],
+  );
+
+  const pastAgenda = useMemo(
+    () =>
+      filteredAgenda
+        .filter((activity) => activity.datetime < todayIsoString)
+        .sort((a, b) => new Date(b.datetime) - new Date(a.datetime)),
+    [filteredAgenda, todayIsoString],
+  );
+
   const table = useReactTable({
-    data: filteredAgenda,
+    data: upcomingAgenda,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: { pageSize: 20 },
+    },
+  });
+
+  const pastTable = useReactTable({
+    data: pastAgenda,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -288,27 +313,19 @@ const AgendaTable = () => {
 
   if (redirect) return <Navigate to={checkoutRedirect} replace />;
 
-  const renderPagination = () => (
+  const renderPagination = (tableInstance) => (
     <Pagination
-      page={table.getState().pagination.pageIndex}
-      totalPages={table.getPageCount()}
-      onPageChange={(p) => table.setPageIndex(p)}
+      page={tableInstance.getState().pagination.pageIndex}
+      totalPages={tableInstance.getPageCount()}
+      onPageChange={(p) => tableInstance.setPageIndex(p)}
       className="pagination--dark"
     />
   );
 
-  return (
-    <div
-      className={`styled-main-column-view agenda-table${agenda.length === 0 ? " agenda-table--empty" : ""}`}
-    >
-      <FilterBar
-        items={types}
-        activeItem={activeType}
-        onSelect={setActiveType}
-        allLabel={t("gallery.tot")}
-      />
-      {isMobile ? (
-        <table>
+  const renderAgendaTable = (tableInstance, showSearchBox) =>
+    isMobile ? (
+      <table>
+        {showSearchBox && (
           <thead>
             <tr>
               <th>
@@ -322,93 +339,114 @@ const AgendaTable = () => {
               </th>
             </tr>
           </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => {
-              const { name, images, datetime } = row.original;
-              return (
-                <tr
-                  key={row.id}
-                  className="agenda-mobile-row"
-                  onClick={() => goToEvent(row.original)}
-                >
-                  <td>
-                    <div className="agenda-mobile-card">
-                      <div className="agenda-mobile-card__image">
-                        <img src={images} alt="" />
+        )}
+        <tbody>
+          {tableInstance.getRowModel().rows.map((row) => {
+            const { name, images, datetime } = row.original;
+            return (
+              <tr
+                key={row.id}
+                className="agenda-mobile-row"
+                onClick={() => goToEvent(row.original)}
+              >
+                <td>
+                  <div className="agenda-mobile-card">
+                    <div className="agenda-mobile-card__image">
+                      <img src={images} alt="" />
+                    </div>
+                    <div className="agenda-mobile-card__info">
+                      <div className="agenda-mobile-card__date">
+                        {formatISODateToDate(datetime)}
                       </div>
-                      <div className="agenda-mobile-card__info">
-                        <div className="agenda-mobile-card__date">
-                          {formatISODateToDate(datetime)}
-                        </div>
-                        <hr />
-                        <div className="agenda-mobile-card__title">
-                          {name?.toUpperCase()}
-                        </div>
+                      <hr />
+                      <div className="agenda-mobile-card__title">
+                        {name?.toUpperCase()}
                       </div>
                     </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      ) : (
-        <table>
-          <thead>
-            {table.getHeaderGroups().map((headerGroup, groupIndex) => (
-              <tr
-                key={headerGroup.id}
-                className={groupIndex > 0 ? "agenda-header-row" : ""}
-              >
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id} colSpan={header.colSpan}>
-                    {header.id.includes("search-box") ? (
-                      <div className="search-row">
-                        <SearchBox
-                          searchText="Busca"
-                          searchInput={searchInput}
-                          setSearchInput={setSearchInput}
-                        />
-                      </div>
-                    ) : null}
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                  </th>
-                ))}
+                  </div>
+                </td>
               </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => {
-              return (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <td
-                        key={cell.id}
-                        onClick={() =>
-                          cell.column.id !== "reserva" &&
-                          goToEvent(row.original)
-                        }
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+            );
+          })}
+        </tbody>
+      </table>
+    ) : (
+      <table>
+        <thead>
+          {tableInstance.getHeaderGroups().map((headerGroup, groupIndex) => (
+            <tr
+              key={headerGroup.id}
+              className={groupIndex > 0 ? "agenda-header-row" : ""}
+            >
+              {headerGroup.headers.map((header) => (
+                <th key={header.id} colSpan={header.colSpan}>
+                  {showSearchBox && header.id.includes("search-box") ? (
+                    <div className="search-row">
+                      <SearchBox
+                        searchText="Busca"
+                        searchInput={searchInput}
+                        setSearchInput={setSearchInput}
+                      />
+                    </div>
+                  ) : null}
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                </th>
+              ))}
+            </tr>
+          ))}
+        </thead>
+        <tbody>
+          {tableInstance.getRowModel().rows.map((row) => {
+            return (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => {
+                  return (
+                    <td
+                      key={cell.id}
+                      onClick={() =>
+                        cell.column.id !== "reserva" &&
+                        goToEvent(row.original)
+                      }
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </td>
+                  );
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    );
+
+  return (
+    <div
+      className={`styled-main-column-view agenda-table${agenda.length === 0 ? " agenda-table--empty" : ""}`}
+    >
+      <FilterBar
+        items={types}
+        activeItem={activeType}
+        onSelect={setActiveType}
+        allLabel={t("gallery.tot")}
+      />
+      {renderAgendaTable(table, true)}
+      {renderPagination(table)}
+
+      {pastAgenda.length > 0 && (
+        <>
+          <h2 className="agenda-section-title">{t("agenda.pasats")}</h2>
+          {renderAgendaTable(pastTable, false)}
+          {renderPagination(pastTable)}
+        </>
       )}
-      {renderPagination()}
     </div>
   );
 };
