@@ -18,11 +18,11 @@ function GalleryArxiuAlbum() {
   const gallery = getGalleryBySlug(slug, year);
   const [page, setPage] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState(null);
-  const { galleryImages, isGalleryAlbumLoading, fetchGalleryImages } = useDataStore();
+  const { galleryImages, isGalleryAlbumLoading, fetchGalleryImages } =
+    useDataStore();
 
   useEffect(() => {
     if (gallery) fetchGalleryImages(gallery.tag);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gallery?.tag]);
 
   if (!gallery) {
@@ -31,7 +31,10 @@ function GalleryArxiuAlbum() {
         <PageMeta title={t("menu.arxiu")} url="/festivals/arxiu" />
         <div className="gallery-arxiu-album__not-found">
           <p>{t("gallery.no-trobada")}</p>
-          <Link to="/festivals/arxiu" className="gallery-arxiu-album__back-link">
+          <Link
+            to="/festivals/arxiu"
+            className="gallery-arxiu-album__back-link"
+          >
             ← {t("gallery.tornar")}
           </Link>
         </div>
@@ -43,15 +46,25 @@ function GalleryArxiuAlbum() {
     cloudinaryUrl(`${img.public_id}.${img.format}`),
   );
   const totalPages = Math.ceil(galleryImages.length / PAGE_SIZE);
-  const pagedImages = galleryImages.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
+  const pagedImages = galleryImages.slice(
+    page * PAGE_SIZE,
+    (page + 1) * PAGE_SIZE,
+  );
 
-  const openLightbox = (pageIndex) => setLightboxIndex(page * PAGE_SIZE + pageIndex);
+  const openLightbox = (pageIndex) =>
+    setLightboxIndex(page * PAGE_SIZE + pageIndex);
 
   return (
     <PageLayout section="festivals" promo loading={isGalleryAlbumLoading}>
-      <PageMeta title={gallery.title} url={`/festivals/arxiu/${slug}/${year}`} />
+      <PageMeta
+        title={gallery.title}
+        url={`/festivals/arxiu/${slug}/${year}`}
+      />
       <div className="gallery-arxiu-album">
-        <nav aria-label={t("festivals.breadcrumb")} className="gallery-arxiu-album__breadcrumb">
+        <nav
+          aria-label={t("festivals.breadcrumb")}
+          className="gallery-arxiu-album__breadcrumb"
+        >
           <Link to="/">AMEBA</Link>
           <span>|</span>
           <Link to="/festivals">{t("menu.festivals")}</Link>
@@ -85,7 +98,11 @@ function GalleryArxiuAlbum() {
           </div>
         )}
 
-        <Pagination page={page} totalPages={totalPages} onPageChange={setPage} />
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          onPageChange={setPage}
+        />
 
         {lightboxIndex !== null && (
           <ImageLightbox

@@ -24,9 +24,11 @@ function GalleryArxiu() {
 
   const filtered = useMemo(
     () =>
-      [...(activeYear ? galleries.filter((g) => g.year === activeYear) : galleries)].sort(
-        (a, b) => b.year - a.year,
-      ),
+      [
+        ...(activeYear
+          ? galleries.filter((g) => g.year === activeYear)
+          : galleries),
+      ].sort((a, b) => b.year - a.year),
     [activeYear],
   );
 
@@ -36,7 +38,6 @@ function GalleryArxiu() {
         fetchGalleryCover(gallery.tag);
       }
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -47,7 +48,10 @@ function GalleryArxiu() {
         url="/festivals/arxiu"
       />
       <div className="gallery-arxiu">
-        <nav aria-label={t("festivals.breadcrumb")} className="gallery-arxiu__breadcrumb">
+        <nav
+          aria-label={t("festivals.breadcrumb")}
+          className="gallery-arxiu__breadcrumb"
+        >
           <Link to="/">AMEBA</Link>
           <span>|</span>
           <Link to="/festivals">{t("menu.festivals")}</Link>
@@ -80,7 +84,9 @@ function GalleryArxiu() {
                 <AmebaCard
                   key={`${gallery.slug}-${gallery.year}`}
                   to={`/festivals/arxiu/${gallery.slug}/${gallery.year}`}
-                  image={coverPublicId ? cloudinaryCover(coverPublicId) : undefined}
+                  image={
+                    coverPublicId ? cloudinaryCover(coverPublicId) : undefined
+                  }
                   imageAlt={gallery.title}
                   badge={gallery.date}
                   title={gallery.title}

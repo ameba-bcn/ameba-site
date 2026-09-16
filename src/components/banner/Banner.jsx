@@ -1,5 +1,4 @@
 import React from "react";
-import LettersMove from "../layout/LettersMove";
 import useMediaQuery from "../../hooks/use-media-query";
 import { MOBILE_NORMAL } from "../../utils/constants";
 import "./Banner.css";
@@ -9,7 +8,7 @@ function getMobileImage(image) {
   return image.slice(0, ext) + "-mobile" + image.slice(ext);
 }
 
-export default function Banner({ image, link, alt, title }) {
+export default function Banner({ image, link, alt }) {
   const isMobile = useMediaQuery(MOBILE_NORMAL);
   const src = isMobile ? getMobileImage(image) : image;
   // Solo se permiten enlaces http(s) (evita javascript:/data: desde la API).
@@ -32,11 +31,6 @@ export default function Banner({ image, link, alt, title }) {
       ) : (
         <div className="Banner">{content}</div>
       )}
-      <LettersMove
-        className="lettersMoveAsso"
-        sentence={title || "L'ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA "}
-        link={link}
-      />
     </div>
   );
 }
