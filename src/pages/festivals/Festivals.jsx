@@ -3,7 +3,12 @@ import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useDataStore from "../../stores/useDataStore";
 import { selectFestivals, FESTIVAL_TYPES } from "../../selectors/festivals";
-import { formatPrice, sortByDate, formatISODateToDate, formatDateToHour } from "../../utils/utils";
+import {
+  formatPrice,
+  sortByDate,
+  formatISODateToDate,
+  formatDateToHour,
+} from "../../utils/utils";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import PageMeta from "../../components/seo/PageMeta";
 import SectionHero from "../../components/ui/SectionHero";
@@ -13,7 +18,9 @@ import DropdownFilter from "../../components/ui/DropdownFilter";
 import CardGrid from "../../components/ui/CardGrid";
 import AmebaCard from "../../components/ui/AmebaCard";
 import LoadMoreButton from "../../components/ui/LoadMoreButton";
-import FeaturedFestival, { useFeaturedFestivalReveal } from "../../components/festivals/FeaturedFestival";
+import FeaturedFestival, {
+  useFeaturedFestivalReveal,
+} from "../../components/festivals/FeaturedFestival";
 import ArxiuBand from "../../components/festivals/ArxiuBand";
 import heroImage from "../../assets/images/home/home2.jpg";
 import { gsap, Flip, prefersReducedMotion } from "../../utils/gsapSetup";
@@ -44,22 +51,33 @@ function Festivals() {
   usePageEnter(rootRef, "festivals");
 
   // §2.2 — dots row above the featured band, just before its mask opens.
-  useGsapContext(() => {
-    const dots = gsap.utils.toArray(".festivals__hero-dots .dots-row__dot", rootRef.current);
-    if (!dots.length) return;
-    if (prefersReducedMotion()) {
-      gsap.set(dots, { autoAlpha: 1 });
-      return;
-    }
-    gsap.set(dots, { scale: 0 });
-    gsap.to(dots, {
-      scale: 1,
-      duration: 0.4,
-      stagger: 0.04,
-      ease: "power2.out",
-      scrollTrigger: { trigger: rootRef.current.querySelector(".festivals__hero-dots"), start: "top 90%", once: true },
-    });
-  }, [], rootRef);
+  useGsapContext(
+    () => {
+      const dots = gsap.utils.toArray(
+        ".festivals__hero-dots .dots-row__dot",
+        rootRef.current,
+      );
+      if (!dots.length) return;
+      if (prefersReducedMotion()) {
+        gsap.set(dots, { autoAlpha: 1 });
+        return;
+      }
+      gsap.set(dots, { scale: 0 });
+      gsap.to(dots, {
+        scale: 1,
+        duration: 0.4,
+        stagger: 0.04,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: rootRef.current.querySelector(".festivals__hero-dots"),
+          start: "top 90%",
+          once: true,
+        },
+      });
+    },
+    [],
+    rootRef,
+  );
 
   const activeYear = searchParams.get("any");
   const activeType = searchParams.get("tipus");
@@ -83,11 +101,16 @@ function Festivals() {
         ease: "power3.inOut",
         stagger: 0.03,
         absolute: true,
-        onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, scale: 0.92 }, { autoAlpha: 1, scale: 1, duration: 0.4 }),
-        onLeave: (els) => gsap.to(els, { autoAlpha: 0, scale: 0.92, duration: 0.3 }),
+        onEnter: (els) =>
+          gsap.fromTo(
+            els,
+            { autoAlpha: 0, scale: 0.92 },
+            { autoAlpha: 1, scale: 1, duration: 0.4 },
+          ),
+        onLeave: (els) =>
+          gsap.to(els, { autoAlpha: 0, scale: 0.92, duration: 0.3 }),
       });
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeYear, activeType]);
 
   const festivals = useMemo(() => selectFestivals(agenda), [agenda]);
@@ -110,15 +133,18 @@ function Festivals() {
   const historic = useMemo(
     () =>
       sortByDate(
-        festivals.filter((f) => new Date(f.datetime) < new Date() && f.id !== featured?.id),
+        festivals.filter(
+          (f) => new Date(f.datetime) < new Date() && f.id !== featured?.id,
+        ),
       ),
     [festivals, featured],
   );
 
   const years = useMemo(
-    () => [...new Set(historic.map((f) => new Date(f.datetime).getFullYear()))].sort(
-      (a, b) => b - a,
-    ),
+    () =>
+      [
+        ...new Set(historic.map((f) => new Date(f.datetime).getFullYear())),
+      ].sort((a, b) => b - a),
     [historic],
   );
 
@@ -126,7 +152,9 @@ function Festivals() {
     () =>
       historic
         .filter((f) =>
-          activeYear ? String(new Date(f.datetime).getFullYear()) === activeYear : true,
+          activeYear
+            ? String(new Date(f.datetime).getFullYear()) === activeYear
+            : true,
         )
         .filter((f) => (activeType ? f.type === activeType : true)),
     [historic, activeYear, activeType],
@@ -157,94 +185,105 @@ function Festivals() {
         url="/festivals"
       />
       <div ref={rootRef}>
-      <SectionHero
-        title={t("menu.festivals")}
-        section="festivals"
-        variant="mega"
-        dotsPosition="end"
-        image={heroImage}
-        imageAlt={t("menu.festivals")}
-        lead={t("festivals.hero-lead")}
-        titleFit={false}
-      >
-        <p>{t("festivals.hero-body-1")}</p>
-        <p className="section-hero__text-p--regular">{t("festivals.hero-body-2")}</p>
-      </SectionHero>
-      <hr className="festivals__hr--bleed-right" />
-      <DotsRow className="festivals__hero-dots" />
+        <SectionHero
+          title={t("menu.festivals")}
+          section="festivals"
+          variant="mega"
+          dotsPosition="end"
+          image={heroImage}
+          imageAlt={t("menu.festivals")}
+          lead={t("festivals.hero-lead")}
+          titleFit={false}
+        >
+          <p>{t("festivals.hero-body-1")}</p>
+          <p className="section-hero__text-p--regular">
+            {t("festivals.hero-body-2")}
+          </p>
+        </SectionHero>
+        <hr className="festivals__hr--bleed-right" />
+        <DotsRow className="festivals__hero-dots" />
 
-      {featured ? (
-        <FeaturedFestival festival={featured} />
-      ) : (
-        // No festival-type events at all yet (neither upcoming nor past).
-        <div className="featured-festival" ref={fallbackFeaturedRef}>
-          <img className="featured-festival__image" src={heroImage} alt="" />
-        </div>
-      )}
-
-      <hr className="festivals__hr--bleed-left" />
-      <OutlineHeading as="h2" className="festivals__section-title">
-        {t("festivals.historic")}
-      </OutlineHeading>
-
-      <div className="festivals__filters">
-        <DropdownFilter
-          label={t("festivals.any")}
-          value={activeYear}
-          options={years.map(String)}
-          onChange={(v) => setFilter("any", v)}
-        />
-        <DropdownFilter
-          label={t("festivals.festival")}
-          value={activeType ? t(TYPE_LABEL_KEYS[activeType]) : null}
-          options={FESTIVAL_TYPES.map((type) => ({
-            value: type,
-            label: t(TYPE_LABEL_KEYS[type]),
-          }))}
-          onChange={(v) => setFilter("tipus", v)}
-        />
-        {(activeYear || activeType) && (
-          <button type="button" className="festivals__clear" onClick={clearFilters}>
-            {t("general.borrar-filtres")}
-          </button>
+        {featured ? (
+          <FeaturedFestival festival={featured} />
+        ) : (
+          // No festival-type events at all yet (neither upcoming nor past).
+          <div className="featured-festival" ref={fallbackFeaturedRef}>
+            <img className="featured-festival__image" src={heroImage} alt="" />
+          </div>
         )}
-      </div>
 
-      {!isEventsLoading && filtered.length === 0 ? (
-        <div className="festivals__empty">{t("general.sense-resultats")}</div>
-      ) : (
-        <>
-          <CardGrid className="festivals__card-grid">
-            {visibleItems.map((f) => (
-              <div key={f.id} style={f.cancelled ? { opacity: 0.6 } : undefined}>
-                <AmebaCard
-                  to={`/festivals/${f.id}`}
-                  image={f.images?.[0]}
-                  imageAlt={f.name}
-                  badge={`${formatISODateToDate(f.datetime)} - ${formatDateToHour(f.datetime)}h`}
-                  title={f.name}
-                  subtitle={f.address}
-                  highlight={
-                    f.cancelled
-                      ? t("festivals.cancellat")
-                      : f.price === 0
-                        ? t("events.button.gratis").toUpperCase()
-                        : f.price
-                          ? formatPrice(f.price)
-                          : null
-                  }
-                  meta={f.address}
-                />
-              </div>
-            ))}
-          </CardGrid>
-          {visibleCount < filtered.length && (
-            <LoadMoreButton onClick={() => setVisibleCount((c) => c + PAGE_SIZE)} />
+        <hr className="festivals__hr--bleed-left" />
+        <OutlineHeading as="h2" className="festivals__section-title">
+          {t("festivals.historic")}
+        </OutlineHeading>
+
+        <div className="festivals__filters">
+          <DropdownFilter
+            label={t("festivals.any")}
+            value={activeYear}
+            options={years.map(String)}
+            onChange={(v) => setFilter("any", v)}
+          />
+          <DropdownFilter
+            label={t("festivals.festival")}
+            value={activeType ? t(TYPE_LABEL_KEYS[activeType]) : null}
+            options={FESTIVAL_TYPES.map((type) => ({
+              value: type,
+              label: t(TYPE_LABEL_KEYS[type]),
+            }))}
+            onChange={(v) => setFilter("tipus", v)}
+          />
+          {(activeYear || activeType) && (
+            <button
+              type="button"
+              className="festivals__clear"
+              onClick={clearFilters}
+            >
+              {t("general.borrar-filtres")}
+            </button>
           )}
-        </>
-      )}
+        </div>
 
-      <ArxiuBand />
+        {!isEventsLoading && filtered.length === 0 ? (
+          <div className="festivals__empty">{t("general.sense-resultats")}</div>
+        ) : (
+          <>
+            <CardGrid className="festivals__card-grid">
+              {visibleItems.map((f) => (
+                <div
+                  key={f.id}
+                  style={f.cancelled ? { opacity: 0.6 } : undefined}
+                >
+                  <AmebaCard
+                    to={`/festivals/${f.id}`}
+                    image={f.images?.[0]}
+                    imageAlt={f.name}
+                    badge={`${formatISODateToDate(f.datetime)} - ${formatDateToHour(f.datetime)}h`}
+                    title={f.name}
+                    subtitle={f.address}
+                    highlight={
+                      f.cancelled
+                        ? t("festivals.cancellat")
+                        : f.price === 0
+                          ? t("events.button.gratis").toUpperCase()
+                          : f.price
+                            ? formatPrice(f.price)
+                            : null
+                    }
+                    meta={f.address}
+                  />
+                </div>
+              ))}
+            </CardGrid>
+            {visibleCount < filtered.length && (
+              <LoadMoreButton
+                onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+              />
+            )}
+          </>
+        )}
+
+        <ArxiuBand />
       </div>
     </PageLayout>
   );

@@ -9,7 +9,7 @@
 
 - Rutas actuales (en `src/App.jsx`): `/` (Home), `/activitats` (Agenda), `/botiga`, `/socis` (Soci@s), `/gallery` (Arxiu), `/memberships` (Fes-te soci), `/login`, `/legal`, `/checkout`, `/profile`, etc.
 - Navbar: `src/components/navbar/Navbar.jsx` + `NavbarButtons.jsx` (desktop) + `NavbarButtonsMobile.jsx` (móvil), estilos en `Navbar.style.css`. Incluye `Cart`, `MenuLog` (login/perfil) y switch CAT/CAST inline.
-- Home: `src/pages/home/Home.jsx` → `Associacio` (cover), `Manifesto`, `Activitats` + marquesina `LettersMove`.
+- Home: `src/pages/home/Home.jsx` → `Associacio` (cover), `Manifesto`, `Activitats`.
 - Footer global: `src/contacte/Contacte.jsx` (newsletter + `MediaLinks` + colaboradores + legal), montado en `App.jsx` bajo las rutas.
 - Tokens: `src/index.css` (`--color-cream`, `--color-amarillo`, `--color-naranja`, `--color-rojo`, `--color-negro`…).
 - i18n: `react-i18next`, claves tipo `menu.botiga`, `footer.colab`; idiomas `ca`/`es` en localStorage (`i18nextLng`).
@@ -67,7 +67,6 @@ Pierden sitio en el menú: Agenda (`/activitats`), Arxiu (`/gallery`), Fes-te so
 - [ ] Reubicar contenido actual de la home:
   - `Manifesto` → sale de la home (destino: página Associació, fase posterior). No borrar el componente.
   - `Activitats` (grid agenda) → sale de la home; `/activitats` sigue siendo su vista completa.
-  - `LettersMove` (marquesinas) → conservar como separadores si encaja con el rediseño; si no, retirar de Home sin borrar el componente (lo usa `Contacte`).
 
 ### 4. Footer — `src/contacte/Contacte.jsx` (rutas huérfanas)
 

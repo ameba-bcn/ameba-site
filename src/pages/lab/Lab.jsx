@@ -3,7 +3,13 @@ import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useDataStore from "../../stores/useDataStore";
 import { selectLabActivities } from "../../selectors/festivals";
-import { formatPrice, priceMayDiscount, sortByDate, formatISODateToDate, formatDateToHour } from "../../utils/utils";
+import {
+  formatPrice,
+  priceMayDiscount,
+  sortByDate,
+  formatISODateToDate,
+  formatDateToHour,
+} from "../../utils/utils";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import PageMeta from "../../components/seo/PageMeta";
 import SectionHero from "../../components/ui/SectionHero";
@@ -56,11 +62,16 @@ function Lab() {
         ease: "power3.inOut",
         stagger: 0.03,
         absolute: true,
-        onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, duration: 0.3 }),
-        onLeave: (els) => gsap.to(els, { autoAlpha: 0, scale: 0.9, duration: 0.2 }),
+        onEnter: (els) =>
+          gsap.fromTo(
+            els,
+            { autoAlpha: 0, scale: 0.9 },
+            { autoAlpha: 1, scale: 1, duration: 0.3 },
+          ),
+        onLeave: (els) =>
+          gsap.to(els, { autoAlpha: 0, scale: 0.9, duration: 0.2 }),
       });
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeType, selectedDate]);
 
   const activities = useMemo(() => selectLabActivities(agenda), [agenda]);
@@ -73,7 +84,10 @@ function Lab() {
     return upcoming[0] ?? null;
   }, [activities]);
 
-  const activityDates = useMemo(() => activityDateSet(activities), [activities]);
+  const activityDates = useMemo(
+    () => activityDateSet(activities),
+    [activities],
+  );
 
   // Order of appearance follows the render (Tallers, Xerrades, Itineraris,
   // Club Lectura, Radio, Streams, Jams) only for types the backend actually
@@ -87,7 +101,11 @@ function Lab() {
     () =>
       sortByDate(activities)
         .filter((a) => (activeType ? a.type === activeType : true))
-        .filter((a) => (selectedDate ? dateKey(new Date(a.datetime)) === dateKey(selectedDate) : true)),
+        .filter((a) =>
+          selectedDate
+            ? dateKey(new Date(a.datetime)) === dateKey(selectedDate)
+            : true,
+        ),
     [activities, activeType, selectedDate],
   );
 
@@ -102,100 +120,102 @@ function Lab() {
     setVisibleCount(PAGE_SIZE);
   };
 
-  const clearFilters = () => {
-    captureFlip();
-    setSearchParams({});
-    setSelectedDate(null);
-    setVisibleCount(PAGE_SIZE);
-  };
-
   return (
     <PageLayout section="lab" promo loading={isEventsLoading}>
       <PageMeta title="Lab" description={t("lab.meta")} url="/lab" />
       <div ref={rootRef}>
-      <SectionHero
-        title={t("menu.lab")}
-        section="lab"
-        variant="mega"
-        dotsPosition="end"
-        titleColor="var(--color-cream)"
-        image={heroImage}
-        imageAlt={t("menu.lab")}
-        lead={t("lab.hero-lead")}
-        titleFit={false}
-      >
-        <p>{t("lab.hero-body-1")}</p>
-        <p className="section-hero__text-p--regular">{t("lab.hero-body-2")}</p>
-      </SectionHero>
-      <hr />
-      <DotsRow className="lab__hero-dots" />
+        <SectionHero
+          title={t("menu.lab")}
+          section="lab"
+          variant="mega"
+          dotsPosition="end"
+          titleColor="var(--color-cream)"
+          image={heroImage}
+          imageAlt={t("menu.lab")}
+          lead={t("lab.hero-lead")}
+          titleFit={false}
+        >
+          <p>{t("lab.hero-body-1")}</p>
+          <p className="section-hero__text-p--regular">
+            {t("lab.hero-body-2")}
+          </p>
+        </SectionHero>
+        <hr />
+        <DotsRow className="lab__hero-dots" />
 
-      <div className="lab__calendar-row">
-        <div>
-          <OutlineHeading as="h2" className="lab__section-title">
-            {t("lab.calendari")}
-          </OutlineHeading>
-          <LabCalendar
-            activityDateSet={activityDates}
-            selectedDate={selectedDate}
-            onSelectDate={(d) => {
-              captureFlip();
-              setSelectedDate(d);
-              setVisibleCount(PAGE_SIZE);
-            }}
-          />
+        <div className="lab__calendar-row">
+          <div>
+            <OutlineHeading as="h2" className="lab__section-title">
+              {t("lab.calendari")}
+            </OutlineHeading>
+            <LabCalendar
+              activityDateSet={activityDates}
+              selectedDate={selectedDate}
+              onSelectDate={(d) => {
+                captureFlip();
+                setSelectedDate(d);
+                setVisibleCount(PAGE_SIZE);
+              }}
+            />
+          </div>
+          <div>
+            <OutlineHeading as="h2" className="lab__section-title">
+              {t("lab.propera-activitat")}
+            </OutlineHeading>
+            <NextActivityCard activity={nextActivity} />
+          </div>
         </div>
-        <div>
-          <OutlineHeading as="h2" className="lab__section-title">
-            {t("lab.propera-activitat")}
-          </OutlineHeading>
-          <NextActivityCard activity={nextActivity} />
-        </div>
-      </div>
 
-      <hr />
-      <OutlineHeading as="h2" className="lab__section-title">
-        {t("lab.activitats-en-curs")}
-      </OutlineHeading>
+        <hr />
+        <OutlineHeading as="h2" className="lab__section-title">
+          {t("lab.activitats-en-curs")}
+        </OutlineHeading>
 
-      <FilterBar
-        items={types}
-        activeItem={activeType}
-        onSelect={setType}
-        allLabel={null}
-        variant="solid"
-        resetLabel={t("general.borrar-filtres")}
-      />
+        <FilterBar
+          items={types}
+          activeItem={activeType}
+          onSelect={setType}
+          allLabel={null}
+          variant="solid"
+          resetLabel={t("general.borrar-filtres")}
+        />
 
-      {!isEventsLoading && filtered.length === 0 ? (
-        <div className="lab__empty">{t("general.sense-resultats")}</div>
-      ) : (
-        <>
-          <CardGrid className="lab__card-grid">
-            {visibleItems.map((a) => (
-              <AmebaCard
-                key={a.id}
-                to={`/lab/${a.id}`}
-                image={a.images?.[0]}
-                imageAlt={a.header || a.name}
-                badge={`${formatISODateToDate(a.datetime)} - ${formatDateToHour(a.datetime)}h`}
-                title={a.header || a.name}
-                highlight={
-                  a.price === 0
-                    ? t("events.button.gratis").toUpperCase()
-                    : a.price
-                      ? priceMayDiscount(formatPrice(a.price), a.discount, null, t("form.descompte"))
-                      : null
-                }
-                meta={a.address}
+        {!isEventsLoading && filtered.length === 0 ? (
+          <div className="lab__empty">{t("general.sense-resultats")}</div>
+        ) : (
+          <>
+            <CardGrid className="lab__card-grid">
+              {visibleItems.map((a) => (
+                <AmebaCard
+                  key={a.id}
+                  to={`/lab/${a.id}`}
+                  image={a.images?.[0]}
+                  imageAlt={a.header || a.name}
+                  badge={`${formatISODateToDate(a.datetime)} - ${formatDateToHour(a.datetime)}h`}
+                  title={a.header || a.name}
+                  highlight={
+                    a.price === 0
+                      ? t("events.button.gratis").toUpperCase()
+                      : a.price
+                        ? priceMayDiscount(
+                            formatPrice(a.price),
+                            a.discount,
+                            null,
+                            t("form.descompte"),
+                          )
+                        : null
+                  }
+                  meta={a.address}
+                />
+              ))}
+            </CardGrid>
+            {visibleCount < filtered.length && (
+              <LoadMoreButton
+                onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
               />
-            ))}
-          </CardGrid>
-          {visibleCount < filtered.length && (
-            <LoadMoreButton onClick={() => setVisibleCount((c) => c + PAGE_SIZE)} />
-          )}
-        </>
-      )}
+            )}
+          </>
+        )}
       </div>
     </PageLayout>
   );

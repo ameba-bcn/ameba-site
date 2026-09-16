@@ -20,14 +20,7 @@ export default function QrClient() {
   }, [location.search]);
 
   return (
-    <PageLayout
-      className="logViewRed"
-      banner={{
-        sentence: t("banners.soci-curt"),
-        link: "/associacio/nou-soci",
-        color: "var(--color-cream)",
-      }}
-    >
+    <PageLayout className="logViewRed">
       <div className="cardForm">
         <div className="card-form">
           <div className="logTitle">data</div>

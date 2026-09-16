@@ -1,6 +1,5 @@
 import React from "react";
 import PowerTitle from "../PowerTitle";
-import LettersMove from "../LettersMove";
 import Spinner from "../../spinner/Spinner";
 import PromoBar from "../../ui/PromoBar";
 import "./PageLayout.css";
@@ -10,7 +9,6 @@ export default function PageLayout({
   title,
   titleProps,
   loading,
-  banner,
   centered,
   children,
   section,
@@ -38,13 +36,6 @@ export default function PageLayout({
           )}
         </div>
       </div>
-      {banner && (
-        <LettersMove
-          sentence={banner.sentence}
-          link={banner.link}
-          color={banner.color}
-        />
-      )}
     </div>
   );
 }

@@ -28,9 +28,9 @@ function CheckoutFinished() {
               buttonStyle="boton--back-orange--solid"
               buttonSize="boton--medium"
               hoverStyle="bg-cream"
-              onClick={() => navigate("/compte")}
+              onClick={() => navigate("/")}
             >
-              {t("checkoutFinished.cta-compte")}
+              {t("checkoutFinished.cta-home")}
             </Button>
             <Button
               buttonStyle="boton--primary--solid"
