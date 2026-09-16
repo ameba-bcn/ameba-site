@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { formatPrice, priceMayDiscount, formatISODateToDate, formatDateToHour } from "../../utils/utils";
-import CountdownTimer from "../countdown/CountdownTimer";
 import { gsap, prefersReducedMotion } from "../../utils/gsapSetup";
 import useGsapContext from "../../hooks/use-gsap-context";
 import "./NextActivityCard.css";
@@ -67,9 +66,6 @@ export default function NextActivityCard({ activity }) {
             : priceMayDiscount(formatPrice(price), discount, null, t("form.descompte"))}
         </div>
         {address && <div className="next-activity-card__row">{address}</div>}
-        <div className="next-activity-card__countdown">
-          <CountdownTimer targetDate={datetime} />
-        </div>
       </div>
     </NavLink>
   );
