@@ -214,7 +214,9 @@
     "socios": "Soci@s",
     "agenda": "Agenda",
     "archivo": "Archivo",
-    "legal": "Legal"
+    "legal": "Legal",
+    "play": "Reproducir",
+    "pause": "Pausa"
   },
   "lab": {
     "proximament": "Próximamente",

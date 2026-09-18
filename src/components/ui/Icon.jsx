@@ -368,6 +368,18 @@ function Icon(props) {
     </AmebaSvgWrapper>
   );
 
+  const play = (
+    <AmebaSvgWrapper {...props}>
+      <path d="M8 5V19L19 12L8 5Z" fill="black" />
+    </AmebaSvgWrapper>
+  );
+
+  const pause = (
+    <AmebaSvgWrapper {...props}>
+      <path d="M6 5H10V19H6V5ZM14 5H18V19H14V5Z" fill="black" />
+    </AmebaSvgWrapper>
+  );
+
   const tooltip = (
     <AmebaSvgWrapper {...props}>
       <svg
@@ -449,6 +461,10 @@ function Icon(props) {
       return pdfFile;
     case "tooltip":
       return tooltip;
+    case "play":
+      return play;
+    case "pause":
+      return pause;
     default:
       return null;
   }
