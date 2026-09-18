@@ -2,20 +2,38 @@ import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AmebaLogo from "../ui/logo/AmebaLogo";
+import TurntableIcon from "../ui/logo/TurntableIcon";
 import Icon from "../ui/Icon";
 import Button from "../button/Button";
 import useDataStore from "../../stores/useDataStore";
 import profileServices from "../../store/services/profile.services";
 import { AMEBA_EMAIL } from "../../utils/constants";
+import useVinylScratch from "./useVinylScratch";
 import "./Footer.css";
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const SOCIALS = [
-  { icon: "instagram", label: "Instagram", url: "https://www.instagram.com/ameba_bcn" },
-  { icon: "soundcloud", label: "SoundCloud", url: "https://soundcloud.com/ameba-barcelona" },
-  { icon: "facebook", label: "Facebook", url: "https://www.facebook.com/amebabarcelona" },
-  { icon: "youtube", label: "YouTube", url: "https://www.youtube.com/channel/UCH5ssfBCmgJ1IDM-pSn2cEg" },
+  {
+    icon: "instagram",
+    label: "Instagram",
+    url: "https://www.instagram.com/ameba_bcn",
+  },
+  {
+    icon: "soundcloud",
+    label: "SoundCloud",
+    url: "https://soundcloud.com/ameba-barcelona",
+  },
+  {
+    icon: "facebook",
+    label: "Facebook",
+    url: "https://www.facebook.com/amebabarcelona",
+  },
+  {
+    icon: "youtube",
+    label: "YouTube",
+    url: "https://www.youtube.com/channel/UCH5ssfBCmgJ1IDM-pSn2cEg",
+  },
 ];
 
 export default function Footer() {
@@ -25,6 +43,7 @@ export default function Footer() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState(null); // { tone: "success"|"error", text }
   const [submitting, setSubmitting] = useState(false);
+  const vinyl = useVinylScratch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,13 +69,42 @@ export default function Footer() {
     <footer className="ameba-footer">
       <div className="ameba-footer__grid">
         <div className="ameba-footer__brand">
-          <Link to="/" aria-label={t("footer.inici")} className="ameba-footer__logo">
-            <AmebaLogo width={88} height={88} fill="var(--color-naranja)" />
-          </Link>
+          <div className="ameba-footer__turntable">
+            <TurntableIcon
+              className="ameba-footer__turntable-art"
+              thinness={3}
+            />
+            <Link
+              to="/"
+              aria-label={t("footer.inici")}
+              className="ameba-footer__logo"
+              {...vinyl.bind}
+            >
+              <AmebaLogo fill="var(--color-naranja)" />
+            </Link>
+            <button
+              type="button"
+              className="ameba-footer__play"
+              aria-label={t(vinyl.playing ? "footer.pause" : "footer.play")}
+              onClick={vinyl.togglePlay}
+            >
+              <Icon
+                icon={vinyl.playing ? "pause" : "play"}
+                width="12"
+                height="12"
+              />
+            </button>
+          </div>
           <p className="ameba-footer__tagline">{t("footer.tagline")}</p>
           <div className="ameba-footer__socials">
             {SOCIALS.map(({ icon, label, url }) => (
-              <a key={icon} href={url} target="_blank" rel="noopener noreferrer" aria-label={label}>
+              <a
+                key={icon}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+              >
                 <Icon icon={icon} width="26" height="26" />
               </a>
             ))}
@@ -66,7 +114,9 @@ export default function Footer() {
         <nav className="ameba-footer__nav" aria-label={t("menu.associacio")}>
           <h3>{t("menu.associacio")}</h3>
           <div className="ameba-footer__links">
-            <NavLink to="/associacio/nou-soci">{t("footer.hazte-socio")}</NavLink>
+            <NavLink to="/associacio/nou-soci">
+              {t("footer.hazte-socio")}
+            </NavLink>
             <NavLink to="/associacio/socis">{t("footer.socios")}</NavLink>
           </div>
         </nav>
@@ -120,7 +170,9 @@ export default function Footer() {
       </div>
 
       <div className="ameba-footer__bottom">
-        <span>AMEBA {new Date().getFullYear()} © · {t("footer.drets")}</span>
+        <span>
+          AMEBA {new Date().getFullYear()} © · {t("footer.drets")}
+        </span>
         <div
           className={`ameba-footer__collab${activeCollaborators.length === 1 ? " ameba-footer__collab--single" : ""}`}
         >
