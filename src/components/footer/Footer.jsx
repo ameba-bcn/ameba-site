@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import AmebaLogo from "../ui/logo/AmebaLogo";
 import TurntableIcon from "../ui/logo/TurntableIcon";
@@ -74,14 +74,9 @@ export default function Footer() {
               className="ameba-footer__turntable-art"
               thinness={3}
             />
-            <Link
-              to="/"
-              aria-label={t("footer.inici")}
-              className="ameba-footer__logo"
-              {...vinyl.bind}
-            >
+            <div className="ameba-footer__logo" aria-hidden="true" {...vinyl.bind}>
               <AmebaLogo fill="var(--color-naranja)" />
-            </Link>
+            </div>
             <button
               type="button"
               className="ameba-footer__play"
