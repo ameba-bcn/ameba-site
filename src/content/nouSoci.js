@@ -11,12 +11,9 @@ export const STATS = [
 ];
 
 export const BENEFITS = [
-  "lab",
-  "entrades",
-  "projecte",
-  "assemblea",
-  "mastering",
-  "comunitat",
+  { key: "formacio", bullets: ["tallers", "mentories"] },
+  { key: "visibilitat", bullets: ["perfil", "radio", "playlist", "newsletter"] },
+  { key: "comunitat", bullets: ["trobades", "banc"] },
 ];
 
 export const STEPS = ["cistella", "dades", "carnet"];

@@ -56,20 +56,19 @@
     "pagament-segur": "Pagament segur amb targeta · pots donar-te de baixa quan vulguis.",
     "que-inclou-title": "QUÈ INCLOU",
     "que-inclou-hint": "Avantatges vigents durant tot el 2026",
-    "benefit-lab-title": "75% AL LAB",
-    "benefit-lab-text": "Tallers, xerrades i masterclass a 2 € en lloc de 5 €. Places reservades per a socis/es.",
-    "benefit-entrades-title": "ENTRADES ANTICIPADES",
-    "benefit-entrades-text": "Accés previ a les entrades dels festivals i descomptes a la botiga.",
-    "benefit-projecte-title": "EL TEU PROJECTE A LA WEB",
-    "benefit-projecte-text-pre": "Pàgina d'artista pròpia al",
-    "benefit-projecte-link": "directori de projectes",
-    "benefit-projecte-text-post": ", que edites tu.",
-    "benefit-assemblea-title": "ASSEMBLEA ANUAL",
-    "benefit-assemblea-text": "Veu i vot en les decisions de l'associació i en la programació de l'any.",
-    "benefit-mastering-title": "30% EN MÀSTERING",
-    "benefit-mastering-text": "Descompte en els serveis de Human Mastering Studio per a les teves referències.",
+    "benefit-formacio-title": "FORMACIÓ",
+    "benefit-formacio-bullet-tallers": "Tallers exclusius.",
+    "benefit-formacio-bullet-mentories": "Programa de mentories amb artistes consolidats.",
+    "benefit-visibilitat-title": "VISIBILITAT",
+    "benefit-visibilitat-bullet-perfil-pre": "Perfil destacat a la web: la teva pàgina al",
+    "benefit-visibilitat-bullet-perfil-link": "directori de projectes",
+    "benefit-visibilitat-bullet-perfil-post": ", que edites tu.",
+    "benefit-visibilitat-bullet-radio": "Difusió dels nous llançaments a AMEBA Radio.",
+    "benefit-visibilitat-bullet-playlist": "Playlist mensual a Spotify.",
+    "benefit-visibilitat-bullet-newsletter": "Newsletter destacant projectes de socis/es.",
     "benefit-comunitat-title": "COMUNITAT",
-    "benefit-comunitat-text": "Canal intern, convocatòries obertes i prioritat per tocar a les nostres festes.",
+    "benefit-comunitat-bullet-trobades": "Trobades entre socis/es (networking).",
+    "benefit-comunitat-bullet-banc": "Banc de col·laboracions (busco vocalista, dissenyador/a, tècnic...).",
     "com-funciona-title": "COM FUNCIONA",
     "step-cistella-title": "AFEGEIX LA QUOTA",
     "step-cistella-text": "La quota va a la cistella com qualsevol altre producte de la botiga.",
@@ -282,7 +281,7 @@
       }
     },
     "cta": {
-      "title": "FES-TE SOCI/SÒCIA D'AMEBA DES DE 10€ ANUALS",
+      "title": "FES-TE SOCI/SÒCIA D'AMEBA POR 50€ ANUALS",
       "bullet1": "Vols formar part d'aquesta comunitat?",
       "bullet2": "Descobreix els avantatges de formar part de la comunitat.",
       "button": "INSCRIU-TE!"
@@ -295,7 +294,7 @@
     "principis": {
       "title": "ELS NOSTRES PRINCIPIS",
       "text1": "Autogestió: la junta i els grups de treball són voluntaris, i els comptes es presenten cada any a l'assemblea.",
-      "text2": "Comunitat abans que negoci: cap benefici es reparteix, tot torna a finançar activitats i festivals gratuïts.",
+      "text2": "Comunitat abans que negoci: no repartim beneficis entre soci/es, tot torna a la feina de l'associació, a activitats i a festivals gratuïts.",
       "text3": "Portes obertes: no cal ser músic ni artista per fer-se'n soci/sòcia, només tenir ganes de sostenir l'escena."
     },
     "stats": {
@@ -389,11 +388,11 @@
     "band": {
       "associacio": {
         "lead": "L'associació que sosté l'escena electrònica de Barcelona.",
-        "body": "Som un grup de voluntaris i voluntàries que organitza festivals, tallers i un directori de projectes locals. Fes-te'n soci/sòcia des de 10 € l'any i dona suport directe a la cultura electrònica de la ciutat."
+        "body": "Som un grup de voluntaris i voluntàries que organitza festivals, tallers i un directori de projectes locals. Fes-te'n soci/sòcia per 50 € l'any i dona suport directe a la cultura electrònica de la ciutat."
       },
       "festivals": {
         "lead": "El Parkfest i altres festivals, gratuïts i a l'aire lliure.",
-        "body": "Cada any portem l'escena electrònica local als carrers i places de Barcelona. Consulta el cartell, la localització i l'horari de cada edició."
+        "body": "Cada any portem l'escena electrònica local al Parkfest i a les Festes Majors —el nostre AMEBA FM—, tots dos gratuïts i a l'aire lliure, i també a sales de la ciutat. Consulta el cartell, la localització i l'horari de cada edició."
       },
       "lab": {
         "lead": "Tallers i xerrades per aprendre de l'escena, de la mà de l'escena.",

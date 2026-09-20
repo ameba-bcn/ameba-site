@@ -372,14 +372,14 @@ function AccountProject({ isMembershipExpired }) {
             {imagesError && <span className="compte-field-error">{imagesError}</span>}
           </div>
 
-          <label className="compte-field" style={{ flexDirection: "row", alignItems: "center", gap: 11 }}>
+          <label className="compte-field account-project__publish-field">
             <input
               type="checkbox"
+              className="account-project__checkbox"
               checked={isPublic}
               onChange={(e) => setIsPublic(e.target.checked)}
-              style={{ width: 22, height: 22, accentColor: "var(--color-rojo)", flex: "none" }}
             />
-            <span style={{ fontSize: 13.5, fontWeight: 700 }}>{t("form.publicat")}</span>
+            <span className="account-project__publish-label">{t("form.publicat")}</span>
           </label>
 
           <div className="compte-panel__actions">

@@ -143,6 +143,19 @@
   display: block;
 }
 
+.soci-detail__portrait--masonry {
+  display: block;
+  columns: 2;
+  column-gap: 14px;
+}
+
+.soci-detail__portrait--masonry .soci-detail__portrait-image {
+  aspect-ratio: auto;
+  object-fit: initial;
+  margin-bottom: 14px;
+  break-inside: avoid;
+}
+
 .soci-detail__portrait-placeholder {
   background: rgba(242, 227, 201, 0.08);
   border: 1px dashed rgba(242, 227, 201, 0.3);
@@ -215,17 +228,13 @@
 .soci-detail__footer-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: end;
   gap: 20px;
   flex-wrap: wrap;
   padding-top: 22px;
   border-top: 2px solid var(--color-negro);
 }
 
-.soci-detail__member-number {
-  font-size: 13px;
-  font-weight: 600;
-}
 
 .soci-detail__not-found {
   min-height: 240px;
@@ -249,5 +258,11 @@
 @media screen and (max-width: 980px) {
   .soci-detail__body {
     grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .soci-detail__portrait--masonry {
+    columns: 1;
   }
 }

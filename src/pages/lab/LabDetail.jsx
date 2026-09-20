@@ -180,7 +180,9 @@ function LabDetail() {
             </Link>
           </section>
 
-          <section className="lab-detail__body">
+          <section
+            className={`lab-detail__body${portrait ? "" : " lab-detail__body--no-portrait"}`}
+          >
             <div className="lab-detail__intro">
               {description && (
                 <div dangerouslySetInnerHTML={{ __html: description }} />
@@ -198,18 +200,16 @@ function LabDetail() {
               </div>
             </div>
 
-            <div className="lab-detail__portrait">
-              {portrait ? (
+            {portrait && (
+              <div className="lab-detail__portrait">
                 <img src={portrait} alt="" className="lab-detail__portrait-image" />
-              ) : (
-                <div className="lab-detail__portrait-placeholder" aria-hidden="true" />
-              )}
-              {event.tallerista && (
-                <span className="lab-detail__portrait-caption">
-                  {event.tallerista} · {t("lab.retrat")}
-                </span>
-              )}
-            </div>
+                {event.tallerista && (
+                  <span className="lab-detail__portrait-caption">
+                    {event.tallerista} · {t("lab.retrat")}
+                  </span>
+                )}
+              </div>
+            )}
           </section>
         </div>
       )}

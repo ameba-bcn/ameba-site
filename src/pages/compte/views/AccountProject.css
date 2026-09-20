@@ -39,6 +39,55 @@
   color: rgba(29, 29, 27, 0.6);
 }
 
+.compte-field.account-project__publish-field {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 11px;
+  text-transform: capitalize;
+}
+
+.account-project__checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  background: var(--color-cream);
+  border: 2px solid var(--color-negro);
+  cursor: pointer;
+  position: relative;
+}
+
+.account-project__checkbox:checked {
+  background: var(--color-rojo);
+  border-color: var(--color-rojo);
+}
+
+.account-project__checkbox:checked::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 11px;
+  border: solid var(--color-cream);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.account-project__checkbox:focus-visible {
+  outline: 2px solid var(--color-rojo);
+  outline-offset: 2px;
+}
+
+.account-project__publish-label {
+  font-size: 13.5px;
+  font-weight: 700;
+  line-height: 22px;
+}
+
 .account-project__link-row {
   display: flex;
   gap: 9px;
