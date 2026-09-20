@@ -197,24 +197,28 @@ function NouSoci() {
               </span>
             </div>
             <div className="nou-soci__benefits-grid">
-              {BENEFITS.map((key) => (
+              {BENEFITS.map(({ key, bullets }) => (
                 <div key={key} className="nou-soci__benefit">
                   <span className="nou-soci__benefit-title">
                     {t(`nouSoci.benefit-${key}-title`)}
                   </span>
-                  <p className="nou-soci__benefit-text">
-                    {key === "projecte" ? (
-                      <>
-                        {t("nouSoci.benefit-projecte-text-pre")}{" "}
-                        <Link to="/associacio/socis">
-                          {t("nouSoci.benefit-projecte-link")}
-                        </Link>
-                        {t("nouSoci.benefit-projecte-text-post")}
-                      </>
-                    ) : (
-                      t(`nouSoci.benefit-${key}-text`)
-                    )}
-                  </p>
+                  <ul className="nou-soci__benefit-list">
+                    {bullets.map((bulletKey) => (
+                      <li key={bulletKey} className="nou-soci__benefit-text">
+                        {key === "visibilitat" && bulletKey === "perfil" ? (
+                          <>
+                            {t("nouSoci.benefit-visibilitat-bullet-perfil-pre")}{" "}
+                            <Link to="/associacio/socis">
+                              {t("nouSoci.benefit-visibilitat-bullet-perfil-link")}
+                            </Link>
+                            {t("nouSoci.benefit-visibilitat-bullet-perfil-post")}
+                          </>
+                        ) : (
+                          t(`nouSoci.benefit-${key}-bullet-${bulletKey}`)
+                        )}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               ))}
             </div>
@@ -233,7 +237,7 @@ function NouSoci() {
                   {key === "carnet" ? (
                     <>
                       {t("nouSoci.faq-carnet-a-pre")}{" "}
-                      <Link to="/compte/dades">
+                      <Link to={isLoggedIn ? "/compte/dades" : "/inicia-sessio"}>
                         {t("nouSoci.faq-carnet-a-link")}
                       </Link>
                       .

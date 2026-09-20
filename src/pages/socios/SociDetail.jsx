@@ -28,11 +28,13 @@ function SociDetail() {
 
   const name = project?.project_name || "";
   const firstName = project?.first_name || "";
-  const portrait = project?.images?.[0];
-  const description = project?.description ? sanitizeHTML(project.description) : "";
+  const images = project?.images || [];
+  const portrait = images[0];
+  const description = project?.description
+    ? sanitizeHTML(project.description)
+    : "";
   const tags = project?.tags || [];
   const genres = project?.genres || [];
-  const memberNumber = project?.member_number;
 
   const mediaUrls = project?.media_urls || [];
   const embeds = mediaUrls
@@ -64,7 +66,9 @@ function SociDetail() {
         <PageMeta
           title={name}
           description={
-            description ? description.replace(/<[^>]+>/g, "").slice(0, 200) : undefined
+            description
+              ? description.replace(/<[^>]+>/g, "").slice(0, 200)
+              : undefined
           }
           image={portrait || undefined}
           url={`/associacio/socis/${id}`}
@@ -72,7 +76,10 @@ function SociDetail() {
       )}
       {!loading && name && (
         <div className="soci-detail">
-          <nav aria-label={t("soci.directori-breadcrumb")} className="soci-detail__breadcrumb">
+          <nav
+            aria-label={t("soci.directori-breadcrumb")}
+            className="soci-detail__breadcrumb"
+          >
             <Link to="/">AMEBA</Link>
             <span>|</span>
             <Link to="/associacio">{t("menu.associacio")}</Link>
@@ -94,7 +101,10 @@ function SociDetail() {
               {(tags.length > 0 || genres.length > 0) && (
                 <div className="soci-detail__chips">
                   {tags.map((tag) => (
-                    <span key={tag} className="soci-detail__chip soci-detail__chip--fill">
+                    <span
+                      key={tag}
+                      className="soci-detail__chip soci-detail__chip--fill"
+                    >
                       {tag}
                     </span>
                   ))}
@@ -115,11 +125,23 @@ function SociDetail() {
                   <div dangerouslySetInnerHTML={{ __html: description }} />
                 ) : null}
               </div>
-              <div className="soci-detail__portrait">
-                {portrait ? (
-                  <img src={portrait} alt={name} className="soci-detail__portrait-image" />
+              <div
+                className={`soci-detail__portrait${images.length > 1 ? " soci-detail__portrait--masonry" : ""}`}
+              >
+                {images.length > 0 ? (
+                  images.map((image, i) => (
+                    <img
+                      key={image}
+                      src={image}
+                      alt={i === 0 ? name : ""}
+                      className="soci-detail__portrait-image"
+                    />
+                  ))
                 ) : (
-                  <div className="soci-detail__portrait-placeholder" aria-hidden="true" />
+                  <div
+                    className="soci-detail__portrait-placeholder"
+                    aria-hidden="true"
+                  />
                 )}
               </div>
             </div>
@@ -168,11 +190,6 @@ function SociDetail() {
               )}
 
               <div className="soci-detail__footer-row">
-                {memberNumber && (
-                  <span className="soci-detail__member-number">
-                    {t("form.soci")} {memberNumber}
-                  </span>
-                )}
                 <Link to="/associacio/socis" className="soci-detail__link">
                   ← {t("soci.directori-torna")}
                 </Link>

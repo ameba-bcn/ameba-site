@@ -435,11 +435,24 @@
   letter-spacing: 0.02em;
 }
 
+.nou-soci__benefit-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .nou-soci__benefit-text {
   margin: 0;
   font-size: 13.5px;
   line-height: 1.55;
   text-wrap: pretty;
+}
+
+.nou-soci__benefit-text::before {
+  content: "- ";
 }
 
 .nou-soci__benefit-text a {

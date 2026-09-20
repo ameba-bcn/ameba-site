@@ -211,6 +211,10 @@
   min-width: 0;
 }
 
+.lab-detail__body--no-portrait {
+  grid-template-columns: 1fr;
+}
+
 .lab-detail__intro {
   display: flex;
   flex-direction: column;
@@ -232,17 +236,11 @@
   min-width: 0;
 }
 
-.lab-detail__portrait-image,
-.lab-detail__portrait-placeholder {
+.lab-detail__portrait-image {
   width: 100%;
   aspect-ratio: 1 / 1.05;
   object-fit: cover;
   display: block;
-}
-
-.lab-detail__portrait-placeholder {
-  background: rgba(29, 29, 27, 0.08);
-  border: 1px dashed rgba(29, 29, 27, 0.3);
 }
 
 .lab-detail__portrait-caption {
