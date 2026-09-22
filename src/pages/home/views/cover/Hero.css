@@ -58,6 +58,21 @@
   background-color: var(--color-negro);
 }
 
+/* Each line is its own box (so the GSAP reveal can sweep them in
+   independently, staggered — see Hero.jsx) rather than one shared
+   background, so at some widths/zoom levels a hairline of page
+   background shows through between stacked boxes: they sit flush at 0
+   logical gap, but the browser rasterizes each one independently, and
+   at a non-integer device pixel ratio (Windows' common 125%/150%
+   display scaling) each box's edge rounds to the nearest device pixel
+   on its own, occasionally landing a device pixel apart. A 1px vertical
+   overlap forces real geometric overlap instead of an exact touching
+   edge, so there's nothing left to round inconsistently — invisible
+   here since both boxes are the same solid color. */
+.hero__title-line + .hero__title-line {
+  margin-top: -1px;
+}
+
 .hero__title-line-inner {
   display: inline-block;
   font-family: var(--font-display);
