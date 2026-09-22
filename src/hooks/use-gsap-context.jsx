@@ -35,7 +35,6 @@ export default function useGsapContext(effect, deps = [], externalRef) {
       customCleanup?.();
       ctx.revert();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   return scope;
