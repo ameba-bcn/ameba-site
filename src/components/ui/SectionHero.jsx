@@ -47,6 +47,8 @@ export default function SectionHero({
         className="section-hero__outline-title"
         fit={titleFit}
         strokeColor={titleColor}
+        renderAs={variant === "mega" ? "svg" : "text"}
+        strokeWidth={variant === "mega" ? 1 : 2}
       />
       <div className="section-hero__visual">
         <div className="section-hero__image-wrap">
