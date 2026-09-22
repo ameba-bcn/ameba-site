@@ -9,10 +9,20 @@
   -webkit-text-stroke: 2px var(--mega-title-stroke, var(--color-negro));
   pointer-events: none;
   user-select: none;
+  /* Same repaint bug as .outline-heading (see its CSS): -webkit-text-stroke
+     can fail to repaint after a GSAP transform/opacity reveal, leaving the
+     title looking washed-out/translucent until something else forces a
+     repaint — reported on Windows/Chrome here (that component's own note
+     is Safari-specific, but it's the same compositor issue). Promoting to
+     its own layer keeps the stroke painted through use-page-enter's tween. */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 /* El JS mide el ancho natural y encoge (escala uniforme) solo si no cabe */
 .mega-title__text {
   display: inline-block;
   transform-origin: left top;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
