@@ -53,4 +53,10 @@
      una regla CSS le gane la cascada al atributo. */
   font-family: inherit;
   font-weight: inherit;
+  /* "auto" deja que el navegador elija entre nitidez y velocidad, y en
+     algunas combinaciones GPU/driver en Windows opta por una rasterización
+     más barata y con más aliasing, sobre todo con un stroke tan fino
+     (1-2px) sobre glifos gigantes — fuerza siempre el antialiasing de
+     mayor calidad en vez de dejarlo a ese heurístico. */
+  shape-rendering: geometricPrecision;
 }
