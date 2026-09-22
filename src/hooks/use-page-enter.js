@@ -16,11 +16,18 @@ import useGsapContext from "./use-gsap-context";
  * -webkit-text-stroke workaround, see MegaTitle.css) — its glyphs are
  * already split into individual <tspan>s by the component itself
  * (GSAP's SplitText here doesn't support SVG <text>), so the char
- * stagger below just grabs those instead of calling SplitText. Same for
- * the stroke draw-in: it animates the `strokeWidth` SVG attribute
- * instead of the (SVG-inapplicable) `webkitTextStrokeWidth` CSS prop —
- * to whatever value SectionHero already resolved (1 on Retina, 2 on
- * standard-density screens, see its own comment), not a fixed one.
+ * stagger below just grabs those instead of calling SplitText.
+ *
+ * Unlike the old -webkit-text-stroke version (and SectionBand's, which
+ * still uses it), this reveal does NOT also animate the stroke from 0
+ * up to its final width: thin (1-2px) strokes are exactly what alias
+ * badly on standard-density screens (see MegaTitle.css/SectionHero.jsx),
+ * so animating *through* those in-between widths for the whole reveal
+ * read as an ugly flicker — reported live, on top of everything else
+ * already fixed for that same thin-stroke fragility. The stroke just
+ * renders at its resolved final width (the `strokeWidth` SVG attribute,
+ * untouched) from the first frame; only the characters' position
+ * animates.
  *
  * The reveal *timeline* (not the initial gsap.set() hidden state, which
  * stays synchronous so there's no flash of the unstyled final state) is
@@ -50,15 +57,9 @@ export default function usePageEnter(rootRef, sectionClass) {
     const paragraphs = gsap.utils.toArray(".section-hero__text p", root);
 
     const revealTargets = [band, megaText, imageWrap, image, ...dots, ...paragraphs].filter(Boolean);
-    // SectionHero already resolved the right stroke-width (1 on Retina, 2
-    // on standard-density screens — see its own comment) into this
-    // attribute; read it back instead of hardcoding a value here too, so
-    // the draw-in animates to whatever the static/reduced-motion state
-    // already uses.
-    const megaStrokeWidth = megaText ? Number(megaText.getAttribute("stroke-width")) || 1 : 1;
 
     if (prefersReducedMotion()) {
-      gsap.set(revealTargets, { autoAlpha: 1, clipPath: "none", strokeWidth: megaStrokeWidth });
+      gsap.set(revealTargets, { autoAlpha: 1, clipPath: "none" });
       return undefined;
     }
 
@@ -67,7 +68,6 @@ export default function usePageEnter(rootRef, sectionClass) {
     if (megaText) {
       chars = gsap.utils.toArray(megaText.querySelectorAll("tspan"));
       if (megaSvg) gsap.set(megaSvg, { overflow: "hidden" });
-      gsap.set(megaText, { strokeWidth: 0 });
       gsap.set(chars, { yPercent: 100 });
     }
     if (imageWrap) gsap.set(imageWrap, { clipPath: "inset(0 100% 0 0)" });
@@ -99,7 +99,7 @@ export default function usePageEnter(rootRef, sectionClass) {
               onComplete: () => megaSvg && gsap.set(megaSvg, { overflow: "visible" }),
             },
             0.3,
-          ).to(megaText, { strokeWidth: megaStrokeWidth, duration: 0.7 }, 0.3);
+          );
         }
         // A.3 — hero image mask
         if (imageWrap) tl.to(imageWrap, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "expo.out" }, 0.5);
