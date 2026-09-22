@@ -203,6 +203,11 @@ describe("sortSizes", () => {
     expect(result).toEqual(["S - Small", "M - Medium", "L - Large", "XL - Extra Large"]);
   });
 
+  it("orders real variant values (e.g. \"XL unisex\")", () => {
+    const result = sortSizes(["XL unisex", "L unisex", "M unisex", "S unisex"]);
+    expect(result).toEqual(["S unisex", "M unisex", "L unisex", "XL unisex"]);
+  });
+
   it("does not mutate the input array", () => {
     const input = ["L", "S"];
     sortSizes(input);
