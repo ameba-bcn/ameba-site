@@ -103,10 +103,15 @@ export const sortByDate = (array) => {
 // whatever order they were created, not size order.
 const SIZE_ORDER = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
 
+// Variant values can carry more than the size code (e.g. "XL - Extra
+// Large", as split on elsewhere by ProductDetails' `el.split(" ")[0]`)
+// — match on just the leading token, same as what's actually displayed.
+const sizeCode = (size) => size.trim().split(" ")[0].toUpperCase();
+
 export const sortSizes = (sizes = []) => {
   return [...sizes].sort((a, b) => {
-    const indexA = SIZE_ORDER.indexOf(a.toUpperCase());
-    const indexB = SIZE_ORDER.indexOf(b.toUpperCase());
+    const indexA = SIZE_ORDER.indexOf(sizeCode(a));
+    const indexB = SIZE_ORDER.indexOf(sizeCode(b));
     if (indexA === -1 && indexB === -1) return 0;
     if (indexA === -1) return 1;
     if (indexB === -1) return -1;

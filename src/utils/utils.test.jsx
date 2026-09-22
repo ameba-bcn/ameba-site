@@ -196,6 +196,18 @@ describe("sortSizes", () => {
     expect(sortSizes(["UNIC", "M", "S"])).toEqual(["S", "M", "UNIC"]);
   });
 
+  it("orders by the leading size code when values carry extra text", () => {
+    // ProductDetails.jsx displays `el.split(" ")[0]` — variant values can
+    // be more than a bare code (e.g. "XL - Extra Large").
+    const result = sortSizes(["XL - Extra Large", "L - Large", "M - Medium", "S - Small"]);
+    expect(result).toEqual(["S - Small", "M - Medium", "L - Large", "XL - Extra Large"]);
+  });
+
+  it("orders real variant values (e.g. \"XL unisex\")", () => {
+    const result = sortSizes(["XL unisex", "L unisex", "M unisex", "S unisex"]);
+    expect(result).toEqual(["S unisex", "M unisex", "L unisex", "XL unisex"]);
+  });
+
   it("does not mutate the input array", () => {
     const input = ["L", "S"];
     sortSizes(input);
