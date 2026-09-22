@@ -3,6 +3,22 @@ import MegaTitle from "./MegaTitle";
 import DotsColumn from "./DotsColumn";
 import "./SectionHero.css";
 
+// A 1px SVG stroke on the mega title's huge glyphs (up to 320px) anti-
+// aliases fine on a Retina/high-DPI screen, but on a standard-density
+// (1x) display there just aren't enough physical pixels to smooth a
+// line that thin — confirmed on a real Windows/Chromium machine:
+// bumping stroke-width to 2 there fixed it live in devtools, and
+// bumping the OS/browser zoom (which also raises the effective
+// resolution) fixed it too, with no code change. There's no reliable
+// "is this Windows" media feature (or a good reason to special-case an
+// OS rather than the screen that's actually thin-stroke-hostile), so
+// this targets the real condition instead: any 1x-ish display, whatever
+// the OS. Retina users keep the original hairline look.
+const isLowDprDisplay =
+  typeof window !== "undefined" &&
+  typeof window.matchMedia === "function" &&
+  !window.matchMedia("(min-resolution: 2dppx)").matches;
+
 export default function SectionHero({
   title,
   image,
@@ -48,7 +64,7 @@ export default function SectionHero({
         fit={titleFit}
         strokeColor={titleColor}
         renderAs={variant === "mega" ? "svg" : "text"}
-        strokeWidth={variant === "mega" ? 1 : 2}
+        strokeWidth={variant === "mega" ? (isLowDprDisplay ? 2 : 1) : 2}
       />
       <div className="section-hero__visual">
         <div className="section-hero__image-wrap">

@@ -18,7 +18,9 @@ import useGsapContext from "./use-gsap-context";
  * (GSAP's SplitText here doesn't support SVG <text>), so the char
  * stagger below just grabs those instead of calling SplitText. Same for
  * the stroke draw-in: it animates the `strokeWidth` SVG attribute
- * instead of the (SVG-inapplicable) `webkitTextStrokeWidth` CSS prop.
+ * instead of the (SVG-inapplicable) `webkitTextStrokeWidth` CSS prop —
+ * to whatever value SectionHero already resolved (1 on Retina, 2 on
+ * standard-density screens, see its own comment), not a fixed one.
  */
 export default function usePageEnter(rootRef, sectionClass) {
   return useGsapContext(() => {
@@ -35,9 +37,15 @@ export default function usePageEnter(rootRef, sectionClass) {
     const paragraphs = gsap.utils.toArray(".section-hero__text p", root);
 
     const revealTargets = [band, megaText, imageWrap, image, ...dots, ...paragraphs].filter(Boolean);
+    // SectionHero already resolved the right stroke-width (1 on Retina, 2
+    // on standard-density screens — see its own comment) into this
+    // attribute; read it back instead of hardcoding a value here too, so
+    // the draw-in animates to whatever the static/reduced-motion state
+    // already uses.
+    const megaStrokeWidth = megaText ? Number(megaText.getAttribute("stroke-width")) || 1 : 1;
 
     if (prefersReducedMotion()) {
-      gsap.set(revealTargets, { autoAlpha: 1, clipPath: "none", strokeWidth: 1 });
+      gsap.set(revealTargets, { autoAlpha: 1, clipPath: "none", strokeWidth: megaStrokeWidth });
       return;
     }
 
@@ -73,7 +81,7 @@ export default function usePageEnter(rootRef, sectionClass) {
           onComplete: () => megaSvg && gsap.set(megaSvg, { overflow: "visible" }),
         },
         0.3,
-      ).to(megaText, { strokeWidth: 1, duration: 0.7 }, 0.3);
+      ).to(megaText, { strokeWidth: megaStrokeWidth, duration: 0.7 }, 0.3);
     }
     // A.3 — hero image mask
     if (imageWrap) tl.to(imageWrap, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "expo.out" }, 0.5);
