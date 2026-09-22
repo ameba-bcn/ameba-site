@@ -109,10 +109,12 @@
   z-index: 2;
   font-size: clamp(170px, 18.5vw, 320px);
   white-space: nowrap;
-  /* Lighter than a plain 2px stroke so it reads as a background texture,
-     not competing with the real copy in front of it. */
-  -webkit-text-stroke: 1px var(--mega-title-stroke, var(--color-negro));
   opacity: 0.55;
+  /* Renders via MegaTitle's renderAs="svg" (see SectionHero.jsx), with a
+     lighter 1px strokeWidth prop (vs. the 2px default) so it reads as a
+     background texture, not competing with the real copy in front of it —
+     instead of -webkit-text-stroke, which at this font size (up to 320px)
+     rasterizes with visibly jagged edges on non-Retina Windows/Chromium. */
 }
 
 .section-hero--mega .section-hero__image-wrap {

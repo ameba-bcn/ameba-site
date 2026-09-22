@@ -26,3 +26,31 @@
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
+/* renderAs="svg" mode: trazo dibujado con <text> SVG (fill:none + stroke)
+   en vez de -webkit-text-stroke. Evita un bug de Chromium/Skia donde el
+   trazo de -webkit-text-stroke en fuentes gigantes (200px+) se rasteriza
+   con bordes pixelados/serrados en pantallas Windows no-Retina — el
+   stroke SVG pasa por el rasterizador vectorial normal en vez del path
+   específico de trazo de texto, así que se ve liso a cualquier tamaño.
+   También evita el desenfoque del transform:scale() JS del modo texto,
+   ya que aquí es el propio SVG el que reescala su contenido vectorial
+   (viewBox vs. width/height) en vez de reescalar una capa ya rasterizada.
+   Sigue siendo opt-in (no sustituye el modo texto por defecto) porque
+   SectionBand anima .mega-title__text directamente y ese selector no
+   existe en este modo — ver use-page-enter.js para el equivalente SVG
+   que sí anima (.mega-title__svg-text). */
+.mega-title__svg {
+  display: block;
+  overflow: visible;
+}
+
+.mega-title__svg text {
+  fill: none;
+  stroke: var(--mega-title-stroke, var(--color-negro));
+  /* stroke-width viene del atributo SVG (prop `strokeWidth`, default 2),
+     no de CSS — así use-page-enter.js puede animarlo con GSAP sin que
+     una regla CSS le gane la cascada al atributo. */
+  font-family: inherit;
+  font-weight: inherit;
+}

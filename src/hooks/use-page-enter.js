@@ -1,4 +1,4 @@
-import { gsap, SplitText, DESKTOP_QUERY, prefersReducedMotion } from "../utils/gsapSetup";
+import { gsap, DESKTOP_QUERY, prefersReducedMotion } from "../utils/gsapSetup";
 import useGsapContext from "./use-gsap-context";
 
 /**
@@ -11,6 +11,14 @@ import useGsapContext from "./use-gsap-context";
  * PageLayout root itself isn't ref-able, so its "curtain" band is found
  * by class name instead (each page has a distinct `page-layout--x` class,
  * so this is safe).
+ *
+ * The outline title renders via MegaTitle's renderAs="svg" (jagged
+ * -webkit-text-stroke workaround, see MegaTitle.css) — its glyphs are
+ * already split into individual <tspan>s by the component itself
+ * (GSAP's SplitText here doesn't support SVG <text>), so the char
+ * stagger below just grabs those instead of calling SplitText. Same for
+ * the stroke draw-in: it animates the `strokeWidth` SVG attribute
+ * instead of the (SVG-inapplicable) `webkitTextStrokeWidth` CSS prop.
  */
 export default function usePageEnter(rootRef, sectionClass) {
   return useGsapContext(() => {
@@ -19,7 +27,8 @@ export default function usePageEnter(rootRef, sectionClass) {
 
     const band = document.querySelector(`.page-layout--${sectionClass}`);
     const heroSection = root.querySelector(".section-hero");
-    const megaText = root.querySelector(".section-hero .mega-title__text");
+    const megaSvg = root.querySelector(".section-hero .mega-title__svg");
+    const megaText = root.querySelector(".section-hero .mega-title__svg-text");
     const imageWrap = root.querySelector(".section-hero__image-wrap");
     const image = root.querySelector(".section-hero__image");
     const dots = gsap.utils.toArray(".section-hero__dots .dots-column__dot", root);
@@ -28,15 +37,16 @@ export default function usePageEnter(rootRef, sectionClass) {
     const revealTargets = [band, megaText, imageWrap, image, ...dots, ...paragraphs].filter(Boolean);
 
     if (prefersReducedMotion()) {
-      gsap.set(revealTargets, { autoAlpha: 1, clipPath: "none", webkitTextStrokeWidth: "1px" });
+      gsap.set(revealTargets, { autoAlpha: 1, clipPath: "none", strokeWidth: 1 });
       return;
     }
 
     if (band) gsap.set(band, { clipPath: "inset(0 0 100% 0)" });
     let chars = [];
     if (megaText) {
-      chars = new SplitText(megaText, { type: "chars" }).chars;
-      gsap.set(megaText, { overflow: "hidden", webkitTextStrokeWidth: "0px" });
+      chars = gsap.utils.toArray(megaText.querySelectorAll("tspan"));
+      if (megaSvg) gsap.set(megaSvg, { overflow: "hidden" });
+      gsap.set(megaText, { strokeWidth: 0 });
       gsap.set(chars, { yPercent: 100 });
     }
     if (imageWrap) gsap.set(imageWrap, { clipPath: "inset(0 100% 0 0)" });
@@ -49,11 +59,21 @@ export default function usePageEnter(rootRef, sectionClass) {
     if (band) tl.to(band, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.6, ease: "expo.out" }, 0);
     // A.2 — outline title, split by character
     if (megaText) {
-      tl.to(chars, { yPercent: 0, duration: 0.6, stagger: 0.045, ease: "expo.out" }, 0.3).to(
-        megaText,
-        { webkitTextStrokeWidth: "1px", duration: 0.7 },
+      tl.to(
+        chars,
+        {
+          yPercent: 0,
+          duration: 0.6,
+          stagger: 0.045,
+          ease: "expo.out",
+          // Chars start below their final position (yPercent:100) —
+          // clip while they're offscreen-below so they don't peek
+          // through the natural stroke bleed margin (see .mega-title__svg
+          // in MegaTitle.css), then release it back for that margin.
+          onComplete: () => megaSvg && gsap.set(megaSvg, { overflow: "visible" }),
+        },
         0.3,
-      );
+      ).to(megaText, { strokeWidth: 1, duration: 0.7 }, 0.3);
     }
     // A.3 — hero image mask
     if (imageWrap) tl.to(imageWrap, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "expo.out" }, 0.5);
