@@ -21,11 +21,24 @@ import useGsapContext from "./use-gsap-context";
  * instead of the (SVG-inapplicable) `webkitTextStrokeWidth` CSS prop —
  * to whatever value SectionHero already resolved (1 on Retina, 2 on
  * standard-density screens, see its own comment), not a fixed one.
+ *
+ * The reveal *timeline* (not the initial gsap.set() hidden state, which
+ * stays synchronous so there's no flash of the unstyled final state) is
+ * deferred one requestAnimationFrame: these pages mount a lot of GSAP/
+ * ScrollTrigger setup at once, and on a loaded real machine that
+ * synchronous burst can eat into this timeline's ~1s window before the
+ * browser gets a single chance to paint it — GSAP times tweens off the
+ * real clock, not frame count, so if the first paint lands after the
+ * tween "should" already be done, it just snaps straight to the end,
+ * with nothing visibly animating. Reported on a real machine and
+ * reproduced locally via CPU throttling; waiting one rAF (letting that
+ * mount burst finish and the hidden state actually paint first) fixed
+ * it in the same repro.
  */
 export default function usePageEnter(rootRef, sectionClass) {
-  return useGsapContext(() => {
+  return useGsapContext((ctx) => {
     const root = rootRef.current;
-    if (!root) return;
+    if (!root) return undefined;
 
     const band = document.querySelector(`.page-layout--${sectionClass}`);
     const heroSection = root.querySelector(".section-hero");
@@ -46,7 +59,7 @@ export default function usePageEnter(rootRef, sectionClass) {
 
     if (prefersReducedMotion()) {
       gsap.set(revealTargets, { autoAlpha: 1, clipPath: "none", strokeWidth: megaStrokeWidth });
-      return;
+      return undefined;
     }
 
     if (band) gsap.set(band, { clipPath: "inset(0 0 100% 0)" });
@@ -62,56 +75,68 @@ export default function usePageEnter(rootRef, sectionClass) {
     gsap.set(dots, { scale: 0, autoAlpha: 0 });
     gsap.set(paragraphs, { y: 16, autoAlpha: 0 });
 
-    const tl = gsap.timeline();
-    // A.1 — background band "curtain"
-    if (band) tl.to(band, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.6, ease: "expo.out" }, 0);
-    // A.2 — outline title, split by character
-    if (megaText) {
-      tl.to(
-        chars,
-        {
-          yPercent: 0,
-          duration: 0.6,
-          stagger: 0.045,
-          ease: "expo.out",
-          // Chars start below their final position (yPercent:100) —
-          // clip while they're offscreen-below so they don't peek
-          // through the natural stroke bleed margin (see .mega-title__svg
-          // in MegaTitle.css), then release it back for that margin.
-          onComplete: () => megaSvg && gsap.set(megaSvg, { overflow: "visible" }),
-        },
-        0.3,
-      ).to(megaText, { strokeWidth: megaStrokeWidth, duration: 0.7 }, 0.3);
-    }
-    // A.3 — hero image mask
-    if (imageWrap) tl.to(imageWrap, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "expo.out" }, 0.5);
-    if (image) tl.to(image, { scale: 1, duration: 0.9, ease: "expo.out" }, 0.5);
-    // A.4 — dots column
-    if (dots.length) tl.to(dots, { scale: 1, autoAlpha: 1, duration: 0.4, stagger: 0.05, ease: "power2.out" }, 0.9);
-    // A.5 — paragraphs
-    if (paragraphs.length) {
-      tl.to(paragraphs, { y: 0, autoAlpha: 1, duration: 0.5, stagger: 0.08, ease: "power2.out" }, 1.2);
-    }
+    let cancelled = false;
+    const rafId = requestAnimationFrame(() => {
+      if (cancelled) return;
+      ctx.add(() => {
+        const tl = gsap.timeline();
+        // A.1 — background band "curtain"
+        if (band) tl.to(band, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.6, ease: "expo.out" }, 0);
+        // A.2 — outline title, split by character
+        if (megaText) {
+          tl.to(
+            chars,
+            {
+              yPercent: 0,
+              duration: 0.6,
+              stagger: 0.045,
+              ease: "expo.out",
+              // Chars start below their final position (yPercent:100) —
+              // clip while they're offscreen-below so they don't peek
+              // through the natural stroke bleed margin (see
+              // .mega-title__svg in MegaTitle.css), then release it back
+              // for that margin.
+              onComplete: () => megaSvg && gsap.set(megaSvg, { overflow: "visible" }),
+            },
+            0.3,
+          ).to(megaText, { strokeWidth: megaStrokeWidth, duration: 0.7 }, 0.3);
+        }
+        // A.3 — hero image mask
+        if (imageWrap) tl.to(imageWrap, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.9, ease: "expo.out" }, 0.5);
+        if (image) tl.to(image, { scale: 1, duration: 0.9, ease: "expo.out" }, 0.5);
+        // A.4 — dots column
+        if (dots.length) tl.to(dots, { scale: 1, autoAlpha: 1, duration: 0.4, stagger: 0.05, ease: "power2.out" }, 0.9);
+        // A.5 — paragraphs
+        if (paragraphs.length) {
+          tl.to(paragraphs, { y: 0, autoAlpha: 1, duration: 0.5, stagger: 0.08, ease: "power2.out" }, 1.2);
+        }
 
-    // B — title drift with scroll, all breakpoints
-    if (megaText && heroSection) {
-      gsap.to(megaText, {
-        xPercent: -8,
-        autoAlpha: 0.35,
-        ease: "none",
-        scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 },
-      });
-    }
+        // B — title drift with scroll, all breakpoints
+        if (megaText && heroSection) {
+          gsap.to(megaText, {
+            xPercent: -8,
+            autoAlpha: 0.35,
+            ease: "none",
+            scrollTrigger: { trigger: heroSection, start: "top top", end: "bottom top", scrub: 1 },
+          });
+        }
 
-    // C — hero parallax, desktop only (no scrub/pins on mobile per §8)
-    gsap.matchMedia().add(DESKTOP_QUERY, () => {
-      if (image && heroSection) {
-        gsap.to(image, {
-          yPercent: 10,
-          ease: "none",
-          scrollTrigger: { trigger: heroSection, start: "top bottom", end: "bottom top", scrub: true },
+        // C — hero parallax, desktop only (no scrub/pins on mobile per §8)
+        gsap.matchMedia().add(DESKTOP_QUERY, () => {
+          if (image && heroSection) {
+            gsap.to(image, {
+              yPercent: 10,
+              ease: "none",
+              scrollTrigger: { trigger: heroSection, start: "top bottom", end: "bottom top", scrub: true },
+            });
+          }
         });
-      }
+      });
     });
+
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(rafId);
+    };
   }, [], rootRef);
 }
