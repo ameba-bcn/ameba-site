@@ -47,7 +47,7 @@ describe("revamp smoke", () => {
     expect(screen.getByText("Associació")).toBeInTheDocument();
     expect(screen.getByText("Festivals")).toBeInTheDocument();
     expect(screen.getByText("Lab")).toBeInTheDocument();
-    expect(screen.getByText("Shop")).toBeInTheDocument();
+    expect(screen.getByText("Botiga")).toBeInTheDocument();
   });
 
   it("renders the closable PromoBar (shared with Home) with an accessible close button", () => {

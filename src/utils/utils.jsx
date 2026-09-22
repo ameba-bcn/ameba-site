@@ -99,6 +99,21 @@ export const sortByDate = (array) => {
   return array;
 };
 
+// Canonical apparel size order — variants come back from the API in
+// whatever order they were created, not size order.
+const SIZE_ORDER = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
+
+export const sortSizes = (sizes = []) => {
+  return [...sizes].sort((a, b) => {
+    const indexA = SIZE_ORDER.indexOf(a.toUpperCase());
+    const indexB = SIZE_ORDER.indexOf(b.toUpperCase());
+    if (indexA === -1 && indexB === -1) return 0;
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    return indexA - indexB;
+  });
+};
+
 export const sortByProperty = (array, property, asc = true) => {
   if (asc) {
     return array.sort((a, b) =>

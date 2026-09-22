@@ -1,15 +1,25 @@
 import React, { useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import Icon from "../ui/Icon";
 import { buildCalendarGrid, dateKey, isToday } from "./calendarGrid";
 import { gsap, prefersReducedMotion } from "../../utils/gsapSetup";
 import useGsapContext from "../../hooks/use-gsap-context";
+import "../tooltip/Tooltip.css";
 import "./LabCalendar.css";
 
 const WEEKDAY_KEYS = ["dl", "dt", "dc", "dj", "dv", "ds", "dm"];
 
-export default function LabCalendar({ activityDateSet, selectedDate, onSelectDate }) {
-  const [t] = useTranslation("translation");
+export default function LabCalendar({
+  activityDateSet,
+  festivalDateSet = new Set(),
+  activityTitlesByDate = new Map(),
+  festivalTitlesByDate = new Map(),
+  selectedDate,
+  onSelectDate,
+}) {
+  const [t, i18next] = useTranslation("translation");
+  const locale = i18next.language === "es" ? "es-ES" : "ca-ES";
   const [month, setMonth] = useState(() => new Date(new Date().getFullYear(), new Date().getMonth(), 1));
   const direction = useRef(1);
   const gridRef = useRef(null);
@@ -21,8 +31,9 @@ export default function LabCalendar({ activityDateSet, selectedDate, onSelectDat
     const currentYear = new Date().getFullYear();
     const set = new Set([currentYear, month.getFullYear()]);
     activityDateSet.forEach((key) => set.add(Number(key.slice(0, 4))));
+    festivalDateSet.forEach((key) => set.add(Number(key.slice(0, 4))));
     return Array.from(set).sort((a, b) => a - b);
-  }, [activityDateSet, month]);
+  }, [activityDateSet, festivalDateSet, month]);
 
   const changeMonth = (delta) => {
     direction.current = delta;
@@ -87,7 +98,7 @@ export default function LabCalendar({ activityDateSet, selectedDate, onSelectDat
           <Icon icon="arrowLeft" width="18" height="18" />
         </button>
         <span className="lab-calendar__month">
-          {month.toLocaleDateString("ca-ES", { month: "long" })}
+          {month.toLocaleDateString(locale, { month: "long" })}
         </span>
         <button type="button" aria-label="Mes següent" onClick={() => changeMonth(1)}>
           <Icon icon="arrowRight" width="18" height="18" />
@@ -113,20 +124,46 @@ export default function LabCalendar({ activityDateSet, selectedDate, onSelectDat
         ))}
         {cells.map((cell) => {
           const hasActivity = activityDateSet.has(cell.key);
+          const isFestival = festivalDateSet.has(cell.key);
           const isSelected = cell.key === selectedKey;
           const today = isToday(cell.key);
+          const titles = (
+            (isFestival ? festivalTitlesByDate : activityTitlesByDate).get(cell.key) || []
+          ).join(", ");
+
+          // `.lab-calendar__day` is already `position: relative`, so the
+          // tooltip span (from Tooltip.css) can hang directly off it —
+          // no extra wrapper div, which would otherwise become the real
+          // grid cell in place of the button/link and break sizing.
           const classes = [
             "lab-calendar__day",
             hasActivity ? "lab-calendar__day--active" : "",
+            isFestival ? "lab-calendar__day--festival" : "",
             !cell.inCurrentMonth ? "lab-calendar__day--muted" : "",
             isSelected ? "lab-calendar__day--selected" : "",
+            titles ? "tooltip-wrapper" : "",
           ]
             .filter(Boolean)
             .join(" ");
 
+          if (isFestival) {
+            return (
+              <Link
+                key={cell.key}
+                to="/festivals"
+                className={classes}
+                aria-label={`${cell.date.toLocaleDateString(locale)} — dia de festival`}
+              >
+                {cell.date.getDate()}
+                {today && <span className="lab-calendar__today-dot" aria-hidden="true" />}
+                {titles && <span className="tooltipSpan">{titles}</span>}
+              </Link>
+            );
+          }
+
           if (!hasActivity) {
             return (
-              <div key={cell.key} className={classes} title={cell.date.toLocaleDateString("ca-ES")}>
+              <div key={cell.key} className={classes} title={cell.date.toLocaleDateString(locale)}>
                 {cell.date.getDate()}
                 {today && <span className="lab-calendar__today-dot" aria-hidden="true" />}
               </div>
@@ -140,14 +177,25 @@ export default function LabCalendar({ activityDateSet, selectedDate, onSelectDat
               className={classes}
               onClick={() => onSelectDate(isSelected ? null : cell.date)}
               aria-pressed={isSelected}
-              aria-label={`${cell.date.toLocaleDateString("ca-ES")} — dia amb activitat`}
+              aria-label={`${cell.date.toLocaleDateString(locale)} — dia amb activitat`}
             >
               {cell.date.getDate()}
               {today && <span className="lab-calendar__today-dot" aria-hidden="true" />}
+              {titles && <span className="tooltipSpan">{titles}</span>}
             </button>
           );
         })}
       </div>
+      {selectedDate && (
+        <button
+          type="button"
+          className="lab-calendar__clear"
+          onClick={() => onSelectDate(null)}
+        >
+          <Icon icon="clear" width="14" height="14" />
+          {t("lab.veure-tota-agenda")}
+        </button>
+      )}
     </div>
   );
 }

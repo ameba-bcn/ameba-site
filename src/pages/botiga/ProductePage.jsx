@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import axiosInstance from "../../axios";
 import { API_URL } from "../../utils/constants";
-import { formatPrice, urlify } from "../../utils/utils";
+import { formatPrice, urlify, sortSizes } from "../../utils/utils";
 import { gsap, prefersReducedMotion } from "../../utils/gsapSetup";
 import useCartStore from "../../stores/useCartStore";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
@@ -75,7 +75,7 @@ function ProductePage() {
         available.push(v.attributes[0].value.toUpperCase());
       }
     });
-    setSizes(available);
+    setSizes(sortSizes(available));
   }, [product]);
 
   const jsonLd = useMemo(() => buildProductJsonLd(product, id), [product, id]);

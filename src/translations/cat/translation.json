@@ -97,7 +97,7 @@
     "associacio": "Associació",
     "festivals": "Festivals",
     "lab": "Lab",
-    "shop": "Shop",
+    "shop": "Botiga",
     "idioma": "Canvia l'idioma",
     "el-meu-projecte": "El meu projecte",
     "seccions": "Seccions",
@@ -226,6 +226,9 @@
     "calendari": "Calendari",
     "propera-activitat": "Propera activitat",
     "activitats-en-curs": "Activitats en curs",
+    "activitats-passades": "Activitats passades",
+    "sense-activitats-en-curs": "Actualment estem treballant en la propera agenda del curs, en uns dies afegirem les properes activitats.",
+    "veure-tota-agenda": "Veure tota l'agenda",
     "cap-activitat-propera": "No hi ha cap activitat propera",
     "calendar": {
       "dl": "DL",
@@ -277,7 +280,7 @@
       },
       "per-que": {
         "title": "PER QUÈ?",
-        "text": "Perquè l'escena electrònica local necessita estructura pròpia: espais, recursos i suport mutu que no depenguin de cap discogràfica ni marca."
+        "text": "Perquè l'escena electrònica local necessita estructura pròpia: espais, recursos i suport mutu que no depenguin de cap marca."
       }
     },
     "cta": {
