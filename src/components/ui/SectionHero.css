@@ -110,11 +110,14 @@
   font-size: clamp(170px, 18.5vw, 320px);
   white-space: nowrap;
   opacity: 0.55;
-  /* Renders via MegaTitle's renderAs="svg" (see SectionHero.jsx), with a
-     lighter 1px strokeWidth prop (vs. the 2px default) so it reads as a
-     background texture, not competing with the real copy in front of it —
-     instead of -webkit-text-stroke, which at this font size (up to 320px)
-     rasterizes with visibly jagged edges on non-Retina Windows/Chromium. */
+  /* Renders via MegaTitle's renderAs="svg" (see SectionHero.jsx) instead
+     of -webkit-text-stroke, which at this font size (up to 320px)
+     rasterizes with visibly jagged edges on standard-density Windows/
+     Chromium. Its strokeWidth prop is 1 on Retina screens (lighter, so
+     it reads as a background texture, not competing with the real copy
+     in front of it) but bumped to 2 on standard-density ones — even the
+     SVG stroke anti-aliases badly at 1px there; confirmed live on a real
+     Windows machine (see SectionHero.jsx's isLowDprDisplay comment). */
 }
 
 .section-hero--mega .section-hero__image-wrap {
