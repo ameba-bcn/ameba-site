@@ -33,4 +33,17 @@ export function activityDateSet(activities = []) {
   return new Set(activities.map((a) => dateKey(new Date(a.datetime))));
 }
 
+// "YYYY-MM-DD" -> event names on that date, for the calendar-cell tooltip.
+export function titlesByDate(activities = []) {
+  const map = new Map();
+  activities.forEach((a) => {
+    const key = dateKey(new Date(a.datetime));
+    const title = a.header || a.name;
+    if (!title) return;
+    if (!map.has(key)) map.set(key, []);
+    map.get(key).push(title);
+  });
+  return map;
+}
+
 export const isToday = (key) => key === dateKey(new Date());

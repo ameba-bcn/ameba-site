@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import useDataStore from "../../stores/useDataStore";
-import { selectLabActivities } from "../../selectors/festivals";
+import { selectLabActivities, selectFestivals } from "../../selectors/festivals";
 import {
   formatPrice,
   priceMayDiscount,
@@ -21,7 +21,11 @@ import AmebaCard from "../../components/ui/AmebaCard";
 import LoadMoreButton from "../../components/ui/LoadMoreButton";
 import LabCalendar from "../../components/lab/LabCalendar";
 import NextActivityCard from "../../components/lab/NextActivityCard";
-import { activityDateSet, dateKey } from "../../components/lab/calendarGrid";
+import {
+  activityDateSet,
+  titlesByDate,
+  dateKey,
+} from "../../components/lab/calendarGrid";
 import heroImage from "../../assets/images/home/home3.jpg";
 import { gsap, Flip, prefersReducedMotion } from "../../utils/gsapSetup";
 import usePageEnter from "../../hooks/use-page-enter";
@@ -35,6 +39,7 @@ function Lab() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedDate, setSelectedDate] = useState(null);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [visiblePastCount, setVisiblePastCount] = useState(PAGE_SIZE);
   const rootRef = useRef(null);
   const flipState = useRef(null);
 
@@ -89,6 +94,17 @@ function Lab() {
     [activities],
   );
 
+  const festivalDates = useMemo(
+    () => activityDateSet(selectFestivals(agenda)),
+    [agenda],
+  );
+
+  const activityTitles = useMemo(() => titlesByDate(activities), [activities]);
+  const festivalTitles = useMemo(
+    () => titlesByDate(selectFestivals(agenda)),
+    [agenda],
+  );
+
   // Order of appearance follows the render (Tallers, Xerrades, Itineraris,
   // Club Lectura, Radio, Streams, Jams) only for types the backend actually
   // returns — never hardcoded, per the doc.
@@ -99,7 +115,7 @@ function Lab() {
 
   const filtered = useMemo(
     () =>
-      sortByDate(activities)
+      activities
         .filter((a) => (activeType ? a.type === activeType : true))
         .filter((a) =>
           selectedDate
@@ -109,16 +125,61 @@ function Lab() {
     [activities, activeType, selectedDate],
   );
 
-  const visibleItems = filtered.slice(0, visibleCount);
+  // Upcoming activities lead, soonest first; anything already past drops
+  // into its own grid below, most recent first.
+  const { upcomingItems, pastItems } = useMemo(() => {
+    const now = new Date();
+    const upcoming = [];
+    const past = [];
+    filtered.forEach((a) => {
+      (new Date(a.datetime) >= now ? upcoming : past).push(a);
+    });
+    return {
+      upcomingItems: sortByDate(upcoming).reverse(),
+      pastItems: sortByDate(past),
+    };
+  }, [filtered]);
 
+  const visibleUpcoming = upcomingItems.slice(0, visibleCount);
+  const visiblePast = pastItems.slice(0, visiblePastCount);
+
+  // FilterBar's allLabel is null here, so onSelect(null) only ever comes
+  // from "Borrar filtres" — safe to treat it as clearing the calendar-day
+  // filter too, not just the type.
   const setType = (value) => {
     captureFlip();
     const next = new URLSearchParams(searchParams);
     if (value) next.set("tipus", value);
     else next.delete("tipus");
     setSearchParams(next);
+    if (!value) setSelectedDate(null);
     setVisibleCount(PAGE_SIZE);
+    setVisiblePastCount(PAGE_SIZE);
   };
+
+  const renderActivityCard = (a) => (
+    <AmebaCard
+      key={a.id}
+      to={`/lab/${a.id}`}
+      image={a.images?.[0]}
+      imageAlt={a.header || a.name}
+      badge={`${formatISODateToDate(a.datetime)} - ${formatDateToHour(a.datetime)}h`}
+      title={a.header || a.name}
+      highlight={
+        a.price === 0
+          ? t("events.button.gratis").toUpperCase()
+          : a.price
+            ? priceMayDiscount(
+                formatPrice(a.price),
+                a.discount,
+                null,
+                t("form.descompte"),
+              )
+            : null
+      }
+      meta={a.address}
+    />
+  );
 
   return (
     <PageLayout section="lab" promo loading={isEventsLoading}>
@@ -150,11 +211,15 @@ function Lab() {
             </OutlineHeading>
             <LabCalendar
               activityDateSet={activityDates}
+              festivalDateSet={festivalDates}
+              activityTitlesByDate={activityTitles}
+              festivalTitlesByDate={festivalTitles}
               selectedDate={selectedDate}
               onSelectDate={(d) => {
                 captureFlip();
                 setSelectedDate(d);
                 setVisibleCount(PAGE_SIZE);
+                setVisiblePastCount(PAGE_SIZE);
               }}
             />
           </div>
@@ -184,35 +249,37 @@ function Lab() {
           <div className="lab__empty">{t("general.sense-resultats")}</div>
         ) : (
           <>
-            <CardGrid className="lab__card-grid">
-              {visibleItems.map((a) => (
-                <AmebaCard
-                  key={a.id}
-                  to={`/lab/${a.id}`}
-                  image={a.images?.[0]}
-                  imageAlt={a.header || a.name}
-                  badge={`${formatISODateToDate(a.datetime)} - ${formatDateToHour(a.datetime)}h`}
-                  title={a.header || a.name}
-                  highlight={
-                    a.price === 0
-                      ? t("events.button.gratis").toUpperCase()
-                      : a.price
-                        ? priceMayDiscount(
-                            formatPrice(a.price),
-                            a.discount,
-                            null,
-                            t("form.descompte"),
-                          )
-                        : null
-                  }
-                  meta={a.address}
-                />
-              ))}
-            </CardGrid>
-            {visibleCount < filtered.length && (
-              <LoadMoreButton
-                onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
-              />
+            {upcomingItems.length > 0 ? (
+              <>
+                <CardGrid className="lab__card-grid">
+                  {visibleUpcoming.map((a) => renderActivityCard(a))}
+                </CardGrid>
+                {visibleCount < upcomingItems.length && (
+                  <LoadMoreButton
+                    onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+                  />
+                )}
+              </>
+            ) : (
+              <div className="lab__empty">
+                {t("lab.sense-activitats-en-curs")}
+              </div>
+            )}
+
+            {pastItems.length > 0 && (
+              <>
+                <OutlineHeading as="h2" className="lab__section-title">
+                  {t("lab.activitats-passades")}
+                </OutlineHeading>
+                <CardGrid className="lab__card-grid">
+                  {visiblePast.map((a) => renderActivityCard(a))}
+                </CardGrid>
+                {visiblePastCount < pastItems.length && (
+                  <LoadMoreButton
+                    onClick={() => setVisiblePastCount((c) => c + PAGE_SIZE)}
+                  />
+                )}
+              </>
             )}
           </>
         )}

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { productKinds } from "../../utils/constants";
-import { urlify } from "../../utils/utils";
+import { urlify, sortSizes } from "../../utils/utils";
 import ImageCarousel from "../images/ImageCarousel";
 import Icon from "../ui/Icon";
 import CartToast from "../toast/CartToast";
@@ -74,7 +74,7 @@ const CardView = ({ productData = {}, kind = "", handleAddClick }) => {
         available.push(element.attributes[0].value.toUpperCase());
       }
     });
-    setSizes(available);
+    setSizes(sortSizes(available));
   }, [variants]);
 
   const handleCopyLink = () => {

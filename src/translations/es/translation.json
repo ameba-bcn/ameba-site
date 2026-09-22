@@ -97,7 +97,7 @@
     "associacio": "Asociación",
     "festivals": "Festivales",
     "lab": "Lab",
-    "shop": "Shop",
+    "shop": "Tienda",
     "idioma": "Cambia el idioma",
     "el-meu-projecte": "Mi proyecto",
     "seccions": "Secciones",
@@ -171,10 +171,10 @@
     "soci-curt": "hazte socio/a",
     "soci-llarg-pt1": "hazte socio/a de ameba desde ",
     "soci-llarg-pt2": "/año",
-    "promo-text-1": "Hazte ",
+    "promo-text-1": "¡Hazte ",
     "promo-text-bold": "socio/socia de Ameba",
     "promo-text-2": " y disfruta de las ventajas de formar parte de nuestra comunidad!",
-    "promo-cta": ">>>>>> Descubre más haciendo click aquí!",
+    "promo-cta": ">>>>>> ¡Descubre más haciendo click aquí!",
     "promo-text-mobile": "Hazte socio/a de Ameba →",
     "promo-close": "Cierra el banner"
   },
@@ -226,6 +226,9 @@
     "calendari": "Calendario",
     "propera-activitat": "Próxima actividad",
     "activitats-en-curs": "Actividades en curso",
+    "activitats-passades": "Actividades pasadas",
+    "sense-activitats-en-curs": "Actualmente estamos preparando la próxima agenda del curso, en unos días añadiremos las próximas actividades.",
+    "veure-tota-agenda": "Ver toda la agenda",
     "cap-activitat-propera": "No hay ninguna actividad próxima",
     "localitzacio": "Ubicación",
     "dia": "Día",
@@ -277,17 +280,17 @@
       },
       "per-que": {
         "title": "¿POR QUÉ?",
-        "text": "Porque la escena electrónica local necesita estructura propia: espacios, recursos y apoyo mutuo que no dependan de ninguna discográfica ni marca."
+        "text": "Porque la escena electrónica local necesita estructura propia: espacios, recursos y apoyo mutuo que no dependan de ninguna marca."
       }
     },
     "cta": {
-      "title": "HAZTE SOCIO/SOCIA DE AMEBA PER 50€ ANUALES",
+      "title": "¡HAZTE SOCIO/SOCIA DE AMEBA PER 50€ ANUALES",
       "bullet1": "¿Quieres formar parte de esta comunidad?",
       "bullet2": "Descubre las ventajas de formar parte de la comunidad.",
       "button": "¡INSCRÍBETE!"
     },
     "since": {
-      "title": "DESDE 2014 DANDO SOPORTE AL TALENTO LOCAL DE LA CIUDAD!",
+      "title": "¡DESDE 2014 DANDO SOPORTE AL TALENTO LOCAL DE LA CIUDAD!",
       "text": "Descubre los proyectos personales de nuestros socios en nuestro directorio",
       "button": "PROYECTOS SOCIOS/SOCIAS"
     },
@@ -375,7 +378,7 @@
   "home": {
     "meta": "AMEBA — Asociación, Festivales, Lab y Shop. Desde 2014 dando apoyo al talento local de Barcelona.",
     "hero": {
-      "title-1": "DESDE 2014",
+      "title-1": "¡DESDE 2014",
       "title-2": "DANDO APOYO",
       "title-3": "AL TALENTO LOCAL",
       "title-4": "DE LA CIUDAD!",

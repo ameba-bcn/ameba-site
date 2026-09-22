@@ -92,6 +92,7 @@ export default function AmebaCard({
           padding="16px 16px 0"
           color="var(--color-cream)"
           fontStyle="normal"
+          overflow="visible"
         >
           {title}
         </AmebaCardTitle>
