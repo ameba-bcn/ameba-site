@@ -241,6 +241,18 @@ const applyDiscount = (item_variants, discountCode) => {
     });
 };
 
+const setDeliveryMethod = (payload) => {
+  return axiosInstance
+    .patch(`${API_URL}carts/current/`, payload, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("access")}`,
+      },
+    })
+    .then((response) => {
+      return response?.data;
+    });
+};
+
 export default {
   addInCart,
   deleteFullCart,
@@ -250,4 +262,5 @@ export default {
   getCart,
   deleteCartAfterSuccesfullCheckout,
   applyDiscount,
+  setDeliveryMethod,
 };

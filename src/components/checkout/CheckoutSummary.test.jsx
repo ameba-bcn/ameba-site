@@ -8,6 +8,7 @@ import {
   mockCartRegular,
   mockCartMultipleItems,
   mockCartDiscounted,
+  mockCartMember,
 } from "../../test/mocks/data";
 
 describe("CheckoutSummary - item list", () => {
@@ -80,9 +81,33 @@ describe("CheckoutSummary - discount computation", () => {
 });
 
 describe("CheckoutSummary - pickup note", () => {
-  it("always renders the pickup section regardless of cart contents", () => {
+  it("renders the pickup section when the cart has articles", () => {
     useCartStore.setState({ cart_data: mockCartRegular });
     renderWithProviders(<CheckoutSummary />);
     expect(screen.getByText("Recollida")).toBeInTheDocument();
+  });
+
+  it("hides the pickup/shipping section for a cart with no articles", () => {
+    useCartStore.setState({ cart_data: mockCartMember });
+    const { container } = renderWithProviders(<CheckoutSummary />);
+    expect(container.querySelector(".checkout-summary__pickup")).not.toBeInTheDocument();
+  });
+
+  it("shows the shipping address and surcharge row when delivery_method is shipping", () => {
+    useCartStore.setState({
+      cart_data: {
+        ...mockCartRegular,
+        delivery_method: "shipping",
+        shipping_address: "Carrer Fictici, 1",
+        shipping_postal_code: "08001",
+        shipping_city: "Barcelona",
+      },
+    });
+    const { container } = renderWithProviders(<CheckoutSummary />);
+    expect(screen.getAllByText("Enviament").length).toBeGreaterThan(0);
+    expect(screen.getByText("+7,00 €")).toBeInTheDocument();
+    expect(
+      container.querySelector(".checkout-summary__pickup"),
+    ).toHaveTextContent("Carrer Fictici, 1, 08001 Barcelona");
   });
 });

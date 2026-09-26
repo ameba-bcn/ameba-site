@@ -75,6 +75,22 @@ export const getErrors = () => ({
       "Título: este campo es obligatorio",
     ),
   },
+  POSTAL_CODE: {
+    REQUIRED: msg(
+      "Codi postal: aquest camp es obligatori",
+      "Código postal: este campo es obligatorio",
+    ),
+    FORMAT: msg(
+      "Codi postal: només fem enviaments a l'Espanya peninsular",
+      "Código postal: solo hacemos envíos a la España peninsular",
+    ),
+  },
+  DELIVERY_METHOD: {
+    REQUIRED: msg(
+      "Selecciona un mètode d'entrega",
+      "Selecciona un método de entrega",
+    ),
+  },
   REPEAT_PASSWORD: {
     REQUIRED: msg(
       "Repeteix la contrasenya: aquest camp es obligatori",

@@ -13,12 +13,21 @@ vi.mock("./TableProducts", () => ({
 vi.mock("../forms/DiscountForm/DiscountCode", () => ({
   default: () => <div data-testid="discount-code">DiscountCode</div>,
 }));
+vi.mock("../forms/DeliveryForm/DeliveryMethod", () => ({
+  default: () => <div data-testid="delivery-method">DeliveryMethod</div>,
+}));
 
 describe("Review", () => {
   it("renders TableProducts component", () => {
     useCartStore.setState({ cart_data: mockCartRegular });
     renderWithProviders(<Review />);
     expect(screen.getByTestId("table-products")).toBeInTheDocument();
+  });
+
+  it("renders DeliveryMethod component", () => {
+    useCartStore.setState({ cart_data: mockCartRegular });
+    renderWithProviders(<Review />);
+    expect(screen.getByTestId("delivery-method")).toBeInTheDocument();
   });
 
   it("renders DiscountCode component", () => {
