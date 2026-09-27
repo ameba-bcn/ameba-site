@@ -189,6 +189,30 @@
   padding-top: 4px;
 }
 
+.checkout-cta {
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.checkout-cta__note {
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: rgba(29, 29, 27, 0.7);
+}
+
+@media (max-width: 500px) {
+  .checkout-cta {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .checkout-cta .boton {
+    width: 100%;
+  }
+}
+
 /* Step 0 — member data, scoped reskin over the shared InputField-based
    MembershipForm/MembershipFormReadOnly (also used by /profile, so we
    only override presentation here, never their own stylesheets). */

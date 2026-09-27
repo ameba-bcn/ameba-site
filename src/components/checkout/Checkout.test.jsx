@@ -7,7 +7,7 @@ import useAuthStore from "../../stores/useAuthStore";
 import renderWithProviders from "../../test/helpers/renderWithProviders";
 import { mockCartRegular, mockCartMember, mockCartFree } from "../../test/mocks/data";
 
-const NEXT_LABEL = "Ves al pagament";
+const NEXT_LABEL = /Ves al pagament/;
 
 // Mock child components to isolate Checkout logic
 vi.mock("./Review", () => ({

@@ -73,6 +73,21 @@ code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+/* Visually-hidden but still focusable/readable by AT — used to keep native
+   radio/checkbox inputs in the DOM (for keyboard + screen reader support)
+   behind custom-drawn controls. */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* Avoid error cover image on dev server */
 iframe#webpack-dev-server-client-overlay {
     display: none;

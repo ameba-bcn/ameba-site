@@ -1,7 +1,6 @@
 import React from "react";
 import PowerTitle from "../PowerTitle";
 import Spinner from "../../spinner/Spinner";
-import PromoBar from "../../ui/PromoBar";
 import "./PageLayout.css";
 
 export default function PageLayout({
@@ -12,7 +11,6 @@ export default function PageLayout({
   centered,
   children,
   section,
-  promo,
   flushBottom,
 }) {
   const contentClass = `page-layout__content${centered ? " page-layout__content--centered" : ""}`;
@@ -23,7 +21,6 @@ export default function PageLayout({
 
   return (
     <div className={rootClass}>
-      {promo && <PromoBar />}
       <div className={innerClass}>
         {title && <PowerTitle title={title} {...titleProps} />}
         <div className={contentClass}>

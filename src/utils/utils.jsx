@@ -81,6 +81,44 @@ export function hasArticlesCheckout(input) {
   return input.some((x) => x.item_type === "article");
 }
 
+// Catalan/Spanish checkout copy always renders prices as "20,00 €"
+// (Intl.NumberFormat, comma decimal) regardless of what shape the backend
+// sent ("25.00 €", "25.00", 25).
+export function formatPriceCA(price = "") {
+  const num =
+    typeof price === "number"
+      ? price
+      : parseFloat(String(price).replace(/[^\d,.-]/g, "").replace(",", "."));
+  if (isNaN(num)) return price;
+  return new Intl.NumberFormat("ca-ES", {
+    style: "currency",
+    currency: "EUR",
+  }).format(num);
+}
+
+export function isDeliveryComplete(cart_data = {}) {
+  const {
+    item_variants = [],
+    delivery_method = "",
+    pickup_location = "",
+    shipping_name = "",
+    shipping_address = "",
+    shipping_postal_code = "",
+    shipping_city = "",
+  } = cart_data;
+  if (!hasArticlesCheckout(item_variants)) return true;
+  if (delivery_method === "pickup") return !!pickup_location;
+  if (delivery_method === "shipping") {
+    return (
+      !!shipping_name &&
+      !!shipping_address &&
+      !!shipping_city &&
+      !!shipping_postal_code
+    );
+  }
+  return true;
+}
+
 export function mergeCartIds(arr1, arr2) {
   return [...new Set([...arr1, ...arr2])];
 }

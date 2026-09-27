@@ -101,6 +101,12 @@
   border-top: 2px solid var(--color-negro);
 }
 
+.checkout-summary__pickup-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .checkout-summary__pickup-title {
   font-family: var(--font-display);
   font-size: 18px;

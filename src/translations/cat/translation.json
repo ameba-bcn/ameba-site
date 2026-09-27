@@ -133,7 +133,7 @@
     "metode-entrega": "Mètode d'entrega",
     "gratis": "gratis",
     "enviament": "Enviament",
-    "enviament-nota": "Només fem enviaments a l'Espanya peninsular.",
+    "enviament-nota": "Només enviem a l'Espanya peninsular. Si ets a Balears, Canàries, Ceuta o Melilla, tria Recollida.",
     "adreca": "Adreça",
     "codi-postal": "Codi postal",
     "ciutat": "Ciutat",
@@ -156,7 +156,27 @@
     "total": "Total",
     "resta": "Resta una unitat",
     "suma": "Suma una unitat",
-    "continua-comprant": "Continua comprant"
+    "continua-comprant": "Continua comprant",
+    "recogida-subtitol": "A Barcelona · 2 punts",
+    "enviament-subtitol": "A domicili · Espanya peninsular",
+    "on-recollir": "On vols recollir-ho?",
+    "veure-mapa": "Veure mapa",
+    "desa-adreca-properes": "Desa aquesta adreça per a properes compres",
+    "zona-balears": "les Illes Balears",
+    "zona-canaries": "les Canàries",
+    "zona-ceuta": "Ceuta",
+    "zona-melilla": "Melilla",
+    "cp-fora-cobertura": "El {{cp}} és de {{zona}} i no hi arribem.",
+    "canvia-recollida": "Canvia a Recollida",
+    "seguent-pagament": "Següent: dades de pagament",
+    "pickup-tag-taller": "Taller",
+    "pickup-tag-botiga": "Botiga",
+    "recollida-a": "Recollida a {{lloc}}",
+    "enviament-domicili": "Enviament a domicili",
+    "completa-adreca": "Espanya peninsular · Completa l'adreça per continuar",
+    "adreca-linia2": "Pis, porta",
+    "opcional": "opcional",
+    "desant": "Desant…"
   },
   "support": {
     "menu": {
@@ -179,13 +199,7 @@
   "banners": {
     "soci-curt": "fes-te soci/a",
     "soci-llarg-pt1": "fes-te soci/a d'ameba desde ",
-    "soci-llarg-pt2": "/any",
-    "promo-text-1": "Fes-te ",
-    "promo-text-bold": "soci/sòcia d'Ameba",
-    "promo-text-2": " i gaudeix dels avantatges de formar part de la nostre comunitat!",
-    "promo-cta": ">>>>>> Descobreix més fent click aquí!",
-    "promo-text-mobile": "Fes-te soci/sòcia d'Ameba →",
-    "promo-close": "Tanca el banner"
+    "soci-llarg-pt2": "/any"
   },
   "agenda": {
     "data": "data",

@@ -105,7 +105,7 @@ describe.each(MATRIX)("Checkout battery: $label", ({ member, mobile }) => {
     renderWithProviders(<Checkout />);
     expect(getSections()[1].classList.contains("checkout-section--active")).toBe(true);
 
-    fireEvent.click(screen.getByText("Ves al pagament"));
+    fireEvent.click(screen.getByText(/Ves al pagament/));
     await waitFor(() => {
       expect(getSections()[2].classList.contains("checkout-section--active")).toBe(true);
     });
@@ -124,7 +124,7 @@ describe.each(MATRIX)("Checkout battery: $label", ({ member, mobile }) => {
   it("calls window.scrollTo on step navigation only when mobile", async () => {
     setupCheckout(mockCartRegular, { member });
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("Ves al pagament"));
+    fireEvent.click(screen.getByText(/Ves al pagament/));
     await waitFor(() => {
       expect(getSections()[2].classList.contains("checkout-section--active")).toBe(true);
     });
@@ -141,7 +141,7 @@ describe.each(MATRIX)("Checkout battery: $label", ({ member, mobile }) => {
     mockConfirmPayment.mockResolvedValue({});
     renderWithProviders(<Checkout />);
 
-    fireEvent.click(screen.getByText("Ves al pagament"));
+    fireEvent.click(screen.getByText(/Ves al pagament/));
     await waitFor(() => {
       expect(screen.getByTestId("stripe-elements")).toBeInTheDocument();
     });
@@ -159,7 +159,7 @@ describe.each(MATRIX)("Checkout battery: $label", ({ member, mobile }) => {
     mockConfirmPayment.mockResolvedValue({ error: { message: "Targeta rebutjada" } });
     renderWithProviders(<Checkout />);
 
-    fireEvent.click(screen.getByText("Ves al pagament"));
+    fireEvent.click(screen.getByText(/Ves al pagament/));
     await waitFor(() => {
       expect(screen.getByTestId("stripe-elements")).toBeInTheDocument();
     });
@@ -176,7 +176,7 @@ describe.each(MATRIX)("Checkout battery: $label", ({ member, mobile }) => {
   it("skips checkoutPaymentCart for a free cart", async () => {
     const { mockCheckoutCart, mockCheckoutPaymentCart } = setupCheckout(mockCartFree, { member });
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("Ves al pagament"));
+    fireEvent.click(screen.getByText(/Ves al pagament/));
     await waitFor(() => expect(mockCheckoutCart).toHaveBeenCalled());
     expect(mockCheckoutPaymentCart).not.toHaveBeenCalled();
   });
