@@ -138,6 +138,22 @@ const useCartStore = create((set, get) => ({
     );
   },
 
+  setDeliveryMethod: (payload) => {
+    return CartService.setDeliveryMethod(payload).then(
+      (response) => {
+        set({ cart_data: response });
+      },
+      (error) => {
+        const message =
+          error?.response?.data?.detail ||
+          error?.response?.data?.shipping_postal_code?.[0] ||
+          error?.response?.data?.delivery_method?.[0];
+        notificationToast(message, "error");
+        return Promise.reject();
+      }
+    );
+  },
+
   clearCart: () => set({ cart_data: {} }),
 }));
 

@@ -75,6 +75,12 @@ export function isMemberCheckout(input) {
   return !!membershipInCart;
 }
 
+// Only article (shop/Botiga) purchases need a delivery method — events and
+// memberships never ship/get picked up.
+export function hasArticlesCheckout(input) {
+  return input.some((x) => x.item_type === "article");
+}
+
 export function mergeCartIds(arr1, arr2) {
   return [...new Set([...arr1, ...arr2])];
 }

@@ -48,6 +48,11 @@ const setupCheckout = (cartData, { member }) => {
   const mockGetMemberProfile = vi.fn().mockResolvedValue(mockMemberProfile);
   const mockSubstractToCart = vi.fn().mockResolvedValue();
   const mockApplyDiscount = vi.fn().mockResolvedValue({ ...cartData, total: "AMEBA1" });
+  const mockSetDeliveryMethod = vi.fn().mockResolvedValue({
+    ...cartData,
+    delivery_method: "pickup",
+    pickup_location: "trama",
+  });
 
   useAuthStore.setState({
     isLoggedIn: true,
@@ -66,6 +71,7 @@ const setupCheckout = (cartData, { member }) => {
     getCart: mockGetCart,
     substractToCart: mockSubstractToCart,
     applyDiscount: mockApplyDiscount,
+    setDeliveryMethod: mockSetDeliveryMethod,
   });
 
   return {
@@ -75,6 +81,7 @@ const setupCheckout = (cartData, { member }) => {
     mockGetMemberProfile,
     mockSubstractToCart,
     mockApplyDiscount,
+    mockSetDeliveryMethod,
   };
 };
 
