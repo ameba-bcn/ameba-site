@@ -197,13 +197,14 @@ function ProductePage() {
             </div>
 
             <div className="shop-product__gallery">
-              {[0, 1].map((i) => (
-                <div key={i} className="shop-product__gallery-cell">
-                  {images[i] ? (
-                    <img src={images[i]} alt={name} className="shop-product__gallery-image" />
-                  ) : (
-                    <div className="shop-product__gallery-placeholder" aria-hidden="true" />
-                  )}
+              {images.slice(0, 2).map((src, i) => (
+                <div
+                  key={src}
+                  className={`shop-product__gallery-cell${
+                    images.length === 1 ? " shop-product__gallery-cell--full" : ""
+                  }`}
+                >
+                  <img src={src} alt={name} className="shop-product__gallery-image" />
                 </div>
               ))}
             </div>
