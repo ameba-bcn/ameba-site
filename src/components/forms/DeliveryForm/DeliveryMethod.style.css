@@ -50,9 +50,18 @@
   transform: translateY(-1px);
 }
 
+.option-tile:active {
+  transform: scale(0.98);
+  border-color: var(--color-naranja);
+}
+
 .option-tile--selected {
   background: var(--color-negro);
   color: var(--color-cream);
+}
+
+.option-tile--selected:active {
+  border-color: var(--color-naranja);
 }
 
 .option-tile__mark {
@@ -159,6 +168,11 @@
 .pickup-row--selected {
   border-color: var(--color-negro);
   background: rgba(253, 253, 253, 0.55);
+}
+
+.pickup-list .pickup-row:active {
+  border-color: var(--color-naranja);
+  background: rgba(232, 145, 45, 0.12);
 }
 
 .pickup-row__mark {
