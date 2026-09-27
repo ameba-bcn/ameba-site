@@ -7,6 +7,7 @@ import Review from "./Review";
 import Payment from "./Payment";
 import CheckoutSummary from "./CheckoutSummary";
 import Button from "../button/Button";
+import RouteFallback from "../spinner/RouteFallback";
 import { formatPriceCA, isDeliveryComplete, isMemberCheckout } from "../../utils/utils";
 import useAuthStore from "../../stores/useAuthStore";
 import useCartStore from "../../stores/useCartStore";
@@ -64,7 +65,12 @@ function CheckoutSection({
 
 function Checkout() {
   const [t] = useTranslation("translation");
-  const { cart_data = {}, checkoutCart, checkoutPaymentCart } = useCartStore();
+  const {
+    cart_data = {},
+    cartLoaded = false,
+    checkoutCart,
+    checkoutPaymentCart,
+  } = useCartStore();
   const { isLoggedIn = false, user_data = {} } = useAuthStore();
   const getMemberProfile = useAuthStore((state) => state.getMemberProfile);
   const { total = "", item_variants = [], id = "" } = cart_data;
@@ -142,6 +148,12 @@ function Checkout() {
     },
     [checkoutCart, checkoutPaymentCart, id, isPaymentFree, goToStep],
   );
+
+  // On a hard refresh landing directly on /pagament, cart_data starts empty
+  // until the app-mount getCart() call resolves — without this wait, the
+  // guard below would judge that still-empty cart and bounce straight
+  // back to "/" before the real cart ever gets a chance to load.
+  if (!cartLoaded) return <RouteFallback />;
 
   if (!item_variants.length || !isLoggedIn) return <Navigate to="/" replace />;
 

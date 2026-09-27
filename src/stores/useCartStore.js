@@ -7,6 +7,11 @@ const useCartStore = create((set, get) => ({
   checkout: {},
   stripe: false,
   cartBusy: false,
+  // False until the initial getCart() (fired on app mount) settles. Guards
+  // like Checkout's "redirect home if the cart is empty" must wait for
+  // this instead of judging an empty cart_data={} that just hasn't loaded
+  // yet — otherwise a hard refresh on /pagament always bounces to "/".
+  cartLoaded: false,
 
   addToCart: (id) => {
     if (get().cartBusy) return Promise.resolve();
@@ -47,10 +52,10 @@ const useCartStore = create((set, get) => ({
   getCart: () => {
     return CartService.getCart().then(
       (response) => {
-        set({ cart_data: response });
+        set({ cart_data: response, cartLoaded: true });
       },
       (error) => {
-        set({ cart_data: {} });
+        set({ cart_data: {}, cartLoaded: true });
         // Cart not found (expired/deleted) — clean up stale cart_id silently
         if (error.response?.status === 404) {
           localStorage.removeItem("cart_id");

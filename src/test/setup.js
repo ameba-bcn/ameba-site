@@ -49,6 +49,7 @@ beforeEach(async () => {
     checkout: {},
     stripe: false,
     cartBusy: false,
+    cartLoaded: true,
   });
 
   useAuthStore.setState({

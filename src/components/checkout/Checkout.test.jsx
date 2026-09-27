@@ -77,6 +77,24 @@ describe("Checkout - route guards", () => {
     renderWithProviders(<Checkout />, { route: "/pagament" });
     expect(screen.getByText("pagament")).toBeInTheDocument();
   });
+
+  it("waits for the cart to finish loading instead of redirecting on a still-empty cart_data", () => {
+    // Simulates a hard refresh on /pagament: cart_data is still {} because
+    // the app-mount getCart() call hasn't resolved yet.
+    useAuthStore.setState({ isLoggedIn: true, getMemberProfile: vi.fn().mockResolvedValue() });
+    useCartStore.setState({ cart_data: {}, cartLoaded: false });
+    renderWithProviders(<Checkout />, { route: "/pagament" });
+    expect(screen.queryByText("pagament")).not.toBeInTheDocument();
+    expect(document.querySelector(".route-fallback")).toBeInTheDocument();
+  });
+
+  it("redirects only after the cart has loaded and turns out empty", () => {
+    useAuthStore.setState({ isLoggedIn: true, getMemberProfile: vi.fn().mockResolvedValue() });
+    useCartStore.setState({ cart_data: { item_variants: [] }, cartLoaded: true });
+    renderWithProviders(<Checkout />, { route: "/pagament" });
+    expect(screen.queryByText("pagament")).not.toBeInTheDocument();
+    expect(document.querySelector(".route-fallback")).not.toBeInTheDocument();
+  });
 });
 
 describe("Checkout - layout", () => {
