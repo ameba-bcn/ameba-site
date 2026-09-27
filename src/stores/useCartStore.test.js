@@ -151,6 +151,20 @@ describe("useCartStore - checkoutPaymentCart", () => {
     expect(state.stripe).toBe(true);
   });
 
+  // The backend destroys the cart as soon as a PaymentIntent is created
+  // for it, so a refresh on the payment step can't recover the Stripe
+  // client_secret from the cart — it has to survive in localStorage.
+  it("persists the pending payment to localStorage so a refresh can resume it", async () => {
+    useCartStore.setState({ checkout: { amount: 2500 } });
+    const stripeData = { client_secret: "pi_123", stripe_public: "pk_123" };
+    CartService.checkoutPaymentCart.mockResolvedValue(stripeData);
+
+    await useCartStore.getState().checkoutPaymentCart("cart-uuid");
+    const stored = JSON.parse(localStorage.getItem("pendingPayment"));
+    expect(stored.amount).toBe(2500);
+    expect(stored.checkout_stripe).toEqual(stripeData);
+  });
+
   it("resets on failure", async () => {
     CartService.checkoutPaymentCart.mockRejectedValue({ response: { data: { detail: "Error" } } });
     try {
@@ -158,6 +172,7 @@ describe("useCartStore - checkoutPaymentCart", () => {
     } catch { /* expected */ }
     expect(useCartStore.getState().checkout).toEqual({});
     expect(useCartStore.getState().stripe).toBe(false);
+    expect(localStorage.getItem("pendingPayment")).toBeNull();
   });
 });
 
@@ -214,6 +229,25 @@ describe("useCartStore - clearCart", () => {
     useCartStore.setState({ cart_data: { id: "123" } });
     useCartStore.getState().clearCart();
     expect(useCartStore.getState().cart_data).toEqual({});
+  });
+
+  it("also clears any pending payment (e.g. on logout)", () => {
+    localStorage.setItem("pendingPayment", JSON.stringify({ checkout_stripe: { client_secret: "pi_1" } }));
+    useCartStore.setState({ checkout: { checkout_stripe: { client_secret: "pi_1" } } });
+    useCartStore.getState().clearCart();
+    expect(useCartStore.getState().checkout).toEqual({});
+    expect(localStorage.getItem("pendingPayment")).toBeNull();
+  });
+});
+
+describe("useCartStore - clearPendingPayment", () => {
+  it("clears the checkout state and its localStorage persistence", () => {
+    localStorage.setItem("pendingPayment", JSON.stringify({ checkout_stripe: { client_secret: "pi_1" } }));
+    useCartStore.setState({ checkout: { checkout_stripe: { client_secret: "pi_1" } }, stripe: true });
+    useCartStore.getState().clearPendingPayment();
+    expect(useCartStore.getState().checkout).toEqual({});
+    expect(useCartStore.getState().stripe).toBe(false);
+    expect(localStorage.getItem("pendingPayment")).toBeNull();
   });
 });
 

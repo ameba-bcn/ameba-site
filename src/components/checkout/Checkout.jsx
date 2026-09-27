@@ -68,6 +68,7 @@ function Checkout() {
   const {
     cart_data = {},
     cartLoaded = false,
+    checkout = {},
     checkoutCart,
     checkoutPaymentCart,
   } = useCartStore();
@@ -78,6 +79,12 @@ function Checkout() {
   const hasMembershipInCart = isMemberCheckout(item_variants);
   const deliveryComplete = isDeliveryComplete(cart_data);
   const firstStep = hasMembershipInCart ? 0 : 1;
+  // Reaching the payment step destroys the cart server-side (a Payment /
+  // Stripe PaymentIntent takes its place) — cart_data is legitimately
+  // empty from then on, so an empty cart shouldn't bounce the user home
+  // while there's still a payment in flight to resume (see useCartStore's
+  // pendingPayment persistence).
+  const hasPendingPayment = !!checkout?.checkout_stripe?.client_secret;
 
   const getSavedStep = () => {
     const saved = parseInt(localStorage.getItem(CHECKOUT_STEP_KEY));
@@ -155,7 +162,8 @@ function Checkout() {
   // back to "/" before the real cart ever gets a chance to load.
   if (!cartLoaded) return <RouteFallback />;
 
-  if (!item_variants.length || !isLoggedIn) return <Navigate to="/" replace />;
+  if ((!item_variants.length && !hasPendingPayment) || !isLoggedIn)
+    return <Navigate to="/" replace />;
 
   const getStepState = (step) => {
     if (step === activeStep) return "active";
