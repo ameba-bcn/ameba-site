@@ -1,26 +1,32 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
 import useCartStore from "../../../stores/useCartStore";
-import Button from "../../button/Button";
-import InputField from "../InputField/InputField";
+import OptionTile from "./OptionTile";
+import PickupPointList from "./PickupPointList";
+import CoverageNote from "./CoverageNote";
+import AddressForm from "./AddressForm";
+import Checkbox from "./Checkbox";
 import { validate } from "./DeliveryMethodValidate";
-import { hasArticlesCheckout, isEmptyObject } from "../../../utils/utils";
-import "../Log.style.css";
+import { formatPriceCA, hasArticlesCheckout, isEmptyObject } from "../../../utils/utils";
 import "./DeliveryMethod.style.css";
 
 export const PICKUP_LOCATIONS = [
   {
     value: "trama",
-    label:
-      "Trama Serigrafia — Carrer de Conca, 13-15, Sant Martí, 08026 Barcelona",
+    name: "Trama Serigrafia",
+    tag: "Taller",
+    address: "Carrer de Conca, 13-15 · Sant Martí, 08026 Barcelona",
   },
   {
     value: "merla",
-    label:
-      "La Merla (botiga) — Carrer de Sants, 1, Sants-Montjuïc, 08014 Barcelona",
+    name: "La Merla",
+    tag: "Botiga",
+    address: "Carrer de Sants, 1 · Sants-Montjuïc, 08014 Barcelona",
   },
 ];
+
+const AUTOSAVE_DELAY = 600;
 
 export default function DeliveryMethod() {
   const [t] = useTranslation("translation");
@@ -37,8 +43,9 @@ export default function DeliveryMethod() {
 
   const [method, setMethod] = useState(delivery_method || "pickup");
   const [pickup, setPickup] = useState(pickup_location || "trama");
-  const [loading, setLoading] = useState(false);
-  const [saved, setSaved] = useState(false);
+  const [saveAddress, setSaveAddress] = useState(true);
+  const [saveState, setSaveState] = useState("idle"); // idle | saving | saved
+  const autosaveTimer = useRef(null);
 
   // Keep local selection in sync once the cart round-trips from the API
   // (e.g. after the initial auto-save below, or on step re-entry).
@@ -56,32 +63,20 @@ export default function DeliveryMethod() {
       shipping_city,
     },
     enableReinitialize: true,
-    validate,
+    validate: (values) => validate(values, t),
     validateOnChange: false,
-    validateOnBlur: false,
-    onSubmit: (values) => {
-      setLoading(true);
-      setSaved(false);
-      setDeliveryMethod({ delivery_method: "shipping", ...values })
-        .then(() => {
-          setLoading(false);
-          setSaved(true);
-        })
-        .catch(() => setLoading(false));
-    },
+    validateOnBlur: true,
+    onSubmit: () => {},
   });
 
   const selectPickup = (location) => {
     setPickup(location);
     setMethod("pickup");
-    setLoading(true);
-    setDeliveryMethod({ delivery_method: "pickup", pickup_location: location })
-      .then(() => setLoading(false))
-      .catch(() => setLoading(false));
+    setDeliveryMethod({ delivery_method: "pickup", pickup_location: location });
   };
 
   // Sensible default: pickup at the first location, saved automatically so
-  // "ir al pago" doesn't fail on a choice nobody had to actively make.
+  // "ves al pagament" doesn't fail on a choice nobody had to actively make.
   useEffect(() => {
     if (!delivery_method && hasArticlesCheckout(item_variants)) {
       selectPickup(pickup);
@@ -90,13 +85,33 @@ export default function DeliveryMethod() {
   }, []);
 
   const handleMethodChange = (value) => {
-    setSaved(false);
     if (value === "pickup") {
       selectPickup(pickup);
     } else {
       setMethod(value);
     }
   };
+
+  // No explicit "save address" button: once every field is filled in and
+  // passes validation, the address auto-saves to the cart a moment after
+  // the user stops typing/tabbing through the form.
+  useEffect(() => {
+    if (autosaveTimer.current) clearTimeout(autosaveTimer.current);
+    if (method !== "shipping" || !formik.dirty) return undefined;
+    setSaveState("idle");
+    const errors = validate(formik.values, t);
+    if (!isEmptyObject(errors)) return undefined;
+
+    autosaveTimer.current = setTimeout(() => {
+      setSaveState("saving");
+      setDeliveryMethod({ delivery_method: "shipping", ...formik.values })
+        .then(() => setSaveState("saved"))
+        .catch(() => setSaveState("idle"));
+    }, AUTOSAVE_DELAY);
+
+    return () => clearTimeout(autosaveTimer.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formik.values, formik.dirty, method]);
 
   if (!hasArticlesCheckout(item_variants)) return null;
 
@@ -106,122 +121,65 @@ export default function DeliveryMethod() {
         {t("checkout.metode-entrega")}
       </span>
 
-      <div className="delivery-method__options">
-        <label className="delivery-method__option">
-          <input
-            type="radio"
-            name="delivery_method"
-            checked={method === "pickup"}
-            onChange={() => handleMethodChange("pickup")}
-          />
-          <span>
-            {t("checkout.recogida")} — {t("checkout.gratis")}
-          </span>
-        </label>
-        <label className="delivery-method__option">
-          <input
-            type="radio"
-            name="delivery_method"
-            checked={method === "shipping"}
-            onChange={() => handleMethodChange("shipping")}
-          />
-          <span>{t("checkout.enviament")} — +7,00 €</span>
-        </label>
-      </div>
+      <fieldset className="option-tiles">
+        <legend className="sr-only">{t("checkout.metode-entrega")}</legend>
+        <OptionTile
+          id="delivery_method-pickup"
+          name="delivery_method"
+          value="pickup"
+          checked={method === "pickup"}
+          onChange={() => handleMethodChange("pickup")}
+          title={t("checkout.recogida")}
+          price={t("checkout.gratis")}
+          subtitle={t("checkout.recogida-subtitol")}
+        />
+        <OptionTile
+          id="delivery_method-shipping"
+          name="delivery_method"
+          value="shipping"
+          checked={method === "shipping"}
+          onChange={() => handleMethodChange("shipping")}
+          title={t("checkout.enviament")}
+          price={`+${formatPriceCA(7)}`}
+          subtitle={t("checkout.enviament-subtitol")}
+        />
+      </fieldset>
 
       {method === "pickup" && (
-        <div className="delivery-method__pickup">
-          {PICKUP_LOCATIONS.map((location) => (
-            <label className="delivery-method__pickup-option" key={location.value}>
-              <input
-                type="radio"
-                name="pickup_location"
-                checked={pickup === location.value}
-                onChange={() => selectPickup(location.value)}
-              />
-              <span>{location.label}</span>
-            </label>
-          ))}
-        </div>
+        <fieldset className="pickup-points">
+          <legend className="pickup-points__legend">
+            {t("checkout.on-recollir")}
+          </legend>
+          <PickupPointList
+            locations={PICKUP_LOCATIONS}
+            value={pickup}
+            onChange={selectPickup}
+          />
+        </fieldset>
       )}
 
       {method === "shipping" && (
-        <form
-          className="delivery-method__shipping"
-          onSubmit={formik.handleSubmit}
-        >
-          <p className="delivery-method__shipping-note">
-            {t("checkout.enviament-nota")}
-          </p>
-          <div className="field-wrapper">
-            <InputField
-              id="shipping_name"
-              name="shipping_name"
-              type="text"
-              label={t("form.nom")}
-              onChange={formik.handleChange}
-              value={formik.values.shipping_name}
-              valid={!formik.errors.shipping_name}
-            />
-          </div>
-          <div className="field-wrapper">
-            <InputField
-              id="shipping_address"
-              name="shipping_address"
-              type="text"
-              label={t("checkout.adreca")}
-              onChange={formik.handleChange}
-              value={formik.values.shipping_address}
-              valid={!formik.errors.shipping_address}
-            />
-          </div>
-          <div className="field-wrapper">
-            <InputField
-              id="shipping_postal_code"
-              name="shipping_postal_code"
-              type="text"
-              label={t("checkout.codi-postal")}
-              onChange={formik.handleChange}
-              value={formik.values.shipping_postal_code}
-              valid={!formik.errors.shipping_postal_code}
-            />
-          </div>
-          <div className="field-wrapper">
-            <InputField
-              id="shipping_city"
-              name="shipping_city"
-              type="text"
-              label={t("checkout.ciutat")}
-              onChange={formik.handleChange}
-              value={formik.values.shipping_city}
-              valid={!formik.errors.shipping_city}
-            />
-          </div>
-
-          {!isEmptyObject(formik.errors) && (
-            <div className="log-form-error">
-              {Object.values(formik.errors).map((x) => (
-                <div key={x}>{x}</div>
-              ))}
+        <fieldset className="shipping-address">
+          <legend className="sr-only">{t("checkout.adreca")}</legend>
+          <CoverageNote />
+          <AddressForm
+            formik={formik}
+            onSwitchToPickup={() => handleMethodChange("pickup")}
+          />
+          <Checkbox
+            id="save_address"
+            checked={saveAddress}
+            onChange={() => setSaveAddress((value) => !value)}
+            label={t("checkout.desa-adreca-properes")}
+          />
+          {saveState !== "idle" && (
+            <div className="delivery-method__saving" aria-live="polite">
+              {saveState === "saving"
+                ? t("checkout.desant")
+                : t("checkout.adreca-guardada")}
             </div>
           )}
-
-          <Button
-            type="submit"
-            buttonSize="boton--medium"
-            buttonStyle="boton--primary--outline"
-            disabled={loading}
-            loading={loading}
-          >
-            {t("checkout.guardar-adreca")}
-          </Button>
-
-          {saved && (
-            <div className="delivery-method__confirmation">
-              {t("checkout.adreca-guardada")}
-            </div>
-          )}
-        </form>
+        </fieldset>
       )}
     </div>
   );

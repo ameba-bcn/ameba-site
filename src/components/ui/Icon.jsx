@@ -117,6 +117,23 @@ function Icon(props) {
     </AmebaSvgWrapper>
   );
 
+  const truck = (
+    <AmebaSvgWrapper {...props}>
+      <g
+        className="stroke-icon"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M3 17h1a2 2 0 0 0 4 0h7a2 2 0 0 0 4 0h1v-6l-3 -5h-4v9m-9 0v-9h6" />
+        <circle cx="7" cy="17" r="2" />
+        <circle cx="17" cy="17" r="2" />
+      </g>
+    </AmebaSvgWrapper>
+  );
+
   const calendar = (
     <AmebaSvgWrapper {...props}>
       <path
@@ -465,6 +482,8 @@ function Icon(props) {
       return play;
     case "pause":
       return pause;
+    case "truck":
+      return truck;
     default:
       return null;
   }

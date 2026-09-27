@@ -17,8 +17,8 @@ describe("CheckoutSummary - item list", () => {
     renderWithProviders(<CheckoutSummary />);
     expect(screen.getByText("Ameba T-shirt")).toBeInTheDocument();
     expect(screen.getByText("Ameba Vinyl")).toBeInTheDocument();
-    expect(screen.getByText("25.00 €")).toBeInTheDocument();
-    expect(screen.getByText("30.00 €")).toBeInTheDocument();
+    expect(screen.getByText("25,00 €")).toBeInTheDocument();
+    expect(screen.getByText("30,00 €")).toBeInTheDocument();
   });
 
   it("renders no item rows for an empty cart", () => {
@@ -31,7 +31,7 @@ describe("CheckoutSummary - item list", () => {
     useCartStore.setState({ cart_data: mockCartRegular });
     const { container } = renderWithProviders(<CheckoutSummary />);
     expect(container.querySelector(".checkout-summary__total-value")).toHaveTextContent(
-      "25.00 €",
+      "25,00 €",
     );
   });
 });
@@ -53,7 +53,7 @@ describe("CheckoutSummary - discount computation", () => {
     expect(row).toHaveTextContent("AMEBA20");
     // price 25.00 - subtotal 20.00 = 5.00 savings
     expect(container.querySelector(".checkout-summary__discount-value")).toHaveTextContent(
-      "5€",
+      "5,00 €",
     );
   });
 
@@ -82,9 +82,17 @@ describe("CheckoutSummary - discount computation", () => {
 
 describe("CheckoutSummary - pickup note", () => {
   it("renders the pickup section when the cart has articles", () => {
-    useCartStore.setState({ cart_data: mockCartRegular });
-    renderWithProviders(<CheckoutSummary />);
-    expect(screen.getByText("Recollida")).toBeInTheDocument();
+    useCartStore.setState({
+      cart_data: {
+        ...mockCartRegular,
+        delivery_method: "pickup",
+        pickup_location: "trama",
+      },
+    });
+    const { container } = renderWithProviders(<CheckoutSummary />);
+    expect(
+      container.querySelector(".checkout-summary__pickup-title"),
+    ).toHaveTextContent("Trama Serigrafia");
   });
 
   it("hides the pickup/shipping section for a cart with no articles", () => {
@@ -109,5 +117,15 @@ describe("CheckoutSummary - pickup note", () => {
     expect(
       container.querySelector(".checkout-summary__pickup"),
     ).toHaveTextContent("Carrer Fictici, 1, 08001 Barcelona");
+  });
+
+  it("shows an incomplete-address hint when shipping is selected but no address was entered yet", () => {
+    useCartStore.setState({
+      cart_data: { ...mockCartRegular, delivery_method: "shipping" },
+    });
+    const { container } = renderWithProviders(<CheckoutSummary />);
+    expect(container.querySelector(".checkout-summary__pickup")).toHaveTextContent(
+      "Completa l'adreça",
+    );
   });
 });

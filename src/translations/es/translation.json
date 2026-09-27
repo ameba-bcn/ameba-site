@@ -133,7 +133,7 @@
     "metode-entrega": "Método de entrega",
     "gratis": "gratis",
     "enviament": "Envío",
-    "enviament-nota": "Solo hacemos envíos a la España peninsular.",
+    "enviament-nota": "Solo enviamos a la España peninsular. Si estás en Baleares, Canarias, Ceuta o Melilla, elige Recogida.",
     "adreca": "Dirección",
     "codi-postal": "Código postal",
     "ciutat": "Ciudad",
@@ -156,7 +156,27 @@
     "total": "Total",
     "resta": "Resta una unidad",
     "suma": "Suma una unidad",
-    "continua-comprant": "Sigue comprando"
+    "continua-comprant": "Sigue comprando",
+    "recogida-subtitol": "En Barcelona · 2 puntos",
+    "enviament-subtitol": "A domicilio · España peninsular",
+    "on-recollir": "¿Dónde quieres recogerlo?",
+    "veure-mapa": "Ver mapa",
+    "desa-adreca-properes": "Guarda esta dirección para próximas compras",
+    "zona-balears": "las Islas Baleares",
+    "zona-canaries": "las Canarias",
+    "zona-ceuta": "Ceuta",
+    "zona-melilla": "Melilla",
+    "cp-fora-cobertura": "El {{cp}} es de {{zona}} y no llegamos.",
+    "canvia-recollida": "Cambiar a Recogida",
+    "seguent-pagament": "Siguiente: datos de pago",
+    "pickup-tag-taller": "Taller",
+    "pickup-tag-botiga": "Tienda",
+    "recollida-a": "Recogida en {{lloc}}",
+    "enviament-domicili": "Envío a domicilio",
+    "completa-adreca": "España peninsular · Completa la dirección para continuar",
+    "adreca-linia2": "Piso, puerta",
+    "opcional": "opcional",
+    "desant": "Guardando…"
   },
   "support": {
     "menu": {
@@ -179,13 +199,7 @@
   "banners": {
     "soci-curt": "hazte socio/a",
     "soci-llarg-pt1": "hazte socio/a de ameba desde ",
-    "soci-llarg-pt2": "/año",
-    "promo-text-1": "¡Hazte ",
-    "promo-text-bold": "socio/socia de Ameba",
-    "promo-text-2": " y disfruta de las ventajas de formar parte de nuestra comunidad!",
-    "promo-cta": ">>>>>> ¡Descubre más haciendo click aquí!",
-    "promo-text-mobile": "Hazte socio/a de Ameba →",
-    "promo-close": "Cierra el banner"
+    "soci-llarg-pt2": "/año"
   },
   "agenda": {
     "data": "fecha",

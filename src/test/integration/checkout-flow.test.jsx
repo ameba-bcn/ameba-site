@@ -94,7 +94,7 @@ describe("Integration: Regular checkout (no subscription, paid)", () => {
   it("advances to Payment step on Next click", async () => {
     setupCheckout(mockCartRegular);
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("Ves al pagament"));
+    fireEvent.click(screen.getByText(/Ves al pagament/));
     await waitFor(() => {
       const sections = getSections();
       expect(sections[2].classList.contains("checkout-section--active")).toBe(true);
@@ -114,7 +114,7 @@ describe("Integration: Regular checkout (no subscription, paid)", () => {
     });
 
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("Ves al pagament"));
+    fireEvent.click(screen.getByText(/Ves al pagament/));
     await waitFor(() => {
       const sections = getSections();
       expect(sections[2].classList.contains("checkout-section--active")).toBe(true);
@@ -160,7 +160,7 @@ describe("Integration: Free checkout flow", () => {
   it("does not call checkoutPaymentCart for free cart on step transition", async () => {
     const { mockCheckoutCart, mockCheckoutPaymentCart } = setupCheckout(mockCartFree);
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("Ves al pagament"));
+    fireEvent.click(screen.getByText(/Ves al pagament/));
     await waitFor(() => {
       expect(mockCheckoutCart).toHaveBeenCalled();
     });
@@ -197,7 +197,7 @@ describe("Integration: Error handling", () => {
     const { mockCheckoutCart } = setupCheckout(mockCartRegular);
     mockCheckoutCart.mockRejectedValue(new Error("API error"));
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("Ves al pagament"));
+    fireEvent.click(screen.getByText(/Ves al pagament/));
     await waitFor(() => {
       const sections = getSections();
       expect(sections[1].classList.contains("checkout-section--active")).toBe(true);

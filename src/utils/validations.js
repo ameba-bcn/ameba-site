@@ -35,6 +35,20 @@ export const postalCodeValidation = (value) => {
   return !SPAIN_MAINLAND_POSTAL_CODE.test(value);
 };
 
+// Identifies which excluded zone an out-of-coverage postal code belongs to,
+// so the checkout can name it in the error instead of a generic message.
+// Returns a translation-key suffix (see checkout.zona-* keys) or null when
+// the code isn't recognisable as one of the four excluded zones (e.g. it's
+// just malformed).
+export const postalCodeZone = (value) => {
+  if (!value) return null;
+  if (/^07/.test(value)) return "balears";
+  if (/^(35|38)/.test(value)) return "canaries";
+  if (/^51/.test(value)) return "ceuta";
+  if (/^52/.test(value)) return "melilla";
+  return null;
+};
+
 export const isValidUrl = (urlString) => {
   var urlPattern = new RegExp(
     "^(https?:\\/\\/)?" + // validate protocol

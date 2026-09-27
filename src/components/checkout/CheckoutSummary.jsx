@@ -1,8 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useCartStore from "../../stores/useCartStore";
-import { formatPrice, hasArticlesCheckout } from "../../utils/utils";
+import { formatPriceCA, hasArticlesCheckout } from "../../utils/utils";
 import { PICKUP_LOCATIONS } from "../forms/DeliveryForm/DeliveryMethod";
+import Icon from "../ui/Icon";
 import "./CheckoutSummary.css";
 
 function computeDiscount(items) {
@@ -33,9 +34,11 @@ export default function CheckoutSummary() {
   const discount = computeDiscount(item_variants);
   const isShipping = delivery_method === "shipping";
   const needsDelivery = hasArticlesCheckout(item_variants);
-  const pickupLabel = PICKUP_LOCATIONS.find(
+  const pickupLocation = PICKUP_LOCATIONS.find(
     (location) => location.value === pickup_location,
-  )?.label;
+  );
+  const hasShippingAddress =
+    !!shipping_address && !!shipping_postal_code && !!shipping_city;
 
   return (
     <aside className="checkout-summary">
@@ -49,7 +52,7 @@ export default function CheckoutSummary() {
                 {item.item_name}
               </span>
               <span className="checkout-summary__item-price">
-                {formatPrice(item.price)}
+                {formatPriceCA(item.price)}
               </span>
             </span>
           ))}
@@ -62,35 +65,48 @@ export default function CheckoutSummary() {
               {discount.name ? ` ${discount.name}` : ""}
             </span>
             <span className="checkout-summary__discount-value">
-              −{formatPrice(discount.savings)}
+              −{formatPriceCA(discount.savings)}
             </span>
           </div>
         )}
 
-        {isShipping && (
+        {needsDelivery && (
           <div className="checkout-summary__row">
-            <span>{t("checkout.enviament")}</span>
-            <span>+7,00 €</span>
+            <span>
+              {isShipping ? t("checkout.enviament") : t("checkout.recogida")}
+            </span>
+            <span>{isShipping ? `+${formatPriceCA(7)}` : t("checkout.gratis")}</span>
           </div>
         )}
 
         <div className="checkout-summary__row checkout-summary__row--total">
-          <span>Total</span>
-          <span className="checkout-summary__total-value">{total}</span>
+          <span>{t("checkout.total")}</span>
+          <span className="checkout-summary__total-value">
+            {formatPriceCA(total)}
+          </span>
         </div>
       </div>
 
       {needsDelivery && (
         <div className="checkout-summary__pickup">
-          <span className="checkout-summary__pickup-title">
-            {isShipping ? t("checkout.enviament") : t("checkout.recogida")}
-          </span>
+          <div className="checkout-summary__pickup-head">
+            <Icon icon={isShipping ? "truck" : "place"} width="20" height="20" />
+            <span className="checkout-summary__pickup-title">
+              {isShipping
+                ? t("checkout.enviament-domicili")
+                : t("checkout.recollida-a", {
+                    lloc: pickupLocation?.name || "",
+                  })}
+            </span>
+          </div>
           {isShipping ? (
             <p>
-              {shipping_address}, {shipping_postal_code} {shipping_city}
+              {hasShippingAddress
+                ? `${shipping_address}, ${shipping_postal_code} ${shipping_city}`
+                : t("checkout.completa-adreca")}
             </p>
           ) : (
-            <p>{pickupLabel || t("checkout.review-footer-5")}</p>
+            <p>{pickupLocation?.address}</p>
           )}
           <p className="checkout-summary__pickup-note">
             {t("checkout.review-footer-1")}

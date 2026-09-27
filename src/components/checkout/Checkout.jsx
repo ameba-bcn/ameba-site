@@ -7,7 +7,7 @@ import Review from "./Review";
 import Payment from "./Payment";
 import CheckoutSummary from "./CheckoutSummary";
 import Button from "../button/Button";
-import { isMemberCheckout } from "../../utils/utils";
+import { formatPriceCA, isDeliveryComplete, isMemberCheckout } from "../../utils/utils";
 import useAuthStore from "../../stores/useAuthStore";
 import useCartStore from "../../stores/useCartStore";
 import useMediaQuery from "../../hooks/use-media-query";
@@ -70,6 +70,7 @@ function Checkout() {
   const { total = "", item_variants = [], id = "" } = cart_data;
   const isPaymentFree = total === "0.00 €";
   const hasMembershipInCart = isMemberCheckout(item_variants);
+  const deliveryComplete = isDeliveryComplete(cart_data);
   const firstStep = hasMembershipInCart ? 0 : 1;
 
   const getSavedStep = () => {
@@ -216,15 +217,22 @@ function Checkout() {
                 )}
 
                 {step === 1 && state === "active" && (
-                  <div className="checkout-section__buttons">
+                  <div className="checkout-section__buttons checkout-cta">
+                    <span className="checkout-cta__note">
+                      {t("checkout.seguent-pagament")}
+                    </span>
                     <Button
                       buttonSize="boton--medium"
-                      buttonStyle="boton--primary--solid"
-                      disabled={loading}
+                      buttonStyle={
+                        !deliveryComplete
+                          ? "boton--primary--disabled"
+                          : "boton--primary--solid"
+                      }
+                      disabled={loading || !deliveryComplete}
                       loading={loading}
                       onClick={() => handleNext(1)}
                     >
-                      {t("checkout.ir-al-pago")}
+                      {t("checkout.ir-al-pago")} · {formatPriceCA(total)}
                     </Button>
                   </div>
                 )}
