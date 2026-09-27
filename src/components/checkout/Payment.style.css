@@ -22,7 +22,7 @@
 }
 
 .payment-terms {
-  display: flex;
+  display: flex !important;
   align-items: center;
   gap: 14px;
   font-size: 13px;
