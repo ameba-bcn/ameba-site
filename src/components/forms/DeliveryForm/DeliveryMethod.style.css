@@ -27,11 +27,16 @@
   gap: 16px;
 }
 
-.option-tile {
+/* Selector scoped with the .delivery-method ancestor (not just .option-tile)
+   to out-specificity App.css's global ".app label { display: block; }" —
+   without it, the label falls back to block and the mark span's
+   width/height (ignored on a plain inline element) collapse to a sliver. */
+.delivery-method .option-tile {
   display: flex;
   align-items: flex-start;
   gap: 16px;
   min-height: 108px;
+  margin: 0;
   padding: 20px;
   box-sizing: border-box;
   border: 4px solid var(--color-negro);
@@ -45,9 +50,21 @@
   transform: translateY(-1px);
 }
 
-.option-tile--selected {
+.option-tile:active {
+  transform: scale(0.98);
+  border-color: var(--color-naranja);
+}
+
+/* Scoped to match (not just equal, but tie-broken by source order after)
+   the base ".delivery-method .option-tile" rule's specificity — a bare
+   ".option-tile--selected" here would lose to it and never apply. */
+.delivery-method .option-tile--selected {
   background: var(--color-negro);
   color: var(--color-cream);
+}
+
+.delivery-method .option-tile--selected:active {
+  border-color: var(--color-naranja);
 }
 
 .option-tile__mark {
@@ -139,20 +156,35 @@
   gap: 12px;
 }
 
-.pickup-row {
+.pickup-list .pickup-row {
   display: flex;
   align-items: flex-start;
   gap: 12px;
+  margin: 0;
   padding: 16px 20px;
   border: 3px solid rgba(29, 29, 27, 0.25);
   background: transparent;
+  color: var(--color-negro);
   cursor: pointer;
-  transition: border-color 150ms ease, background-color 150ms ease;
+  transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
 }
 
-.pickup-row--selected {
+/* Selected pickup row matches the selected option tile: solid black fill,
+   cream text, orange accent dot — rather than the lighter tint used
+   before, per design review. Scoped like ".delivery-method
+   .option-tile--selected" above, for the same specificity reason. */
+.pickup-list .pickup-row--selected {
   border-color: var(--color-negro);
-  background: rgba(253, 253, 253, 0.55);
+  background: var(--color-negro);
+  color: var(--color-cream);
+}
+
+.pickup-list .pickup-row:active {
+  border-color: var(--color-naranja);
+}
+
+.pickup-list .pickup-row:not(.pickup-row--selected):active {
+  background: rgba(232, 145, 45, 0.12);
 }
 
 .pickup-row__mark {
@@ -161,7 +193,7 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 3px solid var(--color-negro);
+  border: 3px solid currentColor;
   position: relative;
 }
 
@@ -173,7 +205,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--color-negro);
+  background: var(--color-naranja);
 }
 
 .sr-only:focus-visible + .pickup-row__mark {
@@ -200,7 +232,7 @@
   font-family: var(--font-display);
   font-size: 24px;
   letter-spacing: 0.02em;
-  color: var(--color-negro);
+  color: inherit;
 }
 
 .pickup-row__tag {
@@ -208,15 +240,19 @@
   font-size: 14px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  border: 2px solid var(--color-negro);
+  border: 2px solid currentColor;
   padding: 4px 6px;
-  color: var(--color-negro);
+  color: inherit;
+}
+
+.pickup-row--selected .pickup-row__tag {
+  color: var(--color-naranja);
 }
 
 .pickup-row__address {
   font-family: var(--font-body);
   font-size: 14px;
-  color: var(--color-negro);
+  color: inherit;
   opacity: 0.85;
 }
 
@@ -226,7 +262,7 @@
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 13px;
-  color: var(--color-negro);
+  color: inherit;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -318,11 +354,12 @@
 
 /* 3.5 — save-address checkbox */
 
-.abm-checkbox {
+.shipping-address .abm-checkbox {
   display: inline-flex;
   align-items: center;
   gap: 12px;
   min-height: 44px;
+  margin: 0;
   cursor: pointer;
   font-family: var(--font-body);
   font-size: 14px;
@@ -392,12 +429,17 @@
     grid-column: span 6;
   }
 
-  .pickup-row {
-    flex-wrap: wrap;
+  /* A fixed-width map link fighting the body span for space on one flex
+     line squeezed the address text down to a near-zero column instead of
+     wrapping. Stacking the row in a column at narrow widths gives the mark,
+     the name/tag/address block, and the map link each the full row width
+     instead. */
+  .pickup-list .pickup-row {
+    flex-direction: column;
+    gap: 10px;
   }
 
   .pickup-row__map {
     align-self: flex-start;
-    margin-left: 34px;
   }
 }

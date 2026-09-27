@@ -194,6 +194,7 @@
   align-items: center;
   gap: 16px;
   flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 .checkout-cta__note {
