@@ -429,12 +429,17 @@
     grid-column: span 6;
   }
 
-  .pickup-row {
-    flex-wrap: wrap;
+  /* A fixed-width map link fighting the body span for space on one flex
+     line squeezed the address text down to a near-zero column instead of
+     wrapping. Stacking the row in a column at narrow widths gives the mark,
+     the name/tag/address block, and the map link each the full row width
+     instead. */
+  .pickup-list .pickup-row {
+    flex-direction: column;
+    gap: 10px;
   }
 
   .pickup-row__map {
     align-self: flex-start;
-    margin-left: 34px;
   }
 }
