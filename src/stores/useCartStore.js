@@ -2,9 +2,39 @@ import { create } from "zustand";
 import CartService from "../store/services/cart.services";
 import notificationToast from "../utils/utils";
 
+const PENDING_PAYMENT_KEY = "pendingPayment";
+
+// The backend destroys the Cart the moment it creates a Stripe PaymentIntent
+// for it (CartViewSet.payment -> create_payment_and_destroy_cart) — so by
+// the time the Payment step is showing, there is no cart left to re-fetch.
+// Persisting the Stripe payment details lets a refresh mid-payment resume
+// the same PaymentIntent instead of finding an empty cart and bouncing to
+// "/" (see Checkout.jsx's route guard).
+function loadPendingPayment() {
+  try {
+    const raw = localStorage.getItem(PENDING_PAYMENT_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch {
+    return {};
+  }
+}
+
+function persistPendingPayment(checkout) {
+  try {
+    if (checkout?.checkout_stripe?.client_secret) {
+      localStorage.setItem(PENDING_PAYMENT_KEY, JSON.stringify(checkout));
+    } else {
+      localStorage.removeItem(PENDING_PAYMENT_KEY);
+    }
+  } catch {
+    // localStorage unavailable (private mode, quota) — payment still
+    // works for this tab, it just won't survive a refresh.
+  }
+}
+
 const useCartStore = create((set, get) => ({
   cart_data: {},
-  checkout: {},
+  checkout: loadPendingPayment(),
   stripe: false,
   cartBusy: false,
   // False until the initial getCart() (fired on app mount) settles. Guards
@@ -73,10 +103,12 @@ const useCartStore = create((set, get) => ({
     return CartService.checkoutCart().then(
       (response) => {
         set({ checkout: response, stripe: true });
+        persistPendingPayment(response);
       },
       (error) => {
         const message = error.response?.data?.detail;
         set({ checkout: {}, stripe: false });
+        persistPendingPayment({});
         notificationToast(message, "error");
         return Promise.reject();
       }
@@ -86,14 +118,16 @@ const useCartStore = create((set, get) => ({
   checkoutPaymentCart: (id) => {
     return CartService.checkoutPaymentCart(id).then(
       (response) => {
-        set((state) => ({
-          checkout: { ...state.checkout, checkout_stripe: response },
-          stripe: true,
-        }));
+        set((state) => {
+          const checkout = { ...state.checkout, checkout_stripe: response };
+          persistPendingPayment(checkout);
+          return { checkout, stripe: true };
+        });
       },
       (error) => {
         const message = error?.response?.data?.detail;
         set({ checkout: {}, stripe: false });
+        persistPendingPayment({});
         notificationToast(message, "error");
         return Promise.reject();
       }
@@ -119,6 +153,7 @@ const useCartStore = create((set, get) => ({
     return CartService.deleteCartAfterSuccesfullCheckout().then(
       () => {
         set({ cart_data: {}, checkout: {}, stripe: false });
+        persistPendingPayment({});
       },
       (error) => {
         const message =
@@ -159,7 +194,15 @@ const useCartStore = create((set, get) => ({
     );
   },
 
-  clearCart: () => set({ cart_data: {} }),
+  clearCart: () => {
+    persistPendingPayment({});
+    set({ cart_data: {}, checkout: {}, stripe: false });
+  },
+
+  clearPendingPayment: () => {
+    persistPendingPayment({});
+    set({ checkout: {}, stripe: false });
+  },
 }));
 
 export default useCartStore;

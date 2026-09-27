@@ -5,13 +5,17 @@ import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import PageMeta from "../../components/seo/PageMeta";
 import StatusPanel from "../../components/status/StatusPanel";
 import Button from "../../components/button/Button";
+import useCartStore from "../../stores/useCartStore";
 
 function CheckoutFinished() {
   const [t] = useTranslation("translation");
   const navigate = useNavigate();
+  const clearPendingPayment = useCartStore((state) => state.clearPendingPayment);
 
   useEffect(() => {
     localStorage.removeItem("checkoutStep");
+    clearPendingPayment();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

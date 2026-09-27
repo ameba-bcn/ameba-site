@@ -95,6 +95,24 @@ describe("Checkout - route guards", () => {
     expect(screen.queryByText("pagament")).not.toBeInTheDocument();
     expect(document.querySelector(".route-fallback")).not.toBeInTheDocument();
   });
+
+  it("does not redirect on a refresh mid-payment, once the cart is (legitimately) empty", () => {
+    // The backend destroys the cart as soon as a Stripe PaymentIntent is
+    // created for it, so a refresh on the payment step always finds an
+    // empty cart_data — but useCartStore restores the persisted pending
+    // payment, and the guard should let that through instead of bouncing
+    // to "/" as if the cart were simply abandoned.
+    localStorage.setItem("checkoutStep", "2");
+    useAuthStore.setState({ isLoggedIn: true, getMemberProfile: vi.fn().mockResolvedValue() });
+    useCartStore.setState({
+      cart_data: {},
+      cartLoaded: true,
+      checkout: { total: "25.00 €", checkout_stripe: { client_secret: "pi_123_secret" } },
+    });
+    renderWithProviders(<Checkout />, { route: "/pagament" });
+    expect(screen.getByText("pagament")).toBeInTheDocument();
+    expect(screen.getByTestId("payment")).toBeInTheDocument();
+  });
 });
 
 describe("Checkout - layout", () => {
