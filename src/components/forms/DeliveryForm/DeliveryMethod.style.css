@@ -55,12 +55,15 @@
   border-color: var(--color-naranja);
 }
 
-.option-tile--selected {
+/* Scoped to match (not just equal, but tie-broken by source order after)
+   the base ".delivery-method .option-tile" rule's specificity — a bare
+   ".option-tile--selected" here would lose to it and never apply. */
+.delivery-method .option-tile--selected {
   background: var(--color-negro);
   color: var(--color-cream);
 }
 
-.option-tile--selected:active {
+.delivery-method .option-tile--selected:active {
   border-color: var(--color-naranja);
 }
 
@@ -161,17 +164,26 @@
   padding: 16px 20px;
   border: 3px solid rgba(29, 29, 27, 0.25);
   background: transparent;
+  color: var(--color-negro);
   cursor: pointer;
-  transition: border-color 150ms ease, background-color 150ms ease;
+  transition: border-color 150ms ease, background-color 150ms ease, color 150ms ease;
 }
 
-.pickup-row--selected {
+/* Selected pickup row matches the selected option tile: solid black fill,
+   cream text, orange accent dot — rather than the lighter tint used
+   before, per design review. Scoped like ".delivery-method
+   .option-tile--selected" above, for the same specificity reason. */
+.pickup-list .pickup-row--selected {
   border-color: var(--color-negro);
-  background: rgba(253, 253, 253, 0.55);
+  background: var(--color-negro);
+  color: var(--color-cream);
 }
 
 .pickup-list .pickup-row:active {
   border-color: var(--color-naranja);
+}
+
+.pickup-list .pickup-row:not(.pickup-row--selected):active {
   background: rgba(232, 145, 45, 0.12);
 }
 
@@ -181,7 +193,7 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  border: 3px solid var(--color-negro);
+  border: 3px solid currentColor;
   position: relative;
 }
 
@@ -193,7 +205,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--color-negro);
+  background: var(--color-naranja);
 }
 
 .sr-only:focus-visible + .pickup-row__mark {
@@ -220,7 +232,7 @@
   font-family: var(--font-display);
   font-size: 24px;
   letter-spacing: 0.02em;
-  color: var(--color-negro);
+  color: inherit;
 }
 
 .pickup-row__tag {
@@ -228,15 +240,19 @@
   font-size: 14px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  border: 2px solid var(--color-negro);
+  border: 2px solid currentColor;
   padding: 4px 6px;
-  color: var(--color-negro);
+  color: inherit;
+}
+
+.pickup-row--selected .pickup-row__tag {
+  color: var(--color-naranja);
 }
 
 .pickup-row__address {
   font-family: var(--font-body);
   font-size: 14px;
-  color: var(--color-negro);
+  color: inherit;
   opacity: 0.85;
 }
 
@@ -246,7 +262,7 @@
   font-family: var(--font-body);
   font-weight: 600;
   font-size: 13px;
-  color: var(--color-negro);
+  color: inherit;
   text-decoration: none;
   white-space: nowrap;
 }
