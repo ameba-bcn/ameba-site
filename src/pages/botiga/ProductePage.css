@@ -168,17 +168,20 @@
   overflow: hidden;
 }
 
+/* A single-image product spans both grid columns instead of leaving an
+   empty second cell beside it. The 3/4 portrait ratio above is sized for a
+   half-width cell — kept at full width it would render absurdly tall, so
+   the full-width variant uses a landscape ratio instead. */
+.shop-product__gallery-cell--full {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 9;
+}
+
 .shop-product__gallery-image {
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
-}
-
-.shop-product__gallery-placeholder {
-  width: 100%;
-  height: 100%;
-  border: 1px dashed rgba(29, 29, 27, 0.3);
 }
 
 /* Full viewport bleed regardless of the 1100px reading column .shop-product
