@@ -63,6 +63,23 @@
   flex: none;
 }
 
+/* The wordmark logo ships as a black-on-transparent PNG, so we use its alpha
+   channel as a mask and paint the shape with the theme colour instead. */
+.navbar .menu-logo-img {
+  display: block;
+  width: 90px;
+  height: 28px;
+  background-color: currentColor;
+  -webkit-mask-image: url("/ameba-logo-2-n.png");
+  mask-image: url("/ameba-logo-2-n.png");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: left center;
+  mask-position: left center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
 .navbar .menu-logo-box a {
   display: flex;
   align-items: center;
@@ -559,5 +576,12 @@
 @media screen and (max-width: 350px) {
   .nb-row {
     font-size: 26px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .navbar .menu-logo-img {
+    width: 77px;
+    height: 24px;
   }
 }

@@ -38,7 +38,8 @@
 .ameba-footer__turntable {
   position: relative;
   width: 176px;
-  aspect-ratio: 387 / 319;
+  /* matches the ameba-deck.svg viewBox (506.35 x 399.51) */
+  aspect-ratio: 506.35 / 399.51;
 }
 
 .ameba-footer__turntable-art {
@@ -47,12 +48,14 @@
   height: 100%;
 }
 
+/* Fills the whole platter, up to the inner edge of the dotted groove band:
+   centre 251.55,239.78 with radius 162.87 in the artwork's coordinates. */
 .ameba-footer__logo {
   display: flex;
   position: absolute;
-  left: 17.5%;
-  top: 20.8%;
-  width: 48%;
+  left: 8.04%;
+  top: 8.58%;
+  width: 64.33%;
   aspect-ratio: 1;
   border-radius: 50%;
   overflow: hidden;
@@ -69,22 +72,35 @@
   height: 100%;
 }
 
+/* Fills the pad cut out of the deck at 68.48,385.12 (47.47 x 35.06). */
 .ameba-footer__play {
   position: absolute;
-  left: 12%;
-  top: 86%;
-  width: 15%;
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
+  left: 4.05%;
+  top: 85.72%;
+  width: 9.37%;
+  height: 8.78%;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
-  border-radius: 50%;
+  border-radius: 0;
   background-color: transparent;
   cursor: pointer;
   padding: 0;
-  transition: background-color 0.2s ease, transform 0.15s ease;
+  transition: background-color 0.2s ease;
+}
+
+.ameba-footer__play .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.ameba-footer__play svg {
+  width: auto;
+  height: 70%;
 }
 
 .ameba-footer__play svg path {
