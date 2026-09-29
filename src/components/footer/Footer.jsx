@@ -70,10 +70,7 @@ export default function Footer() {
       <div className="ameba-footer__grid">
         <div className="ameba-footer__brand">
           <div className="ameba-footer__turntable">
-            <TurntableIcon
-              className="ameba-footer__turntable-art"
-              thinness={3}
-            />
+            <TurntableIcon className="ameba-footer__turntable-art" />
             <div className="ameba-footer__logo" aria-hidden="true" {...vinyl.bind}>
               <AmebaLogo fill="var(--color-naranja)" />
             </div>
@@ -83,11 +80,7 @@ export default function Footer() {
               aria-label={t(vinyl.playing ? "footer.pause" : "footer.play")}
               onClick={vinyl.togglePlay}
             >
-              <Icon
-                icon={vinyl.playing ? "pause" : "play"}
-                width="12"
-                height="12"
-              />
+              <Icon icon={vinyl.playing ? "pause" : "play"} />
             </button>
           </div>
           <p className="ameba-footer__tagline">{t("footer.tagline")}</p>
@@ -109,10 +102,15 @@ export default function Footer() {
         <nav className="ameba-footer__nav" aria-label={t("menu.associacio")}>
           <h3>{t("menu.associacio")}</h3>
           <div className="ameba-footer__links">
-            <NavLink to="/associacio/nou-soci">
-              {t("footer.hazte-socio")}
+            <NavLink to="/associacio">
+              {t("menu.submenu-associacio-qui-som")}
             </NavLink>
-            <NavLink to="/associacio/socis">{t("footer.socios")}</NavLink>
+            <NavLink to="/associacio/socis">
+              {t("menu.submenu-associacio-socis")}
+            </NavLink>
+            <NavLink to="/associacio/nou-soci">
+              {t("menu.submenu-associacio-fes-te-soci")}
+            </NavLink>
           </div>
         </nav>
 

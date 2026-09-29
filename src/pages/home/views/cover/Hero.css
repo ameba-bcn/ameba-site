@@ -80,12 +80,16 @@
   line-height: 0.95;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  /* Relleno = fondo de la caja: tapa la mitad interior del trazo,
-     dejando un outline efectivo fi. 1px en lloc d'un valor sub-píxel:
-     per sota d'1px Firefox no dibuixa el trazo de forma consistent
-     amb el fill i les lletres surten trencades. */
+  /* Outline fi sense recórrer a un trazo sub-píxel (que els navegadors
+     arrodoneixen a la graella de píxels i acaba veient-se igual de
+     gruixut). El trazo es dibuixa centrat sobre el contorn de la lletra
+     i per defecte es pinta A SOBRE del fill, així que es veu sencer;
+     amb paint-order invertit el fill —del mateix color que la caixa—
+     es pinta al damunt i tapa la meitat interior, de manera que el
+     gruix visible queda a la meitat del valor declarat. */
   color: var(--color-negro);
-  -webkit-text-stroke: 1px var(--color-cream);
+  -webkit-text-stroke: 2px var(--color-cream);
+  paint-order: stroke fill;
 }
 
 /* Tarjeta roja estrecha a la derecha */
@@ -152,8 +156,12 @@
 
   .hero__title-line-inner {
     font-size: clamp(32px, 9vw, 40px);
+    /* Aquí el fill ha de ser transparent (a sota hi ha la foto), així
+       que paint-order no tapa res i el trazo es veu sencer: per aprimar
+       només queda baixar-ne el gruix. */
     color: transparent;
     -webkit-text-stroke: 1.2px var(--color-cream);
+    paint-order: normal;
   }
 
   .hero__card {

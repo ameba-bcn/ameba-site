@@ -20,6 +20,17 @@ import "./MegaTitle.css";
  * el split lo hace el propio componente. stroke-width se controla vía
  * la prop `strokeWidth` (atributo SVG, no CSS) para que ese mismo hook
  * pueda animarlo con GSAP sin que una regla CSS le gane la cascada.
+ *
+ * El trazo lleva vector-effect="non-scaling-stroke": sin él, el ancho
+ * está en unidades del viewBox y por tanto lo multiplica el mismo
+ * factor con el que el SVG se reescala para caber (width/height vs.
+ * viewBox), así que un stroke-width de 1 acaba pintándose a un ancho
+ * fraccionario arbitrario (0,6-0,8 px según el ancho del contenedor).
+ * Esa fracción es justo lo que se rasteriza como una línea gris y
+ * dentada en pantallas de densidad 1x: no hay píxel físico entero que
+ * llenar. Con non-scaling-stroke el ancho se aplica DESPUÉS de la
+ * transformación, en espacio de pantalla, así que es exactamente el
+ * valor pedido en px en cualquier viewport y en cualquier pantalla.
  */
 export default function MegaTitle({
   title,
@@ -102,6 +113,7 @@ export default function MegaTitle({
             y="0"
             xmlSpace="preserve"
             strokeWidth={strokeWidth}
+            vectorEffect="non-scaling-stroke"
           >
             {Array.from(title).map((char, i) => (
               // eslint-disable-next-line react/no-array-index-key

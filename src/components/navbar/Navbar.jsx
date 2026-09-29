@@ -10,7 +10,6 @@ import useUIStore from "../../stores/useUIStore";
 import useAuthStore from "../../stores/useAuthStore";
 import useCartStore from "../../stores/useCartStore";
 import Icon from "../ui/Icon";
-import AmebaBlob from "../ui/logo/AmebaBlob";
 import { gsap, SplitText, prefersReducedMotion } from "../../utils/gsapSetup";
 import useGsapContext from "../../hooks/use-gsap-context";
 
@@ -105,14 +104,12 @@ export default function Navbar({ isErrored = false }) {
           <div className="menuSuperior">
             <div className="menuSuperior__inner">
               <div className="menu-logo-box">
-                <NavLink to="/" data-item="AMEBA">
-                  <span className="menuAmebalogo">
-                    <AmebaBlob
-                      size={isMobile ? 24 : 28}
-                      color="cream"
-                    />
-                  </span>
-                  <span className="menu-wordmark">AMEBA</span>
+                <NavLink to="/" aria-label="AMEBA">
+                  <span
+                    className="menuAmebalogo menu-logo-img"
+                    role="img"
+                    aria-label="AMEBA"
+                  />
                 </NavLink>
               </div>
               {isMobile
