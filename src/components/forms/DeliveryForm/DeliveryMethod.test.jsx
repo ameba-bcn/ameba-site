@@ -71,6 +71,31 @@ describe("DeliveryMethod", () => {
     expect(document.getElementById("shipping_city")).toBeInTheDocument();
   });
 
+  it("persists shipping as soon as the tile is picked, before any address is typed", async () => {
+    // El resumen del pedido lee delivery_method del carrito. Si esto no se
+    // guarda al momento, sigue diciendo "recollida, gratis" hasta que el
+    // autoguardado de la dirección se dispara.
+    const mockSetDeliveryMethod = vi.fn().mockResolvedValue();
+    useCartStore.setState({
+      cart_data: {
+        ...mockCartRegular,
+        delivery_method: "pickup",
+        pickup_location: "trama",
+      },
+      setDeliveryMethod: mockSetDeliveryMethod,
+    });
+    renderWithProviders(<DeliveryMethod />);
+    mockSetDeliveryMethod.mockClear();
+
+    fireEvent.click(screen.getAllByText("Enviament")[0]);
+
+    await waitFor(() => {
+      expect(mockSetDeliveryMethod).toHaveBeenCalledWith({
+        delivery_method: "shipping",
+      });
+    });
+  });
+
   it("auto-saves the shipping address once every field is valid and blurred", async () => {
     const mockSetDeliveryMethod = vi.fn().mockResolvedValue();
     useCartStore.setState({

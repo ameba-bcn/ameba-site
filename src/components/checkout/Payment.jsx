@@ -32,30 +32,30 @@ export default function Payment() {
 
   const isStripeReady = !!(stripe_public && client_secret && stripePromise);
 
+  const termsCheckbox = (
+    <label className="payment-terms">
+      <input
+        type="checkbox"
+        checked={terms}
+        onChange={(e) => setTerms(e.target.checked)}
+      />
+      <span>
+        {t("checkout.acceptar-pre")}
+        <Link to="/legal">{t("checkout.acceptar-link")}</Link>
+        {t("checkout.acceptar-post")}
+      </span>
+    </label>
+  );
+
   return (
     <div className="payment-content">
       {!isPaymentFree && (
-        <>
-          <div className="payment-secure-note">
-            <span className="ck-lbl">{t("checkout.pago-seguro-titol")}</span>
-            <span className="payment-secure-note__text">
-              {t("checkout.pago-seguro-text")}
-            </span>
-          </div>
-
-          <label className="payment-terms">
-            <input
-              type="checkbox"
-              checked={terms}
-              onChange={(e) => setTerms(e.target.checked)}
-            />
-            <span>
-              {t("checkout.acceptar-pre")}
-              <Link to="/legal">{t("checkout.acceptar-link")}</Link>
-              {t("checkout.acceptar-post")}
-            </span>
-          </label>
-        </>
+        <div className="payment-secure-note">
+          <span className="ck-lbl">{t("checkout.pago-seguro-titol")}</span>
+          <span className="payment-secure-note__text">
+            {t("checkout.pago-seguro-text")}
+          </span>
+        </div>
       )}
 
       <div className="payment-box">
@@ -63,7 +63,7 @@ export default function Payment() {
           <FreeCheckout />
         ) : isStripeReady ? (
           <Elements stripe={stripePromise} options={options}>
-            <PaymentForm disabled={!terms} />
+            <PaymentForm disabled={!terms} beforeSubmit={termsCheckbox} />
           </Elements>
         ) : (
           <Spinner size={40} alone />
