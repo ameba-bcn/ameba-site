@@ -8,7 +8,10 @@ import "./PaymentForm.css";
 import Button from "../../button/Button";
 import notificationToast from "../../../utils/utils";
 
-function PaymentForm({ disabled = false }) {
+// `beforeSubmit` se pinta entre el formulario de Stripe y el botón: es donde
+// va la aceptación de condiciones, que tiene que leerse justo antes de pagar y
+// no al principio de la página, separada del CTA por toda la tarjeta.
+function PaymentForm({ disabled = false, beforeSubmit = null }) {
   const [processing, setProcessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
@@ -49,6 +52,7 @@ function PaymentForm({ disabled = false }) {
       <div className="payment-body">
         <form onSubmit={handleSubmit}>
           <PaymentElement options={paymentElementOptions} />
+          {beforeSubmit}
           <Button
             variant="contained"
             color="primary"

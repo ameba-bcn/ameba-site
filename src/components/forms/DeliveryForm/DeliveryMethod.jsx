@@ -87,9 +87,19 @@ export default function DeliveryMethod() {
   const handleMethodChange = (value) => {
     if (value === "pickup") {
       selectPickup(pickup);
-    } else {
-      setMethod(value);
+      return;
     }
+    setMethod(value);
+    // El resumen del pedido lee delivery_method del carrito, no de este
+    // estado local, así que sin persistir aquí seguiría diciendo "recollida,
+    // gratis" hasta que el autoguardado de la dirección se disparase — que
+    // exige haber escrito los cuatro campos y que validen.
+    //
+    // Guardar "shipping" sin dirección es seguro: el backend solo rechaza el
+    // PATCH si el código postal está puesto y cae fuera de la península, y
+    // isDeliveryComplete sigue bloqueando el paso al pago hasta que la
+    // dirección esté entera.
+    setDeliveryMethod({ delivery_method: "shipping" });
   };
 
   // No explicit "save address" button: once every field is filled in and

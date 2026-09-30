@@ -113,3 +113,8 @@
         width: 80vw;
     }
 }
+/* La aceptación de condiciones vive dentro del formulario, entre la tarjeta
+   de Stripe y el botón de pagar, para que se lea justo antes del CTA. */
+.payment-body>form>.payment-terms {
+    margin-top: 20px;
+}

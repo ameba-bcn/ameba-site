@@ -22,8 +22,11 @@ vi.mock("./FreeCheckout", () => ({
 }));
 
 vi.mock("../forms/Payment/PaymentForm", () => ({
-  default: ({ disabled }) => (
+  // El mock pinta `beforeSubmit` igual que el componente real: ahí es donde
+  // vive ahora la aceptación de condiciones, justo encima del botón de pagar.
+  default: ({ disabled, beforeSubmit }) => (
     <div data-testid="payment-form" data-disabled={disabled ? "true" : "false"}>
+      {beforeSubmit}
       PaymentForm
     </div>
   ),
