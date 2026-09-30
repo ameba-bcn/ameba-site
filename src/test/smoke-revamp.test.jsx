@@ -55,6 +55,9 @@ describe("revamp smoke", () => {
       screen.getByText(`AMEBA ${new Date().getFullYear()} © · Tots els drets reservats`),
     ).toBeInTheDocument();
     expect(screen.getByText("Agenda")).toBeInTheDocument();
-    expect(screen.getByText("Soci@s")).toBeInTheDocument();
+    expect(screen.getByText("Arxiu")).toBeInTheDocument();
+    expect(
+      screen.getByText("Projectes de socis i sòcies"),
+    ).toBeInTheDocument();
   });
 });
