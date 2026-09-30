@@ -10,7 +10,8 @@ import useProfileStore from "./stores/useProfileStore";
 import useAuthStore from "./stores/useAuthStore";
 import useDataStore from "./stores/useDataStore";
 import useCartStore from "./stores/useCartStore";
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import legacyRoutes from "./components/routing/legacyRoutes";
 import Footer from "./components/footer/Footer";
 import Menu from "./components/navbar/Navbar";
 import ScrollTop from "./components/layout/ScrollTop";
@@ -167,6 +168,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/qr-view" element={<QrLanding />} />
               <Route path="/event-ticket" element={<EventTicket />} />
+              {legacyRoutes()}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
