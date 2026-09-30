@@ -43,12 +43,22 @@ function SociDetail() {
     .filter(Boolean);
   const links = mediaUrls.filter((link) => !iframesValidation(link));
 
-  const notFound = !loading && !name;
+  // Member.is_active en el backend es la vigencia de la membresía más reciente
+  // (starts < now < expires). El directorio ya lo filtra, pero el endpoint de
+  // detalle sólo filtra public=True y sigue devolviendo 200 para un socio
+  // caducado, así que sin esto la ficha seguiría siendo navegable por URL
+  // directa: enlaces antiguos, historial o resultados de búsqueda.
+  const isExpired = project?.is_active === false;
+  const notFound = !loading && (!name || isExpired);
 
   if (notFound) {
     return (
       <PageLayout section="socis" promo>
-        <PageMeta title={t("footer.socios")} url={`/associacio/socis/${id}`} />
+        <PageMeta
+          title={t("footer.socios")}
+          url={`/associacio/socis/${id}`}
+          noindex
+        />
         <div className="soci-detail__not-found">
           <p>{t("errors.linkBuit1")}</p>
           <p>{t("errors.linkBuit2")}</p>

@@ -11,7 +11,10 @@ export const STATS = [
 ];
 
 export const BENEFITS = [
-  { key: "formacio", bullets: ["tallers", "mentories"] },
+  // "mentories" fuera de momento: el programa de mentorías todavía no se
+  // puede ofrecer. Las cadenas nouSoci.benefit-formacio-bullet-mentories
+  // (ca/es) siguen en translation.json para poder reactivarlo sin retraducir.
+  { key: "formacio", bullets: ["tallers"] },
   { key: "visibilitat", bullets: ["perfil", "radio", "playlist", "newsletter"] },
   { key: "comunitat", bullets: ["trobades", "banc"] },
 ];
