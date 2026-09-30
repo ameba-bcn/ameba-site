@@ -11,6 +11,7 @@ import {
   truncate,
   sortByDate,
   sortByProperty,
+  sortSizes,
   isDateExpired,
 } from "./utils";
 
@@ -178,6 +179,39 @@ describe("sortByDate", () => {
     const result = sortByDate(arr);
     expect(result[0].datetime).toBe("2024-06-01");
     expect(result[2].datetime).toBe("2024-01-01");
+  });
+});
+
+describe("sortSizes", () => {
+  it("orders sizes XS through XXXL regardless of input order", () => {
+    const result = sortSizes(["L", "XS", "XXL", "S", "XL", "M", "XXXL"]);
+    expect(result).toEqual(["XS", "S", "M", "L", "XL", "XXL", "XXXL"]);
+  });
+
+  it("is case-insensitive", () => {
+    expect(sortSizes(["l", "xs", "m"])).toEqual(["xs", "m", "l"]);
+  });
+
+  it("pushes unrecognized sizes to the end, keeping their relative order", () => {
+    expect(sortSizes(["UNIC", "M", "S"])).toEqual(["S", "M", "UNIC"]);
+  });
+
+  it("orders by the leading size code when values carry extra text", () => {
+    // ProductDetails.jsx displays `el.split(" ")[0]` — variant values can
+    // be more than a bare code (e.g. "XL - Extra Large").
+    const result = sortSizes(["XL - Extra Large", "L - Large", "M - Medium", "S - Small"]);
+    expect(result).toEqual(["S - Small", "M - Medium", "L - Large", "XL - Extra Large"]);
+  });
+
+  it("orders real variant values (e.g. \"XL unisex\")", () => {
+    const result = sortSizes(["XL unisex", "L unisex", "M unisex", "S unisex"]);
+    expect(result).toEqual(["S unisex", "M unisex", "L unisex", "XL unisex"]);
+  });
+
+  it("does not mutate the input array", () => {
+    const input = ["L", "S"];
+    sortSizes(input);
+    expect(input).toEqual(["L", "S"]);
   });
 });
 

@@ -10,8 +10,8 @@ export default function CartToast() {
   const { user_profile = "" } = useProfileStore();
   const checkoutRedirect =
     user_profile === "LOGGED" || user_profile === "MEMBER"
-      ? "/checkout"
-      : "/login";
+      ? "/pagament"
+      : "/inicia-sessio";
   const { item_variants = [] } = cart_data;
   const [t] = useTranslation("translation");
 

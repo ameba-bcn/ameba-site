@@ -2,11 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
 }
 
 .card-view__breadcrumbs {
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-size: 24px;
   font-weight: 500;
   text-transform: uppercase;
@@ -35,7 +35,7 @@
 .card-view__title-box {
   flex: 1;
   min-width: 0;
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-weight: 800;
   font-size: 90px;
   line-height: 0.9;
@@ -117,6 +117,17 @@
   .card-view__header {
     width: 90%;
   }
+
+  /* La etiqueta "tallas disponibles" ocupa toda la fila para que las
+     tallas siempre queden juntas en la fila siguiente, en vez de que la
+     primera se cuele al final de la fila del título y el resto se parta. */
+  .modal-card___title_small {
+    flex: 1 0 100%;
+  }
+
+  .modal-sizes-row {
+    row-gap: 8px;
+  }
 }
 
 .card-view__description-title {
@@ -128,7 +139,7 @@
 }
 
 .card-view__description-content {
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-body);
   font-size: 1.1rem;
   margin-top: -0.3rem;
   margin-bottom: 0.5rem;
@@ -152,7 +163,7 @@
 .modal-card___title_small {
   display: flex;
   align-items: center;
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-size: 26px;
   text-transform: uppercase;
 }
@@ -193,7 +204,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-body);
   font-size: 20px;
   color: var(--color-negro);
 }
@@ -210,7 +221,7 @@
 .interactiveDataBox-activitat__text-loca a,
 .interactiveDataBox-activitat__text-loca-fullview a {
   color: inherit;
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-body);
   font-size: 20px;
   line-height: 20px;
 }
@@ -228,6 +239,8 @@
 
 .interactiveDataBox-product-sizes__button_active,
 .interactiveDataBox-product-sizes__button {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   min-width: 30px;
   height: 30px;
@@ -245,8 +258,11 @@
   color: var(--color-cream);
 }
 
+/* Background comes from the GSAP/Flip-driven .modal-sizes-row__highlight
+   underneath (ProductDetails.jsx) — this stays transparent so it shows
+   through, only the text color flips. */
 .interactiveDataBox-product-sizes__button_active {
-  background-color: var(--color-cream);
+  background-color: transparent;
   color: var(--color-negro);
 }
 
@@ -255,9 +271,18 @@
 }
 
 .modal-sizes-row {
+  position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+}
+
+.modal-sizes-row__highlight {
+  position: absolute;
+  z-index: 0;
+  background-color: var(--color-cream);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .modal-center-label {

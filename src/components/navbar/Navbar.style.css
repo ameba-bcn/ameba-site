@@ -4,45 +4,52 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  animation: navbar-appear 0.2s ease-out;
+  /* Entrance + auto-hide-on-scroll are GSAP-driven (Navbar.jsx) — no CSS
+     animation/class here, so nothing fights its inline transform.
+     The horizontal overflow-clip lives on .menuContainer below, NOT
+     here: a `transform` (Navbar.jsx sets one on this exact element,
+     even at rest it's translate(0,0)) combined with any non-`visible`
+     overflow on the SAME element makes Chromium/WebKit clip it on
+     BOTH axes as a single compositing rect — silently eating the
+     account/cart dropdown popovers that are meant to overflow below
+     this 80px bar, despite overflow-y being left `visible` on paper. */
 }
 
-.navbar--hidden {
-  display: none;
-}
-
-@keyframes navbar-appear {
-  from {
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.navbar .menuContainer {
+  position: relative;
+  /* Being position:fixed (on .navbar) takes this out of .app's containing
+     block, so .app's own overflow-x:hidden (App.css) can't clip anything
+     that overflows in here — any child that overflows horizontally would
+     otherwise leak into page-wide scroll-x. Using `clip` instead of
+     `hidden` matters: per spec, pairing overflow-x:hidden with an
+     unset (visible) overflow-y forces overflow-y to compute as `auto`,
+     which clipped the account/cart dropdown popovers rendered inside
+     .navbar. `clip` is exempt from that visible->auto coercion, so
+     overflow-y stays visible and the popovers show fully. This rule is
+     deliberately on .menuContainer, not .navbar — see the comment above. */
+  overflow-x: clip;
 }
 
 .navbar .menuSuperior {
-  background-color: var(--color-negro) !important;
+  background-color: var(--color-negro);
+  height: 80px;
+  box-sizing: border-box;
+}
+
+/* Content row caps at the design's 1240px and centers, instead of the
+   fluid --page-margin-x used by page content — keeps the bar dense and
+   anchored on ultra-wide screens per the NavBar redesign. */
+.navbar .menuSuperior__inner {
+  max-width: 1240px;
+  height: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  flex-flow: row;
   justify-content: space-between;
-  padding: 15px;
-}
-
-.navbar .menuButton {
-  display: flex;
-  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
-}
-
-.navbar .menuButton_mobile {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
+  gap: 28px;
+  padding: 0 28px;
 }
 
 .navbar .menu-logo-box {
@@ -52,61 +59,43 @@
 }
 
 .navbar .menuAmebalogo {
-  width: 50px;
-  height: 50px;
+  display: flex;
+  flex: none;
 }
 
-.navbar .cart-cistella {
-  cursor: pointer;
-}
-
-.navbar .cart-cistella a {
-  color: var(--color-cream) !important;
+/* The wordmark logo ships as a black-on-transparent PNG, so we use its alpha
+   channel as a mask and paint the shape with the theme colour instead. */
+.navbar .menu-logo-img {
+  display: block;
+  width: 90px;
+  height: 28px;
+  background-color: currentColor;
+  -webkit-mask-image: url("/ameba-logo-2-n.png");
+  mask-image: url("/ameba-logo-2-n.png");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: left center;
+  mask-position: left center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
 }
 
 .navbar .menu-logo-box a {
-  font-family: "Bebas Neue";
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-family: var(--font-display);
   cursor: pointer;
   text-decoration: none;
-  font-size: 2.5rem;
+  font-size: 29px;
+  letter-spacing: 0.04em;
   font-weight: 400;
-  display: inline-block;
   color: var(--color-cream);
   position: relative;
-  transition: all 0.5s ease-in-out;
 }
 
-.navbar .cartIconMenu,
-.navbar .sessio-menu-button {
-  font-family: "Bebas Neue";
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 2.5rem;
-  font-weight: 400;
-  display: inline-block;
-  color: var(--color-cream);
-  position: relative;
-  transition: all 0.5s ease-in-out;
-}
-
-.navbar .cartIconMenu::before,
-.navbar .sessio-menu-button::before {
-  content: attr(data-item);
-  transition: 0.5s;
+.navbar .menu-logo-box a:hover {
   color: var(--color-naranja);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  overflow: hidden;
-}
-
-.navbar .cartIconMenu:hover::before,
-.navbar .sessio-menu-button:hover::before {
-  width: 100%;
-  transition: all 0.5s ease-in-out;
 }
 
 .navbar .nav-ul {
@@ -115,7 +104,9 @@
   align-items: center;
   justify-content: center;
   vertical-align: middle;
+  gap: 32px;
   margin: 0;
+  padding: 0;
 }
 
 .navbar .nav-ul li {
@@ -124,245 +115,138 @@
   white-space: nowrap;
 }
 
-.navbar .nav-ul div a,
-.navbar .nav-ul li a {
-  display: inline-block;
-  font-family: "Bebas Neue";
-  font-size: 2.5rem;
-  margin-right: 20px;
-  font-weight: 400;
+/* Section links: chip cuadrat + etiqueta en el color de la seva secció,
+   subratllat en hover/actiu — com un .nb-link del disseny. */
+.navbar .nav-section-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
   text-decoration: none;
+  color: var(--chip-color, var(--color-cream));
+  padding: 8px 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.navbar .nav-color-chip {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
+  background-color: var(--chip-color, var(--color-cream));
+}
+
+.navbar .nav-section-link:hover,
+.navbar .nav-section-link.active {
+  border-bottom-color: currentColor;
+}
+
+/* Right icon group: user / cart / language */
+.navbar .nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 34px;
+}
+
+.navbar .nav-icon-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Blob de acceso/login: cream, a naranja en hover como el resto de
+   controles de la navbar rediseñada. */
+.navbar .nav-user-blob path {
+  transition: fill 0.2s ease;
+}
+
+.navbar .nav-icon-link:hover .nav-user-blob path {
+  fill: var(--color-naranja);
+}
+
+.navbar .nav-lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 8px 4px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 19px;
+  letter-spacing: 0.04em;
   color: var(--color-cream);
-  transition: all 0.5s ease-in-out;
-  position: relative;
   text-transform: uppercase;
 }
 
-.navbar .nav-ul div a::before,
-.navbar .nav-ul li a::before {
-  content: attr(data-item);
-  transition: 0.5s;
+.navbar .nav-lang-toggle:hover {
   color: var(--color-naranja);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 10;
-  width: 0;
-  overflow: hidden;
 }
 
-.navbar .nav-ul div a:hover::before,
-.navbar .nav-ul li a:hover::before {
-  width: 100%;
-  transition: all 0.5s ease-in-out;
+/* The language icon otherwise only reacts to hovering its own SVG box
+   (Icon.css's generic `#hoverable-black-svg:hover`, tinting red) instead
+   of the button as a whole, and to a different color than the "CAT"/
+   "CAST" label next to it (which just inherits the button's own hover
+   color above). Higher specificity here makes icon + label move and
+   recolor together as one button, matching the rest of the navbar. */
+.navbar .nav-lang-toggle:hover #hoverable-black-svg path {
+  fill: var(--color-naranja);
 }
 
-.navbar .nav-ul div a.active,
-.navbar .nav-ul li a.active {
-  color: var(--color-rojo);
-}
-
-.navbar .logname-li {
-  width: fit-content;
-  display: flex;
-  vertical-align: middle;
-  padding-right: 0px;
-  margin-right: 0px;
-}
-
+.navbar .logname-li,
 .navbar .logname-li-mobile {
-  width: 100%;
   display: flex;
-  vertical-align: middle;
-  padding-right: 0px;
-  margin-right: 0px;
+  align-items: center;
 }
 
-.navbar .logname-li-mobile div {
-  width: 100%;
+/* Icon button shared by the cart trigger (desktop popover and the
+   collapsed mobile header) — 44×44 hit target, badge pinned top-right. */
+.nb-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-cream);
+  position: relative;
+}
+
+.nb-icon[aria-expanded="true"] {
+  color: var(--color-naranja);
+}
+
+.nb-count {
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  background: var(--color-naranja);
+  color: var(--color-negro);
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .navbar .menuButtons {
   justify-content: flex-end;
 }
 
-.navbar .nav-ul_box-mobile {
-  width: 100%;
-  overflow: hidden;
-  max-height: 0;
-  background-color: var(--color-negro);
-  transition: max-height 0.35s ease;
-}
-
-.navbar .nav-ul_box-mobile--open {
-  max-height: 500px;
-}
-
-.navbar .nav-ul_box-mobile--open.nav-ul_box-mobile--has-cart {
-  max-height: fit-content;
-}
-
-.navbar .nav-ul_box-mobile .nav-ul_mobile {
-  opacity: 0;
-  transition: opacity 0.25s ease;
-}
-
-.navbar .nav-ul_box-mobile--open .nav-ul_mobile {
-  opacity: 1;
-  transition: opacity 0.3s ease 0.1s;
-}
-
-.navbar .nav-ul_mobile {
-  background-color: var(--color-negro);
-  list-style-type: none;
-  list-style: none;
+.menu-mobile-actions {
   display: flex;
-  flex-direction: column;
-  text-align: start;
-  margin-bottom: 0;
-  padding-bottom: 1em;
-  padding-left: 2em;
-  margin-block-start: 0px;
-}
-
-.navbar .nav-ul_mobile div,
-.navbar .nav-ul_mobile li {
-  justify-content: flex-start;
-}
-
-.navbar .nav-ul_mobile div a.active,
-.navbar .nav-ul_mobile li a.active {
-  color: var(--color-rojo);
-}
-
-.navbar .nav-ul_mobile div a,
-.navbar .nav-ul_mobile li a {
-  margin: 4px 0px;
-  display: inline-block;
-  font-family: "Bebas Neue";
-  font-size: 2.5rem;
-  margin-right: 20px;
-  font-weight: 400;
-  text-decoration: none;
-  color: var(--color-cream);
-  transition: all 0.5s ease-in-out;
-  position: relative;
-  text-transform: uppercase;
-}
-
-.navbar .nav-ul_mobile div a::before,
-.navbar .nav-ul_mobile li a::before {
-  content: attr(data-item);
-  transition: 0.5s;
-  color: var(--color-naranja);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 10;
-  width: 0;
-  overflow: hidden;
-}
-
-.navbar .nav-ul_mobile div a:hover::before,
-.navbar .nav-ul_mobile li a:hover::before {
-  width: 100%;
-  transition: all 0.5s ease-in-out;
-}
-
-.navbar .menu-lang li {
-  cursor: pointer;
-}
-
-.navbar .menu-lang li a {
-  color: var(--color-cream) !important;
-}
-
-.navbar .menu-lang li a:last-child {
-  margin-left: -20px;
-}
-
-.navbar .menu-lang li > a.active {
-  color: var(--color-amarillo) !important;
-}
-
-.navbar .cartIconMenu {
-  width: 2.2rem !important;
-  height: auto !important;
-  margin-left: 0px;
-  margin-right: 5px;
-  margin-bottom: 4px;
-  cursor: pointer;
-}
-
-.navbar .cart-icon-bubble-box {
-  margin-top: -18px;
-}
-
-.navbar .bubbleCart {
-  color: var(--color-negro);
-  position: relative;
-  top: 5px;
-  left: 25px;
-  width: 18px;
-  height: 18px;
-  padding: 2px 1px 0px 1px;
-  background-color: var(--color-naranja);
-  font-family: "Bebas Neue";
-  font-weight: 600;
-  font-size: 0.7em;
-  border-radius: 50%;
-}
-
-.navbar .bubbleCartMember {
-  color: var(--color-negro);
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  width: 18px;
-  height: 18px;
-  padding: 2px 5px 2px 6px;
-  background-color: var(--color-naranja);
-  font-family: "Bebas Neue";
-  font-weight: 600;
-  font-size: 0.3em;
-  border-radius: 50%;
-  box-shadow: 1px 1px 1px gray;
-}
-
-.navbar .cart-mobile__box {
-  background-color: var(--color-cream);
-  margin-left: -2em;
-  animation: fade 0.5s 1;
-  -webkit-animation: fade 0.5s 1;
-}
-
-.navbar .logBox {
-  vertical-align: middle;
-}
-
-.navbar .menu-mobile-session-box {
-  background-color: var(--color-cream);
-  width: calc(100% + 32px);
-  margin-left: -32px;
-  padding-right: 32px;
-  animation: fade 0.5s 1;
-  -webkit-animation: fade 0.5s 1;
-}
-
-.navbar .menu-mobile-session {
-  margin-left: 32px;
-}
-
-.navbar .dropdown-profile-mobile,
-.navbar .dropdown-logout-mobile {
-  color: var(--color-negro);
-  font-family: "Bebas Neue";
-  font-size: 2.5rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  cursor: pointer;
+  align-items: center;
+  gap: 2px;
 }
 
 .menu-icon {
@@ -370,9 +254,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
-  gap: 6px;
+  width: 44px;
+  height: 44px;
+  gap: 5px;
   cursor: pointer;
   background: none;
   border: none;
@@ -381,31 +265,323 @@
 
 .menu-icon__bar {
   display: block;
-  width: 28px;
-  height: 3px;
+  width: 23px;
+  height: 2px;
   background-color: var(--color-cream);
-  border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.menu-icon--open .menu-icon__bar:nth-child(1) {
-  transform: translateY(9px) rotate(45deg);
-}
-
-.menu-icon--open .menu-icon__bar:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-icon--open .menu-icon__bar:nth-child(3) {
-  transform: translateY(-9px) rotate(-45deg);
 }
 
 .menu-icon:hover .menu-icon__bar {
-  background-color: var(--color-rojo);
+  background-color: var(--color-naranja);
+}
+
+/* ---- Mobile drawer (full-screen takeover) ---- */
+
+.nb-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  background: var(--color-negro);
+  color: var(--color-cream);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  /* Same story as .navbar above: fixed positioning escapes .app's
+     overflow-x:hidden, so any row/button that overflows horizontally
+     inside the drawer would otherwise force page-wide scroll-x. */
+  overflow-x: hidden;
+  /* Open/close is GSAP-driven (Navbar.style.css sets the base state,
+     NavbarButtonsMobile.jsx plays a clip-path reveal timeline). */
+}
+
+.nb-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid rgba(242, 227, 201, 0.25);
+  flex: none;
+}
+
+.nb-drawer__brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-size: 25px;
+  letter-spacing: 0.04em;
+}
+
+.nb-drawer__close {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.nb-identity {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid rgba(242, 227, 201, 0.14);
+  flex: none;
+}
+
+.nb-identity__avatar {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  background: var(--color-naranja);
+  color: var(--color-negro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 20px;
+}
+
+.nb-identity__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.nb-identity__name {
+  font-family: var(--font-display);
+  font-size: 23px;
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+}
+
+.nb-identity__sub {
+  font-size: 11.5px;
+  color: rgba(242, 227, 201, 0.7);
+}
+
+.nb-glabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 16px;
+  margin: 18px 0 10px;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(242, 227, 201, 0.5);
+}
+
+.nb-glabel::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(242, 227, 201, 0.2);
+}
+
+.nb-drawer nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nb-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(242, 227, 201, 0.14);
+  padding: 0 16px;
+  min-height: 60px;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  color: var(--color-cream);
+  font-family: var(--font-display);
+  font-size: 30px;
+  letter-spacing: 0.03em;
+}
+
+.nb-row:hover {
+  background: rgba(242, 227, 201, 0.06);
+}
+
+.nb-row[aria-expanded="true"] {
+  background: rgba(242, 227, 201, 0.06);
+  border-bottom-color: transparent;
+}
+
+.nb-msq {
+  width: 15px;
+  height: 15px;
+  display: block;
+  flex: none;
+}
+
+.nb-chev {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border: 1.5px solid rgba(242, 227, 201, 0.35);
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--color-cream);
+  transition: transform 0.18s ease;
+}
+
+.nb-row[aria-expanded="true"] .nb-chev {
+  transform: rotate(180deg);
+  border-color: var(--color-naranja);
+  color: var(--color-naranja);
+}
+
+.nb-arrow {
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: rgba(242, 227, 201, 0.5);
+  flex: none;
+}
+
+.nb-row:hover .nb-arrow {
+  color: var(--color-naranja);
+}
+
+.nb-sub {
+  display: flex;
+  flex-direction: column;
+  background: rgba(242, 227, 201, 0.06);
+  border-bottom: 1px solid rgba(242, 227, 201, 0.14);
+  padding: 2px 16px 10px 44px;
+}
+
+.nb-sub a {
+  display: flex;
+  align-items: center;
+  min-height: 46px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(242, 227, 201, 0.86);
+  text-decoration: none;
+}
+
+.nb-sub a:hover {
+  color: var(--color-naranja);
+}
+
+.nb-arow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 0 16px;
+  min-height: 56px;
+  border-bottom: 1px solid rgba(242, 227, 201, 0.14);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-cream);
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+}
+
+.nb-arow:hover {
+  background: rgba(242, 227, 201, 0.06);
+}
+
+.nb-drawer__cta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 16px 18px;
+}
+
+.nb-badge--naranja {
+  background: var(--color-naranja);
+  border-color: var(--color-naranja);
+  color: var(--color-negro);
+}
+
+.nb-badge--naranja:hover {
+  background: var(--color-cream);
+  border-color: var(--color-cream);
+}
+
+.nb-badge--outline {
+  background: none;
+  border-color: rgba(242, 227, 201, 0.55);
+  color: var(--color-cream);
+}
+
+.nb-badge--outline:hover {
+  background: rgba(242, 227, 201, 0.08);
+  color: var(--color-cream);
+}
+
+.nb-drawer__footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 16px;
+  border-top: 1px solid rgba(242, 227, 201, 0.25);
+  flex: none;
+}
+
+.nb-drawer__footer-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(242, 227, 201, 0.6);
+}
+
+.nb-seg {
+  display: flex;
+  border: 1.5px solid rgba(242, 227, 201, 0.35);
+}
+
+.nb-seg button {
+  background: none;
+  border: none;
+  padding: 0 14px;
+  min-height: 38px;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 17px;
+  letter-spacing: 0.06em;
+  color: rgba(242, 227, 201, 0.6);
+}
+
+.nb-seg button[aria-pressed="true"] {
+  background: var(--color-cream);
+  color: var(--color-negro);
 }
 
 @media screen and (max-width: 350px) {
-  .navbar .nav-ul_mobile {
-    padding-left: 1.5em;
+  .nb-row {
+    font-size: 26px;
+  }
+}
+
+@media screen and (max-width: 760px) {
+  .navbar .menu-logo-img {
+    width: 77px;
+    height: 24px;
   }
 }

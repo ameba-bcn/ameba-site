@@ -117,6 +117,23 @@ function Icon(props) {
     </AmebaSvgWrapper>
   );
 
+  const truck = (
+    <AmebaSvgWrapper {...props}>
+      <g
+        className="stroke-icon"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M3 17h1a2 2 0 0 0 4 0h7a2 2 0 0 0 4 0h1v-6l-3 -5h-4v9m-9 0v-9h6" />
+        <circle cx="7" cy="17" r="2" />
+        <circle cx="17" cy="17" r="2" />
+      </g>
+    </AmebaSvgWrapper>
+  );
+
   const calendar = (
     <AmebaSvgWrapper {...props}>
       <path
@@ -168,6 +185,28 @@ function Icon(props) {
         fillRule="evenodd"
         clipRule="evenodd"
         d="M18.2963 11.97C17.9563 12.59 17.2963 13 16.5463 13H9.09634L7.99634 15H19.9963V17H7.99634C6.47634 17 5.51634 15.37 6.24634 14.03L7.59634 11.59L3.99634 4H1.99634V2H5.26634L6.20634 4H21.0063C21.7663 4 22.2463 4.82 21.8763 5.48L18.2963 11.97ZM19.3063 6H7.15634L9.52634 11H16.5463L19.3063 6ZM7.99634 18C6.89634 18 6.00634 18.9 6.00634 20C6.00634 21.1 6.89634 22 7.99634 22C9.09634 22 9.99634 21.1 9.99634 20C9.99634 18.9 9.09634 18 7.99634 18ZM16.0063 20C16.0063 18.9 16.8963 18 17.9963 18C19.0963 18 19.9963 18.9 19.9963 20C19.9963 21.1 19.0963 22 17.9963 22C16.8963 22 16.0063 21.1 16.0063 20Z"
+        fill="black"
+      />
+    </AmebaSvgWrapper>
+  );
+
+  const user = (
+    <AmebaSvgWrapper {...props}>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z"
+        fill="black"
+      />
+    </AmebaSvgWrapper>
+  );
+
+  const language = (
+    <AmebaSvgWrapper {...props}>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M11.99 2C6.47 2 2 6.48 2 12C2 17.52 6.47 22 11.99 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 11.99 2ZM18.92 8H15.97C15.65 6.75 15.19 5.55 14.59 4.44C16.43 5.07 17.96 6.35 18.92 8ZM12 4.04C12.83 5.24 13.48 6.57 13.91 8H10.09C10.52 6.57 11.17 5.24 12 4.04ZM4.26 14C4.1 13.36 4 12.69 4 12C4 11.31 4.1 10.64 4.26 10H7.64C7.56 10.66 7.5 11.32 7.5 12C7.5 12.68 7.56 13.34 7.64 14H4.26ZM5.08 16H8.03C8.35 17.25 8.81 18.45 9.41 19.56C7.57 18.93 6.04 17.66 5.08 16ZM8.03 8H5.08C6.04 6.34 7.57 5.07 9.41 4.44C8.81 5.55 8.35 6.75 8.03 8ZM12 19.96C11.17 18.76 10.52 17.43 10.09 16H13.91C13.48 17.43 12.83 18.76 12 19.96ZM14.34 14H9.66C9.57 13.34 9.5 12.68 9.5 12C9.5 11.32 9.57 10.65 9.66 10H14.34C14.43 10.65 14.5 11.32 14.5 12C14.5 12.68 14.43 13.34 14.34 14ZM14.59 19.56C15.19 18.45 15.65 17.25 15.97 16H18.92C17.96 17.65 16.43 18.93 14.59 19.56ZM16.36 14C16.44 13.34 16.5 12.68 16.5 12C16.5 11.32 16.44 10.66 16.36 10H19.74C19.9 10.64 20 11.31 20 12C20 12.69 19.9 13.36 19.74 14H16.36Z"
         fill="black"
       />
     </AmebaSvgWrapper>
@@ -346,6 +385,18 @@ function Icon(props) {
     </AmebaSvgWrapper>
   );
 
+  const play = (
+    <AmebaSvgWrapper {...props}>
+      <path d="M8 5V19L19 12L8 5Z" fill="black" />
+    </AmebaSvgWrapper>
+  );
+
+  const pause = (
+    <AmebaSvgWrapper {...props}>
+      <path d="M6 5H10V19H6V5ZM14 5H18V19H14V5Z" fill="black" />
+    </AmebaSvgWrapper>
+  );
+
   const tooltip = (
     <AmebaSvgWrapper {...props}>
       <svg
@@ -389,6 +440,10 @@ function Icon(props) {
       return shoppingCart;
     case "trash":
       return trash;
+    case "user":
+      return user;
+    case "language":
+      return language;
     case "replay":
       return replay;
     case "arrowDown":
@@ -423,6 +478,12 @@ function Icon(props) {
       return pdfFile;
     case "tooltip":
       return tooltip;
+    case "play":
+      return play;
+    case "pause":
+      return pause;
+    case "truck":
+      return truck;
     default:
       return null;
   }

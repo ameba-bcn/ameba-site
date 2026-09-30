@@ -1,10 +1,114 @@
-/* No background here: the view container decides its own color
-   (default cream comes from .app-main-view) */
+/* No background here by default: the view container decides its own color
+   (default cream comes from .app-main-view's gradient). A `section` page
+   paints its own tint instead — CSS custom properties only inherit
+   downward, so a --page-tint set here can't reach .app-main-view (its
+   ancestor) in App.css; painting the color directly on this root is the
+   only way that actually works. min-height covers the viewport below the
+   fixed 80px navbar so the tint fully replaces the cream underneath,
+   whatever the page's own content height ends up being. */
+.page-layout--associacio,
+.page-layout--festivals,
+.page-layout--lab,
+.page-layout--shop,
+.page-layout--auth,
+.page-layout--notfound,
+.page-layout--socis,
+.page-layout--compte,
+.page-layout--nou-soci,
+.page-layout--legal,
+.page-layout--status {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: calc(100vh - 80px);
+}
+
+.page-layout--associacio {
+  background-color: var(--section-associacio);
+}
+
+.page-layout--festivals {
+  background-color: var(--section-festivals);
+}
+
+.page-layout--lab {
+  background-color: var(--section-lab);
+}
+
+.page-layout--shop {
+  background-color: var(--section-shop);
+}
+
+.page-layout--nou-soci,
+.page-layout--legal {
+  background-color: var(--color-cream);
+}
+
+.page-layout--auth,
+.page-layout--notfound,
+.page-layout--socis,
+.page-layout--compte,
+.page-layout--status {
+  background-color: var(--color-negro);
+}
+
+/* Redesign 2026 section views align to the site's shared horizontal
+   margin (navbar, promo bar) instead of the legacy fixed 60px used by
+   pages not yet migrated — scoped to these so nothing else shifts. */
+.page-layout--associacio > .page-layout__inner,
+.page-layout--festivals > .page-layout__inner,
+.page-layout--lab > .page-layout__inner,
+.page-layout--shop > .page-layout__inner,
+.page-layout--notfound > .page-layout__inner,
+.page-layout--socis > .page-layout__inner,
+.page-layout--compte > .page-layout__inner,
+.page-layout--nou-soci > .page-layout__inner,
+.page-layout--legal > .page-layout__inner,
+.page-layout--status > .page-layout__inner {
+  padding-left: var(--page-margin-x);
+  padding-right: var(--page-margin-x);
+}
+
+/* Auth's card already carries its own internal gutters (aside/form
+   padding) sized to its 1240px max-width, like the reference design's
+   full-bleed page — the shared 60px/9vw inset would double them up. */
+.page-layout--auth > .page-layout__inner {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* .app sets text-align:center as a global legacy default (fine for the
+   pages that still rely on it); Associació's grid is left-aligned
+   throughout, per its reference. */
+.page-layout--associacio .page-layout__content,
+.page-layout--festivals .page-layout__content,
+.page-layout--notfound .page-layout__content,
+.page-layout--socis .page-layout__content,
+.page-layout--compte .page-layout__content,
+.page-layout--nou-soci .page-layout__content,
+.page-layout--legal .page-layout__content,
+.page-layout--auth .page-layout__content,
+.page-layout--status .page-layout__content,
+/* /checkout doesn't pass PageLayout's `section` prop (predates that
+   convention), so it never gets a .page-layout--* class — target its
+   legacy `className` directly instead. */
+.checkoutViewYellow .page-layout__content {
+  text-align: left;
+}
+
 .page-layout__inner {
   padding: 0 60px 40px 60px;
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+/* Pages that end in a full-bleed band meant to sit flush against the
+   footer (e.g. a closing CTA band, a buy bar) opt into this via
+   PageLayout's `flushBottom` prop instead of fighting the shared 40px
+   bottom padding with negative margins. */
+.page-layout__inner.page-layout__inner--flush {
+  padding-bottom: 0;
 }
 
 .page-layout__content {

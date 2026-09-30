@@ -1,0 +1,202 @@
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 80vh;
+  overflow: hidden;
+  background-color: var(--color-cream);
+}
+
+/* Foto full-bleed en duotono crema/sepia */
+.hero__media {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-cream);
+}
+
+.hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Desplaza la imagen hacia arriba dentro del recorte:
+     ↑ subir más = % mayor · ↓ bajar = % menor (50% = centrado) */
+  object-position: 50% 70%;
+  filter: grayscale(1) contrast(1.05);
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+}
+
+/* Titular a la izquierda, tarjeta a la derecha */
+.hero__content {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  padding: 10vh 7vw;
+}
+
+/* Titular outline en 4 cajas negras */
+.hero__title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+  text-align: left;
+}
+
+/* The box: background + padding, and the overflow-hidden mask the text
+   slides up out of (GSAP reveal in Hero.jsx — the inner span is the one
+   that actually carries the type). */
+.hero__title-line {
+  display: inline-block;
+  overflow: hidden;
+  padding: 6px 20px;
+  background-color: var(--color-negro);
+}
+
+/* Each line is its own box (so the GSAP reveal can sweep them in
+   independently, staggered — see Hero.jsx) rather than one shared
+   background, so at some widths/zoom levels a hairline of page
+   background shows through between stacked boxes: they sit flush at 0
+   logical gap, but the browser rasterizes each one independently, and
+   at a non-integer device pixel ratio (Windows' common 125%/150%
+   display scaling) each box's edge rounds to the nearest device pixel
+   on its own, occasionally landing a device pixel apart. A 1px vertical
+   overlap forces real geometric overlap instead of an exact touching
+   edge, so there's nothing left to round inconsistently — invisible
+   here since both boxes are the same solid color. */
+.hero__title-line + .hero__title-line {
+  margin-top: -1px;
+}
+
+.hero__title-line-inner {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5.5vw, 110px);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  /* Outline fi sense recórrer a un trazo sub-píxel (que els navegadors
+     arrodoneixen a la graella de píxels i acaba veient-se igual de
+     gruixut). El trazo es dibuixa centrat sobre el contorn de la lletra
+     i per defecte es pinta A SOBRE del fill, així que es veu sencer;
+     amb paint-order invertit el fill —del mateix color que la caixa—
+     es pinta al damunt i tapa la meitat interior, de manera que el
+     gruix visible queda a la meitat del valor declarat. */
+  color: var(--color-negro);
+  -webkit-text-stroke: 2px var(--color-cream);
+  paint-order: stroke fill;
+}
+
+/* Tarjeta roja estrecha a la derecha */
+.hero__card {
+  flex: 0 0 clamp(240px, 15vw, 300px);
+  margin-right: 8vw;
+  box-sizing: border-box;
+  background-color: var(--color-rojo);
+  color: var(--color-negro);
+  padding: 32px 26px;
+  text-align: left;
+  max-width: 240px;
+}
+
+.hero__bullets {
+  margin: 0 0 32px;
+  padding-left: 20px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-cream);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Botones apilados: caja negra + sombra crema desplazada */
+.hero__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Button styling itself lives in the shared HeroButton component
+   (src/components/ui/HeroButton.css) — reused by Associació's CTA. */
+
+@media screen and (max-width: 960px) {
+  .hero__content {
+    flex-direction: column;
+    padding: 6vh 16px;
+  }
+
+  .hero__card {
+    flex: 1 1 auto;
+    margin-right: 0;
+    width: 100%;
+    max-width: 420px;
+  }
+
+}
+
+/* Mobile (telèfon): la foto es converteix en una franja fixa amb el
+   titular ancorat al seu peu; la targeta de soci passa a text negre i
+   botons en fila, com a la resta de continguts d'aquesta vista. */
+@media screen and (max-width: 760px) {
+  .hero {
+    min-height: auto;
+  }
+
+  .hero__content {
+    padding: 20px 16px 24px;
+    gap: 18px;
+  }
+
+  .hero__title-line-inner {
+    font-size: clamp(32px, 9vw, 40px);
+    /* Aquí el fill ha de ser transparent (a sota hi ha la foto), així
+       que paint-order no tapa res i el trazo es veu sencer: per aprimar
+       només queda baixar-ne el gruix. */
+    color: transparent;
+    -webkit-text-stroke: 1.2px var(--color-cream);
+    paint-order: normal;
+  }
+
+  .hero__card {
+    max-width: none;
+    padding: 22px 20px 24px;
+    color: var(--color-negro);
+  }
+
+  .hero__bullets {
+    gap: 8px;
+    color: var(--color-negro);
+  }
+
+  .hero__actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  .hero__actions .hero-button {
+    flex: 1 1 140px;
+    text-align: center;
+    font-size: 1rem;
+    padding: 12px 16px;
+    box-shadow: none;
+    border: 2px solid var(--color-negro);
+  }
+
+  .hero__actions .hero-button--invert {
+    border-color: var(--color-cream);
+  }
+
+  .hero__actions .hero-button:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}

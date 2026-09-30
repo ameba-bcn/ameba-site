@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import "./FullscreenSpinner.css";
-import AmebaSpinner from "./AmebaSpinner";
+import Spinner from "./Spinner";
 
 const FullscreenSpinner = ({ isClosing = false, onClosed }) => {
   const [visible, setVisible] = useState(true);
@@ -22,7 +22,7 @@ const FullscreenSpinner = ({ isClosing = false, onClosed }) => {
       className={`fullscreen-spinner-overlay${isClosing ? " closing" : ""}`}
       onAnimationEnd={handleAnimationEnd}
     >
-      <AmebaSpinner />
+      <Spinner size={100} />
     </div>
   );
 };

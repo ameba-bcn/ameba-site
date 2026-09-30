@@ -1,0 +1,50 @@
+.featured-festival {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.featured-festival__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* scale/grayscale are GSAP-driven (FeaturedFestival.jsx) — an inline
+     transform/filter would override CSS here anyway. */
+}
+
+.featured-festival__panel {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: var(--color-negro);
+  color: var(--color-cream);
+  padding: 16px 24px;
+  max-width: 60%;
+}
+
+.featured-festival__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 3rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.featured-festival__meta {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  margin-top: 4px;
+}
+
+@media (max-width: 760px) {
+  .featured-festival {
+    aspect-ratio: 4 / 3;
+  }
+
+  .featured-festival__panel {
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,54 @@
+.account-data__notice {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-rojo);
+}
+
+.account-data__cta {
+  font-size: 13px;
+}
+
+.account-data__cta a {
+  color: var(--color-negro);
+  text-decoration: underline;
+}
+
+.account-data__password-link {
+  color: var(--color-negro);
+  font-size: 13px;
+  text-decoration: underline;
+}
+
+.account-data__aside {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.account-data__quota {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(242, 227, 201, 0.22);
+}
+
+.account-data__quota-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  letter-spacing: 0.03em;
+}
+
+.account-data__quota-text {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: rgba(242, 227, 201, 0.75);
+}
+
+.account-data__quota-text a {
+  color: var(--color-cream);
+  text-decoration: underline;
+}

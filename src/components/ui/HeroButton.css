@@ -1,0 +1,71 @@
+.hero-button {
+  display: inline-block;
+  padding: 6px 16px;
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  line-height: 1.1;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--color-cream);
+  background-color: var(--color-negro);
+  box-shadow: 6px 6px 0 var(--color-cream);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-button:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--color-cream);
+}
+
+/* Caja crema, texto negro, sombra negra */
+.hero-button--invert {
+  color: var(--color-negro);
+  background-color: var(--color-cream);
+  box-shadow: 6px 6px 0 var(--color-negro);
+}
+
+.hero-button--invert:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 3px 3px 0 var(--color-negro);
+}
+
+/* Same cream box + black text as --invert, but for use directly on a
+   black background: a solid cream box-shadow blends into the cream
+   box itself (no depth cue against black). The offset "shadow" here
+   is a hollow cream border instead (drawn via ::after), so only its
+   outline shows past the button's own edge. */
+.hero-button--invert-bordered {
+  /* z-index:0 (not just position:relative) is required here: without
+     it this box doesn't establish its own stacking context, so the
+     ::after's z-index:-1 escapes past it and gets painted underneath
+     the section's own opaque background instead of just behind this
+     button — invisible except when the generic .hero-button:hover
+     rule's (unrelated) solid box-shadow happened to paint over it. */
+  position: relative;
+  z-index: 0;
+  color: var(--color-negro);
+  background-color: var(--color-cream);
+  box-shadow: none;
+}
+
+.hero-button--invert-bordered:hover {
+  /* Override the generic .hero-button:hover box-shadow/transform —
+     this variant's "shadow" is the ::after border below, not a
+     box-shadow on the button itself. */
+  transform: none;
+  box-shadow: none;
+}
+
+.hero-button--invert-bordered::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 2px solid var(--color-cream);
+  transform: translate(6px, 6px);
+  z-index: -1;
+  transition: transform 0.2s ease;
+}
+
+.hero-button--invert-bordered:hover::after {
+  transform: translate(3px, 3px);
+}

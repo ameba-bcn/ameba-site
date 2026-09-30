@@ -9,10 +9,10 @@
 .power-title__title {
   width: 95%;
   margin: 0 20px;
-  padding: 40px 0;
-  font-family: "Bebas Neue", sans-serif;
+  padding: clamp(24px, 2.6vw, 40px) 0;
+  font-family: var(--font-display);
   font-weight: 800;
-  font-size: 220px;
+  font-size: var(--display-xl);
   line-height: 0.85;
   text-transform: uppercase;
   letter-spacing: -0.02em;
@@ -21,44 +21,12 @@
   overflow: hidden;
 }
 
-/* ≤ 1519px */
-@media screen and (max-width: 1519px) {
-  .power-title__title {
-    font-size: 180px;
-    padding: 35px 0;
-  }
-}
-
-/* ≤ 1200px */
-@media screen and (max-width: 1200px) {
-  .power-title__title {
-    font-size: 140px;
-    padding: 28px 0;
-  }
-}
-
-/* ≤ 760px */
-@media screen and (max-width: 760px) {
-  .power-title__title {
-    font-size: 90px;
-    padding: 24px 0;
-  }
-}
-
-/* ≤ 400px */
-@media screen and (max-width: 400px) {
-  .power-title__title {
-    font-size: 70px;
-    padding: 24px 0;
-  }
-}
-
 /* Subtitle */
 .power-title__box .SupportSubtitle {
   margin: -20px 30px 1rem;
   text-transform: uppercase;
   font-size: 1.8rem;
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-display);
   font-weight: 100;
   width: 100%;
 }

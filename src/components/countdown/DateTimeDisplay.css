@@ -1,0 +1,10 @@
+/* Mask for the per-digit reveal (DateTimeDisplay.jsx) — page-specific
+   color/size/spacing for .countdown itself still comes from wherever
+   CountdownTimer is used (e.g. SiteNotAvailable.css, NextActivityCard.css). */
+.countdown__value-mask {
+  overflow: hidden;
+}
+
+.countdown__value {
+  display: inline-block;
+}

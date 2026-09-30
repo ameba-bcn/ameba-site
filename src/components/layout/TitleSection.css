@@ -1,6 +1,6 @@
 .title-section-support {
   font-size: 60px;
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   font-weight: 800;
   line-height: 0.6em;
 }

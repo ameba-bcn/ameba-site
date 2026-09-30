@@ -1,0 +1,23 @@
+{
+  "projectId": "b2f16bec-c5bd-4100-93e5-bf818b60505c",
+  "shape": "storybook",
+  "pkg": "ameba-site",
+  "globalName": "AmebaDS",
+  "entry": ".design-sync/entry.js",
+  "storybookStatic": ".design-sync/sb-reference",
+  "buildCmd": "npx storybook build -c .storybook -o .design-sync/sb-reference",
+  "cssEntry": "src/index.css",
+  "readmeHeader": ".design-sync/conventions.md",
+  "provider": {
+    "component": "AppProviders"
+  },
+  "libOverrides": {
+    "dts.mjs": "no .d.ts anywhere in this plain-JS/JSX app — exportedNames falls back to scanning .design-sync/entry.js so storybook-discovered components aren't zeroed out by the public-export filter"
+  },
+  "overrides": {
+    "CardLayout": { "cardMode": "column" },
+    "CardView": { "cardMode": "column" },
+    "FullscreenSpinner": { "cardMode": "single", "primaryStory": "Default" },
+    "CollapsableTextDiv": { "skip": ["components-collapsabletextdiv--short-text"] }
+  }
+}

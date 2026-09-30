@@ -75,6 +75,50 @@ export function isMemberCheckout(input) {
   return !!membershipInCart;
 }
 
+// Only article (shop/Botiga) purchases need a delivery method — events and
+// memberships never ship/get picked up.
+export function hasArticlesCheckout(input) {
+  return input.some((x) => x.item_type === "article");
+}
+
+// Catalan/Spanish checkout copy always renders prices as "20,00 €"
+// (Intl.NumberFormat, comma decimal) regardless of what shape the backend
+// sent ("25.00 €", "25.00", 25).
+export function formatPriceCA(price = "") {
+  const num =
+    typeof price === "number"
+      ? price
+      : parseFloat(String(price).replace(/[^\d,.-]/g, "").replace(",", "."));
+  if (isNaN(num)) return price;
+  return new Intl.NumberFormat("ca-ES", {
+    style: "currency",
+    currency: "EUR",
+  }).format(num);
+}
+
+export function isDeliveryComplete(cart_data = {}) {
+  const {
+    item_variants = [],
+    delivery_method = "",
+    pickup_location = "",
+    shipping_name = "",
+    shipping_address = "",
+    shipping_postal_code = "",
+    shipping_city = "",
+  } = cart_data;
+  if (!hasArticlesCheckout(item_variants)) return true;
+  if (delivery_method === "pickup") return !!pickup_location;
+  if (delivery_method === "shipping") {
+    return (
+      !!shipping_name &&
+      !!shipping_address &&
+      !!shipping_city &&
+      !!shipping_postal_code
+    );
+  }
+  return true;
+}
+
 export function mergeCartIds(arr1, arr2) {
   return [...new Set([...arr1, ...arr2])];
 }
@@ -97,6 +141,26 @@ export const sortByDate = (array) => {
     return new Date(b.datetime) - new Date(a.datetime);
   });
   return array;
+};
+
+// Canonical apparel size order — variants come back from the API in
+// whatever order they were created, not size order.
+const SIZE_ORDER = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
+
+// Variant values can carry more than the size code (e.g. "XL - Extra
+// Large", as split on elsewhere by ProductDetails' `el.split(" ")[0]`)
+// — match on just the leading token, same as what's actually displayed.
+const sizeCode = (size) => size.trim().split(" ")[0].toUpperCase();
+
+export const sortSizes = (sizes = []) => {
+  return [...sizes].sort((a, b) => {
+    const indexA = SIZE_ORDER.indexOf(sizeCode(a));
+    const indexB = SIZE_ORDER.indexOf(sizeCode(b));
+    if (indexA === -1 && indexB === -1) return 0;
+    if (indexA === -1) return 1;
+    if (indexB === -1) return -1;
+    return indexA - indexB;
+  });
 };
 
 export const sortByProperty = (array, property, asc = true) => {
@@ -233,4 +297,14 @@ export function isDateExpired(expiringMembershipDate) {
   today.setHours(0, 0, 0, 0);
 
   return expiringDate < today;
+}
+
+// `expires` comes back from the API as "DD/MM/YYYY", which `new Date(...)`
+// can't parse (it reads "18/06/2027" as month 18 and returns Invalid Date,
+// whose .getFullYear() is NaN) — pull the year out of the string directly
+// instead, same as isDateExpired already does above.
+export function getExpiryYear(expiringMembershipDate) {
+  if (!expiringMembershipDate) return null;
+  const year = Number(expiringMembershipDate.split("/")[2]);
+  return Number.isNaN(year) ? null : year;
 }

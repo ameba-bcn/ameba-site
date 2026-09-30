@@ -1,6 +1,10 @@
 import React, { useRef, useEffect, useCallback } from "react";
 import "./PowerTitle.css";
 
+// Deprecada de cara al rediseño 2026: los títulos outline grandes ahora
+// usan MegaTitle (src/components/ui/MegaTitle.jsx — Arimo, escala uniforme
+// por JS). PowerTitle se mantiene solo para las vistas aún no migradas
+// (PageLayout title prop) — no la uses en código nuevo.
 function PowerTitle({
   title,
   subtitle,

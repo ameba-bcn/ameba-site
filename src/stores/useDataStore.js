@@ -22,6 +22,7 @@ const useDataStore = create((set) => ({
   isAboutLoading: false,
   isCoversLoading: false,
   isArtistsLoading: false,
+  botigaError: false,
   isGaleriaLoading: false,
   galleryImages: [],
   isGalleryAlbumLoading: false,
@@ -51,13 +52,13 @@ const useDataStore = create((set) => ({
   },
 
   fetchBotiga: () => {
-    set({ isArtistsLoading: true });
+    set({ isArtistsLoading: true, botigaError: false });
     return DataService.botigaAll()
       .then((response) => {
         set({ botiga: response?.data, isArtistsLoading: false });
       })
       .catch(() => {
-        set({ isArtistsLoading: false });
+        set({ isArtistsLoading: false, botigaError: true });
       });
   },
 

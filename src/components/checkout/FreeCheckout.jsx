@@ -20,7 +20,7 @@ export default function FreeCheckout() {
     setRedirect(true);
   };
 
-  if (redirect) return <Navigate to="/summary-checkout" replace />;
+  if (redirect) return <Navigate to="/resum-comanda" replace />;
 
   return (
     <div className="free-checkout">

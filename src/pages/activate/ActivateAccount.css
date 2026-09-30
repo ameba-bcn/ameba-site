@@ -1,0 +1,95 @@
+.activate-state {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  padding: 6px 11px;
+}
+
+.activate-state--pending,
+.activate-state--checking {
+  background: rgba(242, 227, 201, 0.2);
+  color: var(--color-cream);
+}
+
+.activate-state--done {
+  background: var(--color-naranja);
+  color: var(--color-negro);
+}
+
+.activate-state--error {
+  background: var(--color-rojo);
+  color: var(--color-cream);
+}
+
+.activate-body {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.activate-mail {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: rgba(242, 227, 201, 0.08);
+  border-left: 3px solid var(--color-naranja);
+  padding: 16px 18px;
+}
+
+.activate-mail p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.activate-mail--error {
+  border-left-color: var(--color-rojo);
+  background: rgba(224, 90, 58, 0.12);
+}
+
+.activate-tips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-size: 13.5px;
+  color: rgba(242, 227, 201, 0.78);
+}
+
+.activate-tips li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.activate-tips li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  background: var(--color-naranja);
+}
+
+.activate-checking {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 26px 0;
+  font-size: 14px;
+  color: rgba(242, 227, 201, 0.78);
+}
+
+.activate-inline-link {
+  font-size: 13.5px;
+  text-decoration: underline;
+  align-self: flex-start;
+}

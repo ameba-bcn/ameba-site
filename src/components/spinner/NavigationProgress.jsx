@@ -22,7 +22,7 @@ export default function NavigationProgress() {
       if (!link) return;
 
       const href = link.getAttribute("href");
-      if (!href || href.startsWith("http") || href.startsWith("mailto:")) return;
+      if (!href || href.startsWith("http") || href.startsWith("mailto:") || href.startsWith("#")) return;
 
       // Internal link to a different path
       if (href !== location.pathname) {

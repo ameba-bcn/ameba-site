@@ -1,0 +1,62 @@
+.mega-title {
+  margin: 0;
+  font-family: "Arimo", Arial, sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--mega-title-stroke, var(--color-negro));
+  pointer-events: none;
+  user-select: none;
+  /* Same repaint bug as .outline-heading (see its CSS): -webkit-text-stroke
+     can fail to repaint after a GSAP transform/opacity reveal, leaving the
+     title looking washed-out/translucent until something else forces a
+     repaint — reported on Windows/Chrome here (that component's own note
+     is Safari-specific, but it's the same compositor issue). Promoting to
+     its own layer keeps the stroke painted through use-page-enter's tween. */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* El JS mide el ancho natural y encoge (escala uniforme) solo si no cabe */
+.mega-title__text {
+  display: inline-block;
+  transform-origin: left top;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* renderAs="svg" mode: trazo dibujado con <text> SVG (fill:none + stroke)
+   en vez de -webkit-text-stroke. Evita un bug de Chromium/Skia donde el
+   trazo de -webkit-text-stroke en fuentes gigantes (200px+) se rasteriza
+   con bordes pixelados/serrados en pantallas Windows no-Retina — el
+   stroke SVG pasa por el rasterizador vectorial normal en vez del path
+   específico de trazo de texto, así que se ve liso a cualquier tamaño.
+   También evita el desenfoque del transform:scale() JS del modo texto,
+   ya que aquí es el propio SVG el que reescala su contenido vectorial
+   (viewBox vs. width/height) en vez de reescalar una capa ya rasterizada.
+   Sigue siendo opt-in (no sustituye el modo texto por defecto) porque
+   SectionBand anima .mega-title__text directamente y ese selector no
+   existe en este modo — ver use-page-enter.js para el equivalente SVG
+   que sí anima (.mega-title__svg-text). */
+.mega-title__svg {
+  display: block;
+  overflow: visible;
+}
+
+.mega-title__svg text {
+  fill: none;
+  stroke: var(--mega-title-stroke, var(--color-negro));
+  /* stroke-width viene del atributo SVG (prop `strokeWidth`, default 2),
+     no de CSS — así use-page-enter.js puede animarlo con GSAP sin que
+     una regla CSS le gane la cascada al atributo. */
+  font-family: inherit;
+  font-weight: inherit;
+  /* "auto" deja que el navegador elija entre nitidez y velocidad, y en
+     algunas combinaciones GPU/driver en Windows opta por una rasterización
+     más barata y con más aliasing, sobre todo con un stroke tan fino
+     (1-2px) sobre glifos gigantes — fuerza siempre el antialiasing de
+     mayor calidad en vez de dejarlo a ese heurístico. */
+  shape-rendering: geometricPrecision;
+}

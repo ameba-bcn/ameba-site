@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Button from "../../button/Button";
-import InputField from "../InputField/InputField";
-import "../Log.style.css";
 import { validate } from "./DiscountCodeValidate";
 import { useFormik } from "formik";
+import "../Log.style.css";
 import "./DiscountCode.style.css";
 import notificationToast, { isEmptyObject } from "../../../utils/utils";
 import { useTranslation } from "react-i18next";
@@ -12,14 +11,14 @@ import useCartStore from "../../../stores/useCartStore";
 export default function DiscountCode() {
   const [t] = useTranslation("translation");
   const { cart_data = {}, applyDiscount } = useCartStore();
-  const { item_variant_ids = [] } = cart_data;
+  const { item_variant_ids = [], item_variants = [] } = cart_data;
   const [loading, setLoading] = useState(false);
+  const [applied, setApplied] = useState(null);
 
   const formik = useFormik({
     initialValues: {
       code: "",
     },
-    enableReinitialize: true,
     validate,
     validateOnChange: false,
     validateOnBlur: false,
@@ -27,11 +26,22 @@ export default function DiscountCode() {
       handleSubmitDiscount(values);
     },
   });
+
   const handleSubmitDiscount = (value) => {
     setLoading(true);
+    setApplied(null);
     applyDiscount(item_variant_ids, value.code)
-      .then(() => {
+      .then((data) => {
         setLoading(false);
+        const discounted = (data?.item_variants || item_variants).find(
+          (item) => item.discount_name || item.discount_value,
+        );
+        if (discounted) {
+          setApplied({
+            code: discounted.discount_name || value.code,
+            value: discounted.discount_value,
+          });
+        }
       })
       .catch((err) => {
         console.warn("ERROR: ", err);
@@ -41,40 +51,44 @@ export default function DiscountCode() {
   };
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form className="discount-code" onSubmit={formik.handleSubmit}>
       <div className="discount-code__row">
-        <InputField
+        <input
           id="code"
           name="code"
           type="text"
+          className="ck-input discount-code__input"
           placeholder={t("form.descompte")}
-          className="form-control logForm"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           value={formik.values.code}
-          valid={1}
-          unstyled={true}
         />
         <Button
           type="submit"
-          variant="contained"
-          color="primary"
+          className=""
           buttonSize="boton--medium"
-          buttonStyle="boton--primary--solid"
+          buttonStyle="boton--primary--outline"
           disabled={loading}
-          hoverStyle="bg-red"
           loading={loading}
         >
-          <span>Aplica</span>
+          {t("boto.aplica")}
         </Button>
-        {!isEmptyObject(formik.errors) && (
-          <div className="log-form-error">
-            {Object.values(formik.errors).map((x) => {
-              return <div key={x}>{x}</div>;
-            })}
-          </div>
-        )}
       </div>
+      {!isEmptyObject(formik.errors) && (
+        <div className="log-form-error">
+          {Object.values(formik.errors).map((x) => (
+            <div key={x}>{x}</div>
+          ))}
+        </div>
+      )}
+      {applied?.value ? (
+        <div className="discount-code__confirmation">
+          {t("checkout.codigo-aplicado", {
+            code: applied.code,
+            value: applied.value,
+          })}
+        </div>
+      ) : null}
     </form>
   );
 }

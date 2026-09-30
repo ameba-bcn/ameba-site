@@ -1,0 +1,159 @@
+.lab-calendar__nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  font-family: var(--font-body);
+}
+
+.lab-calendar__nav button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  min-height: 44px;
+  min-width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lab-calendar__month {
+  text-transform: capitalize;
+  min-width: 90px;
+  text-align: center;
+}
+
+.lab-calendar__year {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-negro);
+  background-color: transparent;
+  border: 1px solid var(--color-negro);
+  min-height: 36px;
+  padding: 0 8px;
+  cursor: pointer;
+}
+
+.lab-calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.lab-calendar__weekday {
+  background-color: var(--color-gris-claro);
+  color: var(--color-negro);
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 8px 0;
+}
+
+.lab-calendar__day {
+  position: relative;
+  background-color: var(--color-cream);
+  color: var(--color-negro);
+  text-align: center;
+  font-family: var(--font-body);
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 0;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* §3.1 "Hover de cel·la" — plain background/color swap, no movement:
+   it's a data grid, not a decorative element. */
+.lab-calendar__day:hover {
+  background-color: var(--color-negro);
+  color: var(--color-cream);
+}
+
+.lab-calendar__day--muted {
+  opacity: 0.4;
+}
+
+.lab-calendar__day--active {
+  background-color: var(--color-negro);
+  color: var(--color-cream);
+  cursor: pointer;
+}
+
+.lab-calendar__day--festival {
+  background-color: #f5e400;
+  color: var(--color-negro);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.lab-calendar__day--festival:hover {
+  background-color: var(--color-negro);
+  color: #f5e400;
+}
+
+.lab-calendar__day--selected {
+  outline: 2px solid var(--color-rojo);
+  outline-offset: -2px;
+}
+
+.lab-calendar__clear {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  border: none;
+  background: transparent;
+  color: var(--color-negro);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+.lab-calendar__clear:hover {
+  color: var(--color-rojo);
+}
+
+.lab-calendar__today-dot {
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--color-rojo);
+  pointer-events: none;
+}
+
+@media (max-width: 760px) {
+  .lab-calendar__nav {
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .lab-calendar__month {
+    min-width: 0;
+    font-size: 0.85rem;
+  }
+
+  .lab-calendar__year {
+    font-size: 0.85rem;
+    min-height: 32px;
+    padding: 0 6px;
+  }
+
+  .lab-calendar__weekday {
+    font-size: 0.7rem;
+    padding: 6px 0;
+  }
+
+  .lab-calendar__day {
+    font-size: 0.8rem;
+  }
+}

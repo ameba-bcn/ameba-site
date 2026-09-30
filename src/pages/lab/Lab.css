@@ -1,0 +1,93 @@
+/* Same dot size as the hero's own dots column */
+.lab__hero-dots .dots-row__dot {
+  width: 10px;
+  height: 10px;
+}
+
+/* Black hr on Lab, like Associació's own override — the browser default
+   is a light grey, barely visible against the orange background. */
+.page-layout--lab hr {
+  border: none;
+  border-top: 1px solid var(--color-negro);
+}
+
+/* Reference has these as plain left-aligned section labels, not the big
+   hollow display treatment OutlineHeading defaults to — including the
+   body font instead of Bebas Neue, which is unicase and would still
+   read as all-caps regardless of text-transform. Case is forced instead
+   of relying on the translation strings, so only the first letter is
+   ever capitalized regardless of source casing. */
+.lab__section-title {
+  font-family: var(--font-body);
+  text-align: left;
+  text-transform: lowercase;
+  color: var(--color-negro);
+  -webkit-text-stroke: 0;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+
+.lab__section-title::first-letter {
+  text-transform: uppercase;
+}
+
+.lab__calendar-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+  margin-bottom: 24px;
+}
+
+.lab__empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  font-family: var(--font-body);
+  text-align: center;
+}
+
+@media (max-width: 1200px) {
+  .lab__calendar-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .lab__section-title {
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+
+  .lab__calendar-row {
+    gap: 32px;
+  }
+
+  /* CardGrid defaults to a single column at this breakpoint (shared by
+     Botiga too) — Lab's mock keeps the 2-column poster grid on phones. */
+  .lab__card-grid.card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .lab__card-grid .ameba-card__badge {
+    font-size: 0.65rem;
+    padding: 3px 6px;
+  }
+
+  .lab__card-grid .ameba-card-title {
+    font-size: 0.95rem;
+  }
+
+  .lab__card-grid .ameba-card__title-block {
+    min-height: 56px;
+    padding-bottom: 10px;
+  }
+
+  .lab__card-grid .ameba-card__highlight,
+  .lab__card-grid .ameba-card__meta {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+}

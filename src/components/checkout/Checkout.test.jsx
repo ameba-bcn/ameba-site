@@ -7,12 +7,17 @@ import useAuthStore from "../../stores/useAuthStore";
 import renderWithProviders from "../../test/helpers/renderWithProviders";
 import { mockCartRegular, mockCartMember, mockCartFree } from "../../test/mocks/data";
 
+const NEXT_LABEL = /Ves al pagament/;
+
 // Mock child components to isolate Checkout logic
 vi.mock("./Review", () => ({
   default: () => <div data-testid="review">Review</div>,
 }));
 vi.mock("./Payment", () => ({
   default: () => <div data-testid="payment">Payment</div>,
+}));
+vi.mock("./CheckoutSummary", () => ({
+  default: () => <div data-testid="checkout-summary">CheckoutSummary</div>,
 }));
 vi.mock("../forms/MembershipForm/MembershipFormLayout", () => ({
   default: () => (
@@ -56,21 +61,65 @@ describe("Checkout - route guards", () => {
   it("redirects to / when user is not logged in", () => {
     useAuthStore.setState({ isLoggedIn: false });
     useCartStore.setState({ cart_data: mockCartRegular });
-    renderWithProviders(<Checkout />, { route: "/checkout" });
+    renderWithProviders(<Checkout />, { route: "/pagament" });
     expect(screen.queryByText("pagament")).not.toBeInTheDocument();
   });
 
   it("redirects to / when cart has no items", () => {
     useAuthStore.setState({ isLoggedIn: true, getMemberProfile: vi.fn().mockResolvedValue() });
     useCartStore.setState({ cart_data: { item_variants: [] } });
-    renderWithProviders(<Checkout />, { route: "/checkout" });
+    renderWithProviders(<Checkout />, { route: "/pagament" });
     expect(screen.queryByText("pagament")).not.toBeInTheDocument();
   });
 
   it("does not redirect when logged in with items", () => {
     setupLoggedIn(mockCartRegular);
-    renderWithProviders(<Checkout />, { route: "/checkout" });
+    renderWithProviders(<Checkout />, { route: "/pagament" });
     expect(screen.getByText("pagament")).toBeInTheDocument();
+  });
+
+  it("waits for the cart to finish loading instead of redirecting on a still-empty cart_data", () => {
+    // Simulates a hard refresh on /pagament: cart_data is still {} because
+    // the app-mount getCart() call hasn't resolved yet.
+    useAuthStore.setState({ isLoggedIn: true, getMemberProfile: vi.fn().mockResolvedValue() });
+    useCartStore.setState({ cart_data: {}, cartLoaded: false });
+    renderWithProviders(<Checkout />, { route: "/pagament" });
+    expect(screen.queryByText("pagament")).not.toBeInTheDocument();
+    expect(document.querySelector(".route-fallback")).toBeInTheDocument();
+  });
+
+  it("redirects only after the cart has loaded and turns out empty", () => {
+    useAuthStore.setState({ isLoggedIn: true, getMemberProfile: vi.fn().mockResolvedValue() });
+    useCartStore.setState({ cart_data: { item_variants: [] }, cartLoaded: true });
+    renderWithProviders(<Checkout />, { route: "/pagament" });
+    expect(screen.queryByText("pagament")).not.toBeInTheDocument();
+    expect(document.querySelector(".route-fallback")).not.toBeInTheDocument();
+  });
+
+  it("does not redirect on a refresh mid-payment, once the cart is (legitimately) empty", () => {
+    // The backend destroys the cart as soon as a Stripe PaymentIntent is
+    // created for it, so a refresh on the payment step always finds an
+    // empty cart_data — but useCartStore restores the persisted pending
+    // payment, and the guard should let that through instead of bouncing
+    // to "/" as if the cart were simply abandoned.
+    localStorage.setItem("checkoutStep", "2");
+    useAuthStore.setState({ isLoggedIn: true, getMemberProfile: vi.fn().mockResolvedValue() });
+    useCartStore.setState({
+      cart_data: {},
+      cartLoaded: true,
+      checkout: { total: "25.00 €", checkout_stripe: { client_secret: "pi_123_secret" } },
+    });
+    renderWithProviders(<Checkout />, { route: "/pagament" });
+    expect(screen.getByText("pagament")).toBeInTheDocument();
+    expect(screen.getByTestId("payment")).toBeInTheDocument();
+  });
+});
+
+describe("Checkout - layout", () => {
+  it("renders the sticky order summary sidebar", () => {
+    setupLoggedIn(mockCartRegular);
+    renderWithProviders(<Checkout />);
+    expect(screen.getByTestId("checkout-summary")).toBeInTheDocument();
   });
 });
 
@@ -93,9 +142,10 @@ describe("Checkout - accordion sections", () => {
   it("renders Catalan section titles by default", () => {
     setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
-    expect(screen.getByText("Dades personals")).toBeInTheDocument();
-    expect(screen.getByText("Cistella")).toBeInTheDocument();
-    expect(screen.getByText("Dades de pagament")).toBeInTheDocument();
+    const titles = [...document.querySelectorAll(".checkout-section__title")].map(
+      (el) => el.textContent,
+    );
+    expect(titles).toEqual(["Dades personals", "Cistella", "Dades de pagament"]);
   });
 
   it("marks step 1 as active for regular cart (no subscription)", () => {
@@ -117,20 +167,14 @@ describe("Checkout - accordion sections", () => {
     expect(sections[2].classList.contains("checkout-section--disabled")).toBe(true);
   });
 
-  it("shows ▼ indicator on active section", () => {
+  it("shows the EDITAR hint on completed sections after advancing", async () => {
     setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
-    const indicators = document.querySelectorAll(".checkout-section__indicator");
-    expect(indicators[1].textContent).toBe("▼");
-  });
-
-  it("shows ✓ indicator on completed sections after advancing", async () => {
-    setupLoggedIn(mockCartRegular);
-    renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText(NEXT_LABEL));
     await waitFor(() => {
-      const indicators = document.querySelectorAll(".checkout-section__indicator");
-      expect(indicators[1].textContent).toBe("✓");
+      const hints = document.querySelectorAll(".checkout-section__hint");
+      expect(hints.length).toBeGreaterThan(0);
+      expect(hints[0].textContent).toContain("Edita");
     });
   });
 });
@@ -148,10 +192,10 @@ describe("Checkout - step 0 (Membership)", () => {
     expect(screen.getByTestId("membership-form-readonly")).toBeInTheDocument();
   });
 
-  it("shows Next button at step 0 for subscription cart", () => {
+  it("shows a continue button at step 0 for subscription cart (data already valid/unchanged)", () => {
     setupLoggedIn(mockCartMember);
     renderWithProviders(<Checkout />);
-    expect(screen.getByText("següent pas")).toBeInTheDocument();
+    expect(screen.getByText("Desa i continua")).toBeInTheDocument();
   });
 });
 
@@ -162,10 +206,10 @@ describe("Checkout - step 1 (Review)", () => {
     expect(screen.getByTestId("review")).toBeInTheDocument();
   });
 
-  it("shows Next button at step 1", () => {
+  it("shows the go-to-payment button at step 1", () => {
     setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
-    expect(screen.getByText("següent pas")).toBeInTheDocument();
+    expect(screen.getByText(NEXT_LABEL)).toBeInTheDocument();
   });
 });
 
@@ -173,14 +217,14 @@ describe("Checkout - step navigation", () => {
   it("calls checkoutCart on Next at step 1", async () => {
     const { mockCheckoutCart } = setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText(NEXT_LABEL));
     expect(mockCheckoutCart).toHaveBeenCalled();
   });
 
   it("calls checkoutPaymentCart when not free on Next at step 1", async () => {
     const { mockCheckoutPaymentCart } = setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText(NEXT_LABEL));
     await waitFor(() => {
       expect(mockCheckoutPaymentCart).toHaveBeenCalledWith("cart-uuid-123");
     });
@@ -189,7 +233,7 @@ describe("Checkout - step navigation", () => {
   it("does NOT call checkoutPaymentCart when free on Next at step 1", async () => {
     const { mockCheckoutCart, mockCheckoutPaymentCart } = setupLoggedIn(mockCartFree);
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText(NEXT_LABEL));
     await waitFor(() => {
       expect(mockCheckoutCart).toHaveBeenCalled();
     });
@@ -199,7 +243,7 @@ describe("Checkout - step navigation", () => {
   it("advances to step 2 after successful checkout", async () => {
     setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText(NEXT_LABEL));
     await waitFor(() => {
       expect(getSections()[2].classList.contains("checkout-section--active")).toBe(true);
     });
@@ -209,17 +253,17 @@ describe("Checkout - step navigation", () => {
     const { mockCheckoutCart } = setupLoggedIn(mockCartRegular);
     mockCheckoutCart.mockRejectedValue(new Error("fail"));
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText(NEXT_LABEL));
     await waitFor(() => {
       expect(getSections()[1].classList.contains("checkout-section--active")).toBe(true);
     });
   });
 
-  it("navigates back to completed section by clicking its header", async () => {
+  it("navigates back to a completed section by clicking its header", async () => {
     setupLoggedIn(mockCartMember);
     renderWithProviders(<Checkout />);
     // Advance from step 0 to step 1
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText("Desa i continua"));
     // Step 0 should be completed
     expect(getSections()[0].classList.contains("checkout-section--completed")).toBe(true);
     // Click step 0 header to go back
@@ -241,14 +285,14 @@ describe("Checkout - step navigation", () => {
 });
 
 describe("Checkout - step 2 (Payment)", () => {
-  it("does not show Next button at step 2", async () => {
+  it("does not show the go-to-payment button at step 2", async () => {
     setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText(NEXT_LABEL));
     await waitFor(() => {
       expect(getSections()[2].classList.contains("checkout-section--active")).toBe(true);
     });
-    expect(screen.queryByText("següent pas")).not.toBeInTheDocument();
+    expect(screen.queryByText(NEXT_LABEL)).not.toBeInTheDocument();
   });
 
   it("renders Payment component", () => {
@@ -283,7 +327,7 @@ describe("Checkout - step persistence", () => {
     setupLoggedIn(mockCartRegular);
     renderWithProviders(<Checkout />);
     expect(localStorage.getItem("checkoutStep")).toBe("1");
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText(NEXT_LABEL));
     await waitFor(() => {
       expect(localStorage.getItem("checkoutStep")).toBe("2");
     });
@@ -295,7 +339,7 @@ describe("Checkout - loading state", () => {
     const { mockCheckoutCart } = setupLoggedIn(mockCartRegular);
     mockCheckoutCart.mockReturnValue(new Promise(() => {})); // never resolves
     const { container } = renderWithProviders(<Checkout />);
-    fireEvent.click(screen.getByText("següent pas"));
+    fireEvent.click(screen.getByText(NEXT_LABEL));
     await waitFor(() => {
       expect(container.querySelector(".spinner")).toBeInTheDocument();
     });

@@ -31,7 +31,7 @@
   background-color: transparent;
   border: 2px solid var(--color-negro);
   border-radius: 0rem;
-  font-family: "Montserrat", sans-serif;
+  font-family: var(--font-body);
   color: var(--color-negro);
   font-size: 28px;
   animation-name: search-box-wide-expand;
@@ -40,7 +40,7 @@
 }
 
 .search-box__input::placeholder {
-  font-family: "Bebas Neue";
+  font-family: var(--font-display);
   color: var(--color-negro);
   font-size: 22px;
   font-weight: 300;

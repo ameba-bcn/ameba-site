@@ -68,6 +68,7 @@ jobs:
             VITE_SENTRY_ENVIRONMENT=${{ github.ref_name == 'master' && 'production' || 'development' }}
             VITE_VERSION=${{ steps.pkg.outputs.version }}
             VITE_COMMIT_SHA=${{ github.sha }}
+            VITE_TINYMCE_KEY=${{ secrets.TINYMCE_KEY }}
             SENTRY_AUTH_TOKEN=${{ secrets.SENTRY_AUTH_TOKEN }}
             SENTRY_ORG=${{ secrets.SENTRY_ORG }}
             SENTRY_PROJECT=${{ secrets.SENTRY_PROJECT }}

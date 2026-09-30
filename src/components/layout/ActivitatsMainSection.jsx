@@ -14,7 +14,7 @@ const ActivitatsMainSection = (props) => {
           <div
             key={data.name}
             className="activitats-main__card-item Card3GridItem"
-            onClick={() => navigate(`/activitats/${data.id}`)}
+            onClick={() => navigate(`/lab/${data.id}`)}
           >
             <CardNew
               className="CardIndividual"

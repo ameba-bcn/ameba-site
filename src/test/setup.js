@@ -13,6 +13,13 @@ afterEach(() => {
 // Mock window.scrollTo
 window.scrollTo = vi.fn();
 
+// Mock ResizeObserver (used by PowerTitle/AmebaCardTitle/SectionBand autofit)
+global.ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+
 // Mock window.matchMedia
 window.matchMedia = vi.fn().mockImplementation((query) => ({
   matches: false,
@@ -42,6 +49,7 @@ beforeEach(async () => {
     checkout: {},
     stripe: false,
     cartBusy: false,
+    cartLoaded: true,
   });
 
   useAuthStore.setState({

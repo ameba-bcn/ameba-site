@@ -11,50 +11,45 @@ import useAuthStore from "./stores/useAuthStore";
 import useDataStore from "./stores/useDataStore";
 import useCartStore from "./stores/useCartStore";
 import { Routes, Route } from "react-router-dom";
-import Contacte from "./contacte/Contacte";
+import legacyRoutes from "./components/routing/legacyRoutes";
+import Footer from "./components/footer/Footer";
 import Menu from "./components/navbar/Navbar";
 import ScrollTop from "./components/layout/ScrollTop";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import FullscreenSpinner from "./components/spinner/FullscreenSpinner";
+import RouteFallback from "./components/spinner/RouteFallback";
 import NavigationProgress from "./components/spinner/NavigationProgress";
 import lazyWithRetry from "./utils/lazyWithRetry";
 import "./App.css";
 
-const Home = lazyWithRetry(() => import("./pages/home/Home"));
-const Agenda = lazyWithRetry(() => import("./pages/agenda/Agenda"));
+// Home se importa estática: es la landing, pesa ~4KB y así el hero
+// se pinta en el primer render sin pasar por el spinner de Suspense
+import Home from "./pages/home/Home";
+
 const Botiga = lazyWithRetry(() => import("./pages/Botiga"));
-const SociosDetailed = lazyWithRetry(
-  () => import("./pages/socios/components/SociosDetailed"),
-);
-const Socios = lazyWithRetry(() => import("./pages/socios/Socios"));
-const Gallery = lazyWithRetry(() => import("./pages/gallery/Gallery"));
-const GalleryAlbum = lazyWithRetry(
-  () => import("./pages/gallery/GalleryAlbum"),
+const SociDetail = lazyWithRetry(() => import("./pages/socios/SociDetail"));
+const SocisDirectory = lazyWithRetry(
+  () => import("./pages/socios/SocisDirectory"),
 );
 const LogSession = lazyWithRetry(() => import("./pages/LogSession"));
-const PasswordRecovery = lazyWithRetry(
-  () => import("./pages/PasswordRecovery"),
+const RecoveryReset = lazyWithRetry(
+  () => import("./pages/recovery/RecoveryReset"),
 );
 const CheckoutPage = lazyWithRetry(() => import("./pages/CheckoutPage"));
-const Memberships = lazyWithRetry(
-  () => import("./pages/memberships/Memberships"),
-);
-const SendEmailPasswordRecovery = lazyWithRetry(
-  () => import("./pages/SendEmailPasswordRecovery"),
+const NouSoci = lazyWithRetry(() => import("./pages/nou-soci/NouSoci"));
+const RecoveryRequest = lazyWithRetry(
+  () => import("./pages/recovery/RecoveryRequest"),
 );
 const QrClient = lazyWithRetry(() => import("./pages/QrClient"));
-const ValidateEmail = lazyWithRetry(() => import("./pages/ValidateEmail"));
-const LogMailConfirmation = lazyWithRetry(
-  () => import("./pages/LogMailConfirmation"),
+const ActivateAccount = lazyWithRetry(
+  () => import("./pages/activate/ActivateAccount"),
 );
-const ActivitatPage = lazyWithRetry(
-  () => import("./pages/activitat/ActivitatPage"),
-);
+const LabDetail = lazyWithRetry(() => import("./pages/lab/LabDetail"));
 const ProductePage = lazyWithRetry(() => import("./pages/botiga/ProductePage"));
 const ProductRedirect = lazyWithRetry(() => import("./pages/ProductRedirect"));
-const Profile = lazyWithRetry(() => import("./pages/profile/Profile"));
+const Compte = lazyWithRetry(() => import("./pages/compte/Compte"));
 const CheckoutFinished = lazyWithRetry(
   () => import("./pages/landing/CheckoutFinished"),
 );
@@ -62,7 +57,18 @@ const SubscriptionFinished = lazyWithRetry(
   () => import("./pages/landing/SubscriptionFinished"),
 );
 const Legal = lazyWithRetry(() => import("./pages/legal/Legal"));
+const Lab = lazyWithRetry(() => import("./pages/lab/Lab"));
+const Festivals = lazyWithRetry(() => import("./pages/festivals/Festivals"));
+const FestivalDetail = lazyWithRetry(
+  () => import("./pages/festivals/FestivalDetail"),
+);
+const GalleryArxiu = lazyWithRetry(() => import("./pages/festivals/GalleryArxiu"));
+const GalleryArxiuAlbum = lazyWithRetry(
+  () => import("./pages/festivals/GalleryArxiuAlbum"),
+);
+const Associacio = lazyWithRetry(() => import("./pages/associacio/Associacio"));
 const QrLanding = lazyWithRetry(() => import("./pages/qr-landing/QrLanding"));
+const EventTicket = lazyWithRetry(() => import("./pages/event-ticket/EventTicket"));
 const NotFound = lazyWithRetry(() => import("./pages/NotFound"));
 
 const UserContext = createContext(null);
@@ -132,41 +138,43 @@ function App() {
           <ScrollTop showBelow={250} />
           <NavigationProgress />
           {isNavigating && <FullscreenSpinner />}
-          <Suspense fallback={<FullscreenSpinner />}>
+          <Suspense fallback={<RouteFallback />}>
             <Routes>
-              <Route path="/activitats/:id" element={<ActivitatPage />} />
-              <Route path="/activitats" element={<Agenda />} />
               <Route path="/botiga/:id" element={<ProductePage />} />
               <Route path="/botiga" element={<Botiga />} />
-              <Route path="/socis/:id" element={<SociosDetailed />} />
-              <Route path="/socis" element={<Socios />} />
-              <Route path="/gallery/:slug/:year" element={<GalleryAlbum />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/login" element={<LogSession />} />
-              <Route path="/recovery" element={<PasswordRecovery />} />
-              <Route path="/checkout" element={<CheckoutPage />} />
-              <Route path="/memberships" element={<Memberships />} />
-              <Route
-                path="/send-recovery"
-                element={<SendEmailPasswordRecovery />}
-              />
+              <Route path="/associacio/socis/:id" element={<SociDetail />} />
+              <Route path="/associacio/socis" element={<SocisDirectory />} />
+              <Route path="/inicia-sessio" element={<LogSession />} />
+              <Route path="/registre" element={<LogSession />} />
+              <Route path="/recovery" element={<RecoveryReset />} />
+              <Route path="/pagament" element={<CheckoutPage />} />
+              <Route path="/associacio/nou-soci" element={<NouSoci />} />
+              <Route path="/recupera-contrasenya" element={<RecoveryRequest />} />
               <Route path="/member-card" element={<QrClient />} />
-              <Route path="/validate-email" element={<ValidateEmail />} />
-              <Route path="/activate" element={<LogMailConfirmation />} />
+              <Route path="/activate" element={<ActivateAccount />} />
               <Route path="/product" element={<ProductRedirect />} />
-              <Route path="/profile/:id" element={<Profile />} />
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/summary-checkout" element={<CheckoutFinished />} />
+              <Route path="/compte/:id" element={<Compte />} />
+              <Route path="/compte" element={<Compte />} />
+              <Route path="/resum-comanda" element={<CheckoutFinished />} />
               <Route path="/subscribe" element={<SubscriptionFinished />} />
               <Route path="/legal" element={<Legal />} />
+              <Route path="/lab/:id" element={<LabDetail />} />
+              <Route path="/lab" element={<Lab />} />
+              <Route path="/festivals/arxiu/:slug/:year" element={<GalleryArxiuAlbum />} />
+              <Route path="/festivals/arxiu" element={<GalleryArxiu />} />
+              <Route path="/festivals/:id" element={<FestivalDetail />} />
+              <Route path="/festivals" element={<Festivals />} />
+              <Route path="/associacio" element={<Associacio />} />
               <Route path="/" element={<Home />} />
               <Route path="/qr-view" element={<QrLanding />} />
+              <Route path="/event-ticket" element={<EventTicket />} />
+              {legacyRoutes()}
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </div>
       </UserContext.Provider>
-      <Contacte />
+      <Footer />
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React from "react";
 import PowerTitle from "../PowerTitle";
-import LettersMove from "../LettersMove";
-import EmbeddedSpinner from "../../spinner/EmbeddedSpinner";
+import Spinner from "../../spinner/Spinner";
 import "./PageLayout.css";
 
 export default function PageLayout({
@@ -9,33 +8,31 @@ export default function PageLayout({
   title,
   titleProps,
   loading,
-  banner,
   centered,
   children,
+  section,
+  flushBottom,
 }) {
   const contentClass = `page-layout__content${centered ? " page-layout__content--centered" : ""}`;
+  const rootClass = [className, section && `page-layout--${section}`]
+    .filter(Boolean)
+    .join(" ");
+  const innerClass = `page-layout__inner${flushBottom ? " page-layout__inner--flush" : ""}`;
 
   return (
-    <div className={className}>
-      <div className="page-layout__inner">
+    <div className={rootClass}>
+      <div className={innerClass}>
         {title && <PowerTitle title={title} {...titleProps} />}
         <div className={contentClass}>
           {loading ? (
             <div className="page-layout__loader">
-              <EmbeddedSpinner />
+              <Spinner size={64} />
             </div>
           ) : (
             children
           )}
         </div>
       </div>
-      {banner && (
-        <LettersMove
-          sentence={banner.sentence}
-          link={banner.link}
-          color={banner.color}
-        />
-      )}
     </div>
   );
 }

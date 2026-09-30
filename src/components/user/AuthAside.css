@@ -1,0 +1,56 @@
+.auth-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-size: 14px;
+}
+
+.auth-steps__item {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  color: rgba(242, 227, 201, 0.45);
+}
+
+.auth-steps__num {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  background: rgba(242, 227, 201, 0.18);
+  color: rgba(242, 227, 201, 0.6);
+}
+
+.auth-steps__item--active {
+  color: var(--color-cream);
+}
+
+.auth-steps__item--active .auth-steps__num {
+  background: var(--color-cream);
+  color: var(--color-negro);
+}
+
+.auth-steps__item--done {
+  color: var(--color-cream);
+}
+
+.auth-steps__item--done .auth-steps__num {
+  background: var(--color-naranja);
+  color: var(--color-negro);
+}
+
+.auth-aside__help {
+  margin-top: auto;
+}
+
+.auth-aside__help a {
+  text-decoration: underline;
+}

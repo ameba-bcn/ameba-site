@@ -28,18 +28,20 @@ const TextArea = (props) => {
 
   return (
     <>
-      <div className="text-area__label-box">
-        {tooltip.length > 0 ? (
-          <Tooltip tooltipContent={tooltip}>
-            <div className="text-area__label" id="description-label">
-              {` ${label} `}
-              <Icon icon="tooltip" />
-            </div>
-          </Tooltip>
-        ) : (
-          <div className="text-area__label" id="description-label">{` ${label} `}</div>
-        )}
-      </div>
+      {(label || tooltip.length > 0) && (
+        <div className="text-area__label-box">
+          {tooltip.length > 0 ? (
+            <Tooltip tooltipContent={tooltip}>
+              <div className="text-area__label" id="description-label">
+                {` ${label} `}
+                <Icon icon="tooltip" />
+              </div>
+            </Tooltip>
+          ) : (
+            <div className="text-area__label" id="description-label">{` ${label} `}</div>
+          )}
+        </div>
+      )}
       <div className={styledClassName}>
         <Editor
           apiKey={TEXT_EDITOR_KEY}
@@ -86,7 +88,7 @@ const TextArea = (props) => {
               "alignright alignjustify | bullist numlist outdent indent | " +
               "removeformat | help",
             content_style:
-              "body { font-family:Helvetica,Arial,sans-serif; font-size:16px; }",
+              "body { font-family:'Montserrat',Arial,sans-serif; font-size:16px; color:#1d1d1b; }",
             statusbar: false,
             toolbar_location: "bottom",
             setup: (editor) => {

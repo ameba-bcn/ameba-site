@@ -71,7 +71,7 @@
 }
 
 .productCardPrice {
-    font-family: 'Bebas Neue';
+    font-family: var(--font-display);
     color: var(--color-cream);
     font-size: 36px;
     text-align: right;
@@ -94,7 +94,7 @@
 
 .botiga-general__title {
     width: 90%;
-    font-family: "Bebas Neue";
+    font-family: var(--font-display);
     font-weight: 300;
     font-style: italic;
     font-size: 36px;

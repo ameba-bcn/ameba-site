@@ -5,7 +5,7 @@ import "./CardLayout.css";
 import PlusButton from "../../button/PlusButton";
 import { createLastRowIterator, sortByProperty } from "../../../utils/utils";
 import useMediaQuery from "../../../hooks/use-media-query";
-import EmbeddedSpinner from "../../spinner/EmbeddedSpinner";
+import Spinner from "../../spinner/Spinner";
 
 export default function CardLayout(props) {
   const { cardList = [], urlRoot, loading = false } = props; //Pendiente recibir si es entrevista por props
@@ -64,7 +64,7 @@ export default function CardLayout(props) {
       className={`card-layout${!cardList.length > 0 ? " card-layout--empty" : ""}`}
     >
       {loading ? (
-        <EmbeddedSpinner />
+        <Spinner size={64} />
       ) : (
         <>
           {cardList.length > 0 && cardGenerator}

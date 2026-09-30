@@ -1,83 +1,120 @@
 /* eslint-disable no-undef */
 import { safeLocalStorage } from "./safeStorage";
 
-const lang = safeLocalStorage.getItem("i18nextLng");
+// Lee el idioma en el momento del acceso (no en tiempo de import) para que
+// los mensajes no queden congelados al idioma con el que cargó la app.
+const msg = (ca, es) =>
+  safeLocalStorage.getItem("i18nextLng") === "es" ? es : ca;
 
-export const ERROR = {
+export const getErrors = () => ({
   EMAIL: {
-    REQUIRED:
-      lang === "ca"
-        ? "Email: aquest camp es obligatori"
-        : "Email: este campo es obligatorio",
-    FORMAT: lang === "ca" ? "Email: format erroni" : "Email: formato erróneo",
+    REQUIRED: msg(
+      "Email: aquest camp es obligatori",
+      "Email: este campo es obligatorio",
+    ),
+    FORMAT: msg("Email: format erroni", "Email: formato erróneo"),
   },
   USERNAME: {
-    REQUIRED:
-      lang === "ca"
-        ? "Nom d'usuari: camp es obligatori"
-        : "Nombre de usuario: campo obligatorio",
-    FORMAT:
-      lang === "ca"
-        ? "Nom d'usuari: ha de tenir entre 1 i 20 lletres"
-        : "Nombre de usuario: debe tener entre 1 y 20 caracteres",
+    REQUIRED: msg(
+      "Nom d'usuari: camp es obligatori",
+      "Nombre de usuario: campo obligatorio",
+    ),
+    FORMAT: msg(
+      "Nom d'usuari: ha de tenir entre 1 i 20 lletres",
+      "Nombre de usuario: debe tener entre 1 y 20 caracteres",
+    ),
   },
   PASSWORD: {
-    REQUIRED:
-      lang === "ca"
-        ? "Contrasenya: aquest camp es obligatori"
-        : "Contraseña: este campo es obligatorio",
-    FORMAT:
-      lang === "ca"
-        ? "Contrasenya: ha de tenir entre 6 i 20 lletres"
-        : "Contraseña: debe tener entre 6 y 20 caracteres",
+    REQUIRED: msg(
+      "Contrasenya: aquest camp es obligatori",
+      "Contraseña: este campo es obligatorio",
+    ),
+    FORMAT: msg(
+      "Contrasenya: ha de tenir entre 6 i 20 lletres",
+      "Contraseña: debe tener entre 6 y 20 caracteres",
+    ),
   },
   PHONE: {
-    REQUIRED:
-      lang === "ca"
-        ? "Telèfon: aquest camp es obligatori"
-        : "Teléfono: este campo es obligatorio",
-    FORMAT:
-      lang === "ca" ? "Telèfon: format erroni" : "Teléfono: formato erróneo",
+    REQUIRED: msg(
+      "Telèfon: aquest camp es obligatori",
+      "Teléfono: este campo es obligatorio",
+    ),
+    FORMAT: msg("Telèfon: format erroni", "Teléfono: formato erróneo"),
   },
   FIRSTNAME: {
-    REQUIRED:
-      lang === "ca"
-        ? "Nom: aquest camp es obligatori"
-        : "Nombre: este campo es obligatorio",
+    REQUIRED: msg(
+      "Nom: aquest camp es obligatori",
+      "Nombre: este campo es obligatorio",
+    ),
   },
   LASTNAME: {
-    REQUIRED:
-      lang === "ca"
-        ? "Cognoms: aquest camp es obligatori"
-        : "Apellidos: este campo es obligatorio",
+    REQUIRED: msg(
+      "Cognoms: aquest camp es obligatori",
+      "Apellidos: este campo es obligatorio",
+    ),
   },
   ADDRESS: {
-    REQUIRED:
-      lang === "ca"
-        ? "DNI/NIE: aquest camp es obligatori"
-        : "DNI/NIE: este campo es obligatorio",
+    REQUIRED: msg(
+      "DNI/NIE: aquest camp es obligatori",
+      "DNI/NIE: este campo es obligatorio",
+    ),
   },
   CODE: {
-    REQUIRED:
-      lang === "ca"
-        ? "Descompte: aquest camp es obligatori"
-        : "Descuento: este campo es obligatorio",
-    FORMAT:
-      lang === "ca"
-        ? "Descompte: format o longitud(6 lletres) erroni"
-        : "Descuento: formato o longitud(6 letras) erróneo",
+    REQUIRED: msg(
+      "Descompte: aquest camp es obligatori",
+      "Descuento: este campo es obligatorio",
+    ),
+    FORMAT: msg(
+      "Descompte: format o longitud(6 lletres) erroni",
+      "Descuento: formato o longitud(6 letras) erróneo",
+    ),
   },
   TITLE: {
-    REQUIRED:
-      lang === "ca"
-        ? "Títol: aquest camp es obligatori"
-        : "Título: este campo es obligatorio",
+    REQUIRED: msg(
+      "Títol: aquest camp es obligatori",
+      "Título: este campo es obligatorio",
+    ),
+  },
+  POSTAL_CODE: {
+    REQUIRED: msg(
+      "Codi postal: aquest camp es obligatori",
+      "Código postal: este campo es obligatorio",
+    ),
+    FORMAT: msg(
+      "Codi postal: només fem enviaments a l'Espanya peninsular",
+      "Código postal: solo hacemos envíos a la España peninsular",
+    ),
+  },
+  DELIVERY_METHOD: {
+    REQUIRED: msg(
+      "Selecciona un mètode d'entrega",
+      "Selecciona un método de entrega",
+    ),
+  },
+  REPEAT_PASSWORD: {
+    REQUIRED: msg(
+      "Repeteix la contrasenya: aquest camp es obligatori",
+      "Repite la contraseña: este campo es obligatorio",
+    ),
+    MISMATCH: msg(
+      "Les dues contrasenyes no coincideixen",
+      "Las dos contraseñas no coinciden",
+    ),
   },
   GENERIC: {
-    REQUIRED:
-      lang === "ca" ? "Aquest camp es obligatori" : "Este campo es obligatorio",
+    REQUIRED: msg("Aquest camp es obligatori", "Este campo es obligatorio"),
   },
-};
+});
+
+// Compatibilidad con los consumidores existentes (ERROR.X.Y): getters
+// perezosos que resuelven el idioma en cada acceso.
+export const ERROR = {};
+Object.keys(getErrors()).forEach((key) => {
+  Object.defineProperty(ERROR, key, {
+    get: () => getErrors()[key],
+    enumerable: true,
+  });
+});
 
 export const MOBILE_BIG = "(max-width:1519px)";
 
@@ -122,5 +159,7 @@ export const cloudinaryCover = (publicId) =>
   cloudinaryUrl(publicId, "c_fill,w_600,h_400,q_auto,f_auto");
 
 export const radioDublabLink = "https://www.dublab.cat/shows/ameba";
-export const TEXT_EDITOR_KEY =
-  "3tpoe00fct6ffh0uhj84y2twrfb2e64jy0b7o0yhvmme31o1";
+
+// ⚠ La clave anterior estaba commiteada en el repo: debe rotarse en el panel
+// de TinyMCE y definirse via VITE_TINYMCE_KEY.
+export const TEXT_EDITOR_KEY = import.meta.env.VITE_TINYMCE_KEY || "";

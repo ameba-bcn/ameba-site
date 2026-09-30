@@ -1,0 +1,292 @@
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import useDataStore from "../../stores/useDataStore";
+import { selectFestivals, FESTIVAL_TYPES } from "../../selectors/festivals";
+import {
+  formatPrice,
+  sortByDate,
+  formatISODateToDate,
+  formatDateToHour,
+} from "../../utils/utils";
+import PageLayout from "../../components/layout/PageLayout/PageLayout";
+import PageMeta from "../../components/seo/PageMeta";
+import SectionHero from "../../components/ui/SectionHero";
+import DotsRow from "../../components/ui/DotsRow";
+import OutlineHeading from "../../components/ui/OutlineHeading";
+import DropdownFilter from "../../components/ui/DropdownFilter";
+import CardGrid from "../../components/ui/CardGrid";
+import AmebaCard from "../../components/ui/AmebaCard";
+import LoadMoreButton from "../../components/ui/LoadMoreButton";
+import FeaturedFestival, {
+  useFeaturedFestivalReveal,
+} from "../../components/festivals/FeaturedFestival";
+import ArxiuBand from "../../components/festivals/ArxiuBand";
+import heroImage from "../../assets/images/home/home2.jpg";
+import { gsap, Flip, prefersReducedMotion } from "../../utils/gsapSetup";
+import usePageEnter from "../../hooks/use-page-enter";
+import useGsapContext from "../../hooks/use-gsap-context";
+import "./Festivals.css";
+
+const PAGE_SIZE = 12;
+
+// Fixed taxonomy (not derived from the data) — Parkfest is Ameba's own
+// flagship event and always leads, unlike the dynamic per-type filter on
+// /lab where any type the backend returns is fair game.
+const TYPE_LABEL_KEYS = {
+  parkfest: "festivals.tipus-parkfest",
+  festival: "festivals.tipus-festival",
+  "festa major": "festivals.tipus-festa-major",
+};
+
+function Festivals() {
+  const { agenda = [], isEventsLoading } = useDataStore();
+  const [t] = useTranslation("translation");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const rootRef = useRef(null);
+  const flipState = useRef(null);
+  const fallbackFeaturedRef = useFeaturedFestivalReveal();
+
+  usePageEnter(rootRef, "festivals");
+
+  // §2.2 — dots row above the featured band, just before its mask opens.
+  useGsapContext(
+    () => {
+      const dots = gsap.utils.toArray(
+        ".festivals__hero-dots .dots-row__dot",
+        rootRef.current,
+      );
+      if (!dots.length) return;
+      if (prefersReducedMotion()) {
+        gsap.set(dots, { autoAlpha: 1 });
+        return;
+      }
+      gsap.set(dots, { scale: 0 });
+      gsap.to(dots, {
+        scale: 1,
+        duration: 0.4,
+        stagger: 0.04,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: rootRef.current.querySelector(".festivals__hero-dots"),
+          start: "top 90%",
+          once: true,
+        },
+      });
+    },
+    [],
+    rootRef,
+  );
+
+  const activeYear = searchParams.get("any");
+  const activeType = searchParams.get("tipus");
+
+  // §2.3 "Aplicar filtre → FLIP" — capture card positions synchronously
+  // before the filter changes the result set, apply the transition once
+  // React has re-rendered.
+  const captureFlip = () => {
+    if (prefersReducedMotion()) return;
+    const cards = gsap.utils.toArray(".festivals__card-grid .ameba-card");
+    if (cards.length) flipState.current = Flip.getState(cards);
+  };
+
+  useEffect(() => {
+    if (!flipState.current) return;
+    const state = flipState.current;
+    flipState.current = null;
+    requestAnimationFrame(() => {
+      Flip.from(state, {
+        duration: 0.55,
+        ease: "power3.inOut",
+        stagger: 0.03,
+        absolute: true,
+        onEnter: (els) =>
+          gsap.fromTo(
+            els,
+            { autoAlpha: 0, scale: 0.92 },
+            { autoAlpha: 1, scale: 1, duration: 0.4 },
+          ),
+        onLeave: (els) =>
+          gsap.to(els, { autoAlpha: 0, scale: 0.92, duration: 0.3 }),
+      });
+    });
+  }, [activeYear, activeType]);
+
+  const festivals = useMemo(() => selectFestivals(agenda), [agenda]);
+
+  // Next upcoming festival when there is one; otherwise the most recent
+  // past one, so the featured band is never empty just because nothing's
+  // scheduled yet.
+  const featured = useMemo(() => {
+    const now = new Date();
+    const upcoming = festivals
+      .filter((f) => new Date(f.datetime) >= now)
+      .sort((a, b) => new Date(a.datetime) - new Date(b.datetime));
+    if (upcoming[0]) return upcoming[0];
+    const past = festivals
+      .filter((f) => new Date(f.datetime) < now)
+      .sort((a, b) => new Date(b.datetime) - new Date(a.datetime));
+    return past[0] ?? null;
+  }, [festivals]);
+
+  const historic = useMemo(
+    () =>
+      sortByDate(
+        festivals.filter(
+          (f) => new Date(f.datetime) < new Date() && f.id !== featured?.id,
+        ),
+      ),
+    [festivals, featured],
+  );
+
+  const years = useMemo(
+    () =>
+      [
+        ...new Set(historic.map((f) => new Date(f.datetime).getFullYear())),
+      ].sort((a, b) => b - a),
+    [historic],
+  );
+
+  const filtered = useMemo(
+    () =>
+      historic
+        .filter((f) =>
+          activeYear
+            ? String(new Date(f.datetime).getFullYear()) === activeYear
+            : true,
+        )
+        .filter((f) => (activeType ? f.type === activeType : true)),
+    [historic, activeYear, activeType],
+  );
+
+  const visibleItems = filtered.slice(0, visibleCount);
+
+  const setFilter = (key, value) => {
+    captureFlip();
+    const next = new URLSearchParams(searchParams);
+    if (value) next.set(key, value);
+    else next.delete(key);
+    setSearchParams(next);
+    setVisibleCount(PAGE_SIZE);
+  };
+
+  const clearFilters = () => {
+    captureFlip();
+    setSearchParams({});
+    setVisibleCount(PAGE_SIZE);
+  };
+
+  return (
+    <PageLayout section="festivals" promo loading={isEventsLoading}>
+      <PageMeta
+        title="Festivals"
+        description={t("festivals.meta")}
+        url="/festivals"
+      />
+      <div ref={rootRef}>
+        <SectionHero
+          title={t("menu.festivals")}
+          section="festivals"
+          variant="mega"
+          dotsPosition="end"
+          image={heroImage}
+          imageAlt={t("menu.festivals")}
+          lead={t("festivals.hero-lead")}
+          titleFit={false}
+        >
+          <p>{t("festivals.hero-body-1")}</p>
+          <p className="section-hero__text-p--regular">
+            {t("festivals.hero-body-2")}
+          </p>
+        </SectionHero>
+        <hr className="festivals__hr--bleed-right" />
+        <DotsRow className="festivals__hero-dots" />
+
+        {featured ? (
+          <FeaturedFestival festival={featured} />
+        ) : (
+          // No festival-type events at all yet (neither upcoming nor past).
+          <div className="featured-festival" ref={fallbackFeaturedRef}>
+            <img className="featured-festival__image" src={heroImage} alt="" />
+          </div>
+        )}
+
+        <hr className="festivals__hr--bleed-left" />
+        <OutlineHeading as="h2" className="festivals__section-title">
+          {t("festivals.historic")}
+        </OutlineHeading>
+
+        <div className="festivals__filters">
+          <DropdownFilter
+            label={t("festivals.any")}
+            value={activeYear}
+            options={years.map(String)}
+            onChange={(v) => setFilter("any", v)}
+          />
+          <DropdownFilter
+            label={t("festivals.festival")}
+            value={activeType ? t(TYPE_LABEL_KEYS[activeType]) : null}
+            options={FESTIVAL_TYPES.map((type) => ({
+              value: type,
+              label: t(TYPE_LABEL_KEYS[type]),
+            }))}
+            onChange={(v) => setFilter("tipus", v)}
+          />
+          {(activeYear || activeType) && (
+            <button
+              type="button"
+              className="festivals__clear"
+              onClick={clearFilters}
+            >
+              {t("general.borrar-filtres")}
+            </button>
+          )}
+        </div>
+
+        {!isEventsLoading && filtered.length === 0 ? (
+          <div className="festivals__empty">{t("general.sense-resultats")}</div>
+        ) : (
+          <>
+            <CardGrid className="festivals__card-grid">
+              {visibleItems.map((f) => (
+                <div
+                  key={f.id}
+                  style={f.cancelled ? { opacity: 0.6 } : undefined}
+                >
+                  <AmebaCard
+                    to={`/festivals/${f.id}`}
+                    image={f.images?.[0]}
+                    imageAlt={f.name}
+                    badge={`${formatISODateToDate(f.datetime)} - ${formatDateToHour(f.datetime)}h`}
+                    title={f.name}
+                    subtitle={f.address}
+                    highlight={
+                      f.cancelled
+                        ? t("festivals.cancellat")
+                        : f.price === 0
+                          ? t("events.button.gratis").toUpperCase()
+                          : f.price
+                            ? formatPrice(f.price)
+                            : null
+                    }
+                    meta={f.address}
+                  />
+                </div>
+              ))}
+            </CardGrid>
+            {visibleCount < filtered.length && (
+              <LoadMoreButton
+                onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+              />
+            )}
+          </>
+        )}
+
+        <ArxiuBand />
+      </div>
+    </PageLayout>
+  );
+}
+
+export default Festivals;

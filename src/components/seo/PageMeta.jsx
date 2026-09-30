@@ -28,6 +28,7 @@ export default function PageMeta({
   url,
   type = "website",
   jsonLd,
+  noindex = false,
 }) {
   const fullTitle = title
     ? `${title} | ${SITE_NAME}`
@@ -49,6 +50,17 @@ export default function PageMeta({
       document.title = prevTitle;
     };
   }, [fullTitle, description, image, fullUrl, type]);
+
+  // Sólo las páginas que lo piden añaden el meta, y se retira al desmontar:
+  // PageMeta escribe sobre el <head> compartido, así que dejarlo puesto lo
+  // heredaría la siguiente página que no declare nada.
+  useEffect(() => {
+    if (!noindex) return undefined;
+    setMeta("name", "robots", "noindex, follow");
+    return () => {
+      document.querySelector('meta[name="robots"]')?.remove();
+    };
+  }, [noindex]);
 
   useEffect(() => {
     if (!jsonLd) return;
