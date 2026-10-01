@@ -57,14 +57,6 @@ function Legal() {
             <h1 className="legal-page__title">{t("legal.hero-title")}</h1>
             <p className="legal-page__lead">{t("legal.hero-lead")}</p>
           </div>
-          {lastUpdated && (
-            <div className="legal-page__updated">
-              <span className="legal-page__updated-label">
-                {t("legal.updated-label")}
-              </span>
-              <span className="legal-page__updated-value">{lastUpdated}</span>
-            </div>
-          )}
         </div>
 
         <div className="legal-page__split">
@@ -103,6 +95,15 @@ function Legal() {
                   {t("legal.documents-hint")}
                 </span>
               </div>
+
+              {lastUpdated && (
+                <div className="legal-page__updated">
+                  <span className="legal-page__updated-label">
+                    {t("legal.updated-label")}
+                  </span>
+                  <span className="legal-page__updated-value">{lastUpdated}</span>
+                </div>
+              )}
 
               {documents.length === 0 ? (
                 <p className="legal-page__empty">{t("legal.documents-empty")}</p>

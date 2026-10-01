@@ -96,9 +96,11 @@ const useDataStore = create((set) => ({
   },
 
   fetchCollaborators: () => {
-    return DataService.getCollaborators().then((response) => {
-      set({ collaborators: response?.data });
-    });
+    return DataService.getCollaborators()
+      .then((response) => {
+        set({ collaborators: response?.data });
+      })
+      .catch(() => {});
   },
 
   fetchMemberProjects: () => {

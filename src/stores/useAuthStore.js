@@ -73,7 +73,7 @@ const useAuthStore = create((set) => ({
         localStorage.removeItem("refresh");
         localStorage.removeItem("cart_id");
         set({ isLoggedIn: false, user: null });
-        return Promise.reject(message);
+        return Promise.reject(new Error(message || "Token validation failed"));
       },
     );
   },
@@ -104,7 +104,7 @@ const useAuthStore = create((set) => ({
       (error) => {
         const message = error.response?.data.detail;
         set({ user_member_data: {} });
-        return Promise.reject(message);
+        return Promise.reject(new Error(message || "Member profile failed"));
       },
     );
   },
@@ -227,7 +227,7 @@ const useAuthStore = create((set) => ({
       () => {},
       (error) => {
         const message = error.response?.data?.detail;
-        return Promise.reject(message);
+        return Promise.reject(new Error(message || "Delete user failed"));
       },
     );
   },

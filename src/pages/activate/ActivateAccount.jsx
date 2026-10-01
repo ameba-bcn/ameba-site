@@ -33,9 +33,9 @@ export default function ActivateAccount() {
     window.history.replaceState(null, "", window.location.pathname);
     validateEmail(token).then(
       () => {
-        getUserData().then((data) => {
-          if (data?.member) getMemberProfile();
-        });
+        getUserData()
+          .then((data) => (data?.member ? getMemberProfile() : undefined))
+          .catch(() => {});
         getCart();
         setStep("done");
       },

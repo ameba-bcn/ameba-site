@@ -120,7 +120,7 @@ function Checkout() {
 
   useEffect(() => {
     if (user_data?.member) {
-      getMemberProfile();
+      getMemberProfile()?.catch?.(() => {});
     }
   }, [getMemberProfile, user_data?.member]);
 

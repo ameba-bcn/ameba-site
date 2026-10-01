@@ -107,13 +107,14 @@ function App() {
       validateLocalToken(refresh)
         .then(() => {
           setLoggedUser();
-          getUserData().then((data) => {
+          return getUserData().then((data) => {
             if (data?.member) {
-              getMemberProfile();
+              return getMemberProfile();
             }
+            return undefined;
           });
         })
-        .catch(setGuestUser());
+        .catch(() => setGuestUser());
     } else {
       setGuestUser();
     }
