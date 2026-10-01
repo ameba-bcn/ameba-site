@@ -59,7 +59,7 @@ export default function NextActivityCard({ activity }) {
         <div className="next-activity-card__date">
           {formatISODateToDate(datetime)} - {formatDateToHour(datetime)}H
         </div>
-        <div className="next-activity-card__title">{header || name}</div>
+        <div className="next-activity-card__title">{name || header}</div>
         <div className="next-activity-card__row">
           {price === 0
             ? t("events.button.gratis").toUpperCase()

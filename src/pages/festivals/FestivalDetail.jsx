@@ -7,6 +7,7 @@ import { formatPrice, formatDateToHour } from "../../utils/utils";
 import { sanitizeHTML } from "../../utils/sanitize";
 import { formatDateChip, formatDayLine } from "../../utils/eventDateLabels";
 import { buildEventJsonLd } from "../../utils/eventJsonLd";
+import useProfileStore from "../../stores/useProfileStore";
 import PageLayout from "../../components/layout/PageLayout/PageLayout";
 import PageMeta from "../../components/seo/PageMeta";
 import DotsRow from "../../components/ui/DotsRow";
@@ -17,6 +18,7 @@ function FestivalDetail() {
   const { id } = useParams();
   const [t, i18next] = useTranslation("translation");
   const lang = i18next.language === "es" ? "es" : "ca";
+  const { user_profile = "" } = useProfileStore();
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -33,6 +35,9 @@ function FestivalDetail() {
   const jsonLd = useMemo(() => buildEventJsonLd(event, id, "festivals"), [event, id]);
 
   const eventName = event?.header || event?.name || "";
+  const eventTitle = event?.name || event?.header || "";
+  const isLogged = user_profile === "LOGGED" || user_profile === "MEMBER";
+  const discount = Number(event?.discount) || 0;
   const banner = event?.images?.[0];
   // No dedicated poster/cartell field exists on EventDetail — reuse the same
   // banner image framed as the "Cartell" slot rather than inventing a second one.
@@ -87,7 +92,7 @@ function FestivalDetail() {
           <section className="festival-detail__hero">
             <div className="festival-detail__hero-left">
               <DotsRow count={6} className="festival-detail__dots" />
-              <h1 className="festival-detail__title">{eventName}</h1>
+              <h1 className="festival-detail__title">{eventTitle}</h1>
             </div>
             <div className="festival-detail__hero-right">
               {event.datetime && (
@@ -140,6 +145,12 @@ function FestivalDetail() {
                   <div>
                     <dt>{t("festivals.entrada")}:</dt>
                     <dd>{entrada}</dd>
+                  </div>
+                )}
+                {isLogged && discount > 0 && (
+                  <div>
+                    <dt>{t("festivals.descompte")}:</dt>
+                    <dd>-{discount}%</dd>
                   </div>
                 )}
               </dl>
