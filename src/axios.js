@@ -74,10 +74,15 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    if (
-      error.response.status === 401 &&
-      originalRequest.url === BASE_URL + "token/refresh/"
-    ) {
+    // El refresh interno de este interceptor se lanza con la URL relativa
+    // ("/token/refresh/"), así que comparar contra BASE_URL + "token/refresh/"
+    // no lo reconocía y un 401 ahí volvía a entrar en la rama de refresh,
+    // reintentando en bucle. Reconocemos ambas formas.
+    const isRefreshRequest = String(originalRequest.url || "").endsWith(
+      "token/refresh/"
+    );
+
+    if (error.response.status === 401 && isRefreshRequest) {
       clearSession();
       window.location.href = "/inicia-sessio";
       return Promise.reject(error);

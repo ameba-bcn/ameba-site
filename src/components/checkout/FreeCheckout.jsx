@@ -13,10 +13,12 @@ export default function FreeCheckout() {
   const [redirect, setRedirect] = useState(false);
   const getMemberProfile = useAuthStore((state) => state.getMemberProfile);
   const handleFinishPayment = () => {
-    checkoutPaymentCart(id).then(() => {
-      getMemberProfile();
-      getCart();
-    });
+    checkoutPaymentCart(id)
+      .then(() => {
+        getMemberProfile()?.catch?.(() => {});
+        return getCart();
+      })
+      .catch(() => {});
     setRedirect(true);
   };
 

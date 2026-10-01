@@ -20,11 +20,14 @@ export default function LoginForm({ setRedirect }) {
     setLoading(true);
     login(values.email, values.password)
       .then(() => {
-        getUserData().then((data) => {
-          if (data?.member) {
-            getMemberProfile();
-          }
-        });
+        getUserData()
+          .then((data) => {
+            if (data?.member) {
+              return getMemberProfile();
+            }
+            return undefined;
+          })
+          .catch(() => {});
         getCart().then(() => {
           setRedirect(true);
         });
