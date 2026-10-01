@@ -40,6 +40,9 @@ function LabDetail() {
   const jsonLd = useMemo(() => buildEventJsonLd(event, id, "lab"), [event, id]);
 
   const eventName = event?.header || event?.name || "";
+  const eventTitle = event?.name || event?.header || "";
+  const isLogged = user_profile === "LOGGED" || user_profile === "MEMBER";
+  const discount = Number(event?.discount) || 0;
   const hero = event?.images?.[0];
   const portrait = event?.images?.[1];
   const description = event?.description ? sanitizeHTML(event.description) : "";
@@ -116,7 +119,7 @@ function LabDetail() {
           <section className="lab-detail__hero">
             <div className="lab-detail__hero-left">
               <DotsRow count={7} className="lab-detail__dots" />
-              <h1 className="lab-detail__title">{eventName}</h1>
+              <h1 className="lab-detail__title">{eventTitle}</h1>
 
               <dl className="lab-detail__info">
                 {event.address && (
@@ -147,6 +150,12 @@ function LabDetail() {
                   <div>
                     <dt>{t("lab.entrada")}:</dt>
                     <dd>{entrada}</dd>
+                  </div>
+                )}
+                {isLogged && discount > 0 && (
+                  <div>
+                    <dt>{t("lab.descompte")}:</dt>
+                    <dd>-{discount}%</dd>
                   </div>
                 )}
               </dl>
