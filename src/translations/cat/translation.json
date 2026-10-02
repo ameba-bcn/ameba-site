@@ -178,6 +178,12 @@
     "opcional": "opcional",
     "desant": "Desant…"
   },
+  "institucional": {
+    "label": "Amb el suport de",
+    "lab": "Les activitats del Lab compten amb el suport de",
+    "icub": "Institut de Cultura",
+    "icub-footer": "Institut\nde Cultura"
+  },
   "support": {
     "menu": {
       "bio": "bio",

@@ -20,6 +20,7 @@ import CardGrid from "../../components/ui/CardGrid";
 import AmebaCard from "../../components/ui/AmebaCard";
 import LoadMoreButton from "../../components/ui/LoadMoreButton";
 import LabCalendar from "../../components/lab/LabCalendar";
+import InstitutionalSupport from "../../components/ui/InstitutionalSupport";
 import NextActivityCard from "../../components/lab/NextActivityCard";
 import {
   activityDateSet,
@@ -284,6 +285,8 @@ function Lab() {
             )}
           </>
         )}
+
+        <InstitutionalSupport variant="lab" />
       </div>
     </PageLayout>
   );
