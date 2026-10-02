@@ -1,0 +1,32 @@
+name: Dependabot auto-merge
+
+# pull_request_target i no pull_request: les PRs de Dependabot reben un token
+# de només lectura amb pull_request i no podrien fusionar-se.
+# No fem checkout del codi de la PR, així que no executem res de la branca.
+on: pull_request_target
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    name: Enable auto-merge
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.user.login == 'dependabot[bot]'
+    steps:
+      - name: Read Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Els majors queden oberts perquè els revisis a mà.
+      # Auto-merge només fusiona quan els checks requerits de master passen;
+      # si cap check és obligatori, fusionaria a l'instant.
+      - name: Enable auto-merge for patch and minor updates
+        if: steps.metadata.outputs.update-type != 'version-update:semver-major'
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
