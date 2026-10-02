@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
-import html2canvas from "html2canvas";
-import { jsPDF } from "jspdf";
 import authService from "../../../../store/services/auth.service";
 import Spinner from "../../../../components/spinner/Spinner";
 import "./MemberQr.style.css";
@@ -31,6 +29,12 @@ const MemberQr = () => {
     if (!cardRef.current) return;
     setDownloading(true);
     try {
+      // html2canvas + jspdf pesan ~1 MB: se cargan solo al descargar el carnet.
+      const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+        import("html2canvas"),
+        import("jspdf"),
+      ]);
+
       const scale = 3;
       const canvas = await html2canvas(cardRef.current, {
         scale,

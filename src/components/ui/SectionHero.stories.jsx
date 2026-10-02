@@ -1,4 +1,5 @@
 import SectionHero from "./SectionHero";
+import { storyCoverImage } from "../../test/mocks/storyImage";
 
 export default {
   title: "Components/SectionHero",
@@ -10,7 +11,7 @@ export const Shop = {
   args: {
     title: "Shop",
     section: "shop",
-    image: "https://ameba.cat/AmebaPortadaDesktop.jpg",
+    image: storyCoverImage,
     imageAlt: "Shop",
     lead: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
     children: (
@@ -26,7 +27,7 @@ export const Lab = {
   args: {
     title: "Lab",
     section: "lab",
-    image: "https://ameba.cat/AmebaPortadaDesktop.jpg",
+    image: storyCoverImage,
     imageAlt: "Lab",
     lead: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },

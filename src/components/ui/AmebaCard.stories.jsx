@@ -1,5 +1,6 @@
 import AmebaCard from "./AmebaCard";
 import CardGrid from "./CardGrid";
+import { storyCoverImage } from "../../test/mocks/storyImage";
 
 export default {
   title: "Components/AmebaCard",
@@ -9,7 +10,7 @@ export default {
 export const Default = {
   args: {
     to: "/botiga/1",
-    image: "https://ameba.cat/AmebaPortadaDesktop.jpg",
+    image: storyCoverImage,
     imageAlt: "Samarreta Ameba",
     badge: "20€",
     title: "Samarreta Ameba Fstvl 2026",
@@ -19,7 +20,7 @@ export const Default = {
 export const FullRow = {
   args: {
     to: "/lab/1",
-    image: "https://ameba.cat/AmebaPortadaDesktop.jpg",
+    image: storyCoverImage,
     imageAlt: "Ameba Fest",
     badge: "29.4.2026 - 19H",
     title: "Ameba Fest 2026",
@@ -36,7 +37,7 @@ export const Grid = {
         <AmebaCard
           key={i}
           to={`/botiga/${i}`}
-          image="https://ameba.cat/AmebaPortadaDesktop.jpg"
+          image={storyCoverImage}
           imageAlt="Samarreta Ameba"
           badge="20€"
           title="Samarreta Ameba Fstvl 2026"
