@@ -1,9 +1,8 @@
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
-import { Flip } from "gsap/Flip";
 
-gsap.registerPlugin(ScrollTrigger, SplitText, Flip);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 // Avoids re-measuring triggers when only the mobile URL bar collapses.
 ScrollTrigger.config({ ignoreMobileResize: true });
@@ -24,4 +23,4 @@ export const prefersReducedMotion = () =>
 // instead of a frozen mid-animation frame.
 export const isTestEnv = () => typeof import.meta !== "undefined" && import.meta.env?.MODE === "test";
 
-export { gsap, ScrollTrigger, SplitText, Flip };
+export { gsap, ScrollTrigger, SplitText };

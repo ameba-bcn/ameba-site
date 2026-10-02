@@ -1,9 +1,10 @@
 import CardLayout from "./CardLayout";
+import { storyCoverImage, storyCoverImageAlt } from "../../../test/mocks/storyImage";
 
 const CARD_LIST = [
-  { id: 1, name: "Concert Ameba Fest", image: "https://ameba.cat/AmebaPortadaDesktop.jpg", tags: ["Música"], created: "2026-06-01" },
-  { id: 2, name: "Taller de producció", image: "https://ameba.cat/AmebaPortadaMobile.jpg", tags: ["Taller"], created: "2026-05-15" },
-  { id: 3, name: "Xerrada cultura electrònica", image: "https://ameba.cat/AmebaPortadaDesktop.jpg", tags: [], created: "2026-04-20" },
+  { id: 1, name: "Concert Ameba Fest", image: storyCoverImage, tags: ["Música"], created: "2026-06-01" },
+  { id: 2, name: "Taller de producció", image: storyCoverImageAlt, tags: ["Taller"], created: "2026-05-15" },
+  { id: 3, name: "Xerrada cultura electrònica", image: storyCoverImage, tags: [], created: "2026-04-20" },
 ];
 
 export default {

@@ -126,3 +126,12 @@
 .text-area__styled .tox-collection__item-checkmark svg {
   fill: var(--color-negro) !important;
 }
+
+/* Reserva l'alçada de l'editor mentre es carrega el seu chunk, per evitar
+   que el formulari salti quan TinyMCE acaba de muntar-se. */
+.text-area__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+}

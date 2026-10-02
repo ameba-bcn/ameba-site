@@ -1,9 +1,10 @@
 import CardView from "./CardView";
+import { storyCoverImage } from "../../test/mocks/storyImage";
 
 const EVENT_DATA = {
   name: "Ameba Fest 2026",
   header: "Ameba Fest 2026",
-  images: ["https://ameba.cat/AmebaPortadaDesktop.jpg"],
+  images: [storyCoverImage],
   datetime: "2031-06-15T20:00:00.000Z",
   address: "Razzmatazz, Barcelona",
   description: "Un festival de música electrònica amb els millors DJs locals.",
@@ -15,7 +16,7 @@ const EVENT_DATA = {
 
 const PRODUCT_DATA = {
   name: "Samarreta Ameba",
-  images: ["https://ameba.cat/AmebaPortadaDesktop.jpg"],
+  images: [storyCoverImage],
   description: "Samarreta oficial d'Ameba, 100% cotó orgànic.",
   price: 22,
   price_range: "22 €",
@@ -30,7 +31,7 @@ const PRODUCT_DATA = {
 
 const MEMBERSHIP_DATA = {
   name: "Soci Anual",
-  images: ["https://ameba.cat/AmebaPortadaDesktop.jpg"],
+  images: [storyCoverImage],
   description: "Fes-te soci i gaudeix de descomptes en tots els esdeveniments.",
   benefits: "Entrades amb descompte, accés prioritari, newsletter exclusiva.",
   price: 30,

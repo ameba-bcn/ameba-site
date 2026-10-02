@@ -1,4 +1,5 @@
 import Banner from "./Banner";
+import { storyCoverImage } from "../../test/mocks/storyImage";
 
 export default {
   title: "Components/Banner",
@@ -7,7 +8,7 @@ export default {
 
 export const Default = {
   args: {
-    image: "https://ameba.cat/AmebaPortadaDesktop.jpg",
+    image: storyCoverImage,
     alt: "Ameba Barcelona",
     title: "L'ASSOCIACIÓ DE MÚSICA ELECTRÒNICA DE BARCELONA",
   },
@@ -15,7 +16,7 @@ export const Default = {
 
 export const WithLink = {
   args: {
-    image: "https://ameba.cat/AmebaPortadaDesktop.jpg",
+    image: storyCoverImage,
     link: "https://ameba.cat",
     alt: "Ameba Barcelona",
     title: "FES-TE SOCI D'AMEBA",
