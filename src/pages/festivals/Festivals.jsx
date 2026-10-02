@@ -23,7 +23,8 @@ import FeaturedFestival, {
 } from "../../components/festivals/FeaturedFestival";
 import ArxiuBand from "../../components/festivals/ArxiuBand";
 import heroImage from "../../assets/images/home/home2.jpg";
-import { gsap, Flip, prefersReducedMotion } from "../../utils/gsapSetup";
+import { gsap, prefersReducedMotion } from "../../utils/gsapSetup";
+import { Flip } from "../../utils/gsapFlip";
 import usePageEnter from "../../hooks/use-page-enter";
 import useGsapContext from "../../hooks/use-gsap-context";
 import "./Festivals.css";

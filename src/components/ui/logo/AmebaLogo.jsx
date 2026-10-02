@@ -4,7 +4,10 @@ import { AmebaSvgWrapper } from "../Icon";
 const AmebaLogo = ({
   width = 100,
   height = 100,
-  fill = { fill },
+  // El valor per defecte era `{ fill }`, que es referencia a si mateix dins
+  // del destructuring i llençava "Cannot access 'fill' before initialization"
+  // si es renderitzava el logo sense passar-li el color.
+  fill = "currentColor",
   ...props
 }) => (
   <AmebaSvgWrapper

@@ -27,7 +27,8 @@ import {
   dateKey,
 } from "../../components/lab/calendarGrid";
 import heroImage from "../../assets/images/home/home3.jpg";
-import { gsap, Flip, prefersReducedMotion } from "../../utils/gsapSetup";
+import { gsap, prefersReducedMotion } from "../../utils/gsapSetup";
+import { Flip } from "../../utils/gsapFlip";
 import usePageEnter from "../../hooks/use-page-enter";
 import "./Lab.css";
 
