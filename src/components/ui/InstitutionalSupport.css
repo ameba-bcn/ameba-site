@@ -1,0 +1,101 @@
+/* Ajuntament de Barcelona – Institut de Cultura credit.
+   Two variants: the footer's brand-column block and the Lab section's
+   closing strip. Deliberately low visual weight in both. */
+
+.institutional-support__logo {
+  width: auto;
+  object-fit: contain;
+}
+
+.institutional-support__link:focus-visible,
+.institutional-support--lab:focus-visible {
+  outline: 1px solid var(--color-naranja);
+  outline-offset: 4px;
+}
+
+/* [1] Footer — brand column, under the tagline. Separate from the bottom
+   bar's "Amb la col·laboració de": different relationship. */
+.institutional-support--footer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 220px;
+  margin-top: 14px;
+  padding-top: 14px;
+  /* Same cream rule as the footer's bottom bar. */
+  border-top: 1px solid rgba(242, 227, 201, 0.18);
+}
+
+.institutional-support__label {
+  font-family: var(--font-body);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-gris-claro);
+}
+
+.institutional-support__link {
+  display: flex;
+  text-decoration: none;
+  align-items: center;
+  gap: 10px;
+  transition: opacity 150ms ease;
+}
+
+.institutional-support__link:hover {
+  opacity: 0.75;
+}
+
+.institutional-support--footer .institutional-support__logo {
+  height: 24px;
+}
+
+.institutional-support__rule {
+  flex: none;
+  width: 1px;
+  height: 22px;
+  background-color: rgba(242, 227, 201, 0.4);
+}
+
+.institutional-support__name {
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1.25;
+  color: var(--color-cream);
+  /* The translation carries the line break between "Institut" and
+     "de Cultura" so it stays translatable. */
+  white-space: pre-line;
+}
+
+/* [2] Lab — closing strip on the section's orange background. */
+.institutional-support--lab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 28px 0;
+  color: var(--color-negro);
+  text-decoration: none;
+  transition: opacity 150ms ease;
+}
+
+.institutional-support--lab .institutional-support__text {
+  font-family: var(--font-body);
+  font-size: 11px;
+}
+
+.institutional-support--lab .institutional-support__text--strong {
+  font-weight: 600;
+}
+
+.institutional-support--lab .institutional-support__logo {
+  height: 16px;
+  /* The asset is the official white lockup; there is no black version in
+     assets, so knock it to black for the orange background. */
+  filter: brightness(0);
+}
+
+.institutional-support--lab:hover .institutional-support__text {
+  text-decoration: underline;
+}

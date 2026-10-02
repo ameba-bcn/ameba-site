@@ -5,6 +5,7 @@ import AmebaLogo from "../ui/logo/AmebaLogo";
 import TurntableIcon from "../ui/logo/TurntableIcon";
 import Icon from "../ui/Icon";
 import Button from "../button/Button";
+import InstitutionalSupport from "../ui/InstitutionalSupport";
 import useDataStore from "../../stores/useDataStore";
 import profileServices from "../../store/services/profile.services";
 import { AMEBA_EMAIL } from "../../utils/constants";
@@ -84,6 +85,7 @@ export default function Footer() {
             </button>
           </div>
           <p className="ameba-footer__tagline">{t("footer.tagline")}</p>
+          <InstitutionalSupport />
           <div className="ameba-footer__socials">
             {SOCIALS.map(({ icon, label, url }) => (
               <a
