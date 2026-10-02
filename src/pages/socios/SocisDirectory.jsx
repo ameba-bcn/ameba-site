@@ -76,7 +76,10 @@ function SocisDirectory() {
         url="/associacio/socis"
       />
       <div className="socis-directory">
-        <nav aria-label={t("soci.directori-breadcrumb")} className="socis-directory__breadcrumb">
+        <nav
+          aria-label={t("soci.directori-breadcrumb")}
+          className="socis-directory__breadcrumb"
+        >
           <Link to="/">AMEBA</Link>
           <span>|</span>
           <Link to="/associacio">{t("menu.associacio")}</Link>
@@ -96,7 +99,10 @@ function SocisDirectory() {
           )}
         </section>
 
-        <section aria-label={t("soci.cerca-projecte")} className="socis-directory__filters">
+        <section
+          aria-label={t("soci.cerca-projecte")}
+          className="socis-directory__filters"
+        >
           {roles.length > 0 && (
             <FilterBar
               items={roles}
@@ -116,18 +122,29 @@ function SocisDirectory() {
               aria-label={t("soci.cerca-projecte")}
             />
             <span className="socis-directory__count">
-              {projects.length} {t("footer.socios")}
+              {projects.length} {t("support.top-menu.projectes")}
+              {" de "}
+              {t("footer.socios")}
             </span>
           </div>
         </section>
 
-        <section className="socis-directory__results" aria-label={t("footer.socios")}>
+        <section
+          className="socis-directory__results"
+          aria-label={t("footer.socios")}
+        >
           {visibleProjects.length === 0 && !isMemberProjectsLoading ? (
             <div className="socis-directory__empty">
-              <span className="socis-directory__empty-title">{t("soci.no-projectes")}</span>
+              <span className="socis-directory__empty-title">
+                {t("soci.no-projectes")}
+              </span>
               <p>{t("soci.no-projectes-text")}</p>
               {(query || activeRole) && (
-                <button type="button" className="socis-directory__chip" onClick={resetFilters}>
+                <button
+                  type="button"
+                  className="socis-directory__chip"
+                  onClick={resetFilters}
+                >
                   {t("general.borrar-filtres")}
                 </button>
               )}
@@ -143,12 +160,16 @@ function SocisDirectory() {
                     imageAlt={p.project_name}
                     badge={p.tags?.[0]}
                     title={p.project_name}
-                    meta={p.first_name ? `${t("soci.per")} ${p.first_name}` : null}
+                    meta={
+                      p.first_name ? `${t("soci.per")} ${p.first_name}` : null
+                    }
                   />
                 ))}
               </CardGrid>
               {visibleCount < projects.length && (
-                <LoadMoreButton onClick={() => setVisibleCount((c) => c + PAGE_SIZE)} />
+                <LoadMoreButton
+                  onClick={() => setVisibleCount((c) => c + PAGE_SIZE)}
+                />
               )}
             </>
           )}
