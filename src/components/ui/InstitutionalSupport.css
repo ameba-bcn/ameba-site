@@ -82,7 +82,7 @@
 
 .institutional-support--lab .institutional-support__text {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: 14px;
 }
 
 .institutional-support--lab .institutional-support__text--strong {
@@ -96,6 +96,6 @@
   filter: brightness(0);
 }
 
-.institutional-support--lab:hover .institutional-support__text {
-  text-decoration: underline;
+.institutional-support--lab:hover {
+  opacity: 0.75;
 }

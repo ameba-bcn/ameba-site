@@ -38,6 +38,7 @@ export default function InstitutionalSupport({ variant = "footer" }) {
           src={ajuntamentLogo}
           alt="Ajuntament de Barcelona"
         />
+        |
         <span className="institutional-support__text institutional-support__text--strong">
           {t("institucional.icub")}
         </span>
