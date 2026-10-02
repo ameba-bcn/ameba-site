@@ -1,0 +1,48 @@
+version: 2
+
+updates:
+  # Dependències de l'aplicació (npm / yarn).
+  # Només yarn.lock està versionat: package-lock.json està al .gitignore.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "Europe/Madrid"
+    open-pull-requests-limit: 5
+    # No tocar els rangs de package.json si n'hi ha prou amb actualitzar el lockfile.
+    versioning-strategy: increase-if-necessary
+    labels:
+      - "dependencies"
+    groups:
+      # Totes les alertes de seguretat pendents arriben en una sola PR.
+      security:
+        applies-to: security-updates
+        patterns:
+          - "*"
+      # Minors i patches agrupats; els majors segueixen venint un per un
+      # perquè necessiten revisió manual.
+      production:
+        applies-to: version-updates
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      development:
+        applies-to: version-updates
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    labels:
+      - "dependencies"
+    groups:
+      actions:
+        patterns:
+          - "*"
