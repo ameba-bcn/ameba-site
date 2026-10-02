@@ -6,7 +6,7 @@ import { safeLocalStorage } from "./safeStorage";
 const msg = (ca, es) =>
   safeLocalStorage.getItem("i18nextLng") === "es" ? es : ca;
 
-export const getErrors = () => ({
+const getErrors = () => ({
   EMAIL: {
     REQUIRED: msg(
       "Email: aquest camp es obligatori",
@@ -118,8 +118,6 @@ Object.keys(getErrors()).forEach((key) => {
 
 export const MOBILE_BIG = "(max-width:1519px)";
 
-export const MOBILE_SEMI_BIG = "(max-width:1200px)";
-
 export const MOBILE_NORMAL = "(max-width:760px)";
 
 export const MOBILE_SMALL = "(max-width:400px)";
@@ -128,14 +126,7 @@ export const AMEBA_EMAIL = "info@ameba.cat";
 
 export const MEMBER = "Suporter";
 
-export const ACTIVE_STATUS = "active";
-
 export const productKinds = ["producte", "soci", "activitat"];
-export const productQueryKind = {
-  producte: "articles",
-  soci: "subscriptions",
-  activitat: "events",
-};
 
 export const API_URL =
   import.meta.env.VITE_API_HOST ||
@@ -157,8 +148,6 @@ export const cloudinaryThumb = (publicId) =>
 
 export const cloudinaryCover = (publicId) =>
   cloudinaryUrl(publicId, "c_fill,w_600,h_400,q_auto,f_auto");
-
-export const radioDublabLink = "https://www.dublab.cat/shows/ameba";
 
 // ⚠ La clave anterior estaba commiteada en el repo: debe rotarse en el panel
 // de TinyMCE y definirse via VITE_TINYMCE_KEY.

@@ -19,31 +19,10 @@ export function formatPrice(price = "") {
   return num % 1 === 0 ? num + "€" : num.toFixed(2) + "€";
 }
 
-export function getNFirstElementsOfArray(inArray = [], numberElements) {
-  let newArray = [];
-  if (inArray.length > 2) {
-    newArray = inArray.slice(-numberElements);
-    return newArray;
-  } else {
-    newArray = inArray;
-  }
-  return newArray;
-}
-
 export function formatISODateToDate(sDate) {
   let date = new Date(sDate);
   return (
     date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear()
-  );
-}
-
-export function formatISODateToHour(sDate) {
-  let date = new Date(sDate);
-  return (
-    date.getHours() +
-    ":" +
-    (date.getMinutes() < 10 ? "0" : "") +
-    date.getMinutes()
   );
 }
 
@@ -277,8 +256,6 @@ export default function notificationToast(text = "", type = "success") {
     theme: "info",
   });
 }
-
-export const isDevMode = () => localStorage.getItem("dev") === "true";
 
 export const tinymceTextAreaFormatter = (val) =>
   val
