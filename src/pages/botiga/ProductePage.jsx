@@ -91,6 +91,12 @@ function ProductePage() {
       ? formatPrice(Number(product.price) * (1 - discount / 100))
       : null;
   const productSoldOut = sizes.length === 0;
+  // The CTA is disabled until a size is picked, which reads as "broken"
+  // without an explanation. Single-size / "Talla única" products get their
+  // size auto-selected in ProductDetails, so the hint only applies when
+  // there is an actual choice to make.
+  const needsSizeChoice =
+    !productSoldOut && sizes.length > 1 && activeSize.length === 0;
 
   const handleAddToCart = () => {
     if (activeSize.length === 0) {
@@ -140,7 +146,7 @@ function ProductePage() {
   }
 
   return (
-    <PageLayout section="shop" promo loading={loading} flushBottom>
+    <PageLayout className="shop-detail" section="shop" promo loading={loading} flushBottom>
       {!loading && name && (
         <PageMeta
           title={name}
@@ -197,7 +203,7 @@ function ProductePage() {
             </div>
 
             <div className="shop-product__gallery">
-              {images.slice(0, 2).map((src, i) => (
+              {images.slice(0, 2).map((src) => (
                 <div
                   key={src}
                   className={`shop-product__gallery-cell${
@@ -220,6 +226,9 @@ function ProductePage() {
               productSoldOut={productSoldOut}
             />
             <div className="shop-product__cta">
+              {needsSizeChoice && (
+                <p className="shop-product__cta-hint">{t("botiga.tria-talla")}</p>
+              )}
               <CardViewButton
                 type="PRODUCTE"
                 onAddToCart={handleAddToCart}

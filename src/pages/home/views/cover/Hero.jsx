@@ -30,11 +30,26 @@ const Hero = () => {
       return;
     }
 
+    // 3.3's extra slide is desktop-only (the mobile layout is a plain
+    // stacked band, where an x-offset on top of the reveal reads oddly).
+    // Resolved once, here, so it can ride along in the card's own tween:
+    // adding it later from inside the timeline meant a `gsap.from()` born
+    // mid-reveal, which snapped the card 40px sideways in a single frame
+    // before sliding it back — the flicker — and, being created outside
+    // the synchronous gsap.context() window, was never reverted either.
+    const cardOffset = window.matchMedia(DESKTOP_QUERY).matches ? 40 : 0;
+
     gsap.set(boxes, { scaleX: 0, transformOrigin: "left center" });
     gsap.set(lines, { yPercent: 100 });
     // §5 "franja de captació" treatment — same red-card pattern reused
-    // by Associació's own CTA band.
-    gsap.set(card, { scaleX: 0, transformOrigin: "left center" });
+    // by Associació's own CTA band. Swept open with clip-path rather than
+    // scaleX: scaling the box horizontally also squashes the bullets and
+    // buttons inside it and snaps them back into shape on the last frame.
+    gsap.set(card, {
+      clipPath: "inset(0 100% 0 0)",
+      x: cardOffset,
+      willChange: "clip-path, transform",
+    });
     gsap.set(bullets, { x: -12, autoAlpha: 0 });
     gsap.set(buttons, { y: 14, autoAlpha: 0 });
 
@@ -44,17 +59,14 @@ const Hero = () => {
       .timeline({ delay: 0.1 })
       .to(boxes, { scaleX: 1, duration: 0.5, stagger: 0.09, ease: "power3.out" })
       .to(lines, { yPercent: 0, duration: 0.8, stagger: 0.09, ease: "expo.out" }, "-=0.35")
-      .to(card, { scaleX: 1, duration: 0.6, ease: "expo.out" }, "-=0.4")
+      .to(
+        card,
+        { clipPath: "inset(0 0% 0 0)", x: 0, duration: 0.6, ease: "expo.out" },
+        "-=0.4",
+      )
       .to(bullets, { x: 0, autoAlpha: 1, duration: 0.4, stagger: 0.08 }, "-=0.3")
       .to(buttons, { y: 0, autoAlpha: 1, duration: 0.4, stagger: 0.06 }, "-=0.2")
-      // 3.3 — additional slide, desktop only (its mobile layout is a
-      // plain stacked band, an x-offset on top of the reveal above
-      // reads oddly there).
-      .add(() => {
-        gsap.matchMedia().add(DESKTOP_QUERY, () => {
-          gsap.from(card, { x: 40, duration: 0.6 });
-        });
-      }, "-=0.4");
+      .set(card, { clearProps: "willChange" });
 
     // 3.2 — parallax, desktop only (no pin/scrub on mobile per the doc).
     gsap.matchMedia().add(DESKTOP_QUERY, () => {
