@@ -1,17 +1,28 @@
 /* .page-layout__content (PageLayout.jsx, shared) is a plain block box —
-   flex:1 only gives IT a definite height inside page-layout__inner's own
-   column, it doesn't turn it into a flex container for us to stretch
-   into. Make it one here, scoped to this section only, so .shop-product
-   can grow to fill the remaining height and push the buybar down. */
+   make it a column here, scoped to this section only, so .shop-product's
+   own column (hero + full-bleed buybar) lays out predictably. */
 .page-layout--shop .page-layout__content {
   display: flex;
   flex-direction: column;
 }
 
+/* The product detail is the one shop view that must end with its footer
+   in sight: the shared .page-layout--shop min-height (100vh - navbar) plus
+   the flex:1 chain down to .shop-product would otherwise stretch the page
+   to a full viewport and push the footer below the fold, with the gap
+   showing up as dead space around the buybar. Opted into via the
+   `shop-detail` className on PageLayout (ProductePage.jsx) so the Botiga
+   listing keeps its full-height tint. */
+.page-layout--shop.shop-detail,
+.shop-detail .page-layout__inner,
+.shop-detail .page-layout__content {
+  flex: none;
+  min-height: 0;
+}
+
 .shop-product {
   max-width: 1100px;
   width: 100%;
-  flex: 1;
   margin: 0 auto;
   text-align: left;
   color: var(--color-negro);
@@ -189,16 +200,17 @@
    since a fixed calc(-1 * var(--page-margin-x)) margin only cancels the
    page's own gutter and falls short of the true edge once the viewport is
    wider than 1100px + 2 * var(--page-margin-x). */
-/* Pushed to the bottom of .shop-product (which fills the full height of
-   page-layout__content via flex) rather than trailing right after the
-   hero — short-content products (e.g. "Talla única") would otherwise
-   leave a big empty gap between the buybar and the footer. */
+/* Sits right after the hero with a fixed gap. It used to be pushed to the
+   bottom with margin-top:auto (the flex chain down from page-layout), but
+   that stretched the page to the full viewport height and left the footer
+   permanently below the fold on big screens — see the flex:none /
+   min-height overrides at the top of this file. */
 .shop-product__buybar {
   box-sizing: border-box;
   background: var(--color-cream);
   color: var(--color-negro);
   width: 100vw;
-  margin-top: auto;
+  margin-top: 56px;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
   padding: 20px var(--page-margin-x);
@@ -215,7 +227,23 @@
 
 .shop-product__cta {
   display: flex;
+  align-items: center;
+  gap: 16px;
   flex-shrink: 0;
+}
+
+/* Why the CTA is greyed out: shown only while a product with several
+   sizes still has none picked (ProductePage's needsSizeChoice). */
+.shop-product__cta-hint {
+  margin: 0;
+  max-width: 220px;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(29, 29, 27, 0.65);
 }
 
 /* Reskin the shared size picker (ProductDetails.jsx) and CardViewButton as
@@ -309,6 +337,17 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
+  }
+
+  /* Stacked buybar: the hint reads left-to-right under the sizes row. */
+  .shop-product__cta {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .shop-product__cta-hint {
+    max-width: none;
+    text-align: left;
   }
 }
 
