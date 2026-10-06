@@ -19,7 +19,7 @@
     "react": "19",
     "react-dom": "19",
     "react-i18next": "^11.12.0",
-    "react-router-dom": "^6.30.6",
+    "react-router-dom": "^7.18.4",
     "react-toastify": "^10.0.5",
     "zustand": "^5.0.11"
   },
