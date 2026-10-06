@@ -28,9 +28,11 @@ const BANDS = [
     color: "var(--section-associacio)",
     image: home1,
     to: "/associacio",
-    // (+) pegado a la derecha de la columna de texto: el contenido centrado
-    // mide 948px (mitad = 474) + 16px de separación
-    morePosition: { left: "calc(50% + 490px)", top: "54%" },
+    // Sin morePosition: el (+) se alinea con el del resto de bandas
+    // (.section-band__more, right: clamp(16px, 4vw, 64px) / top: 50%).
+    // Antes iba pegado al borde derecho de la columna de texto centrada
+    // (948px), lo que en pantallas anchas lo dejaba ~300px a la izquierda
+    // de los demás.
   },
   {
     id: "festivals",
