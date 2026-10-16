@@ -29,14 +29,17 @@ export default function useGsapContext(effect, deps = [], externalRef) {
   useLayoutEffect(() => {
     if (isTestEnv()) return undefined;
     let customCleanup;
-    // El contexto se crea vacío y el efecto entra por `ctx.add()` (misma
-    // semántica: recibe el self y registra lo que cree) para que, si lanza,
-    // ya tengamos la referencia con la que revertir.
-    const ctx = gsap.context(undefined, scope);
+    // `self` se guarda ANTES de invocar el efecto: el callback de
+    // gsap.context() corre síncrono, así que si `effect` lanza ya tenemos
+    // la referencia con la que revertir. (Ojo: `gsap.context(undefined,
+    // scope)` NO crea un contexto vacío — sin func devuelve el contexto
+    // global activo, que aquí es undefined.)
+    let ctx;
     try {
-      ctx.add((self) => {
+      ctx = gsap.context((self) => {
+        ctx = self;
         customCleanup = effect(self);
-      });
+      }, scope);
     } catch (error) {
       // Una animación nunca debe tumbar la página. GSAP revienta en
       // entornos con el DOM manipulado (extensiones/antivirus que parchean
@@ -47,7 +50,7 @@ export default function useGsapContext(effect, deps = [], externalRef) {
       // árbol y saltaba el ErrorBoundary raíz → pantalla de error completa.
       // ctx.revert() deshace los gsap.set() que sí llegaron a aplicarse,
       // para que el contenido no se quede en su estado inicial (oculto).
-      ctx.revert();
+      ctx?.revert();
       if (import.meta.env?.DEV) throw error;
       Sentry.captureException(error, { level: "warning", tags: { gsap: "context-failed" } });
       return undefined;
