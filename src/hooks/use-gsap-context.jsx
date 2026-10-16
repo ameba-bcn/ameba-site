@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef } from "react";
+import * as Sentry from "@sentry/react";
 import { gsap, isTestEnv } from "../utils/gsapSetup";
 
 /**
@@ -28,9 +29,29 @@ export default function useGsapContext(effect, deps = [], externalRef) {
   useLayoutEffect(() => {
     if (isTestEnv()) return undefined;
     let customCleanup;
-    const ctx = gsap.context((self) => {
-      customCleanup = effect(self);
-    }, scope);
+    // El contexto se crea vacío y el efecto entra por `ctx.add()` (misma
+    // semántica: recibe el self y registra lo que cree) para que, si lanza,
+    // ya tengamos la referencia con la que revertir.
+    const ctx = gsap.context(undefined, scope);
+    try {
+      ctx.add((self) => {
+        customCleanup = effect(self);
+      });
+    } catch (error) {
+      // Una animación nunca debe tumbar la página. GSAP revienta en
+      // entornos con el DOM manipulado (extensiones/antivirus que parchean
+      // document.createElement, renderers sin DOM real): CSSPlugin deja
+      // `_transformProp` a null al inicializarse y cualquier tween con
+      // transform lanza "Cannot read properties of null (reading 'replace')".
+      // Al correr esto dentro de useLayoutEffect, el throw desmontaba el
+      // árbol y saltaba el ErrorBoundary raíz → pantalla de error completa.
+      // ctx.revert() deshace los gsap.set() que sí llegaron a aplicarse,
+      // para que el contenido no se quede en su estado inicial (oculto).
+      ctx.revert();
+      if (import.meta.env?.DEV) throw error;
+      Sentry.captureException(error, { level: "warning", tags: { gsap: "context-failed" } });
+      return undefined;
+    }
     return () => {
       customCleanup?.();
       ctx.revert();
