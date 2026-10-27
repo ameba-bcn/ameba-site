@@ -15,6 +15,11 @@
     line-height: 1;
 }
 
+.boton__content {
+    display: contents;
+}
+
+
 .button-disabled {
     opacity: 0.6;
     cursor: unset;
