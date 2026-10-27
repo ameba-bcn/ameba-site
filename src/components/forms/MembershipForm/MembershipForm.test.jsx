@@ -125,7 +125,7 @@ describe("MembershipForm", () => {
   it("disables cancel button when no data has changed", () => {
     setupExistingMember();
     renderWithProviders(<MembershipForm setButtonDisabled={vi.fn()} />);
-    const cancelButton = screen.getByText("cancel·la");
+    const cancelButton = screen.getByRole("button", { name: "cancel·la" });
     expect(cancelButton).toBeDisabled();
   });
 });

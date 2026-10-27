@@ -1,5 +1,21 @@
 import * as Sentry from "@sentry/react";
 
+// Chrome en iOS (WKWebView) inyecta sus propios scripts en la página — p. ej.
+// el traductor, que envuelve el texto en <font> — y sus frames llegan con la
+// URL del documento como fichero (`/activate/:229`), no con un .js. Nuestro
+// código siempre corre desde ficheros .js del bundle (el script inline de
+// index.html solo envuelve sessionStorage en try/catch), así que un stack sin
+// ningún frame de un .js no es nuestro.
+const SCRIPT_FILE_RE = /\.m?js(\?|#|$)/i;
+
+export function isInjectedScriptEvent(event) {
+  const values = event?.exception?.values;
+  if (!Array.isArray(values) || values.length === 0) return false;
+  const frames = values.flatMap((val) => val?.stacktrace?.frames || []);
+  if (frames.length === 0) return false;
+  return !frames.some((frame) => SCRIPT_FILE_RE.test(frame?.abs_path || frame?.filename || ""));
+}
+
 const dsn = import.meta.env.VITE_SENTRY_DSN;
 const environment = import.meta.env.VITE_SENTRY_ENVIRONMENT || "production";
 
@@ -36,6 +52,7 @@ if (dsn && environment === "production") {
     replaysOnErrorSampleRate: 1.0,
     // Elimina cabeceras/tokens de autenticación antes de enviar el evento.
     beforeSend(event) {
+      if (isInjectedScriptEvent(event)) return null;
       const scrub = (headers) => {
         if (!headers) return;
         for (const key of Object.keys(headers)) {

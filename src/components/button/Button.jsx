@@ -47,15 +47,19 @@ export default function Button(props) {
       {loading ? (
         <Spinner size={24} />
       ) : (
-        <>
+        // El traductor de Chrome sustituye los nodos de texto por <font>; si el
+        // texto fuera hijo directo del <button>, React no lo encontraría al
+        // cambiar al spinner (NotFoundError en removeChild). El <span> es el
+        // nodo que React quita, y `display: contents` mantiene el layout flex.
+        <span className="boton__content">
           {icon ? (
             <>
               {icon} {children}
             </>
           ) : (
-            <>{children}</>
+            children
           )}
-        </>
+        </span>
       )}
     </button>
   );
