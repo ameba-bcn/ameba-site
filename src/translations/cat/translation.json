@@ -145,6 +145,7 @@
     "guardar-continuar": "Desa i continua",
     "ir-al-pago": "Ves al pagament",
     "pago-seguro-titol": "Targeta · pagament segur amb Stripe",
+    "pagament-caducat": "Aquest pagament ja no és vàlid. Revisa la cistella i torna a anar al pagament.",
     "pago-seguro-text": "Mai emmagatzemem les dades de la teva targeta.",
     "acceptar-pre": "Accepto les ",
     "acceptar-link": "condicions de compra",
@@ -462,7 +463,14 @@
     "titol": "Gràcies.",
     "subtitol": "Hem rebut la teva comanda. Si hi ha productes físics, t'avisarem per correu quan els puguis recollir.",
     "cta-home": "Segueix navegant",
-    "cta-botiga": "Seguir comprant"
+    "cta-botiga": "Seguir comprant",
+    "processing-tag": "Pagament en curs",
+    "processing-titol": "Gairebé fet.",
+    "processing-text": "El teu banc encara està confirmant el pagament. Quan es completi rebràs un correu amb la comanda; no cal que tornis a pagar.",
+    "failed-tag": "Pagament no completat",
+    "failed-titol": "No s'ha pogut cobrar.",
+    "failed-text": "El pagament no s'ha completat i no t'hem cobrat res. Pots tornar-ho a provar amb la mateixa targeta o amb una altra.",
+    "cta-retry": "Torna-ho a provar"
   },
   "ticket": {
     "meta-title": "Entrada",

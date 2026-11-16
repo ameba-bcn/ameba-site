@@ -44,7 +44,10 @@ function NouSoci() {
       navigate(checkoutRedirect);
       return;
     }
-    addToCart(firstVariantId).then(() => navigate(checkoutRedirect));
+    // Si falla, el store ya ha mostrado el toast: solo hay que no navegar.
+    addToCart(firstVariantId)
+      .then(() => navigate(checkoutRedirect))
+      .catch(() => {});
   };
 
   const ctaLabel = productSoldOut

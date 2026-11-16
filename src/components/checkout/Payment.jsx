@@ -8,10 +8,11 @@ import FreeCheckout from "./FreeCheckout";
 import Spinner from "../spinner/Spinner";
 import "./Payment.style.css";
 import useCartStore from "../../stores/useCartStore";
+import notificationToast from "../../utils/utils";
 
-export default function Payment() {
+export default function Payment({ onRestart = null }) {
   const [t] = useTranslation("translation");
-  const { checkout = {} } = useCartStore();
+  const { checkout = {}, clearPendingPayment } = useCartStore();
   const { checkout_stripe = {}, amount } = checkout;
   const isPaymentFree = amount === 0;
   const { client_secret = "", stripe_public = "" } = checkout_stripe;
@@ -29,6 +30,12 @@ export default function Payment() {
     }),
     [client_secret],
   );
+
+  const handleUnavailable = () => {
+    clearPendingPayment();
+    notificationToast(t("checkout.pagament-caducat"), "error");
+    onRestart?.();
+  };
 
   const isStripeReady = !!(stripe_public && client_secret && stripePromise);
 
@@ -63,7 +70,12 @@ export default function Payment() {
           <FreeCheckout />
         ) : isStripeReady ? (
           <Elements stripe={stripePromise} options={options}>
-            <PaymentForm disabled={!terms} beforeSubmit={termsCheckbox} />
+            <PaymentForm
+              disabled={!terms}
+              beforeSubmit={termsCheckbox}
+              clientSecret={client_secret}
+              onUnavailable={handleUnavailable}
+            />
           </Elements>
         ) : (
           <Spinner size={40} alone />

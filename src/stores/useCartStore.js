@@ -4,12 +4,11 @@ import notificationToast from "../utils/utils";
 
 const PENDING_PAYMENT_KEY = "pendingPayment";
 
-// The backend destroys the Cart the moment it creates a Stripe PaymentIntent
-// for it (CartViewSet.payment -> create_payment_and_destroy_cart) — so by
-// the time the Payment step is showing, there is no cart left to re-fetch.
-// Persisting the Stripe payment details lets a refresh mid-payment resume
-// the same PaymentIntent instead of finding an empty cart and bouncing to
-// "/" (see Checkout.jsx's route guard).
+// The backend keeps the Cart until its payment succeeds and returns the same
+// PaymentIntent while the cart is unchanged. Persisting the Stripe payment
+// details lets a refresh mid-payment go straight back to the payment step;
+// PaymentForm drops the persisted intent if Stripe reports it canceled or
+// already paid.
 function loadPendingPayment() {
   try {
     const raw = localStorage.getItem(PENDING_PAYMENT_KEY);

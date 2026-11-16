@@ -6,12 +6,19 @@ import useCartStore from "../../stores/useCartStore";
 import renderWithProviders from "../../test/helpers/renderWithProviders";
 import { mockCartRegular, mockCartFree, mockCheckoutPaid, mockCheckoutFree } from "../../test/mocks/data";
 
-vi.mock("@stripe/react-stripe-js", () => ({
-  Elements: ({ children }) => <div data-testid="stripe-elements">{children}</div>,
-  PaymentElement: () => <div data-testid="payment-element" />,
-  useStripe: () => ({ confirmPayment: vi.fn() }),
-  useElements: () => ({}),
-}));
+vi.mock("@stripe/react-stripe-js", async () => {
+  const { useEffect } = await vi.importActual("react");
+  return {
+    Elements: ({ children }) => <div data-testid="stripe-elements">{children}</div>,
+    // Like Stripe, signal `onReady` after mount so the pay button enables.
+    PaymentElement: ({ onReady }) => {
+      useEffect(() => onReady?.(), []);
+      return <div data-testid="payment-element" />;
+    },
+    useStripe: () => ({ confirmPayment: vi.fn() }),
+    useElements: () => ({}),
+  };
+});
 
 vi.mock("@stripe/stripe-js", () => ({
   loadStripe: vi.fn().mockResolvedValue({}),

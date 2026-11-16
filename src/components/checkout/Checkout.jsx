@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { Navigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import MembershipFormLayout from "../forms/MembershipForm/MembershipFormLayout";
@@ -79,11 +79,9 @@ function Checkout() {
   const hasMembershipInCart = isMemberCheckout(item_variants);
   const deliveryComplete = isDeliveryComplete(cart_data);
   const firstStep = hasMembershipInCart ? 0 : 1;
-  // Reaching the payment step destroys the cart server-side (a Payment /
-  // Stripe PaymentIntent takes its place) — cart_data is legitimately
-  // empty from then on, so an empty cart shouldn't bounce the user home
-  // while there's still a payment in flight to resume (see useCartStore's
-  // pendingPayment persistence).
+  // Once paid, the backend swaps the cart for a new empty one, but a payment
+  // still in flight (persisted by useCartStore) can be resumed — so an
+  // empty cart only bounces the user home when there's nothing to resume.
   const hasPendingPayment = !!checkout?.checkout_stripe?.client_secret;
 
   const getSavedStep = () => {
@@ -136,17 +134,24 @@ function Checkout() {
     [isMobile],
   );
 
+  // `loading` tarda un render en desactivar el botón: un doble clic rápido
+  // pedía dos pagos al backend. El ref corta el segundo en el mismo tick.
+  const paymentRequested = useRef(false);
+
   const handleNext = useCallback(
     (fromStep) => {
       if (fromStep === 1) {
+        if (paymentRequested.current) return;
+        paymentRequested.current = true;
         setLoading(true);
         checkoutCart()
           .then(() => !isPaymentFree && checkoutPaymentCart(id))
           .then(() => {
             goToStep(fromStep + 1);
-            setLoading(false);
           })
-          .catch(() => {
+          .catch(() => {})
+          .finally(() => {
+            paymentRequested.current = false;
             setLoading(false);
           });
       } else {
@@ -222,7 +227,7 @@ function Checkout() {
 
                 {step === 1 && <Review />}
 
-                {step === 2 && <Payment />}
+                {step === 2 && <Payment onRestart={() => goToStep(1)} />}
 
                 {step === 0 && state === "active" && !userIsEditingData && (
                   <div className="checkout-section__buttons">

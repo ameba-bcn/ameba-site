@@ -230,6 +230,15 @@ describe("Checkout - step navigation", () => {
     });
   });
 
+  it("ignores a second click on Next while the payment is being requested", async () => {
+    const { mockCheckoutCart } = setupLoggedIn(mockCartRegular);
+    renderWithProviders(<Checkout />);
+    const next = screen.getByText(NEXT_LABEL);
+    fireEvent.click(next);
+    fireEvent.click(next);
+    expect(mockCheckoutCart).toHaveBeenCalledTimes(1);
+  });
+
   it("does NOT call checkoutPaymentCart when free on Next at step 1", async () => {
     const { mockCheckoutCart, mockCheckoutPaymentCart } = setupLoggedIn(mockCartFree);
     renderWithProviders(<Checkout />);
