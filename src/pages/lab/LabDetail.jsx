@@ -70,7 +70,7 @@ function LabDetail() {
         className: "toast-black-background",
       });
       navigate(user_profile === "LOGGED" ? "/pagament" : "/inicia-sessio");
-    });
+    }).catch(() => {}); // el store ya ha mostrado el toast de error
   };
 
   if (!loading && !eventName) {

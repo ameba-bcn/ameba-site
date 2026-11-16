@@ -21,6 +21,9 @@ function PaymentForm({
   onUnavailable = null,
 }) {
   const [processing, setProcessing] = useState(false);
+  // Stripe lanza un IntegrationError si se confirma sin el PaymentElement
+  // montado: el botón espera a `onReady` y se vuelve a bloquear si falla.
+  const [elementReady, setElementReady] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate();
@@ -49,7 +52,6 @@ function PaymentForm({
     return () => {
       active = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stripe, clientSecret]);
 
   const paymentElementOptions = {
@@ -61,18 +63,23 @@ function PaymentForm({
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!stripe || !elements) {
+    if (!stripe || !elements || !elementReady) {
       return;
     }
 
     setProcessing(true);
 
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url,
-      },
-    });
+    let error;
+    try {
+      ({ error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url,
+        },
+      }));
+    } catch (integrationError) {
+      error = integrationError;
+    }
 
     if (error) {
       // Show error but keep the form open so the user can retry
@@ -89,7 +96,11 @@ function PaymentForm({
         <form onSubmit={handleSubmit}>
           <PaymentElement
             options={paymentElementOptions}
-            onLoadError={() => onUnavailable?.()}
+            onReady={() => setElementReady(true)}
+            onLoadError={() => {
+              setElementReady(false);
+              onUnavailable?.();
+            }}
           />
           {beforeSubmit}
           <Button
@@ -98,7 +109,7 @@ function PaymentForm({
             buttonSize="boton--megaxxl"
             buttonStyle="boton--back-orange--solid"
             id="submit"
-            disabled={!stripe || processing || disabled}
+            disabled={!stripe || !elementReady || processing || disabled}
             loading={processing}
           >
             <span id="button-text">Paga</span>

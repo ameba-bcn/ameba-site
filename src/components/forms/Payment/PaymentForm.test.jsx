@@ -12,15 +12,24 @@ const mockStripe = {
 };
 const mockElements = {};
 let paymentElementLoadError = false;
+let paymentElementPending = false;
 
-vi.mock("@stripe/react-stripe-js", () => ({
-  PaymentElement: ({ onLoadError }) => {
-    if (paymentElementLoadError) onLoadError?.({});
-    return <div data-testid="payment-element" />;
-  },
-  useStripe: () => mockStripe,
-  useElements: () => mockElements,
-}));
+vi.mock("@stripe/react-stripe-js", async () => {
+  const { useEffect } = await vi.importActual("react");
+  return {
+    // Like Stripe, report the load result after mount.
+    PaymentElement: ({ onReady, onLoadError }) => {
+      useEffect(() => {
+        if (paymentElementPending) return;
+        if (paymentElementLoadError) onLoadError?.({});
+        else onReady?.();
+      }, []);
+      return <div data-testid="payment-element" />;
+    },
+    useStripe: () => mockStripe,
+    useElements: () => mockElements,
+  };
+});
 
 const mockNavigate = vi.fn();
 vi.mock("react-router-dom", async () => ({
@@ -41,6 +50,8 @@ describe("PaymentForm", () => {
     vi.restoreAllMocks();
     vi.clearAllMocks();
     mockConfirmPayment.mockReset();
+    paymentElementLoadError = false;
+    paymentElementPending = false;
   });
 
   it("renders PaymentElement", () => {
@@ -175,6 +186,34 @@ describe("PaymentForm", () => {
       expect(screen.getByTestId("payment-element")).toBeInTheDocument();
       expect(screen.getByText("Paga").closest("button")).not.toBeDisabled();
     });
+  });
+
+  // Stripe throws an IntegrationError if confirmPayment runs before the
+  // Payment Element has mounted (AMEBA-SITE-4W).
+  it("keeps Paga disabled and does not confirm until the Payment Element is ready", async () => {
+    paymentElementPending = true;
+    renderWithProviders(<PaymentForm />);
+    expect(screen.getByText("Paga").closest("button")).toBeDisabled();
+    fireEvent.submit(screen.getByText("Paga").closest("form"));
+    await waitFor(() => expect(mockConfirmPayment).not.toHaveBeenCalled());
+  });
+
+  it("does not confirm after the Payment Element fails to load", async () => {
+    paymentElementLoadError = true;
+    renderWithProviders(<PaymentForm />);
+    expect(screen.getByText("Paga").closest("button")).toBeDisabled();
+    fireEvent.submit(screen.getByText("Paga").closest("form"));
+    await waitFor(() => expect(mockConfirmPayment).not.toHaveBeenCalled());
+  });
+
+  it("toasts an error thrown by confirmPayment and lets the user retry", async () => {
+    mockConfirmPayment.mockRejectedValue(new Error("elements should have a mounted Payment Element"));
+    renderWithProviders(<PaymentForm />);
+    fireEvent.submit(screen.getByText("Paga").closest("form"));
+    const { toast } = await import("react-toastify");
+    await waitFor(() => expect(toast.error).toHaveBeenCalled());
+    expect(lastToastMessage(toast.error)).toBe("elements should have a mounted Payment Element");
+    expect(screen.getByText("Paga").closest("button")).not.toBeDisabled();
   });
 });
 

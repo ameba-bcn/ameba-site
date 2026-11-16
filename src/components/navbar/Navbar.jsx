@@ -85,16 +85,21 @@ export default function Navbar({ isErrored = false }) {
 
   // 1.2 — auto-hide on scroll, GSAP-driven instead of a CSS display:none
   // toggle (smoother, and still just a transform under the hood).
+  // Va fuera de useGsapContext, así que necesita su propio try/catch: con el
+  // DOM parcheado por extensiones/antivirus, GSAP lanza "Cannot read
+  // properties of null (reading 'replace')" en cualquier tween con transform
+  // (ver use-gsap-context.jsx). Ahí el menú se oculta con CSS sin animar.
   useEffect(() => {
-    if (prefersReducedMotion()) {
-      gsap.set(rootRef.current, { yPercent: shouldHide ? -100 : 0 });
-      return;
+    const yPercent = shouldHide ? -100 : 0;
+    try {
+      if (prefersReducedMotion()) {
+        gsap.set(rootRef.current, { yPercent });
+        return;
+      }
+      gsap.to(rootRef.current, { yPercent, duration: 0.35, ease: "power2.out" });
+    } catch {
+      if (rootRef.current) rootRef.current.style.transform = `translateY(${yPercent}%)`;
     }
-    gsap.to(rootRef.current, {
-      yPercent: shouldHide ? -100 : 0,
-      duration: 0.35,
-      ease: "power2.out",
-    });
   }, [shouldHide]);
 
   return (

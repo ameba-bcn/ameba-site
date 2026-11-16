@@ -40,12 +40,13 @@ function Cart() {
 
   const isMemberProduct = (id) => [26, 27].includes(id); // Controlar que el id de cart nunca cambie. IMPORTANTE
 
-  const addItem = (id) => addToCart(id);
+  // Los errores ya los muestra el store con un toast.
+  const addItem = (id) => addToCart(id).catch(() => {});
   const substractItem = (id) => {
     if (isMemberProduct(id)) {
       isLoggedIn ? setLoggedUser() : setGuestUser();
     }
-    substractToCart(id);
+    substractToCart(id).catch(() => {});
   };
   const handleToggle = () => (isCartMenuOpen ? closeCartMenu() : openCartMenu());
   const handleCheckoutClick = () => {

@@ -127,7 +127,7 @@ function ProductePage() {
           gsap.to(cartIcon, { scale: 1.25, duration: 0.15, yoyo: true, repeat: 1, ease: "power2.inOut" });
         }
       }
-    });
+    }).catch(() => {}); // el store ya ha mostrado el toast de error
   };
 
   if (!loading && !name) {
