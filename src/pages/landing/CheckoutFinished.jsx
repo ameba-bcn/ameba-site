@@ -78,7 +78,9 @@ function CheckoutFinished() {
   const retry = () => {
     // Un pago rechazado sigue siendo reutilizable: se vuelve directo al paso
     // de pago. Uno cancelado ya no, así que se repasa la cesta y se pide
-    // uno nuevo.
+    // uno nuevo. Se descarta aquí también: el efecto de arriba puede no
+    // haber corrido aún si el usuario pulsa nada más pintarse el botón.
+    if (status === "canceled") clearPendingPayment();
     localStorage.setItem(
       CHECKOUT_STEP_KEY,
       status === "canceled" ? PAYMENT_STEP - 1 : PAYMENT_STEP,
