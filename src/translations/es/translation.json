@@ -145,6 +145,7 @@
     "guardar-continuar": "Guardar y continuar",
     "ir-al-pago": "Ir al pago",
     "pago-seguro-titol": "Tarjeta · pago seguro con Stripe",
+    "pagament-caducat": "Este pago ya no es válido. Revisa la cesta y vuelve a ir al pago.",
     "pago-seguro-text": "Nunca almacenamos los datos de tu tarjeta.",
     "acceptar-pre": "Acepto las ",
     "acceptar-link": "condiciones de compra",
@@ -462,7 +463,14 @@
     "titol": "Gracias.",
     "subtitol": "Hemos recibido tu pedido. Si hay productos físicos, te avisaremos por correo cuando puedas recogerlos.",
     "cta-home": "Sigue navegando",
-    "cta-botiga": "Seguir comprando"
+    "cta-botiga": "Seguir comprando",
+    "processing-tag": "Pago en curso",
+    "processing-titol": "Casi listo.",
+    "processing-text": "Tu banco todavía está confirmando el pago. Cuando se complete recibirás un correo con el pedido; no hace falta que vuelvas a pagar.",
+    "failed-tag": "Pago no completado",
+    "failed-titol": "No se ha podido cobrar.",
+    "failed-text": "El pago no se ha completado y no te hemos cobrado nada. Puedes volver a intentarlo con la misma tarjeta o con otra.",
+    "cta-retry": "Vuelve a intentarlo"
   },
   "ticket": {
     "meta-title": "Entrada",

@@ -10,7 +10,10 @@ import { mockCartRegular, mockCartMember, mockMemberProfile } from "../mocks/dat
 vi.mock("@stripe/react-stripe-js", () => ({
   Elements: ({ children }) => <div>{children}</div>,
   PaymentElement: () => <div data-testid="payment-element" />,
-  useStripe: () => ({ confirmPayment: vi.fn().mockResolvedValue({}) }),
+  useStripe: () => ({
+    confirmPayment: vi.fn().mockResolvedValue({}),
+    retrievePaymentIntent: vi.fn().mockResolvedValue({}),
+  }),
   useElements: () => ({}),
 }));
 vi.mock("@stripe/stripe-js", () => ({

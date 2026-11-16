@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   PaymentElement,
   useStripe,
@@ -11,10 +12,45 @@ import notificationToast from "../../../utils/utils";
 // `beforeSubmit` se pinta entre el formulario de Stripe y el botón: es donde
 // va la aceptación de condiciones, que tiene que leerse justo antes de pagar y
 // no al principio de la página, separada del CTA por toda la tarjeta.
-function PaymentForm({ disabled = false, beforeSubmit = null }) {
+// `onUnavailable` se llama si el pago pendiente ya no se puede usar (cancelado
+// o el PaymentElement no carga), para que el checkout pida uno nuevo.
+function PaymentForm({
+  disabled = false,
+  beforeSubmit = null,
+  clientSecret = "",
+  onUnavailable = null,
+}) {
   const [processing, setProcessing] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
+
+  // El pago pendiente se guarda en localStorage y puede reanudarse días
+  // después: si ya se cobró se manda al resumen, y si se canceló se descarta.
+  useEffect(() => {
+    if (!stripe || !clientSecret) return;
+    let active = true;
+    stripe
+      .retrievePaymentIntent(clientSecret)
+      .then(({ paymentIntent } = {}) => {
+        if (!active || !paymentIntent) return;
+        const { status } = paymentIntent;
+        if (status === "succeeded" || status === "processing") {
+          const query = new URLSearchParams({
+            payment_intent_client_secret: clientSecret,
+            redirect_status: status,
+          });
+          navigate(`/resum-comanda?${query}`);
+        } else if (status === "canceled") {
+          onUnavailable?.();
+        }
+      })
+      .catch(() => {});
+    return () => {
+      active = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stripe, clientSecret]);
 
   const paymentElementOptions = {
     layout: "tabs",
@@ -51,7 +87,10 @@ function PaymentForm({ disabled = false, beforeSubmit = null }) {
     <div className="payment-root">
       <div className="payment-body">
         <form onSubmit={handleSubmit}>
-          <PaymentElement options={paymentElementOptions} />
+          <PaymentElement
+            options={paymentElementOptions}
+            onLoadError={() => onUnavailable?.()}
+          />
           {beforeSubmit}
           <Button
             variant="contained"

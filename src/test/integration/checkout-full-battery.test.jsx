@@ -26,7 +26,10 @@ vi.mock("../../hooks/use-media-query", () => ({ default: vi.fn() }));
 vi.mock("@stripe/react-stripe-js", () => ({
   Elements: ({ children }) => <div data-testid="stripe-elements">{children}</div>,
   PaymentElement: () => <div data-testid="payment-element" />,
-  useStripe: () => ({ confirmPayment: mockConfirmPayment }),
+  useStripe: () => ({
+    confirmPayment: mockConfirmPayment,
+    retrievePaymentIntent: vi.fn().mockResolvedValue({}),
+  }),
   useElements: () => ({}),
 }));
 vi.mock("@stripe/stripe-js", () => ({
