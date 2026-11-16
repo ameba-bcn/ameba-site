@@ -79,11 +79,9 @@ function Checkout() {
   const hasMembershipInCart = isMemberCheckout(item_variants);
   const deliveryComplete = isDeliveryComplete(cart_data);
   const firstStep = hasMembershipInCart ? 0 : 1;
-  // Reaching the payment step destroys the cart server-side (a Payment /
-  // Stripe PaymentIntent takes its place) — cart_data is legitimately
-  // empty from then on, so an empty cart shouldn't bounce the user home
-  // while there's still a payment in flight to resume (see useCartStore's
-  // pendingPayment persistence).
+  // Once paid, the backend swaps the cart for a new empty one, but a payment
+  // still in flight (persisted by useCartStore) can be resumed — so an
+  // empty cart only bounces the user home when there's nothing to resume.
   const hasPendingPayment = !!checkout?.checkout_stripe?.client_secret;
 
   const getSavedStep = () => {
